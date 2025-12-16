@@ -1,0 +1,55 @@
+diff --git a/node_modules/@react-native-community/slider/ios/RNCSliderComponentView.mm b/node_modules/@react-native-community/slider/ios/RNCSliderComponentView.mm
+index 928c532..aff395b 100644
+--- a/node_modules/@react-native-community/slider/ios/RNCSliderComponentView.mm
++++ b/node_modules/@react-native-community/slider/ios/RNCSliderComponentView.mm
+@@ -7,9 +7,19 @@
+ #import <react/renderer/components/RNCSlider/Props.h>
+ #import <react/renderer/components/RNCSlider/RCTComponentViewHelpers.h>
+ #import <React/RCTBridge+Private.h>
++#if __has_include(<React/RCTImagePrimitivesConversions.h>)
++#import <React/RCTImagePrimitivesConversions.h>
++#elif __has_include(<react/renderer/imagemanager/RCTImagePrimitivesConversions.h>)
++#import <react/renderer/imagemanager/RCTImagePrimitivesConversions.h>
++#else
+ #import "RCTImagePrimitivesConversions.h"
++#endif
+ #import <React/RCTImageLoaderProtocol.h>
++#if __has_include(<React/RCTFabricComponentsPlugins.h>)
++#import <React/RCTFabricComponentsPlugins.h>
++#else
+ #import "RCTFabricComponentsPlugins.h"
++#endif
+ #import "RNCSlider.h"
+ 
+ using namespace facebook::react;
+@@ -271,14 +281,16 @@ using namespace facebook::react;
+ {
+     NSString *uri = [[NSString alloc] initWithUTF8String:source.uri.c_str()];
+     if ((BOOL)uri.length) {
++        RCTImageLoaderProgressBlock progressBlock = ^(__unused int64_t progress, __unused int64_t total) {};
++        RCTImageLoaderPartialLoadBlock partialBlock = ^(__unused UIImage *image) {};
+         [[[RCTBridge currentBridge] moduleForName:@"ImageLoader"]
+         loadImageWithURLRequest:NSURLRequestFromImageSource(source)
+         size:CGSizeMake(source.size.width, source.size.height)
+         scale:source.scale
+         clipped:NO
+         resizeMode:RCTResizeModeCover
+-        progressBlock:nil
+-        partialLoadBlock:nil
++        progressBlock:progressBlock
++        partialLoadBlock:partialBlock
+         completionBlock:completionBlock];
+     } else {
+         failureBlock();
+@@ -294,6 +306,11 @@ using namespace facebook::react;
+     }
+ }
+ 
++- (float)discreteValue:(float)value
++{
++    return [slider discreteValue:value];
++}
++
+ @end
+ 
+ Class<RCTComponentViewProtocol> RNCSliderCls(void)

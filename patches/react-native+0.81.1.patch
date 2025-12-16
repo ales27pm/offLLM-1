@@ -1,0 +1,62 @@
+diff --git a/node_modules/react-native/React/Fabric/RCTSurfacePointerHandler.mm b/node_modules/react-native/React/Fabric/RCTSurfacePointerHandler.mm
+index 1dce206..5835ab8 100644
+--- a/node_modules/react-native/React/Fabric/RCTSurfacePointerHandler.mm
++++ b/node_modules/react-native/React/Fabric/RCTSurfacePointerHandler.mm
+@@ -13,7 +13,6 @@
+ #import <React/RCTViewComponentView.h>
+ 
+ #import "RCTConversions.h"
+-#import "RCTTouchableComponentViewProtocol.h"
+ 
+ using namespace facebook::react;
+ 
+@@ -281,7 +280,7 @@ static PointerEvent CreatePointerEventFromActivePointer(
+     UIView *rootComponentView)
+ {
+   PointerEvent event = {};
+-  event.pointerId = activePointer.identifier;
++  event.pointerId = (int)activePointer.identifier;
+   event.pointerType = PointerTypeCStringFromUITouchType(activePointer.touchType);
+ 
+   if (eventType == RCTPointerEventTypeCancel) {
+@@ -321,8 +320,8 @@ static PointerEvent CreatePointerEventFromActivePointer(
+ 
+   event.detail = 0;
+ 
+-  event.button = activePointer.button;
+-  event.buttons = ButtonMaskToButtons(activePointer.buttonMask);
++  event.button = (int)activePointer.button;
++  event.buttons = (int)ButtonMaskToButtons(activePointer.buttonMask);
+ 
+   UpdatePointerEventModifierFlags(event, activePointer.modifierFlags);
+ 
+@@ -342,7 +341,7 @@ static PointerEvent CreatePointerEventFromIncompleteHoverData(
+     UIKeyModifierFlags modifierFlags)
+ {
+   PointerEvent event = {};
+-  event.pointerId = pointerId;
++  event.pointerId = (int)pointerId;
+   event.pressure = 0.0;
+   event.pointerType = pointerType;
+   event.clientPoint = RCTPointFromCGPoint(clientLocation);
+@@ -584,7 +583,7 @@ RCT_NOT_IMPLEMENTED(-(instancetype)initWithTarget : (id)target action : (SEL)act
+       default:
+         // since the touch's identifier has been offset we need to re-normalize it to 0-based
+         // which is what the identifier pool expects
+-        _identifierPool.enqueue(activePointer.identifier - kTouchIdentifierPoolOffset);
++        _identifierPool.enqueue((int)(activePointer.identifier - kTouchIdentifierPoolOffset));
+     }
+ 
+     _activePointers.erase(touch);
+diff --git a/node_modules/react-native/React/Fabric/RCTSurfaceTouchHandler.mm b/node_modules/react-native/React/Fabric/RCTSurfaceTouchHandler.mm
+index a793251..1ede316 100644
+--- a/node_modules/react-native/React/Fabric/RCTSurfaceTouchHandler.mm
++++ b/node_modules/react-native/React/Fabric/RCTSurfaceTouchHandler.mm
+@@ -13,7 +13,6 @@
+ 
+ #import "RCTConversions.h"
+ #import "RCTSurfacePointerHandler.h"
+-#import "RCTTouchableComponentViewProtocol.h"
+ 
+ using namespace facebook::react;
+ 

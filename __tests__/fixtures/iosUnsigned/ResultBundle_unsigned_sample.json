@@ -1,0 +1,77 @@
+{
+  "_type": { "_name": "ActionsInvocationRecord" },
+  "actions": {
+    "_type": { "_name": "Array" },
+    "_values": [
+      {
+        "_type": { "_name": "ActionRecord" },
+        "actionResult": {
+          "_type": { "_name": "ActionResult" },
+          "issues": {
+            "_type": { "_name": "ResultIssueSummaries" },
+            "issueSummaries": {
+              "_type": { "_name": "IssueSummaries" },
+              "_values": [
+                {
+                  "_type": { "_name": "IssueSummary" },
+                  "issueType": {
+                    "_type": { "_name": "String" },
+                    "_value": "Swift Compiler Error"
+                  },
+                  "message": {
+                    "_type": { "_name": "String" },
+                    "_value": "Sending 'session' risks causing data races"
+                  },
+                  "documentLocationInCreatingWorkspace": {
+                    "_type": { "_name": "DocumentLocation" },
+                    "concreteTypeName": {
+                      "_type": { "_name": "String" },
+                      "_value": "DVTTextDocumentLocation"
+                    },
+                    "url": {
+                      "_type": { "_name": "String" },
+                      "_value": "file:///Users/runner/work/offLLM/offLLM/ios/MyOfflineLLMApp/MLX/MLXModule.swift#EndingColumnNumber=29&EndingLineNumber=153&StartingColumnNumber=29&StartingLineNumber=153&Timestamp=779766553.001115"
+                    }
+                  }
+                },
+                {
+                  "_type": { "_name": "IssueSummary" },
+                  "issueType": {
+                    "_type": { "_name": "String" },
+                    "_value": "Warning"
+                  },
+                  "message": {
+                    "_type": { "_name": "String" },
+                    "_value": "Run script build phase '[CP-User] [Hermes] Replace Hermes for the right configuration, if needed' will be run during every build because it does not specify any outputs. To address this issue, either add output dependencies to the script phase, or configure it to run in every build by unchecking \"Based on dependency analysis\" in the script phase."
+                  }
+                },
+                {
+                  "_type": { "_name": "IssueSummary" },
+                  "issueType": {
+                    "_type": { "_name": "String" },
+                    "_value": "Parse Issue"
+                  },
+                  "message": {
+                    "_type": { "_name": "String" },
+                    "_value": "Use of GNU ?: conditional expression extension, omitting middle operand"
+                  },
+                  "documentLocationInCreatingWorkspace": {
+                    "_type": { "_name": "DocumentLocation" },
+                    "concreteTypeName": {
+                      "_type": { "_name": "String" },
+                      "_value": "DVTTextDocumentLocation"
+                    },
+                    "url": {
+                      "_type": { "_name": "String" },
+                      "_value": "file:///Users/runner/work/offLLM/offLLM/node_modules/react-native/Libraries/TypeSafety/RCTConvertHelpers.h#EndingColumnNumber=23&EndingLineNumber=26&StartingColumnNumber=23&StartingLineNumber=26&Timestamp=779766553.001115"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  }
+}

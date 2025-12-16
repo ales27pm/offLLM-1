@@ -1,0 +1,59 @@
+diff --git a/node_modules/@react-native-clipboard/clipboard/ios/RNCClipboard.mm b/node_modules/@react-native-clipboard/clipboard/ios/RNCClipboard.mm
+index 4e38fd2..28be803 100644
+--- a/node_modules/@react-native-clipboard/clipboard/ios/RNCClipboard.mm
++++ b/node_modules/@react-native-clipboard/clipboard/ios/RNCClipboard.mm
+@@ -1,7 +1,6 @@
+ #import "RNCClipboard.h"
+ 
+-#import <MobileCoreServices/MobileCoreServices.h>
+-#import <MobileCoreServices/UTType.h>
++#import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
+ #import <UIKit/UIKit.h>
+ #import <React/RCTBridge.h>
+ #import <React/RCTEventDispatcher.h>
+@@ -219,16 +218,38 @@ RCT_EXPORT_METHOD(getImage:(RCTPromiseResolveBlock)resolve
+   UIPasteboard *clipboard = [UIPasteboard generalPasteboard];
+   NSString *withPrefix;
+   for (NSItemProvider *itemProvider in clipboard.itemProviders) {
+-    if ([itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypeImage]) {
+-      for (NSString *identifier in itemProvider.registeredTypeIdentifiers) {
+-        if (UTTypeConformsTo((__bridge CFStringRef)identifier, kUTTypeImage)) {
+-          NSString *MIMEType = (__bridge_transfer NSString *)UTTypeCopyPreferredTagWithClass((__bridge CFStringRef)identifier, kUTTagClassMIMEType);
+-          NSString *imageDataBase64 = [[clipboard dataForPasteboardType:identifier] base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+-          withPrefix = [NSString stringWithFormat:@"data:%@;base64,%@", MIMEType, imageDataBase64];
++    if (@available(iOS 14, *)) {
++      if ([itemProvider hasItemConformingToTypeIdentifier:UTTypeImage.identifier]) {
++        for (NSString *identifier in itemProvider.registeredTypeIdentifiers) {
++          UTType *type = [UTType typeWithIdentifier:identifier];
++          if (type && [type conformsToType:UTTypeImage]) {
++            NSData *imageData = [clipboard dataForPasteboardType:identifier];
++            if (imageData) {
++              NSString *MIMEType = type.preferredMIMEType ?: @"image/png";
++              NSString *imageDataBase64 = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
++              withPrefix = [NSString stringWithFormat:@"data:%@;base64,%@", MIMEType, imageDataBase64];
++            }
++            break;
++          }
++        }
++        if (withPrefix) {
++          break;
++        }
++      }
++    } else {
++      if ([itemProvider hasItemConformingToTypeIdentifier:@"public.image"]) {
++        for (NSString *identifier in itemProvider.registeredTypeIdentifiers) {
++          NSData *imageData = [clipboard dataForPasteboardType:identifier];
++          if (imageData) {
++            NSString *imageDataBase64 = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
++            withPrefix = [NSString stringWithFormat:@"data:image/png;base64,%@", imageDataBase64];
++            break;
++          }
++        }
++        if (withPrefix) {
+           break;
+         }
+       }
+-      break;
+     }
+   }
+   resolve((withPrefix ? : NULL));
