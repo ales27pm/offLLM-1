@@ -1,0 +1,12 @@
+/*
+ * Module map to expose RCTDeprecation as a clang module when the pod
+ * fails to ship one. This mirrors the structure expected by Swift 6
+ * builds that import RCTDeprecation from generated modules.
+ */
+module RCTDeprecation [system] {
+  header "RCTDeprecation.h"
+  export *
+}
+
+
+

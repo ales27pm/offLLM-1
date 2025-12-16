@@ -1,0 +1,120 @@
+name: signing-secrets-check
+description: Validate that all required signing secrets are populated before running signing workflows.
+inputs:
+  required-secrets:
+    description: |-
+      Newline-delimited list of environment variable names that must be populated for signing to proceed.
+    required: true
+  require-signing:
+    description: |-
+      Raw workflow input indicating whether signing should run. Accepts truthy/falsey strings (true/false/yes/no/1/0).
+    required: false
+    default: ""
+outputs:
+  ready:
+    description: Indicates whether all required secrets were found and signing should continue.
+    value: ${{ steps.evaluate.outputs.ready }}
+  message:
+    description: Human-readable summary of the signing readiness decision.
+    value: ${{ steps.evaluate.outputs.message }}
+  missing:
+    description: Comma-separated list of any secrets that were not populated.
+    value: ${{ steps.evaluate.outputs.missing }}
+runs:
+  using: composite
+  steps:
+    - id: evaluate
+      shell: bash
+      env:
+        REQUIRED_SECRETS: ${{ inputs.required-secrets }}
+        REQUIRE_SIGNING_INPUT: ${{ inputs.require-signing }}
+      run: |
+        set -euo pipefail
+        python3 - <<'PY'
+        import os
+        import sys
+        from typing import List, Tuple
+
+        TRUTHY = {"true", "1", "yes", "on"}
+        FALSY = {"false", "0", "no", "off"}
+
+        def normalize_secret_names(raw: str) -> List[str]:
+            seen = set()
+            ordered: List[str] = []
+            for line in raw.splitlines():
+                candidate = line.strip()
+                if not candidate:
+                    continue
+                key = candidate
+                if key not in seen:
+                    seen.add(key)
+                    ordered.append(candidate)
+            return ordered
+
+        def normalize_require_signing(raw: str) -> Tuple[bool, str | None]:
+            if raw is None:
+                return True, None
+            candidate = raw.strip().lower()
+            if not candidate:
+                return True, None
+            if candidate in TRUTHY:
+                return True, None
+            if candidate in FALSY:
+                return False, None
+            return True, f"Unknown require_signing value '{raw}'; defaulting to true."
+
+        required = normalize_secret_names(os.environ.get("REQUIRED_SECRETS", ""))
+        require_signing_raw = os.environ.get("REQUIRE_SIGNING_INPUT")
+        require_signing, warning = normalize_require_signing(require_signing_raw)
+        if warning:
+            sys.stdout.write(f"::warning ::{warning}\n")
+
+        missing = [name for name in required if not os.environ.get(name)]
+        missing_joined = ", ".join(missing)
+
+        if not require_signing:
+            ready = False
+            message = "Signed build skipped via workflow input."
+        elif not required:
+            ready = True
+            message = "No signing secrets were requested; continuing with signed build."
+        elif missing:
+            ready = False
+            message = (
+                "Signed build skipped; configure the following secrets to enable it: "
+                f"{missing_joined}."
+            )
+        else:
+            ready = True
+            message = "All signing secrets detected; continuing with signed build."
+
+        ready_str = "true" if ready else "false"
+
+        output_path = os.environ["GITHUB_OUTPUT"]
+        with open(output_path, "a", encoding="utf-8") as fh:
+            fh.write(f"ready={ready_str}\n")
+            fh.write(f"message={message}\n")
+            fh.write(f"missing={missing_joined}\n")
+
+        sys.stdout.write(f"::notice ::{message}\n")
+
+        summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
+        if summary_path:
+            lines = [
+                "## Signing secrets check",
+                "",
+                f"- Require signing: `{require_signing}`",
+                f"- Ready: `{ready_str}`",
+                f"- Details: {message}",
+            ]
+            if missing_joined:
+                lines.append(f"- Missing secrets: {missing_joined}")
+            else:
+                lines.append("- Missing secrets: none")
+            lines.append("")
+            with open(summary_path, "a", encoding="utf-8") as summary_file:
+                summary_file.write("\n".join(lines))
+        PY
+
+
+

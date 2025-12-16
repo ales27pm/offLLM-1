@@ -1,0 +1,54 @@
+name: Convert Dolphin to Core ML
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  convert:
+    runs-on: macos-latest
+    environment: offLLM
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -V
+          pip install --upgrade pip
+          pip install \
+            torch==2.2.0 \
+            transformers==4.44.2 \
+            coremltools==8.0 \
+            numpy==1.26.4 \
+            huggingface-hub==0.25.1
+
+      - name: Convert model to Core ML
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          set -euo pipefail
+          MODEL_ID="cognitivecomputations/Dolphin3.0-Llama3.2-3B"
+          python scripts/convert_to_coreml.py \
+            --hf_model "${MODEL_ID}" \
+            --out_prefix "Dolphin3.0-Llama3.2-3B"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: coreml-model
+          path: |
+            Dolphin3.0-Llama3.2-3B-fp16.mlpackage
+            Dolphin3.0-Llama3.2-3B-int8.mlpackage
+            Dolphin3.0-Llama3.2-3B-int4-lut.mlpackage
+            coreml_artifacts.json
+          if-no-files-found: error
+
+
+

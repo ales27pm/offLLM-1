@@ -1,0 +1,121 @@
+name: Fine-tune (LoRA) + Convert to Core ML (FP16/INT8/INT4)
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_training:
+        description: "Run LoRA training (true/false)"
+        required: true
+        default: "false"
+      base_model:
+        description: "HF model id or local path (e.g., cognitivecomputations/Dolphin3.0-Llama3.2-3B)"
+        required: true
+        default: "cognitivecomputations/Dolphin3.0-Llama3.2-3B"
+      dataset_path:
+        description: "Path to your real JSONL dataset (required if run_training=true)"
+        required: false
+        default: ""
+      max_steps:
+        description: "Max training steps (choose realistically for CI/GPU)"
+        required: false
+        default: "50"
+
+jobs:
+  build:
+    runs-on: macos-latest
+    environment: offLLM
+    timeout-minutes: 240
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          pip install --upgrade pip
+          pip install \
+            torch==2.2.0 \
+            transformers==4.44.2 \
+            datasets==2.21.0 \
+            peft==0.11.1 \
+            accelerate==0.34.2 \
+            coremltools==8.0 \
+            huggingface-hub==0.25.1 \
+            numpy==1.26.4
+
+      - name: Validate inputs (no placeholders)
+        env:
+          RUN_TRAINING: ${{ github.event.inputs.run_training }}
+          DATASET_PATH: ${{ github.event.inputs.dataset_path }}
+        run: |
+          set -e
+          echo "run_training=${RUN_TRAINING}"
+          if [ "${RUN_TRAINING}" = "true" ]; then
+            if [ -z "${DATASET_PATH}" ]; then
+              echo "ERROR: run_training=true but dataset_path is empty."
+              exit 1
+            fi
+            if [ ! -f "${DATASET_PATH}" ]; then
+              echo "ERROR: dataset_path does not exist: ${DATASET_PATH}"
+              exit 1
+            fi
+          fi
+
+      - name: (Optional) LoRA training on your REAL dataset
+        if: ${{ github.event.inputs.run_training == 'true' }}
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          BASE_MODEL: ${{ github.event.inputs.base_model }}
+          DATASET_PATH: ${{ github.event.inputs.dataset_path }}
+          MAX_STEPS: ${{ github.event.inputs.max_steps }}
+        run: |
+          python scripts/train_lora.py \
+            --base_model "${BASE_MODEL}" \
+            --train_file "${DATASET_PATH}" \
+            --output_dir outputs/lora \
+            --max_steps ${MAX_STEPS}
+
+      - name: (Optional) Merge LoRA into base (FP16)
+        if: ${{ github.event.inputs.run_training == 'true' }}
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          BASE_MODEL: ${{ github.event.inputs.base_model }}
+        run: |
+          python scripts/merge_lora.py \
+            --base_model "${BASE_MODEL}" \
+            --lora_dir outputs/lora \
+            --output_dir outputs/merged_fp16
+
+      - name: "Convert to Core ML (matrix: FP16/INT8/INT4)"
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          BASE_MODEL: ${{ github.event.inputs.base_model }}
+          RUN_TRAINING: ${{ github.event.inputs.run_training }}
+        run: |
+          set -e
+          HF_INPUT="${BASE_MODEL}"
+          if [ "${RUN_TRAINING}" = "true" ]; then
+            HF_INPUT="outputs/merged_fp16"
+          fi
+
+          python scripts/convert_to_coreml.py \
+            --hf_model "${HF_INPUT}" \
+            --out_prefix "Dolphin3.0-Llama3.2-3B"
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v5
+        with:
+          name: coreml-matrix
+          path: |
+            Dolphin3.0-Llama3.2-3B-fp16.mlpackage
+            Dolphin3.0-Llama3.2-3B-int8.mlpackage
+            Dolphin3.0-Llama3.2-3B-int4-lut.mlpackage
+            coreml_artifacts.json
+
+
+

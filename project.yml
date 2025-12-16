@@ -1,0 +1,128 @@
+name: monGARS
+
+options:
+  bundleIdPrefix: com.offllm
+  deploymentTarget:
+    iOS: "18.0"
+
+packages:
+  mlx-swift:
+    url: https://github.com/ml-explore/mlx-swift
+    exactVersion: 0.25.6
+  mlx-swift-examples:
+    url: https://github.com/ml-explore/mlx-swift-examples
+    exactVersion: 2.25.6
+
+targets:
+  monGARS:
+    type: application
+    platform: iOS
+    deploymentTarget: "18.0"
+
+    sources:
+      - path: MyOfflineLLMApp
+        excludes:
+          - "../node_modules/**"
+          - "../build/**"
+          - "Pods/**"
+          - "MLXCompat.swift"
+        # MLXCompat.swift has been removed. The new MLX LLM API is
+        # used directly via `LanguageModel` in `MLXModule.swift`.
+
+    dependencies:
+      - package: mlx-swift-examples
+        product: MLXLLM
+      # If your code imports additional MLX products, keep them here:
+      - package: mlx-swift
+        product: MLX
+      - package: mlx-swift
+        product: MLXNN
+      - package: mlx-swift
+        product: MLXLinalg
+      - package: mlx-swift
+        product: MLXFFT
+      # Additional libraries required by MLXModule.swift
+      - package: mlx-swift-examples
+        product: MLXLMCommon
+      # - package: mlx-swift-examples
+      #   product: Tokenizers
+      # System frameworks required by custom native modules
+      - sdk: EventKit.framework
+
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.offllm.mongars
+        INFOPLIST_FILE: MyOfflineLLMApp/Info.plist
+        SWIFT_VERSION: "6.0"
+        IPHONEOS_DEPLOYMENT_TARGET: "18.0"
+        SWIFT_OBJC_BRIDGING_HEADER: MyOfflineLLMApp/Bridging/monGARS-Bridging-Header.h
+        HEADER_SEARCH_PATHS:
+          - "$(inherited)"
+          - "$(PODS_ROOT)/Headers/Public"
+          - "$(PODS_ROOT)/Headers/Public/RCTDeprecation"
+        OTHER_CFLAGS:
+          - "$(inherited)"
+          - "-fmodule-map-file=$(PODS_ROOT)/Headers/Public/RCTDeprecation/module.modulemap"
+        OTHER_CPLUSPLUSFLAGS:
+          - "$(inherited)"
+          - "-fmodule-map-file=$(PODS_ROOT)/Headers/Public/RCTDeprecation/module.modulemap"
+        OTHER_SWIFT_FLAGS:
+          - "$(inherited)"
+          - "-Xcc"
+          - "-fmodule-map-file=$(PODS_ROOT)/Headers/Public/RCTDeprecation/module.modulemap"
+        CLANG_ENABLE_MODULES: YES
+
+        # Unsigned/device builds in CI
+        CODE_SIGNING_ALLOWED: NO
+        CODE_SIGNING_REQUIRED: NO
+        CODE_SIGN_IDENTITY: ""
+        DEVELOPMENT_TEAM: ""
+
+        # Stable toolchain for RN/Folly
+        CLANG_CXX_LIBRARY: libc++
+        # CLANG_CXX_LANGUAGE_STANDARD inherited from Pods (c++20)
+        OTHER_MTLFLAGS:
+          - "$(inherited)"
+          - "-std=metal-cpp17"
+
+        # Allow CocoaPods header symlink scripts to write in Xcode 15+
+        ENABLE_USER_SCRIPT_SANDBOXING: NO
+
+      configurations:
+        Release:
+          DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+
+    scripts:
+      - name: Purge legacy RCTDeprecation caches
+        script: |
+          bash "${PROJECT_DIR}/scripts/purge-rctdeprecation-caches.sh"
+        runOnlyForDeploymentPostprocessing: false
+        alwaysOutOfDate: true
+      - name: Patch MLX metal headers for C++17 warnings
+        script: |
+          bash "${PROJECT_DIR}/scripts/patch-mlx-metal-cxx17.sh"
+        runOnlyForDeploymentPostprocessing: false
+        alwaysOutOfDate: true
+      - name: Create Symlinks to Header Folders
+        script: |
+          echo "Symlinks handled by CocoaPods"
+          exit 0
+        outputFiles:
+          - "${DERIVED_FILE_DIR}/create_symlinks_to_header_folders.stamp"
+        runOnlyForDeploymentPostprocessing: false
+        alwaysOutOfDate: true
+
+    scheme:
+      testTargets: []
+      preActions:
+        - name: Purge legacy RCTDeprecation caches
+          settingsTarget: monGARS
+          script: |
+            bash "${PROJECT_DIR}/scripts/purge-rctdeprecation-caches.sh"
+        - name: Patch MLX metal headers
+          settingsTarget: monGARS
+          script: |
+            bash "${PROJECT_DIR}/scripts/patch-mlx-metal-cxx17.sh"
+
+
+

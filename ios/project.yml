@@ -1,0 +1,152 @@
+name: monGARS
+
+options:
+  bundleIdPrefix: com.offllm
+  deploymentTarget:
+    iOS: "18.0"
+
+packages:
+  mlx-swift:
+    url: https://github.com/ml-explore/mlx-swift
+    exactVersion: 0.25.6
+  mlx-swift-examples:
+    url: https://github.com/ml-explore/mlx-swift-examples
+    exactVersion: 2.25.6
+
+settings:
+  base:
+    CLANG_CXX_LANGUAGE_STANDARD: c++20
+    CLANG_CXX_LIBRARY: libc++
+
+targets:
+  monGARS:
+    type: application
+    platform: iOS
+    deploymentTarget: "18.0"
+
+    sources:
+      - path: MyOfflineLLMApp
+        excludes:
+          - "../node_modules/**"
+          - "../build/**"
+          - "Pods/**"
+          - "MLXCompat.swift"
+          - "Resources/**"
+        # MLXCompat.swift has been removed; the app now uses the new MLX API via LanguageModel
+
+    resources:
+      - path: MyOfflineLLMApp/Resources
+        type: folder
+        optional: true
+      - path: MyOfflineLLMApp/Models
+        type: folder
+        optional: true
+
+    dependencies:
+      # System frameworks required by custom native modules
+      - sdk: Contacts.framework
+      - sdk: CoreLocation.framework
+      - sdk: CoreMotion.framework
+      - sdk: EventKit.framework
+      - sdk: MapKit.framework
+      - sdk: MediaPlayer.framework
+      - sdk: MessageUI.framework
+      - sdk: Photos.framework
+      - package: mlx-swift-examples
+        product: MLXLLM
+      # If your code imports additional MLX products, keep them here:
+      - package: mlx-swift
+        product: MLX
+      - package: mlx-swift
+        product: MLXNN
+      - package: mlx-swift
+        product: MLXLinalg
+      - package: mlx-swift
+        product: MLXFFT
+      # Additional libraries required by MLXModule.swift
+      - package: mlx-swift-examples
+        product: MLXLMCommon
+      # - package: mlx-swift-examples
+      #   product: Tokenizers
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.offllm.mongars
+        INFOPLIST_FILE: MyOfflineLLMApp/Info.plist
+        SWIFT_VERSION: "6.0"
+        IPHONEOS_DEPLOYMENT_TARGET: "18.0"
+        SWIFT_OBJC_BRIDGING_HEADER: MyOfflineLLMApp/Bridging/monGARS-Bridging-Header.h
+
+        # Unsigned/device builds in CI
+        CODE_SIGNING_ALLOWED: NO
+        CODE_SIGNING_REQUIRED: NO
+        CODE_SIGN_IDENTITY: ""
+        DEVELOPMENT_TEAM: ""
+
+        # Stable toolchain for RN/Folly
+        CLANG_CXX_LIBRARY: libc++
+        # CLANG_CXX_LANGUAGE_STANDARD inherited from Pods (c++20)
+        OTHER_MTLFLAGS:
+          - "$(inherited)"
+          - "-std=metal-cpp17"
+
+        # Allow CocoaPods header symlink scripts to write in Xcode 15+
+        ENABLE_USER_SCRIPT_SANDBOXING: NO
+
+      configurations:
+        Release:
+          DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+
+    scripts:
+      - name: Bundle React Native code and images
+        shell: /bin/bash
+        script: |
+          set -euo pipefail
+          export NODE_BINARY="${NODE_BINARY:-node}"
+          export RCT_METRO_PORT="${RCT_METRO_PORT:-8081}"
+          if [[ "${CONFIGURATION}" == "Release" ]]; then
+            export EXTRA_PACKAGER_ARGS="${EXTRA_PACKAGER_ARGS:---minify}"
+          fi
+          "${SRCROOT}/../node_modules/react-native/scripts/react-native-xcode.sh"
+        inputFiles:
+          - "${SRCROOT}/../index.js"
+          - "${SRCROOT}/../package.json"
+          - "${SRCROOT}/../app.json"
+          - "${SRCROOT}/../babel.config.js"
+          - "${SRCROOT}/../metro.config.js"
+          - "${SRCROOT}/../node_modules/react-native/scripts/react-native-xcode.sh"
+        outputFiles:
+          - "${DERIVED_FILE_DIR}/bundle-react-native.stamp"
+        runOnlyForDeploymentPostprocessing: false
+      - name: Purge legacy RCTDeprecation caches
+        script: |
+          bash "${PROJECT_DIR}/scripts/purge-rctdeprecation-caches.sh"
+        runOnlyForDeploymentPostprocessing: false
+        alwaysOutOfDate: true
+      - name: Patch MLX metal headers for C++17 warnings
+        script: |
+          bash "${PROJECT_DIR}/scripts/patch-mlx-metal-cxx17.sh"
+        runOnlyForDeploymentPostprocessing: false
+        alwaysOutOfDate: true
+      - name: Create Symlinks to Header Folders
+        script: |
+          echo "Symlinks handled by CocoaPods"
+          exit 0
+        outputFiles:
+          - "${DERIVED_FILE_DIR}/create_symlinks_to_header_folders.stamp"
+        runOnlyForDeploymentPostprocessing: false
+        alwaysOutOfDate: true
+
+    scheme:
+      testTargets: []
+      preActions:
+        - name: Purge legacy RCTDeprecation caches
+          settingsTarget: monGARS
+          script: |
+            bash "${PROJECT_DIR}/scripts/purge-rctdeprecation-caches.sh"
+        - name: Patch MLX metal headers
+          settingsTarget: monGARS
+          script: |
+            bash "${PROJECT_DIR}/scripts/patch-mlx-metal-cxx17.sh"
+
+
+

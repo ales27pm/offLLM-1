@@ -1,0 +1,13 @@
+#include "Pods/Target Support Files/Pods-MyOfflineLLMApp/Pods-MyOfflineLLMApp.release.xcconfig"
+#include? "Auto/MLXFlags.xcconfig"
+
+HEADER_SEARCH_PATHS = $(inherited) $(SRCROOT)/build/generated/ios \
+  "$(PODS_CONFIGURATION_BUILD_DIR)/ReactCommon/ReactCommon.framework/Headers" \
+  "$(PODS_ROOT)/Headers/Public/ReactCommon" \
+  "$(PODS_ROOT)/Headers/Public/React-Codegen" \
+  "$(PODS_ROOT)/Headers/Private"
+
+SWIFT_INCLUDE_PATHS = $(inherited) $(SRCROOT)/build/generated/ios
+
+
+

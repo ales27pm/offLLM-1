@@ -1,0 +1,705 @@
+[
+    {
+        "label": "argparse",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "argparse",
+        "description": "argparse",
+        "detail": "argparse",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "subprocess",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "detail": "subprocess",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Set",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "unquote",
+        "importPath": "urllib.parse",
+        "description": "urllib.parse",
+        "isExtraImport": true,
+        "detail": "urllib.parse",
+        "documentation": {}
+    },
+    {
+        "label": "urlparse",
+        "importPath": "urllib.parse",
+        "description": "urllib.parse",
+        "isExtraImport": true,
+        "detail": "urllib.parse",
+        "documentation": {}
+    },
+    {
+        "label": "warnings",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "warnings",
+        "description": "warnings",
+        "detail": "warnings",
+        "documentation": {}
+    },
+    {
+        "label": "coremltools",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "coremltools",
+        "description": "coremltools",
+        "detail": "coremltools",
+        "documentation": {}
+    },
+    {
+        "label": "coremltools.optimize",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "coremltools.optimize",
+        "description": "coremltools.optimize",
+        "detail": "coremltools.optimize",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "torch",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "torch",
+        "description": "torch",
+        "detail": "torch",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "importPath": "huggingface_hub",
+        "description": "huggingface_hub",
+        "isExtraImport": true,
+        "detail": "huggingface_hub",
+        "documentation": {}
+    },
+    {
+        "label": "AutoConfig",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "AutoModelForCausalLM",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "AutoModelForCausalLM",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "AutoTokenizer",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "AutoModelForCausalLM",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "AutoTokenizer",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "DataCollatorForLanguageModeling",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "Trainer",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "TrainingArguments",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "Cache",
+        "importPath": "transformers.cache_utils",
+        "description": "transformers.cache_utils",
+        "isExtraImport": true,
+        "detail": "transformers.cache_utils",
+        "documentation": {}
+    },
+    {
+        "label": "PeftModel",
+        "importPath": "peft",
+        "description": "peft",
+        "isExtraImport": true,
+        "detail": "peft",
+        "documentation": {}
+    },
+    {
+        "label": "LoraConfig",
+        "importPath": "peft",
+        "description": "peft",
+        "isExtraImport": true,
+        "detail": "peft",
+        "documentation": {}
+    },
+    {
+        "label": "get_peft_model",
+        "importPath": "peft",
+        "description": "peft",
+        "isExtraImport": true,
+        "detail": "peft",
+        "documentation": {}
+    },
+    {
+        "label": "prepare_model_for_kbit_training",
+        "importPath": "peft",
+        "description": "peft",
+        "isExtraImport": true,
+        "detail": "peft",
+        "documentation": {}
+    },
+    {
+        "label": "load_dataset",
+        "importPath": "datasets",
+        "description": "datasets",
+        "isExtraImport": true,
+        "detail": "datasets",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "json,",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json.",
+        "description": "json.",
+        "detail": "json.",
+        "documentation": {}
+    },
+    {
+        "label": "parse_args",
+        "kind": 2,
+        "importPath": "scripts.ci.build_report",
+        "description": "scripts.ci.build_report",
+        "peekOfCode": "def parse_args():\n    p = argparse.ArgumentParser(description=\"Generate CI build reports\")\n    p.add_argument(\"--log\", required=True, help=\"Path to xcodebuild.log\")\n    p.add_argument(\"--xcresult\", required=True, help=\"Path to .xcresult bundle\")\n    p.add_argument(\"--out\", default=\"REPORT.md\", help=\"Output human report path\")\n    p.add_argument(\"--agent\", default=\"report_agent.md\", help=\"Output agent report path\")\n    return p.parse_args()\ndef parse_log(path: Path):\n    errors, warnings = [], []\n    try:",
+        "detail": "scripts.ci.build_report",
+        "documentation": {}
+    },
+    {
+        "label": "parse_log",
+        "kind": 2,
+        "importPath": "scripts.ci.build_report",
+        "description": "scripts.ci.build_report",
+        "peekOfCode": "def parse_log(path: Path):\n    errors, warnings = [], []\n    try:\n        with path.open(errors=\"ignore\") as f:\n            for line in f:\n                low = line.lower().strip()\n                if \"error:\" in low:\n                    errors.append(line.strip())\n                elif \"warning:\" in low:\n                    warnings.append(line.strip())",
+        "detail": "scripts.ci.build_report",
+        "documentation": {}
+    },
+    {
+        "label": "parse_xcresult",
+        "kind": 2,
+        "importPath": "scripts.ci.build_report",
+        "description": "scripts.ci.build_report",
+        "peekOfCode": "def parse_xcresult(path: Path):\n    if not path.exists():\n        return []\n    try:\n        out = _run_xcresulttool(path)\n        data = json.loads(out)\n    except Exception as e:  # xcresulttool missing or parse error\n        return [f\"(xcresult parse failed: {e})\"]\n    issues = []\n    def walk(obj):",
+        "detail": "scripts.ci.build_report",
+        "documentation": {}
+    },
+    {
+        "label": "write_human_report",
+        "kind": 2,
+        "importPath": "scripts.ci.build_report",
+        "description": "scripts.ci.build_report",
+        "peekOfCode": "def write_human_report(out_path: Path, log_path: Path, xc_path: Path, errors, warnings, xc_issues):\n    with out_path.open(\"w\") as f:\n        f.write(\"# iOS CI Report\\n\\n\")\n        f.write(f\"- Workflow log: {log_path}\\n\")\n        f.write(f\"- Result bundle: {xc_path}\\n\\n\")\n        f.write(\"## Errors\\n\")\n        if errors:\n            f.write(\"\\n\".join(f\"- {e}\" for e in errors[:100]))\n            if len(errors) > 100:\n                f.write(f\"\\n... ({len(errors)-100} more)\\n\")",
+        "detail": "scripts.ci.build_report",
+        "documentation": {}
+    },
+    {
+        "label": "write_agent_report",
+        "kind": 2,
+        "importPath": "scripts.ci.build_report",
+        "description": "scripts.ci.build_report",
+        "peekOfCode": "def write_agent_report(out_path: Path, errors, warnings, xc_issues):\n    with out_path.open(\"w\") as f:\n        f.write(\"# agent_report\\n\")\n        f.write(f\"errors_count={len(errors)}\\n\")\n        f.write(f\"warnings_count={len(warnings)}\\n\")\n        f.write(f\"xcresult_issues_count={len(xc_issues)}\\n\")\n        if errors:\n            f.write(\"first_error=\" + errors[0].replace(\"|\", \"/\") + \"\\n\")\n        if warnings:\n            f.write(\"first_warning=\" + warnings[0].replace(\"|\", \"/\") + \"\\n\")",
+        "detail": "scripts.ci.build_report",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.ci.build_report",
+        "description": "scripts.ci.build_report",
+        "peekOfCode": "def main():\n    args = parse_args()\n    log_path = Path(args.log)\n    xc_path = Path(args.xcresult)\n    errors, warnings = parse_log(log_path)\n    xc_issues = parse_xcresult(xc_path)\n    write_human_report(Path(args.out), log_path, xc_path, errors, warnings, xc_issues)\n    write_agent_report(Path(args.agent), errors, warnings, xc_issues)\n    print(f\"✅ Reports generated: {args.out}, {args.agent}\")\nif __name__ == \"__main__\":",
+        "detail": "scripts.ci.build_report",
+        "documentation": {}
+    },
+    {
+        "label": "LEGACY_UNSUPPORTED_TOKENS",
+        "kind": 5,
+        "importPath": "scripts.ci.build_report",
+        "description": "scripts.ci.build_report",
+        "peekOfCode": "LEGACY_UNSUPPORTED_TOKENS = (\n    \"unknown option\",\n    \"unrecognized option\",\n    \"invalid option\",\n    \"invalid argument\",\n    \"not supported\",\n    \"no longer supported\",\n    \"unsupported option\",\n    \"does not support\",\n    \"has been removed\",",
+        "detail": "scripts.ci.build_report",
+        "documentation": {}
+    },
+    {
+        "label": "_LEGACY_SUPPORT_STATE",
+        "kind": 5,
+        "importPath": "scripts.ci.build_report",
+        "description": "scripts.ci.build_report",
+        "peekOfCode": "_LEGACY_SUPPORT_STATE = None\ndef parse_args():\n    p = argparse.ArgumentParser(description=\"Generate CI build reports\")\n    p.add_argument(\"--log\", required=True, help=\"Path to xcodebuild.log\")\n    p.add_argument(\"--xcresult\", required=True, help=\"Path to .xcresult bundle\")\n    p.add_argument(\"--out\", default=\"REPORT.md\", help=\"Output human report path\")\n    p.add_argument(\"--agent\", default=\"report_agent.md\", help=\"Output agent report path\")\n    return p.parse_args()\ndef parse_log(path: Path):\n    errors, warnings = [], []",
+        "detail": "scripts.ci.build_report",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.ci.emit_ios_diagnostics_summary",
+        "description": "scripts.ci.emit_ios_diagnostics_summary",
+        "peekOfCode": "def main() -> int:\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"--label\", default=\"iOS build\")\n    parser.add_argument(\"--env-log\", default=\"build/diagnostics/environment.log\")\n    parser.add_argument(\"--error-log\", default=\"build/diagnostics/xcodebuild-errors.log\")\n    parser.add_argument(\"--derived-log\", default=\"build/diagnostics/derived-data.txt\")\n    parser.add_argument(\"--unified-log\", default=\"build/diagnostics/unified-xcodebuild.log\")\n    parser.add_argument(\"--artifact-path\", default=\"build/diagnostics\")\n    parser.add_argument(\"--result-json\", action=\"append\", default=[])\n    parser.add_argument(\"--env-limit\", type=int, default=40)",
+        "detail": "scripts.ci.emit_ios_diagnostics_summary",
+        "documentation": {}
+    },
+    {
+        "label": "SliceUpdateKeyValueCache",
+        "kind": 6,
+        "importPath": "scripts.convert_to_coreml",
+        "description": "scripts.convert_to_coreml",
+        "peekOfCode": "class SliceUpdateKeyValueCache(Cache):\n    def __init__(self, *, shape, dtype=torch.float32):\n        super().__init__()\n        self.register_buffer(\"k\", torch.zeros(shape, dtype=dtype))\n        self.register_buffer(\"v\", torch.zeros(shape, dtype=dtype))\n        self.register_buffer(\n            \"_current_length\",\n            torch.zeros(shape[0], dtype=torch.int32),\n            persistent=False,\n        )",
+        "detail": "scripts.convert_to_coreml",
+        "documentation": {}
+    },
+    {
+        "label": "convert",
+        "kind": 2,
+        "importPath": "scripts.convert_to_coreml",
+        "description": "scripts.convert_to_coreml",
+        "peekOfCode": "def convert(\n    hf_model_path: str,\n    out_prefix: str,\n    artifacts_path: str = \"coreml_artifacts.json\",\n    hf_token: str | None = None,\n):\n    if hf_token:\n        try:\n            login(token=hf_token)\n            print(\"Authenticated with Hugging Face Hub\")",
+        "detail": "scripts.convert_to_coreml",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.merge_lora",
+        "description": "scripts.merge_lora",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--base_model\", required=True)\n    parser.add_argument(\"--lora_dir\", required=True)\n    parser.add_argument(\"--output_dir\", required=True)\n    args = parser.parse_args()\n    base_model = AutoModelForCausalLM.from_pretrained(\n        args.base_model,\n        torch_dtype=\"auto\",\n    )",
+        "detail": "scripts.merge_lora",
+        "documentation": {}
+    },
+    {
+        "label": "format_example",
+        "kind": 2,
+        "importPath": "scripts.train_lora",
+        "description": "scripts.train_lora",
+        "peekOfCode": "def format_example(example: dict) -> str:\n    system_prompt = (\n        \"You are an assistant that decides when to call tools. If a tool is needed, \"\n        \"output JSON 'tool_call' then 'final_answer'.\"\n    )\n    user_prompt = (\n        \"INSTRUCTION:\\n{instruction}\\nCONTEXT:\\n{context}\\nTOOL_SCHEMA:\\n{schema}\".format(\n            instruction=example.get(\"instruction\", \"\"),\n            context=example.get(\"context\", \"\"),\n            schema=example.get(\"tool_schema\", \"\"),",
+        "detail": "scripts.train_lora",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.train_lora",
+        "description": "scripts.train_lora",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--base_model\", required=True)\n    parser.add_argument(\"--train_file\", required=True)\n    parser.add_argument(\"--output_dir\", required=True)\n    parser.add_argument(\"--max_steps\", type=int, default=50)\n    args = parser.parse_args()\n    if not os.path.isfile(args.train_file):\n        raise FileNotFoundError(f\"Dataset not found: {args.train_file}\")\n    tokenizer = AutoTokenizer.from_pretrained(args.base_model, use_fast=True)",
+        "detail": "scripts.train_lora",
+        "documentation": {}
+    },
+    {
+        "label": "Configuration",
+        "kind": 6,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "class Configuration:\n    identifier: str\n    config_name: str\n    target_label: str\n    values: list[str]\ndef normalize_value(raw_value: str) -> str:\n    value = raw_value.strip()\n    if value.startswith('\"') and value.endswith('\"'):\n        value = value[1:-1]\n    return value.strip()",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "normalize_value",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def normalize_value(raw_value: str) -> str:\n    value = raw_value.strip()\n    if value.startswith('\"') and value.endswith('\"'):\n        value = value[1:-1]\n    return value.strip()\ndef is_variable(value: str) -> bool:\n    return value.startswith(\"$(\") or value.startswith(\"${\")\ndef extract_section(text: str, section: str) -> str:\n    pattern = re.compile(SECTION_TEMPLATE.format(section=re.escape(section)), re.DOTALL)\n    match = pattern.search(text)",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "is_variable",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def is_variable(value: str) -> bool:\n    return value.startswith(\"$(\") or value.startswith(\"${\")\ndef extract_section(text: str, section: str) -> str:\n    pattern = re.compile(SECTION_TEMPLATE.format(section=re.escape(section)), re.DOTALL)\n    match = pattern.search(text)\n    return match.group(\"body\") if match else \"\"\ndef parse_configurations(text: str) -> dict[str, tuple[str, list[str]]]:\n    section = extract_section(text, \"XCBuildConfiguration\")\n    configurations: dict[str, tuple[str, list[str]]] = {}\n    for match in BUILD_CONFIG_RE.finditer(section):",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "extract_section",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def extract_section(text: str, section: str) -> str:\n    pattern = re.compile(SECTION_TEMPLATE.format(section=re.escape(section)), re.DOTALL)\n    match = pattern.search(text)\n    return match.group(\"body\") if match else \"\"\ndef parse_configurations(text: str) -> dict[str, tuple[str, list[str]]]:\n    section = extract_section(text, \"XCBuildConfiguration\")\n    configurations: dict[str, tuple[str, list[str]]] = {}\n    for match in BUILD_CONFIG_RE.finditer(section):\n        config_id = match.group(\"id\")\n        config_name = match.group(\"name\").strip()",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "parse_configurations",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def parse_configurations(text: str) -> dict[str, tuple[str, list[str]]]:\n    section = extract_section(text, \"XCBuildConfiguration\")\n    configurations: dict[str, tuple[str, list[str]]] = {}\n    for match in BUILD_CONFIG_RE.finditer(section):\n        config_id = match.group(\"id\")\n        config_name = match.group(\"name\").strip()\n        body = match.group(\"body\")\n        values: list[str] = []\n        for setting_match in STD_SETTING_RE.finditer(body):\n            if value := normalize_value(setting_match.group(\"value\")):",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "format_target",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def format_target(kind: str, name: str) -> str:\n    prefixes = {\n        \"PBXProject\": \"Project\",\n        \"PBXNativeTarget\": \"Target\",\n        \"PBXAggregateTarget\": \"Aggregate target\",\n    }\n    prefix = prefixes.get(kind.strip(), kind.strip() or \"Unknown\")\n    return f\"{prefix} \\\"{name.strip()}\\\"\"\ndef map_configuration_targets(text: str) -> dict[str, tuple[str, str]]:\n    section = extract_section(text, \"XCConfigurationList\")",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "map_configuration_targets",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def map_configuration_targets(text: str) -> dict[str, tuple[str, str]]:\n    section = extract_section(text, \"XCConfigurationList\")\n    mapping: dict[str, tuple[str, str]] = {}\n    for match in CONFIG_LIST_RE.finditer(section):\n        kind = match.group(\"kind\")\n        name = match.group(\"name\")\n        configs_blob = match.group(\"configs\")\n        for config_id_match in CONFIG_ID_RE.finditer(configs_blob):\n            config_id = config_id_match.group(1)\n            mapping[config_id] = (kind, name)",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "collect_configuration_reports",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def collect_configuration_reports(path: Path) -> list[Configuration]:\n    text = path.read_text(errors=\"ignore\")\n    values_by_id = parse_configurations(text)\n    target_mapping = map_configuration_targets(text)\n    reports: list[Configuration] = []\n    for config_id, (config_name, values) in values_by_id.items():\n        kind, name = target_mapping.get(config_id, (\"Unknown\", config_id))\n        reports.append(\n            Configuration(\n                identifier=config_id,",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "summarize_values",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def summarize_values(configurations: Iterable[Configuration]) -> set[str]:\n    values: set[str] = set()\n    for config in configurations:\n        values.update(config.values)\n    return values\ndef evaluate_pods_configs(configurations: list[Configuration]) -> tuple[bool, list[str]]:\n    failures: list[str] = []\n    for config in configurations:\n        explicit_values = [value for value in config.values if not is_variable(value)]\n        if not explicit_values:",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "evaluate_pods_configs",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def evaluate_pods_configs(configurations: list[Configuration]) -> tuple[bool, list[str]]:\n    failures: list[str] = []\n    for config in configurations:\n        explicit_values = [value for value in config.values if not is_variable(value)]\n        if not explicit_values:\n            failures.append(\n                f\"{config.target_label} [{config.config_name}]: \"\n                f\"{', '.join(config.values) if config.values else '(missing)'}\"\n            )\n            continue",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "print_app_summary",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def print_app_summary(configurations: list[Configuration]) -> None:\n    explicit_values = {\n        value\n        for config in configurations\n        for value in config.values\n        if not is_variable(value)\n    }\n    if explicit_values:\n        print(\"App CLANG_CXX_LANGUAGE_STANDARD values:\", explicit_values)\n    else:",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def main() -> int:\n    if not PODS_PROJECT.exists():\n        print(\"Pods.xcodeproj not found (run pod install)\", file=sys.stderr)\n        return 2\n    pods_configs = collect_configuration_reports(PODS_PROJECT)\n    pods_values = summarize_values(pods_configs)\n    print(\"Pods CLANG_CXX_LANGUAGE_STANDARD values:\", pods_values or {\"(none)\"})\n    pods_ok, failures = evaluate_pods_configs(pods_configs)\n    if APP_PROJECT.exists():\n        app_configs = collect_configuration_reports(APP_PROJECT)",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "PODS_PROJECT",
+        "kind": 5,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "PODS_PROJECT = Path(\"ios/Pods/Pods.xcodeproj/project.pbxproj\")\nAPP_PROJECT = Path(\"ios/monGARS.xcodeproj/project.pbxproj\")\nSECTION_TEMPLATE = r\"/\\* Begin {section} section \\*/(?P<body>.*?)/\\* End {section} section \\*/\"\nBUILD_CONFIG_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* (?P<name>[^*]+) \\*/ = \\{\\s*\"\n    r\"isa = XCBuildConfiguration;\\s*(?P<body>.*?)\\};\",\n    re.DOTALL,\n)\nCONFIG_LIST_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* Build configuration list for (?P<kind>[^\\\"]+) \\\"(?P<name>[^\\\"]+)\\\" \\*/ = \\{\\s*\"",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "APP_PROJECT",
+        "kind": 5,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "APP_PROJECT = Path(\"ios/monGARS.xcodeproj/project.pbxproj\")\nSECTION_TEMPLATE = r\"/\\* Begin {section} section \\*/(?P<body>.*?)/\\* End {section} section \\*/\"\nBUILD_CONFIG_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* (?P<name>[^*]+) \\*/ = \\{\\s*\"\n    r\"isa = XCBuildConfiguration;\\s*(?P<body>.*?)\\};\",\n    re.DOTALL,\n)\nCONFIG_LIST_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* Build configuration list for (?P<kind>[^\\\"]+) \\\"(?P<name>[^\\\"]+)\\\" \\*/ = \\{\\s*\"\n    r\"isa = XCConfigurationList;\\s*buildConfigurations = \\((?P<configs>.*?)\\);\",",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "SECTION_TEMPLATE",
+        "kind": 5,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "SECTION_TEMPLATE = r\"/\\* Begin {section} section \\*/(?P<body>.*?)/\\* End {section} section \\*/\"\nBUILD_CONFIG_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* (?P<name>[^*]+) \\*/ = \\{\\s*\"\n    r\"isa = XCBuildConfiguration;\\s*(?P<body>.*?)\\};\",\n    re.DOTALL,\n)\nCONFIG_LIST_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* Build configuration list for (?P<kind>[^\\\"]+) \\\"(?P<name>[^\\\"]+)\\\" \\*/ = \\{\\s*\"\n    r\"isa = XCConfigurationList;\\s*buildConfigurations = \\((?P<configs>.*?)\\);\",\n    re.DOTALL,",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "BUILD_CONFIG_RE",
+        "kind": 5,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "BUILD_CONFIG_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* (?P<name>[^*]+) \\*/ = \\{\\s*\"\n    r\"isa = XCBuildConfiguration;\\s*(?P<body>.*?)\\};\",\n    re.DOTALL,\n)\nCONFIG_LIST_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* Build configuration list for (?P<kind>[^\\\"]+) \\\"(?P<name>[^\\\"]+)\\\" \\*/ = \\{\\s*\"\n    r\"isa = XCConfigurationList;\\s*buildConfigurations = \\((?P<configs>.*?)\\);\",\n    re.DOTALL,\n)",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "CONFIG_LIST_RE",
+        "kind": 5,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "CONFIG_LIST_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* Build configuration list for (?P<kind>[^\\\"]+) \\\"(?P<name>[^\\\"]+)\\\" \\*/ = \\{\\s*\"\n    r\"isa = XCConfigurationList;\\s*buildConfigurations = \\((?P<configs>.*?)\\);\",\n    re.DOTALL,\n)\nCONFIG_ID_RE = re.compile(r\"([0-9A-Fa-f]+) /\\*\")\nSTD_SETTING_RE = re.compile(\n    r\"CLANG_CXX_LANGUAGE_STANDARD(?:\\[[^\\]]+\\])?\\s*=\\s*(?P<value>[^;]+);\"\n)\n@dataclass",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "CONFIG_ID_RE",
+        "kind": 5,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "CONFIG_ID_RE = re.compile(r\"([0-9A-Fa-f]+) /\\*\")\nSTD_SETTING_RE = re.compile(\n    r\"CLANG_CXX_LANGUAGE_STANDARD(?:\\[[^\\]]+\\])?\\s*=\\s*(?P<value>[^;]+);\"\n)\n@dataclass\nclass Configuration:\n    identifier: str\n    config_name: str\n    target_label: str\n    values: list[str]",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "STD_SETTING_RE",
+        "kind": 5,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "STD_SETTING_RE = re.compile(\n    r\"CLANG_CXX_LANGUAGE_STANDARD(?:\\[[^\\]]+\\])?\\s*=\\s*(?P<value>[^;]+);\"\n)\n@dataclass\nclass Configuration:\n    identifier: str\n    config_name: str\n    target_label: str\n    values: list[str]\ndef normalize_value(raw_value: str) -> str:",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-rn-versions",
+        "description": "scripts.verify-ios-rn-versions",
+        "peekOfCode": "def main():\n    pkg_path = Path(\"package.json\")\n    lock_path = Path(\"ios/Podfile.lock\")\n    if not pkg_path.exists():\n        print(\"package.json not found\", file=sys.stderr)\n        sys.exit(2)\n    if not lock_path.exists():\n        print(\"ios/Podfile.lock not found (run pod install)\", file=sys.stderr)\n        sys.exit(2)\n    pkg = json.loads(pkg_path.read_text())",
+        "detail": "scripts.verify-ios-rn-versions",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.xcresult_top_issues",
+        "description": "scripts.xcresult_top_issues",
+        "peekOfCode": "def main() -> None:\n    try:\n        data = json.load(sys.stdin)\n    except Exception:\n        # If input isn't JSON for any reason, don't fail the step\n        return\n    pairs: List[Tuple[str, str]] = []\n    _collect_messages(data, pairs)\n    pairs = _dedupe_preserve_order(pairs)\n    for sev, msg in pairs[:200]:",
+        "detail": "scripts.xcresult_top_issues",
+        "documentation": {}
+    }
+]

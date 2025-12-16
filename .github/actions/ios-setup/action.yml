@@ -1,0 +1,35 @@
+name: iOS Setup
+description: Select Xcode, install Node deps, XcodeGen and CocoaPods
+runs:
+  using: "composite"
+  steps:
+    - name: Select Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: "16.4"
+
+    - name: Setup Node 20.19.4
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.19.4
+        cache: "npm"
+
+    - name: Install JS deps
+      shell: bash
+      run: npm ci
+
+    - name: Install XcodeGen
+      shell: bash
+      run: |
+        set -euo pipefail
+        brew install xcodegen
+        xcodegen --version
+
+    - name: Install CocoaPods
+      shell: bash
+      run: |
+        gem install cocoapods --no-document
+        pod --version
+
+
+
