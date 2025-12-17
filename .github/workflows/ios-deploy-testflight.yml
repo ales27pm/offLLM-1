@@ -17,7 +17,7 @@ on:
 
 env:
   APP_NAME: offLLM
-  # If your scheme is actually "offLLM", set it here.
+  # This will be auto-corrected if your app scheme differs.
   SCHEME: monGARS
   BUNDLE_ID: com.offllm.mongars
   WORKSPACE: ios/monGARS.xcworkspace
@@ -174,25 +174,63 @@ jobs:
           xcodegen generate
           pod install --verbose
 
-      - name: 🔎 List schemes and validate target scheme
+      - name: 🧠 Auto-detect app scheme (non-Pods)
         run: |
           set -euo pipefail
-          echo "Workspace: $WORKSPACE"
-          echo "Requested scheme: $SCHEME"
-          xcodebuild -list -workspace "$WORKSPACE"
 
-          # Fail fast with a clean error if the scheme doesn't exist.
-          if ! xcodebuild -list -workspace "$WORKSPACE" | awk '/Schemes:/{flag=1;next}/^$/{flag=0}flag{print}' | grep -Fxq "$SCHEME"; then
-            echo "::warning::Scheme '$SCHEME' not found in workspace."
-            # Try a common fallback: APP_NAME as scheme
-            if xcodebuild -list -workspace "$WORKSPACE" | awk '/Schemes:/{flag=1;next}/^$/{flag=0}flag{print}' | grep -Fxq "$APP_NAME"; then
-              echo "::warning::Falling back to SCHEME=$APP_NAME"
-              echo "SCHEME=$APP_NAME" >> "$GITHUB_ENV"
-            else
-              echo "::error::No matching scheme found. Set env.SCHEME to an existing scheme."
-              exit 1
-            fi
+          echo "Workspace: $WORKSPACE"
+          out="$RUNNER_TEMP/xcodebuild_list.txt"
+          xcodebuild -list -workspace "$WORKSPACE" > "$out"
+
+          schemes="$(python3 - <<'PY'
+import re, sys, pathlib
+txt = pathlib.Path(sys.argv[1]).read_text(errors="ignore").splitlines()
+schemes=[]
+in_block=False
+for line in txt:
+  if re.search(r'^\s*Schemes:\s*$', line):
+    in_block=True
+    continue
+  if in_block:
+    m=re.match(r'^\s{4,}(.+?)\s*$', line)
+    if not m:
+      if line.strip()=="":
+        continue
+      break
+    schemes.append(m.group(1).strip())
+print("\n".join(schemes))
+PY
+"$out")"
+
+          echo "All schemes detected:"
+          echo "$schemes" | sed 's/^/  - /'
+
+          candidates="$(printf '%s\n' "$schemes" \
+            | grep -vE '^Pods-' \
+            | grep -vE '(^|-)privacy$' \
+            | grep -vE '^(React|RCT|Yoga|SocketRocket|boost|glog|fmt|DoubleConversion|fast_float|hermes-engine)(-|$)' \
+            | grep -vE '^(RNC|RN|react-native-)' \
+            | sed '/^$/d')"
+
+          echo "Candidate app schemes:"
+          echo "$candidates" | sed 's/^/  - /' || true
+
+          count="$(printf '%s\n' "$candidates" | sed '/^$/d' | wc -l | tr -d ' ')"
+          if [ "$count" -eq 1 ]; then
+            detected="$(printf '%s\n' "$candidates" | head -n 1)"
+            echo "✅ Detected app scheme: $detected"
+            echo "SCHEME=$detected" >> "$GITHUB_ENV"
+            exit 0
           fi
+
+          if [ -n "${SCHEME:-}" ] && xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -showBuildSettings >/dev/null 2>&1; then
+            echo "::warning::Auto-detect found $count candidates; keeping existing SCHEME=$SCHEME (it is valid)."
+            exit 0
+          fi
+
+          echo "::error::Expected exactly 1 non-Pods app scheme, found $count."
+          echo "::error::Set env.SCHEME explicitly or refine the filter list."
+          exit 1
 
       - name: 🏷️ Bump build number
         if: ${{ inputs.bump_build_number }}
