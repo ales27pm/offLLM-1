@@ -116,8 +116,8 @@ jobs:
             CODE_SIGNING_ALLOWED=YES \
             CODE_SIGNING_REQUIRED=YES \
             CODE_SIGN_IDENTITY="$SIGNING_IDENTITY" \
-            CODE_SIGN_KEYCHAIN="${KEYCHAIN_PATH:-}" \
-            OTHER_CODE_SIGN_FLAGS="--keychain ${KEYCHAIN_PATH:-}" \
+            ${KEYCHAIN_PATH:+CODE_SIGN_KEYCHAIN="$KEYCHAIN_PATH"} \
+            ${KEYCHAIN_PATH:+OTHER_CODE_SIGN_FLAGS="--keychain $KEYCHAIN_PATH"} \
             -sdk iphoneos \
             | tee "$ARCHIVE_LOG" | xcpretty
 

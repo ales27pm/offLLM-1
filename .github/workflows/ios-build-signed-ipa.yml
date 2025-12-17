@@ -180,6 +180,13 @@ jobs:
             PROJECT_FLAGS=(-project "$WORKSPACE" -scheme "$SCHEME")
           fi
           build_status=0
+          CODE_SIGN_ARGS=()
+          if [[ -n "${KEYCHAIN_PATH:-}" ]]; then
+            CODE_SIGN_ARGS+=(
+              CODE_SIGN_KEYCHAIN="${KEYCHAIN_PATH}"
+              OTHER_CODE_SIGN_FLAGS="--keychain ${KEYCHAIN_PATH}"
+            )
+          fi
           set +e
           xcodebuild archive \
             "${PROJECT_FLAGS[@]}" \
@@ -194,8 +201,7 @@ jobs:
             CODE_SIGN_IDENTITY="${SIGNING_IDENTITY:-}" \
             CODE_SIGNING_ALLOWED=YES \
             CODE_SIGNING_REQUIRED=YES \
-            CODE_SIGN_KEYCHAIN="${KEYCHAIN_PATH:-}" \
-            OTHER_CODE_SIGN_FLAGS="--keychain ${KEYCHAIN_PATH:-}" \
+            "${CODE_SIGN_ARGS[@]}" \
             | tee "$ARCHIVE_LOG" \
             | xcpretty --color auto
           build_status=${PIPESTATUS[0]}
@@ -284,4 +290,3 @@ jobs:
             rm -f "$HOME/Library/MobileDevice/Provisioning Profiles/${PROFILE_UUID}.mobileprovision" || true
           fi
           rm -f ExportOptions.plist || true
-

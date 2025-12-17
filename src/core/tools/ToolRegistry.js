@@ -18,6 +18,16 @@ const createToolRegistry = () => {
       toolCategories.get(category).add(name);
     },
 
+    tryRegister(name, tool, category = "general") {
+      try {
+        this.register(name, tool, category);
+        return true;
+      } catch (error) {
+        console.warn(error.message);
+        return false;
+      }
+    },
+
     unregister(name) {
       toolCategories.forEach((set) => set.delete(name));
       return tools.delete(name);
@@ -41,7 +51,7 @@ const createToolRegistry = () => {
       if (!module) return;
       Object.values(module).forEach((tool) => {
         if (tool && tool.name && typeof tool.execute === "function") {
-          this.register(tool.name, tool);
+          this.tryRegister(tool.name, tool);
         }
       });
     },

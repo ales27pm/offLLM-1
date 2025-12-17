@@ -3,6 +3,37 @@ export default class ToolHandler {
     this.toolRegistry = toolRegistry;
   }
 
+  _scanBalanced(str, start, openChar, closeChar, initialDepth = 0) {
+    let depth = initialDepth;
+    let inQuote = null;
+    let escape = false;
+    for (let i = start; i < str.length; i++) {
+      const ch = str[i];
+      if (escape) {
+        escape = false;
+        continue;
+      }
+      if (ch === "\\") {
+        escape = true;
+        continue;
+      }
+      if (inQuote) {
+        if (ch === inQuote) inQuote = null;
+        continue;
+      }
+      if (ch === '"' || ch === "'") {
+        inQuote = ch;
+        continue;
+      }
+      if (ch === openChar) depth++;
+      else if (ch === closeChar) {
+        depth--;
+        if (depth === 0) return { end: i, closed: true };
+      }
+    }
+    return { end: str.length, closed: false };
+  }
+
   parse(response) {
     const results = [];
     const marker = /TOOL_CALL:/g;
@@ -13,53 +44,40 @@ export default class ToolHandler {
 
       while (cursor < response.length && /\s/.test(response[cursor])) cursor++;
       const nameMatch = /[A-Za-z_][\w-]*/.exec(response.slice(cursor));
-      if (!nameMatch) continue;
+      if (!nameMatch) {
+        console.warn("Malformed TOOL_CALL: missing name");
+        continue;
+      }
       const name = nameMatch[0];
       cursor += name.length;
 
       while (cursor < response.length && /\s/.test(response[cursor])) cursor++;
-      if (response[cursor] !== "(") continue;
+      if (response[cursor] !== "(") {
+        console.warn(`Malformed TOOL_CALL for ${name}: missing '('`);
+        continue;
+      }
       cursor++; // skip opening parenthesis
 
-      let inQuote = null;
-      let depth = 1;
-      let escape = false;
       const argsStart = cursor;
-
-      for (; cursor < response.length; cursor++) {
-        const ch = response[cursor];
-        if (escape) {
-          escape = false;
-          continue;
-        }
-        if (ch === "\\") {
-          escape = true;
-          continue;
-        }
-        if (inQuote) {
-          if (ch === inQuote) inQuote = null;
-          continue;
-        }
-        if (ch === '"' || ch === "'") {
-          inQuote = ch;
-          continue;
-        }
-        if (ch === "(") depth++;
-        else if (ch === ")") {
-          depth--;
-          if (depth === 0) {
-            const argsStr = response.slice(argsStart, cursor);
-            try {
-              const args = this._parseArgs(argsStr.trim());
-              results.push({ name, args });
-            } catch (error) {
-              console.warn(`Failed to parse args for ${name}:`, error);
-            }
-            marker.lastIndex = cursor + 1;
-            break;
-          }
-        }
+      const { end, closed } = this._scanBalanced(
+        response,
+        cursor,
+        "(",
+        ")",
+        1,
+      );
+      if (!closed) {
+        console.warn(`Malformed TOOL_CALL for ${name}: unterminated args`);
+        continue;
       }
+      const argsStr = response.slice(argsStart, end);
+      try {
+        const args = this._parseArgs(argsStr.trim());
+        results.push({ name, args });
+      } catch (error) {
+        console.warn(`Failed to parse args for ${name}:`, error);
+      }
+      marker.lastIndex = end + 1;
     }
     return results;
   }
@@ -119,46 +137,22 @@ export default class ToolHandler {
       } else if (char === "{" || char === "[") {
         const startChar = char;
         const endChar = char === "{" ? "}" : "]";
-        let depth = 0;
-        let inQuote = null;
-        let escape = false;
         const start = cursor;
+        const { end, closed } = this._scanBalanced(
+          str,
+          start,
+          startChar,
+          endChar,
+        );
 
-        while (cursor < len) {
-          const ch = str[cursor];
-          if (escape) {
-            escape = false;
-            cursor++;
-            continue;
-          }
-          if (ch === "\\") {
-            escape = true;
-            cursor++;
-            continue;
-          }
-          if (inQuote) {
-            if (ch === inQuote) inQuote = null;
-            cursor++;
-            continue;
-          }
-          if (ch === '"' || ch === "'") {
-            inQuote = ch;
-            cursor++;
-            continue;
-          }
-          if (ch === startChar) depth++;
-          else if (ch === endChar) depth--;
-          cursor++;
-          if (depth === 0) break;
-        }
-
-        if (depth !== 0) throw new Error("Malformed argument string");
-        const raw = str.slice(start, cursor);
+        if (!closed) throw new Error("Malformed argument string");
+        const raw = str.slice(start, end + 1);
         try {
           value = JSON.parse(raw);
         } catch {
           value = raw;
         }
+        cursor = end + 1;
       } else {
         const start = cursor;
         while (cursor < len && !/[\s,]/.test(str[cursor])) cursor++;

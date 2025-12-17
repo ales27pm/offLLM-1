@@ -28,6 +28,8 @@ export default class PromptBuilder {
     return [
       "You are an AI assistant with access to:",
       toolsDesc,
+      "Instructions:",
+      'Use tools when additional data or actions are required. Emit calls as TOOL_CALL: toolName(param="value"). Reply directly when you already have the answer. Observe tool results to form your final answer.',
       "Context:",
       contextLines,
       `User: ${userPrompt}`,
