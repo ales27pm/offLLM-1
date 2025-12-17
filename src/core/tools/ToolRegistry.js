@@ -1,7 +1,6 @@
 import * as iosTools from "../../tools/iosTools";
 import * as androidTools from "../../tools/androidTools";
 import { Platform } from "react-native";
-import { webSearchTool } from "../../tools/webSearchTool";
 
 const createToolRegistry = () => {
   const tools = new Map();
@@ -54,6 +53,8 @@ export const toolRegistry = createToolRegistry();
 const moduleToUse = Platform.OS === "android" ? androidTools : iosTools;
 toolRegistry.autoRegister(moduleToUse);
 if (process.env.NODE_ENV !== "test") {
+  // Lazy load to avoid pulling heavy dependencies in test environments
+  const { webSearchTool } = require("../../tools/webSearchTool");
   toolRegistry.register("web_search", webSearchTool, "online");
 }
 
