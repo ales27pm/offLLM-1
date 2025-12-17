@@ -193,7 +193,7 @@ export default class ToolHandler {
             ? ""
             : typeof output === "string"
               ? output
-              : JSON.stringify(output) ?? String(output);
+              : (JSON.stringify(output) ?? String(output));
         results.push({ role: "tool", name, content });
       } catch (error) {
         results.push({

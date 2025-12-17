@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Download the bundled MLX model for iOS builds so archives ship with weights.
+# Download the bundled MLX or Core ML model for iOS builds so archives ship with weights.
 #
 # Environment variables:
 #   MODEL_ID                Hugging Face repo id (default: Qwen/Qwen2-1.5B-Instruct-MLX)
@@ -11,8 +11,8 @@ set -euo pipefail
 #   PYTHON_BIN              Python executable to use (default: python3)
 #   MODEL_VENV_DIR          Optional path to reuse a Python virtualenv for dependencies
 #   CI_FORCE_MODEL_REFRESH  When non-zero, remove any cached copy and redownload
-#   VERIFY_MODEL_PIPELINE   "0" to skip transformers pipeline warm-up, "1" to force it,
-#                           otherwise detected automatically (Darwin arm64 only)
+#   VERIFY_MODEL_PIPELINE   "0" to skip transformers/MLX warm-up, "1" to force it,
+#                           otherwise detected automatically (Darwin arm64 only; auto-skipped for Core ML)
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
@@ -23,6 +23,7 @@ MODEL_ROOT="${MODEL_ROOT:-${REPO_ROOT}/ios/MyOfflineLLMApp/Models}"
 PYTHON_BIN="${PYTHON_BIN:-python3}"
 HOST_PYTHON="$PYTHON_BIN"
 TARGET_DIR="${MODEL_ROOT}/${MODEL_ID}"
+MODEL_FORMAT=""
 
 log() {
   printf '==> %s\n' "$*"
@@ -38,6 +39,23 @@ dir_has_contents() {
   [[ -d "$dir" ]] && [[ -n "$(ls -A -- "$dir" 2>/dev/null)" ]]
 }
 
+detect_model_format() {
+  local dir="$1"
+  [[ -d "$dir" ]] || return 1
+
+  if find "$dir" \( -name '*.mlpackage' -o -name '*.mlmodelc' -o -name '*.mlmodel' \) -print -quit 2>/dev/null | grep -q .; then
+    echo "coreml"
+    return 0
+  fi
+
+  if find "$dir" -type f \( -name '*.safetensors' -o -name '*.gguf' -o -name '*.mlx' \) -print -quit 2>/dev/null | grep -q .; then
+    echo "mlx"
+    return 0
+  fi
+
+  return 1
+}
+
 if ! command -v "$HOST_PYTHON" >/dev/null 2>&1; then
   die "Python interpreter '$PYTHON_BIN' not found"
 fi
@@ -47,8 +65,8 @@ if [[ "${CI_FORCE_MODEL_REFRESH:-0}" != "0" ]]; then
   rm -rf "$TARGET_DIR"
 fi
 
-if [[ -d "$TARGET_DIR" ]] && find "$TARGET_DIR" -type f \( -name '*.safetensors' -o -name '*.gguf' -o -name '*.mlx' \) -print -quit | grep -q .; then
-  log "Model artifacts (.safetensors/.gguf/.mlx) already present at ${TARGET_DIR}; skipping download."
+if MODEL_FORMAT="$(detect_model_format "$TARGET_DIR")"; then
+  log "Model artifacts (${MODEL_FORMAT}) already present at ${TARGET_DIR}; skipping download."
   exit 0
 fi
 
@@ -104,18 +122,6 @@ case "${VERIFY_MODEL_PIPELINE:-auto}" in
     ;;
 esac
 
-if [[ "$should_validate_pipeline" -eq 0 && "${VERIFY_MODEL_PIPELINE:-auto}" != "0" ]]; then
-  log "Skipping transformers pipeline warm-up on $(uname -s)/$(uname -m); enable VERIFY_MODEL_PIPELINE=1 on supported hosts."
-fi
-
-if [[ "$should_validate_pipeline" -eq 1 ]]; then
-  log "Installing transformers pipeline helpers inside ${VENV_DIR} (quietly)"
-  "$PYTHON_BIN" -m pip install --upgrade --quiet "transformers>=4.43.0" "sentencepiece>=0.1.99"
-  if [[ "$(uname -s)" == "Darwin" && "$(uname -m)" == "arm64" ]]; then
-    "$PYTHON_BIN" -m pip install --upgrade --quiet "mlx>=0.12.0" "mlx-lm>=0.10.0"
-  fi
-fi
-
 log "Downloading ${MODEL_ID}@${MODEL_REVISION}"
 MODEL_ID="$MODEL_ID" \
 MODEL_REVISION="$MODEL_REVISION" \
@@ -137,11 +143,28 @@ snapshot_download(
 )
 PY
 
-if ! find "$TARGET_DIR" -type f \( -name '*.safetensors' -o -name '*.gguf' -o -name '*.mlx' \) -print -quit | grep -q .; then
-  die "Downloaded model at ${TARGET_DIR} does not contain expected .safetensors, .gguf, or .mlx weight files"
+if ! MODEL_FORMAT="$(detect_model_format "$TARGET_DIR")"; then
+  die "Downloaded model at ${TARGET_DIR} does not contain expected MLX or Core ML artifacts (.safetensors/.gguf/.mlx/.mlpackage)"
 fi
 
-log "Bundled MLX model ready at ${TARGET_DIR}"
+if [[ "$MODEL_FORMAT" == "coreml" && "$should_validate_pipeline" -eq 1 ]]; then
+  log "Core ML package detected; skipping MLX/transformers warm-up."
+  should_validate_pipeline=0
+fi
+
+log "Bundled ${MODEL_FORMAT^^} model ready at ${TARGET_DIR}"
+
+if [[ "$should_validate_pipeline" -eq 0 && "${VERIFY_MODEL_PIPELINE:-auto}" != "0" ]]; then
+  log "Skipping transformers pipeline warm-up on $(uname -s)/$(uname -m); enable VERIFY_MODEL_PIPELINE=1 on supported hosts."
+fi
+
+if [[ "$should_validate_pipeline" -eq 1 ]]; then
+  log "Installing transformers pipeline helpers inside ${VENV_DIR} (quietly)"
+  "$PYTHON_BIN" -m pip install --upgrade --quiet "transformers>=4.43.0" "sentencepiece>=0.1.99"
+  if [[ "$(uname -s)" == "Darwin" && "$(uname -m)" == "arm64" ]]; then
+    "$PYTHON_BIN" -m pip install --upgrade --quiet "mlx>=0.12.0" "mlx-lm>=0.10.0"
+  fi
+fi
 
 if [[ "$should_validate_pipeline" -eq 1 ]]; then
   log "Validating MLX weights with runtime helpers"
@@ -219,6 +242,3 @@ except Exception as exc:  # pragma: no cover - runtime validation only
     raise SystemExit(f"Pipeline warm-up failed: {exc}") from exc
 PY
 fi
-
-
-

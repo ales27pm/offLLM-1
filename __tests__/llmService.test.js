@@ -46,4 +46,16 @@ describe("LLMService", () => {
     );
     expect(NativeModules.LlamaTurboModule.generate).toHaveBeenCalled();
   });
+
+  test("passes modelId hint when loading an explicit repo id", async () => {
+    await llmService.loadModel("ales27pm/Dolphin3.0-CoreML");
+    expect(ensureModelDownloaded).not.toHaveBeenCalled();
+    expect(NativeModules.LlamaTurboModule.loadModel).toHaveBeenCalledWith(
+      "ales27pm/Dolphin3.0-CoreML",
+      expect.objectContaining({
+        contextSize: 4096,
+        modelId: "ales27pm/Dolphin3.0-CoreML",
+      }),
+    );
+  });
 });

@@ -38,7 +38,13 @@ enum BundledModelLocator {
 
     for case let fileURL as URL in enumerator {
       let ext = fileURL.pathExtension.lowercased()
-      if ext == "safetensors" || ext == "gguf" || ext == "bin" || ext == "mlx" {
+      if ext == "safetensors" ||
+        ext == "gguf" ||
+        ext == "bin" ||
+        ext == "mlx" ||
+        ext == "mlpackage" ||
+        ext == "mlmodel" ||
+        ext == "mlmodelc" {
         return true
       }
     }
@@ -46,6 +52,5 @@ enum BundledModelLocator {
     return false
   }
 }
-
 
 

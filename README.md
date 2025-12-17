@@ -34,6 +34,18 @@ xcodebuild \
   -configuration Debug build
 ```
 
+## Bundling Core ML Dolphin 3.0 models
+
+Pre-converted Core ML packages for Dolphin 3.0 (fp16, int8, int4 LUT) are published to [ales27pm/Dolphin3.0-CoreML](https://huggingface.co/ales27pm/Dolphin3.0-CoreML). To bundle them into the iOS app resources before building:
+
+```bash
+MODEL_ID=ales27pm/Dolphin3.0-CoreML ./scripts/ci/download-mlx-model.sh
+```
+
+The download is ~11 GB and produces `.mlpackage` bundles under `ios/MyOfflineLLMApp/Models/ales27pm/Dolphin3.0-CoreML/`. The iOS model picker exposes a “Dolphin 3.0 Core ML (3B)” preset that loads these artifacts when they are present in the bundle.
+
+When running on device or simulator, selecting this preset will automatically download the Hugging Face repository into the app’s documents directory on first use (no extra setup is required). Subsequent launches reuse the cached copy unless you remove the downloaded folder.
+
 ## CI (GitHub Actions)
 
 - Unsigned iOS IPA is built by `.github/workflows/ios-unsigned.yml` on macos-15.
