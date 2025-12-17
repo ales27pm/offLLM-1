@@ -115,6 +115,12 @@ jobs:
           set -euo pipefail
           bash scripts/ensure-rctdeprecation-legacy.sh
 
+      - name: Purge RCTDeprecation caches
+        working-directory: ${{ env.WORKING_DIR }}
+        run: |
+          set -euo pipefail
+          bash scripts/purge-rctdeprecation-caches.sh
+
       - name: (Optional) Pre-archive prep
         run: |
           bash scripts/ci/prep-ios-unsigned-archive.sh || true
