@@ -9,19 +9,26 @@ actor ModelActor {
     private let batchInterval: TimeInterval = 0.05
 
     func load(configuration: ModelConfiguration) async throws -> String {
-        let container = try await LLMModelFactory.shared.loadContainer(configuration: configuration)
+        let container = try await LLMModelFactory.shared.loadContainer(
+            configuration: configuration
+        )
         self.container = container
         return configuration.name
     }
 
     func unload() {
-        self.container = nil
-        self.isResponding = false
+        container = nil
+        isResponding = false
     }
 
-    // ✅ FIXED: collect AsyncStream into a String
-    func generate(prompt: String, parameters: GenerateParameters) async throws -> String {
-        guard let container = container else {
+    // MARK: - Non-streaming (accumulate tokens)
+
+    func generate(
+        prompt: String,
+        parameters: GenerateParameters
+    ) async throws -> String {
+
+        guard let container else {
             throw NSError(
                 domain: "MLX",
                 code: 1,
@@ -32,36 +39,42 @@ actor ModelActor {
             throw NSError(
                 domain: "MLX",
                 code: 2,
-                userInfo: [NSLocalizedDescriptionKey: "Busy"]
+                userInfo: [NSLocalizedDescriptionKey: "Model busy"]
             )
         }
 
         isResponding = true
         defer { isResponding = false }
 
-        let stream = try await container.perform { context in
+        return try await container.perform { context in
             let input = try await context.processor.prepare(
                 input: .init(prompt: prompt)
             )
-            return try MLXLMCommon.generate(
+
+            let stream = try MLXLMCommon.generate(
                 input: input,
                 parameters: parameters,
                 context: context
             )
-        }
 
-        var fullText = ""
-        for await blob in stream {
-            if let token = blob.chunk {
-                fullText += token
+            var output = ""
+            for await blob in stream {
+                if let token = blob.chunk {
+                    output += token
+                }
             }
+            return output
         }
-        return fullText
     }
 
-    // ✅ FIXED: explicitly discard perform result + stream correctly
-    func generateStream(prompt: String, parameters: GenerateParameters) async throws {
-        guard let container = container else {
+    // MARK: - Streaming
+
+    func generateStream(
+        prompt: String,
+        parameters: GenerateParameters
+    ) async throws {
+
+        guard let container else {
             throw NSError(
                 domain: "MLX",
                 code: 1,
@@ -72,17 +85,18 @@ actor ModelActor {
             throw NSError(
                 domain: "MLX",
                 code: 2,
-                userInfo: [NSLocalizedDescriptionKey: "Busy"]
+                userInfo: [NSLocalizedDescriptionKey: "Model busy"]
             )
         }
 
         isResponding = true
         defer { isResponding = false }
 
-        _ = try await container.perform { context in
+        try await container.perform { context in
             let input = try await context.processor.prepare(
                 input: .init(prompt: prompt)
             )
+
             let result = try MLXLMCommon.generate(
                 input: input,
                 parameters: parameters,
@@ -90,17 +104,17 @@ actor ModelActor {
             )
 
             var buffer = ""
-            var lastEmitTime = Date()
+            var lastEmit = Date()
 
             for await blob in result {
                 guard let token = blob.chunk else { continue }
                 buffer += token
 
                 let now = Date()
-                if now.timeIntervalSince(lastEmitTime) >= self.batchInterval || buffer.count > 50 {
+                if now.timeIntervalSince(lastEmit) >= batchInterval || buffer.count > 50 {
                     let chunk = buffer
                     buffer = ""
-                    lastEmitTime = now
+                    lastEmit = now
                     Task { @MainActor in
                         MLXEvents.shared?.emitToken(chunk)
                     }
@@ -112,12 +126,15 @@ actor ModelActor {
                     MLXEvents.shared?.emitToken(buffer)
                 }
             }
+
+            return result
         }
     }
 }
 
 @objc(MLXModule)
 final class MLXModule: NSObject {
+
     private let modelActor = ModelActor()
 
     @objc static func moduleName() -> String! { "MLXModule" }
@@ -125,6 +142,7 @@ final class MLXModule: NSObject {
 
     private func makeParams(options: NSDictionary?) -> GenerateParameters {
         var params = GenerateParameters()
+
         if let temp = options?["temperature"] as? NSNumber {
             params.temperature = temp.floatValue
         }
@@ -141,11 +159,11 @@ final class MLXModule: NSObject {
         resolve: @escaping RCTPromiseResolveBlock,
         reject: @escaping RCTPromiseRejectBlock
     ) {
-        let mid = modelID as String? ?? "mlx-community/Llama-3.2-3B-Instruct-4bit"
+        let id = modelID as String? ?? "mlx-community/Llama-3.2-3B-Instruct-4bit"
         Task {
             do {
                 let name = try await modelActor.load(
-                    configuration: ModelConfiguration(id: mid)
+                    configuration: ModelConfiguration(id: id)
                 )
                 resolve(["id": name, "status": "loaded"])
             } catch {
