@@ -6,15 +6,15 @@ export default class ToolHandler {
   _scanBalanced(str, start, openChar, closeChar, initialDepth = 0) {
     let depth = initialDepth;
     let inQuote = null;
-    let escape = false;
+    let escaped = false;
     for (let i = start; i < str.length; i++) {
       const ch = str[i];
-      if (escape) {
-        escape = false;
+      if (escaped) {
+        escaped = false;
         continue;
       }
       if (ch === "\\") {
-        escape = true;
+        escaped = true;
         continue;
       }
       if (inQuote) {
@@ -103,18 +103,18 @@ export default class ToolHandler {
         const quote = char;
         cursor++;
         let val = "";
-        let escape = false;
+        let escaped = false;
         let closed = false;
         while (cursor < len) {
           const ch = str[cursor];
-          if (escape) {
+          if (escaped) {
             val += ch;
-            escape = false;
+            escaped = false;
             cursor++;
             continue;
           }
           if (ch === "\\") {
-            escape = true;
+            escaped = true;
             cursor++;
             continue;
           }
@@ -126,7 +126,7 @@ export default class ToolHandler {
           val += ch;
           cursor++;
         }
-        if (escape || !closed) throw new Error("Malformed argument string");
+        if (escaped || !closed) throw new Error("Malformed argument string");
         value = this._coerceValue(val);
       } else if (char === "{" || char === "[") {
         const startChar = char;
@@ -189,7 +189,11 @@ export default class ToolHandler {
       try {
         const output = await tool.execute(args);
         const content =
-          typeof output === "string" ? output : JSON.stringify(output);
+          output === undefined || output === null
+            ? ""
+            : typeof output === "string"
+              ? output
+              : JSON.stringify(output) ?? String(output);
         results.push({ role: "tool", name, content });
       } catch (error) {
         results.push({
@@ -206,7 +210,14 @@ export default class ToolHandler {
   _coerceValue(value) {
     if (value === "true") return true;
     if (value === "false") return false;
-    if (value !== "" && !Number.isNaN(Number(value))) return Number(value);
+    if (
+      value !== "" &&
+      typeof value === "string" &&
+      value.trim() !== "" &&
+      !Number.isNaN(Number(value))
+    ) {
+      return Number(value);
+    }
     if (
       typeof value === "string" &&
       (value.trim().startsWith("{") || value.trim().startsWith("["))

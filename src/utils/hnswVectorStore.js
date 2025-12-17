@@ -330,7 +330,7 @@ export class HNSWVectorStore {
       .map((x) => x.value);
   }
 
-  async _searchLayer(queryVector, entryId, layer, ef) {
+  _searchLayer(queryVector, entryId, layer, ef) {
     if (!this.nodeMap.has(entryId)) return [];
     return this._searchLayerEF(queryVector, entryId, layer, ef);
   }

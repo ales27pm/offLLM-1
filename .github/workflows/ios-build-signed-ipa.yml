@@ -121,6 +121,7 @@ jobs:
 
           PROFILE_UUID=$(/usr/libexec/PlistBuddy -c "Print:UUID" "$PLIST")
           PROFILE_NAME=$(/usr/libexec/PlistBuddy -c "Print:Name" "$PLIST")
+          rm -f "$PLIST"
 
           if [[ -z "${PROFILE_UUID:-}" || ! "$PROFILE_UUID" =~ ^[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$ ]]; then
             echo "::error::Invalid provisioning profile UUID extracted; verify the IOS_PROVISIONING_PROFILE_BASE64 secret." >&2
@@ -208,7 +209,7 @@ jobs:
           set -euo pipefail
           if [ "$build_status" -ne 0 ]; then
             echo "---- SIGNING / PROVISIONING ERRORS (if any) ----"
-            grep -nE "error:|No profiles|provision|Provisioning|CodeSign|codesign|Signing|entitlement|requires a provisioning profile" "$ARCHIVE_LOG" || true
+            grep -nEi "error:.*provision|error:.*codesign|error:.*signing|no matching profiles|requires a provisioning profile|entitlement.*not supported" "$ARCHIVE_LOG" || true
             exit "$build_status"
           fi
           echo "ARCHIVE_PATH=$ARCHIVE_PATH" >> $GITHUB_ENV

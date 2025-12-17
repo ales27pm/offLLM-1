@@ -25,7 +25,7 @@ export default class PromptBuilder {
       .filter(Boolean)
       .join("\n");
 
-    return [
+    const promptSections = [
       "You are an AI assistant with access to:",
       toolsDesc,
       "Instructions:",
@@ -34,9 +34,9 @@ export default class PromptBuilder {
       contextLines,
       `User: ${userPrompt}`,
       "Assistant:",
-    ]
-      .filter((segment) => segment !== "")
-      .join("\n");
+    ].filter((segment) => segment !== "");
+
+    return promptSections.join("\n");
   }
 
   _formatContextEntry(entry) {

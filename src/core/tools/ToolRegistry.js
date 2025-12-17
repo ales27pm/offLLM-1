@@ -8,14 +8,27 @@ const createToolRegistry = () => {
 
   return {
     register(name, tool, category = "general") {
-      if (!tool || typeof tool.execute !== "function") {
-        throw new Error(`Invalid tool ${name}: missing execute()`);
+      const toolName =
+        tool && typeof tool.name === "string" && tool.name.trim()
+          ? tool.name
+          : name;
+      const registryName =
+        typeof name === "string" && name.trim() ? name : toolName;
+      if (!toolName || typeof toolName !== "string") {
+        throw new Error(`Invalid tool ${name}: missing valid name`);
       }
-      tools.set(name, tool);
+      if (!tool || typeof tool.execute !== "function") {
+        throw new Error(`Invalid tool ${toolName}: missing execute()`);
+      }
+      if (!tool.name) tool.name = toolName;
+      if (!registryName) {
+        throw new Error(`Invalid tool ${toolName}: missing registry name`);
+      }
+      tools.set(registryName, tool);
       if (!toolCategories.has(category)) {
         toolCategories.set(category, new Set());
       }
-      toolCategories.get(category).add(name);
+      toolCategories.get(category).add(registryName);
     },
 
     tryRegister(name, tool, category = "general") {
@@ -42,9 +55,15 @@ const createToolRegistry = () => {
         ? Array.from(toolCategories.get(category) || [])
         : Array.from(tools.keys());
       return names
-        .map((name) => tools.get(name))
+        .map((registryName) => {
+          const tool = tools.get(registryName);
+          if (!tool) return null;
+          const toolName = tool.name || registryName;
+          return { tool, toolName };
+        })
         .filter(Boolean)
-        .sort((a, b) => a.name.localeCompare(b.name));
+        .sort((a, b) => a.toolName.localeCompare(b.toolName))
+        .map(({ tool }) => tool);
     },
 
     autoRegister(module) {
