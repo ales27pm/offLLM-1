@@ -35,6 +35,3 @@ export default class Retriever {
     return indices.map((i) => ({ role: "context", content: items[i].content }));
   }
 }
-
-
-

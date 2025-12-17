@@ -147,6 +147,3 @@ targets:
           settingsTarget: monGARS
           script: |
             bash "${PROJECT_DIR}/scripts/patch-mlx-metal-cxx17.sh"
-
-
-

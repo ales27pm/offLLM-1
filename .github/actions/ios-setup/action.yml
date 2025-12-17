@@ -30,6 +30,3 @@ runs:
       run: |
         gem install cocoapods --no-document
         pod --version
-
-
-

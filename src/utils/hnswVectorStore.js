@@ -119,13 +119,18 @@ export class HNSWVectorStore {
     this.nodeMap = new Map();
     const key =
       getEnv("MEMORY_ENCRYPTION_KEY") || "default-dev-key-32-bytes-long-0000";
-    this.crypto = new EncryptionService(Buffer.from(key.padEnd(32).slice(0, 32)));
+    this.crypto = new EncryptionService(
+      Buffer.from(key.padEnd(32).slice(0, 32)),
+    );
   }
 
   async initialize(config = {}) {
     if (this.initialized) return;
     this.config = { ...this.config, ...config };
-    this.db = await SQLite.openDatabase({ name: "hnsw.db", location: "default" });
+    this.db = await SQLite.openDatabase({
+      name: "hnsw.db",
+      location: "default",
+    });
     await this.db.executeSql("PRAGMA foreign_keys = ON;");
     await this._createTables();
     await this._loadIndex();
@@ -152,7 +157,8 @@ export class HNSWVectorStore {
     cfg.rows.raw().forEach((row) => {
       if (row.key === "entryPoint")
         this.index.entryPoint = row.value ? parseInt(row.value) : null;
-      if (row.key === "maxLayer") this.index.maxLayer = parseInt(row.value) || 0;
+      if (row.key === "maxLayer")
+        this.index.maxLayer = parseInt(row.value) || 0;
     });
     this.index.layers = new Array(this.index.maxLayer + 1)
       .fill(0)
@@ -161,7 +167,10 @@ export class HNSWVectorStore {
     layers.rows.raw().forEach((row) => {
       const l = parseInt(row.layer);
       if (!this.index.layers[l]) this.index.layers[l] = new Map();
-      this.index.layers[l].set(parseInt(row.node_id), JSON.parse(row.connections));
+      this.index.layers[l].set(
+        parseInt(row.node_id),
+        JSON.parse(row.connections),
+      );
     });
     if (this.nodeMap.size === 0) await this._loadNodeMap();
   }
@@ -177,7 +186,11 @@ export class HNSWVectorStore {
           this.crypto.decrypt(Buffer.from(row.metadata, "base64")),
         );
         const vector = new Float32Array(new Uint8Array(row.vector).buffer);
-        this.nodeMap.set(row.id, { content, metadata, vector: Array.from(vector) });
+        this.nodeMap.set(row.id, {
+          content,
+          metadata,
+          vector: Array.from(vector),
+        });
       } catch (error) {
         console.warn("Failed to decrypt cached vector", error);
       }
@@ -192,7 +205,9 @@ export class HNSWVectorStore {
   async addVector(content, vector, metadata = {}) {
     if (!this.initialized) await this.initialize();
     const encContent = this.crypto.encrypt(content).toString("base64");
-    const encMeta = this.crypto.encrypt(JSON.stringify(metadata)).toString("base64");
+    const encMeta = this.crypto
+      .encrypt(JSON.stringify(metadata))
+      .toString("base64");
     const [res] = await this.db.executeSql(
       "INSERT INTO vectors (content, metadata) VALUES (?, ?)",
       [encContent, encMeta],
@@ -200,10 +215,10 @@ export class HNSWVectorStore {
     const id = res.insertId;
     const buf = new ArrayBuffer(vector.length * 4);
     new Float32Array(buf).set(vector);
-    await this.db.executeSql("INSERT INTO vector_data (id, vector) VALUES (?, ?)", [
-      id,
-      new Uint8Array(buf),
-    ]);
+    await this.db.executeSql(
+      "INSERT INTO vector_data (id, vector) VALUES (?, ?)",
+      [id, new Uint8Array(buf)],
+    );
     this.nodeMap.set(id, { content, metadata, vector });
     await this._insert(id, vector);
     return id;
@@ -227,11 +242,17 @@ export class HNSWVectorStore {
 
     let ep = this.index.entryPoint;
     const curMax = this.index.maxLayer;
-    for (let l = curMax; l > level; l--) ep = this._greedySearchLayer(vector, ep, l);
+    for (let l = curMax; l > level; l--)
+      ep = this._greedySearchLayer(vector, ep, l);
 
     const upper = Math.min(level, curMax);
     for (let l = upper; l >= 0; l--) {
-      const candidates = this._searchLayerEF(vector, ep, l, this.config.efConstruction);
+      const candidates = this._searchLayerEF(
+        vector,
+        ep,
+        l,
+        this.config.efConstruction,
+      );
       const M = l === 0 ? this.config.mMax0 : this.config.mMax;
       const selected = this._selectNeighbors(vector, candidates, M);
       await this._connectBidirectional(id, l, selected, M);
@@ -286,7 +307,8 @@ export class HNSWVectorStore {
       const curr = candidates.pop();
       if (!curr) break;
       const worst = results.peek();
-      if (worst && results.size() >= ef && curr.priority < worst.priority) break;
+      if (worst && results.size() >= ef && curr.priority < worst.priority)
+        break;
       const nbrs = this._getConnections(layer, curr.value);
       for (const n of nbrs) {
         if (visited.has(n)) continue;
@@ -346,7 +368,8 @@ export class HNSWVectorStore {
 
   async _connectBidirectional(nodeId, layer, neighbors, maxM) {
     if (!this.index.layers[layer]) this.index.layers[layer] = new Map();
-    if (!this.index.layers[layer].has(nodeId)) await this._setConnections(layer, nodeId, []);
+    if (!this.index.layers[layer].has(nodeId))
+      await this._setConnections(layer, nodeId, []);
     await this._setConnections(layer, nodeId, neighbors);
 
     // Reverse links
@@ -377,7 +400,11 @@ export class HNSWVectorStore {
       .map((id) => {
         const node = this.nodeMap.get(id);
         return node
-          ? { id, ...node, similarity: cosineSimilarity(queryVector, node.vector) }
+          ? {
+              id,
+              ...node,
+              similarity: cosineSimilarity(queryVector, node.vector),
+            }
           : null;
       })
       .filter(Boolean)

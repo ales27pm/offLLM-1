@@ -59,13 +59,7 @@ export default class ToolHandler {
       cursor++; // skip opening parenthesis
 
       const argsStart = cursor;
-      const { end, closed } = this._scanBalanced(
-        response,
-        cursor,
-        "(",
-        ")",
-        1,
-      );
+      const { end, closed } = this._scanBalanced(response, cursor, "(", ")", 1);
       if (!closed) {
         console.warn(`Malformed TOOL_CALL for ${name}: unterminated args`);
         continue;

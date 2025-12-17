@@ -35,6 +35,3 @@ export class MemoryManager {
 }
 
 export default MemoryManager;
-
-
-

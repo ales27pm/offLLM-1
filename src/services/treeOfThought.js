@@ -189,6 +189,3 @@ Provide only the numerical rating:`;
     return successfulResults.sort((a, b) => b.confidence - a.confidence)[0];
   }
 }
-
-
-

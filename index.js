@@ -4,6 +4,3 @@ import { name as appName } from "./app.json";
 import "./src/specs/registerTurboModules";
 
 AppRegistry.registerComponent(appName, () => App);
-
-
-

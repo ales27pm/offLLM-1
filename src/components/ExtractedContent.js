@@ -172,6 +172,3 @@ const htmlStyles = {
 };
 
 export default ExtractedContent;
-
-
-

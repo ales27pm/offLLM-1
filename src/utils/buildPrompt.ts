@@ -10,6 +10,3 @@ export function buildPrompt(opts: {
   if (opts.context) prompt = `Context:\n${opts.context}\n\n${prompt}`;
   return prompt;
 }
-
-
-

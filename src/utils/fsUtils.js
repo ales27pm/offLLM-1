@@ -349,6 +349,3 @@ export const normalizeDirectoryEntriesFromRN = (entries) => {
     modifiedAt: entry.mtime || null,
   }));
 };
-
-
-

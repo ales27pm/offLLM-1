@@ -205,6 +205,3 @@ export function parseXCResult(xcresultPath) {
     warningCount,
   };
 }
-
-
-

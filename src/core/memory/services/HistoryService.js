@@ -15,6 +15,3 @@ export default class HistoryService {
     return this.history;
   }
 }
-
-
-

@@ -224,6 +224,3 @@ function euclideanDistance(vecA, vecB) {
     vecA.reduce((sum, a, i) => sum + Math.pow(a - vecB[i], 2), 0),
   );
 }
-
-
-

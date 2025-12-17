@@ -57,6 +57,3 @@ ${patchBody}
   writeText(path.join(opts.out || "reports", "patches.md"), content);
   console.log("Generated reports/patches.md");
 }
-
-
-

@@ -10,6 +10,3 @@ export function logToNative(level: string, tag: string, message: string) {
     // ignore native failures
   }
 }
-
-
-

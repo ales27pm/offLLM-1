@@ -30,6 +30,3 @@ export function useEmotion() {
 
   return { detectText, detectAudio };
 }
-
-
-

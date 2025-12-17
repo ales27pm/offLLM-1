@@ -70,6 +70,3 @@ export async function ensureModelDownloaded(url, options = {}) {
 
   return localPath;
 }
-
-
-

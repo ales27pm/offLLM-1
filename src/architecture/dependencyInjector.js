@@ -25,6 +25,3 @@ export class DependencyInjector {
 }
 
 export const dependencyInjector = new DependencyInjector();
-
-
-

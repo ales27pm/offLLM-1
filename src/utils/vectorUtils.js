@@ -13,4 +13,3 @@ export function quantizeVector(vector, bits = 4) {
   const scale = Math.pow(2, bits - 1) - 1;
   return vector.map((v) => Math.round((v / maxVal) * scale));
 }
-

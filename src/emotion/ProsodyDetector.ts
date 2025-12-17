@@ -21,6 +21,3 @@ export default class ProsodyDetector {
     return { emotion: null, confidence: 0.3 };
   }
 }
-
-
-

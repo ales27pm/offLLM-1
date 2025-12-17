@@ -62,6 +62,3 @@ export class ConsentManager {
     await AsyncStorage.multiRemove(keys);
   }
 }
-
-
-

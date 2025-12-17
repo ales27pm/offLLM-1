@@ -51,6 +51,3 @@ export default class FileStorage {
     await this.saveRaw(buf);
   }
 }
-
-
-

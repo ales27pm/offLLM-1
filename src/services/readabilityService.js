@@ -159,6 +159,3 @@ class ReadabilityService {
 }
 
 export default ReadabilityService;
-
-
-

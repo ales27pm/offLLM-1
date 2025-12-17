@@ -414,6 +414,3 @@ export function isDeviceCompatible(minRequirements = {}) {
     platforms.includes(deviceProfile.platform)
   );
 }
-
-
-
