@@ -109,6 +109,18 @@ jobs:
           pod repo update
           pod install --verbose
 
+      - name: Ensure RCTDeprecation modulemap
+        working-directory: ${{ env.WORKING_DIR }}
+        run: |
+          set -euo pipefail
+          bash scripts/ensure-rctdeprecation-legacy.sh
+
+      - name: Purge RCTDeprecation caches
+        working-directory: ${{ env.WORKING_DIR }}
+        run: |
+          set -euo pipefail
+          bash scripts/purge-rctdeprecation-caches.sh
+
       - name: (Optional) Pre-archive prep
         run: |
           bash scripts/ci/prep-ios-unsigned-archive.sh || true
@@ -122,8 +134,41 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p signing
-          echo "$P12_BASE64" | base64 -d > signing/cert.p12
-          echo "$MOBILEPROVISION_BASE64" | base64 -d > signing/profile.mobileprovision
+
+          decode_to_file() {
+            local key="$1" dest="$2"
+            local value="${!key:-}"
+
+            if [[ -z "${value// }" ]]; then
+              echo "::error ::Missing or empty $key secret" >&2
+              exit 1
+            fi
+
+            normalized="$(printf '%s' "$value" | tr -d '[:space:]')"
+
+            if [[ -z "${normalized// }" ]]; then
+              echo "::error ::$key is empty after whitespace normalization" >&2
+              exit 1
+            fi
+
+            # macOS base64 prefers -D; GNU prefers --decode/-d. Try both.
+            if ! printf '%s' "$normalized" | base64 -d >"$dest" 2>/dev/null; then
+              if ! printf '%s' "$normalized" | base64 -D >"$dest" 2>/dev/null; then
+                echo "::error ::Failed to decode $key with base64" >&2
+                exit 1
+              fi
+            fi
+
+            chmod 600 "$dest"
+
+            if [[ ! -s "$dest" ]]; then
+              echo "::error ::Decoded file not created: $dest" >&2
+              exit 1
+            fi
+          }
+
+          decode_to_file P12_BASE64 signing/cert.p12
+          decode_to_file MOBILEPROVISION_BASE64 signing/profile.mobileprovision
           ls -la signing
 
       - name: Import signing into temp keychain
@@ -249,8 +294,31 @@ jobs:
             plutil -insert teamID -string "$TEAM_ID" ExportOptions.plist
           fi
 
-          plutil -insert provisioningProfiles -xml '<dict/>' ExportOptions.plist || true
-          plutil -insert "provisioningProfiles.${BUNDLE_ID}" -string "$PROFILE_NAME" ExportOptions.plist
+          inserted_profile=0
+
+          if [[ -x /usr/libexec/PlistBuddy ]]; then
+            if /usr/libexec/PlistBuddy -c "Delete :provisioningProfiles" ExportOptions.plist 2>/dev/null; then
+              :
+            fi
+
+            if /usr/libexec/PlistBuddy -c "Add :provisioningProfiles dict" ExportOptions.plist 2>/dev/null; then
+              if /usr/libexec/PlistBuddy -c "Add :provisioningProfiles:${BUNDLE_ID} string $PROFILE_NAME" ExportOptions.plist 2>/dev/null; then
+                inserted_profile=1
+              elif /usr/libexec/PlistBuddy -c "Set :provisioningProfiles:${BUNDLE_ID} $PROFILE_NAME" ExportOptions.plist 2>/dev/null; then
+                inserted_profile=1
+              fi
+            fi
+
+            if [[ $inserted_profile -eq 0 ]]; then
+              echo "::warning ::PlistBuddy could not set provisioningProfiles; retrying with plutil" >&2
+            fi
+          fi
+
+          if [[ $inserted_profile -eq 0 ]]; then
+            plutil -remove provisioningProfiles ExportOptions.plist 2>/dev/null || true
+            plutil -insert provisioningProfiles -xml '<dict/>' ExportOptions.plist
+            plutil -replace "provisioningProfiles.${BUNDLE_ID}" -string "$PROFILE_NAME" ExportOptions.plist
+          fi
 
           cert_label=""
           if [[ "$METHOD" == "development" ]]; then
