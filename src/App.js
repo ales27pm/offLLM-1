@@ -47,6 +47,7 @@ import { useSpeechRecognition } from "./hooks/useSpeechRecognition";
 import { useChat } from "./hooks/useChat";
 import useLLMStore from "./store/llmStore";
 import { MODEL_CONFIG } from "./config/model";
+import { ensureHuggingFaceRepoDownloaded } from "./utils/hfRepoDownloader";
 
 const MODEL_PRESETS = [
   {
@@ -57,6 +58,15 @@ const MODEL_PRESETS = [
     description:
       "Uses MODEL_URL or the default Dolphin 3.0 1B quantised build.",
     size: "1.1 GB",
+  },
+  {
+    id: "dolphin3-coreml",
+    name: "Dolphin 3.0 Core ML (3B)",
+    modelId: "ales27pm/Dolphin3.0-CoreML",
+    description:
+      "Pre-converted Core ML packages (fp16/int8/int4) hosted on Hugging Face. Run scripts/ci/download-mlx-model.sh MODEL_ID=ales27pm/Dolphin3.0-CoreML to bundle them locally before building.",
+    size: "11.3 GB",
+    platforms: ["ios"],
   },
   {
     id: "qwen2-1_5b-mlx",
@@ -194,11 +204,19 @@ function App() {
           setCurrentModelPath(path);
           setActiveModelId(model.id);
         } else if (model.modelId) {
+          setModelStatus("downloading");
+          setDownloadProgress(0.05);
+          const localPath =
+            Platform.OS === "ios"
+              ? await ensureHuggingFaceRepoDownloaded(model.modelId, {
+                  onProgress: (p) => setDownloadProgress(0.05 + 0.6 * p),
+                })
+              : model.modelId;
+          setDownloadProgress(0.7);
           setModelStatus("loading");
-          setDownloadProgress(0.1);
-          await LLMService.loadModel(model.modelId);
+          await LLMService.loadModel(localPath);
           setDownloadProgress(1);
-          setCurrentModelPath(model.modelId);
+          setCurrentModelPath(localPath);
           setActiveModelId(model.id);
         } else {
           throw new Error("Model is missing download information.");

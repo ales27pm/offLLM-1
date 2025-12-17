@@ -1,10 +1,10 @@
 {
   "fallback_models": [
+    "ales27pm/Dolphin3.0-CoreML",
     "Qwen/Qwen2-1.5B-Instruct-MLX",
     "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
     "openaccess-ai-collective/tiny-mistral"
   ]
 }
-
 
 

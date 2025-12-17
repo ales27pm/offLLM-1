@@ -78,6 +78,11 @@ class LLMService {
             checksum: MODEL_CONFIG.checksum,
           }));
         console.log(`[LLMService] Loading: ${path}`);
+        const isModelId =
+          typeof customPath === "string" &&
+          !customPath.startsWith("/") &&
+          !customPath.startsWith("file://") &&
+          !/^[a-z]+:\/\//i.test(customPath);
 
         let result;
         if (this.isWeb) {
@@ -87,9 +92,12 @@ class LLMService {
           if (this.isReady && this.nativeModule.unload)
             await this.nativeModule.unload();
 
-          const options =
-            Platform.OS === "android" ? { contextSize: 4096 } : null;
-          result = await this._nativeLoad(path, options);
+          const options = {
+            ...(Platform.OS === "android" ? { contextSize: 4096 } : {}),
+            ...(isModelId ? { modelId: customPath } : {}),
+          };
+          const loadOptions = Object.keys(options).length > 0 ? options : null;
+          result = await this._nativeLoad(path, loadOptions);
 
           await this.pluginManager.enablePlugin("sparseAttention");
         }
