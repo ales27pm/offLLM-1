@@ -19,30 +19,75 @@ actor ModelActor {
         self.isResponding = false
     }
 
+    // ✅ FIXED: collect AsyncStream into a String
     func generate(prompt: String, parameters: GenerateParameters) async throws -> String {
-        guard let container = container else { throw NSError(domain: "MLX", code: 1, userInfo: [NSLocalizedDescriptionKey: "Model not loaded"]) }
-        guard !isResponding else { throw NSError(domain: "MLX", code: 2, userInfo: [NSLocalizedDescriptionKey: "Busy"]) }
+        guard let container = container else {
+            throw NSError(
+                domain: "MLX",
+                code: 1,
+                userInfo: [NSLocalizedDescriptionKey: "Model not loaded"]
+            )
+        }
+        guard !isResponding else {
+            throw NSError(
+                domain: "MLX",
+                code: 2,
+                userInfo: [NSLocalizedDescriptionKey: "Busy"]
+            )
+        }
 
         isResponding = true
         defer { isResponding = false }
 
-        let output = try await container.perform { context in
-            let input = try await context.processor.prepare(input: .init(prompt: prompt))
-            return try MLXLMCommon.generate(input: input, parameters: parameters, context: context)
+        let stream = try await container.perform { context in
+            let input = try await context.processor.prepare(
+                input: .init(prompt: prompt)
+            )
+            return try MLXLMCommon.generate(
+                input: input,
+                parameters: parameters,
+                context: context
+            )
         }
-        return output.text
+
+        var fullText = ""
+        for await blob in stream {
+            if let token = blob.chunk {
+                fullText += token
+            }
+        }
+        return fullText
     }
 
+    // ✅ FIXED: explicitly discard perform result + stream correctly
     func generateStream(prompt: String, parameters: GenerateParameters) async throws {
-        guard let container = container else { throw NSError(domain: "MLX", code: 1, userInfo: [NSLocalizedDescriptionKey: "Model not loaded"]) }
-        guard !isResponding else { throw NSError(domain: "MLX", code: 2, userInfo: [NSLocalizedDescriptionKey: "Busy"]) }
+        guard let container = container else {
+            throw NSError(
+                domain: "MLX",
+                code: 1,
+                userInfo: [NSLocalizedDescriptionKey: "Model not loaded"]
+            )
+        }
+        guard !isResponding else {
+            throw NSError(
+                domain: "MLX",
+                code: 2,
+                userInfo: [NSLocalizedDescriptionKey: "Busy"]
+            )
+        }
 
         isResponding = true
         defer { isResponding = false }
 
-        try await container.perform { context in
-            let input = try await context.processor.prepare(input: .init(prompt: prompt))
-            let result = try MLXLMCommon.generate(input: input, parameters: parameters, context: context)
+        _ = try await container.perform { context in
+            let input = try await context.processor.prepare(
+                input: .init(prompt: prompt)
+            )
+            let result = try MLXLMCommon.generate(
+                input: input,
+                parameters: parameters,
+                context: context
+            )
 
             var buffer = ""
             var lastEmitTime = Date()
@@ -56,11 +101,17 @@ actor ModelActor {
                     let chunk = buffer
                     buffer = ""
                     lastEmitTime = now
-                    Task { @MainActor in MLXEvents.shared?.emitToken(chunk) }
+                    Task { @MainActor in
+                        MLXEvents.shared?.emitToken(chunk)
+                    }
                 }
             }
-            if !buffer.isEmpty { Task { @MainActor in MLXEvents.shared?.emitToken(buffer) } }
-            return result
+
+            if !buffer.isEmpty {
+                Task { @MainActor in
+                    MLXEvents.shared?.emitToken(buffer)
+                }
+            }
         }
     }
 }
@@ -68,12 +119,15 @@ actor ModelActor {
 @objc(MLXModule)
 final class MLXModule: NSObject {
     private let modelActor = ModelActor()
+
     @objc static func moduleName() -> String! { "MLXModule" }
     @objc static func requiresMainQueueSetup() -> Bool { false }
 
     private func makeParams(options: NSDictionary?) -> GenerateParameters {
         var params = GenerateParameters()
-        if let temp = options?["temperature"] as? NSNumber { params.temperature = temp.floatValue }
+        if let temp = options?["temperature"] as? NSNumber {
+            params.temperature = temp.floatValue
+        }
         if let topK = options?["topK"] as? NSNumber {
             let k = topK.floatValue
             params.topP = min(max(k / 100.0, 0.1), 1.0)
@@ -82,43 +136,82 @@ final class MLXModule: NSObject {
     }
 
     @objc(load:resolver:rejecter:)
-    func load(modelID: NSString?, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    func load(
+        modelID: NSString?,
+        resolve: @escaping RCTPromiseResolveBlock,
+        reject: @escaping RCTPromiseRejectBlock
+    ) {
         let mid = modelID as String? ?? "mlx-community/Llama-3.2-3B-Instruct-4bit"
         Task {
             do {
-                let name = try await modelActor.load(configuration: ModelConfiguration(id: mid))
+                let name = try await modelActor.load(
+                    configuration: ModelConfiguration(id: mid)
+                )
                 resolve(["id": name, "status": "loaded"])
-            } catch { reject("LOAD_FAIL", error.localizedDescription, error) }
-        }
-    }
-
-    @objc(generate:options:resolver:rejecter:)
-    func generate(prompt: NSString, options: NSDictionary?, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
-        let params = makeParams(options: options)
-        Task {
-            do {
-                let text = try await modelActor.generate(prompt: prompt as String, parameters: params)
-                resolve(text)
-            } catch { reject("GEN_FAIL", error.localizedDescription, error) }
-        }
-    }
-
-    @objc(startStream:options:resolver:rejecter:)
-    func startStream(prompt: NSString, options: NSDictionary?, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
-        let params = makeParams(options: options)
-        Task {
-            resolve(nil)
-            do {
-                try await modelActor.generateStream(prompt: prompt as String, parameters: params)
-                Task { @MainActor in MLXEvents.shared?.emitCompleted() }
             } catch {
-                Task { @MainActor in MLXEvents.shared?.emitError("STREAM_FAIL", message: error.localizedDescription) }
+                reject("LOAD_FAIL", error.localizedDescription, error)
             }
         }
     }
 
-    @objc(unload) func unload() { Task { await modelActor.unload() } }
-    @objc(reset) func reset() {}
-    @objc(stop) func stop() {}
-}
+    @objc(generate:options:resolver:rejecter:)
+    func generate(
+        prompt: NSString,
+        options: NSDictionary?,
+        resolve: @escaping RCTPromiseResolveBlock,
+        reject: @escaping RCTPromiseRejectBlock
+    ) {
+        let params = makeParams(options: options)
+        Task {
+            do {
+                let text = try await modelActor.generate(
+                    prompt: prompt as String,
+                    parameters: params
+                )
+                resolve(text)
+            } catch {
+                reject("GEN_FAIL", error.localizedDescription, error)
+            }
+        }
+    }
 
+    @objc(startStream:options:resolver:rejecter:)
+    func startStream(
+        prompt: NSString,
+        options: NSDictionary?,
+        resolve: @escaping RCTPromiseResolveBlock,
+        reject: @escaping RCTPromiseRejectBlock
+    ) {
+        let params = makeParams(options: options)
+        Task {
+            resolve(nil)
+            do {
+                try await modelActor.generateStream(
+                    prompt: prompt as String,
+                    parameters: params
+                )
+                Task { @MainActor in
+                    MLXEvents.shared?.emitCompleted()
+                }
+            } catch {
+                Task { @MainActor in
+                    MLXEvents.shared?.emitError(
+                        "STREAM_FAIL",
+                        message: error.localizedDescription
+                    )
+                }
+            }
+        }
+    }
+
+    @objc(unload)
+    func unload() {
+        Task { await modelActor.unload() }
+    }
+
+    @objc(reset)
+    func reset() {}
+
+    @objc(stop)
+    func stop() {}
+}
