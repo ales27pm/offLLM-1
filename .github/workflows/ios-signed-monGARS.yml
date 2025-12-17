@@ -139,9 +139,12 @@ jobs:
               exit 1
             fi
 
-            if ! printf '%s' "$normalized" | base64 --decode > "$dest"; then
-              echo "::error ::Failed to decode $key" >&2
-              exit 1
+            # macOS base64 prefers -D; GNU prefers --decode/-d. Try both.
+            if ! printf '%s' "$normalized" | base64 -d >"$dest" 2>/dev/null; then
+              if ! printf '%s' "$normalized" | base64 -D >"$dest" 2>/dev/null; then
+                echo "::error ::Failed to decode $key with base64" >&2
+                exit 1
+              fi
             fi
 
             chmod 600 "$dest"
