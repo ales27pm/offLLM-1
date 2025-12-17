@@ -17,7 +17,7 @@ on:
 
 env:
   APP_NAME: offLLM
-  # This can be overwritten automatically if detection finds the real app scheme.
+  # Can be overwritten automatically after scheme detection.
   SCHEME: monGARS
   BUNDLE_ID: com.offllm.mongars
   WORKSPACE: ios/monGARS.xcworkspace
@@ -183,89 +183,97 @@ jobs:
           echo "Workspace: $WORKSPACE"
           echo "Configured SCHEME: ${SCHEME:-}"
           echo "Target BUNDLE_ID: $BUNDLE_ID"
+          echo "Configuration: $CONFIGURATION"
 
-          list_out="$RUNNER_TEMP/xcode_schemes.txt"
-          xcodebuild -list -workspace "$WORKSPACE" | tee "$list_out"
+          # Prefer Xcode's JSON output (stable + no awk indentation traps)
+          json="$RUNNER_TEMP/xcodebuild_list.json"
+          xcodebuild -list -json -workspace "$WORKSPACE" > "$json"
 
-          # Parse schemes robustly: after "Schemes:" take indented lines; stop when indentation ends.
-          schemes="$(awk '
-            /Schemes:/ {in_s=1; next}
-            in_s {
-              if ($0 ~ /^[[:space:]]*$/) next
-              if ($0 !~ /^[[:space:]]+/) { exit }
-              gsub(/^[[:space:]]+/, "", $0)
-              gsub(/[[:space:]]+$/, "", $0)
-              print
-            }
-          ' "$list_out")"
+          python3 - <<'PY'
+          import json, os, subprocess, sys
 
-          echo "All schemes:"
-          printf '%s\n' "$schemes" | sed 's/^/  - /'
+          workspace = os.environ["WORKSPACE"]
+          bundle_id = os.environ["BUNDLE_ID"]
+          config = os.environ["CONFIGURATION"]
+          configured = os.environ.get("SCHEME", "").strip()
+          json_path = os.path.join(os.environ["RUNNER_TEMP"], "xcodebuild_list.json")
 
-          scheme_exists() {
-            local s="$1"
-            printf '%s\n' "$schemes" | grep -Fxq "$s"
-          }
+          with open(json_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
 
-          if [ -n "${SCHEME:-}" ] && scheme_exists "$SCHEME"; then
-            echo "::notice::SCHEME '$SCHEME' exists in workspace; keeping it."
-            exit 0
-          fi
+          schemes = data.get("workspace", {}).get("schemes", []) or []
+          print("All schemes:")
+          for s in schemes:
+            print(f"  - {s}")
 
-          candidates="$(printf '%s\n' "$schemes" \
-            | grep -vE '^Pods-' \
-            | grep -vE '(^|-)privacy$' \
-            | grep -vE '^(React|RCT|Yoga|SocketRocket|boost|glog|fmt|DoubleConversion|fast_float|hermes-engine)($|-)'
-          )"
-          candidates="$(printf '%s\n' "$candidates" | grep -vE '^(RN|RNC|react-native-)')"
-          candidates="$(printf '%s\n' "$candidates" | sed '/^$/d')"
+          def scheme_buildable(s: str) -> bool:
+            r = subprocess.run(
+              ["xcodebuild", "-showBuildSettings", "-workspace", workspace, "-scheme", s, "-configuration", config],
+              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+            )
+            return r.returncode == 0
 
-          echo "Candidate schemes:"
-          if [ -n "$candidates" ]; then
-            printf '%s\n' "$candidates" | sed 's/^/  - /'
-          else
-            echo "  (none)"
-          fi
+          def bundle_for_scheme(s: str) -> str:
+            p = subprocess.run(
+              ["xcodebuild", "-showBuildSettings", "-workspace", workspace, "-scheme", s, "-configuration", config],
+              capture_output=True, text=True
+            )
+            if p.returncode != 0:
+              return ""
+            for line in p.stdout.splitlines():
+              if line.strip().startswith("PRODUCT_BUNDLE_IDENTIFIER = "):
+                return line.split(" = ", 1)[1].strip()
+            return ""
 
-          matches=""
-          while IFS= read -r s; do
-            [ -z "$s" ] && continue
-            echo "::group::Probe scheme: $s"
+          # If configured scheme exists AND is buildable, keep it.
+          if configured and configured in schemes and scheme_buildable(configured):
+            print(f"::notice::SCHEME '{configured}' exists & is buildable; keeping it.")
+            sys.exit(0)
 
-            if xcodebuild -showBuildSettings -workspace "$WORKSPACE" -scheme "$s" -configuration "$CONFIGURATION" >/dev/null 2>&1; then
-              pid="$(xcodebuild -showBuildSettings -workspace "$WORKSPACE" -scheme "$s" -configuration "$CONFIGURATION" 2>/dev/null \
-                | awk -F ' = ' '/PRODUCT_BUNDLE_IDENTIFIER/ {print $2; exit}')"
-              pid="$(printf '%s' "$pid" | tr -d '\r' | sed 's/[[:space:]]*$//')"
-              echo "PRODUCT_BUNDLE_IDENTIFIER=$pid"
-              if [ "$pid" = "$BUNDLE_ID" ]; then
-                matches="${matches}${s}"$'\n'
-              fi
-            else
-              echo "(not buildable via showBuildSettings)"
-            fi
+          # Filter out obvious non-app schemes first (Pods-, privacy, RN deps)
+          excluded_prefixes = ("Pods-",)
+          excluded_exact = set([
+            "boost","DoubleConversion","fast_float","FBLazyVector","fmt","glog","hermes-engine","SocketRocket","Yoga"
+          ])
+          excluded_starts = ("React", "RCT")
+          excluded_rn = ("RN", "RNC", "react-native-")
 
-            echo "::endgroup::"
-          done <<< "$candidates"
+          candidates = []
+          for s in schemes:
+            if s.startswith(excluded_prefixes): continue
+            if s in excluded_exact: continue
+            if s.endswith("_privacy") or s.endswith("-privacy") or s.endswith("privacy"): continue
+            if s.startswith(excluded_starts): continue
+            if s.startswith(excluded_rn): continue
+            candidates.append(s)
 
-          matches="$(printf '%s' "$matches" | sed '/^$/d')"
-          match_count="$(printf '%s\n' "$matches" | sed '/^$/d' | wc -l | tr -d ' ')"
+          print("Candidate schemes:")
+          for s in candidates:
+            print(f"  - {s}")
 
-          echo "Matching schemes (bundle id = $BUNDLE_ID):"
-          if [ -n "$matches" ]; then
-            printf '%s\n' "$matches" | sed 's/^/  - /'
-          else
-            echo "  (none)"
-          fi
+          matches = []
+          for s in candidates:
+            if not scheme_buildable(s):
+              continue
+            pid = bundle_for_scheme(s)
+            print(f"Probe {s}: PRODUCT_BUNDLE_IDENTIFIER={pid!r}")
+            if pid == bundle_id:
+              matches.append(s)
 
-          if [ "$match_count" -eq 1 ]; then
-            detected="$(printf '%s\n' "$matches" | head -n 1)"
-            echo "::notice::Auto-detected app scheme: $detected"
-            echo "SCHEME=$detected" >> "$GITHUB_ENV"
-            exit 0
-          fi
+          print("Matching schemes:")
+          for s in matches:
+            print(f"  - {s}")
 
-          echo "::error::Could not uniquely detect app scheme for BUNDLE_ID=$BUNDLE_ID (found $match_count matches). Set env.SCHEME explicitly."
-          exit 1
+          if len(matches) == 1:
+            detected = matches[0]
+            with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as envf:
+              envf.write(f"SCHEME={detected}\n")
+            print(f"::notice::Auto-detected app scheme: {detected}")
+            sys.exit(0)
+
+          print(f"::error::Could not uniquely detect app scheme for BUNDLE_ID={bundle_id} (found {len(matches)} matches). Set env.SCHEME explicitly.")
+          sys.exit(1)
+          PY
 
       - name: 🏷️ Bump build number
         if: ${{ inputs.bump_build_number }}
@@ -315,33 +323,38 @@ jobs:
           echo "SIGNING_IDENTITY=$SIGNING_IDENTITY" >> "$GITHUB_ENV"
           echo "Using signing identity: $SIGNING_IDENTITY"
 
-      - name: 🏗️ Archive (raw log + xcresult + actionable error)
+      - name: 🏗️ Archive (always writes xcresult; dumps failures)
+        id: archive
+        continue-on-error: true
         run: |
           set -euo pipefail
           mkdir -p build/logs
 
+          RESULT_BUNDLE="$RUNNER_TEMP/archive.xcresult"
+          RAW_LOG="build/logs/archive-xcodebuild-raw.log"
+
           EXTRA_PROFILE_ARGS=()
+          # Prefer SPECIFIER (Name). If we don't have it, omit it (ExportOptions still maps for export).
           if [ -n "${PROFILE_NAME:-}" ]; then
             EXTRA_PROFILE_ARGS+=( "PROVISIONING_PROFILE_SPECIFIER=$PROFILE_NAME" )
           fi
-          # NOTE: PROVISIONING_PROFILE=<UUID> is deprecated. Avoid passing it to xcodebuild.
 
-          RAW_LOG="build/logs/archive-raw.log"
-          PRETTY_LOG="build/logs/archive.log"
-          RESULT_BUNDLE="$RUNNER_TEMP/archive.xcresult"
-
-          echo "Archiving workspace=$WORKSPACE scheme=$SCHEME config=$CONFIGURATION"
-          echo "Using keychain: $KEYCHAIN_PATH"
-          echo "Using profile name: ${PROFILE_NAME:-<none>}"
-          echo "Using profile uuid: ${PROFILE_UUID:-<none>}"
-          echo "Using signing identity: $SIGNING_IDENTITY"
+          echo "Archiving with:"
+          echo "  WORKSPACE=$WORKSPACE"
+          echo "  SCHEME=$SCHEME"
+          echo "  CONFIGURATION=$CONFIGURATION"
+          echo "  BUNDLE_ID=$BUNDLE_ID"
+          echo "  TEAM_ID=$TEAM_ID"
+          echo "  PROFILE_NAME=${PROFILE_NAME:-}"
+          echo "  PROFILE_UUID=$PROFILE_UUID"
+          echo "  SIGNING_IDENTITY=$SIGNING_IDENTITY"
+          echo "  RESULT_BUNDLE=$RESULT_BUNDLE"
 
           set +e
           xcodebuild archive \
             -workspace "$WORKSPACE" \
             -scheme "$SCHEME" \
             -configuration "$CONFIGURATION" \
-            -sdk iphoneos \
             -destination "generic/platform=iOS" \
             -archivePath "$RUNNER_TEMP/${APP_NAME}.xcarchive" \
             -derivedDataPath "$RUNNER_TEMP/DerivedData" \
@@ -352,35 +365,54 @@ jobs:
             CODE_SIGN_IDENTITY="$SIGNING_IDENTITY" \
             OTHER_CODE_SIGN_FLAGS="--keychain $KEYCHAIN_PATH" \
             "${EXTRA_PROFILE_ARGS[@]}" \
-            2>&1 | tee "$RAW_LOG" | xcpretty | tee "$PRETTY_LOG"
-          status="${PIPESTATUS[0]}"
+            2>&1 | tee "$RAW_LOG" | xcpretty
+          xc_status=${PIPESTATUS[0]}
           set -e
 
-          if [ "$status" -ne 0 ]; then
-            echo "::error::xcodebuild archive failed with exit code $status"
+          echo "ARCHIVE_XCRESULT=$RESULT_BUNDLE" >> "$GITHUB_ENV"
 
-            echo "::group::Most relevant error lines (raw)"
-            grep -nE "error:|fatal error:|CodeSign|Provisioning|Signing|No profiles|requires a provisioning profile|entitlements|clang: error|SwiftCompile" -n "$RAW_LOG" | head -n 200 || true
-            echo "::endgroup::"
-
-            echo "::group::Tail of raw log"
+          if [ "$xc_status" -ne 0 ]; then
+            echo "::error::xcodebuild archive failed with exit code $xc_status"
+            echo "---- tail (raw xcodebuild) ----"
             tail -n 200 "$RAW_LOG" || true
-            echo "::endgroup::"
-
-            exit "$status"
+            exit "$xc_status"
           fi
 
           echo "ARCHIVE_PATH=$RUNNER_TEMP/${APP_NAME}.xcarchive" >> "$GITHUB_ENV"
-          echo "ARCHIVE_XCRESULT=$RESULT_BUNDLE" >> "$GITHUB_ENV"
 
-      - name: 📎 Upload build logs + xcresult
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: ios-archive-logs
-          path: |
-            build/logs/*
-            ${{ runner.temp }}/archive.xcresult
+      - name: 🧾 If archive failed, dump xcresult issues (action errors)
+        if: ${{ steps.archive.outcome != 'success' }}
+        run: |
+          set -euo pipefail
+          echo "Archive failed; attempting to extract errors from xcresult…"
+          if [ -z "${ARCHIVE_XCRESULT:-}" ] || [ ! -d "${ARCHIVE_XCRESULT:-}" ]; then
+            echo "::warning::No xcresult bundle found at ARCHIVE_XCRESULT=${ARCHIVE_XCRESULT:-}"
+            exit 0
+          fi
+
+          echo "::group::xcresulttool - actions invocation record"
+          xcrun xcresulttool get --path "$ARCHIVE_XCRESULT" --format json | python3 - <<'PY'
+          import json, sys
+          data = json.load(sys.stdin)
+
+          # Best-effort dump of action/issue summaries without assuming exact schema.
+          def walk(obj, path=""):
+            if isinstance(obj, dict):
+              for k, v in obj.items():
+                np = f"{path}.{k}" if path else k
+                if k in ("issueSummaries", "issues", "errors", "warnings") and v:
+                  print(f"\n== {np} ==")
+                  print(json.dumps(v, indent=2)[:20000])
+                walk(v, np)
+            elif isinstance(obj, list):
+              for i, v in enumerate(obj):
+                walk(v, f"{path}[{i}]")
+          walk(data)
+          PY
+          echo "::endgroup::"
+
+          echo "::error::Archive failed. See log tail above + xcresult dumps."
+          exit 1
 
       - name: 📦 Export IPA
         run: |
@@ -391,7 +423,7 @@ jobs:
             -archivePath "$ARCHIVE_PATH" \
             -exportPath build/output \
             -exportOptionsPlist ios/ExportOptions.plist \
-            2>&1 | tee build/logs/export-raw.log | xcpretty | tee build/logs/export.log
+            2>&1 | tee build/logs/export-xcodebuild-raw.log | xcpretty
 
           IPA="$(find build/output -name '*.ipa' -print -quit)"
           if [ -z "$IPA" ]; then
