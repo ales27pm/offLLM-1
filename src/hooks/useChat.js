@@ -23,14 +23,19 @@ export function useChat() {
 
     try {
       const emotion = detectText(query);
-      const augmentedPrompt = emotion ? `[User emotion: ${emotion}] ${query}` : query;
+      const augmentedPrompt = emotion
+        ? `[User emotion: ${emotion}] ${query}`
+        : query;
 
       const reply = await orchestrator.current.run(augmentedPrompt);
 
       addMessage({ role: "assistant", content: reply });
 
       Tts.stop();
-      const speechText = reply.replace(/([.?!])\s+/g, "$1 <break time=\"300ms\"/> ");
+      const speechText = reply.replace(
+        /([.?!])\s+/g,
+        '$1 <break time="300ms"/> ',
+      );
       Tts.speak(speechText);
     } catch (e) {
       console.error("Agent execution failed:", e);
@@ -50,4 +55,3 @@ export function useChat() {
 
   return { send, cancel };
 }
-

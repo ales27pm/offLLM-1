@@ -49,6 +49,3 @@ export function useMlxChat(modelId?: string) {
     [ready, busy, history, error, send, reset],
   );
 }
-
-
-

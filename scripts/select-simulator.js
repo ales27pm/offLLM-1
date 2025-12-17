@@ -68,6 +68,3 @@ const collectStdin = async () => {
     process.exit(1);
   }
 })();
-
-
-

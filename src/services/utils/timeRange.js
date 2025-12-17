@@ -17,6 +17,3 @@ export const brave = {
   month: "pm",
   year: "py",
 };
-
-
-

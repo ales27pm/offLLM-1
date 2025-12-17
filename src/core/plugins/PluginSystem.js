@@ -10,6 +10,3 @@ export class PluginSystem {
 }
 
 export default PluginSystem;
-
-
-

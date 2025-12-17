@@ -27,6 +27,3 @@ export async function search(query, { maxResults, timeRange, safeSearch }) {
     date: i.pagemap?.metatags?.[0]?.["article:published_time"] || null,
   }));
 }
-
-
-

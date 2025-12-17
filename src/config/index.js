@@ -26,6 +26,3 @@ export function getEnv(key) {
   }
   return undefined;
 }
-
-
-

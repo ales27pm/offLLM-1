@@ -115,6 +115,3 @@ runs:
             with open(summary_path, "a", encoding="utf-8") as summary_file:
                 summary_file.write("\n".join(lines))
         PY
-
-
-

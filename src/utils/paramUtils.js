@@ -123,6 +123,3 @@ export const validateParameters = (tool, parameters = {}) => {
     }
   }
 };
-
-
-

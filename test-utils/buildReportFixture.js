@@ -95,6 +95,3 @@ module.exports = {
   PYTHON_INTERPRETER,
   SCRIPT_PATH,
 };
-
-
-

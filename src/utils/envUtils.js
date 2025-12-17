@@ -37,6 +37,3 @@ export const getGlobalProcess = () =>
   typeof process === "object" && process !== null ? process : null;
 
 export { isReactNative };
-
-
-

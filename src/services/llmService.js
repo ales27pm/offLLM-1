@@ -58,7 +58,8 @@ class LLMService {
   }
 
   async _nativeLoad(path, options) {
-    if (this.nativeModule.loadModel) return this.nativeModule.loadModel(path, options);
+    if (this.nativeModule.loadModel)
+      return this.nativeModule.loadModel(path, options);
     if (this.nativeModule.load) return this.nativeModule.load(path);
     throw new Error("Native module incompatible");
   }
@@ -73,7 +74,9 @@ class LLMService {
       try {
         const path =
           customPath ||
-          (await ensureModelDownloaded(MODEL_CONFIG.url, { checksum: MODEL_CONFIG.checksum }));
+          (await ensureModelDownloaded(MODEL_CONFIG.url, {
+            checksum: MODEL_CONFIG.checksum,
+          }));
         console.log(`[LLMService] Loading: ${path}`);
 
         let result;
@@ -81,9 +84,11 @@ class LLMService {
           // We don't have web inference yet, throwing to be safe
           throw new Error("Web inference not configured.");
         } else {
-          if (this.isReady && this.nativeModule.unload) await this.nativeModule.unload();
+          if (this.isReady && this.nativeModule.unload)
+            await this.nativeModule.unload();
 
-          const options = Platform.OS === "android" ? { contextSize: 4096 } : null;
+          const options =
+            Platform.OS === "android" ? { contextSize: 4096 } : null;
           result = await this._nativeLoad(path, options);
 
           await this.pluginManager.enablePlugin("sparseAttention");
@@ -104,7 +109,8 @@ class LLMService {
   async generate(prompt, maxTokens = 256, temperature = 0.7, options = {}) {
     if (!this.isWeb && !this.isReady) await this.loadConfiguredModel();
 
-    const adaptiveTemp = this.performanceMetrics.lastLatency > 2000 ? 0.2 : temperature;
+    const adaptiveTemp =
+      this.performanceMetrics.lastLatency > 2000 ? 0.2 : temperature;
     const start = Date.now();
 
     try {
@@ -129,7 +135,10 @@ class LLMService {
 
       this._updateMetrics(Date.now() - start);
 
-      return { ...response, inferenceTime: this.performanceMetrics.lastLatency };
+      return {
+        ...response,
+        inferenceTime: this.performanceMetrics.lastLatency,
+      };
     } catch (error) {
       console.error("Generation failed:", error);
       throw error;
@@ -141,15 +150,18 @@ class LLMService {
     this.performanceMetrics.totalInferenceTime += duration;
     this.performanceMetrics.inferenceCount++;
     this.performanceMetrics.averageInferenceTime =
-      this.performanceMetrics.totalInferenceTime / this.performanceMetrics.inferenceCount;
+      this.performanceMetrics.totalInferenceTime /
+      this.performanceMetrics.inferenceCount;
   }
 
   async clearKVCache() {
     try {
-      if (!this.isWeb && this.nativeModule?.clearKVCache) await this.nativeModule.clearKVCache();
+      if (!this.isWeb && this.nativeModule?.clearKVCache)
+        await this.nativeModule.clearKVCache();
       this.kvCache = { tokens: [], size: 0, maxSize: 512 };
       return true;
-    } catch (e) {
+    } catch (error) {
+      console.error("Failed to clear KV cache", error);
       return false;
     }
   }
@@ -162,4 +174,3 @@ class LLMService {
 }
 
 export default new LLMService();
-

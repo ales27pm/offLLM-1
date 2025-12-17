@@ -3,7 +3,7 @@ name: iOS • Deploy to TestFlight
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [main]
 
 env:
   APP_NAME: offLLM
@@ -73,11 +73,18 @@ jobs:
           PLIST="$RUNNER_TEMP/profile.plist"
           security cms -D -i "$PROFILE" > "$PLIST"
           UUID=$(/usr/libexec/PlistBuddy -c "Print:UUID" "$PLIST")
+          NAME=$(/usr/libexec/PlistBuddy -c "Print:Name" "$PLIST")
+
+          if [[ -z "${UUID:-}" || -z "${NAME:-}" ]]; then
+            echo "::error::Failed to extract provisioning profile UUID or Name" >&2
+            exit 1
+          fi
 
           mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
           mv "$PROFILE" "$HOME/Library/MobileDevice/Provisioning Profiles/$UUID.mobileprovision"
 
           echo "PROFILE_UUID=$UUID" >> $GITHUB_ENV
+          echo "PROFILE_NAME=$NAME" >> $GITHUB_ENV
 
       - name: Generate project & install pods
         working-directory: ios
@@ -92,7 +99,10 @@ jobs:
 
       - name: Archive
         run: |
-          set -o pipefail
+          set -euo pipefail
+          LOG_DIR="$RUNNER_TEMP/build-logs"
+          mkdir -p "$LOG_DIR"
+          ARCHIVE_LOG="$LOG_DIR/xcodebuild-archive.log"
           xcodebuild archive \
             -workspace "$WORKSPACE" \
             -scheme "$SCHEME" \
@@ -101,20 +111,35 @@ jobs:
             -archivePath "$RUNNER_TEMP/${APP_NAME}.xcarchive" \
             PRODUCT_BUNDLE_IDENTIFIER="$BUNDLE_ID" \
             DEVELOPMENT_TEAM="$TEAM_ID" \
-            PROVISIONING_PROFILE_SPECIFIER="$PROFILE_UUID" \
+            PROVISIONING_PROFILE_SPECIFIER="$PROFILE_NAME" \
             CODE_SIGN_STYLE=Manual \
             CODE_SIGNING_ALLOWED=YES \
             CODE_SIGNING_REQUIRED=YES \
             CODE_SIGN_IDENTITY="$SIGNING_IDENTITY" \
-            | xcpretty
+            ${KEYCHAIN_PATH:+CODE_SIGN_KEYCHAIN="$KEYCHAIN_PATH"} \
+            ${KEYCHAIN_PATH:+OTHER_CODE_SIGN_FLAGS="--keychain $KEYCHAIN_PATH"} \
+            -sdk iphoneos \
+            | tee "$ARCHIVE_LOG" | xcpretty
+
+          build_status=${PIPESTATUS[0]}
+          if [ "$build_status" -ne 0 ]; then
+            echo "---- SIGNING / PROVISIONING ERRORS (if any) ----"
+            grep -nE "error:|No profiles|provision|Provisioning|CodeSign|codesign|Signing|entitlement|requires a provisioning profile" "$ARCHIVE_LOG" || true
+            exit "$build_status"
+          fi
 
       - name: Export IPA
         run: |
+          set -euo pipefail
           cat > "$RUNNER_TEMP/export.plist" <<EOF
           <plist version="1.0"><dict>
             <key>method</key><string>app-store</string>
             <key>teamID</key><string>$TEAM_ID</string>
             <key>signingStyle</key><string>manual</string>
+            <key>provisioningProfiles</key>
+            <dict>
+              <key>$BUNDLE_ID</key><string>$PROFILE_NAME</string>
+            </dict>
           </dict></plist>
           EOF
 

@@ -28,4 +28,3 @@ if (Platform.OS === "ios" && (!Native.load || !Native.generate)) {
 
 export const MLXModule = Native as MLXNative;
 export default MLXModule;
-

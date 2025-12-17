@@ -28,6 +28,3 @@ export async function search(query, { maxResults, safeSearch }) {
   const html = await res.text();
   return parseResults(html, maxResults);
 }
-
-
-

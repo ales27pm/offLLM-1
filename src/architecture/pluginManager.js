@@ -226,6 +226,3 @@ export class PluginManager {
     throw new Error(`Override for ${methodName} not found`);
   }
 }
-
-
-

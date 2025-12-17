@@ -7,6 +7,3 @@ export async function runMigrations(data: { version: number; items: any[] }) {
     await init(data);
   }
 }
-
-
-

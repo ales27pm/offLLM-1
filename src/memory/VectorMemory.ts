@@ -147,6 +147,3 @@ export default class VectorMemory {
     await this.storage.saveRaw(encrypted);
   }
 }
-
-
-

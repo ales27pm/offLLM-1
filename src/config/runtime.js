@@ -11,6 +11,3 @@ export function getRuntimeConfigValue(key) {
 export function getRuntimeConfigSnapshot() {
   return { ...runtimeConfig };
 }
-
-
-

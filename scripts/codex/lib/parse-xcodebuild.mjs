@@ -55,6 +55,3 @@ export function parseXcodebuildLog(logPath) {
     logPath,
   };
 }
-
-
-

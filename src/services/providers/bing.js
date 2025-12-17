@@ -29,6 +29,3 @@ export async function search(query, { maxResults, timeRange, safeSearch }) {
     })) || []
   );
 }
-
-
-

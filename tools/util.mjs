@@ -25,6 +25,3 @@ export function getValues(obj, ...pathKeys) {
   }
   return cur._values || [];
 }
-
-
-

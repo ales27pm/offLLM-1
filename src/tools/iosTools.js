@@ -400,6 +400,3 @@ export const openSettingsTool = {
     throw new Error("Cannot open settings");
   },
 };
-
-
-

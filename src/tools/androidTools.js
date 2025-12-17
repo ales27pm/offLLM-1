@@ -13,6 +13,3 @@ export const setClipboardTool = unsupported("set_clipboard");
 export const getClipboardTool = unsupported("get_clipboard");
 export const openRecentFileTool = unsupported("open_recent_file");
 export const openSettingsTool = unsupported("open_settings");
-
-
-

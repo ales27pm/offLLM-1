@@ -120,6 +120,3 @@ export const resolvePath = (...segments) => {
 
   return normalizePath(resolvedPath);
 };
-
-
-

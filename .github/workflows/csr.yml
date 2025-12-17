@@ -30,6 +30,3 @@ jobs:
         with:
           name: ios_certificate_files
           path: certs/
-
-
-

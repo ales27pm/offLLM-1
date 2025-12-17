@@ -30,6 +30,3 @@ export function renderAgentReport({ xcodebuild }) {
     "- Clean SPM caches & re-resolve packages if you see 'Internal inconsistency error'.",
   ].join("\n");
 }
-
-
-

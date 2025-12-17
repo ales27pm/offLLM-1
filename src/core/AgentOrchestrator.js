@@ -31,7 +31,10 @@ export class AgentOrchestrator {
   }
 
   _pruneContext(context) {
-    const currentLength = context.reduce((acc, msg) => acc + (msg.content?.length || 0), 0);
+    const currentLength = context.reduce(
+      (acc, msg) => acc + (msg.content?.length || 0),
+      0,
+    );
 
     // If within limits, return as is
     if (currentLength < MAX_CONTEXT_CHARS) return context;
@@ -95,7 +98,8 @@ export class AgentOrchestrator {
 
         const currentPrompt = await tracer.withStep(
           `buildPrompt_${currentIteration}`,
-          () => Promise.resolve(this.promptBuilder.build(prompt, contextWindow)),
+          () =>
+            Promise.resolve(this.promptBuilder.build(prompt, contextWindow)),
         );
 
         const rawResponse = await tracer.withStep(
@@ -159,4 +163,3 @@ export class AgentOrchestrator {
 }
 
 export default AgentOrchestrator;
-

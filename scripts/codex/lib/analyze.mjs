@@ -54,6 +54,3 @@ export async function analyzeCmd(opts) {
 
   console.log(`Wrote reports to: ${outDir}`);
 }
-
-
-

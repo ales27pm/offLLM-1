@@ -1,7 +1,7 @@
-import { Platform } from 'react-native';
-import CoreML from '../native/CoreMLInference';
-import { loadONNXModel } from '../native/ONNXInference';
-import { MODEL_VARIANTS } from './modelRegistry';
+import { Platform } from "react-native";
+import CoreML from "../native/CoreMLInference";
+import { loadONNXModel } from "../native/ONNXInference";
+import { MODEL_VARIANTS } from "./modelRegistry";
 
 let currentVariant = null;
 let loading = false;
@@ -13,7 +13,7 @@ export async function ensureModel(variant) {
 
   loading = true;
   try {
-    if (Platform.OS === 'ios') {
+    if (Platform.OS === "ios") {
       await CoreML.loadModel(entry.ios);
     } else {
       await loadONNXModel(entry.android);
@@ -32,4 +32,3 @@ export function getCurrentVariant() {
 export function isModelLoading() {
   return loading;
 }
-

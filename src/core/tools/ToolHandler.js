@@ -1,104 +1,161 @@
-import logger from "../../utils/logger";
-
 export default class ToolHandler {
   constructor(toolRegistry) {
     this.toolRegistry = toolRegistry;
-    this.callRegex = /TOOL_CALL:\s*(\w+)\s*\(([\s\S]*?)\)/g;
+  }
+
+  _scanBalanced(str, start, openChar, closeChar, initialDepth = 0) {
+    let depth = initialDepth;
+    let inQuote = null;
+    let escaped = false;
+    for (let i = start; i < str.length; i++) {
+      const ch = str[i];
+      if (escaped) {
+        escaped = false;
+        continue;
+      }
+      if (ch === "\\") {
+        escaped = true;
+        continue;
+      }
+      if (inQuote) {
+        if (ch === inQuote) inQuote = null;
+        continue;
+      }
+      if (ch === '"' || ch === "'") {
+        inQuote = ch;
+        continue;
+      }
+      if (ch === openChar) depth++;
+      else if (ch === closeChar) {
+        depth--;
+        if (depth === 0) return { end: i, closed: true };
+      }
+    }
+    return { end: str.length, closed: false };
   }
 
   parse(response) {
     const results = [];
-    this.callRegex.lastIndex = 0;
-
+    const marker = /TOOL_CALL:/g;
     let match;
-    while ((match = this.callRegex.exec(response)) !== null) {
-      const name = match[1];
-      const argsStr = match[2];
-      try {
-        const args = this._parseArgsManual(argsStr);
-        results.push({ name, args });
-      } catch (e) {
-        console.warn(`Failed to parse args for ${name}:`, e);
+
+    while ((match = marker.exec(response)) !== null) {
+      let cursor = match.index + match[0].length;
+
+      while (cursor < response.length && /\s/.test(response[cursor])) cursor++;
+      const nameMatch = /[A-Za-z_][\w-]*/.exec(response.slice(cursor));
+      if (!nameMatch) {
+        console.warn("Malformed TOOL_CALL: missing name");
+        continue;
       }
+      const name = nameMatch[0];
+      cursor += name.length;
+
+      while (cursor < response.length && /\s/.test(response[cursor])) cursor++;
+      if (response[cursor] !== "(") {
+        console.warn(`Malformed TOOL_CALL for ${name}: missing '('`);
+        continue;
+      }
+      cursor++; // skip opening parenthesis
+
+      const argsStart = cursor;
+      const { end, closed } = this._scanBalanced(response, cursor, "(", ")", 1);
+      if (!closed) {
+        console.warn(`Malformed TOOL_CALL for ${name}: unterminated args`);
+        continue;
+      }
+      const argsStr = response.slice(argsStart, end);
+      try {
+        const args = this._parseArgs(argsStr.trim());
+        results.push({ name, args });
+      } catch (error) {
+        console.warn(`Failed to parse args for ${name}:`, error);
+      }
+      marker.lastIndex = end + 1;
     }
     return results;
   }
 
-  // Robust manual parser for key=value strings supporting nested JSON/Quotes
-  _parseArgsManual(str) {
+  _parseArgs(str) {
+    if (!str) return {};
     const args = {};
     let cursor = 0;
     const len = str.length;
 
     while (cursor < len) {
-      // Eat whitespace
-      while (cursor < len && /\s/.test(str[cursor])) cursor++;
+      while (cursor < len && /[\s,]/.test(str[cursor])) cursor++;
       if (cursor >= len) break;
 
-      // Read Key
-      const keyStart = cursor;
-      while (cursor < len && /[\w]/.test(str[cursor])) cursor++;
-      const key = str.slice(keyStart, cursor);
+      const keyMatch = /^[A-Za-z_][\w-]*/.exec(str.slice(cursor));
+      if (!keyMatch) throw new Error("Malformed argument string");
+      const key = keyMatch[0];
+      cursor += key.length;
 
-      // Expect '='
       while (cursor < len && /\s/.test(str[cursor])) cursor++;
-      if (str[cursor] !== "=") break;
-      cursor++; // skip =
-
-      // Eat whitespace
+      if (str[cursor] !== "=") throw new Error("Malformed argument string");
+      cursor++; // skip "="
       while (cursor < len && /\s/.test(str[cursor])) cursor++;
+      if (cursor >= len) throw new Error("Malformed argument string");
 
-      // Read Value
       let value;
       const char = str[cursor];
-
       if (char === '"' || char === "'") {
         const quote = char;
         cursor++;
-        const valStart = cursor;
+        let val = "";
+        let escaped = false;
+        let closed = false;
         while (cursor < len) {
-          if (str[cursor] === quote && str[cursor - 1] !== "\\") break;
+          const ch = str[cursor];
+          if (escaped) {
+            val += ch;
+            escaped = false;
+            cursor++;
+            continue;
+          }
+          if (ch === "\\") {
+            escaped = true;
+            cursor++;
+            continue;
+          }
+          if (ch === quote) {
+            cursor++;
+            closed = true;
+            break;
+          }
+          val += ch;
           cursor++;
         }
-        value = str.slice(valStart, cursor);
-        cursor++; // skip closing quote
+        if (escaped || !closed) throw new Error("Malformed argument string");
+        value = this._coerceValue(val);
       } else if (char === "{" || char === "[") {
-        // JSON Object/Array: balance braces
         const startChar = char;
         const endChar = char === "{" ? "}" : "]";
-        let balance = 0;
-        const valStart = cursor;
+        const start = cursor;
+        const { end, closed } = this._scanBalanced(
+          str,
+          start,
+          startChar,
+          endChar,
+        );
 
-        do {
-          if (str[cursor] === startChar) balance++;
-          else if (str[cursor] === endChar) balance--;
-          cursor++;
-        } while (cursor < len && balance > 0);
-
-        const jsonStr = str.slice(valStart, cursor);
+        if (!closed) throw new Error("Malformed argument string");
+        const raw = str.slice(start, end + 1);
         try {
-          value = JSON.parse(jsonStr);
+          value = JSON.parse(raw);
         } catch {
-          value = jsonStr; // Fallback to string if invalid JSON
+          value = raw;
         }
+        cursor = end + 1;
       } else {
-        // Boolean, number, or unquoted string (until comma or end)
-        const valStart = cursor;
-        while (cursor < len && str[cursor] !== ",") cursor++;
-        const rawVal = str.slice(valStart, cursor).trim();
-        if (rawVal === "true") value = true;
-        else if (rawVal === "false") value = false;
-        else if (!isNaN(Number(rawVal))) value = Number(rawVal);
-        else value = rawVal;
+        const start = cursor;
+        while (cursor < len && !/[\s,]/.test(str[cursor])) cursor++;
+        const rawVal = str.slice(start, cursor).trim();
+        value = this._coerceValue(rawVal);
       }
 
       args[key] = value;
-
-      // Skip comma if present
-      while (cursor < len && /\s/.test(str[cursor])) cursor++;
-      if (str[cursor] === ",") cursor++;
     }
-
     return args;
   }
 
@@ -109,7 +166,21 @@ export default class ToolHandler {
     for (const { name, args } of calls) {
       const tool = this.toolRegistry.getTool(name);
       if (!tool) {
-        results.push({ name, content: `Error: Tool '${name}' not found` });
+        results.push({
+          role: "tool",
+          name,
+          content: `Error: Tool '${name}' not found`,
+        });
+        continue;
+      }
+
+      const missing = this._missingRequired(tool.parameters, args);
+      if (missing.length) {
+        results.push({
+          role: "tool",
+          name,
+          content: `Error: Missing required parameters: ${missing.join(", ")}`,
+        });
         continue;
       }
 
@@ -117,13 +188,56 @@ export default class ToolHandler {
 
       try {
         const output = await tool.execute(args);
-        results.push({ name, content: output });
+        const content =
+          output === undefined || output === null
+            ? ""
+            : typeof output === "string"
+              ? output
+              : JSON.stringify(output) ?? String(output);
+        results.push({ role: "tool", name, content });
       } catch (error) {
-        results.push({ name, content: `Error: ${error.message}` });
+        results.push({
+          role: "tool",
+          name,
+          content: `Error: ${error.message || error}`,
+        });
         if (tracer) tracer.error(`Tool ${name} failed`, error);
       }
     }
     return results;
   }
-}
 
+  _coerceValue(value) {
+    if (value === "true") return true;
+    if (value === "false") return false;
+    if (
+      value !== "" &&
+      typeof value === "string" &&
+      value.trim() !== "" &&
+      !Number.isNaN(Number(value))
+    ) {
+      return Number(value);
+    }
+    if (
+      typeof value === "string" &&
+      (value.trim().startsWith("{") || value.trim().startsWith("["))
+    ) {
+      try {
+        return JSON.parse(value);
+      } catch {
+        return value;
+      }
+    }
+    return value;
+  }
+
+  _missingRequired(parameters = {}, args = {}) {
+    const missing = [];
+    Object.entries(parameters || {}).forEach(([key, schema = {}]) => {
+      if (schema.required && args[key] === undefined) {
+        missing.push(key);
+      }
+    });
+    return missing;
+  }
+}

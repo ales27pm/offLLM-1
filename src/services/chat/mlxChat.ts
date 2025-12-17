@@ -62,6 +62,3 @@ export class MlxChat {
 }
 
 export const mlxChat = new MlxChat();
-
-
-

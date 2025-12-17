@@ -35,6 +35,3 @@ program
   .action(fixCmd);
 
 program.parseAsync(process.argv);
-
-
-

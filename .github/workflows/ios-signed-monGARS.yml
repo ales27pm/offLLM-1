@@ -333,6 +333,3 @@ jobs:
             [[ ${#RESTORE_KEYCHAINS[@]} -gt 0 ]] && security list-keychains -d user -s "${RESTORE_KEYCHAINS[@]}" || true
           fi
           [[ -n "${KEYCHAIN_PATH:-}" && -e "${KEYCHAIN_PATH}" ]] && security delete-keychain "${KEYCHAIN_PATH}" || true
-
-
-

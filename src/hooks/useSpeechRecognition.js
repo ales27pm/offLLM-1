@@ -59,6 +59,3 @@ export function useSpeechRecognition(onResult, onError) {
 
   return { isRecording, start, stop };
 }
-
-
-

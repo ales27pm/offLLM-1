@@ -24,6 +24,3 @@ export async function validate(provider) {
       return false;
   }
 }
-
-
-

@@ -18,7 +18,10 @@ export default class EncryptionService {
   encrypt(plaintext: string): Buffer {
     const iv = randomBytes(12);
     const cipher = createCipheriv("aes-256-gcm", this.key, iv);
-    const data = Buffer.concat([cipher.update(plaintext, "utf8"), cipher.final()]);
+    const data = Buffer.concat([
+      cipher.update(plaintext, "utf8"),
+      cipher.final(),
+    ]);
     const tag = cipher.getAuthTag();
     return Buffer.concat([iv, tag, data]);
   }
@@ -29,7 +32,8 @@ export default class EncryptionService {
     const data = buffer.subarray(28);
     const decipher = createDecipheriv("aes-256-gcm", this.key, iv);
     decipher.setAuthTag(tag);
-    return Buffer.concat([decipher.update(data), decipher.final()]).toString("utf8");
+    return Buffer.concat([decipher.update(data), decipher.final()]).toString(
+      "utf8",
+    );
   }
 }
-

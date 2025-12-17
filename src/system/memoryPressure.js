@@ -1,4 +1,4 @@
-import { AppState } from 'react-native';
+import { AppState } from "react-native";
 
 let pressureScore = 0;
 let lastTick = Date.now();
@@ -16,12 +16,11 @@ export function tickPressure() {
 }
 
 export function getPressureLevel() {
-  if (pressureScore > 60) return 'critical';
-  if (pressureScore > 30) return 'high';
-  return 'normal';
+  if (pressureScore > 60) return "critical";
+  if (pressureScore > 30) return "high";
+  return "normal";
 }
 
-AppState.addEventListener('change', state => {
-  if (state !== 'active') pressureScore += 10;
+AppState.addEventListener("change", (state) => {
+  if (state !== "active") pressureScore += 10;
 });
-

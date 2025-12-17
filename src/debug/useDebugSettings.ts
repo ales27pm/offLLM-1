@@ -42,6 +42,3 @@ export const useDebugSettings = create<{
       return { file: next };
     }),
 }));
-
-
-

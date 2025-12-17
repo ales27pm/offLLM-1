@@ -115,6 +115,3 @@ export const normalizeSearchResults = (results, limit) => {
     .filter(Boolean)
     .slice(0, limit);
 };
-
-
-
