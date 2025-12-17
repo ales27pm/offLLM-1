@@ -324,7 +324,6 @@ end
 install! 'cocoapods', :disable_input_output_paths => true
 
 # --- Auto-detect the .xcodeproj near this Podfile ---
-#
 project_candidates = Dir.glob(File.join(__dir__, '*.xcodeproj')).sort
 preferred = ENV['XCODE_PROJECT_NAME']
 project_path =
@@ -441,11 +440,25 @@ target 'monGARS' do
   add_pod_if_present 'react-native-mmkv', '../node_modules/react-native-mmkv'
   add_pod_if_present 'react-native-sqlite-storage', '../node_modules/react-native-sqlite-storage'
   add_pod_if_present 'react-native-music-control', '../node_modules/react-native-music-control'
-
 end
 
 post_install do |installer|
   react_native_post_install(installer)
+
+  # --- CI/Archive hardening: Pods must NEVER be code signed ---
+  installer.pods_project.targets.each do |t|
+    t.build_configurations.each do |c|
+      c.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
+      c.build_settings['CODE_SIGNING_REQUIRED'] = 'NO'
+      c.build_settings['CODE_SIGN_IDENTITY'] = ''
+      c.build_settings['CODE_SIGN_IDENTITY[sdk=iphoneos*]'] = ''
+      c.build_settings['EXPANDED_CODE_SIGN_IDENTITY'] = ''
+      c.build_settings['EXPANDED_CODE_SIGN_IDENTITY_NAME'] = ''
+      c.build_settings.delete('PROVISIONING_PROFILE_SPECIFIER')
+      c.build_settings.delete('PROVISIONING_PROFILE')
+      c.build_settings.delete('DEVELOPMENT_TEAM')
+    end
+  end
 
   forbidden_frameworks = ['CoreAudioTypes']
   forbidden_framework_refs = forbidden_frameworks.flat_map do |framework|
@@ -520,14 +533,6 @@ post_install do |installer|
   legacy_module_map_path_pattern = /(?<!\S)#{Regexp.escape(legacy_module_map_path)}(?!\S)/
   legacy_module_map_flag_quoted_pattern = /"#{Regexp.escape(legacy_module_map_flag)}"/
   legacy_module_map_path_quoted_pattern = /"#{Regexp.escape(legacy_module_map_path)}"/
-  # Provide a single canonical module map so clang never has to reconcile two
-  # definitions of the same module. Previous builds shipped both
-  # `module.modulemap` and `RCTDeprecation.modulemap`, which allowed the compiler
-  # to load either file depending on discovery order. When a precompiled header
-  # cached one path and the next build discovered the other, Xcode 16 aborted the
-  # build because the AST referenced a different module map path. Keeping only the
-  # canonical file and updating build settings to point at it ensures every
-  # invocation resolves the module identically.
   module_map_flags = [module_map_flag].compact
   module_map_dir = File.join(installer.sandbox.root.to_s, 'Headers', 'Public', 'RCTDeprecation')
   module_map_disk = File.join(module_map_dir, 'module.modulemap')
@@ -765,7 +770,7 @@ post_install do |installer|
     unless status.success?
       stderr_str.each_line do |line|
         line = line.strip
-        Pod::UI.warn("[Podfile] STDERR: #{line}") unless line.empty?
+        Pod::UI.warn("[Podfile] STDERR: #{line}") unless line.strip.empty?
       end
       Pod::UI.warn('[Podfile] Failed to patch MLX metal headers; warnings may persist. ' \
                    'You can re-run ios/scripts/patch-mlx-metal-cxx17.sh manually.')
@@ -774,7 +779,6 @@ post_install do |installer|
     Pod::UI.warn('[Podfile] Missing ios/scripts/patch-mlx-metal-cxx17.sh; MLX metal warnings may persist.')
   end
 
-  # Try to apply RN Contacts orientation patch (if repo has the script)
   patch_script = File.join(__dir__, 'scripts', 'patch-react-native-contacts.sh')
   if File.exist?(patch_script)
     stdout_str, stderr_str, status = Open3.capture3('bash', patch_script)
@@ -788,6 +792,3 @@ post_install do |installer|
     Pod::UI.warn('[Podfile] Missing ios/scripts/patch-react-native-contacts.sh; skipping contacts orientation patch.')
   end
 end
-
-
-
