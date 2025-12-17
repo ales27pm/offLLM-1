@@ -177,60 +177,90 @@ jobs:
           xcodegen generate
           pod install --verbose
 
-      - name: 🧠 Auto-detect the only non-Pods scheme
+      - name: 🧠 Auto-detect app scheme by matching PRODUCT_BUNDLE_IDENTIFIER
         run: |
           set -euo pipefail
           echo "Workspace: $WORKSPACE"
-          echo "Requested scheme: ${SCHEME:-}"
+          echo "Configured SCHEME: ${SCHEME:-}"
+          echo "Target BUNDLE_ID: $BUNDLE_ID"
 
-          # Extract schemes reliably using awk only (YAML-safe; no heredocs).
-          schemes="$(xcodebuild -list -workspace "$WORKSPACE" \
-            | awk '
-                /Schemes:/ {in_s=1; next}
-                in_s && NF==0 {next}
-                in_s && NF>0 {
-                  gsub(/^[ \t]+/,"",$0);
-                  print;
-                }
-              ')"
+          list_out="$RUNNER_TEMP/xcode_schemes.txt"
+          xcodebuild -list -workspace "$WORKSPACE" | tee "$list_out"
+
+          schemes="$(awk '
+            /Schemes:/ {in_s=1; next}
+            in_s {
+              if ($0 ~ /^[[:space:]]*$/) next
+              gsub(/^[[:space:]]+/, "", $0)
+              print
+            }
+          ' "$list_out")"
 
           echo "All schemes:"
           printf '%s\n' "$schemes" | sed 's/^/  - /'
 
-          # Candidate app schemes: exclude Pods and common dependency schemes
+          scheme_exists() {
+            local s="$1"
+            printf '%s\n' "$schemes" | grep -Fxq "$s"
+          }
+
+          # If SCHEME exists, keep it (this fixes the earlier false-negative caused by indentation).
+          if [ -n "${SCHEME:-}" ] && scheme_exists "$SCHEME"; then
+            echo "::notice::SCHEME '$SCHEME' exists in workspace; keeping it."
+            exit 0
+          fi
+
+          # Candidate schemes: exclude Pods- and obvious dependency schemes.
           candidates="$(printf '%s\n' "$schemes" \
             | grep -vE '^Pods-' \
             | grep -vE '(^|-)privacy$' \
-            | grep -vE '^(React|RCT|Yoga|SocketRocket|boost|glog|fmt|DoubleConversion|fast_float|hermes-engine)($|-)')"
-
-          # Also exclude RN library module schemes (they are not the app)
+            | grep -vE '^(React|RCT|Yoga|SocketRocket|boost|glog|fmt|DoubleConversion|fast_float|hermes-engine)($|-)'
+          )"
           candidates="$(printf '%s\n' "$candidates" | grep -vE '^(RN|RNC|react-native-)')"
-
           candidates="$(printf '%s\n' "$candidates" | sed '/^$/d')"
 
-          echo "Candidate app schemes:"
-          if [ -n "$candidates" ]; then
-            printf '%s\n' "$candidates" | sed 's/^/  - /'
+          echo "Candidate schemes:"
+          printf '%s\n' "$candidates" | sed 's/^/  - /' || true
+
+          matches=""
+          while IFS= read -r s; do
+            [ -z "$s" ] && continue
+            echo "::group::Probe scheme: $s"
+
+            # showBuildSettings succeeds for real buildable schemes; parse PRODUCT_BUNDLE_IDENTIFIER.
+            # (This is the robust way to identify the app scheme among many RN/Pods schemes.)
+            if xcodebuild -showBuildSettings -workspace "$WORKSPACE" -scheme "$s" -configuration "$CONFIGURATION" >/dev/null 2>&1; then
+              pid="$(xcodebuild -showBuildSettings -workspace "$WORKSPACE" -scheme "$s" -configuration "$CONFIGURATION" 2>/dev/null \
+                | awk -F ' = ' '/PRODUCT_BUNDLE_IDENTIFIER/ {print $2; exit}')"
+              echo "PRODUCT_BUNDLE_IDENTIFIER=$pid"
+              if [ "$pid" = "$BUNDLE_ID" ]; then
+                matches="${matches}${s}"$'\n'
+              fi
+            else
+              echo "(not buildable via showBuildSettings)"
+            fi
+
+            echo "::endgroup::"
+          done <<< "$candidates"
+
+          matches="$(printf '%s' "$matches" | sed '/^$/d')"
+          match_count="$(printf '%s\n' "$matches" | sed '/^$/d' | wc -l | tr -d ' ')"
+
+          echo "Matching schemes (bundle id = $BUNDLE_ID):"
+          if [ -n "$matches" ]; then
+            printf '%s\n' "$matches" | sed 's/^/  - /'
           else
             echo "  (none)"
           fi
 
-          count="$(printf '%s\n' "$candidates" | wc -l | tr -d ' ')"
-
-          # If env.SCHEME is valid, keep it (even if multiple candidates exist).
-          if [ -n "${SCHEME:-}" ] && xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -showBuildSettings >/dev/null 2>&1; then
-            echo "::notice::SCHEME '$SCHEME' is valid; keeping it."
-            exit 0
-          fi
-
-          if [ "$count" -eq 1 ]; then
-            detected="$(printf '%s\n' "$candidates" | head -n 1)"
+          if [ "$match_count" -eq 1 ]; then
+            detected="$(printf '%s\n' "$matches" | head -n 1)"
             echo "::notice::Auto-detected app scheme: $detected"
             echo "SCHEME=$detected" >> "$GITHUB_ENV"
             exit 0
           fi
 
-          echo "::error::Could not auto-detect a single app scheme (found $count). Set env.SCHEME explicitly."
+          echo "::error::Could not uniquely detect app scheme for BUNDLE_ID=$BUNDLE_ID (found $match_count matches). Set env.SCHEME explicitly."
           exit 1
 
       - name: 🏷️ Bump build number
