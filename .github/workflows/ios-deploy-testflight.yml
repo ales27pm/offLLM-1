@@ -17,7 +17,7 @@ on:
 
 env:
   APP_NAME: offLLM
-  # This will be overwritten automatically if needed.
+  # This can be overwritten automatically if detection finds the real app scheme.
   SCHEME: monGARS
   BUNDLE_ID: com.offllm.mongars
   WORKSPACE: ios/monGARS.xcworkspace
@@ -187,11 +187,14 @@ jobs:
           list_out="$RUNNER_TEMP/xcode_schemes.txt"
           xcodebuild -list -workspace "$WORKSPACE" | tee "$list_out"
 
+          # Parse schemes robustly: after "Schemes:" take indented lines; stop when indentation ends.
           schemes="$(awk '
             /Schemes:/ {in_s=1; next}
             in_s {
               if ($0 ~ /^[[:space:]]*$/) next
+              if ($0 !~ /^[[:space:]]+/) { exit }
               gsub(/^[[:space:]]+/, "", $0)
+              gsub(/[[:space:]]+$/, "", $0)
               print
             }
           ' "$list_out")"
@@ -204,13 +207,11 @@ jobs:
             printf '%s\n' "$schemes" | grep -Fxq "$s"
           }
 
-          # If SCHEME exists, keep it (this fixes the earlier false-negative caused by indentation).
           if [ -n "${SCHEME:-}" ] && scheme_exists "$SCHEME"; then
             echo "::notice::SCHEME '$SCHEME' exists in workspace; keeping it."
             exit 0
           fi
 
-          # Candidate schemes: exclude Pods- and obvious dependency schemes.
           candidates="$(printf '%s\n' "$schemes" \
             | grep -vE '^Pods-' \
             | grep -vE '(^|-)privacy$' \
@@ -220,18 +221,21 @@ jobs:
           candidates="$(printf '%s\n' "$candidates" | sed '/^$/d')"
 
           echo "Candidate schemes:"
-          printf '%s\n' "$candidates" | sed 's/^/  - /' || true
+          if [ -n "$candidates" ]; then
+            printf '%s\n' "$candidates" | sed 's/^/  - /'
+          else
+            echo "  (none)"
+          fi
 
           matches=""
           while IFS= read -r s; do
             [ -z "$s" ] && continue
             echo "::group::Probe scheme: $s"
 
-            # showBuildSettings succeeds for real buildable schemes; parse PRODUCT_BUNDLE_IDENTIFIER.
-            # (This is the robust way to identify the app scheme among many RN/Pods schemes.)
             if xcodebuild -showBuildSettings -workspace "$WORKSPACE" -scheme "$s" -configuration "$CONFIGURATION" >/dev/null 2>&1; then
               pid="$(xcodebuild -showBuildSettings -workspace "$WORKSPACE" -scheme "$s" -configuration "$CONFIGURATION" 2>/dev/null \
                 | awk -F ' = ' '/PRODUCT_BUNDLE_IDENTIFIER/ {print $2; exit}')"
+              pid="$(printf '%s' "$pid" | tr -d '\r' | sed 's/[[:space:]]*$//')"
               echo "PRODUCT_BUNDLE_IDENTIFIER=$pid"
               if [ "$pid" = "$BUNDLE_ID" ]; then
                 matches="${matches}${s}"$'\n'
@@ -311,7 +315,7 @@ jobs:
           echo "SIGNING_IDENTITY=$SIGNING_IDENTITY" >> "$GITHUB_ENV"
           echo "Using signing identity: $SIGNING_IDENTITY"
 
-      - name: 🏗️ Archive
+      - name: 🏗️ Archive (raw log + xcresult + actionable error)
         run: |
           set -euo pipefail
           mkdir -p build/logs
@@ -320,33 +324,74 @@ jobs:
           if [ -n "${PROFILE_NAME:-}" ]; then
             EXTRA_PROFILE_ARGS+=( "PROVISIONING_PROFILE_SPECIFIER=$PROFILE_NAME" )
           fi
-          EXTRA_PROFILE_ARGS+=( "PROVISIONING_PROFILE=$PROFILE_UUID" )
+          # NOTE: PROVISIONING_PROFILE=<UUID> is deprecated. Avoid passing it to xcodebuild.
 
+          RAW_LOG="build/logs/archive-raw.log"
+          PRETTY_LOG="build/logs/archive.log"
+          RESULT_BUNDLE="$RUNNER_TEMP/archive.xcresult"
+
+          echo "Archiving workspace=$WORKSPACE scheme=$SCHEME config=$CONFIGURATION"
+          echo "Using keychain: $KEYCHAIN_PATH"
+          echo "Using profile name: ${PROFILE_NAME:-<none>}"
+          echo "Using profile uuid: ${PROFILE_UUID:-<none>}"
+          echo "Using signing identity: $SIGNING_IDENTITY"
+
+          set +e
           xcodebuild archive \
             -workspace "$WORKSPACE" \
             -scheme "$SCHEME" \
             -configuration "$CONFIGURATION" \
+            -sdk iphoneos \
             -destination "generic/platform=iOS" \
             -archivePath "$RUNNER_TEMP/${APP_NAME}.xcarchive" \
             -derivedDataPath "$RUNNER_TEMP/DerivedData" \
+            -resultBundlePath "$RESULT_BUNDLE" \
             PRODUCT_BUNDLE_IDENTIFIER="$BUNDLE_ID" \
             DEVELOPMENT_TEAM="$TEAM_ID" \
             CODE_SIGN_STYLE=Manual \
             CODE_SIGN_IDENTITY="$SIGNING_IDENTITY" \
             OTHER_CODE_SIGN_FLAGS="--keychain $KEYCHAIN_PATH" \
             "${EXTRA_PROFILE_ARGS[@]}" \
-            | tee build/logs/archive.log | xcpretty
+            2>&1 | tee "$RAW_LOG" | xcpretty | tee "$PRETTY_LOG"
+          status="${PIPESTATUS[0]}"
+          set -e
+
+          if [ "$status" -ne 0 ]; then
+            echo "::error::xcodebuild archive failed with exit code $status"
+
+            echo "::group::Most relevant error lines (raw)"
+            grep -nE "error:|fatal error:|CodeSign|Provisioning|Signing|No profiles|requires a provisioning profile|entitlements|clang: error|SwiftCompile" -n "$RAW_LOG" | head -n 200 || true
+            echo "::endgroup::"
+
+            echo "::group::Tail of raw log"
+            tail -n 200 "$RAW_LOG" || true
+            echo "::endgroup::"
+
+            exit "$status"
+          fi
 
           echo "ARCHIVE_PATH=$RUNNER_TEMP/${APP_NAME}.xcarchive" >> "$GITHUB_ENV"
+          echo "ARCHIVE_XCRESULT=$RESULT_BUNDLE" >> "$GITHUB_ENV"
+
+      - name: 📎 Upload build logs + xcresult
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-archive-logs
+          path: |
+            build/logs/*
+            ${{ runner.temp }}/archive.xcresult
 
       - name: 📦 Export IPA
         run: |
           set -euo pipefail
+          mkdir -p build/logs
+
           xcodebuild -exportArchive \
             -archivePath "$ARCHIVE_PATH" \
             -exportPath build/output \
             -exportOptionsPlist ios/ExportOptions.plist \
-            | tee build/logs/export.log | xcpretty
+            2>&1 | tee build/logs/export-raw.log | xcpretty | tee build/logs/export.log
 
           IPA="$(find build/output -name '*.ipa' -print -quit)"
           if [ -z "$IPA" ]; then
