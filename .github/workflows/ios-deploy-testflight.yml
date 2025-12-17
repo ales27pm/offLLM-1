@@ -139,27 +139,45 @@ jobs:
             exit 1
           fi
 
-          # Normalize: remove whitespace + CRLF (copy/paste poison)
-          CLEAN_PROFILE="$(printf '%s' "$PROFILE_B64" | tr -d '\n\r\t ')"
-
           mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
-          OUT="$RUNNER_TEMP/app.mobileprovision"
 
-          # Decode using macOS base64 (-D)
-          printf '%s' "$CLEAN_PROFILE" | base64 -D > "$OUT"
+          python3 - <<'PY'
+          import os, re, base64, pathlib, sys, subprocess
 
-          # Sanity check: must be parseable
-          security cms -D -i "$OUT" > "$RUNNER_TEMP/app.mobileprovision.plist"
+          b64 = os.environ["PROFILE_B64"]
+          b64 = re.sub(r"\s+", "", b64)  # kill CRLF/whitespace/paste poison
 
-          UUID=$(/usr/libexec/PlistBuddy -c "Print:UUID" "$RUNNER_TEMP/app.mobileprovision.plist")
+          try:
+              data = base64.b64decode(b64, validate=True)
+          except Exception as e:
+              print("::error::IOS_PROVISIONING_PROFILE_BASE64 is not valid base64")
+              raise
 
-          if [[ -z "$UUID" || ! "$UUID" =~ ^[A-Fa-f0-9-]{36}$ ]]; then
-            echo "::error::Failed to extract UUID from provisioning profile. Secret may be wrong."
-            exit 1
-          fi
+          out = pathlib.Path(os.environ["RUNNER_TEMP"]) / "app.mobileprovision"
+          out.write_bytes(data)
 
-          mv "$OUT" "$HOME/Library/MobileDevice/Provisioning Profiles/$UUID.mobileprovision"
-          echo "PROFILE_UUID=$UUID" >> "$GITHUB_ENV"
+          # Must be parseable by security cms
+          plist = pathlib.Path(os.environ["RUNNER_TEMP"]) / "app.mobileprovision.plist"
+          subprocess.run(["security", "cms", "-D", "-i", str(out)], check=True, stdout=plist.open("wb"))
+
+          # Extract UUID
+          uuid = subprocess.check_output(
+              ["/usr/libexec/PlistBuddy", "-c", "Print:UUID", str(plist)],
+              text=True
+          ).strip()
+
+          if not re.fullmatch(r"[A-Fa-f0-9-]{36}", uuid or ""):
+              print("::error::Failed to extract UUID from provisioning profile (decoded file is not a valid profile)")
+              sys.exit(1)
+
+          dest = pathlib.Path.home() / "Library/MobileDevice/Provisioning Profiles" / f"{uuid}.mobileprovision"
+          out.replace(dest)
+
+          # Export for later steps
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as f:
+              f.write(f"PROFILE_UUID={uuid}\n")
+          PY
+
 
       - name: 🧾 Write ExportOptions
         working-directory: ios
