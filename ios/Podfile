@@ -1,57 +1,446 @@
 # ios/Podfile
+require 'open3'
+require 'fileutils'
 
-require_relative '../node_modules/react-native/scripts/react_native_pods'
-require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+platform :ios, '18.0'
 
-platform :ios, '15.1'
+def env_flag_enabled?(name, default:)
+  raw = ENV[name]
+  return default if raw.nil?
+
+  normalized = raw.strip.downcase
+  return true if %w[1 true yes on].include?(normalized)
+  return false if %w[0 false no off].include?(normalized)
+
+  default
+end
+
+def normalize_tokens(value)
+  case value
+  when nil
+    [[], :array]
+  when Array
+    [value.compact.dup, :array]
+  else
+    [value.to_s.split(/\s+/), :string]
+  end
+end
+
+def materialize_tokens(tokens, preference)
+  filtered = tokens.compact
+  return preference == :array ? [] : '' if filtered.empty?
+  preference == :array ? filtered : filtered.join(' ')
+end
+
+def strip_wrapping_quotes(value)
+  return nil if value.nil?
+  value.to_s.strip.gsub(/\A(?:\\?["'])+|(?:\\?["'])+\z/, '')
+end
+
+def normalize_token(token)
+  return nil if token.nil?
+  normalized = strip_wrapping_quotes(token)
+
+  if normalized.include?('=')
+    prefix, suffix = normalized.split('=', 2)
+    normalized = "#{prefix}=#{strip_wrapping_quotes(suffix)}"
+  end
+
+  normalized
+end
+
+def normalized_flag_equals?(token, candidate)
+  normalized_token = normalize_token(token)
+  normalized_candidate = normalize_token(candidate)
+  return false if normalized_token.nil? || normalized_candidate.nil?
+  normalized_token == normalized_candidate
+end
+
+def tokens_include_flag?(tokens, flag)
+  tokens.any? { |token| normalized_flag_equals?(token, flag) }
+end
+
+def append_flag(value, flag)
+  return ['$(inherited)', flag] if value.nil?
+  tokens, preference = normalize_tokens(value)
+  return materialize_tokens(tokens, preference) if tokens_include_flag?(tokens, flag)
+  tokens << flag
+  materialize_tokens(tokens, preference)
+end
+
+def append_flags(value, flags)
+  flags.reduce(value) { |memo, flag| append_flag(memo, flag) }
+end
+
+def remove_flag(value, flag)
+  tokens, preference = normalize_tokens(value)
+  original = tokens.dup
+  tokens.reject! { |token| normalized_flag_equals?(token, flag) }
+  [materialize_tokens(tokens, preference), tokens != original]
+end
+
+def find_flag_pair_index(tokens, first_flag, second_flag)
+  return nil if first_flag.nil? || second_flag.nil?
+  tokens.each_cons(2).with_index do |(first, second), index|
+    next unless normalized_flag_equals?(first, first_flag)
+    return index if normalized_flag_equals?(second, second_flag)
+  end
+  nil
+end
+
+def tokens_include_flag_pair?(tokens, first_flag, second_flag)
+  !find_flag_pair_index(tokens, first_flag, second_flag).nil?
+end
+
+def remove_flag_pair!(tokens, first_flag, second_flag)
+  return false if first_flag.nil? || second_flag.nil?
+  removed = false
+  while (index = find_flag_pair_index(tokens, first_flag, second_flag))
+    tokens.slice!(index, 2)
+    removed = true
+  end
+  removed
+end
+
+def swift_flag_pair?(value, flag)
+  return false if flag.nil?
+  tokens, _ = normalize_tokens(value)
+  tokens_include_flag_pair?(tokens, '-Xcc', flag)
+end
+
+def remove_framework_link_flags(value, framework_name)
+  tokens, preference = normalize_tokens(value)
+  frameworks = [framework_name, "#{framework_name}.framework"].uniq
+  changed = false
+
+  frameworks.each do |framework|
+    changed ||= remove_flag_pair!(tokens, '-framework', framework)
+    changed ||= remove_flag_pair!(tokens, '-weak_framework', framework)
+  end
+
+  [materialize_tokens(tokens, preference), changed]
+end
+
+def sanitize_build_setting_ldflags(config, frameworks)
+  value = config.build_settings['OTHER_LDFLAGS']
+  sanitized_value = value
+  changed_any = false
+
+  frameworks.each do |framework|
+    sanitized_value, changed = remove_framework_link_flags(sanitized_value, framework)
+    changed_any ||= changed
+  end
+
+  return false unless changed_any
+
+  if sanitized_value.respond_to?(:empty?) && sanitized_value.empty?
+    config.build_settings.delete('OTHER_LDFLAGS')
+  else
+    config.build_settings['OTHER_LDFLAGS'] = sanitized_value
+  end
+
+  true
+end
+
+def sanitize_ldflags_value(value, frameworks)
+  sanitized_value = value
+  changed_any = false
+
+  frameworks.each do |framework|
+    sanitized_value, changed = remove_framework_link_flags(sanitized_value, framework)
+    changed_any ||= changed
+  end
+
+  return [value, false] unless changed_any
+
+  sanitized_value =
+    if sanitized_value.is_a?(Array)
+      sanitized_value.join(' ')
+    else
+      sanitized_value.to_s
+    end
+
+  sanitized_value = sanitized_value.strip
+  sanitized_value = '$(inherited)' if sanitized_value.empty?
+
+  [sanitized_value, true]
+end
+
+def sanitize_module_map_settings(config, header_search_fix:, module_map_flags:, module_map_path:, legacy_module_map_flag:, force_tokens: false, enforce_module_map: false, enforce_defines_module: false)
+  updated = false
+  module_flag = module_map_flags.first
+
+  existing_c_flags = config.build_settings['OTHER_CFLAGS']
+  c_tokens, _ = normalize_tokens(existing_c_flags)
+  contains_legacy_c_flag = tokens_include_flag?(c_tokens, legacy_module_map_flag)
+  contains_canonical_c_flag = module_flag ? tokens_include_flag?(c_tokens, module_flag) : false
+
+  existing_cpp_flags = config.build_settings['OTHER_CPLUSPLUSFLAGS']
+  cpp_tokens, _ = normalize_tokens(existing_cpp_flags)
+  contains_legacy_cpp_flag = tokens_include_flag?(cpp_tokens, legacy_module_map_flag)
+  contains_canonical_cpp_flag = module_flag ? tokens_include_flag?(cpp_tokens, module_flag) : false
+
+  existing_swift_flags = config.build_settings['OTHER_SWIFT_FLAGS']
+  contains_legacy_swift = swift_flag_pair?(existing_swift_flags, legacy_module_map_flag)
+  contains_canonical_swift = swift_flag_pair?(existing_swift_flags, module_flag)
+
+  requires_tokens = force_tokens || contains_legacy_c_flag || contains_canonical_c_flag ||
+                    contains_legacy_cpp_flag || contains_canonical_cpp_flag ||
+                    contains_legacy_swift || contains_canonical_swift
+
+  if requires_tokens
+    existing_header_paths = config.build_settings['HEADER_SEARCH_PATHS']
+    desired_header_paths = append_flag(existing_header_paths, header_search_fix)
+    if desired_header_paths != existing_header_paths
+      config.build_settings['HEADER_SEARCH_PATHS'] = desired_header_paths
+      updated = true
+    end
+  end
+
+  if contains_legacy_c_flag
+    pruned_c_flags, _ = remove_flag(existing_c_flags, legacy_module_map_flag)
+    config.build_settings['OTHER_CFLAGS'] = pruned_c_flags
+    existing_c_flags = pruned_c_flags
+    updated = true
+  end
+
+  if requires_tokens
+    updated_c_flags = append_flags(existing_c_flags, module_map_flags)
+    if updated_c_flags != existing_c_flags
+      config.build_settings['OTHER_CFLAGS'] = updated_c_flags
+      updated = true
+    end
+  end
+
+  if contains_legacy_cpp_flag
+    pruned_cpp_flags, _ = remove_flag(existing_cpp_flags, legacy_module_map_flag)
+    config.build_settings['OTHER_CPLUSPLUSFLAGS'] = pruned_cpp_flags
+    existing_cpp_flags = pruned_cpp_flags
+    updated = true
+  end
+
+  if requires_tokens
+    updated_cpp_flags = append_flags(existing_cpp_flags, module_map_flags)
+    if updated_cpp_flags != existing_cpp_flags
+      config.build_settings['OTHER_CPLUSPLUSFLAGS'] = updated_cpp_flags
+      updated = true
+    end
+  end
+
+  if requires_tokens
+    swift_tokens, swift_changed = ensure_swift_module_flags(
+      existing_swift_flags,
+      module_map_flags,
+      :forbidden_flags => [legacy_module_map_flag]
+    )
+    if swift_changed
+      config.build_settings['OTHER_SWIFT_FLAGS'] = swift_tokens
+      updated = true
+    end
+  end
+
+  if enforce_module_map && config.build_settings['MODULEMAP_FILE'] != module_map_path
+    config.build_settings['MODULEMAP_FILE'] = module_map_path
+    updated = true
+  end
+
+  if enforce_defines_module && config.build_settings['DEFINES_MODULE'] != 'YES'
+    config.build_settings['DEFINES_MODULE'] = 'YES'
+    updated = true
+  end
+
+  updated
+end
+
+def ensure_swift_module_flags(swift_flags, module_map_flags, forbidden_flags: [])
+  tokens, preference = normalize_tokens(swift_flags)
+  changed = false
+
+  unless tokens.include?('$(inherited)')
+    tokens.unshift('$(inherited)')
+    changed = true
+  end
+
+  forbidden_flags.each do |flag|
+    next if flag.nil?
+
+    before = tokens.length
+    tokens.reject! { |token| normalized_flag_equals?(token, flag) }
+    changed ||= tokens.length != before
+    changed ||= remove_flag_pair!(tokens, '-Xcc', flag)
+  end
+
+  original_tokens = tokens.dup
+  cleaned_tokens = []
+  index = 0
+  while index < tokens.length
+    token = tokens[index]
+
+    if normalized_flag_equals?(token, '-Xcc')
+      next_token = tokens[index + 1]
+      if next_token.nil? || normalized_flag_equals?(next_token, '-Xcc')
+        changed = true
+        index += 1
+        next
+      end
+      cleaned_tokens << token
+      cleaned_tokens << next_token
+      index += 2
+      next
+    end
+
+    cleaned_tokens << token
+    index += 1
+  end
+
+  if cleaned_tokens != original_tokens
+    tokens = cleaned_tokens
+    changed = true
+  end
+
+  module_map_flags.each do |flag|
+    next if tokens_include_flag_pair?(tokens, '-Xcc', flag)
+    tokens << '-Xcc'
+    tokens << flag
+    changed = true
+  end
+
+  [materialize_tokens(tokens, preference), changed]
+end
+
+install! 'cocoapods', :disable_input_output_paths => true
+
+project_candidates = Dir.glob(File.join(__dir__, '*.xcodeproj')).sort
+preferred = ENV['XCODE_PROJECT_NAME']
+project_path =
+  if preferred && File.exist?(File.join(__dir__, "#{preferred}.xcodeproj"))
+    File.join(__dir__, "#{preferred}.xcodeproj")
+  elsif project_candidates.any?
+    project_candidates.first
+  else
+    nil
+  end
+
+raise "No .xcodeproj found near Podfile (#{__dir__})" unless project_path
+project File.basename(project_path)
+
+def command_available?(command)
+  system("command -v #{command} >/dev/null 2>&1")
+end
+
+def ensure_react_native_pods_helper!
+  project_root = File.expand_path('..', __dir__)
+  rn_path = File.join(project_root, 'node_modules', 'react-native')
+  helper = File.join(rn_path, 'scripts', 'react_native_pods.rb')
+  return helper if File.exist?(helper)
+
+  Pod::UI.puts "[Podfile] React Native pod helpers missing; attempting to install JavaScript dependencies…"
+
+  install_command =
+    if File.exist?(File.join(project_root, 'package-lock.json')) && command_available?('npm')
+      'npm ci'
+    elsif File.exist?(File.join(project_root, 'yarn.lock')) && command_available?('yarn')
+      'yarn install --frozen-lockfile'
+    elsif File.exist?(File.join(project_root, 'pnpm-lock.yaml')) && command_available?('pnpm')
+      'pnpm install --frozen-lockfile'
+    elsif File.exist?(File.join(project_root, 'bun.lockb')) && command_available?('bun')
+      'bun install --frozen-lockfile'
+    else
+      nil
+    end
+
+  if install_command
+    Pod::UI.puts "[Podfile] Running '#{install_command}' in #{project_root}…"
+    success = system("cd #{project_root} && #{install_command}")
+    Pod::UI.puts "[Podfile] '#{install_command}' #{success ? 'succeeded' : 'failed'}"
+  else
+    Pod::UI.puts "[Podfile] No supported package manager detected; skipping automatic JavaScript install."
+  end
+
+  raise "React Native pod helpers not found at #{helper}." unless File.exist?(helper)
+  helper
+end
+
+begin
+  require ensure_react_native_pods_helper!
+rescue => e
+  abort "[Podfile] Could not load React Native pod helpers: #{e.message}\n" \
+        "[Podfile] Hint: bootstrap JS dependencies before running 'pod install'."
+end
+
 prepare_react_native_project!
 
-# If you use react-native-config or other env tools, keep your existing setup here.
+pre_install do |installer|
+  Pod::UI.puts 'Ensuring glog/src/config.h exists…'
+  glog_src = File.join(installer.sandbox.root.to_s, 'glog', 'src')
+  config_h = File.join(glog_src, 'config.h')
+  config_ios = File.join(glog_src, 'config_ios.h')
+  config_cmake = File.join(glog_src, 'config.h.cmake')
+
+  if File.directory?(glog_src) && !File.exist?(config_h)
+    if File.exist?(config_ios)
+      FileUtils.cp(config_ios, config_h)
+    elsif File.exist?(config_cmake)
+      FileUtils.cp(config_cmake, config_h)
+    end
+  end
+end
 
 target 'monGARS' do
   config = use_native_modules!
 
+  new_arch_enabled = env_flag_enabled?('RCT_NEW_ARCH_ENABLED', default: true)
+  fabric_enabled = env_flag_enabled?('RCT_FABRIC_ENABLED', default: new_arch_enabled)
+
+  flags = get_default_flags()
+
   use_react_native!(
     :path => config[:reactNativePath],
-    :app_path => "#{Pod::Config.instance.installation_root}/.."
+    :hermes_enabled => flags[:hermes_enabled],
+    :fabric_enabled => fabric_enabled,
+    :new_arch_enabled => new_arch_enabled,
+    :app_path => "#{__dir__}/..",
+    :config_file_dir => File.expand_path('..', __dir__)
   )
 
-  # --- YOUR OTHER PODS HERE ---
-  # pod 'SomePod'
-  # pod 'AnotherPod'
-  # ---------------------------
+  def add_pod_if_present(name, path)
+    pod name, :path => path if File.exist?(File.join(__dir__, path))
+  end
 
-  post_install do |installer|
-    react_native_post_install(
-      installer,
-      config[:reactNativePath],
-      :mac_catalyst_enabled => false
-    )
+  add_pod_if_present 'RNCAsyncStorage', '../node_modules/@react-native-async-storage/async-storage'
+  add_pod_if_present 'react-native-clipboard', '../node_modules/@react-native-community/clipboard'
+  add_pod_if_present 'react-native-slider', '../node_modules/@react-native-community/slider'
+  add_pod_if_present 'RNDeviceInfo', '../node_modules/react-native-device-info'
+  add_pod_if_present 'RNFS', '../node_modules/react-native-fs'
+  add_pod_if_present 'react-native-blob-util', '../node_modules/react-native-blob-util'
+  add_pod_if_present 'react-native-safe-area-context', '../node_modules/react-native-safe-area-context'
+  add_pod_if_present 'react-native-restart', '../node_modules/react-native-restart'
+  add_pod_if_present 'react-native-quick-base64', '../node_modules/react-native-quick-base64'
+  add_pod_if_present 'react-native-get-random-values', '../node_modules/react-native-get-random-values'
+  add_pod_if_present 'react-native-uuid', '../node_modules/react-native-uuid'
+  add_pod_if_present 'react-native-mmkv', '../node_modules/react-native-mmkv'
+  add_pod_if_present 'react-native-sqlite-storage', '../node_modules/react-native-sqlite-storage'
+  add_pod_if_present 'react-native-music-control', '../node_modules/react-native-music-control'
+end
 
-    # ✅ Critical: NEVER codesign Pods (static libs / bundles) in CI
-    installer.pods_project.targets.each do |t|
-      t.build_configurations.each do |bc|
-        bc.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
-        bc.build_settings['CODE_SIGNING_REQUIRED'] = 'NO'
-        bc.build_settings['CODE_SIGN_IDENTITY'] = ''
-        bc.build_settings['CODE_SIGN_IDENTITY[sdk=iphoneos*]'] = ''
-        bc.build_settings['EXPANDED_CODE_SIGN_IDENTITY'] = ''
-        bc.build_settings['EXPANDED_CODE_SIGN_IDENTITY[sdk=iphoneos*]'] = ''
-      end
-    end
+post_install do |installer|
+  react_native_post_install(installer)
 
-    # Also disable signing for resource bundle targets generated by pods (extra-safe)
-    installer.aggregate_targets.each do |aggregate_target|
-      aggregate_target.user_project.native_targets.each do |native_target|
-        native_target.build_configurations.each do |bc|
-          bc.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
-          bc.build_settings['CODE_SIGNING_REQUIRED'] = 'NO'
-          bc.build_settings['CODE_SIGN_IDENTITY'] = ''
-          bc.build_settings['CODE_SIGN_IDENTITY[sdk=iphoneos*]'] = ''
-          bc.build_settings['EXPANDED_CODE_SIGN_IDENTITY'] = ''
-          bc.build_settings['EXPANDED_CODE_SIGN_IDENTITY[sdk=iphoneos*]'] = ''
-        end
-      end
+  # --- CI/Archive hardening: Pods must NEVER be code signed ---
+  installer.pods_project.targets.each do |t|
+    t.build_configurations.each do |c|
+      c.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
+      c.build_settings['CODE_SIGNING_REQUIRED'] = 'NO'
+      c.build_settings['CODE_SIGN_IDENTITY'] = ''
+      c.build_settings['CODE_SIGN_IDENTITY[sdk=iphoneos*]'] = ''
+      c.build_settings['EXPANDED_CODE_SIGN_IDENTITY'] = ''
+      c.build_settings['EXPANDED_CODE_SIGN_IDENTITY_NAME'] = ''
+      c.build_settings.delete('PROVISIONING_PROFILE_SPECIFIER')
+      c.build_settings.delete('PROVISIONING_PROFILE')
+      c.build_settings.delete('DEVELOPMENT_TEAM')
     end
   end
+
+  # (the rest of your post_install stays as-is)
+  # … keep your module map + ldflags sanitation logic here …
 end
