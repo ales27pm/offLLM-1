@@ -1,238 +1,794 @@
-name: iOS • Deploy to TestFlight
+require 'open3'
+require 'fileutils'
 
-on:
-  workflow_dispatch:
-    inputs:
-      configuration: { type: choice, options: [Release, Debug], default: Release }
-      bump_build_number: { type: boolean, default: true }
+platform :ios, '18.0'
 
-env:
-  APP_NAME: offLLM
-  SCHEME: monGARS
-  BUNDLE_ID: com.offllm.mongars
-  WORKSPACE: ios/monGARS.xcworkspace
-  CONFIGURATION: ${{ inputs.configuration || 'Release' }}
-  TEAM_ID: 52T7P32J34
-  EXPORT_METHOD: app-store
+def env_flag_enabled?(name, default:)
+  raw = ENV[name]
+  return default if raw.nil?
 
-jobs:
-  deploy-testflight:
-    runs-on: macos-15
-    environment: offLLM
-    timeout-minutes: 60
-    permissions: { contents: read }
+  normalized = raw.strip.downcase
+  return true if %w[1 true yes on].include?(normalized)
+  return false if %w[0 false no off].include?(normalized)
 
-    steps:
-      - name: ✅ Validate Secrets
-        env:
-          IOS_P12_BASE64: ${{ secrets.IOS_P12_BASE64 }}
-          IOS_P12_PASSWORD: ${{ secrets.IOS_P12_PASSWORD }}
-          IOS_PROVISIONING_PROFILE_BASE64: ${{ secrets.IOS_PROVISIONING_PROFILE_BASE64 }}
-          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
-          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
-          ASC_PRIVATE_KEY_BASE64: ${{ secrets.ASC_PRIVATE_KEY_BASE64 }}
-        run: |
-          set -euo pipefail
-          missing=0
+  default
+end
 
-          for var in IOS_P12_BASE64 IOS_P12_PASSWORD IOS_PROVISIONING_PROFILE_BASE64 ASC_KEY_ID ASC_ISSUER_ID ASC_PRIVATE_KEY_BASE64; do
-            if [ -z "${!var:-}" ]; then
-              echo "::error::Missing $var"
-              missing=1
-            fi
-          done
+def normalize_tokens(value)
+  case value
+  when nil
+    [[], :array]
+  when Array
+    [value.compact.dup, :array]
+  else
+    [value.to_s.split(/\s+/), :string]
+  end
+end
 
-          if [ "$missing" -ne 0 ]; then
-            exit 1
-          fi
+def materialize_tokens(tokens, preference)
+  filtered = tokens.compact
+  return preference == :array ? [] : '' if filtered.empty?
 
-          # Base64 sanity checks (DO NOT print secrets)
-          # macOS base64 uses -D; GNU uses --decode. We support both.
-          decode_test() {
-            local name="$1"
-            local raw="${!name}"
-            local cleaned
-            cleaned="$(printf '%s' "$raw" | tr -d '\n\r\t ')"
+  preference == :array ? filtered : filtered.join(' ')
+end
 
-            if base64 -D </dev/null >/dev/null 2>&1; then
-              printf '%s' "$cleaned" | base64 -D >/dev/null 2>&1 || {
-                echo "::error::$name is not valid base64 (macOS decoder)"
-                exit 1
-              }
-            else
-              printf '%s' "$cleaned" | base64 --decode >/dev/null 2>&1 || {
-                echo "::error::$name is not valid base64 (GNU decoder)"
-                exit 1
-              }
-            fi
-          }
+def strip_wrapping_quotes(value)
+  return nil if value.nil?
 
-          decode_test IOS_P12_BASE64
-          decode_test IOS_PROVISIONING_PROFILE_BASE64
-          decode_test ASC_PRIVATE_KEY_BASE64
+  value.to_s.strip.gsub(/\A(?:\\?["'])+|(?:\\?["'])+\z/, '')
+end
 
-      - uses: actions/checkout@v4
-        with: { fetch-depth: 1 }
+def normalize_token(token)
+  return nil if token.nil?
 
-      - run: bash scripts/ci/select_xcode.sh
+  normalized = strip_wrapping_quotes(token)
 
-      - name: 🍺 Install XcodeGen
-        run: |
-          brew update
-          brew install xcodegen
-          xcodegen --version
+  if normalized.include?('=')
+    prefix, suffix = normalized.split('=', 2)
+    normalized = "#{prefix}=#{strip_wrapping_quotes(suffix)}"
+  end
 
-      - name: 💎 Ensure Ruby tools
-        run: |
-          command -v xcpretty >/dev/null 2>&1 || sudo gem install xcpretty --no-document
-          command -v pod >/dev/null 2>&1 || sudo gem install cocoapods --no-document
-          pod --version
+  normalized
+end
 
-      - name: 🧱 Generate Xcode project + install pods
-        working-directory: ios
-        run: |
-          xcodegen generate
-          pod install --verbose
+def normalized_flag_equals?(token, candidate)
+  normalized_token = normalize_token(token)
+  normalized_candidate = normalize_token(candidate)
 
-      - if: ${{ inputs.bump_build_number }}
-        run: /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $(date +%Y%m%d%H%M)" ios/MyOfflineLLMApp/Info.plist
+  return false if normalized_token.nil? || normalized_candidate.nil?
 
-      - name: 🔐 Setup Keychain
-        env:
-          P12_BASE64: ${{ secrets.IOS_P12_BASE64 }}
-          P12_PASSWORD: ${{ secrets.IOS_P12_PASSWORD }}
-        run: |
-          set -euo pipefail
+  normalized_token == normalized_candidate
+end
 
-          KEYCHAIN="$RUNNER_TEMP/build.keychain-db"
-          KEYPASS="$(openssl rand -hex 12)"
+def tokens_include_flag?(tokens, flag)
+  tokens.any? { |token| normalized_flag_equals?(token, flag) }
+end
 
-          security create-keychain -p "$KEYPASS" "$KEYCHAIN"
-          security set-keychain-settings -lut 21600 "$KEYCHAIN"
-          security unlock-keychain -p "$KEYPASS" "$KEYCHAIN"
+def append_flag(value, flag)
+  return ['$(inherited)', flag] if value.nil?
 
-          # Normalize base64 (remove whitespace / CRLF)
-          CLEAN_P12="$(printf '%s' "$P12_BASE64" | tr -d '\n\r\t ')"
+  tokens, preference = normalize_tokens(value)
+  return materialize_tokens(tokens, preference) if tokens_include_flag?(tokens, flag)
 
-          # Decode using macOS base64 (-D)
-          printf '%s' "$CLEAN_P12" | base64 -D > "$RUNNER_TEMP/cert.p12"
+  tokens << flag
+  materialize_tokens(tokens, preference)
+end
 
-          security import "$RUNNER_TEMP/cert.p12" \
-            -k "$KEYCHAIN" \
-            -P "$P12_PASSWORD" \
-            -T /usr/bin/codesign \
-            -T /usr/bin/security
+def append_flags(value, flags)
+  flags.reduce(value) { |memo, flag| append_flag(memo, flag) }
+end
 
-          security list-keychains -d user -s "$KEYCHAIN" $(security list-keychains -d user | tr -d '"')
-          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYPASS" "$KEYCHAIN"
+def remove_flag(value, flag)
+  tokens, preference = normalize_tokens(value)
+  original = tokens.dup
+  tokens.reject! { |token| normalized_flag_equals?(token, flag) }
+  [materialize_tokens(tokens, preference), tokens != original]
+end
 
-          echo "KEYCHAIN_PATH=$KEYCHAIN" >> "$GITHUB_ENV"
+def find_flag_pair_index(tokens, first_flag, second_flag)
+  return nil if first_flag.nil? || second_flag.nil?
 
-      - name: 🪪 Install Profile
-        env:
-          PROFILE_B64: ${{ secrets.IOS_PROVISIONING_PROFILE_BASE64 }}
-        run: |
-          set -euo pipefail
+  tokens.each_cons(2).with_index do |(first, second), index|
+    next unless normalized_flag_equals?(first, first_flag)
+    return index if normalized_flag_equals?(second, second_flag)
+  end
+  nil
+end
 
-          if [ -z "${PROFILE_B64:-}" ]; then
-            echo "::error::IOS_PROVISIONING_PROFILE_BASE64 is empty"
-            exit 1
-          fi
+def tokens_include_flag_pair?(tokens, first_flag, second_flag)
+  !find_flag_pair_index(tokens, first_flag, second_flag).nil?
+end
 
-          mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
+def remove_flag_pair!(tokens, first_flag, second_flag)
+  return false if first_flag.nil? || second_flag.nil?
 
-          python3 - <<'PY'
-          import os, re, base64, pathlib, sys, subprocess
+  removed = false
+  while (index = find_flag_pair_index(tokens, first_flag, second_flag))
+    tokens.slice!(index, 2)
+    removed = true
+  end
+  removed
+end
 
-          b64 = os.environ["PROFILE_B64"]
-          b64 = re.sub(r"\s+", "", b64)  # kill CRLF/whitespace/paste poison
+def swift_flag_pair?(value, flag)
+  return false if flag.nil?
 
-          try:
-              data = base64.b64decode(b64, validate=True)
-          except Exception as e:
-              print("::error::IOS_PROVISIONING_PROFILE_BASE64 is not valid base64")
-              raise
+  tokens, _ = normalize_tokens(value)
+  tokens_include_flag_pair?(tokens, '-Xcc', flag)
+end
 
-          out = pathlib.Path(os.environ["RUNNER_TEMP"]) / "app.mobileprovision"
-          out.write_bytes(data)
+def remove_framework_link_flags(value, framework_name)
+  tokens, preference = normalize_tokens(value)
+  frameworks = [framework_name, "#{framework_name}.framework"].uniq
+  changed = false
 
-          # Must be parseable by security cms
-          plist = pathlib.Path(os.environ["RUNNER_TEMP"]) / "app.mobileprovision.plist"
-          subprocess.run(["security", "cms", "-D", "-i", str(out)], check=True, stdout=plist.open("wb"))
+  frameworks.each do |framework|
+    changed ||= remove_flag_pair!(tokens, '-framework', framework)
+    changed ||= remove_flag_pair!(tokens, '-weak_framework', framework)
+  end
 
-          # Extract UUID
-          uuid = subprocess.check_output(
-              ["/usr/libexec/PlistBuddy", "-c", "Print:UUID", str(plist)],
-              text=True
-          ).strip()
+  [materialize_tokens(tokens, preference), changed]
+end
 
-          if not re.fullmatch(r"[A-Fa-f0-9-]{36}", uuid or ""):
-              print("::error::Failed to extract UUID from provisioning profile (decoded file is not a valid profile)")
-              sys.exit(1)
+def sanitize_build_setting_ldflags(config, frameworks)
+  value = config.build_settings['OTHER_LDFLAGS']
+  sanitized_value = value
+  changed_any = false
 
-          dest = pathlib.Path.home() / "Library/MobileDevice/Provisioning Profiles" / f"{uuid}.mobileprovision"
-          out.replace(dest)
+  frameworks.each do |framework|
+    sanitized_value, changed = remove_framework_link_flags(sanitized_value, framework)
+    changed_any ||= changed
+  end
 
-          # Export for later steps
-          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as f:
-              f.write(f"PROFILE_UUID={uuid}\n")
-          PY
+  return false unless changed_any
 
+  if sanitized_value.respond_to?(:empty?) && sanitized_value.empty?
+    config.build_settings.delete('OTHER_LDFLAGS')
+  else
+    config.build_settings['OTHER_LDFLAGS'] = sanitized_value
+  end
 
-      - name: 🧾 Write ExportOptions
-        working-directory: ios
-        run: |
-          set -euo pipefail
-          cat > ExportOptions.plist <<EOF
-          <?xml version="1.0" encoding="UTF-8"?>
-          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0"><dict>
-            <key>method</key><string>${EXPORT_METHOD}</string>
-            <key>teamID</key><string>${TEAM_ID}</string>
-            <key>compileBitcode</key><false/>
-            <key>signingStyle</key><string>manual</string>
-            <key>provisioningProfiles</key><dict><key>${BUNDLE_ID}</key><string>${PROFILE_UUID}</string></dict>
-            <key>stripSwiftSymbols</key><true/>
-            <key>uploadSymbols</key><true/>
-          </dict></plist>
-          EOF
+  true
+end
 
-      - name: 🏗️ Archive
-        run: |
-          set -o pipefail
-          mkdir -p build/logs
-          xcodebuild archive \
-            -workspace "$WORKSPACE" \
-            -scheme "$SCHEME" \
-            -configuration "$CONFIGURATION" \
-            -destination "generic/platform=iOS" \
-            -archivePath "$RUNNER_TEMP/${APP_NAME}.xcarchive" \
-            PRODUCT_BUNDLE_IDENTIFIER="$BUNDLE_ID" \
-            DEVELOPMENT_TEAM="$TEAM_ID" \
-            CODE_SIGN_STYLE=Manual \
-            CODE_SIGNING_ALLOWED=YES \
-            CODE_SIGNING_REQUIRED=YES \
-            | tee build/logs/archive.log | xcpretty
-          echo "ARCHIVE_PATH=$RUNNER_TEMP/${APP_NAME}.xcarchive" >> "$GITHUB_ENV"
+def sanitize_ldflags_value(value, frameworks)
+  sanitized_value = value
+  changed_any = false
 
-      - name: 📦 Export IPA
-        run: |
-          set -o pipefail
-          xcodebuild -exportArchive \
-            -archivePath "$ARCHIVE_PATH" \
-            -exportPath build/output \
-            -exportOptionsPlist ios/ExportOptions.plist \
-            | tee build/logs/export.log | xcpretty
+  frameworks.each do |framework|
+    sanitized_value, changed = remove_framework_link_flags(sanitized_value, framework)
+    changed_any ||= changed
+  end
 
-          IPA=$(find build/output -name '*.ipa' -print -quit)
-          echo "IPA_PATH=$IPA" >> "$GITHUB_ENV"
+  return [value, false] unless changed_any
 
-      - name: 🚀 Upload
-        env:
-          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
-          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
-          ASC_PRIVATE_KEY_BASE64: ${{ secrets.ASC_PRIVATE_KEY_BASE64 }}
-        run: bash scripts/ci/upload_testflight.sh "$IPA_PATH" "$ASC_KEY_ID" "$ASC_ISSUER_ID" "$ASC_PRIVATE_KEY_BASE64"
+  sanitized_value =
+    if sanitized_value.is_a?(Array)
+      sanitized_value.join(' ')
+    else
+      sanitized_value.to_s
+    end
 
-      - if: always()
-        run: security delete-keychain "$KEYCHAIN_PATH" || true
+  sanitized_value = sanitized_value.strip
+  sanitized_value = '$(inherited)' if sanitized_value.empty?
+
+  [sanitized_value, true]
+end
+
+def sanitize_module_map_settings(config, header_search_fix:, module_map_flags:, module_map_path:, legacy_module_map_flag:, force_tokens: false, enforce_module_map: false, enforce_defines_module: false)
+  updated = false
+  module_flag = module_map_flags.first
+
+  existing_c_flags = config.build_settings['OTHER_CFLAGS']
+  c_tokens, _ = normalize_tokens(existing_c_flags)
+  contains_legacy_c_flag = tokens_include_flag?(c_tokens, legacy_module_map_flag)
+  contains_canonical_c_flag = module_flag ? tokens_include_flag?(c_tokens, module_flag) : false
+
+  existing_cpp_flags = config.build_settings['OTHER_CPLUSPLUSFLAGS']
+  cpp_tokens, _ = normalize_tokens(existing_cpp_flags)
+  contains_legacy_cpp_flag = tokens_include_flag?(cpp_tokens, legacy_module_map_flag)
+  contains_canonical_cpp_flag = module_flag ? tokens_include_flag?(cpp_tokens, module_flag) : false
+
+  existing_swift_flags = config.build_settings['OTHER_SWIFT_FLAGS']
+  contains_legacy_swift = swift_flag_pair?(existing_swift_flags, legacy_module_map_flag)
+  contains_canonical_swift = swift_flag_pair?(existing_swift_flags, module_flag)
+
+  requires_tokens = force_tokens || contains_legacy_c_flag || contains_canonical_c_flag ||
+                    contains_legacy_cpp_flag || contains_canonical_cpp_flag ||
+                    contains_legacy_swift || contains_canonical_swift
+
+  if requires_tokens
+    existing_header_paths = config.build_settings['HEADER_SEARCH_PATHS']
+    desired_header_paths = append_flag(existing_header_paths, header_search_fix)
+    if desired_header_paths != existing_header_paths
+      config.build_settings['HEADER_SEARCH_PATHS'] = desired_header_paths
+      updated = true
+    end
+  end
+
+  if contains_legacy_c_flag
+    pruned_c_flags, _ = remove_flag(existing_c_flags, legacy_module_map_flag)
+    config.build_settings['OTHER_CFLAGS'] = pruned_c_flags
+    existing_c_flags = pruned_c_flags
+    updated = true
+  end
+
+  if requires_tokens
+    updated_c_flags = append_flags(existing_c_flags, module_map_flags)
+    if updated_c_flags != existing_c_flags
+      config.build_settings['OTHER_CFLAGS'] = updated_c_flags
+      updated = true
+    end
+  end
+
+  if contains_legacy_cpp_flag
+    pruned_cpp_flags, _ = remove_flag(existing_cpp_flags, legacy_module_map_flag)
+    config.build_settings['OTHER_CPLUSPLUSFLAGS'] = pruned_cpp_flags
+    existing_cpp_flags = pruned_cpp_flags
+    updated = true
+  end
+
+  if requires_tokens
+    updated_cpp_flags = append_flags(existing_cpp_flags, module_map_flags)
+    if updated_cpp_flags != existing_cpp_flags
+      config.build_settings['OTHER_CPLUSPLUSFLAGS'] = updated_cpp_flags
+      updated = true
+    end
+  end
+
+  if requires_tokens
+    swift_tokens, swift_changed = ensure_swift_module_flags(
+      existing_swift_flags,
+      module_map_flags,
+      :forbidden_flags => [legacy_module_map_flag]
+    )
+    if swift_changed
+      config.build_settings['OTHER_SWIFT_FLAGS'] = swift_tokens
+      updated = true
+    end
+  end
+
+  if enforce_module_map && config.build_settings['MODULEMAP_FILE'] != module_map_path
+    config.build_settings['MODULEMAP_FILE'] = module_map_path
+    updated = true
+  end
+
+  if enforce_defines_module && config.build_settings['DEFINES_MODULE'] != 'YES'
+    config.build_settings['DEFINES_MODULE'] = 'YES'
+    updated = true
+  end
+
+  updated
+end
+
+def ensure_swift_module_flags(swift_flags, module_map_flags, forbidden_flags: [])
+  tokens, preference = normalize_tokens(swift_flags)
+  changed = false
+
+  unless tokens.include?('$(inherited)')
+    tokens.unshift('$(inherited)')
+    changed = true
+  end
+
+  forbidden_flags.each do |flag|
+    next if flag.nil?
+
+    before = tokens.length
+    tokens.reject! { |token| normalized_flag_equals?(token, flag) }
+    changed ||= tokens.length != before
+
+    changed ||= remove_flag_pair!(tokens, '-Xcc', flag)
+  end
+
+  original_tokens = tokens.dup
+  cleaned_tokens = []
+  index = 0
+  while index < tokens.length
+    token = tokens[index]
+
+    if normalized_flag_equals?(token, '-Xcc')
+      next_token = tokens[index + 1]
+
+      if next_token.nil? || normalized_flag_equals?(next_token, '-Xcc')
+        changed = true
+        index += 1
+        next
+      end
+
+      cleaned_tokens << token
+      cleaned_tokens << next_token
+      index += 2
+      next
+    end
+
+    cleaned_tokens << token
+    index += 1
+  end
+
+  if cleaned_tokens != original_tokens
+    tokens = cleaned_tokens
+    changed = true
+  end
+
+  module_map_flags.each do |flag|
+    next if tokens_include_flag_pair?(tokens, '-Xcc', flag)
+
+    tokens << '-Xcc'
+    tokens << flag
+    changed = true
+  end
+
+  [materialize_tokens(tokens, preference), changed]
+end
+
+install! 'cocoapods', :disable_input_output_paths => true
+
+# --- Auto-detect the .xcodeproj near this Podfile ---
+project_candidates = Dir.glob(File.join(__dir__, '*.xcodeproj')).sort
+preferred = ENV['XCODE_PROJECT_NAME']
+project_path =
+  if preferred && File.exist?(File.join(__dir__, "#{preferred}.xcodeproj"))
+    File.join(__dir__, "#{preferred}.xcodeproj")
+  elsif project_candidates.any?
+    project_candidates.first
+  else
+    nil
+  end
+
+raise "No .xcodeproj found near Podfile (#{__dir__})" unless project_path
+project File.basename(project_path)
+
+def command_available?(command)
+  system("command -v #{command} >/dev/null 2>&1")
+end
+
+def ensure_react_native_pods_helper!
+  project_root = File.expand_path('..', __dir__)
+  rn_path = File.join(project_root, 'node_modules', 'react-native')
+  helper = File.join(rn_path, 'scripts', 'react_native_pods.rb')
+  return helper if File.exist?(helper)
+
+  Pod::UI.puts "[Podfile] React Native pod helpers missing; attempting to install JavaScript dependencies…"
+
+  install_command =
+    if File.exist?(File.join(project_root, 'package-lock.json')) && command_available?('npm')
+      'npm ci'
+    elsif File.exist?(File.join(project_root, 'yarn.lock')) && command_available?('yarn')
+      'yarn install --frozen-lockfile'
+    elsif File.exist?(File.join(project_root, 'pnpm-lock.yaml')) && command_available?('pnpm')
+      'pnpm install --frozen-lockfile'
+    elsif File.exist?(File.join(project_root, 'bun.lockb')) && command_available?('bun')
+      'bun install --frozen-lockfile'
+    else
+      nil
+    end
+
+  if install_command
+    Pod::UI.puts "[Podfile] Running '#{install_command}' in #{project_root}…"
+    success = system("cd #{project_root} && #{install_command}")
+    Pod::UI.puts "[Podfile] '#{install_command}' #{success ? 'succeeded' : 'failed'}"
+  else
+    Pod::UI.puts "[Podfile] No supported package manager detected; skipping automatic JavaScript install."
+  end
+
+  unless File.exist?(helper)
+    raise "React Native pod helpers not found at #{helper}."
+  end
+
+  helper
+end
+
+begin
+  require ensure_react_native_pods_helper!
+rescue => e
+  abort "[Podfile] Could not load React Native pod helpers: #{e.message}\n" \
+        "[Podfile] Hint: bootstrap JS dependencies before running 'pod install'."
+end
+
+prepare_react_native_project!
+
+# Ensure glog/src/config.h exists (prevents 'config.h not found' CI errors)
+pre_install do |installer|
+  Pod::UI.puts 'Ensuring glog/src/config.h exists…'
+  glog_src = File.join(installer.sandbox.root.to_s, 'glog', 'src')
+  config_h = File.join(glog_src, 'config.h')
+  config_ios = File.join(glog_src, 'config_ios.h')
+  config_cmake = File.join(glog_src, 'config.h.cmake')
+
+  if File.directory?(glog_src) && !File.exist?(config_h)
+    if File.exist?(config_ios)
+      FileUtils.cp(config_ios, config_h)
+    elsif File.exist?(config_cmake)
+      FileUtils.cp(config_cmake, config_h)
+    end
+  end
+end
+
+target 'monGARS' do
+  config = use_native_modules!
+
+  new_arch_enabled = env_flag_enabled?('RCT_NEW_ARCH_ENABLED', default: true)
+  fabric_enabled = env_flag_enabled?('RCT_FABRIC_ENABLED', default: new_arch_enabled)
+
+  flags = get_default_flags()
+
+  use_react_native!(
+    :path => config[:reactNativePath],
+    :hermes_enabled => flags[:hermes_enabled],
+    :fabric_enabled => fabric_enabled,
+    :new_arch_enabled => new_arch_enabled,
+    :app_path => "#{__dir__}/..",
+    :config_file_dir => File.expand_path('..', __dir__)
+  )
+
+  # Add third-party pods only if present (keeps CI resilient)
+  def add_pod_if_present(name, path)
+    pod name, :path => path if File.exist?(File.join(__dir__, path))
+  end
+
+  add_pod_if_present 'RNCAsyncStorage', '../node_modules/@react-native-async-storage/async-storage'
+  add_pod_if_present 'react-native-clipboard', '../node_modules/@react-native-community/clipboard'
+  add_pod_if_present 'react-native-slider', '../node_modules/@react-native-community/slider'
+  add_pod_if_present 'RNDeviceInfo', '../node_modules/react-native-device-info'
+  add_pod_if_present 'RNFS', '../node_modules/react-native-fs'
+  add_pod_if_present 'react-native-blob-util', '../node_modules/react-native-blob-util'
+  add_pod_if_present 'react-native-safe-area-context', '../node_modules/react-native-safe-area-context'
+  add_pod_if_present 'react-native-restart', '../node_modules/react-native-restart'
+  add_pod_if_present 'react-native-quick-base64', '../node_modules/react-native-quick-base64'
+  add_pod_if_present 'react-native-get-random-values', '../node_modules/react-native-get-random-values'
+  add_pod_if_present 'react-native-uuid', '../node_modules/react-native-uuid'
+  add_pod_if_present 'react-native-mmkv', '../node_modules/react-native-mmkv'
+  add_pod_if_present 'react-native-sqlite-storage', '../node_modules/react-native-sqlite-storage'
+  add_pod_if_present 'react-native-music-control', '../node_modules/react-native-music-control'
+end
+
+post_install do |installer|
+  react_native_post_install(installer)
+
+  # --- CI/Archive hardening: Pods must NEVER be code signed ---
+  installer.pods_project.targets.each do |t|
+    t.build_configurations.each do |c|
+      c.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
+      c.build_settings['CODE_SIGNING_REQUIRED'] = 'NO'
+      c.build_settings['CODE_SIGN_IDENTITY'] = ''
+      c.build_settings['CODE_SIGN_IDENTITY[sdk=iphoneos*]'] = ''
+      c.build_settings['EXPANDED_CODE_SIGN_IDENTITY'] = ''
+      c.build_settings['EXPANDED_CODE_SIGN_IDENTITY_NAME'] = ''
+      c.build_settings.delete('PROVISIONING_PROFILE_SPECIFIER')
+      c.build_settings.delete('PROVISIONING_PROFILE')
+      c.build_settings.delete('DEVELOPMENT_TEAM')
+    end
+  end
+
+  forbidden_frameworks = ['CoreAudioTypes']
+  forbidden_framework_refs = forbidden_frameworks.flat_map do |framework|
+    ["#{framework}.framework", "#{framework}.tbd"]
+  end.uniq
+  pods_project_modified = false
+
+  # Unconditionally disable I/O path analysis to avoid flaky .xcfilelist issues
+  installer.pods_project.targets.each do |t|
+    target_name = t.respond_to?(:name) ? t.name.to_s : ''
+
+    t.build_configurations.each do |c|
+      c.build_settings['DISABLE_INPUT_OUTPUT_PATHS'] = 'YES'
+      c.build_settings['CLANG_CXX_LANGUAGE_STANDARD'] = 'c++20'
+      c.build_settings['CLANG_CXX_LIBRARY'] = 'libc++'
+
+      if sanitize_build_setting_ldflags(c, forbidden_frameworks)
+        Pod::UI.puts "[Podfile] Removed #{forbidden_frameworks.join(', ')} from OTHER_LDFLAGS for #{target_name} (#{c.name})"
+        pods_project_modified = true
+      end
+    end
+
+    frameworks_phase = t.respond_to?(:frameworks_build_phase) ? t.frameworks_build_phase : nil
+    next unless frameworks_phase && frameworks_phase.respond_to?(:files)
+
+    frameworks_phase.files.to_a.dup.each do |build_file|
+      file_ref = build_file.respond_to?(:file_ref) ? build_file.file_ref : nil
+      next unless file_ref
+
+      display_name =
+        if file_ref.respond_to?(:display_name)
+          file_ref.display_name.to_s
+        elsif file_ref.respond_to?(:path)
+          file_ref.path.to_s
+        else
+          ''
+        end
+
+      next unless forbidden_framework_refs.include?(display_name)
+
+      frameworks_phase.remove_build_file(build_file)
+      Pod::UI.puts "[Podfile] Removed #{display_name} from #{target_name}'s Frameworks phase"
+      pods_project_modified = true
+    end
+  end
+
+  # Remove obsolete Hermes phase if present (idempotent)
+  hermes_phase_labels = ['[Hermes] Replace Hermes']
+  remove_hermes_phase = lambda do |target, scope|
+    return 0 unless target.respond_to?(:shell_script_build_phases)
+    phases = target.shell_script_build_phases.select do |phase|
+      phase_name = phase.respond_to?(:name) ? phase.name.to_s.strip : ''
+      display_name =
+        if phase.respond_to?(:display_name)
+          phase.display_name.to_s.strip
+        else
+          phase_name
+        end
+      hermes_phase_labels.any? { |needle| display_name.include?(needle) }
+    end
+    removed = 0
+    phases.each { |p| target.build_phases.delete(p); removed += 1 }
+    removed
+  end
+
+  header_search_fix = '$(PODS_ROOT)/Headers/Public/RCTDeprecation'
+  module_map_path = '$(PODS_ROOT)/Headers/Public/RCTDeprecation/module.modulemap'
+  legacy_module_map_path = '$(PODS_ROOT)/Headers/Public/RCTDeprecation/RCTDeprecation.modulemap'
+  module_map_flag = "-fmodule-map-file=#{module_map_path}"
+  legacy_module_map_flag = "-fmodule-map-file=#{legacy_module_map_path}"
+  legacy_module_map_flag_pattern = /(?<!\S)#{Regexp.escape(legacy_module_map_flag)}(?!\S)/
+  legacy_module_map_path_pattern = /(?<!\S)#{Regexp.escape(legacy_module_map_path)}(?!\S)/
+  legacy_module_map_flag_quoted_pattern = /"#{Regexp.escape(legacy_module_map_flag)}"/
+  legacy_module_map_path_quoted_pattern = /"#{Regexp.escape(legacy_module_map_path)}"/
+  module_map_flags = [module_map_flag].compact
+  module_map_dir = File.join(installer.sandbox.root.to_s, 'Headers', 'Public', 'RCTDeprecation')
+  module_map_disk = File.join(module_map_dir, 'module.modulemap')
+  legacy_module_map_disk = File.join(module_map_dir, 'RCTDeprecation.modulemap')
+  target_support_dir = File.join(installer.sandbox.root.to_s, 'Target Support Files', 'RCTDeprecation')
+  target_support_module_map = File.join(target_support_dir, 'module.modulemap')
+  legacy_target_support_module_map = File.join(target_support_dir, 'RCTDeprecation.modulemap')
+  module_map_template = File.join(__dir__, 'Config', 'RCTDeprecation.modulemap')
+  raise "Missing #{module_map_template}; ensure it is checked in" unless File.exist?(module_map_template)
+  desired_module_map = File.read(module_map_template)
+
+  FileUtils.mkdir_p(module_map_dir)
+  existing_module_map = File.exist?(module_map_disk) ? File.read(module_map_disk) : nil
+  if existing_module_map != desired_module_map
+    Pod::UI.puts "[Podfile] Writing #{module_map_disk} (primary)"
+    File.write(module_map_disk, desired_module_map)
+  end
+
+  begin
+    FileUtils.ln_sf(module_map_disk, legacy_module_map_disk)
+    Pod::UI.puts "[Podfile] Linked legacy module map to #{legacy_module_map_disk}"
+  rescue => e
+    FileUtils.cp(module_map_disk, legacy_module_map_disk)
+    Pod::UI.puts "[Podfile] Copied canonical module map to legacy path at #{legacy_module_map_disk} (symlink failed: #{e})"
+  end
+
+  installer.pods_project.targets.each do |target|
+    removed = remove_hermes_phase.call(target, 'pods')
+    if removed > 0
+      Pod::UI.puts "[Podfile] Removed #{removed} legacy Hermes phases from #{target.name}"
+      pods_project_modified = true
+    end
+  end
+
+  installer.pods_project.targets.each do |target|
+    target_name = target.respond_to?(:name) ? target.name.to_s : ''
+    force_tokens = target_name == 'RCTDeprecation' || target_name.start_with?('Pods-')
+    enforce_module_identity = target_name == 'RCTDeprecation'
+
+    target.build_configurations.each do |config|
+      updated = sanitize_module_map_settings(
+        config,
+        :header_search_fix => header_search_fix,
+        :module_map_flags => module_map_flags,
+        :module_map_path => module_map_path,
+        :legacy_module_map_flag => legacy_module_map_flag,
+        :force_tokens => force_tokens,
+        :enforce_module_map => enforce_module_identity,
+        :enforce_defines_module => enforce_module_identity
+      )
+
+      if updated
+        Pod::UI.puts "[Podfile] Updated build settings for #{target.name} (#{config.name})"
+        pods_project_modified = true
+      end
+    end
+  end
+
+  installer.pods_project.save if pods_project_modified
+  installer.aggregate_targets.each do |aggregate_target|
+    user_project = aggregate_target.user_project
+    next unless user_project
+
+    project_modified = false
+
+    user_project.targets.each do |target|
+      next unless target.name == 'monGARS'
+
+      target.build_configurations.each do |config|
+        removed_std = config.build_settings.delete('CLANG_CXX_LANGUAGE_STANDARD')
+        if removed_std
+          project_modified = true
+          if removed_std != '$(inherited)'
+            Pod::UI.puts "[Podfile] Clearing CLANG_CXX_LANGUAGE_STANDARD for #{target.name} (#{config.name})"
+          end
+        end
+
+        current_library = config.build_settings['CLANG_CXX_LIBRARY']
+        if current_library != 'libc++'
+          config.build_settings['CLANG_CXX_LIBRARY'] = 'libc++'
+          project_modified = true
+        end
+
+        updated = sanitize_module_map_settings(
+          config,
+          :header_search_fix => header_search_fix,
+          :module_map_flags => module_map_flags,
+          :module_map_path => module_map_path,
+          :legacy_module_map_flag => legacy_module_map_flag,
+          :force_tokens => true
+        )
+
+        project_modified ||= updated
+
+        if sanitize_build_setting_ldflags(config, forbidden_frameworks)
+          Pod::UI.puts "[Podfile] Removed #{forbidden_frameworks.join(', ')} from OTHER_LDFLAGS for #{target.name} (#{config.name})"
+          project_modified = true
+        end
+      end
+
+      frameworks_phase = target.respond_to?(:frameworks_build_phase) ? target.frameworks_build_phase : nil
+      next unless frameworks_phase && frameworks_phase.respond_to?(:files)
+
+      frameworks_phase.files.to_a.dup.each do |build_file|
+        file_ref = build_file.respond_to?(:file_ref) ? build_file.file_ref : nil
+        next unless file_ref
+
+        display_name =
+          if file_ref.respond_to?(:display_name)
+            file_ref.display_name.to_s
+          elsif file_ref.respond_to?(:path)
+            file_ref.path.to_s
+          else
+            ''
+          end
+
+        next unless forbidden_framework_refs.include?(display_name)
+
+        frameworks_phase.remove_build_file(build_file)
+        Pod::UI.puts "[Podfile] Removed #{display_name} from #{target.name}'s Frameworks phase"
+        project_modified = true
+      end
+    end
+
+    user_project.save if project_modified
+  end
+
+  support_files_root = File.join(__dir__, 'Pods', 'Target Support Files')
+  if Dir.exist?(support_files_root)
+    Dir.glob(File.join(support_files_root, '**', '*.xcconfig')).each do |xcconfig_path|
+      original = File.read(xcconfig_path)
+      replaced = original.gsub(legacy_module_map_flag_pattern, module_map_flag)
+      replaced = replaced.gsub(legacy_module_map_path_pattern, module_map_path)
+      replaced = replaced.gsub(legacy_module_map_flag_quoted_pattern, "\"#{module_map_flag}\"")
+      replaced = replaced.gsub(legacy_module_map_path_quoted_pattern, "\"#{module_map_path}\"")
+
+      module_map_updated = replaced != original
+      frameworks_updated = false
+
+      sanitized_lines = replaced.each_line.map do |line|
+        if line =~ /^(\s*OTHER_LDFLAGS\s*=\s*)(.+)$/
+          prefix = Regexp.last_match(1)
+          value = Regexp.last_match(2)
+          newline = line.end_with?("\n") ? "\n" : ''
+
+          sanitized_value, changed = sanitize_ldflags_value(value.strip, forbidden_frameworks)
+          if changed
+            frameworks_updated = true
+            "#{prefix}#{sanitized_value}#{newline}"
+          else
+            line
+          end
+        else
+          line
+        end
+      end
+
+      sanitized_content = sanitized_lines.join
+
+      next if sanitized_content == original
+
+      messages = []
+      messages << 'prefer module.modulemap' if module_map_updated
+      messages << "remove #{forbidden_frameworks.join(', ')} from OTHER_LDFLAGS" if frameworks_updated
+
+      if messages.empty?
+        Pod::UI.puts "[Podfile] Updated #{xcconfig_path}"
+      else
+        Pod::UI.puts "[Podfile] Updated #{xcconfig_path} to #{messages.join(' and ')}"
+      end
+
+      File.write(xcconfig_path, sanitized_content)
+    end
+  end
+
+  if Dir.exist?(target_support_dir)
+    existing_target_support_map = File.exist?(target_support_module_map) ? File.read(target_support_module_map) : nil
+    if existing_target_support_map != desired_module_map
+      Pod::UI.puts "[Podfile] Writing #{target_support_module_map} (target support)"
+      File.write(target_support_module_map, desired_module_map)
+    end
+
+    if File.exist?(legacy_target_support_module_map) || File.symlink?(legacy_target_support_module_map)
+      Pod::UI.puts "[Podfile] Removing legacy module map at #{legacy_target_support_module_map}"
+      FileUtils.rm_f(legacy_target_support_module_map)
+    end
+  end
+
+  preserved_legacy_module_maps = [legacy_module_map_disk].compact
+  Dir.glob(File.join(installer.sandbox.root.to_s, '**', 'RCTDeprecation.modulemap')).each do |stray_module_map|
+    next if preserved_legacy_module_maps.include?(stray_module_map)
+
+    Pod::UI.puts "[Podfile] Removing stray legacy module map at #{stray_module_map}"
+    FileUtils.rm_f(stray_module_map)
+  end
+
+  purge_script = File.join(__dir__, 'scripts', 'purge-rctdeprecation-caches.sh')
+  if File.exist?(purge_script)
+    env = {
+      'PROJECT_DIR' => __dir__,
+      'APP_TARGET' => 'monGARS',
+      'MODULE_NAME' => 'RCTDeprecation',
+      'LEGACY_MODULE_MAP_NAME' => 'RCTDeprecation.modulemap'
+    }
+
+    stdout_str, stderr_str, status = Open3.capture3(env, 'bash', purge_script)
+
+    stdout_str.each_line do |line|
+      line = line.strip
+      Pod::UI.puts("[Podfile] #{line}") unless line.empty?
+    end
+
+    stderr_str.each_line do |line|
+      line = line.strip
+      Pod::UI.warn("[Podfile] STDERR: #{line}") unless line.empty?
+    end
+
+    unless status.success?
+      Pod::UI.warn('[Podfile] Failed to purge legacy RCTDeprecation caches; manual cleanup may be required.')
+    end
+  else
+    Pod::UI.warn('[Podfile] Missing ios/scripts/purge-rctdeprecation-caches.sh; derived data may still reference legacy module maps.')
+  end
+
+  mlx_patch_script = File.join(__dir__, 'scripts', 'patch-mlx-metal-cxx17.sh')
+  if File.exist?(mlx_patch_script)
+    env = { 'PROJECT_DIR' => __dir__, 'SRCROOT' => __dir__ }
+    stdout_str, stderr_str, status = Open3.capture3(env, 'bash', mlx_patch_script)
+
+    stdout_str.each_line do |line|
+      line = line.strip
+      Pod::UI.puts("[Podfile] #{line}") unless line.empty?
+    end
+
+    unless status.success?
+      stderr_str.each_line do |line|
+        line = line.strip
+        Pod::UI.warn("[Podfile] STDERR: #{line}") unless line.strip.empty?
+      end
+      Pod::UI.warn('[Podfile] Failed to patch MLX metal headers; warnings may persist. ' \
+                   'You can re-run ios/scripts/patch-mlx-metal-cxx17.sh manually.')
+    end
+  else
+    Pod::UI.warn('[Podfile] Missing ios/scripts/patch-mlx-metal-cxx17.sh; MLX metal warnings may persist.')
+  end
+
+  patch_script = File.join(__dir__, 'scripts', 'patch-react-native-contacts.sh')
+  if File.exist?(patch_script)
+    stdout_str, stderr_str, status = Open3.capture3('bash', patch_script)
+    if !status.success?
+      stdout_str.each_line { |line| Pod::UI.warn("[Podfile] STDOUT: #{line.strip}") unless line.strip.empty? }
+      stderr_str.each_line { |line| Pod::UI.warn("[Podfile] STDERR: #{line.strip}") unless line.strip.empty? }
+      Pod::UI.warn('[Podfile] Contacts patch failed (non-fatal). ' \
+                   'This may be due to sandboxing or idempotency. Consider re-running the patch manually.')
+    end
+  else
+    Pod::UI.warn('[Podfile] Missing ios/scripts/patch-react-native-contacts.sh; skipping contacts orientation patch.')
+  end
+end
