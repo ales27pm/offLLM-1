@@ -132,13 +132,20 @@ jobs:
               exit 1
             fi
 
-            python3 - "$dest" "$key" -c $'import base64\nimport binascii\nimport os\nimport sys\n\n'\
-              $'dest, key = sys.argv[1:3]\nraw = os.environ.get(key, "")\n'\
-              $'normalized = "".join(raw.split())\nif not normalized:\n'\
-              $'    raise SystemExit(f"::error ::{key} is empty after whitespace normalization")\n'\
-              $'try:\n    decoded = base64.b64decode(normalized, validate=True)\n'\
-              $'except binascii.Error as exc:\n    raise SystemExit(f"::error ::Failed to decode {key}: {exc}")\n'\
-              $'with open(dest, "wb") as fh:\n    fh.write(decoded)\nos.chmod(dest, 0o600)'
+            python3 -c "import base64, binascii, os, sys\n\n"\
+              "dest, key = sys.argv[1:3]\n"\
+              "raw = os.environ.get(key, '')\n"\
+              "normalized = ''.join(raw.split())\n"\
+              "if not normalized:\n"\
+              "    raise SystemExit(f'::error ::{key} is empty after whitespace normalization')\n\n"\
+              "try:\n"\
+              "    decoded = base64.b64decode(normalized, validate=True)\n"\
+              "except binascii.Error as exc:\n"\
+              "    raise SystemExit(f'::error ::Failed to decode {key}: {exc}')\n\n"\
+              "with open(dest, 'wb') as fh:\n"\
+              "    fh.write(decoded)\n"\
+              "os.chmod(dest, 0o600)\n" \
+              "$dest" "$key"
           }
 
           decode_to_file P12_BASE64 signing/cert.p12
