@@ -282,14 +282,14 @@ jobs:
             plutil -insert teamID -string "$TEAM_ID" ExportOptions.plist
           fi
 
-  if [[ -x /usr/libexec/PlistBuddy ]]; then
-    /usr/libexec/PlistBuddy -c "Add :provisioningProfiles dict" ExportOptions.plist 2>/dev/null || \
-    /usr/libexec/PlistBuddy -c "Set :provisioningProfiles dict" ExportOptions.plist 2>/dev/null || true
-    /usr/libexec/PlistBuddy -c "Set :provisioningProfiles:${BUNDLE_ID} $PROFILE_NAME" ExportOptions.plist
-  else
-    plutil -insert provisioningProfiles -xml '<dict/>' ExportOptions.plist || true
-    plutil -insert "provisioningProfiles.${BUNDLE_ID}" -string "$PROFILE_NAME" ExportOptions.plist
-  fi
+          if [[ -x /usr/libexec/PlistBuddy ]]; then
+            /usr/libexec/PlistBuddy -c "Add :provisioningProfiles dict" ExportOptions.plist 2>/dev/null || \\
+            /usr/libexec/PlistBuddy -c "Set :provisioningProfiles dict" ExportOptions.plist 2>/dev/null || true
+            /usr/libexec/PlistBuddy -c "Set :provisioningProfiles:${BUNDLE_ID} $PROFILE_NAME" ExportOptions.plist
+          else
+            plutil -insert provisioningProfiles -xml '<dict/>' ExportOptions.plist || true
+            plutil -insert "provisioningProfiles.${BUNDLE_ID}" -string "$PROFILE_NAME" ExportOptions.plist
+          fi
 
           cert_label=""
           if [[ "$METHOD" == "development" ]]; then
