@@ -11,6 +11,14 @@ const VALID_EXTENSIONS = new Set([
   "safetensors",
   "bin",
 ]);
+const ALLOWED_JSON_FILENAMES = new Set([
+  "coreml_artifacts.json",
+  "config.json",
+  "tokenizer.json",
+  "tokenizer_config.json",
+  "generation_config.json",
+  "special_tokens_map.json",
+]);
 
 async function fetchModelMetadata(repoId) {
   const url = `${HF_API_ROOT}/${encodeURIComponent(repoId)}`;
@@ -33,31 +41,14 @@ function buildTargetDir(repoId, targetRoot) {
   return `${targetRoot}/${safeRepo}`;
 }
 
-async function directoryHasArtifacts(dir) {
-  const visited = new Set();
-  let queue = [dir];
-  while (queue.length > 0) {
-    const current = queue.pop();
-    if (!current || visited.has(current)) continue;
-    visited.add(current);
-    let entries;
-    try {
-      entries = await RNFS.readDir(current);
-    } catch {
-      continue;
-    }
-    for (const entry of entries) {
-      if (entry.isFile()) {
-        const ext = entry.name.split(".").pop()?.toLowerCase();
-        if (ext && VALID_EXTENSIONS.has(ext)) {
-          return true;
-        }
-      } else if (entry.isDirectory()) {
-        queue.push(entry.path);
-      }
-    }
-  }
-  return false;
+function isArtifactFile(name) {
+  const lowerName = name.toLowerCase();
+  const ext = lowerName.split(".").pop() ?? "";
+  return (
+    VALID_EXTENSIONS.has(ext) ||
+    ALLOWED_JSON_FILENAMES.has(lowerName) ||
+    lowerName.endsWith("readme.md")
+  );
 }
 
 async function ensureParentDir(path) {
@@ -93,10 +84,6 @@ export async function ensureHuggingFaceRepoDownloaded(
   }
 
   const targetDir = buildTargetDir(repoId, targetRoot);
-  if (await directoryHasArtifacts(targetDir)) {
-    onProgress?.(1);
-    return targetDir;
-  }
 
   const metadata = await fetchModelMetadata(repoId);
   const siblings = metadata?.siblings ?? [];
@@ -104,24 +91,28 @@ export async function ensureHuggingFaceRepoDownloaded(
     .map((s) => s?.rfilename)
     .filter(Boolean)
     // Avoid downloading large training checkpoints; keep to Core ML/weights files.
-    .filter(
-      (name) =>
-        VALID_EXTENSIONS.has(name.split(".").pop()?.toLowerCase() ?? "") ||
-        name.endsWith("coreml_artifacts.json") ||
-        name.endsWith(".json") ||
-        name.toLowerCase().endsWith("readme.md"),
-    );
+    .filter((name) => isArtifactFile(name));
 
   if (!files.length) {
     throw new Error(`No downloadable files found for ${repoId}`);
   }
 
+  for (const file of files) {
+    const dest = `${targetDir}/${file}`;
+    if (await RNFS.exists(dest)) {
+      onProgress?.(1);
+      return targetDir;
+    }
+  }
+
   let completed = 0;
+  let downloadedAnyArtifact = false;
   for (const file of files) {
     const dest = `${targetDir}/${file}`;
     if (await RNFS.exists(dest)) {
       completed += 1;
       onProgress?.(completed / files.length);
+      downloadedAnyArtifact = downloadedAnyArtifact || isArtifactFile(file);
       continue;
     }
     const encoded = file
@@ -132,11 +123,14 @@ export async function ensureHuggingFaceRepoDownloaded(
     await downloadFile(url, dest);
     completed += 1;
     onProgress?.(completed / files.length);
+    downloadedAnyArtifact = downloadedAnyArtifact || isArtifactFile(file);
   }
 
-  if (!(await directoryHasArtifacts(targetDir))) {
+  if (!downloadedAnyArtifact) {
     throw new Error(
-      `Downloaded files for ${repoId} but no Core ML artifacts were detected`,
+      `Downloaded files for ${repoId} but no MLX/Core ML artifacts were detected (supported extensions: .safetensors, .gguf, .mlx, .mlpackage, .mlmodel, .mlmodelc; metadata: ${[
+        ...ALLOWED_JSON_FILENAMES,
+      ].join(", ")})`,
     );
   }
 

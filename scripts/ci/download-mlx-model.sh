@@ -144,7 +144,7 @@ snapshot_download(
 PY
 
 if ! MODEL_FORMAT="$(detect_model_format "$TARGET_DIR")"; then
-  die "Downloaded model at ${TARGET_DIR} does not contain expected MLX or Core ML artifacts (.safetensors/.gguf/.mlx/.mlpackage)"
+  die "Downloaded model at ${TARGET_DIR} does not contain recognizable MLX or Core ML artifacts (supported: .safetensors, .gguf, .mlx, .mlpackage, .mlmodel, .mlmodelc)"
 fi
 
 if [[ "$MODEL_FORMAT" == "coreml" && "$should_validate_pipeline" -eq 1 ]]; then
@@ -152,7 +152,8 @@ if [[ "$MODEL_FORMAT" == "coreml" && "$should_validate_pipeline" -eq 1 ]]; then
   should_validate_pipeline=0
 fi
 
-log "Bundled ${MODEL_FORMAT^^} model ready at ${TARGET_DIR}"
+UPPER_FORMAT="$(printf '%s' "${MODEL_FORMAT}" | tr '[:lower:]' '[:upper:]')"
+log "Bundled ${UPPER_FORMAT} model ready at ${TARGET_DIR}"
 
 if [[ "$should_validate_pipeline" -eq 0 && "${VERIFY_MODEL_PIPELINE:-auto}" != "0" ]]; then
   log "Skipping transformers pipeline warm-up on $(uname -s)/$(uname -m); enable VERIFY_MODEL_PIPELINE=1 on supported hosts."

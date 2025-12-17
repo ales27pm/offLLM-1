@@ -3,7 +3,7 @@ import RNFS from "react-native-fs";
 
 jest.mock("react-native-fs", () => ({
   DocumentDirectoryPath: "/docs",
-  exists: jest.fn().mockResolvedValue(false),
+  exists: jest.fn(),
   mkdir: jest.fn().mockResolvedValue(true),
   readDir: jest.fn(),
   downloadFile: jest.fn().mockImplementation(({ toFile }) => ({
@@ -14,6 +14,7 @@ jest.mock("react-native-fs", () => ({
 describe("ensureHuggingFaceRepoDownloaded", () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    RNFS.exists.mockImplementation(() => Promise.resolve(false));
     let probeCount = 0;
     global.fetch = jest.fn().mockResolvedValue({
       ok: true,
@@ -82,20 +83,17 @@ describe("ensureHuggingFaceRepoDownloaded", () => {
   });
 
   test("short-circuits when artifacts already exist", async () => {
-    RNFS.readDir.mockImplementation(() =>
-      Promise.resolve([
-        {
-          isFile: () => true,
-          isDirectory: () => false,
-          path: "/docs/Models/ales27pm/Dolphin3.0-CoreML/model.mlmodel",
-          name: "model.mlmodel",
-        },
-      ]),
+    RNFS.exists.mockImplementation((path) =>
+      Promise.resolve(
+        path ===
+          "/docs/Models/ales27pm/Dolphin3.0-CoreML/Dolphin3.0-Llama3.2-3B-int8.mlpackage/Data/com.apple.CoreML/model.mlmodel",
+      ),
     );
     const target = await ensureHuggingFaceRepoDownloaded(
       "ales27pm/Dolphin3.0-CoreML",
     );
-    expect(global.fetch).not.toHaveBeenCalled();
+    expect(global.fetch).toHaveBeenCalled();
+    expect(RNFS.downloadFile).not.toHaveBeenCalled();
     expect(target).toBe("/docs/Models/ales27pm/Dolphin3.0-CoreML");
   });
 });
