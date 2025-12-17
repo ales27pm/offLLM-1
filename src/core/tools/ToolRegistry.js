@@ -10,8 +10,7 @@ const createToolRegistry = () => {
   return {
     register(name, tool, category = "general") {
       if (!tool || typeof tool.execute !== "function") {
-        console.warn(`Invalid tool registration attempt: ${name}`);
-        return;
+        throw new Error(`Invalid tool ${name}: missing execute()`);
       }
       tools.set(name, tool);
       if (!toolCategories.has(category)) {
@@ -20,16 +19,23 @@ const createToolRegistry = () => {
       toolCategories.get(category).add(name);
     },
 
+    unregister(name) {
+      toolCategories.forEach((set) => set.delete(name));
+      return tools.delete(name);
+    },
+
     getTool(name) {
       return tools.get(name);
     },
 
-    getAvailableTools() {
-      return Array.from(tools.values()).map((t) => ({
-        name: t.name,
-        description: t.description,
-        parameters: t.parameters,
-      }));
+    getAvailableTools(category) {
+      const names = category
+        ? Array.from(toolCategories.get(category) || [])
+        : Array.from(tools.keys());
+      return names
+        .map((name) => tools.get(name))
+        .filter(Boolean)
+        .sort((a, b) => a.name.localeCompare(b.name));
     },
 
     autoRegister(module) {
@@ -47,7 +53,8 @@ export const toolRegistry = createToolRegistry();
 
 const moduleToUse = Platform.OS === "android" ? androidTools : iosTools;
 toolRegistry.autoRegister(moduleToUse);
-toolRegistry.register("web_search", webSearchTool, "online");
+if (process.env.NODE_ENV !== "test") {
+  toolRegistry.register("web_search", webSearchTool, "online");
+}
 
 export default toolRegistry;
-

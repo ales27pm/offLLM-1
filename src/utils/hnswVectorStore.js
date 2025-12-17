@@ -178,7 +178,9 @@ export class HNSWVectorStore {
         );
         const vector = new Float32Array(new Uint8Array(row.vector).buffer);
         this.nodeMap.set(row.id, { content, metadata, vector: Array.from(vector) });
-      } catch {}
+      } catch (error) {
+        console.warn("Failed to decrypt cached vector", error);
+      }
     });
   }
 
@@ -306,6 +308,11 @@ export class HNSWVectorStore {
       .map((x) => x.value);
   }
 
+  async _searchLayer(queryVector, entryId, layer, ef) {
+    if (!this.nodeMap.has(entryId)) return [];
+    return this._searchLayerEF(queryVector, entryId, layer, ef);
+  }
+
   _selectNeighbors(qv, candidateIds, M) {
     const scored = [];
     for (const id of candidateIds) {
@@ -389,4 +396,3 @@ export class HNSWVectorStore {
     );
   }
 }
-

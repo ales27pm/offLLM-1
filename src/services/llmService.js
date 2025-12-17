@@ -149,7 +149,8 @@ class LLMService {
       if (!this.isWeb && this.nativeModule?.clearKVCache) await this.nativeModule.clearKVCache();
       this.kvCache = { tokens: [], size: 0, maxSize: 512 };
       return true;
-    } catch (e) {
+    } catch (error) {
+      console.error("Failed to clear KV cache", error);
       return false;
     }
   }
@@ -162,4 +163,3 @@ class LLMService {
 }
 
 export default new LLMService();
-
