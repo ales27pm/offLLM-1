@@ -8,6 +8,9 @@ on:
 jobs:
   deploy-testflight:
     runs-on: macos-15
+    timeout-minutes: 60
+    permissions:
+      contents: read
 
     env:
       APP_NAME: offLLM
@@ -29,51 +32,59 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
-      - name: Select Xcode 16.4
+      - name: 🧰 Select Xcode 16.4
         run: |
+          set -euo pipefail
           sudo xcode-select -s /Applications/Xcode_16.4.app/Contents/Developer
           xcodebuild -version
 
-      - name: Install tooling
+      - name: 🍺 Install tooling
         run: |
+          set -euo pipefail
           brew update
           brew install xcodegen
           command -v xcpretty >/dev/null 2>&1 || sudo gem install xcpretty --no-document
           command -v pod >/dev/null 2>&1 || sudo gem install cocoapods --no-document
           pod --version
+          xcodegen --version
 
-      - name: Validate Base64 secrets
+      - name: ✅ Validate Base64 secrets (no prints)
         run: |
           set -euo pipefail
-
           missing=0
           for var in IOS_P12_BASE64 IOS_P12_PASSWORD IOS_PROVISIONING_PROFILE_BASE64 ASC_KEY_ID ASC_ISSUER_ID ASC_PRIVATE_KEY_BASE64; do
-            if [ -z "${!var:-}" ]; then
-              echo "::error::Missing $var"
-              missing=1
-            fi
+            if [ -z "${!var:-}" ]; then echo "::error::Missing $var"; missing=1; fi
           done
           [ "$missing" -eq 0 ] || exit 1
 
           clean_b64() { printf '%s' "$1" | tr -d '\n\r\t ' ; }
-
           b64_decode_to() {
             local in="$1"; local out="$2"
-            # macOS decoder
-            printf '%s' "$in" | base64 -D > "$out"
+            if base64 -D </dev/null >/dev/null 2>&1; then printf '%s' "$in" | base64 -D > "$out"
+            else printf '%s' "$in" | base64 --decode > "$out"
+            fi
           }
 
-          mkdir -p "$RUNNER_TEMP/b64check"
-          b64_decode_to "$(clean_b64 "$IOS_P12_BASE64")" "$RUNNER_TEMP/b64check/cert.p12"
-          b64_decode_to "$(clean_b64 "$ASC_PRIVATE_KEY_BASE64")" "$RUNNER_TEMP/b64check/key.p8"
-          b64_decode_to "$(clean_b64 "$IOS_PROVISIONING_PROFILE_BASE64")" "$RUNNER_TEMP/b64check/profile.mobileprovision"
+          tmp="$RUNNER_TEMP/b64check"
+          mkdir -p "$tmp"
+          b64_decode_to "$(clean_b64 "$IOS_P12_BASE64")" "$tmp/cert.p12" || { echo "::error::IOS_P12_BASE64 invalid"; exit 1; }
+          b64_decode_to "$(clean_b64 "$ASC_PRIVATE_KEY_BASE64")" "$tmp/key.p8" || { echo "::error::ASC_PRIVATE_KEY_BASE64 invalid"; exit 1; }
+          b64_decode_to "$(clean_b64 "$IOS_PROVISIONING_PROFILE_BASE64")" "$tmp/profile.mobileprovision" || { echo "::error::IOS_PROVISIONING_PROFILE_BASE64 invalid"; exit 1; }
+          security cms -D -i "$tmp/profile.mobileprovision" >/dev/null || { echo "::error::Invalid .mobileprovision"; exit 1; }
 
-          security cms -D -i "$RUNNER_TEMP/b64check/profile.mobileprovision" >/dev/null
-
-      - name: Create and unlock keychain
+      - name: 🔐 Setup keychain + import cert
         run: |
           set -euo pipefail
+          clean_b64() { printf '%s' "$1" | tr -d '\n\r\t ' ; }
+          b64_decode_to() {
+            local in="$1"; local out="$2"
+            if base64 -D </dev/null >/dev/null 2>&1; then printf '%s' "$in" | base64 -D > "$out"
+            else printf '%s' "$in" | base64 --decode > "$out"
+            fi
+          }
 
           KEYCHAIN="$RUNNER_TEMP/build.keychain-db"
           KEYPASS="$(openssl rand -hex 12)"
@@ -82,96 +93,133 @@ jobs:
           security set-keychain-settings -lut 21600 "$KEYCHAIN"
           security unlock-keychain -p "$KEYPASS" "$KEYCHAIN"
 
+          CERT_P12="$RUNNER_TEMP/cert.p12"
+          b64_decode_to "$(clean_b64 "$IOS_P12_BASE64")" "$CERT_P12"
+
+          security import "$CERT_P12" -k "$KEYCHAIN" -P "$IOS_P12_PASSWORD" -T /usr/bin/codesign -T /usr/bin/security
+
+          security list-keychains -d user -s "$KEYCHAIN" $(security list-keychains -d user | tr -d '"')
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYPASS" "$KEYCHAIN"
+
           echo "KEYCHAIN_PATH=$KEYCHAIN" >> "$GITHUB_ENV"
           echo "KEYCHAIN_PASSWORD=$KEYPASS" >> "$GITHUB_ENV"
+          security find-identity -v -p codesigning "$KEYCHAIN" || true
 
-      - name: Import signing certificate
+      - name: 🪪 Install provisioning profile
         run: |
           set -euo pipefail
+          clean_b64() { printf '%s' "$1" | tr -d '\n\r\t ' ; }
+          b64_decode_to() {
+            local in="$1"; local out="$2"
+            if base64 -D </dev/null >/dev/null 2>&1; then printf '%s' "$in" | base64 -D > "$out"
+            else printf '%s' "$in" | base64 --decode > "$out"
+            fi
+          }
 
-          printf '%s' "$IOS_P12_BASE64" | tr -d '\n\r\t ' | base64 -D > "$RUNNER_TEMP/cert.p12"
+          OUT="$RUNNER_TEMP/app.mobileprovision"
+          b64_decode_to "$(clean_b64 "$IOS_PROVISIONING_PROFILE_BASE64")" "$OUT"
 
-          security import "$RUNNER_TEMP/cert.p12" \
-            -k "$KEYCHAIN_PATH" \
-            -P "$IOS_P12_PASSWORD" \
-            -T /usr/bin/codesign \
-            -T /usr/bin/security
+          security cms -D -i "$OUT" > "$RUNNER_TEMP/app.mobileprovision.plist"
+          UUID=$(/usr/libexec/PlistBuddy -c "Print:UUID" "$RUNNER_TEMP/app.mobileprovision.plist")
 
-          security list-keychains -d user -s "$KEYCHAIN_PATH" $(security list-keychains -d user | tr -d '"')
-          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
-          security find-identity -v -p codesigning "$KEYCHAIN_PATH"
-
-      - name: Install provisioning profile
-        run: |
-          set -euo pipefail
-
-          PROFILE_PATH="$RUNNER_TEMP/profile.mobileprovision"
-          printf '%s' "$IOS_PROVISIONING_PROFILE_BASE64" | tr -d '\n\r\t ' | base64 -D > "$PROFILE_PATH"
-
-          PLIST="$RUNNER_TEMP/profile.plist"
-          security cms -D -i "$PROFILE_PATH" > "$PLIST"
-
-          UUID=$(/usr/libexec/PlistBuddy -c "Print:UUID" "$PLIST")
           mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
-          mv "$PROFILE_PATH" "$HOME/Library/MobileDevice/Provisioning Profiles/$UUID.mobileprovision"
+          mv "$OUT" "$HOME/Library/MobileDevice/Provisioning Profiles/$UUID.mobileprovision"
 
           echo "PROFILE_UUID=$UUID" >> "$GITHUB_ENV"
 
-      - name: Generate Xcode project & install pods
+      - name: 🧼 Purge Xcode caches (fixes RCTDeprecation pcm/modulemap mismatch)
+        run: |
+          set -euo pipefail
+          rm -rf "$HOME/Library/Developer/Xcode/DerivedData"/*
+          rm -rf "$HOME/Library/Developer/Xcode/ModuleCache.noindex" || true
+          rm -rf "$HOME/Library/Developer/Xcode/DerivedData/ModuleCache.noindex" || true
+
+      - name: 🧱 Generate Xcode project + install pods (INSIDE ios/)
         working-directory: ios
         run: |
           set -euo pipefail
           xcodegen generate
           pod install --repo-update --verbose
 
-      - name: Build & archive
+      - name: 🔎 Detect signing identity
         run: |
           set -euo pipefail
+          IDENTITY_LINE="$(security find-identity -v -p codesigning "$KEYCHAIN_PATH" | grep -E 'Apple Distribution|iPhone Distribution|Apple Development|iPhone Developer' | head -n 1 || true)"
+          if [ -z "$IDENTITY_LINE" ]; then
+            echo "::error::No code signing identity found in keychain."
+            security find-identity -v -p codesigning "$KEYCHAIN_PATH" || true
+            exit 1
+          fi
+          SIGNING_IDENTITY="$(printf '%s' "$IDENTITY_LINE" | sed -n 's/.*"\(.*\)".*/\1/p')"
+          echo "SIGNING_IDENTITY=$SIGNING_IDENTITY" >> "$GITHUB_ENV"
+          echo "Using signing identity: $SIGNING_IDENTITY"
 
-          xcodebuild \
+      - name: 🏗️ Archive
+        run: |
+          set -o pipefail
+          mkdir -p build/logs
+
+          xcodebuild archive \
             -workspace "$WORKSPACE" \
             -scheme "$SCHEME" \
             -configuration "$CONFIGURATION" \
-            -archivePath "$RUNNER_TEMP/$SCHEME.xcarchive" \
-            -destination generic/platform=iOS \
+            -destination "generic/platform=iOS" \
+            -archivePath "$RUNNER_TEMP/${APP_NAME}.xcarchive" \
+            PRODUCT_BUNDLE_IDENTIFIER="$BUNDLE_ID" \
             DEVELOPMENT_TEAM="$TEAM_ID" \
-            PROVISIONING_PROFILE_SPECIFIER="$PROFILE_UUID" \
             CODE_SIGN_STYLE=Manual \
-            archive | xcpretty
+            CODE_SIGNING_ALLOWED=YES \
+            CODE_SIGNING_REQUIRED=YES \
+            CODE_SIGN_IDENTITY="$SIGNING_IDENTITY" \
+            | tee build/logs/archive.log | xcpretty
 
-      - name: Export IPA
+          echo "ARCHIVE_PATH=$RUNNER_TEMP/${APP_NAME}.xcarchive" >> "$GITHUB_ENV"
+
+      - name: 🧾 Write ExportOptions.plist
+        working-directory: ios
         run: |
           set -euo pipefail
-
-          cat > "$RUNNER_TEMP/exportOptions.plist" <<EOF
+          cat > ExportOptions.plist <<EOF
           <?xml version="1.0" encoding="UTF-8"?>
-          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-          "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0">
-          <dict>
-            <key>method</key><string>app-store</string>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0"><dict>
+            <key>method</key><string>${EXPORT_METHOD}</string>
+            <key>teamID</key><string>${TEAM_ID}</string>
             <key>signingStyle</key><string>manual</string>
-            <key>teamID</key><string>$TEAM_ID</string>
-            <key>uploadBitcode</key><false/>
+            <key>stripSwiftSymbols</key><true/>
             <key>uploadSymbols</key><true/>
-          </dict>
-          </plist>
+          </dict></plist>
           EOF
 
+      - name: 📦 Export IPA
+        run: |
+          set -o pipefail
           xcodebuild -exportArchive \
-            -archivePath "$RUNNER_TEMP/$SCHEME.xcarchive" \
-            -exportPath "$RUNNER_TEMP/export" \
-            -exportOptionsPlist "$RUNNER_TEMP/exportOptions.plist"
+            -archivePath "$ARCHIVE_PATH" \
+            -exportPath build/output \
+            -exportOptionsPlist ios/ExportOptions.plist \
+            | tee build/logs/export.log | xcpretty
 
-      - name: Upload to TestFlight
+          IPA=$(find build/output -name '*.ipa' -print -quit)
+          if [ -z "$IPA" ]; then
+            echo "::error::No IPA produced."
+            exit 1
+          fi
+          echo "IPA_PATH=$IPA" >> "$GITHUB_ENV"
+
+      - name: 🚀 Upload to TestFlight
         run: |
           set -euo pipefail
-
-          printf '%s' "$ASC_PRIVATE_KEY_BASE64" | tr -d '\n\r\t ' | base64 -D > "$RUNNER_TEMP/AuthKey.p8"
+          echo "$ASC_PRIVATE_KEY_BASE64" | tr -d '\n\r\t ' | base64 --decode > "$RUNNER_TEMP/AuthKey.p8"
 
           xcrun altool \
             --upload-app \
-            -f "$RUNNER_TEMP/export/$SCHEME.ipa" \
+            -f "$IPA_PATH" \
             -t ios \
             --apiKey "$ASC_KEY_ID" \
             --apiIssuer "$ASC_ISSUER_ID"
+
+      - if: always()
+        name: 🧹 Cleanup keychain
+        run: |
+          security delete-keychain "$KEYCHAIN_PATH" || true
