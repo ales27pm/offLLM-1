@@ -166,6 +166,20 @@ jobs:
           EOF
           cat ExportOptions.plist
 
+      - name: 🔍 Detect signing identity
+        run: |
+          set -euo pipefail
+          KEYCHAIN_ARG=()
+          if [[ -n "${KEYCHAIN_PATH:-}" && -f "$KEYCHAIN_PATH" ]]; then
+            KEYCHAIN_ARG=("$KEYCHAIN_PATH")
+          fi
+          ID=$(security find-identity -v -p codesigning "${KEYCHAIN_ARG[@]}" | grep "Apple Distribution" | head -n 1 | sed -n 's/.*"\(.*\)".*/\1/p')
+          if [[ -z "${ID:-}" ]]; then
+            echo "::error::No signing identity found in ${KEYCHAIN_PATH:-default keychain}" >&2
+            exit 1
+          fi
+          echo "SIGNING_IDENTITY=$ID" >> "$GITHUB_ENV"
+
       - name: 🏗️ Archive
         shell: bash
         run: |
@@ -204,7 +218,7 @@ jobs:
             CODE_SIGNING_REQUIRED=YES \
             "${CODE_SIGN_ARGS[@]}" \
             | tee "$ARCHIVE_LOG" \
-            | xcpretty --color auto
+            | xcpretty --color
           build_status=${PIPESTATUS[0]}
           set -euo pipefail
           if [ "$build_status" -ne 0 ]; then
