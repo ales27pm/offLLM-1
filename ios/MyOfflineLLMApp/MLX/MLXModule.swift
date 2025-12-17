@@ -167,7 +167,7 @@ final class MLXModule: NSObject {
         let id = modelID as String? ?? "mlx-community/Llama-3.2-3B-Instruct-4bit"
         let callbacks = PromiseCallbacks(resolve: resolve, reject: reject)
         let actor = modelActor
-        Task(priority: .userInitiated) {
+        Task.detached(priority: .userInitiated) {
             do {
                 let name = try await actor.load(
                     configuration: ModelConfiguration(id: id)
@@ -193,7 +193,7 @@ final class MLXModule: NSObject {
         let params = makeParams(options: options)
         let callbacks = PromiseCallbacks(resolve: resolve, reject: reject)
         let actor = modelActor
-        Task(priority: .userInitiated) {
+        Task.detached(priority: .userInitiated) {
             do {
                 let text = try await actor.generate(
                     prompt: prompt as String,
@@ -220,7 +220,7 @@ final class MLXModule: NSObject {
         let params = makeParams(options: options)
         let callbacks = PromiseCallbacks(resolve: resolve, reject: reject)
         let actor = modelActor
-        Task(priority: .userInitiated) {
+        Task.detached(priority: .userInitiated) {
             await MainActor.run {
                 callbacks.resolve(nil)
             }
@@ -247,7 +247,7 @@ final class MLXModule: NSObject {
     @objc(unload)
     func unload() {
         let actor = modelActor
-        Task(priority: .utility) {
+        Task.detached(priority: .utility) {
             await actor.unload()
         }
     }
