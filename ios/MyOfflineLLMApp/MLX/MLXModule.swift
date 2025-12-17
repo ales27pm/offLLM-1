@@ -3,6 +3,11 @@ import React
 @preconcurrency import MLXLLM
 @preconcurrency import MLXLMCommon
 
+private struct PromiseCallbacks: @unchecked Sendable {
+    let resolve: RCTPromiseResolveBlock
+    let reject: RCTPromiseRejectBlock
+}
+
 actor ModelActor {
     private var container: ModelContainer?
     private var isResponding = false
@@ -92,7 +97,7 @@ actor ModelActor {
         isResponding = true
         defer { isResponding = false }
 
-        try await container.perform { context in
+        _ = try await container.perform { context in
             let input = try await context.processor.prepare(
                 input: .init(prompt: prompt)
             )
@@ -160,14 +165,20 @@ final class MLXModule: NSObject {
         reject: @escaping RCTPromiseRejectBlock
     ) {
         let id = modelID as String? ?? "mlx-community/Llama-3.2-3B-Instruct-4bit"
-        Task {
+        let callbacks = PromiseCallbacks(resolve: resolve, reject: reject)
+        let actor = modelActor
+        Task.detached(priority: .userInitiated) {
             do {
-                let name = try await modelActor.load(
+                let name = try await actor.load(
                     configuration: ModelConfiguration(id: id)
                 )
-                resolve(["id": name, "status": "loaded"])
+                await MainActor.run {
+                    callbacks.resolve(["id": name, "status": "loaded"])
+                }
             } catch {
-                reject("LOAD_FAIL", error.localizedDescription, error)
+                await MainActor.run {
+                    callbacks.reject("LOAD_FAIL", error.localizedDescription, error)
+                }
             }
         }
     }
@@ -180,15 +191,21 @@ final class MLXModule: NSObject {
         reject: @escaping RCTPromiseRejectBlock
     ) {
         let params = makeParams(options: options)
-        Task {
+        let callbacks = PromiseCallbacks(resolve: resolve, reject: reject)
+        let actor = modelActor
+        Task.detached(priority: .userInitiated) {
             do {
-                let text = try await modelActor.generate(
+                let text = try await actor.generate(
                     prompt: prompt as String,
                     parameters: params
                 )
-                resolve(text)
+                await MainActor.run {
+                    callbacks.resolve(text)
+                }
             } catch {
-                reject("GEN_FAIL", error.localizedDescription, error)
+                await MainActor.run {
+                    callbacks.reject("GEN_FAIL", error.localizedDescription, error)
+                }
             }
         }
     }
@@ -201,10 +218,14 @@ final class MLXModule: NSObject {
         reject: @escaping RCTPromiseRejectBlock
     ) {
         let params = makeParams(options: options)
-        Task {
-            resolve(nil)
+        let callbacks = PromiseCallbacks(resolve: resolve, reject: reject)
+        let actor = modelActor
+        Task.detached(priority: .userInitiated) {
+            await MainActor.run {
+                callbacks.resolve(nil)
+            }
             do {
-                try await modelActor.generateStream(
+                try await actor.generateStream(
                     prompt: prompt as String,
                     parameters: params
                 )
@@ -212,10 +233,11 @@ final class MLXModule: NSObject {
                     MLXEvents.shared?.emitCompleted()
                 }
             } catch {
-                Task { @MainActor in
-                    MLXEvents.shared?.emitError(
+                await MainActor.run {
+                    callbacks.reject(
                         "STREAM_FAIL",
-                        message: error.localizedDescription
+                        error.localizedDescription,
+                        error
                     )
                 }
             }
@@ -224,7 +246,10 @@ final class MLXModule: NSObject {
 
     @objc(unload)
     func unload() {
-        Task { await modelActor.unload() }
+        let actor = modelActor
+        Task.detached(priority: .utility) {
+            await actor.unload()
+        }
     }
 
     @objc(reset)
