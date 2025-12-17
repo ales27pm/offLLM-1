@@ -109,6 +109,12 @@ jobs:
           pod repo update
           pod install --verbose
 
+      - name: Ensure RCTDeprecation modulemap
+        working-directory: ${{ env.WORKING_DIR }}
+        run: |
+          set -euo pipefail
+          bash scripts/ensure-rctdeprecation-legacy.sh
+
       - name: (Optional) Pre-archive prep
         run: |
           bash scripts/ci/prep-ios-unsigned-archive.sh || true
@@ -282,13 +288,30 @@ jobs:
             plutil -insert teamID -string "$TEAM_ID" ExportOptions.plist
           fi
 
+          inserted_profile=0
+
           if [[ -x /usr/libexec/PlistBuddy ]]; then
-            /usr/libexec/PlistBuddy -c "Add :provisioningProfiles dict" ExportOptions.plist 2>/dev/null || true
-            /usr/libexec/PlistBuddy -c "Add :provisioningProfiles:${BUNDLE_ID} string $PROFILE_NAME" ExportOptions.plist 2>/dev/null || \
-            /usr/libexec/PlistBuddy -c "Set :provisioningProfiles:${BUNDLE_ID} $PROFILE_NAME" ExportOptions.plist
-          else
-            plutil -insert provisioningProfiles -xml '<dict/>' ExportOptions.plist || true
-            plutil -insert "provisioningProfiles.${BUNDLE_ID}" -string "$PROFILE_NAME" ExportOptions.plist
+            if /usr/libexec/PlistBuddy -c "Delete :provisioningProfiles" ExportOptions.plist 2>/dev/null; then
+              :
+            fi
+
+            if /usr/libexec/PlistBuddy -c "Add :provisioningProfiles dict" ExportOptions.plist 2>/dev/null; then
+              if /usr/libexec/PlistBuddy -c "Add :provisioningProfiles:${BUNDLE_ID} string $PROFILE_NAME" ExportOptions.plist 2>/dev/null; then
+                inserted_profile=1
+              elif /usr/libexec/PlistBuddy -c "Set :provisioningProfiles:${BUNDLE_ID} $PROFILE_NAME" ExportOptions.plist 2>/dev/null; then
+                inserted_profile=1
+              fi
+            fi
+
+            if [[ $inserted_profile -eq 0 ]]; then
+              echo "::warning ::PlistBuddy could not set provisioningProfiles; retrying with plutil" >&2
+            fi
+          fi
+
+          if [[ $inserted_profile -eq 0 ]]; then
+            plutil -remove provisioningProfiles ExportOptions.plist 2>/dev/null || true
+            plutil -insert provisioningProfiles -xml '<dict/>' ExportOptions.plist
+            plutil -replace "provisioningProfiles.${BUNDLE_ID}" -string "$PROFILE_NAME" ExportOptions.plist
           fi
 
           cert_label=""
