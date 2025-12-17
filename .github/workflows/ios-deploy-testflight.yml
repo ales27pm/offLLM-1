@@ -60,7 +60,6 @@ jobs:
             fi
           }
 
-          # Decode checks without printing secrets
           tmp="$RUNNER_TEMP/b64check"
           mkdir -p "$tmp"
           b64_decode_to "$(clean_b64 "$IOS_P12_BASE64")" "$tmp/cert.p12" || { echo "::error::IOS_P12_BASE64 invalid"; exit 1; }
@@ -125,7 +124,7 @@ jobs:
           echo "Available code signing identities (sanity):"
           security find-identity -v -p codesigning "$KEYCHAIN" || true
 
-      - name: 🪪 Install Provisioning Profile
+      - name: 🪪 Install Provisioning Profile (UUID + NAME)
         env:
           PROFILE_B64: ${{ secrets.IOS_PROVISIONING_PROFILE_BASE64 }}
         run: |
@@ -146,15 +145,28 @@ jobs:
           b64_decode_to "$(clean_b64 "$PROFILE_B64")" "$OUT"
 
           security cms -D -i "$OUT" > "$RUNNER_TEMP/app.mobileprovision.plist"
+
           UUID=$(/usr/libexec/PlistBuddy -c "Print:UUID" "$RUNNER_TEMP/app.mobileprovision.plist")
+          NAME=$(/usr/libexec/PlistBuddy -c "Print:Name" "$RUNNER_TEMP/app.mobileprovision.plist")
 
           if [[ -z "$UUID" || ! "$UUID" =~ ^[A-Fa-f0-9-]{36}$ ]]; then
             echo "::error::Failed to extract UUID from provisioning profile."
             exit 1
           fi
 
+          if [[ -z "$NAME" ]]; then
+            echo "::error::Failed to extract Name from provisioning profile."
+            exit 1
+          fi
+
           mv "$OUT" "$HOME/Library/MobileDevice/Provisioning Profiles/$UUID.mobileprovision"
+
           echo "PROFILE_UUID=$UUID" >> "$GITHUB_ENV"
+          echo "PROFILE_NAME=$NAME" >> "$GITHUB_ENV"
+
+          echo "Provisioning profile installed:"
+          echo "  UUID=$UUID"
+          echo "  NAME=$NAME"
 
       - name: 🧱 Generate Xcode project + install pods
         working-directory: ios
@@ -192,14 +204,12 @@ jobs:
       - name: 🔎 Detect signing identity (prevents “empty code signing identity”)
         run: |
           set -euo pipefail
-          # Prefer Apple Distribution, fall back to any codesigning identity in the keychain
           IDENTITY_LINE="$(security find-identity -v -p codesigning "$KEYCHAIN_PATH" | grep -E 'Apple Distribution|iPhone Distribution|Apple Development|iPhone Developer' | head -n 1 || true)"
           if [ -z "$IDENTITY_LINE" ]; then
             echo "::error::No code signing identity found in keychain."
             security find-identity -v -p codesigning "$KEYCHAIN_PATH" || true
             exit 1
           fi
-          # Parse the quoted name at end of line: 1) <hash> "NAME"
           SIGNING_IDENTITY="$(printf '%s' "$IDENTITY_LINE" | sed -n 's/.*"\(.*\)".*/\1/p')"
           if [ -z "$SIGNING_IDENTITY" ]; then
             echo "::error::Failed to parse signing identity."
@@ -209,7 +219,7 @@ jobs:
           echo "SIGNING_IDENTITY=$SIGNING_IDENTITY" >> "$GITHUB_ENV"
           echo "Using signing identity: $SIGNING_IDENTITY"
 
-      - name: 🏗️ Archive
+      - name: 🏗️ Archive (manual signing + profile specifier)
         run: |
           set -o pipefail
           mkdir -p build/logs
@@ -226,6 +236,7 @@ jobs:
             CODE_SIGNING_ALLOWED=YES \
             CODE_SIGNING_REQUIRED=YES \
             CODE_SIGN_IDENTITY="$SIGNING_IDENTITY" \
+            PROVISIONING_PROFILE_SPECIFIER="$PROFILE_NAME" \
             | tee build/logs/archive.log | xcpretty
 
           echo "ARCHIVE_PATH=$RUNNER_TEMP/${APP_NAME}.xcarchive" >> "$GITHUB_ENV"
