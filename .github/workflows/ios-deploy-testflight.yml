@@ -17,7 +17,6 @@ on:
 
 env:
   APP_NAME: offLLM
-  # Can be overwritten automatically after scheme detection.
   SCHEME: monGARS
   BUNDLE_ID: com.offllm.mongars
   WORKSPACE: ios/monGARS.xcworkspace
@@ -174,210 +173,210 @@ jobs:
         working-directory: ios
         run: |
           set -euo pipefail
-
           xcodegen generate
           pod install --verbose
 
           if [ ! -d "monGARS.xcworkspace" ]; then
             echo "::error::Expected monGARS.xcworkspace to exist after pod install."
+            ls -la
             exit 1
           fi
 
-      - name: Ensure shared app scheme exists
-        run: |
-          set -euo pipefail
-
-          project_path=""
-          if [[ -n "${WORKSPACE:-}" && "$WORKSPACE" == *.xcodeproj && -d "$WORKSPACE" ]]; then
-            project_path="$WORKSPACE"
-          elif [[ -n "${WORKSPACE:-}" && "$WORKSPACE" == *.xcworkspace ]]; then
-            project_path="$(find "$(dirname "$WORKSPACE")" -maxdepth 1 -type d -name "*.xcodeproj" | head -n 1)"
-          fi
-
-          if [[ -z "$project_path" || ! -d "$project_path" ]]; then
-            project_path="$(find "${WORKING_DIR:-ios}" -maxdepth 1 -type d -name "*.xcodeproj" | head -n 1)"
-          fi
-
-          if [[ -z "$project_path" || ! -d "$project_path" ]]; then
-            echo "::error::Unable to locate .xcodeproj to create a shared scheme."
-            exit 1
-          fi
-
-          target_name="${SCHEME:-monGARS}"
-          pbxproj="${project_path}/project.pbxproj"
-          if [[ ! -f "$pbxproj" ]]; then
-            echo "::error::project.pbxproj not found at $pbxproj"
-            exit 1
-          fi
-
-          target_id=$(python3 - "$pbxproj" "$target_name" -c "import re, sys, pathlib; pbx=pathlib.Path(sys.argv[1]); tgt=sys.argv[2]; data=pbx.read_text(encoding='utf-8', errors='ignore'); m=re.search(r'([A-F0-9]{24}) /\* ' + re.escape(tgt) + r' \*/ = \\\\{isa = PBXNativeTarget;', data); sys.exit(1) if not m else print(m.group(1))") || {
-            echo "::error::Failed to find PBXNativeTarget for $target_name in $pbxproj"
-            exit 1
-          }
-
-          scheme_dir="${project_path}/xcshareddata/xcschemes"
-          mkdir -p "$scheme_dir"
-          scheme_path="${scheme_dir}/${target_name}.xcscheme"
-
-          cat >"$scheme_path" <<EOF
-            <?xml version="1.0" encoding="UTF-8"?>
-            <Scheme
-               LastUpgradeVersion = "1600"
-               version = "1.3">
-               <BuildAction
-                  parallelizeBuildables = "YES"
-                  buildImplicitDependencies = "YES">
-                  <BuildActionEntries>
-                     <BuildActionEntry
-                        buildForTesting = "YES"
-                        buildForRunning = "YES"
-                        buildForProfiling = "YES"
-                        buildForArchiving = "YES"
-                        buildForAnalyzing = "YES">
-                        <BuildableReference
-                           BuildableIdentifier = "primary"
-                           BlueprintIdentifier = "${target_id}"
-                           BuildableName = "${target_name}.app"
-                           BlueprintName = "${target_name}"
-                           ReferencedContainer = "container:$(basename "$project_path")">
-                        </BuildableReference>
-                     </BuildActionEntry>
-                  </BuildActionEntries>
-               </BuildAction>
-               <TestAction
-                  buildConfiguration = "Debug"
-                  selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-                  selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-                  shouldUseLaunchSchemeArgsEnv = "YES">
-                  <Testables>
-                  </Testables>
-               </TestAction>
-               <LaunchAction
-                  buildConfiguration = "Debug"
-                  selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-                  selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-                  launchStyle = "0"
-                  useCustomWorkingDirectory = "NO"
-                  ignoresPersistentStateOnLaunch = "NO"
-                  debugDocumentVersioning = "YES"
-                  debugServiceExtension = "internal"
-                  allowLocationSimulation = "YES">
-                  <BuildableProductRunnable
-                     runnableDebuggingMode = "0">
-                     <BuildableReference
-                        BuildableIdentifier = "primary"
-                        BlueprintIdentifier = "${target_id}"
-                        BuildableName = "${target_name}.app"
-                        BlueprintName = "${target_name}"
-                        ReferencedContainer = "container:$(basename "$project_path")">
-                     </BuildableReference>
-                  </BuildableProductRunnable>
-               </LaunchAction>
-               <ProfileAction
-                  buildConfiguration = "Release"
-                  shouldUseLaunchSchemeArgsEnv = "YES"
-                  savedToolIdentifier = ""
-                  useCustomWorkingDirectory = "NO"
-                  debugDocumentVersioning = "YES">
-                  <BuildableProductRunnable
-                     runnableDebuggingMode = "0">
-                     <BuildableReference
-                        BuildableIdentifier = "primary"
-                        BlueprintIdentifier = "${target_id}"
-                        BuildableName = "${target_name}.app"
-                        BlueprintName = "${target_name}"
-                        ReferencedContainer = "container:$(basename "$project_path")">
-                     </BuildableReference>
-                  </BuildableProductRunnable>
-               </ProfileAction>
-               <AnalyzeAction
-                  buildConfiguration = "Debug">
-               </AnalyzeAction>
-               <ArchiveAction
-                  buildConfiguration = "Release"
-                  revealArchiveInOrganizer = "YES">
-               </ArchiveAction>
-            </Scheme>
-          EOF
-
-          echo "Shared scheme written to: $scheme_path"
-          ls -l "$scheme_path"
-
-      - name: 🔎 Preflight Xcode layout
-        run: |
-          set -euo pipefail
-
-          echo "Workspace expectation: ${WORKSPACE:-unset}"
-          ls -la ios | sed -n '1,200p'
-
-          echo "::group::xcodebuild -list (workspace)"
-          xcodebuild -list -workspace ios/monGARS.xcworkspace || true
-          echo "::endgroup::"
-
-          echo "::group::xcodebuild -list (project)"
-          xcodebuild -list -project ios/monGARS.xcodeproj || true
-          echo "::endgroup::"
-
-          echo "::group::find .xcscheme files"
-          find ios -maxdepth 4 -name "*.xcscheme" -print
-          echo "::endgroup::"
-
-      - name: 🧪 List all app schemes + bundle identifiers
-        run: |
-          set -euo pipefail
-
-          echo "Workspace expectation: ${WORKSPACE:-unset}"
-          ls -la ios | sed -n '1,200p'
-
-          echo "::group::xcodebuild -list (workspace)"
-          xcodebuild -list -workspace ios/monGARS.xcworkspace || true
-          echo "::endgroup::"
-
-          echo "::group::xcodebuild -list (project)"
-          xcodebuild -list -project ios/monGARS.xcodeproj || true
-          echo "::endgroup::"
-
-          echo "::group::find .xcscheme files"
-          find ios -maxdepth 4 -name "*.xcscheme" -print
-          echo "::endgroup::"
-
-      - name: 🧪 Verify workspace + schemes (hard gate)
+      - name: 🧩 Ensure shared scheme exists AND supports ArchiveAction
         run: |
           set -euo pipefail
 
           echo "WORKSPACE=$WORKSPACE"
-          test -d "$WORKSPACE" || { echo "::error::Workspace missing: $WORKSPACE"; exit 1; }
+          echo "SCHEME=$SCHEME"
+
+          # Find the *real* app project (NOT Pods) that contains PBXNativeTarget named $SCHEME.
+          project_path="$(python3 - <<'PY'
+import os, re, pathlib, sys
+
+ios = pathlib.Path("ios")
+target = os.environ.get("SCHEME","").strip()
+if not target:
+    print("")
+    sys.exit(0)
+
+candidates = []
+for proj in ios.glob("*.xcodeproj"):
+    if proj.name == "Pods.xcodeproj":
+        continue
+    pbx = proj / "project.pbxproj"
+    if not pbx.exists():
+        continue
+    txt = pbx.read_text(encoding="utf-8", errors="ignore")
+    # Match "/* monGARS */ = {isa = PBXNativeTarget;"
+    if re.search(r"/\*\s*%s\s*\*/\s*=\s*\{isa\s*=\s*PBXNativeTarget;" % re.escape(target), txt):
+        candidates.append(proj)
+
+if not candidates:
+    print("")
+    sys.exit(0)
+
+# Prefer monGARS.xcodeproj if it exists, else first match.
+preferred = ios / "monGARS.xcodeproj"
+if preferred in candidates:
+    print(str(preferred))
+else:
+    print(str(candidates[0]))
+PY
+)"
+
+          if [[ -z "$project_path" || ! -d "$project_path" ]]; then
+            echo "::error::Could not find an .xcodeproj containing PBXNativeTarget '$SCHEME' (excluding Pods)."
+            echo "::group::Projects seen"
+            find ios -maxdepth 1 -type d -name "*.xcodeproj" -print || true
+            echo "::endgroup::"
+            exit 1
+          fi
+
+          echo "::notice::Using project: $project_path"
+
+          pbxproj="${project_path}/project.pbxproj"
+          scheme_dir="${project_path}/xcshareddata/xcschemes"
+          mkdir -p "$scheme_dir"
+          scheme_path="${scheme_dir}/${SCHEME}.xcscheme"
+
+          # Extract target ID from pbxproj
+          target_id="$(python3 - <<'PY'
+import os, re, pathlib, sys
+pbx = pathlib.Path(os.environ["PBX"])
+tgt = os.environ["TGT"]
+txt = pbx.read_text(encoding="utf-8", errors="ignore")
+m = re.search(r"([A-F0-9]{24}) /\* %s \*/ = \{isa = PBXNativeTarget;" % re.escape(tgt), txt)
+if not m:
+    print("")
+    sys.exit(1)
+print(m.group(1))
+PY
+)" || true
+
+          if [[ -z "$target_id" ]]; then
+            echo "::error::Failed to extract PBXNativeTarget id for '$SCHEME' from $pbxproj"
+            exit 1
+          fi
+
+          # If scheme exists but lacks ArchiveAction, rewrite it.
+          needs_write="1"
+          if [[ -f "$scheme_path" ]]; then
+            if grep -q "<ArchiveAction" "$scheme_path"; then
+              needs_write="0"
+            fi
+          fi
+
+          if [[ "$needs_write" == "1" ]]; then
+            echo "::notice::Writing/repairing shared scheme with ArchiveAction: $scheme_path"
+            cat >"$scheme_path" <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion="1600"
+   version="1.3">
+   <BuildAction parallelizeBuildables="YES" buildImplicitDependencies="YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting="YES"
+            buildForRunning="YES"
+            buildForProfiling="YES"
+            buildForArchiving="YES"
+            buildForAnalyzing="YES">
+            <BuildableReference
+               BuildableIdentifier="primary"
+               BlueprintIdentifier="${target_id}"
+               BuildableName="${SCHEME}.app"
+               BlueprintName="${SCHEME}"
+               ReferencedContainer="container:$(basename "$project_path")">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration="Debug"
+      selectedDebuggerIdentifier="Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier="Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv="YES">
+      <Testables/>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration="Debug"
+      selectedDebuggerIdentifier="Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier="Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle="0"
+      useCustomWorkingDirectory="NO"
+      ignoresPersistentStateOnLaunch="NO"
+      debugDocumentVersioning="YES"
+      debugServiceExtension="internal"
+      allowLocationSimulation="YES">
+      <BuildableProductRunnable runnableDebuggingMode="0">
+         <BuildableReference
+            BuildableIdentifier="primary"
+            BlueprintIdentifier="${target_id}"
+            BuildableName="${SCHEME}.app"
+            BlueprintName="${SCHEME}"
+            ReferencedContainer="container:$(basename "$project_path")">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration="Release"
+      shouldUseLaunchSchemeArgsEnv="YES"
+      savedToolIdentifier=""
+      useCustomWorkingDirectory="NO"
+      debugDocumentVersioning="YES">
+      <BuildableProductRunnable runnableDebuggingMode="0">
+         <BuildableReference
+            BuildableIdentifier="primary"
+            BlueprintIdentifier="${target_id}"
+            BuildableName="${SCHEME}.app"
+            BlueprintName="${SCHEME}"
+            ReferencedContainer="container:$(basename "$project_path")">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </ProfileAction>
+   <AnalyzeAction buildConfiguration="Debug"/>
+   <ArchiveAction buildConfiguration="Release" revealArchiveInOrganizer="YES"/>
+</Scheme>
+EOF
+          fi
 
           echo "::group::Shared schemes on disk"
-          find ios -type f -path "*/xcshareddata/xcschemes/*.xcscheme" -maxdepth 6 -print || true
+          find ios -type f -path "*/xcshareddata/xcschemes/*.xcscheme" -maxdepth 7 -print || true
           echo "::endgroup::"
 
-          echo "::group::xcodebuild -list (json)"
-          list_json="$(xcodebuild -list -json -workspace "$WORKSPACE" 2>/dev/null || true)"
-          python3 -c $'import sys,json\nraw=sys.stdin.read().strip()\nif not raw:\n    print("::warning::No JSON returned from xcodebuild -list")\n    sys.exit(0)\ntry:\n    data=json.loads(raw)\nexcept Exception as e:\n    print(f"::error::Invalid JSON from xcodebuild -list: {e}")\n    sys.exit(1)\nschemes=(data.get("workspace") or {}).get("schemes") or []\nprint("Schemes:")\nfor s in schemes:\n    print(f"  - {s}")' <<<"$list_json"
+          echo "::group::xcodebuild -list (workspace)"
+          xcodebuild -list -workspace "$WORKSPACE" || true
           echo "::endgroup::"
 
-          schemes="$(python3 -c $'import sys,json\nraw=sys.stdin.read().strip()\nif not raw:\n    sys.exit(0)\ndata=json.loads(raw)\nschemes=(data.get(\"workspace\") or {}).get(\"schemes\") or []\nprint(\"\\n\".join(schemes))' <<<"$list_json")"
-
-          if [ -z "$schemes" ]; then
-            echo "::warning::No schemes from xcodebuild -list; scanning shared .xcscheme files."
-            schemes="$(find ios -type f -path "*/xcshareddata/xcschemes/*.xcscheme" -print0 | python3 -c $'import os,sys\nnames=[]\nfor p in sys.stdin.read().split(\"\\0\"):\n    if not p:\n        continue\n    names.append(os.path.splitext(os.path.basename(p))[0])\nseen=set(); out=[]\nfor n in names:\n    if n not in seen:\n        seen.add(n)\n        out.append(n)\nprint(\"\\n\".join(out))')"
-          fi
-
-          if [ -z "$schemes" ]; then
-            echo "::error::No schemes found at all."
+          # Hard gate: scheme file MUST contain ArchiveAction now.
+          if ! grep -q "<ArchiveAction" "$scheme_path"; then
+            echo "::error::Scheme file still missing ArchiveAction: $scheme_path"
+            sed -n '1,200p' "$scheme_path" || true
             exit 1
           fi
 
-          echo "Schemes found:"
-          printf "%s\n" "$schemes"
+        env:
+          PBX: ios/monGARS.xcodeproj/project.pbxproj
+          TGT: ${{ env.SCHEME }}
 
-          if ! printf "%s\n" "$schemes" | grep -qx "$SCHEME"; then
-            echo "::error::Expected SCHEME '$SCHEME' not found."
-            exit 1
-          fi
+      - name: 🧪 Verify workspace + scheme (hard gate)
+        run: |
+          set -euo pipefail
+          test -d "$WORKSPACE" || { echo "::error::Workspace missing: $WORKSPACE"; exit 1; }
 
-          echo "::notice::Scheme '$SCHEME' is visible and ready."
+          list_json="$(xcodebuild -list -json -workspace "$WORKSPACE" 2>/dev/null)"
+          python3 - <<'PY' <<<"$list_json"
+import json, os, sys
+data=json.loads(sys.stdin.read())
+schemes=(data.get("workspace") or {}).get("schemes") or []
+print("Schemes:")
+for s in schemes:
+    print("  -", s)
+want=os.environ["SCHEME"]
+if want not in schemes:
+    raise SystemExit(f"::error::Expected SCHEME '{want}' not found in workspace schemes")
+print(f"::notice::Scheme '{want}' is visible in workspace.")
+PY
 
       - name: 🏷️ Bump build number
         if: ${{ inputs.bump_build_number }}
@@ -405,7 +404,7 @@ jobs:
             <key>stripSwiftSymbols</key><true/>
             <key>uploadSymbols</key><true/>
           </dict></plist>
-          EOF
+EOF
 
       - name: 🔎 Detect signing identity
         run: |
@@ -438,7 +437,6 @@ jobs:
           RAW_LOG="build/logs/archive-xcodebuild-raw.log"
 
           EXTRA_PROFILE_ARGS=()
-          # Prefer SPECIFIER (Name). If we don't have it, omit it (ExportOptions still maps for export).
           if [ -n "${PROFILE_NAME:-}" ]; then
             EXTRA_PROFILE_ARGS+=( "PROVISIONING_PROFILE_SPECIFIER=$PROFILE_NAME" )
           fi
