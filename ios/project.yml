@@ -150,6 +150,7 @@ targets:
 
 schemes:
   monGARS:
+    shared: true
     build:
       targets:
         monGARS: all
