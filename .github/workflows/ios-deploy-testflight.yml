@@ -182,17 +182,17 @@ jobs:
           set -euo pipefail
 
           project_path=""
-          if [[ -n "${WORKSPACE:-}" && "$WORKSPACE" == *.xcodeproj && -f "$WORKSPACE" ]]; then
+          if [[ -n "${WORKSPACE:-}" && "$WORKSPACE" == *.xcodeproj && -d "$WORKSPACE" ]]; then
             project_path="$WORKSPACE"
           elif [[ -n "${WORKSPACE:-}" && "$WORKSPACE" == *.xcworkspace ]]; then
-            project_path="$(find "$(dirname "$WORKSPACE")" -maxdepth 1 -name "*.xcodeproj" | head -n 1)"
+            project_path="$(find "$(dirname "$WORKSPACE")" -maxdepth 1 -type d -name "*.xcodeproj" | head -n 1)"
           fi
 
-          if [[ -z "$project_path" || ! -f "$project_path" ]]; then
-            project_path="$(find "${WORKING_DIR:-ios}" -maxdepth 1 -name "*.xcodeproj" | head -n 1)"
+          if [[ -z "$project_path" || ! -d "$project_path" ]]; then
+            project_path="$(find "${WORKING_DIR:-ios}" -maxdepth 1 -type d -name "*.xcodeproj" | head -n 1)"
           fi
 
-          if [[ -z "$project_path" || ! -f "$project_path" ]]; then
+          if [[ -z "$project_path" || ! -d "$project_path" ]]; then
             echo "::error::Unable to locate .xcodeproj to create a shared scheme."
             exit 1
           fi
