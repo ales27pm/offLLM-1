@@ -243,22 +243,7 @@ jobs:
           # Fallback: scan repository for .xcscheme files if xcodebuild returns none
           if [ -z "$schemes" ]; then
             echo "::warning::No schemes from xcodebuild -list; scanning repo for .xcscheme files."
-            schemes=$(find . -name "*.xcscheme" -print0 | python3 - <<'PY'
-              import os
-              import sys
-
-              paths = sys.stdin.read().split("\0")
-              names = []
-              for path in paths:
-                if not path:
-                  continue
-                base = os.path.splitext(os.path.basename(path))[0]
-                if base not in names:
-                  names.append(base)
-
-              print("\n".join(names))
-            PY
-            )
+            schemes=$(find . -name "*.xcscheme" -print0 | python3 -c "import os,sys; paths=sys.stdin.read().split('\\0'); names=[];\nfor path in paths:\n    if not path:\n        continue\n    base=os.path.splitext(os.path.basename(path))[0]\n    if base not in names:\n        names.append(base)\nprint('\\n'.join(names))")
           fi
 
           if [ -z "$schemes" ]; then
