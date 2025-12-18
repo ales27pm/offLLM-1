@@ -181,21 +181,48 @@ jobs:
         run: |
           set -euo pipefail
 
-          echo "Workspace: $WORKSPACE"
+          # Resolve workspace/project flag (fallback if WORKSPACE not found)
+          project_flag=()
+          workspace_input="${WORKSPACE:-}"
+          if [ -n "$workspace_input" ]; then
+            if [[ "$workspace_input" == *.xcworkspace && -f "$workspace_input" ]]; then
+              project_flag=(-workspace "$workspace_input")
+            elif [[ "$workspace_input" == *.xcodeproj && -f "$workspace_input" ]]; then
+              project_flag=(-project "$workspace_input")
+            fi
+          fi
+
+          if [ ${#project_flag[@]} -eq 0 ]; then
+            search_dir=${WORKING_DIR:-ios}
+            found=$(find "$search_dir" -maxdepth 1 \( -name "*.xcworkspace" -o -name "*.xcodeproj" \) | head -n 1)
+            if [ -n "$found" ]; then
+              if [[ "$found" == *.xcworkspace ]]; then
+                project_flag=(-workspace "$found")
+              else
+                project_flag=(-project "$found")
+              fi
+              echo "::notice::WORKSPACE not found; using detected project: $found"
+            else
+              echo "::error::No .xcworkspace or .xcodeproj found in ${search_dir} (or WORKSPACE path)."
+              exit 1
+            fi
+          fi
+
+          echo "Project flag: ${project_flag[*]}"
           echo "Configuration: $CONFIGURATION"
 
           echo "-------------"
           echo "Listing schemes"
           echo "-------------"
 
-          schemes=$(xcodebuild -list -workspace "$WORKSPACE" \
+          schemes=$(xcodebuild -list "${project_flag[@]}" \
             | awk '
                 /^Schemes:/{in_s=1; next}
                 in_s && NF{ gsub(/^[[:space:]]+/,""); print }
               ')
 
           if [ -z "$schemes" ]; then
-            echo "::error::No schemes found in workspace!"
+            echo "::error::No schemes found for ${project_flag[*]}!"
             exit 1
           fi
 
@@ -214,7 +241,7 @@ jobs:
             for config in Release Debug; do
               echo "  Configuration: $config"
               pid=$(xcodebuild -showBuildSettings \
-                -workspace "$WORKSPACE" \
+                "${project_flag[@]}" \
                 -scheme "$scheme" \
                 -configuration "$config" 2>/dev/null \
                 | awk -F ' = ' '/PRODUCT_BUNDLE_IDENTIFIER/ {print $2; exit}')
