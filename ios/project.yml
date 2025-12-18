@@ -4,6 +4,7 @@ options:
   bundleIdPrefix: com.offllm
   deploymentTarget:
     iOS: "18.0"
+  postGenCommand: pod install --project-directory=ios
 
 packages:
   mlx-swift:
@@ -76,12 +77,6 @@ targets:
         IPHONEOS_DEPLOYMENT_TARGET: "18.0"
         SWIFT_OBJC_BRIDGING_HEADER: MyOfflineLLMApp/Bridging/monGARS-Bridging-Header.h
 
-        # Unsigned/device builds in CI
-        CODE_SIGNING_ALLOWED: NO
-        CODE_SIGNING_REQUIRED: NO
-        CODE_SIGN_IDENTITY: ""
-        DEVELOPMENT_TEAM: ""
-
         # Stable toolchain for RN/Folly
         CLANG_CXX_LIBRARY: libc++
         # CLANG_CXX_LANGUAGE_STANDARD inherited from Pods (c++20)
@@ -95,6 +90,15 @@ targets:
       configurations:
         Release:
           DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+          DEVELOPMENT_TEAM: 52T7P32J34
+          CODE_SIGN_STYLE: Manual
+          PROVISIONING_PROFILE_SPECIFIER: monGARS
+          CODE_SIGN_IDENTITY: "Apple Distribution"
+        Debug:
+          CODE_SIGNING_ALLOWED: NO
+          CODE_SIGNING_REQUIRED: NO
+          CODE_SIGN_IDENTITY: ""
+          DEVELOPMENT_TEAM: ""
 
     scripts:
       - name: Bundle React Native code and images
@@ -117,36 +121,6 @@ targets:
         outputFiles:
           - "${DERIVED_FILE_DIR}/bundle-react-native.stamp"
         runOnlyForDeploymentPostprocessing: false
-      - name: Purge legacy RCTDeprecation caches
-        script: |
-          bash "${PROJECT_DIR}/scripts/purge-rctdeprecation-caches.sh"
-        runOnlyForDeploymentPostprocessing: false
-        alwaysOutOfDate: true
-      - name: Patch MLX metal headers for C++17 warnings
-        script: |
-          bash "${PROJECT_DIR}/scripts/patch-mlx-metal-cxx17.sh"
-        runOnlyForDeploymentPostprocessing: false
-        alwaysOutOfDate: true
-      - name: Create Symlinks to Header Folders
-        script: |
-          echo "Symlinks handled by CocoaPods"
-          exit 0
-        outputFiles:
-          - "${DERIVED_FILE_DIR}/create_symlinks_to_header_folders.stamp"
-        runOnlyForDeploymentPostprocessing: false
-        alwaysOutOfDate: true
-
-    scheme:
-      testTargets: []
-      preActions:
-        - name: Purge legacy RCTDeprecation caches
-          settingsTarget: monGARS
-          script: |
-            bash "${PROJECT_DIR}/scripts/purge-rctdeprecation-caches.sh"
-        - name: Patch MLX metal headers
-          settingsTarget: monGARS
-          script: |
-            bash "${PROJECT_DIR}/scripts/patch-mlx-metal-cxx17.sh"
 
 schemes:
   monGARS:
@@ -154,6 +128,15 @@ schemes:
     build:
       targets:
         monGARS: all
+      preActions:
+        - name: Purge legacy RCTDeprecation caches
+          settingsTarget: monGARS
+          script: |
+            bash "${PROJECT_DIR}/scripts/purge-rctdeprecation-caches.sh"
+        - name: Patch MLX metal headers for C++17 warnings
+          settingsTarget: monGARS
+          script: |
+            bash "${PROJECT_DIR}/scripts/patch-mlx-metal-cxx17.sh"
     run:
       config: Debug
     test:
