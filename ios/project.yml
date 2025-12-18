@@ -4,7 +4,7 @@ options:
   bundleIdPrefix: com.offllm
   deploymentTarget:
     iOS: "18.0"
-  postGenCommand: pod install --project-directory=ios
+  postGenCommand: pod install --project-directory=.
 
 packages:
   mlx-swift:
