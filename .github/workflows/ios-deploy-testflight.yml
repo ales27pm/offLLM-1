@@ -6,18 +6,15 @@ on:
       configuration:
         description: Build configuration
         type: choice
-        options:
-          - Release
-          - Debug
+        options: [Release, Debug]
         default: Release
       bump_build_number:
-        description: Bump CFBundleVersion (date-based)
+        description: Bump CFBundleVersion
         type: boolean
         default: true
 
 env:
   APP_NAME: offLLM
-  # Can be overwritten automatically after scheme detection.
   SCHEME: monGARS
   BUNDLE_ID: com.offllm.mongars
   WORKSPACE: ios/monGARS.xcworkspace
@@ -34,413 +31,162 @@ jobs:
       contents: read
 
     steps:
-      - name: ✅ Validate Secrets (and base64 sanity)
-        env:
-          IOS_P12_BASE64: ${{ secrets.IOS_P12_BASE64 }}
-          IOS_P12_PASSWORD: ${{ secrets.IOS_P12_PASSWORD }}
-          IOS_PROVISIONING_PROFILE_BASE64: ${{ secrets.IOS_PROVISIONING_PROFILE_BASE64 }}
-          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
-          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
-          ASC_PRIVATE_KEY_BASE64: ${{ secrets.ASC_PRIVATE_KEY_BASE64 }}
-        run: |
-          set -euo pipefail
-          missing=0
-          for var in IOS_P12_BASE64 IOS_P12_PASSWORD IOS_PROVISIONING_PROFILE_BASE64 ASC_KEY_ID ASC_ISSUER_ID ASC_PRIVATE_KEY_BASE64; do
-            if [ -z "${!var:-}" ]; then
-              echo "::error::Missing $var"
-              missing=1
-            fi
-          done
-          [ "$missing" -eq 0 ] || exit 1
-
-          clean_b64() { printf '%s' "$1" | tr -d '\n\r\t ' ; }
-          b64_decode_to() {
-            local in="$1"; local out="$2"
-            if base64 -D </dev/null >/dev/null 2>&1; then
-              printf '%s' "$in" | base64 -D > "$out"
-            else
-              printf '%s' "$in" | base64 --decode > "$out"
-            fi
-          }
-
-          tmp="$RUNNER_TEMP/b64check"
-          mkdir -p "$tmp"
-          b64_decode_to "$(clean_b64 "$IOS_P12_BASE64")" "$tmp/cert.p12" || { echo "::error::IOS_P12_BASE64 invalid"; exit 1; }
-          b64_decode_to "$(clean_b64 "$ASC_PRIVATE_KEY_BASE64")" "$tmp/key.p8" || { echo "::error::ASC_PRIVATE_KEY_BASE64 invalid"; exit 1; }
-          b64_decode_to "$(clean_b64 "$IOS_PROVISIONING_PROFILE_BASE64")" "$tmp/profile.mobileprovision" || { echo "::error::IOS_PROVISIONING_PROFILE_BASE64 invalid"; exit 1; }
-
-          security cms -D -i "$tmp/profile.mobileprovision" >/dev/null || {
-            echo "::error::Provisioning profile decodes but is not a valid .mobileprovision"
-            exit 1
-          }
-
-      - name: 🧾 Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
+      - uses: actions/checkout@v4
 
       - name: 🧰 Select Xcode
         run: bash scripts/ci/select_xcode.sh
 
-      - name: 🍺 Install XcodeGen
+      - name: 🍺 Install tools
         run: |
           brew update
           brew install xcodegen
-          xcodegen --version
+          sudo gem install xcpretty cocoapods --no-document
 
-      - name: 💎 Ensure Ruby tools
-        run: |
-          command -v xcpretty >/dev/null 2>&1 || sudo gem install xcpretty --no-document
-          command -v pod >/dev/null 2>&1 || sudo gem install cocoapods --no-document
-          pod --version
-          xcpretty --version
+      # ------------------ CERTS & PROFILES ------------------
 
-      - name: 🔐 Setup Keychain + Import Cert
+      - name: 🔐 Setup keychain + cert
         env:
           P12_BASE64: ${{ secrets.IOS_P12_BASE64 }}
           P12_PASSWORD: ${{ secrets.IOS_P12_PASSWORD }}
         run: |
           set -euo pipefail
-          clean_b64() { printf '%s' "$1" | tr -d '\n\r\t ' ; }
-          b64_decode_to() {
-            local in="$1"; local out="$2"
-            if base64 -D </dev/null >/dev/null 2>&1; then
-              printf '%s' "$in" | base64 -D > "$out"
-            else
-              printf '%s' "$in" | base64 --decode > "$out"
-            fi
-          }
-
           KEYCHAIN="$RUNNER_TEMP/build.keychain-db"
-          KEYPASS="$(openssl rand -hex 12)"
-          security create-keychain -p "$KEYPASS" "$KEYCHAIN"
+          PASS="$(openssl rand -hex 12)"
+
+          security create-keychain -p "$PASS" "$KEYCHAIN"
+          security unlock-keychain -p "$PASS" "$KEYCHAIN"
           security set-keychain-settings -lut 21600 "$KEYCHAIN"
-          security unlock-keychain -p "$KEYPASS" "$KEYCHAIN"
 
-          CERT_P12="$RUNNER_TEMP/cert.p12"
-          b64_decode_to "$(clean_b64 "$P12_BASE64")" "$CERT_P12"
-          security import "$CERT_P12" -k "$KEYCHAIN" -P "$P12_PASSWORD" -T /usr/bin/codesign -T /usr/bin/security
+          echo "$P12_BASE64" | tr -d '\n\r\t ' | base64 --decode > "$RUNNER_TEMP/cert.p12"
+          security import "$RUNNER_TEMP/cert.p12" \
+            -k "$KEYCHAIN" \
+            -P "$P12_PASSWORD" \
+            -T /usr/bin/codesign
 
-          security list-keychains -d user -s "$KEYCHAIN" $(security list-keychains -d user | tr -d '"')
-          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYPASS" "$KEYCHAIN"
+          security list-keychains -d user -s "$KEYCHAIN"
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$PASS" "$KEYCHAIN"
 
-          echo "KEYCHAIN_PATH=$KEYCHAIN" >> "$GITHUB_ENV"
-          echo "KEYCHAIN_PASSWORD=$KEYPASS" >> "$GITHUB_ENV"
+          echo "KEYCHAIN_PATH=$KEYCHAIN" >> $GITHUB_ENV
 
-          echo "Available code signing identities (sanity):"
-          security find-identity -v -p codesigning "$KEYCHAIN" || true
-
-      - name: 🪪 Install Provisioning Profile (extract UUID + Name)
+      - name: 🪪 Install provisioning profile
         env:
           PROFILE_B64: ${{ secrets.IOS_PROVISIONING_PROFILE_BASE64 }}
         run: |
           set -euo pipefail
-          clean_b64() { printf '%s' "$1" | tr -d '\n\r\t ' ; }
-          b64_decode_to() {
-            local in="$1"; local out="$2"
-            if base64 -D </dev/null >/dev/null 2>&1; then
-              printf '%s' "$in" | base64 -D > "$out"
-            else
-              printf '%s' "$in" | base64 --decode > "$out"
-            fi
-          }
-
           mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
 
-          OUT="$RUNNER_TEMP/app.mobileprovision"
-          b64_decode_to "$(clean_b64 "$PROFILE_B64")" "$OUT"
+          echo "$PROFILE_B64" | tr -d '\n\r\t ' | base64 --decode > "$RUNNER_TEMP/app.mobileprovision"
+          security cms -D -i "$RUNNER_TEMP/app.mobileprovision" > "$RUNNER_TEMP/profile.plist"
 
-          security cms -D -i "$OUT" > "$RUNNER_TEMP/app.mobileprovision.plist"
-          UUID=$(/usr/libexec/PlistBuddy -c "Print:UUID" "$RUNNER_TEMP/app.mobileprovision.plist")
-          NAME=$(/usr/libexec/PlistBuddy -c "Print:Name" "$RUNNER_TEMP/app.mobileprovision.plist" 2>/dev/null || true)
+          UUID=$(/usr/libexec/PlistBuddy -c "Print:UUID" "$RUNNER_TEMP/profile.plist")
+          mv "$RUNNER_TEMP/app.mobileprovision" \
+            "$HOME/Library/MobileDevice/Provisioning Profiles/$UUID.mobileprovision"
 
-          if [[ -z "$UUID" || ! "$UUID" =~ ^[A-Fa-f0-9-]{36}$ ]]; then
-            echo "::error::Failed to extract UUID from provisioning profile."
-            exit 1
-          fi
+          echo "PROFILE_UUID=$UUID" >> $GITHUB_ENV
 
-          mv "$OUT" "$HOME/Library/MobileDevice/Provisioning Profiles/$UUID.mobileprovision"
+      # ------------------ PROJECT ------------------
 
-          echo "PROFILE_UUID=$UUID" >> "$GITHUB_ENV"
-          if [ -n "${NAME:-}" ]; then
-            echo "PROFILE_NAME=$NAME" >> "$GITHUB_ENV"
-            echo "Installed provisioning profile: $NAME ($UUID)"
-          else
-            echo "::warning::Could not extract profile Name; will rely on UUID only."
-            echo "Installed provisioning profile UUID: $UUID"
-          fi
-
-      - name: 🧱 Generate Xcode project + install pods
+      - name: 🧱 Generate project + pods
         working-directory: ios
         run: |
           set -euo pipefail
           xcodegen generate
-          pod install --verbose
+          pod install --repo-update
 
-      - name: 🧠 Auto-detect app scheme by matching PRODUCT_BUNDLE_IDENTIFIER
+      - name: 🔒 Freeze Hermes binary
         run: |
           set -euo pipefail
-          echo "Workspace: $WORKSPACE"
-          echo "Configured SCHEME: ${SCHEME:-}"
-          echo "Target BUNDLE_ID: $BUNDLE_ID"
-          echo "Configuration: $CONFIGURATION"
+          HERMES="$(find ios/Pods -name hermes.framework -type d | head -n 1 || true)"
+          if [ -n "$HERMES" ]; then
+            chmod -R a-w "$HERMES"
+          fi
 
-          # Prefer Xcode's JSON output (stable + no awk indentation traps)
-          json="$RUNNER_TEMP/xcodebuild_list.json"
-          xcodebuild -list -json -workspace "$WORKSPACE" > "$json"
+      # ------------------ SCHEME DETECTION ------------------
 
-          python3 - <<'PY'
-          import json, os, subprocess, sys
+      - name: 🧠 Auto-detect app scheme by bundle id
+        run: |
+          set -euo pipefail
+          schemes=$(xcodebuild -list -workspace "$WORKSPACE" \
+            | awk '/Schemes:/{f=1;next} f&&NF{gsub(/^[ \t]+/,"");print}')
 
-          workspace = os.environ["WORKSPACE"]
-          bundle_id = os.environ["BUNDLE_ID"]
-          config = os.environ["CONFIGURATION"]
-          configured = os.environ.get("SCHEME", "").strip()
-          json_path = os.path.join(os.environ["RUNNER_TEMP"], "xcodebuild_list.json")
+          for s in $schemes; do
+            pid=$(xcodebuild -showBuildSettings \
+              -workspace "$WORKSPACE" \
+              -scheme "$s" \
+              -configuration "$CONFIGURATION" 2>/dev/null \
+              | awk -F ' = ' '/PRODUCT_BUNDLE_IDENTIFIER/{print $2;exit}')
+            if [ "$pid" = "$BUNDLE_ID" ]; then
+              echo "SCHEME=$s" >> $GITHUB_ENV
+              exit 0
+            fi
+          done
 
-          with open(json_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
+          echo "::error::No scheme matches $BUNDLE_ID"
+          exit 1
 
-          schemes = data.get("workspace", {}).get("schemes", []) or []
-          print("All schemes:")
-          for s in schemes:
-            print(f"  - {s}")
+      # ------------------ BUILD ------------------
 
-          def scheme_buildable(s: str) -> bool:
-            r = subprocess.run(
-              ["xcodebuild", "-showBuildSettings", "-workspace", workspace, "-scheme", s, "-configuration", config],
-              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-            )
-            return r.returncode == 0
-
-          def bundle_for_scheme(s: str) -> str:
-            p = subprocess.run(
-              ["xcodebuild", "-showBuildSettings", "-workspace", workspace, "-scheme", s, "-configuration", config],
-              capture_output=True, text=True
-            )
-            if p.returncode != 0:
-              return ""
-            for line in p.stdout.splitlines():
-              if line.strip().startswith("PRODUCT_BUNDLE_IDENTIFIER = "):
-                return line.split(" = ", 1)[1].strip()
-            return ""
-
-          # If configured scheme exists AND is buildable, keep it.
-          if configured and configured in schemes and scheme_buildable(configured):
-            print(f"::notice::SCHEME '{configured}' exists & is buildable; keeping it.")
-            sys.exit(0)
-
-          # Filter out obvious non-app schemes first (Pods-, privacy, RN deps)
-          excluded_prefixes = ("Pods-",)
-          excluded_exact = set([
-            "boost","DoubleConversion","fast_float","FBLazyVector","fmt","glog","hermes-engine","SocketRocket","Yoga"
-          ])
-          excluded_starts = ("React", "RCT")
-          excluded_rn = ("RN", "RNC", "react-native-")
-
-          candidates = []
-          for s in schemes:
-            if s.startswith(excluded_prefixes): continue
-            if s in excluded_exact: continue
-            if s.endswith("_privacy") or s.endswith("-privacy") or s.endswith("privacy"): continue
-            if s.startswith(excluded_starts): continue
-            if s.startswith(excluded_rn): continue
-            candidates.append(s)
-
-          print("Candidate schemes:")
-          for s in candidates:
-            print(f"  - {s}")
-
-          matches = []
-          for s in candidates:
-            if not scheme_buildable(s):
-              continue
-            pid = bundle_for_scheme(s)
-            print(f"Probe {s}: PRODUCT_BUNDLE_IDENTIFIER={pid!r}")
-            if pid == bundle_id:
-              matches.append(s)
-
-          print("Matching schemes:")
-          for s in matches:
-            print(f"  - {s}")
-
-          if len(matches) == 1:
-            detected = matches[0]
-            with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as envf:
-              envf.write(f"SCHEME={detected}\n")
-            print(f"::notice::Auto-detected app scheme: {detected}")
-            sys.exit(0)
-
-          print(f"::error::Could not uniquely detect app scheme for BUNDLE_ID={bundle_id} (found {len(matches)} matches). Set env.SCHEME explicitly.")
-          sys.exit(1)
-          PY
-
-      - name: 🏷️ Bump build number
+      - name: 🏷️ Set deterministic build number
         if: ${{ inputs.bump_build_number }}
         run: |
-          set -euo pipefail
-          /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $(date +%Y%m%d%H%M)" ios/MyOfflineLLMApp/Info.plist
-
-      - name: 🧾 Write ExportOptions.plist
-        working-directory: ios
-        run: |
-          set -euo pipefail
-          PROFILE_REF="${PROFILE_NAME:-$PROFILE_UUID}"
-
-          cat > ExportOptions.plist <<EOF
-          <?xml version="1.0" encoding="UTF-8"?>
-          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0"><dict>
-            <key>method</key><string>${EXPORT_METHOD}</string>
-            <key>teamID</key><string>${TEAM_ID}</string>
-            <key>signingStyle</key><string>manual</string>
-            <key>provisioningProfiles</key>
-            <dict>
-              <key>${BUNDLE_ID}</key><string>${PROFILE_REF}</string>
-            </dict>
-            <key>stripSwiftSymbols</key><true/>
-            <key>uploadSymbols</key><true/>
-          </dict></plist>
-          EOF
+          BUILD="${GITHUB_RUN_NUMBER}${GITHUB_RUN_ATTEMPT}"
+          /usr/libexec/PlistBuddy \
+            -c "Set :CFBundleVersion $BUILD" \
+            ios/MyOfflineLLMApp/Info.plist
 
       - name: 🔎 Detect signing identity
         run: |
-          set -euo pipefail
-          IDENTITY_LINE="$(security find-identity -v -p codesigning "$KEYCHAIN_PATH" \
-            | grep -E 'Apple Distribution|iPhone Distribution|Apple Development|iPhone Developer' \
-            | head -n 1 || true)"
-          if [ -z "$IDENTITY_LINE" ]; then
-            echo "::error::No code signing identity found in keychain."
-            security find-identity -v -p codesigning "$KEYCHAIN_PATH" || true
-            exit 1
-          fi
-          SIGNING_IDENTITY="$(printf '%s' "$IDENTITY_LINE" | sed -n 's/.*"\(.*\)".*/\1/p')"
-          if [ -z "$SIGNING_IDENTITY" ]; then
-            echo "::error::Failed to parse signing identity."
-            echo "$IDENTITY_LINE"
-            exit 1
-          fi
-          echo "SIGNING_IDENTITY=$SIGNING_IDENTITY" >> "$GITHUB_ENV"
-          echo "Using signing identity: $SIGNING_IDENTITY"
+          ID=$(security find-identity -v -p codesigning "$KEYCHAIN_PATH" \
+            | grep Apple\ Distribution | head -n1 | sed -n 's/.*"\(.*\)".*/\1/p')
+          echo "SIGNING_IDENTITY=$ID" >> $GITHUB_ENV
 
-      - name: 🏗️ Archive (always writes xcresult; dumps failures)
-        id: archive
-        continue-on-error: true
+      - name: 🏗️ Archive
         run: |
           set -euo pipefail
-          mkdir -p build/logs
-
-          RESULT_BUNDLE="$RUNNER_TEMP/archive.xcresult"
-          RAW_LOG="build/logs/archive-xcodebuild-raw.log"
-
-          EXTRA_PROFILE_ARGS=()
-          # Prefer SPECIFIER (Name). If we don't have it, omit it (ExportOptions still maps for export).
-          if [ -n "${PROFILE_NAME:-}" ]; then
-            EXTRA_PROFILE_ARGS+=( "PROVISIONING_PROFILE_SPECIFIER=$PROFILE_NAME" )
-          fi
-
-          echo "Archiving with:"
-          echo "  WORKSPACE=$WORKSPACE"
-          echo "  SCHEME=$SCHEME"
-          echo "  CONFIGURATION=$CONFIGURATION"
-          echo "  BUNDLE_ID=$BUNDLE_ID"
-          echo "  TEAM_ID=$TEAM_ID"
-          echo "  PROFILE_NAME=${PROFILE_NAME:-}"
-          echo "  PROFILE_UUID=$PROFILE_UUID"
-          echo "  SIGNING_IDENTITY=$SIGNING_IDENTITY"
-          echo "  RESULT_BUNDLE=$RESULT_BUNDLE"
-
-          set +e
           xcodebuild archive \
             -workspace "$WORKSPACE" \
             -scheme "$SCHEME" \
             -configuration "$CONFIGURATION" \
             -destination "generic/platform=iOS" \
             -archivePath "$RUNNER_TEMP/${APP_NAME}.xcarchive" \
-            -derivedDataPath "$RUNNER_TEMP/DerivedData" \
-            -resultBundlePath "$RESULT_BUNDLE" \
             PRODUCT_BUNDLE_IDENTIFIER="$BUNDLE_ID" \
             DEVELOPMENT_TEAM="$TEAM_ID" \
             CODE_SIGN_STYLE=Manual \
             CODE_SIGN_IDENTITY="$SIGNING_IDENTITY" \
+            PROVISIONING_PROFILE="$PROFILE_UUID" \
             OTHER_CODE_SIGN_FLAGS="--keychain $KEYCHAIN_PATH" \
-            "${EXTRA_PROFILE_ARGS[@]}" \
-            2>&1 | tee "$RAW_LOG" | xcpretty
-          xc_status=${PIPESTATUS[0]}
-          set -e
+            | xcpretty
 
-          echo "ARCHIVE_XCRESULT=$RESULT_BUNDLE" >> "$GITHUB_ENV"
-
-          if [ "$xc_status" -ne 0 ]; then
-            echo "::error::xcodebuild archive failed with exit code $xc_status"
-            echo "---- tail (raw xcodebuild) ----"
-            tail -n 200 "$RAW_LOG" || true
-            exit "$xc_status"
-          fi
-
-          echo "ARCHIVE_PATH=$RUNNER_TEMP/${APP_NAME}.xcarchive" >> "$GITHUB_ENV"
-
-      - name: 🧾 If archive failed, dump xcresult issues (action errors)
-        if: ${{ steps.archive.outcome != 'success' }}
-        run: |
-          set -euo pipefail
-          echo "Archive failed; attempting to extract errors from xcresult…"
-          if [ -z "${ARCHIVE_XCRESULT:-}" ] || [ ! -d "${ARCHIVE_XCRESULT:-}" ]; then
-            echo "::warning::No xcresult bundle found at ARCHIVE_XCRESULT=${ARCHIVE_XCRESULT:-}"
-            exit 0
-          fi
-
-          echo "::group::xcresulttool - actions invocation record"
-          xcrun xcresulttool get --path "$ARCHIVE_XCRESULT" --format json | python3 - <<'PY'
-          import json, sys
-          data = json.load(sys.stdin)
-
-          # Best-effort dump of action/issue summaries without assuming exact schema.
-          def walk(obj, path=""):
-            if isinstance(obj, dict):
-              for k, v in obj.items():
-                np = f"{path}.{k}" if path else k
-                if k in ("issueSummaries", "issues", "errors", "warnings") and v:
-                  print(f"\n== {np} ==")
-                  print(json.dumps(v, indent=2)[:20000])
-                walk(v, np)
-            elif isinstance(obj, list):
-              for i, v in enumerate(obj):
-                walk(v, f"{path}[{i}]")
-          walk(data)
-          PY
-          echo "::endgroup::"
-
-          echo "::error::Archive failed. See log tail above + xcresult dumps."
-          exit 1
+          echo "ARCHIVE_PATH=$RUNNER_TEMP/${APP_NAME}.xcarchive" >> $GITHUB_ENV
 
       - name: 📦 Export IPA
         run: |
-          set -euo pipefail
-          mkdir -p build/logs
+          cat > ios/ExportOptions.plist <<EOF
+          <plist version="1.0"><dict>
+            <key>method</key><string>app-store</string>
+            <key>teamID</key><string>$TEAM_ID</string>
+            <key>signingStyle</key><string>manual</string>
+            <key>provisioningProfiles</key>
+            <dict><key>$BUNDLE_ID</key><string>$PROFILE_UUID</string></dict>
+          </dict></plist>
+          EOF
 
           xcodebuild -exportArchive \
             -archivePath "$ARCHIVE_PATH" \
             -exportPath build/output \
             -exportOptionsPlist ios/ExportOptions.plist \
-            2>&1 | tee build/logs/export-xcodebuild-raw.log | xcpretty
+            | xcpretty
 
-          IPA="$(find build/output -name '*.ipa' -print -quit)"
-          if [ -z "$IPA" ]; then
-            echo "::error::No IPA produced."
-            exit 1
-          fi
-          echo "IPA_PATH=$IPA" >> "$GITHUB_ENV"
-          echo "IPA: $IPA"
+          echo "IPA_PATH=$(ls build/output/*.ipa)" >> $GITHUB_ENV
 
       - name: 🚀 Upload to TestFlight
         env:
           ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
           ASC_PRIVATE_KEY_BASE64: ${{ secrets.ASC_PRIVATE_KEY_BASE64 }}
-        run: bash scripts/ci/upload_testflight.sh "$IPA_PATH" "$ASC_KEY_ID" "$ASC_ISSUER_ID" "$ASC_PRIVATE_KEY_BASE64"
-
-      - name: 🧹 Cleanup keychain
-        if: always()
         run: |
-          security delete-keychain "$KEYCHAIN_PATH" || true
+          bash scripts/ci/upload_testflight.sh \
+            "$IPA_PATH" \
+            "$ASC_KEY_ID" \
+            "$ASC_ISSUER_ID" \
+            "$ASC_PRIVATE_KEY_BASE64"
