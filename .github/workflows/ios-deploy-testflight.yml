@@ -177,7 +177,7 @@ jobs:
           xcodegen generate
           pod install --verbose
 
-      - name: 🛠️ Ensure shared app scheme exists
+      - name: Ensure shared app scheme exists
         run: |
           set -euo pipefail
 
@@ -204,7 +204,7 @@ jobs:
             exit 1
           fi
 
-          target_id=$(python3 - "$pbxproj" "$target_name" -c "import re, sys, pathlib; pbx_path=pathlib.Path(sys.argv[1]); target=sys.argv[2]; data=pbx_path.read_text(encoding='utf-8', errors='ignore'); m=re.search(r'([A-F0-9]{24}) /\* ' + re.escape(target) + r' \*/ = \\\\{isa = PBXNativeTarget;', data); sys.exit(1) if not m else print(m.group(1))") || {
+          target_id=$(python3 - "$pbxproj" "$target_name" -c "import re, sys, pathlib; pbx=pathlib.Path(sys.argv[1]); tgt=sys.argv[2]; data=pbx.read_text(encoding='utf-8', errors='ignore'); m=re.search(r'([A-F0-9]{24}) /\* ' + re.escape(tgt) + r' \*/ = \\\\{isa = PBXNativeTarget;', data); sys.exit(1) if not m else print(m.group(1))") || {
             echo "::error::Failed to find PBXNativeTarget for $target_name in $pbxproj"
             exit 1
           }
@@ -363,7 +363,21 @@ jobs:
           # Fallback: scan repository for .xcscheme files if xcodebuild returns none
           if [ -z "$schemes" ]; then
             echo "::warning::No schemes from xcodebuild -list; scanning repo for .xcscheme files."
-            schemes=$(find . -name "*.xcscheme" -print0 | python3 -c "import os,sys; paths=sys.stdin.read().split('\\0'); names=[];\nfor path in paths:\n    if not path:\n        continue\n    base=os.path.splitext(os.path.basename(path))[0]\n    if base not in names:\n        names.append(base)\nprint('\\n'.join(names))")
+            schemes=$(find . -name "*.xcscheme" -print0 | python3 - <<'PY'
+              import os
+              import sys
+
+              names = []
+              for path in sys.stdin.read().split("\0"):
+                if not path:
+                  continue
+                base = os.path.splitext(os.path.basename(path))[0]
+                if base not in names:
+                  names.append(base)
+
+              print("\n".join(names))
+            PY
+            )
           fi
 
           if [ -z "$schemes" ]; then
