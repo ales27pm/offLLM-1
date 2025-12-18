@@ -177,6 +177,57 @@ jobs:
           xcodegen generate
           pod install --verbose
 
+      - name: 🧪 List all app schemes + bundle identifiers
+        run: |
+          set -euo pipefail
+
+          echo "Workspace: $WORKSPACE"
+          echo "Configuration: $CONFIGURATION"
+
+          echo "-------------"
+          echo "Listing schemes"
+          echo "-------------"
+
+          schemes=$(xcodebuild -list -workspace "$WORKSPACE" \
+            | awk '
+                /^Schemes:/{in_s=1; next}
+                in_s && NF{ gsub(/^[[:space:]]+/,""); print }
+              ')
+
+          if [ -z "$schemes" ]; then
+            echo "::error::No schemes found in workspace!"
+            exit 1
+          fi
+
+          echo "Schemes found:"
+          printf "%s\n" "$schemes"
+
+          echo "-------------"
+          echo "Inspecting bundle IDs for each scheme"
+          echo "-------------"
+
+          while IFS= read -r scheme; do
+            [ -z "$scheme" ] && continue
+            echo "Scheme: $scheme"
+
+            # Check build settings for Release and Debug
+            for config in Release Debug; do
+              echo "  Configuration: $config"
+              pid=$(xcodebuild -showBuildSettings \
+                -workspace "$WORKSPACE" \
+                -scheme "$scheme" \
+                -configuration "$config" 2>/dev/null \
+                | awk -F ' = ' '/PRODUCT_BUNDLE_IDENTIFIER/ {print $2; exit}')
+              if [ -n "$pid" ]; then
+                echo "    PRODUCT_BUNDLE_IDENTIFIER=$pid"
+              else
+                echo "    (no PRODUCT_BUNDLE_IDENTIFIER found)"
+              fi
+            done
+
+            echo ""
+          done <<< "$schemes"
+
       - name: 🧠 Auto-detect app scheme by matching PRODUCT_BUNDLE_IDENTIFIER
         run: |
           set -euo pipefail
