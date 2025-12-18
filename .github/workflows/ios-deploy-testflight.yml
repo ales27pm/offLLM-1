@@ -6,7 +6,9 @@ on:
       configuration:
         description: Build configuration
         type: choice
-        options: [Release, Debug]
+        options:
+          - Release
+          - Debug
         default: Release
       bump_build_number:
         description: Bump CFBundleVersion (date-based)
@@ -181,14 +183,8 @@ jobs:
         working-directory: ios
         run: |
           set -euo pipefail
-
-          echo "::group::XcodeGen generate"
           xcodegen generate
-          echo "::endgroup::"
-
-          echo "::group::pod install"
           pod install --verbose
-          echo "::endgroup::"
 
           if [ ! -d "monGARS.xcworkspace" ]; then
             echo "::error::Expected ios/monGARS.xcworkspace to exist after pod install."
@@ -200,26 +196,11 @@ jobs:
         run: |
           set -euo pipefail
           test -d "$WORKSPACE" || { echo "::error::Workspace missing: $WORKSPACE"; exit 1; }
-
-          echo "::group::xcodebuild -list"
           xcodebuild -list -workspace "$WORKSPACE"
-          echo "::endgroup::"
 
-          echo "::group::xcodebuild -list (json) parse"
           list_json="$(xcodebuild -list -json -workspace "$WORKSPACE")"
-          python3 - <<'PY' <<<"$list_json"
-import json, os, sys
-data=json.loads(sys.stdin.read())
-schemes=(data.get("workspace") or {}).get("schemes") or []
-print("Schemes:")
-for s in schemes:
-    print("  -", s)
-want=os.environ["SCHEME"]
-if want not in schemes:
-    raise SystemExit(f"::error::Expected scheme '{want}' not found in workspace schemes")
-print(f"::notice::Scheme '{want}' is present.")
-PY
-          echo "::endgroup::"
+          python3 -c 'import json,os,sys; d=json.load(sys.stdin); schemes=((d.get("workspace") or {}).get("schemes") or []); print("Schemes:", schemes); want=os.environ["SCHEME"]; \
+            (want in schemes) or sys.exit(f"::error::Expected scheme {want} not found")' <<<"$list_json"
 
       - name: 🏷️ Bump build number (CFBundleVersion)
         if: ${{ inputs.bump_build_number }}
@@ -232,8 +213,7 @@ PY
         run: |
           set -euo pipefail
           PROFILE_REF="${PROFILE_NAME:-$PROFILE_UUID}"
-
-          cat > ExportOptions.plist <<EOF
+          cat > ExportOptions.plist <<'EOF'
           <?xml version="1.0" encoding="UTF-8"?>
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
           <plist version="1.0"><dict>
@@ -248,28 +228,19 @@ PY
             <key>uploadSymbols</key><true/>
           </dict></plist>
           EOF
-
-          echo "::notice::ExportOptions.plist written with profile ref: $PROFILE_REF"
+          # Expand variables inside the plist safely:
+          perl -pe 's/\$\{(\w+)\}/$ENV{$1}||$&/ge' -i ExportOptions.plist
 
       - name: 🔎 Detect signing identity (from CI keychain)
         run: |
           set -euo pipefail
-          IDENTITY_LINE="$(security find-identity -v -p codesigning "$KEYCHAIN_PATH" \
-            | grep -E 'Apple Distribution|iPhone Distribution' \
-            | head -n 1 || true)"
+          IDENTITY_LINE="$(security find-identity -v -p codesigning "$KEYCHAIN_PATH" | grep -E 'Apple Distribution|iPhone Distribution' | head -n 1 || true)"
           if [ -z "$IDENTITY_LINE" ]; then
             echo "::error::No Apple Distribution identity found in keychain."
             security find-identity -v -p codesigning "$KEYCHAIN_PATH" || true
             exit 1
           fi
-
           SIGNING_IDENTITY="$(printf '%s' "$IDENTITY_LINE" | sed -n 's/.*"\(.*\)".*/\1/p')"
-          if [ -z "$SIGNING_IDENTITY" ]; then
-            echo "::error::Failed to parse signing identity."
-            echo "$IDENTITY_LINE"
-            exit 1
-          fi
-
           echo "SIGNING_IDENTITY=$SIGNING_IDENTITY" >> "$GITHUB_ENV"
           echo "::notice::Using signing identity: $SIGNING_IDENTITY"
 
@@ -278,13 +249,6 @@ PY
           set -euo pipefail
           mkdir -p build/logs
 
-          RESULT_BUNDLE="$RUNNER_TEMP/archive.xcresult"
-          RAW_LOG="build/logs/archive-xcodebuild-raw.log"
-
-          echo "::notice::Archiving $SCHEME ($CONFIGURATION) from $WORKSPACE"
-
-          # Strongly prefer UUID in CI:
-          # PROVISIONING_PROFILE is the UUID installed into ~/Library/MobileDevice/Provisioning Profiles
           xcodebuild archive \
             -workspace "$WORKSPACE" \
             -scheme "$SCHEME" \
@@ -292,16 +256,14 @@ PY
             -destination "generic/platform=iOS" \
             -archivePath "$RUNNER_TEMP/${APP_NAME}.xcarchive" \
             -derivedDataPath "$RUNNER_TEMP/DerivedData" \
-            -resultBundlePath "$RESULT_BUNDLE" \
             PRODUCT_BUNDLE_IDENTIFIER="$BUNDLE_ID" \
             DEVELOPMENT_TEAM="$TEAM_ID" \
             CODE_SIGN_STYLE=Manual \
             CODE_SIGN_IDENTITY="$SIGNING_IDENTITY" \
             PROVISIONING_PROFILE="$PROFILE_UUID" \
             OTHER_CODE_SIGN_FLAGS="--keychain $KEYCHAIN_PATH" \
-            2>&1 | tee "$RAW_LOG" | xcpretty
+            2>&1 | tee build/logs/archive-xcodebuild-raw.log | xcpretty
 
-          echo "ARCHIVE_XCRESULT=$RESULT_BUNDLE" >> "$GITHUB_ENV"
           echo "ARCHIVE_PATH=$RUNNER_TEMP/${APP_NAME}.xcarchive" >> "$GITHUB_ENV"
 
       - name: 📦 Export IPA
@@ -321,7 +283,6 @@ PY
             ls -la build/output || true
             exit 1
           fi
-
           echo "IPA_PATH=$IPA" >> "$GITHUB_ENV"
           echo "::notice::IPA=$IPA"
 
@@ -347,22 +308,11 @@ PY
           b64_decode_to "$(clean_b64 "$ASC_PRIVATE_KEY_BASE64")" "$KEY_P8"
 
           API_JSON="$RUNNER_TEMP/asc_api_key.json"
-          python3 - <<PY
-import json, os
-key_id=os.environ["ASC_KEY_ID"]
-issuer_id=os.environ["ASC_ISSUER_ID"]
-p8_path=os.environ["KEY_P8_PATH"]
-with open(p8_path, "r", encoding="utf-8") as f:
-    key=f.read()
-obj={"key_id": key_id, "issuer_id": issuer_id, "key": key, "in_house": False}
-with open(os.environ["API_JSON_PATH"], "w", encoding="utf-8") as out:
-    json.dump(obj, out)
-print("Wrote", os.environ["API_JSON_PATH"])
-PY
-          export KEY_P8_PATH="$KEY_P8"
-          export API_JSON_PATH="$API_JSON"
+          KEY_P8_PATH="$KEY_P8" API_JSON_PATH="$API_JSON" python3 -c 'import json,os; \
+            key=open(os.environ["KEY_P8_PATH"],"r",encoding="utf-8").read(); \
+            obj={"key_id":os.environ["ASC_KEY_ID"],"issuer_id":os.environ["ASC_ISSUER_ID"],"key":key,"in_house":False}; \
+            json.dump(obj, open(os.environ["API_JSON_PATH"],"w",encoding="utf-8"))'
 
-          # Upload
           fastlane pilot upload \
             --ipa "$IPA_PATH" \
             --api_key_path "$API_JSON" \
