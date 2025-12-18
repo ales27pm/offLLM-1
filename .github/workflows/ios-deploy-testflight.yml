@@ -57,7 +57,16 @@ jobs:
           security unlock-keychain -p "$PASS" "$KEYCHAIN"
           security set-keychain-settings -lut 21600 "$KEYCHAIN"
 
-          echo "$P12_BASE64" | tr -d '\n\r\t ' | base64 --decode > "$RUNNER_TEMP/cert.p12"
+          python - <<'PY'
+          import base64
+          import os
+
+          data = os.environ["P12_BASE64"].encode()
+          clean = b"".join(data.split())
+
+          with open(os.path.join(os.environ["RUNNER_TEMP"], "cert.p12"), "wb") as f:
+              f.write(base64.b64decode(clean))
+          PY
           security import "$RUNNER_TEMP/cert.p12" \
             -k "$KEYCHAIN" \
             -P "$P12_PASSWORD" \
@@ -75,7 +84,16 @@ jobs:
           set -euo pipefail
           mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
 
-          echo "$PROFILE_B64" | tr -d '\n\r\t ' | base64 --decode > "$RUNNER_TEMP/app.mobileprovision"
+          python - <<'PY'
+          import base64
+          import os
+
+          data = os.environ["PROFILE_B64"].encode()
+          clean = b"".join(data.split())
+
+          with open(os.path.join(os.environ["RUNNER_TEMP"], "app.mobileprovision"), "wb") as f:
+              f.write(base64.b64decode(clean))
+          PY
           security cms -D -i "$RUNNER_TEMP/app.mobileprovision" > "$RUNNER_TEMP/profile.plist"
 
           UUID=$(/usr/libexec/PlistBuddy -c "Print:UUID" "$RUNNER_TEMP/profile.plist")
@@ -109,20 +127,44 @@ jobs:
           schemes=$(xcodebuild -list -workspace "$WORKSPACE" \
             | awk '/Schemes:/{f=1;next} f&&NF{gsub(/^[ \t]+/,"");print}')
 
-          for s in $schemes; do
-            pid=$(xcodebuild -showBuildSettings \
+          matching_schemes=()
+
+          while IFS= read -r s; do
+            [ -z "$s" ] && continue
+
+            build_settings=$(xcodebuild -showBuildSettings \
               -workspace "$WORKSPACE" \
               -scheme "$s" \
-              -configuration "$CONFIGURATION" 2>/dev/null \
-              | awk -F ' = ' '/PRODUCT_BUNDLE_IDENTIFIER/{print $2;exit}')
-            if [ "$pid" = "$BUNDLE_ID" ]; then
-              echo "SCHEME=$s" >> $GITHUB_ENV
-              exit 0
-            fi
-          done
+              -configuration "$CONFIGURATION" 2>/dev/null || true)
 
-          echo "::error::No scheme matches $BUNDLE_ID"
-          exit 1
+            [ -z "$build_settings" ] && continue
+
+            wrapper_extension=$(printf '%s\n' "$build_settings" \
+              | awk '/WRAPPER_EXTENSION/ {print $3; exit}')
+            [ "$wrapper_extension" != "app" ] && continue
+
+            pid=$(printf '%s\n' "$build_settings" \
+              | awk '/PRODUCT_BUNDLE_IDENTIFIER/ {print $3; exit}')
+
+            if [ "$pid" = "$BUNDLE_ID" ]; then
+              matching_schemes+=("$s")
+            fi
+          done <<< "$schemes"
+
+          if [ "${#matching_schemes[@]}" -eq 0 ]; then
+            echo "::error::No application scheme found with PRODUCT_BUNDLE_IDENTIFIER=$BUNDLE_ID"
+            exit 1
+          fi
+
+          if [ "${#matching_schemes[@]}" -gt 1 ]; then
+            echo "::error::Multiple application schemes share PRODUCT_BUNDLE_IDENTIFIER=$BUNDLE_ID"
+            printf ' - %s\n' "${matching_schemes[@]}"
+            echo "Please set SCHEME explicitly or make bundle identifiers unique."
+            exit 1
+          fi
+
+          echo "✅ Auto-detected app scheme: ${matching_schemes[0]}"
+          echo "SCHEME=${matching_schemes[0]}" >> "$GITHUB_ENV"
 
       # ------------------ BUILD ------------------
 
@@ -136,8 +178,22 @@ jobs:
 
       - name: 🔎 Detect signing identity
         run: |
-          ID=$(security find-identity -v -p codesigning "$KEYCHAIN_PATH" \
-            | grep Apple\ Distribution | head -n1 | sed -n 's/.*"\(.*\)".*/\1/p')
+          IDENTITIES=$(security find-identity -v -p codesigning "$KEYCHAIN_PATH" || true)
+
+          DIST_ID=$(printf '%s\n' "$IDENTITIES" | awk -F '"' '/Apple Distribution/ {print $2; exit}')
+          DEV_ID=$(printf '%s\n' "$IDENTITIES" | awk -F '"' '/Apple Development/ {print $2; exit}')
+
+          if [ -n "$DIST_ID" ]; then
+            ID="$DIST_ID"
+          elif [ -n "$DEV_ID" ]; then
+            ID="$DEV_ID"
+          else
+            echo "::error::No signing identity found in keychain $KEYCHAIN_PATH"
+            security find-identity -v -p codesigning "$KEYCHAIN_PATH" || true
+            exit 1
+          fi
+
+          echo "Using signing identity: $ID"
           echo "SIGNING_IDENTITY=$ID" >> $GITHUB_ENV
 
       - name: 🏗️ Archive
@@ -162,13 +218,17 @@ jobs:
       - name: 📦 Export IPA
         run: |
           cat > ios/ExportOptions.plist <<EOF
-          <plist version="1.0"><dict>
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
             <key>method</key><string>app-store</string>
             <key>teamID</key><string>$TEAM_ID</string>
             <key>signingStyle</key><string>manual</string>
             <key>provisioningProfiles</key>
             <dict><key>$BUNDLE_ID</key><string>$PROFILE_UUID</string></dict>
-          </dict></plist>
+          </dict>
+          </plist>
           EOF
 
           xcodebuild -exportArchive \
@@ -177,7 +237,18 @@ jobs:
             -exportOptionsPlist ios/ExportOptions.plist \
             | xcpretty
 
-          echo "IPA_PATH=$(ls build/output/*.ipa)" >> $GITHUB_ENV
+          mapfile -t IPA_FILES < <(find build/output -maxdepth 1 -name "*.ipa" -print)
+          if [ "${#IPA_FILES[@]}" -eq 0 ]; then
+            echo "::error::No IPA file found in build/output"
+            exit 1
+          fi
+          if [ "${#IPA_FILES[@]}" -gt 1 ]; then
+            echo "::error::Multiple IPA files found in build/output; please clean the directory"
+            printf ' - %s\n' "${IPA_FILES[@]}"
+            exit 1
+          fi
+
+          echo "IPA_PATH=${IPA_FILES[0]}" >> "$GITHUB_ENV"
 
       - name: 🚀 Upload to TestFlight
         env:
