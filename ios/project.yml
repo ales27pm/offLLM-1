@@ -1,10 +1,15 @@
+# ios/project.yml
 name: monGARS
 
 options:
   bundleIdPrefix: com.offllm
   deploymentTarget:
     iOS: "18.0"
-  postGenCommand: pod install --project-directory=.
+  # Keep postGenCommand, but make it deterministic and CI-friendly.
+  # CocoaPods must run after XcodeGen so the workspace exists.
+  postGenCommand: |
+    set -euo pipefail
+    pod install --project-directory=. --verbose
 
 packages:
   mlx-swift:
@@ -18,6 +23,9 @@ settings:
   base:
     CLANG_CXX_LANGUAGE_STANDARD: c++20
     CLANG_CXX_LIBRARY: libc++
+    IPHONEOS_DEPLOYMENT_TARGET: "18.0"
+    SWIFT_VERSION: "6.0"
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
 
 targets:
   monGARS:
@@ -32,10 +40,11 @@ targets:
           - "../build/**"
           - "Pods/**"
           - "MLXCompat.swift"
-          - "Resources/**"
-        # MLXCompat.swift has been removed; the app now uses the new MLX API via LanguageModel
+        # IMPORTANT: do NOT exclude Resources/** if you also declare resources below.
+        # Excluding it can confuse incremental builds and bundle scripts.
 
     resources:
+      # Keep these optional so CI doesn't fail if empty/missing.
       - path: MyOfflineLLMApp/Resources
         type: folder
         optional: true
@@ -44,7 +53,7 @@ targets:
         optional: true
 
     dependencies:
-      # System frameworks required by custom native modules
+      # iOS system frameworks required by your native modules
       - sdk: Contacts.framework
       - sdk: CoreLocation.framework
       - sdk: CoreMotion.framework
@@ -53,9 +62,12 @@ targets:
       - sdk: MediaPlayer.framework
       - sdk: MessageUI.framework
       - sdk: Photos.framework
+
+      # MLX + LLM
       - package: mlx-swift-examples
         product: MLXLLM
-      # If your code imports additional MLX products, keep them here:
+      - package: mlx-swift-examples
+        product: MLXLMCommon
       - package: mlx-swift
         product: MLX
       - package: mlx-swift
@@ -64,36 +76,44 @@ targets:
         product: MLXLinalg
       - package: mlx-swift
         product: MLXFFT
-      # Additional libraries required by MLXModule.swift
-      - package: mlx-swift-examples
-        product: MLXLMCommon
-      # - package: mlx-swift-examples
-      #   product: Tokenizers
+
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.offllm.mongars
         INFOPLIST_FILE: MyOfflineLLMApp/Info.plist
-        SWIFT_VERSION: "6.0"
-        IPHONEOS_DEPLOYMENT_TARGET: "18.0"
         SWIFT_OBJC_BRIDGING_HEADER: MyOfflineLLMApp/Bridging/monGARS-Bridging-Header.h
 
-        # Stable toolchain for RN/Folly
         CLANG_CXX_LIBRARY: libc++
-        # CLANG_CXX_LANGUAGE_STANDARD inherited from Pods (c++20)
         OTHER_MTLFLAGS:
           - "$(inherited)"
           - "-std=metal-cpp17"
 
-        # Allow CocoaPods header symlink scripts to write in Xcode 15+
-        ENABLE_USER_SCRIPT_SANDBOXING: NO
+        # Default: unsigned. We only enable signing in Release via configurations below.
+        CODE_SIGNING_ALLOWED: NO
+        CODE_SIGNING_REQUIRED: NO
+        CODE_SIGN_IDENTITY: ""
+        DEVELOPMENT_TEAM: ""
 
       configurations:
         Release:
           DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
-          DEVELOPMENT_TEAM: 52T7P32J34
+
+          # Signing (manual) for App Store / TestFlight archives
+          CODE_SIGNING_ALLOWED: YES
+          CODE_SIGNING_REQUIRED: YES
           CODE_SIGN_STYLE: Manual
-          PROVISIONING_PROFILE_SPECIFIER: monGARS
+          DEVELOPMENT_TEAM: 52T7P32J34
+
+          # Prefer a concrete identity name.
+          # If you want absolute determinism, set this to the full identity string:
+          #   "Apple Distribution: <Your Legal Name> (<TEAMID>)"
           CODE_SIGN_IDENTITY: "Apple Distribution"
+
+          # IMPORTANT: Prefer UUID in CI (more reliable than name).
+          # Your workflow already exports PROFILE_UUID; you can pass it to xcodebuild
+          # as PROVISIONING_PROFILE. Leaving SPECIFIER here is fine for local builds.
+          PROVISIONING_PROFILE_SPECIFIER: "monGARS"
+
         Debug:
           CODE_SIGNING_ALLOWED: NO
           CODE_SIGNING_REQUIRED: NO
@@ -105,11 +125,22 @@ targets:
         shell: /bin/bash
         script: |
           set -euo pipefail
-          export NODE_BINARY="${NODE_BINARY:-node}"
+
+          # Xcode 15/16: ensure node is resolvable (RN script uses NODE_BINARY).
+          export NODE_BINARY="${NODE_BINARY:-$(command -v node || true)}"
+          if [[ -z "${NODE_BINARY}" ]]; then
+            echo "::error::node not found on PATH"
+            exit 1
+          fi
+
           export RCT_METRO_PORT="${RCT_METRO_PORT:-8081}"
+
+          # For archives we want deterministic bundling.
           if [[ "${CONFIGURATION}" == "Release" ]]; then
             export EXTRA_PACKAGER_ARGS="${EXTRA_PACKAGER_ARGS:---minify}"
           fi
+
+          # RN bundling script
           "${SRCROOT}/../node_modules/react-native/scripts/react-native-xcode.sh"
         inputFiles:
           - "${SRCROOT}/../index.js"
@@ -117,32 +148,4 @@ targets:
           - "${SRCROOT}/../app.json"
           - "${SRCROOT}/../babel.config.js"
           - "${SRCROOT}/../metro.config.js"
-          - "${SRCROOT}/../node_modules/react-native/scripts/react-native-xcode.sh"
-        outputFiles:
-          - "${DERIVED_FILE_DIR}/bundle-react-native.stamp"
-        runOnlyForDeploymentPostprocessing: false
-
-schemes:
-  monGARS:
-    shared: true
-    build:
-      targets:
-        monGARS: all
-      preActions:
-        - name: Purge legacy RCTDeprecation caches
-          settingsTarget: monGARS
-          script: |
-            bash "${PROJECT_DIR}/scripts/purge-rctdeprecation-caches.sh"
-        - name: Patch MLX metal headers for C++17 warnings
-          settingsTarget: monGARS
-          script: |
-            bash "${PROJECT_DIR}/scripts/patch-mlx-metal-cxx17.sh"
-    run:
-      config: Debug
-    test:
-      config: Debug
-      targets: []
-    analyze:
-      config: Debug
-    archive:
-      config: Release
+          - "${SRCROOT}/../node_modules/react-native/scripts
