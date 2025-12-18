@@ -215,53 +215,14 @@ jobs:
 
           echo "::group::xcodebuild -list (json)"
           list_json="$(xcodebuild -list -json -workspace "$WORKSPACE" 2>/dev/null || true)"
-          printf '%s\n' "$list_json" | python3 - <<'PY'
-            import sys, json
-            raw = sys.stdin.read().strip()
-            if not raw:
-                print("::warning::No JSON returned from xcodebuild -list")
-                sys.exit(0)
-
-            try:
-                data = json.loads(raw)
-            except Exception as e:
-                print(f"::error::Invalid JSON from xcodebuild -list: {e}")
-                sys.exit(1)
-
-            schemes = (data.get("workspace") or {}).get("schemes") or []
-            print("Schemes:")
-            for s in schemes:
-                print(f"  - {s}")
-          PY
+          python3 -c $'import sys,json\nraw=sys.stdin.read().strip()\nif not raw:\n    print("::warning::No JSON returned from xcodebuild -list")\n    sys.exit(0)\ntry:\n    data=json.loads(raw)\nexcept Exception as e:\n    print(f"::error::Invalid JSON from xcodebuild -list: {e}")\n    sys.exit(1)\nschemes=(data.get("workspace") or {}).get("schemes") or []\nprint("Schemes:")\nfor s in schemes:\n    print(f"  - {s}")' <<<"$list_json"
           echo "::endgroup::"
 
-          schemes="$(printf '%s' "$list_json" | python3 - <<'PY'
-            import sys, json
-            raw = sys.stdin.read().strip()
-            if not raw:
-                sys.exit(0)
-            data = json.loads(raw)
-            schemes = (data.get("workspace") or {}).get("schemes") or []
-            print("\n".join(schemes))
-          PY
-          )"
+          schemes="$(python3 -c $'import sys,json\nraw=sys.stdin.read().strip()\nif not raw:\n    sys.exit(0)\ndata=json.loads(raw)\nschemes=(data.get(\"workspace\") or {}).get(\"schemes\") or []\nprint(\"\\n\".join(schemes))' <<<"$list_json")"
 
           if [ -z "$schemes" ]; then
             echo "::warning::No schemes from xcodebuild -list; scanning shared .xcscheme files."
-            schemes="$(find ios -type f -path "*/xcshareddata/xcschemes/*.xcscheme" -print0 | python3 - <<'PY'
-            import os, sys
-            names = []
-            for p in sys.stdin.read().split("\0"):
-                if not p:
-                    continue
-                names.append(os.path.splitext(os.path.basename(p))[0])
-            seen=set(); out=[]
-            for n in names:
-                if n not in seen:
-                    seen.add(n); out.append(n)
-            print("\n".join(out))
-          PY
-            )"
+            schemes="$(find ios -type f -path "*/xcshareddata/xcschemes/*.xcscheme" -print0 | python3 -c $'import os,sys\nnames=[]\nfor p in sys.stdin.read().split(\"\\0\"):\n    if not p:\n        continue\n    names.append(os.path.splitext(os.path.basename(p))[0])\nseen=set(); out=[]\nfor n in names:\n    if n not in seen:\n        seen.add(n)\n        out.append(n)\nprint(\"\\n\".join(out))')"
           fi
 
           if [ -z "$schemes" ]; then
@@ -278,104 +239,6 @@ jobs:
           fi
 
           echo "::notice::Scheme '$SCHEME' is visible and ready."
-
-      - name: 🧠 Auto-detect app scheme by matching PRODUCT_BUNDLE_IDENTIFIER
-        run: |
-          set -euo pipefail
-          echo "Workspace: $WORKSPACE"
-          echo "Configured SCHEME: ${SCHEME:-}"
-          echo "Target BUNDLE_ID: $BUNDLE_ID"
-          echo "Configuration: $CONFIGURATION"
-
-          # Prefer Xcode's JSON output (stable + no awk indentation traps)
-          json="$RUNNER_TEMP/xcodebuild_list.json"
-          xcodebuild -list -json -workspace "$WORKSPACE" > "$json"
-
-          python3 - <<'PY'
-          import json, os, subprocess, sys
-
-          workspace = os.environ["WORKSPACE"]
-          bundle_id = os.environ["BUNDLE_ID"]
-          config = os.environ["CONFIGURATION"]
-          configured = os.environ.get("SCHEME", "").strip()
-          json_path = os.path.join(os.environ["RUNNER_TEMP"], "xcodebuild_list.json")
-
-          with open(json_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-
-          schemes = data.get("workspace", {}).get("schemes", []) or []
-          print("All schemes:")
-          for s in schemes:
-            print(f"  - {s}")
-
-          def scheme_buildable(s: str) -> bool:
-            r = subprocess.run(
-              ["xcodebuild", "-showBuildSettings", "-workspace", workspace, "-scheme", s, "-configuration", config],
-              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-            )
-            return r.returncode == 0
-
-          def bundle_for_scheme(s: str) -> str:
-            p = subprocess.run(
-              ["xcodebuild", "-showBuildSettings", "-workspace", workspace, "-scheme", s, "-configuration", config],
-              capture_output=True, text=True
-            )
-            if p.returncode != 0:
-              return ""
-            for line in p.stdout.splitlines():
-              if line.strip().startswith("PRODUCT_BUNDLE_IDENTIFIER = "):
-                return line.split(" = ", 1)[1].strip()
-            return ""
-
-          # If configured scheme exists AND is buildable, keep it.
-          if configured and configured in schemes and scheme_buildable(configured):
-            print(f"::notice::SCHEME '{configured}' exists & is buildable; keeping it.")
-            sys.exit(0)
-
-          # Filter out obvious non-app schemes first (Pods-, privacy, RN deps)
-          excluded_prefixes = ("Pods-",)
-          excluded_exact = set([
-            "boost","DoubleConversion","fast_float","FBLazyVector","fmt","glog","hermes-engine","SocketRocket","Yoga"
-          ])
-          excluded_starts = ("React", "RCT")
-          excluded_rn = ("RN", "RNC", "react-native-")
-
-          candidates = []
-          for s in schemes:
-            if s.startswith(excluded_prefixes): continue
-            if s in excluded_exact: continue
-            if s.endswith("_privacy") or s.endswith("-privacy") or s.endswith("privacy"): continue
-            if s.startswith(excluded_starts): continue
-            if s.startswith(excluded_rn): continue
-            candidates.append(s)
-
-          print("Candidate schemes:")
-          for s in candidates:
-            print(f"  - {s}")
-
-          matches = []
-          for s in candidates:
-            if not scheme_buildable(s):
-              continue
-            pid = bundle_for_scheme(s)
-            print(f"Probe {s}: PRODUCT_BUNDLE_IDENTIFIER={pid!r}")
-            if pid == bundle_id:
-              matches.append(s)
-
-          print("Matching schemes:")
-          for s in matches:
-            print(f"  - {s}")
-
-          if len(matches) == 1:
-            detected = matches[0]
-            with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as envf:
-              envf.write(f"SCHEME={detected}\n")
-            print(f"::notice::Auto-detected app scheme: {detected}")
-            sys.exit(0)
-
-          print(f"::error::Could not uniquely detect app scheme for BUNDLE_ID={bundle_id} (found {len(matches)} matches). Set env.SCHEME explicitly.")
-          sys.exit(1)
-          PY
 
       - name: 🏷️ Bump build number
         if: ${{ inputs.bump_build_number }}
@@ -495,24 +358,7 @@ jobs:
           fi
 
           echo "::group::xcresulttool - actions invocation record"
-          xcrun xcresulttool get --path "$ARCHIVE_XCRESULT" --format json | python3 - <<'PY'
-          import json, sys
-          data = json.load(sys.stdin)
-
-          # Best-effort dump of action/issue summaries without assuming exact schema.
-          def walk(obj, path=""):
-            if isinstance(obj, dict):
-              for k, v in obj.items():
-                np = f"{path}.{k}" if path else k
-                if k in ("issueSummaries", "issues", "errors", "warnings") and v:
-                  print(f"\n== {np} ==")
-                  print(json.dumps(v, indent=2)[:20000])
-                walk(v, np)
-            elif isinstance(obj, list):
-              for i, v in enumerate(obj):
-                walk(v, f"{path}[{i}]")
-          walk(data)
-          PY
+          xcrun xcresulttool get --path "$ARCHIVE_XCRESULT" --format json | python3 -c $'import json,sys\n\ndata=json.load(sys.stdin)\n\ndef walk(obj, path=\"\"):\n    if isinstance(obj, dict):\n        for k, v in obj.items():\n            np=f\"{path}.{k}\" if path else k\n            if k in (\"issueSummaries\",\"issues\",\"errors\",\"warnings\") and v:\n                print(f\"\\n== {np} ==\")\n                print(json.dumps(v, indent=2)[:20000])\n            walk(v, np)\n    elif isinstance(obj, list):\n        for i, v in enumerate(obj):\n            walk(v, f\"{path}[{i}]\")\n\nwalk(data)\n'
           echo "::endgroup::"
 
           echo "::error::Archive failed. See log tail above + xcresult dumps."
