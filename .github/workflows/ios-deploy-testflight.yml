@@ -204,18 +204,7 @@ jobs:
             exit 1
           fi
 
-          target_id=$(python3 - "$pbxproj" "$target_name" <<'PY'
-            import re, sys, pathlib
-            pbx_path = pathlib.Path(sys.argv[1])
-            target = sys.argv[2]
-            data = pbx_path.read_text(encoding="utf-8", errors="ignore")
-            pat = re.compile(r'(?P<id>[A-F0-9]{24}) /\* ' + re.escape(target) + r' \*/ = \\{isa = PBXNativeTarget;', re.MULTILINE)
-            m = pat.search(data)
-            if not m:
-                sys.exit(1)
-            print(m.group("id"))
-          PY
-          ) || {
+          target_id=$(python3 - "$pbxproj" "$target_name" -c "import re, sys, pathlib; pbx_path=pathlib.Path(sys.argv[1]); target=sys.argv[2]; data=pbx_path.read_text(encoding='utf-8', errors='ignore'); m=re.search(r'([A-F0-9]{24}) /\* ' + re.escape(target) + r' \*/ = \\\\{isa = PBXNativeTarget;', data); sys.exit(1) if not m else print(m.group(1))") || {
             echo "::error::Failed to find PBXNativeTarget for $target_name in $pbxproj"
             exit 1
           }
