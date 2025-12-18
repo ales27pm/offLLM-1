@@ -364,7 +364,25 @@ jobs:
             echo "::warning::xcodebuild -list failed for ${project_flag[*]} (will attempt .xcscheme scan next)."
           fi
 
-          schemes=$(python3 -c 'import json,sys; data=json.load(sys.stdin) if sys.stdin else {}; proj=data.get("project") or {}; ws=data.get("workspace") or {}; print("\n".join(proj.get("schemes") or ws.get("schemes") or []))' <<< "$list_json")
+          schemes=$(python3 - <<'PY' <<< "$list_json"
+            import json
+            import sys
+            
+            raw = sys.stdin.read()
+            if not raw.strip():
+              sys.exit(0)
+            
+            try:
+              data = json.loads(raw)
+            except Exception as exc:
+              print(f"::error::Failed to parse xcodebuild -list JSON: {exc}", file=sys.stderr)
+              sys.exit(1)
+            
+            proj = data.get("project") or {}
+            ws = data.get("workspace") or {}
+            print("\n".join(proj.get("schemes") or ws.get("schemes") or []))
+          PY
+          )
 
           # Fallback: scan repository for .xcscheme files if xcodebuild returns none
           if [ -z "$schemes" ]; then
