@@ -371,7 +371,7 @@ jobs:
           if [ -z "$schemes" ]; then
             echo "::warning::No schemes from xcodebuild -list; scanning repo for .xcscheme files."
             schemes=$(
-              find . -name "*.xcscheme" -print0 | python3 -c $'import os,sys\nnames=[]\nfor path in sys.stdin.read().split("\\0"):\n    if not path:\n        continue\n    base=os.path.splitext(os.path.basename(path))[0]\n    if base not in names:\n        names.append(base)\nprint("\\n".join(names))'
+              find . -type f -path "*/xcshareddata/xcschemes/*.xcscheme" -print0 | python3 -c $'import os,sys\nnames=[]\nfor path in sys.stdin.read().split("\\0"):\n    if not path:\n        continue\n    base=os.path.splitext(os.path.basename(path))[0]\n    if base not in names:\n        names.append(base)\nprint("\\n".join(names))'
             )
           fi
 
