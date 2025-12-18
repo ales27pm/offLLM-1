@@ -215,7 +215,11 @@ jobs:
           echo "Listing schemes"
           echo "-------------"
 
-          list_json=$(xcodebuild -list "${project_flag[@]}" -json)
+          list_json=""
+          if ! list_json=$(xcodebuild -list "${project_flag[@]}" -json 2>/dev/null); then
+            echo "::warning::xcodebuild -list failed for ${project_flag[*]} (will attempt .xcscheme scan next)."
+          fi
+
           schemes=$(python3 - <<'PY' <<< "$list_json"
             import json
             import sys
