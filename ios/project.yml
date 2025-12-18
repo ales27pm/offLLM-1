@@ -121,24 +121,6 @@ targets:
         outputFiles:
           - "${DERIVED_FILE_DIR}/bundle-react-native.stamp"
         runOnlyForDeploymentPostprocessing: false
-      - name: Purge legacy RCTDeprecation caches
-        script: |
-          bash "${PROJECT_DIR}/scripts/purge-rctdeprecation-caches.sh"
-        runOnlyForDeploymentPostprocessing: false
-        alwaysOutOfDate: true
-      - name: Patch MLX metal headers for C++17 warnings
-        script: |
-          bash "${PROJECT_DIR}/scripts/patch-mlx-metal-cxx17.sh"
-        runOnlyForDeploymentPostprocessing: false
-        alwaysOutOfDate: true
-      - name: Create Symlinks to Header Folders
-        script: |
-          echo "Symlinks handled by CocoaPods"
-          exit 0
-        outputFiles:
-          - "${DERIVED_FILE_DIR}/create_symlinks_to_header_folders.stamp"
-        runOnlyForDeploymentPostprocessing: false
-        alwaysOutOfDate: true
 
 schemes:
   monGARS:
@@ -146,6 +128,15 @@ schemes:
     build:
       targets:
         monGARS: all
+      preActions:
+        - name: Purge legacy RCTDeprecation caches
+          settingsTarget: monGARS
+          script: |
+            bash "${PROJECT_DIR}/scripts/purge-rctdeprecation-caches.sh"
+        - name: Patch MLX metal headers for C++17 warnings
+          settingsTarget: monGARS
+          script: |
+            bash "${PROJECT_DIR}/scripts/patch-mlx-metal-cxx17.sh"
     run:
       config: Debug
     test:
