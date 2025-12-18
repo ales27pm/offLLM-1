@@ -215,11 +215,26 @@ jobs:
           echo "Listing schemes"
           echo "-------------"
 
-          schemes=$(xcodebuild -list "${project_flag[@]}" \
-            | awk '
-                /^Schemes:/{in_s=1; next}
-                in_s && NF{ gsub(/^[[:space:]]+/,""); print }
-              ')
+          list_json=$(xcodebuild -list "${project_flag[@]}" -json)
+          schemes=$(python3 - <<'PY' <<< "$list_json"
+            import json
+            import sys
+
+            try:
+                data = json.load(sys.stdin)
+            except Exception as exc:  # pragma: no cover - defensive guard for CI logs
+                print(f"::error::Failed to parse xcodebuild -list JSON: {exc}", file=sys.stderr)
+                sys.exit(1)
+
+            schemes = (
+                data.get("workspace", {}).get("schemes")
+                or data.get("project", {}).get("schemes")
+                or []
+            )
+
+            print("\n".join(schemes))
+          PY
+          )
 
           if [ -z "$schemes" ]; then
             echo "::error::No schemes found for ${project_flag[*]}!"
@@ -237,8 +252,14 @@ jobs:
             [ -z "$scheme" ] && continue
             echo "Scheme: $scheme"
 
-            # Check build settings for Release and Debug
-            for config in Release Debug; do
+            configs="${SCHEME_CONFIGURATIONS:-Release Debug}"
+            if [ -z "$configs" ]; then
+              echo "::warning::SCHEME_CONFIGURATIONS is empty; defaulting to 'Release Debug'."
+              configs="Release Debug"
+            fi
+
+            # Check build settings for each requested configuration
+            for config in $configs; do
               echo "  Configuration: $config"
               pid=$(xcodebuild -showBuildSettings \
                 "${project_flag[@]}" \
