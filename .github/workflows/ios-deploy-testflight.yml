@@ -361,47 +361,17 @@ jobs:
           echo "-------------"
 
           list_json=""
-          if ! list_json=$(xcodebuild -list "${project_flag[@]}" -json 2>/dev/null); then
+          if ! list_json=$(xcodebuild -list "${project_flag[@]}" -json 2>/dev/null || true); then
             echo "::warning::xcodebuild -list failed for ${project_flag[*]} (will attempt .xcscheme scan next)."
           fi
 
-          schemes=$(python3 - <<'PY' <<< "$list_json"
-            import json
-            import sys
-            
-            raw = sys.stdin.read()
-            if not raw.strip():
-              sys.exit(0)
-            
-            try:
-              data = json.loads(raw)
-            except Exception as exc:
-              print(f"::error::Failed to parse xcodebuild -list JSON: {exc}", file=sys.stderr)
-              sys.exit(1)
-            
-            proj = data.get("project") or {}
-            ws = data.get("workspace") or {}
-            print("\n".join(proj.get("schemes") or ws.get("schemes") or []))
-          PY
-          )
+          schemes=$(python3 -c $'import json,sys\nraw=sys.stdin.read()\nif not raw.strip():\n    sys.exit(0)\ntry:\n    data=json.loads(raw)\nexcept Exception as exc:\n    print(f"::error::Failed to parse xcodebuild -list JSON: {exc}", file=sys.stderr)\n    sys.exit(1)\nproj=data.get("project") or {}\nws=data.get("workspace") or {}\nprint("\\n".join(proj.get("schemes") or ws.get("schemes") or []))' <<< "$list_json")
 
           # Fallback: scan repository for .xcscheme files if xcodebuild returns none
           if [ -z "$schemes" ]; then
             echo "::warning::No schemes from xcodebuild -list; scanning repo for .xcscheme files."
-            schemes=$(find . -name "*.xcscheme" -print0 | python3 - <<'PY'
-              import os
-              import sys
-
-              names = []
-              for path in sys.stdin.read().split("\0"):
-                if not path:
-                  continue
-                base = os.path.splitext(os.path.basename(path))[0]
-                if base not in names:
-                  names.append(base)
-
-              print("\n".join(names))
-            PY
+            schemes=$(
+              find . -name "*.xcscheme" -print0 | python3 -c $'import os,sys\nnames=[]\nfor path in sys.stdin.read().split("\\0"):\n    if not path:\n        continue\n    base=os.path.splitext(os.path.basename(path))[0]\n    if base not in names:\n        names.append(base)\nprint("\\n".join(names))'
             )
           fi
 
