@@ -171,14 +171,15 @@ jobs:
           fi
 
       - name: 🧱 Generate Xcode project + install pods
+        working-directory: ios
         run: |
           set -euo pipefail
 
-          xcodegen generate --spec ios/project.yml --project ios/monGARS.xcodeproj
-          pod install --project-directory=ios --verbose
+          xcodegen generate
+          pod install --verbose
 
-          if [ ! -d "ios/monGARS.xcworkspace" ]; then
-            echo "::error::Expected ios/monGARS.xcworkspace to exist after pod install."
+          if [ ! -d "monGARS.xcworkspace" ]; then
+            echo "::error::Expected monGARS.xcworkspace to exist after pod install."
             exit 1
           fi
 
