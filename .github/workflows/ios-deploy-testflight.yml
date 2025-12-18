@@ -305,9 +305,9 @@ jobs:
           project_flag=()
           workspace_input="${WORKSPACE:-}"
           if [ -n "$workspace_input" ]; then
-            if [[ "$workspace_input" == *.xcworkspace && -f "$workspace_input" ]]; then
+            if [[ "$workspace_input" == *.xcworkspace && -d "$workspace_input" ]]; then
               project_flag=(-workspace "$workspace_input")
-            elif [[ "$workspace_input" == *.xcodeproj && -f "$workspace_input" ]]; then
+            elif [[ "$workspace_input" == *.xcodeproj && -d "$workspace_input" ]]; then
               project_flag=(-project "$workspace_input")
             fi
           fi
