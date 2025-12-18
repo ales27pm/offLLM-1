@@ -171,11 +171,16 @@ jobs:
           fi
 
       - name: 🧱 Generate Xcode project + install pods
-        working-directory: ios
         run: |
           set -euo pipefail
-          xcodegen generate
-          pod install --verbose
+
+          xcodegen generate --spec ios/project.yml --project ios/monGARS.xcodeproj
+          pod install --project-directory=ios --verbose
+
+          if [ ! -d "ios/monGARS.xcworkspace" ]; then
+            echo "::error::Expected ios/monGARS.xcworkspace to exist after pod install."
+            exit 1
+          fi
 
       - name: Ensure shared app scheme exists
         run: |
@@ -297,6 +302,25 @@ jobs:
           echo "Shared scheme written to: $scheme_path"
           ls -l "$scheme_path"
 
+      - name: 🔎 Preflight Xcode layout
+        run: |
+          set -euo pipefail
+
+          echo "Workspace expectation: ${WORKSPACE:-unset}"
+          ls -la ios | sed -n '1,200p'
+
+          echo "::group::xcodebuild -list (workspace)"
+          xcodebuild -list -workspace ios/monGARS.xcworkspace || true
+          echo "::endgroup::"
+
+          echo "::group::xcodebuild -list (project)"
+          xcodebuild -list -project ios/monGARS.xcodeproj || true
+          echo "::endgroup::"
+
+          echo "::group::find .xcscheme files"
+          find ios -maxdepth 4 -name "*.xcscheme" -print
+          echo "::endgroup::"
+
       - name: 🧪 List all app schemes + bundle identifiers
         run: |
           set -euo pipefail
@@ -340,25 +364,7 @@ jobs:
             echo "::warning::xcodebuild -list failed for ${project_flag[*]} (will attempt .xcscheme scan next)."
           fi
 
-          schemes=$(python3 - <<'PY' <<< "$list_json"
-            import json
-            import sys
-
-            try:
-                data = json.load(sys.stdin)
-            except Exception as exc:  # pragma: no cover - defensive guard for CI logs
-                print(f"::error::Failed to parse xcodebuild -list JSON: {exc}", file=sys.stderr)
-                sys.exit(1)
-
-            schemes = (
-                data.get("workspace", {}).get("schemes")
-                or data.get("project", {}).get("schemes")
-                or []
-            )
-
-            print("\n".join(schemes))
-          PY
-          )
+          schemes=$(python3 -c 'import json,sys; data=json.load(sys.stdin) if sys.stdin else {}; proj=data.get("project") or {}; ws=data.get("workspace") or {}; print("\n".join(proj.get("schemes") or ws.get("schemes") or []))' <<< "$list_json")
 
           # Fallback: scan repository for .xcscheme files if xcodebuild returns none
           if [ -z "$schemes" ]; then
