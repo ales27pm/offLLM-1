@@ -165,6 +165,13 @@ export class ToolRegistry {
   }
 }
 
+const shouldLogFileSystemError = (error) => {
+  if (!error || typeof error.message !== "string") {
+    return true;
+  }
+  return !error.message.includes("Invalid path");
+};
+
 export const builtInTools = {
   webSearch: {
     name: "webSearch",
@@ -431,7 +438,9 @@ export const builtInTools = {
             throw new Error(`Unsupported file system operation: ${operation}`);
         }
       } catch (error) {
-        console.error("File system operation failed:", error);
+        if (shouldLogFileSystemError(error)) {
+          console.error("File system operation failed:", error);
+        }
         return {
           success: false,
           operation,
