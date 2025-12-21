@@ -17,6 +17,7 @@ import argparse
 import ast
 import dataclasses
 import hashlib
+import importlib.util
 import inspect
 import json
 import os
@@ -33,6 +34,16 @@ from dataclasses import dataclass, asdict, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, Iterator, List, Optional, Sequence, Tuple, Union
+
+def _module_available(name: str) -> bool:
+    return importlib.util.find_spec(name) is not None
+
+
+# Optional: if Unsloth is installed, import it EARLY (before transformers/trl/peft) to avoid patch-order warnings.
+if _module_available("unsloth"):
+    import unsloth  # type: ignore  # noqa: F401
+else:
+    unsloth = None  # type: ignore  # noqa: F401
 
 import torch
 from torch import nn
@@ -80,8 +91,10 @@ class PipelineConfig:
     sft_lr: float = 2e-4
     sft_lora_r: int = 16
     sft_lora_alpha: int = 32
+    sft_min_rows: int = 50
     unsloth_max_steps: int = 800
     unsloth_lr: float = 2e-4
+    unsloth_max_seq_length: int = 1024
 
     llm2vec_max_steps: int = 1200
     llm2vec_lr: float = 1e-4
@@ -97,6 +110,7 @@ class PipelineConfig:
 
     # Misc
     verbose: bool = False
+    strict: bool = False
 
 
 def resolve_pipeline_config(config: PipelineConfig) -> PipelineConfig:
@@ -871,7 +885,7 @@ class DatasetBuilder:
                     str(max_records),
                     "--min-chars",
                     str(min_chars),
-                ]
+                ],
             )
         except subprocess.CalledProcessError as exc:
             if output_path.exists() and output_path.stat().st_size > 0:
@@ -901,7 +915,7 @@ class DatasetBuilder:
 
 
 def build_sft_trainer_kwargs(
-    trainer_cls: type, tokenizer: AutoTokenizer, **kwargs: Any
+    trainer_cls: type, tokenizer: Any, **kwargs: Any
 ) -> Dict[str, Any]:
     signature = inspect.signature(trainer_cls.__init__)
     params = signature.parameters
@@ -1035,18 +1049,17 @@ class UnslothTrainerWrapper:
         output_dir: Path,
         max_steps: int,
     ) -> Path:
-        try:
-            from unsloth import FastLanguageModel
-        except ImportError as exc:
+        if not _module_available("unsloth"):
             raise ImportError(
                 "Unsloth is required for the 'unsloth' stage. Install with "
                 "`pip install unsloth` (see Unsloth docs for hardware support)."
-            ) from exc
+            )
+        from unsloth import FastLanguageModel
 
         model, tokenizer = FastLanguageModel.from_pretrained(
             model_name=config.base_model,
-            max_seq_length=2048,
-            dtype=None,
+            max_seq_length=config.unsloth_max_seq_length,
+            dtype=torch.float16 if torch.cuda.is_available() else None,
             load_in_4bit=True,
         )
 
@@ -1074,8 +1087,8 @@ class UnslothTrainerWrapper:
 
         training_args = TrainingArguments(
             output_dir=str(output_dir),
-            per_device_train_batch_size=2,
-            gradient_accumulation_steps=4,
+            per_device_train_batch_size=1,
+            gradient_accumulation_steps=8,
             learning_rate=config.unsloth_lr,
             max_steps=max_steps,
             logging_steps=10,
@@ -1092,7 +1105,7 @@ class UnslothTrainerWrapper:
                 model=lora_model,
                 train_dataset=train_ds,
                 dataset_text_field="text",
-                max_seq_length=2048,
+                max_seq_length=config.unsloth_max_seq_length,
                 args=training_args,
             )
         )
@@ -1322,9 +1335,9 @@ class PipelineOrchestrator:
             "git_commit": git_commit(self.config.repo_root),
             "platform": {
                 "python": sys.version,
-            "os": platform.platform(),
-            "machine": platform.machine(),
-        },
+                "os": platform.platform(),
+                "machine": platform.machine(),
+            },
             "config": to_json_serializable(dataclasses.asdict(self.config)),
         }
 
@@ -1435,6 +1448,13 @@ class PipelineOrchestrator:
 
         datasets = {}
 
+        formatted = self._format_datasets()
+        datasets.update(formatted)
+
+        harvested = datasets_dir / "internet" / "harvested_fr.jsonl"
+        if harvested.exists():
+            datasets["internet_raw"] = harvested
+
         # French datasets
         french_dir = datasets_dir / "french"
         french_dir.mkdir(exist_ok=True)
@@ -1449,35 +1469,151 @@ class PipelineOrchestrator:
 
         return datasets
 
+    def _pick_best_jsonl(
+        self,
+        candidates: Dict[str, Path],
+        prefer_keys: tuple[str, ...],
+        prefer_name_substrings: tuple[str, ...],
+        min_rows: int = 200,
+    ) -> Path:
+        """Select the best JSONL for a stage.
+
+        Strategy:
+        1) Prefer explicit dataset keys (e.g. offllm_sft, french_sft, telemetry_sft).
+        2) Prefer filenames containing expected substrings (e.g. 'sft', 'instruction').
+        3) Fall back to the largest JSONL by line count (fast heuristic).
+        """
+
+        def count_lines(p: Path, cap: int = 2_000_000) -> int:
+            try:
+                n = 0
+                with p.open("rb") as f:
+                    for _ in f:
+                        n += 1
+                        if n >= cap:
+                            break
+                return n
+            except Exception:
+                return 0
+
+        def in_current_run(p: Path) -> bool:
+            try:
+                return self.config.run_dir in p.parents
+            except Exception:
+                return False
+
+        def mtime(p: Path) -> float:
+            try:
+                return p.stat().st_mtime
+            except Exception:
+                return 0.0
+
+        # 1) explicit keys (prefer current run artifacts)
+        for k in prefer_keys:
+            if k in candidates and candidates[k].suffix == ".jsonl" and candidates[k].exists():
+                p = candidates[k]
+                if in_current_run(p) and count_lines(p) >= min_rows:
+                    return p
+
+        for k in prefer_keys:
+            if k in candidates and candidates[k].suffix == ".jsonl" and candidates[k].exists():
+                p = candidates[k]
+                if count_lines(p) >= min_rows:
+                    return p
+
+        # 2) substring match
+        scored: list[tuple[int, int, int, float, str, Path]] = []
+        for k, p in candidates.items():
+            if not p.exists() or p.suffix != ".jsonl":
+                continue
+            name = (p.name + " " + k).lower()
+            hits = sum(1 for s in prefer_name_substrings if s in name)
+            lines = count_lines(p)
+            scored.append((hits, int(in_current_run(p)), lines, mtime(p), k, p))
+        scored.sort(reverse=True, key=lambda t: (t[0], t[1], t[2], t[3]))
+
+        for hits, _in_run, lines, _mt, _k, p in scored:
+            if hits > 0 and lines >= min_rows:
+                return p
+
+        # 3) largest (prefer current run + newest)
+        if scored:
+            viable = [row for row in scored if row[2] >= min_rows]
+            if viable:
+                return viable[0][5]
+            best = max(scored, key=lambda t: (t[1], t[2], t[3]))
+            if best[2] == 0:
+                raise FileNotFoundError("No non-empty JSONL dataset found")
+            print(
+                "⚠️  No JSONL met the minimum row threshold; falling back to the largest available dataset."
+            )
+            return best[5]
+
+        raise FileNotFoundError("No JSONL dataset found")
+
     def _run_sft(self, datasets: Dict[str, Path]):
-        """Run SFT training."""
-        # Find dataset file
-        dataset_path = None
-        for path in datasets.values():
-            if path.suffix == ".jsonl":
-                dataset_path = path
-                break
+        """Run SFT training.
 
-        if not dataset_path:
-            raise FileNotFoundError("No JSONL dataset found")
+        IMPORTANT: Do not pick an arbitrary first JSONL (it can be tiny, e.g. 2 rows).
+        We prefer explicit SFT datasets, then filenames containing 'sft'/'instruction',
+        then fall back to the largest JSONL.
+        """
+        dataset_path = self._pick_best_jsonl(
+            datasets,
+            prefer_keys=(
+                "internet_pretrain",
+                "internet_raw",
+                "combined_instruct.jsonl",
+                "combined_retrieval.jsonl",
+                "offllm_sft",
+                "french_sft",
+                "telemetry_sft",
+                "sft",
+                "offllm",
+            ),
+            prefer_name_substrings=(
+                "normalized",
+                "harvested",
+                "french",
+                "sft",
+                "instruction",
+                "chat",
+                "alpaca",
+                "instruct",
+            ),
+            min_rows=max(50, self.config.sft_min_rows),
+        )
 
-        # Train
         sft_trainer = SFTTrainerWrapper()
         sft_trainer.train(self.config, dataset_path)
 
     def _run_llm2vec(self, datasets: Dict[str, Path]):
-        """Run LLM2Vec training."""
-        # Find corpus file
-        corpus_path = None
-        for path in datasets.values():
-            if path.suffix == ".jsonl":
-                corpus_path = str(path)
-                break
+        """Run LLM2Vec training.
 
-        if not corpus_path:
-            raise FileNotFoundError("No corpus JSONL found")
+        We strongly prefer retrieval-pairs/contrastive data if present (telemetry-derived),
+        otherwise we fall back to the best available corpus-sized JSONL.
+        """
+        # Prefer retrieval pairs (telemetry-derived)
+        pairs = (self.config.datasets_dir or (self.config.run_dir / "datasets")) / "retrieval_pairs.jsonl"
+        if pairs.exists():
+            corpus_path = str(pairs)
+        else:
+            corpus_path = str(
+                self._pick_best_jsonl(
+                    datasets,
+                    prefer_keys=("retrieval_pairs", "offllm_corpus", "internals_full", "offllm"),
+                    prefer_name_substrings=("pairs", "retrieval", "corpus", "internals", "docs", "kb"),
+                    min_rows=200,
+                )
+            )
 
-        # Configure and train
+        # Dependency check (llm2vec is not installed in many envs)
+        if not _module_available("llm2vec"):
+            print("⚠️  LLM2Vec dependency missing. Install with: pip install llm2vec")
+            print("    (See the LLM2Vec docs/model card for installation guidance.)")
+            return
+        import llm2vec  # type: ignore  # noqa: F401
+
         train_cfg = TrainCfg(
             base_model=self.config.base_model,
             revision=self.config.base_model_revision,
@@ -1492,18 +1628,66 @@ class PipelineOrchestrator:
         trainer.train()
 
     def _run_unsloth(self, datasets: Dict[str, Path]):
-        dataset_path = None
-        for path in datasets.values():
-            if path.suffix == ".jsonl":
-                dataset_path = path
-                break
-        if not dataset_path:
-            raise FileNotFoundError("No JSONL dataset found for Unsloth training")
+        """Run Unsloth training (optional).
+
+        On ~8GB GPUs (RTX 2070), Unsloth can fail if the quantized base model still
+        doesn't fit entirely on GPU. We try a conservative configuration and, if it
+        fails, we continue the pipeline (unless strict mode is enabled).
+        """
+        dataset_path = self._pick_best_jsonl(
+            datasets,
+            prefer_keys=(
+                "internet_pretrain",
+                "internet_raw",
+                "combined_instruct.jsonl",
+                "combined_retrieval.jsonl",
+                "offllm_sft",
+                "french_sft",
+                "telemetry_sft",
+                "sft",
+                "offllm",
+            ),
+            prefer_name_substrings=(
+                "normalized",
+                "harvested",
+                "french",
+                "sft",
+                "instruction",
+                "chat",
+                "alpaca",
+                "instruct",
+            ),
+            min_rows=max(50, self.config.sft_min_rows),
+        )
+
         output_dir = self.config.run_dir / "unsloth"
         output_dir.mkdir(parents=True, exist_ok=True)
-        UnslothTrainerWrapper.train(
-            self.config, dataset_path, output_dir, self.config.unsloth_max_steps
-        )
+
+        if not _module_available("unsloth"):
+            message = (
+                "⚠️  Unsloth is not installed; skipping Unsloth stage. "
+                "Install with `pip install unsloth`."
+            )
+            if self.config.strict:
+                raise ImportError(message)
+            print(message)
+            return
+
+        try:
+            UnslothTrainerWrapper.train(
+                self.config, dataset_path, output_dir, self.config.unsloth_max_steps
+            )
+        except Exception as e:
+            msg = str(e)
+            print("⚠️  Unsloth stage failed; continuing. Error:\n" + msg)
+            print(
+                "    Tip: this often means VRAM is too tight and Transformers is offloading modules. "
+            )
+            print(
+                "    Consider: (1) smaller max_seq_len, (2) smaller base model, or (3) CPU offload with a custom device_map."
+            )
+            if self.config.strict:
+                raise
 
     def _run_mlx_export(self) -> None:
         if not self.config.mlx_model_path:
@@ -1614,6 +1798,7 @@ class TerminalUI:
             run_dir=run_dir,
             base_model=args.base_model or "cognitivecomputations/Dolphin3.0-Llama3.2-3B",
             verbose=args.verbose,
+            strict=False,
         )
 
         # Run pipeline
@@ -1659,11 +1844,13 @@ def main_cli():
     parser.add_argument("--retrieval-max-negatives", type=int, default=4)
     parser.add_argument("--unsloth-max-steps", type=int, default=800)
     parser.add_argument("--unsloth-lr", type=float, default=2e-4)
+    parser.add_argument("--unsloth-max-seq-length", type=int, default=1024)
     parser.add_argument("--mlx-model-path", default=None)
     parser.add_argument("--mlx-export-dir", default=None)
     parser.add_argument("--mlx-quantize-bits", type=int, default=4)
     parser.add_argument("--coreml-export-dir", default=None)
     parser.add_argument("--verbose", action="store_true")
+    parser.add_argument("--strict", action="store_true")
 
     args = parser.parse_args()
 
@@ -1694,6 +1881,7 @@ def main_cli():
         retrieval_max_negatives=args.retrieval_max_negatives,
         unsloth_max_steps=args.unsloth_max_steps,
         unsloth_lr=args.unsloth_lr,
+        unsloth_max_seq_length=args.unsloth_max_seq_length,
         mlx_model_path=Path(args.mlx_model_path).expanduser()
         if args.mlx_model_path
         else None,
@@ -1705,6 +1893,7 @@ def main_cli():
         if args.coreml_export_dir
         else None,
         verbose=args.verbose,
+        strict=args.strict,
     )
 
     # Run pipeline
