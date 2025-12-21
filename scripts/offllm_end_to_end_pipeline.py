@@ -857,20 +857,40 @@ class DatasetBuilder:
         max_records: int,
         min_chars: int,
     ) -> Path:
-        run_command(
-            [
-                sys.executable,
-                str(Path(__file__).parent / "mlops" / "harvest_fr.py"),
-                "--manifest",
-                str(manifest_path),
-                "--output",
-                str(output_path),
-                "--max-records",
-                str(max_records),
-                "--min-chars",
-                str(min_chars),
-            ]
-        )
+        try:
+            run_command(
+                [
+                    sys.executable,
+                    str(Path(__file__).parent / "mlops" / "harvest_fr.py"),
+                    "--manifest",
+                    str(manifest_path),
+                    "--output",
+                    str(output_path),
+                    "--max-records",
+                    str(max_records),
+                    "--min-chars",
+                    str(min_chars),
+                ]
+            )
+        except subprocess.CalledProcessError as exc:
+            if output_path.exists() and output_path.stat().st_size > 0:
+                # Validate that file contains at least one valid JSONL record
+                try:
+                    with output_path.open("r", encoding="utf-8") as f:
+                        first_line = f.readline().strip()
+                        if not first_line:
+                            raise ValueError("Output file is empty or contains only whitespace")
+                        json.loads(first_line)  # Validate first record is valid JSON
+                except (json.JSONDecodeError, ValueError, UnicodeDecodeError) as validation_error:
+                    print(f"⚠️  Harvest output file is invalid: {validation_error}")
+                    raise exc from validation_error
+                
+                print(
+                    "⚠️  Harvest command failed after writing output; "
+                    f"continuing with {output_path} (exit {exc.returncode})."
+                )
+            else:
+                raise
         return output_path
 
 
