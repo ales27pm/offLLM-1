@@ -36,7 +36,6 @@ from typing import Any, Dict, Iterable, Iterator, List, Optional, Sequence, Tupl
 
 import torch
 from torch import nn
-from torch.optim import AdamW
 
 
 # ============================================================================
@@ -74,6 +73,9 @@ class PipelineConfig:
     unsloth_max_steps: int = 800
     unsloth_lr: float = 2e-4
     unsloth_max_seq_length: int = 1024
+    unsloth_allow_cpu_offload: bool = False
+    unsloth_gpu_memory_gb: int | None = None
+    unsloth_cpu_memory_gb: int | None = None
 
     llm2vec_max_steps: int = 1200
     llm2vec_lr: float = 1e-4
@@ -89,6 +91,7 @@ class PipelineConfig:
 
     # Misc
     verbose: bool = False
+    strict: bool = False
 
 
 def resolve_pipeline_config(config: PipelineConfig) -> PipelineConfig:
@@ -1037,25 +1040,40 @@ class UnslothTrainerWrapper:
         output_dir: Path,
         max_steps: int,
     ) -> Path:
+        from unsloth import FastLanguageModel
         from datasets import load_dataset
         from transformers import TrainingArguments
         from trl import SFTTrainer
-        from unsloth import FastLanguageModel
 
         if torch.cuda.is_available():
-            device_map = {"": 0}
             dtype = torch.float16
         else:
-            device_map = {"": "cpu"}
             dtype = torch.float32
 
-        model, tokenizer = FastLanguageModel.from_pretrained(
-            model_name=config.base_model,
-            max_seq_length=config.unsloth_max_seq_length,
-            dtype=dtype,
-            load_in_4bit=True,
-            device_map=device_map,
-        )
+        load_kwargs: Dict[str, Any] = {
+            "model_name": config.base_model,
+            "max_seq_length": config.unsloth_max_seq_length,
+            "dtype": dtype,
+            "load_in_4bit": True,
+        }
+        if config.unsloth_allow_cpu_offload:
+            max_memory: Dict[str, str] = {}
+            if torch.cuda.is_available():
+                max_memory["cuda:0"] = f"{config.unsloth_gpu_memory_gb or 7}GiB"
+            max_memory["cpu"] = f"{config.unsloth_cpu_memory_gb or 32}GiB"
+            load_kwargs.update(
+                {
+                    "device_map": "auto",
+                    "max_memory": max_memory,
+                    "llm_int8_enable_fp32_cpu_offload": True,
+                }
+            )
+        elif torch.cuda.is_available():
+            load_kwargs["device_map"] = {"": 0}
+        else:
+            load_kwargs["device_map"] = {"": "cpu"}
+
+        model, tokenizer = FastLanguageModel.from_pretrained(**load_kwargs)
 
         if tokenizer.pad_token is None:
             tokenizer.pad_token = tokenizer.eos_token
@@ -1265,7 +1283,30 @@ class PipelineOrchestrator:
             ]
 
         if "unsloth" in stages:
-            import unsloth  # noqa: F401
+            try:
+                import unsloth  # noqa: F401
+            except ImportError:
+                message = (
+                    "⚠️  Unsloth is not installed; skipping Unsloth stage. "
+                    "Install with `pip install unsloth`."
+                )
+                if self.config.strict:
+                    raise ImportError(message)
+                print(message)
+                stages = [stage for stage in stages if stage != "unsloth"]
+
+        if "llm2vec" in stages:
+            try:
+                import llm2vec  # noqa: F401
+            except ImportError:
+                message = (
+                    "⚠️  llm2vec is not installed; skipping LLM2Vec stage. "
+                    "Install with `pip install llm2vec`."
+                )
+                if self.config.strict:
+                    raise ImportError(message)
+                print(message)
+                stages = [stage for stage in stages if stage != "llm2vec"]
 
         datasets = {}
 
@@ -1311,13 +1352,13 @@ class PipelineOrchestrator:
             print("⚡ Running Unsloth training...")
             if not datasets:
                 datasets = self._build_datasets()
-            self._run_unsloth(datasets)
+            self._run_optional_stage("Unsloth", lambda: self._run_unsloth(datasets))
 
         if "llm2vec" in stages:
             print("🧬 Running LLM2Vec training...")
             if not datasets:
                 datasets = self._build_datasets()
-            self._run_llm2vec(datasets)
+            self._run_optional_stage("LLM2Vec", lambda: self._run_llm2vec(datasets))
 
         if "mlx_export" in stages:
             print("📦 Exporting MLX/CoreML artifacts...")
@@ -1325,6 +1366,14 @@ class PipelineOrchestrator:
 
         print(f"✅ Pipeline complete! Outputs in: {self.config.run_dir}")
         return 0
+
+    def _run_optional_stage(self, name: str, runner) -> None:
+        try:
+            runner()
+        except Exception as exc:
+            if self.config.strict:
+                raise
+            print(f"⚠️  {name} stage failed; continuing. Error: {exc}")
 
     def _write_run_metadata(self):
         """Write run metadata file."""
@@ -1471,21 +1520,32 @@ class PipelineOrchestrator:
 
     def _select_training_dataset(self, datasets: Dict[str, Path]) -> Path:
         datasets_dir = self.config.datasets_dir or (self.config.run_dir / "datasets")
-        candidates = [
-            datasets_dir / "normalized" / "harvested_fr_normalized.jsonl",
-            datasets_dir / "internet" / "harvested_fr.jsonl",
-            datasets_dir / "french" / "combined_instruct.jsonl",
-            datasets_dir / "french" / "combined_retrieval.jsonl",
-            datasets_dir / "offllm" / "offllm_dataset.jsonl",
-        ]
-        candidates.extend(datasets.values())
+        candidates: Dict[Path, int] = {}
 
-        for path in candidates:
+        def consider(path: Path) -> None:
             if path.exists() and path.suffix == ".jsonl" and path.stat().st_size > 0:
-                print(f"📦 Using training dataset: {path}")
-                return path
+                candidates[path] = path.stat().st_size
 
-        raise FileNotFoundError("No JSONL dataset found for training")
+        for path in datasets.values():
+            consider(path)
+
+        for path in datasets_dir.rglob("*.jsonl"):
+            consider(path)
+
+        if not candidates:
+            raise FileNotFoundError("No JSONL dataset found for training")
+
+        def priority(path: Path) -> Tuple[int, int]:
+            name = path.name.lower()
+            if "sft" in name:
+                return (0, -candidates[path])
+            if "instruction" in name or "instruct" in name:
+                return (1, -candidates[path])
+            return (2, -candidates[path])
+
+        selected = sorted(candidates.keys(), key=priority)[0]
+        print(f"📦 Using training dataset: {selected}")
+        return selected
 
     def _run_sft(self, datasets: Dict[str, Path]):
         """Run SFT training."""
@@ -1514,6 +1574,12 @@ class PipelineOrchestrator:
         trainer.train()
 
     def _run_unsloth(self, datasets: Dict[str, Path]):
+        if not torch.cuda.is_available() and not self.config.unsloth_allow_cpu_offload:
+            message = "⚠️  Unsloth requires CUDA or CPU offload; skipping."
+            if self.config.strict:
+                raise RuntimeError(message)
+            print(message)
+            return
         dataset_path = self._select_training_dataset(datasets)
         output_dir = self.config.run_dir / "unsloth"
         output_dir.mkdir(parents=True, exist_ok=True)
@@ -1630,6 +1696,7 @@ class TerminalUI:
             run_dir=run_dir,
             base_model=args.base_model or "cognitivecomputations/Dolphin3.0-Llama3.2-3B",
             verbose=args.verbose,
+            strict=False,
         )
 
         # Run pipeline
@@ -1676,11 +1743,15 @@ def main_cli():
     parser.add_argument("--unsloth-max-steps", type=int, default=800)
     parser.add_argument("--unsloth-lr", type=float, default=2e-4)
     parser.add_argument("--unsloth-max-seq-length", type=int, default=1024)
+    parser.add_argument("--unsloth-allow-cpu-offload", action="store_true")
+    parser.add_argument("--unsloth-gpu-memory-gb", type=int, default=None)
+    parser.add_argument("--unsloth-cpu-memory-gb", type=int, default=None)
     parser.add_argument("--mlx-model-path", default=None)
     parser.add_argument("--mlx-export-dir", default=None)
     parser.add_argument("--mlx-quantize-bits", type=int, default=4)
     parser.add_argument("--coreml-export-dir", default=None)
     parser.add_argument("--verbose", action="store_true")
+    parser.add_argument("--strict", action="store_true")
 
     args = parser.parse_args()
 
@@ -1712,6 +1783,9 @@ def main_cli():
         unsloth_max_steps=args.unsloth_max_steps,
         unsloth_lr=args.unsloth_lr,
         unsloth_max_seq_length=args.unsloth_max_seq_length,
+        unsloth_allow_cpu_offload=args.unsloth_allow_cpu_offload,
+        unsloth_gpu_memory_gb=args.unsloth_gpu_memory_gb,
+        unsloth_cpu_memory_gb=args.unsloth_cpu_memory_gb,
         mlx_model_path=Path(args.mlx_model_path).expanduser()
         if args.mlx_model_path
         else None,
@@ -1723,6 +1797,7 @@ def main_cli():
         if args.coreml_export_dir
         else None,
         verbose=args.verbose,
+        strict=args.strict,
     )
 
     # Run pipeline
