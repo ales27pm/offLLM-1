@@ -1,0 +1,41 @@
+name: e2e
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+  e2e-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Format check
+        run: npm run format:check
+
+      - name: Symbiosis advisor
+        run: python scripts/offllm_symbiosis_advisor_v3.py --repo . --out-dir runs/symbiosis

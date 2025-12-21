@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import PromptBuilder from "../src/core/prompt/PromptBuilder";
 import ToolHandler from "../src/core/tools/ToolHandler";
 
@@ -235,5 +237,24 @@ describe("PromptBuilder", () => {
     expect(prompt).toContain(
       `Tool: ${validatorTool.name} - ${validatorTool.description}`,
     );
+  });
+
+  const goldenPath = path.join(
+    __dirname,
+    "..",
+    "scripts",
+    "eval",
+    "golden_prompts.json",
+  );
+  const golden = JSON.parse(fs.readFileSync(goldenPath, "utf-8"));
+  const goldenCases = golden.map((entry) => [entry.id, entry]);
+
+  it.each(goldenCases)("matches golden prompt %s", (_id, entry) => {
+    const registry = {
+      getAvailableTools: () => entry.tools,
+    };
+    const builder = new PromptBuilder(registry);
+    const prompt = builder.build(entry.user_prompt, entry.context);
+    expect(prompt).toBe(entry.expected_prompt);
   });
 });

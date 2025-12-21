@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "language": "fr",
+  "sources": [
+    {
+      "name": "wikipedia",
+      "dataset": "wikimedia/wikipedia",
+      "subset": "20231101.fr",
+      "split": "train",
+      "text_field": "text"
+    },
+    {
+      "name": "oscar",
+      "dataset": "oscar-corpus/OSCAR-2301",
+      "subset": "fr",
+      "split": "train",
+      "text_field": "text"
+    },
+    {
+      "name": "ccnet",
+      "dataset": "statmt/cc100",
+      "subset": "fr",
+      "split": "train",
+      "text_field": "text"
+    }
+  ]
+}

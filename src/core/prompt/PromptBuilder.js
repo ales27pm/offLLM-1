@@ -1,3 +1,5 @@
+import { buildPrompt, formatToolDescription } from "./promptTemplate";
+
 export default class PromptBuilder {
   constructor(toolRegistry) {
     this.toolRegistry = toolRegistry;
@@ -13,30 +15,14 @@ export default class PromptBuilder {
       }))
       .sort((a, b) => a.name.localeCompare(b.name));
 
-    const toolsDesc = tools
-      .map(
-        (t) =>
-          `Tool: ${t.name} - ${t.description} (Params: ${JSON.stringify(t.parameters)})`,
-      )
-      .join("\n");
+    const toolsDesc = tools.map(formatToolDescription).join("\n");
 
     const contextLines = (context || [])
       .map((entry) => this._formatContextEntry(entry))
       .filter(Boolean)
       .join("\n");
 
-    const promptSections = [
-      "You are an AI assistant with access to:",
-      toolsDesc,
-      "Instructions:",
-      'Use tools when additional data or actions are required. Emit calls as TOOL_CALL: toolName(param="value"). Reply directly when you already have the answer. Observe tool results to form your final answer.',
-      "Context:",
-      contextLines,
-      `User: ${userPrompt}`,
-      "Assistant:",
-    ].filter((segment) => segment !== "");
-
-    return promptSections.join("\n");
+    return buildPrompt({ toolsDesc, contextLines, userPrompt });
   }
 
   _formatContextEntry(entry) {

@@ -5,6 +5,12 @@ import PluginSystem from "./plugins/PluginSystem";
 import PromptBuilder from "./prompt/PromptBuilder";
 import ToolHandler from "./tools/ToolHandler";
 import { WorkflowTracer } from "./workflows/WorkflowTracer";
+import {
+  buildFinalResponseEvent,
+  buildPromptEvent,
+  hashString,
+  logTelemetryEvent,
+} from "../utils/telemetry";
 
 const WORKFLOW_NAME = "AgentOrchestrator";
 const MAX_ITERATIONS = 5;
@@ -79,6 +85,11 @@ export class AgentOrchestrator {
       promptPreview: tracer.preview(typeof prompt === "string" ? prompt : ""),
     });
 
+    const promptHash = hashString(String(prompt ?? ""));
+    void logTelemetryEvent(
+      buildPromptEvent({ promptHash, promptText: String(prompt ?? "") }),
+    );
+
     try {
       // 1. Context Retrieval
       const [longMem, shortMem] = await Promise.all([
@@ -89,6 +100,7 @@ export class AgentOrchestrator {
       let contextWindow = [...longMem, ...shortMem];
       let currentIteration = 0;
       let finalResponse = null;
+      let totalToolCalls = 0;
 
       // 2. ReAct Loop
       while (currentIteration < MAX_ITERATIONS) {
@@ -117,6 +129,8 @@ export class AgentOrchestrator {
           break;
         }
 
+        totalToolCalls += toolCalls.length;
+
         tracer.info(
           `Iteration ${currentIteration}: Executing ${toolCalls.length} tools`,
         );
@@ -124,7 +138,11 @@ export class AgentOrchestrator {
         // Execute Tools
         const toolResults = await tracer.withStep(
           `executeTools_${currentIteration}`,
-          () => this.toolHandler.execute(toolCalls, { tracer }),
+          () =>
+            this.toolHandler.execute(toolCalls, {
+              tracer,
+              telemetryContext: { promptHash },
+            }),
           { successData: (results) => ({ count: results.length }) },
         );
 
@@ -142,6 +160,14 @@ export class AgentOrchestrator {
           "I reasoned about the problem but reached the maximum iteration limit without a final answer.";
         tracer.warn("Max iterations reached");
       }
+
+      void logTelemetryEvent(
+        buildFinalResponseEvent({
+          promptHash,
+          responseText: finalResponse,
+          toolCallsCount: totalToolCalls,
+        }),
+      );
 
       // 4. Persist Interaction
       await tracer.withStep(
