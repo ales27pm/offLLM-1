@@ -1,705 +1,1691 @@
 [
-  {
-    "label": "argparse",
-    "kind": 6,
-    "isExtraImport": true,
-    "importPath": "argparse",
-    "description": "argparse",
-    "detail": "argparse",
-    "documentation": {}
-  },
-  {
-    "label": "json",
-    "kind": 6,
-    "isExtraImport": true,
-    "importPath": "json",
-    "description": "json",
-    "detail": "json",
-    "documentation": {}
-  },
-  {
-    "label": "os",
-    "kind": 6,
-    "isExtraImport": true,
-    "importPath": "os",
-    "description": "os",
-    "detail": "os",
-    "documentation": {}
-  },
-  {
-    "label": "subprocess",
-    "kind": 6,
-    "isExtraImport": true,
-    "importPath": "subprocess",
-    "description": "subprocess",
-    "detail": "subprocess",
-    "documentation": {}
-  },
-  {
-    "label": "Path",
-    "importPath": "pathlib",
-    "description": "pathlib",
-    "isExtraImport": true,
-    "detail": "pathlib",
-    "documentation": {}
-  },
-  {
-    "label": "Path",
-    "importPath": "pathlib",
-    "description": "pathlib",
-    "isExtraImport": true,
-    "detail": "pathlib",
-    "documentation": {}
-  },
-  {
-    "label": "Path",
-    "importPath": "pathlib",
-    "description": "pathlib",
-    "isExtraImport": true,
-    "detail": "pathlib",
-    "documentation": {}
-  },
-  {
-    "label": "Path",
-    "importPath": "pathlib",
-    "description": "pathlib",
-    "isExtraImport": true,
-    "detail": "pathlib",
-    "documentation": {}
-  },
-  {
-    "label": "annotations",
-    "importPath": "__future__",
-    "description": "__future__",
-    "isExtraImport": true,
-    "detail": "__future__",
-    "documentation": {}
-  },
-  {
-    "label": "annotations",
-    "importPath": "__future__",
-    "description": "__future__",
-    "isExtraImport": true,
-    "detail": "__future__",
-    "documentation": {}
-  },
-  {
-    "label": "sys",
-    "kind": 6,
-    "isExtraImport": true,
-    "importPath": "sys",
-    "description": "sys",
-    "detail": "sys",
-    "documentation": {}
-  },
-  {
-    "label": "Any",
-    "importPath": "typing",
-    "description": "typing",
-    "isExtraImport": true,
-    "detail": "typing",
-    "documentation": {}
-  },
-  {
-    "label": "Iterable",
-    "importPath": "typing",
-    "description": "typing",
-    "isExtraImport": true,
-    "detail": "typing",
-    "documentation": {}
-  },
-  {
-    "label": "List",
-    "importPath": "typing",
-    "description": "typing",
-    "isExtraImport": true,
-    "detail": "typing",
-    "documentation": {}
-  },
-  {
-    "label": "Tuple",
-    "importPath": "typing",
-    "description": "typing",
-    "isExtraImport": true,
-    "detail": "typing",
-    "documentation": {}
-  },
-  {
-    "label": "Iterable",
-    "importPath": "typing",
-    "description": "typing",
-    "isExtraImport": true,
-    "detail": "typing",
-    "documentation": {}
-  },
-  {
-    "label": "Any",
-    "importPath": "typing",
-    "description": "typing",
-    "isExtraImport": true,
-    "detail": "typing",
-    "documentation": {}
-  },
-  {
-    "label": "Iterable",
-    "importPath": "typing",
-    "description": "typing",
-    "isExtraImport": true,
-    "detail": "typing",
-    "documentation": {}
-  },
-  {
-    "label": "List",
-    "importPath": "typing",
-    "description": "typing",
-    "isExtraImport": true,
-    "detail": "typing",
-    "documentation": {}
-  },
-  {
-    "label": "Set",
-    "importPath": "typing",
-    "description": "typing",
-    "isExtraImport": true,
-    "detail": "typing",
-    "documentation": {}
-  },
-  {
-    "label": "Tuple",
-    "importPath": "typing",
-    "description": "typing",
-    "isExtraImport": true,
-    "detail": "typing",
-    "documentation": {}
-  },
-  {
-    "label": "unquote",
-    "importPath": "urllib.parse",
-    "description": "urllib.parse",
-    "isExtraImport": true,
-    "detail": "urllib.parse",
-    "documentation": {}
-  },
-  {
-    "label": "urlparse",
-    "importPath": "urllib.parse",
-    "description": "urllib.parse",
-    "isExtraImport": true,
-    "detail": "urllib.parse",
-    "documentation": {}
-  },
-  {
-    "label": "warnings",
-    "kind": 6,
-    "isExtraImport": true,
-    "importPath": "warnings",
-    "description": "warnings",
-    "detail": "warnings",
-    "documentation": {}
-  },
-  {
-    "label": "coremltools",
-    "kind": 6,
-    "isExtraImport": true,
-    "importPath": "coremltools",
-    "description": "coremltools",
-    "detail": "coremltools",
-    "documentation": {}
-  },
-  {
-    "label": "coremltools.optimize",
-    "kind": 6,
-    "isExtraImport": true,
-    "importPath": "coremltools.optimize",
-    "description": "coremltools.optimize",
-    "detail": "coremltools.optimize",
-    "documentation": {}
-  },
-  {
-    "label": "numpy",
-    "kind": 6,
-    "isExtraImport": true,
-    "importPath": "numpy",
-    "description": "numpy",
-    "detail": "numpy",
-    "documentation": {}
-  },
-  {
-    "label": "torch",
-    "kind": 6,
-    "isExtraImport": true,
-    "importPath": "torch",
-    "description": "torch",
-    "detail": "torch",
-    "documentation": {}
-  },
-  {
-    "label": "login",
-    "importPath": "huggingface_hub",
-    "description": "huggingface_hub",
-    "isExtraImport": true,
-    "detail": "huggingface_hub",
-    "documentation": {}
-  },
-  {
-    "label": "AutoConfig",
-    "importPath": "transformers",
-    "description": "transformers",
-    "isExtraImport": true,
-    "detail": "transformers",
-    "documentation": {}
-  },
-  {
-    "label": "AutoModelForCausalLM",
-    "importPath": "transformers",
-    "description": "transformers",
-    "isExtraImport": true,
-    "detail": "transformers",
-    "documentation": {}
-  },
-  {
-    "label": "AutoModelForCausalLM",
-    "importPath": "transformers",
-    "description": "transformers",
-    "isExtraImport": true,
-    "detail": "transformers",
-    "documentation": {}
-  },
-  {
-    "label": "AutoTokenizer",
-    "importPath": "transformers",
-    "description": "transformers",
-    "isExtraImport": true,
-    "detail": "transformers",
-    "documentation": {}
-  },
-  {
-    "label": "AutoModelForCausalLM",
-    "importPath": "transformers",
-    "description": "transformers",
-    "isExtraImport": true,
-    "detail": "transformers",
-    "documentation": {}
-  },
-  {
-    "label": "AutoTokenizer",
-    "importPath": "transformers",
-    "description": "transformers",
-    "isExtraImport": true,
-    "detail": "transformers",
-    "documentation": {}
-  },
-  {
-    "label": "DataCollatorForLanguageModeling",
-    "importPath": "transformers",
-    "description": "transformers",
-    "isExtraImport": true,
-    "detail": "transformers",
-    "documentation": {}
-  },
-  {
-    "label": "Trainer",
-    "importPath": "transformers",
-    "description": "transformers",
-    "isExtraImport": true,
-    "detail": "transformers",
-    "documentation": {}
-  },
-  {
-    "label": "TrainingArguments",
-    "importPath": "transformers",
-    "description": "transformers",
-    "isExtraImport": true,
-    "detail": "transformers",
-    "documentation": {}
-  },
-  {
-    "label": "Cache",
-    "importPath": "transformers.cache_utils",
-    "description": "transformers.cache_utils",
-    "isExtraImport": true,
-    "detail": "transformers.cache_utils",
-    "documentation": {}
-  },
-  {
-    "label": "PeftModel",
-    "importPath": "peft",
-    "description": "peft",
-    "isExtraImport": true,
-    "detail": "peft",
-    "documentation": {}
-  },
-  {
-    "label": "LoraConfig",
-    "importPath": "peft",
-    "description": "peft",
-    "isExtraImport": true,
-    "detail": "peft",
-    "documentation": {}
-  },
-  {
-    "label": "get_peft_model",
-    "importPath": "peft",
-    "description": "peft",
-    "isExtraImport": true,
-    "detail": "peft",
-    "documentation": {}
-  },
-  {
-    "label": "prepare_model_for_kbit_training",
-    "importPath": "peft",
-    "description": "peft",
-    "isExtraImport": true,
-    "detail": "peft",
-    "documentation": {}
-  },
-  {
-    "label": "load_dataset",
-    "importPath": "datasets",
-    "description": "datasets",
-    "isExtraImport": true,
-    "detail": "datasets",
-    "documentation": {}
-  },
-  {
-    "label": "dataclass",
-    "importPath": "dataclasses",
-    "description": "dataclasses",
-    "isExtraImport": true,
-    "detail": "dataclasses",
-    "documentation": {}
-  },
-  {
-    "label": "re",
-    "kind": 6,
-    "isExtraImport": true,
-    "importPath": "re",
-    "description": "re",
-    "detail": "re",
-    "documentation": {}
-  },
-  {
-    "label": "json,",
-    "kind": 6,
-    "isExtraImport": true,
-    "importPath": "json.",
-    "description": "json.",
-    "detail": "json.",
-    "documentation": {}
-  },
-  {
-    "label": "parse_args",
-    "kind": 2,
-    "importPath": "scripts.ci.build_report",
-    "description": "scripts.ci.build_report",
-    "peekOfCode": "def parse_args():\n    p = argparse.ArgumentParser(description=\"Generate CI build reports\")\n    p.add_argument(\"--log\", required=True, help=\"Path to xcodebuild.log\")\n    p.add_argument(\"--xcresult\", required=True, help=\"Path to .xcresult bundle\")\n    p.add_argument(\"--out\", default=\"REPORT.md\", help=\"Output human report path\")\n    p.add_argument(\"--agent\", default=\"report_agent.md\", help=\"Output agent report path\")\n    return p.parse_args()\ndef parse_log(path: Path):\n    errors, warnings = [], []\n    try:",
-    "detail": "scripts.ci.build_report",
-    "documentation": {}
-  },
-  {
-    "label": "parse_log",
-    "kind": 2,
-    "importPath": "scripts.ci.build_report",
-    "description": "scripts.ci.build_report",
-    "peekOfCode": "def parse_log(path: Path):\n    errors, warnings = [], []\n    try:\n        with path.open(errors=\"ignore\") as f:\n            for line in f:\n                low = line.lower().strip()\n                if \"error:\" in low:\n                    errors.append(line.strip())\n                elif \"warning:\" in low:\n                    warnings.append(line.strip())",
-    "detail": "scripts.ci.build_report",
-    "documentation": {}
-  },
-  {
-    "label": "parse_xcresult",
-    "kind": 2,
-    "importPath": "scripts.ci.build_report",
-    "description": "scripts.ci.build_report",
-    "peekOfCode": "def parse_xcresult(path: Path):\n    if not path.exists():\n        return []\n    try:\n        out = _run_xcresulttool(path)\n        data = json.loads(out)\n    except Exception as e:  # xcresulttool missing or parse error\n        return [f\"(xcresult parse failed: {e})\"]\n    issues = []\n    def walk(obj):",
-    "detail": "scripts.ci.build_report",
-    "documentation": {}
-  },
-  {
-    "label": "write_human_report",
-    "kind": 2,
-    "importPath": "scripts.ci.build_report",
-    "description": "scripts.ci.build_report",
-    "peekOfCode": "def write_human_report(out_path: Path, log_path: Path, xc_path: Path, errors, warnings, xc_issues):\n    with out_path.open(\"w\") as f:\n        f.write(\"# iOS CI Report\\n\\n\")\n        f.write(f\"- Workflow log: {log_path}\\n\")\n        f.write(f\"- Result bundle: {xc_path}\\n\\n\")\n        f.write(\"## Errors\\n\")\n        if errors:\n            f.write(\"\\n\".join(f\"- {e}\" for e in errors[:100]))\n            if len(errors) > 100:\n                f.write(f\"\\n... ({len(errors)-100} more)\\n\")",
-    "detail": "scripts.ci.build_report",
-    "documentation": {}
-  },
-  {
-    "label": "write_agent_report",
-    "kind": 2,
-    "importPath": "scripts.ci.build_report",
-    "description": "scripts.ci.build_report",
-    "peekOfCode": "def write_agent_report(out_path: Path, errors, warnings, xc_issues):\n    with out_path.open(\"w\") as f:\n        f.write(\"# agent_report\\n\")\n        f.write(f\"errors_count={len(errors)}\\n\")\n        f.write(f\"warnings_count={len(warnings)}\\n\")\n        f.write(f\"xcresult_issues_count={len(xc_issues)}\\n\")\n        if errors:\n            f.write(\"first_error=\" + errors[0].replace(\"|\", \"/\") + \"\\n\")\n        if warnings:\n            f.write(\"first_warning=\" + warnings[0].replace(\"|\", \"/\") + \"\\n\")",
-    "detail": "scripts.ci.build_report",
-    "documentation": {}
-  },
-  {
-    "label": "main",
-    "kind": 2,
-    "importPath": "scripts.ci.build_report",
-    "description": "scripts.ci.build_report",
-    "peekOfCode": "def main():\n    args = parse_args()\n    log_path = Path(args.log)\n    xc_path = Path(args.xcresult)\n    errors, warnings = parse_log(log_path)\n    xc_issues = parse_xcresult(xc_path)\n    write_human_report(Path(args.out), log_path, xc_path, errors, warnings, xc_issues)\n    write_agent_report(Path(args.agent), errors, warnings, xc_issues)\n    print(f\"✅ Reports generated: {args.out}, {args.agent}\")\nif __name__ == \"__main__\":",
-    "detail": "scripts.ci.build_report",
-    "documentation": {}
-  },
-  {
-    "label": "LEGACY_UNSUPPORTED_TOKENS",
-    "kind": 5,
-    "importPath": "scripts.ci.build_report",
-    "description": "scripts.ci.build_report",
-    "peekOfCode": "LEGACY_UNSUPPORTED_TOKENS = (\n    \"unknown option\",\n    \"unrecognized option\",\n    \"invalid option\",\n    \"invalid argument\",\n    \"not supported\",\n    \"no longer supported\",\n    \"unsupported option\",\n    \"does not support\",\n    \"has been removed\",",
-    "detail": "scripts.ci.build_report",
-    "documentation": {}
-  },
-  {
-    "label": "_LEGACY_SUPPORT_STATE",
-    "kind": 5,
-    "importPath": "scripts.ci.build_report",
-    "description": "scripts.ci.build_report",
-    "peekOfCode": "_LEGACY_SUPPORT_STATE = None\ndef parse_args():\n    p = argparse.ArgumentParser(description=\"Generate CI build reports\")\n    p.add_argument(\"--log\", required=True, help=\"Path to xcodebuild.log\")\n    p.add_argument(\"--xcresult\", required=True, help=\"Path to .xcresult bundle\")\n    p.add_argument(\"--out\", default=\"REPORT.md\", help=\"Output human report path\")\n    p.add_argument(\"--agent\", default=\"report_agent.md\", help=\"Output agent report path\")\n    return p.parse_args()\ndef parse_log(path: Path):\n    errors, warnings = [], []",
-    "detail": "scripts.ci.build_report",
-    "documentation": {}
-  },
-  {
-    "label": "main",
-    "kind": 2,
-    "importPath": "scripts.ci.emit_ios_diagnostics_summary",
-    "description": "scripts.ci.emit_ios_diagnostics_summary",
-    "peekOfCode": "def main() -> int:\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"--label\", default=\"iOS build\")\n    parser.add_argument(\"--env-log\", default=\"build/diagnostics/environment.log\")\n    parser.add_argument(\"--error-log\", default=\"build/diagnostics/xcodebuild-errors.log\")\n    parser.add_argument(\"--derived-log\", default=\"build/diagnostics/derived-data.txt\")\n    parser.add_argument(\"--unified-log\", default=\"build/diagnostics/unified-xcodebuild.log\")\n    parser.add_argument(\"--artifact-path\", default=\"build/diagnostics\")\n    parser.add_argument(\"--result-json\", action=\"append\", default=[])\n    parser.add_argument(\"--env-limit\", type=int, default=40)",
-    "detail": "scripts.ci.emit_ios_diagnostics_summary",
-    "documentation": {}
-  },
-  {
-    "label": "SliceUpdateKeyValueCache",
-    "kind": 6,
-    "importPath": "scripts.convert_to_coreml",
-    "description": "scripts.convert_to_coreml",
-    "peekOfCode": "class SliceUpdateKeyValueCache(Cache):\n    def __init__(self, *, shape, dtype=torch.float32):\n        super().__init__()\n        self.register_buffer(\"k\", torch.zeros(shape, dtype=dtype))\n        self.register_buffer(\"v\", torch.zeros(shape, dtype=dtype))\n        self.register_buffer(\n            \"_current_length\",\n            torch.zeros(shape[0], dtype=torch.int32),\n            persistent=False,\n        )",
-    "detail": "scripts.convert_to_coreml",
-    "documentation": {}
-  },
-  {
-    "label": "convert",
-    "kind": 2,
-    "importPath": "scripts.convert_to_coreml",
-    "description": "scripts.convert_to_coreml",
-    "peekOfCode": "def convert(\n    hf_model_path: str,\n    out_prefix: str,\n    artifacts_path: str = \"coreml_artifacts.json\",\n    hf_token: str | None = None,\n):\n    if hf_token:\n        try:\n            login(token=hf_token)\n            print(\"Authenticated with Hugging Face Hub\")",
-    "detail": "scripts.convert_to_coreml",
-    "documentation": {}
-  },
-  {
-    "label": "main",
-    "kind": 2,
-    "importPath": "scripts.merge_lora",
-    "description": "scripts.merge_lora",
-    "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--base_model\", required=True)\n    parser.add_argument(\"--lora_dir\", required=True)\n    parser.add_argument(\"--output_dir\", required=True)\n    args = parser.parse_args()\n    base_model = AutoModelForCausalLM.from_pretrained(\n        args.base_model,\n        torch_dtype=\"auto\",\n    )",
-    "detail": "scripts.merge_lora",
-    "documentation": {}
-  },
-  {
-    "label": "format_example",
-    "kind": 2,
-    "importPath": "scripts.train_lora",
-    "description": "scripts.train_lora",
-    "peekOfCode": "def format_example(example: dict) -> str:\n    system_prompt = (\n        \"You are an assistant that decides when to call tools. If a tool is needed, \"\n        \"output JSON 'tool_call' then 'final_answer'.\"\n    )\n    user_prompt = (\n        \"INSTRUCTION:\\n{instruction}\\nCONTEXT:\\n{context}\\nTOOL_SCHEMA:\\n{schema}\".format(\n            instruction=example.get(\"instruction\", \"\"),\n            context=example.get(\"context\", \"\"),\n            schema=example.get(\"tool_schema\", \"\"),",
-    "detail": "scripts.train_lora",
-    "documentation": {}
-  },
-  {
-    "label": "main",
-    "kind": 2,
-    "importPath": "scripts.train_lora",
-    "description": "scripts.train_lora",
-    "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--base_model\", required=True)\n    parser.add_argument(\"--train_file\", required=True)\n    parser.add_argument(\"--output_dir\", required=True)\n    parser.add_argument(\"--max_steps\", type=int, default=50)\n    args = parser.parse_args()\n    if not os.path.isfile(args.train_file):\n        raise FileNotFoundError(f\"Dataset not found: {args.train_file}\")\n    tokenizer = AutoTokenizer.from_pretrained(args.base_model, use_fast=True)",
-    "detail": "scripts.train_lora",
-    "documentation": {}
-  },
-  {
-    "label": "Configuration",
-    "kind": 6,
-    "importPath": "scripts.verify-ios-cpp-standard",
-    "description": "scripts.verify-ios-cpp-standard",
-    "peekOfCode": "class Configuration:\n    identifier: str\n    config_name: str\n    target_label: str\n    values: list[str]\ndef normalize_value(raw_value: str) -> str:\n    value = raw_value.strip()\n    if value.startswith('\"') and value.endswith('\"'):\n        value = value[1:-1]\n    return value.strip()",
-    "detail": "scripts.verify-ios-cpp-standard",
-    "documentation": {}
-  },
-  {
-    "label": "normalize_value",
-    "kind": 2,
-    "importPath": "scripts.verify-ios-cpp-standard",
-    "description": "scripts.verify-ios-cpp-standard",
-    "peekOfCode": "def normalize_value(raw_value: str) -> str:\n    value = raw_value.strip()\n    if value.startswith('\"') and value.endswith('\"'):\n        value = value[1:-1]\n    return value.strip()\ndef is_variable(value: str) -> bool:\n    return value.startswith(\"$(\") or value.startswith(\"${\")\ndef extract_section(text: str, section: str) -> str:\n    pattern = re.compile(SECTION_TEMPLATE.format(section=re.escape(section)), re.DOTALL)\n    match = pattern.search(text)",
-    "detail": "scripts.verify-ios-cpp-standard",
-    "documentation": {}
-  },
-  {
-    "label": "is_variable",
-    "kind": 2,
-    "importPath": "scripts.verify-ios-cpp-standard",
-    "description": "scripts.verify-ios-cpp-standard",
-    "peekOfCode": "def is_variable(value: str) -> bool:\n    return value.startswith(\"$(\") or value.startswith(\"${\")\ndef extract_section(text: str, section: str) -> str:\n    pattern = re.compile(SECTION_TEMPLATE.format(section=re.escape(section)), re.DOTALL)\n    match = pattern.search(text)\n    return match.group(\"body\") if match else \"\"\ndef parse_configurations(text: str) -> dict[str, tuple[str, list[str]]]:\n    section = extract_section(text, \"XCBuildConfiguration\")\n    configurations: dict[str, tuple[str, list[str]]] = {}\n    for match in BUILD_CONFIG_RE.finditer(section):",
-    "detail": "scripts.verify-ios-cpp-standard",
-    "documentation": {}
-  },
-  {
-    "label": "extract_section",
-    "kind": 2,
-    "importPath": "scripts.verify-ios-cpp-standard",
-    "description": "scripts.verify-ios-cpp-standard",
-    "peekOfCode": "def extract_section(text: str, section: str) -> str:\n    pattern = re.compile(SECTION_TEMPLATE.format(section=re.escape(section)), re.DOTALL)\n    match = pattern.search(text)\n    return match.group(\"body\") if match else \"\"\ndef parse_configurations(text: str) -> dict[str, tuple[str, list[str]]]:\n    section = extract_section(text, \"XCBuildConfiguration\")\n    configurations: dict[str, tuple[str, list[str]]] = {}\n    for match in BUILD_CONFIG_RE.finditer(section):\n        config_id = match.group(\"id\")\n        config_name = match.group(\"name\").strip()",
-    "detail": "scripts.verify-ios-cpp-standard",
-    "documentation": {}
-  },
-  {
-    "label": "parse_configurations",
-    "kind": 2,
-    "importPath": "scripts.verify-ios-cpp-standard",
-    "description": "scripts.verify-ios-cpp-standard",
-    "peekOfCode": "def parse_configurations(text: str) -> dict[str, tuple[str, list[str]]]:\n    section = extract_section(text, \"XCBuildConfiguration\")\n    configurations: dict[str, tuple[str, list[str]]] = {}\n    for match in BUILD_CONFIG_RE.finditer(section):\n        config_id = match.group(\"id\")\n        config_name = match.group(\"name\").strip()\n        body = match.group(\"body\")\n        values: list[str] = []\n        for setting_match in STD_SETTING_RE.finditer(body):\n            if value := normalize_value(setting_match.group(\"value\")):",
-    "detail": "scripts.verify-ios-cpp-standard",
-    "documentation": {}
-  },
-  {
-    "label": "format_target",
-    "kind": 2,
-    "importPath": "scripts.verify-ios-cpp-standard",
-    "description": "scripts.verify-ios-cpp-standard",
-    "peekOfCode": "def format_target(kind: str, name: str) -> str:\n    prefixes = {\n        \"PBXProject\": \"Project\",\n        \"PBXNativeTarget\": \"Target\",\n        \"PBXAggregateTarget\": \"Aggregate target\",\n    }\n    prefix = prefixes.get(kind.strip(), kind.strip() or \"Unknown\")\n    return f\"{prefix} \\\"{name.strip()}\\\"\"\ndef map_configuration_targets(text: str) -> dict[str, tuple[str, str]]:\n    section = extract_section(text, \"XCConfigurationList\")",
-    "detail": "scripts.verify-ios-cpp-standard",
-    "documentation": {}
-  },
-  {
-    "label": "map_configuration_targets",
-    "kind": 2,
-    "importPath": "scripts.verify-ios-cpp-standard",
-    "description": "scripts.verify-ios-cpp-standard",
-    "peekOfCode": "def map_configuration_targets(text: str) -> dict[str, tuple[str, str]]:\n    section = extract_section(text, \"XCConfigurationList\")\n    mapping: dict[str, tuple[str, str]] = {}\n    for match in CONFIG_LIST_RE.finditer(section):\n        kind = match.group(\"kind\")\n        name = match.group(\"name\")\n        configs_blob = match.group(\"configs\")\n        for config_id_match in CONFIG_ID_RE.finditer(configs_blob):\n            config_id = config_id_match.group(1)\n            mapping[config_id] = (kind, name)",
-    "detail": "scripts.verify-ios-cpp-standard",
-    "documentation": {}
-  },
-  {
-    "label": "collect_configuration_reports",
-    "kind": 2,
-    "importPath": "scripts.verify-ios-cpp-standard",
-    "description": "scripts.verify-ios-cpp-standard",
-    "peekOfCode": "def collect_configuration_reports(path: Path) -> list[Configuration]:\n    text = path.read_text(errors=\"ignore\")\n    values_by_id = parse_configurations(text)\n    target_mapping = map_configuration_targets(text)\n    reports: list[Configuration] = []\n    for config_id, (config_name, values) in values_by_id.items():\n        kind, name = target_mapping.get(config_id, (\"Unknown\", config_id))\n        reports.append(\n            Configuration(\n                identifier=config_id,",
-    "detail": "scripts.verify-ios-cpp-standard",
-    "documentation": {}
-  },
-  {
-    "label": "summarize_values",
-    "kind": 2,
-    "importPath": "scripts.verify-ios-cpp-standard",
-    "description": "scripts.verify-ios-cpp-standard",
-    "peekOfCode": "def summarize_values(configurations: Iterable[Configuration]) -> set[str]:\n    values: set[str] = set()\n    for config in configurations:\n        values.update(config.values)\n    return values\ndef evaluate_pods_configs(configurations: list[Configuration]) -> tuple[bool, list[str]]:\n    failures: list[str] = []\n    for config in configurations:\n        explicit_values = [value for value in config.values if not is_variable(value)]\n        if not explicit_values:",
-    "detail": "scripts.verify-ios-cpp-standard",
-    "documentation": {}
-  },
-  {
-    "label": "evaluate_pods_configs",
-    "kind": 2,
-    "importPath": "scripts.verify-ios-cpp-standard",
-    "description": "scripts.verify-ios-cpp-standard",
-    "peekOfCode": "def evaluate_pods_configs(configurations: list[Configuration]) -> tuple[bool, list[str]]:\n    failures: list[str] = []\n    for config in configurations:\n        explicit_values = [value for value in config.values if not is_variable(value)]\n        if not explicit_values:\n            failures.append(\n                f\"{config.target_label} [{config.config_name}]: \"\n                f\"{', '.join(config.values) if config.values else '(missing)'}\"\n            )\n            continue",
-    "detail": "scripts.verify-ios-cpp-standard",
-    "documentation": {}
-  },
-  {
-    "label": "print_app_summary",
-    "kind": 2,
-    "importPath": "scripts.verify-ios-cpp-standard",
-    "description": "scripts.verify-ios-cpp-standard",
-    "peekOfCode": "def print_app_summary(configurations: list[Configuration]) -> None:\n    explicit_values = {\n        value\n        for config in configurations\n        for value in config.values\n        if not is_variable(value)\n    }\n    if explicit_values:\n        print(\"App CLANG_CXX_LANGUAGE_STANDARD values:\", explicit_values)\n    else:",
-    "detail": "scripts.verify-ios-cpp-standard",
-    "documentation": {}
-  },
-  {
-    "label": "main",
-    "kind": 2,
-    "importPath": "scripts.verify-ios-cpp-standard",
-    "description": "scripts.verify-ios-cpp-standard",
-    "peekOfCode": "def main() -> int:\n    if not PODS_PROJECT.exists():\n        print(\"Pods.xcodeproj not found (run pod install)\", file=sys.stderr)\n        return 2\n    pods_configs = collect_configuration_reports(PODS_PROJECT)\n    pods_values = summarize_values(pods_configs)\n    print(\"Pods CLANG_CXX_LANGUAGE_STANDARD values:\", pods_values or {\"(none)\"})\n    pods_ok, failures = evaluate_pods_configs(pods_configs)\n    if APP_PROJECT.exists():\n        app_configs = collect_configuration_reports(APP_PROJECT)",
-    "detail": "scripts.verify-ios-cpp-standard",
-    "documentation": {}
-  },
-  {
-    "label": "PODS_PROJECT",
-    "kind": 5,
-    "importPath": "scripts.verify-ios-cpp-standard",
-    "description": "scripts.verify-ios-cpp-standard",
-    "peekOfCode": "PODS_PROJECT = Path(\"ios/Pods/Pods.xcodeproj/project.pbxproj\")\nAPP_PROJECT = Path(\"ios/monGARS.xcodeproj/project.pbxproj\")\nSECTION_TEMPLATE = r\"/\\* Begin {section} section \\*/(?P<body>.*?)/\\* End {section} section \\*/\"\nBUILD_CONFIG_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* (?P<name>[^*]+) \\*/ = \\{\\s*\"\n    r\"isa = XCBuildConfiguration;\\s*(?P<body>.*?)\\};\",\n    re.DOTALL,\n)\nCONFIG_LIST_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* Build configuration list for (?P<kind>[^\\\"]+) \\\"(?P<name>[^\\\"]+)\\\" \\*/ = \\{\\s*\"",
-    "detail": "scripts.verify-ios-cpp-standard",
-    "documentation": {}
-  },
-  {
-    "label": "APP_PROJECT",
-    "kind": 5,
-    "importPath": "scripts.verify-ios-cpp-standard",
-    "description": "scripts.verify-ios-cpp-standard",
-    "peekOfCode": "APP_PROJECT = Path(\"ios/monGARS.xcodeproj/project.pbxproj\")\nSECTION_TEMPLATE = r\"/\\* Begin {section} section \\*/(?P<body>.*?)/\\* End {section} section \\*/\"\nBUILD_CONFIG_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* (?P<name>[^*]+) \\*/ = \\{\\s*\"\n    r\"isa = XCBuildConfiguration;\\s*(?P<body>.*?)\\};\",\n    re.DOTALL,\n)\nCONFIG_LIST_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* Build configuration list for (?P<kind>[^\\\"]+) \\\"(?P<name>[^\\\"]+)\\\" \\*/ = \\{\\s*\"\n    r\"isa = XCConfigurationList;\\s*buildConfigurations = \\((?P<configs>.*?)\\);\",",
-    "detail": "scripts.verify-ios-cpp-standard",
-    "documentation": {}
-  },
-  {
-    "label": "SECTION_TEMPLATE",
-    "kind": 5,
-    "importPath": "scripts.verify-ios-cpp-standard",
-    "description": "scripts.verify-ios-cpp-standard",
-    "peekOfCode": "SECTION_TEMPLATE = r\"/\\* Begin {section} section \\*/(?P<body>.*?)/\\* End {section} section \\*/\"\nBUILD_CONFIG_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* (?P<name>[^*]+) \\*/ = \\{\\s*\"\n    r\"isa = XCBuildConfiguration;\\s*(?P<body>.*?)\\};\",\n    re.DOTALL,\n)\nCONFIG_LIST_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* Build configuration list for (?P<kind>[^\\\"]+) \\\"(?P<name>[^\\\"]+)\\\" \\*/ = \\{\\s*\"\n    r\"isa = XCConfigurationList;\\s*buildConfigurations = \\((?P<configs>.*?)\\);\",\n    re.DOTALL,",
-    "detail": "scripts.verify-ios-cpp-standard",
-    "documentation": {}
-  },
-  {
-    "label": "BUILD_CONFIG_RE",
-    "kind": 5,
-    "importPath": "scripts.verify-ios-cpp-standard",
-    "description": "scripts.verify-ios-cpp-standard",
-    "peekOfCode": "BUILD_CONFIG_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* (?P<name>[^*]+) \\*/ = \\{\\s*\"\n    r\"isa = XCBuildConfiguration;\\s*(?P<body>.*?)\\};\",\n    re.DOTALL,\n)\nCONFIG_LIST_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* Build configuration list for (?P<kind>[^\\\"]+) \\\"(?P<name>[^\\\"]+)\\\" \\*/ = \\{\\s*\"\n    r\"isa = XCConfigurationList;\\s*buildConfigurations = \\((?P<configs>.*?)\\);\",\n    re.DOTALL,\n)",
-    "detail": "scripts.verify-ios-cpp-standard",
-    "documentation": {}
-  },
-  {
-    "label": "CONFIG_LIST_RE",
-    "kind": 5,
-    "importPath": "scripts.verify-ios-cpp-standard",
-    "description": "scripts.verify-ios-cpp-standard",
-    "peekOfCode": "CONFIG_LIST_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* Build configuration list for (?P<kind>[^\\\"]+) \\\"(?P<name>[^\\\"]+)\\\" \\*/ = \\{\\s*\"\n    r\"isa = XCConfigurationList;\\s*buildConfigurations = \\((?P<configs>.*?)\\);\",\n    re.DOTALL,\n)\nCONFIG_ID_RE = re.compile(r\"([0-9A-Fa-f]+) /\\*\")\nSTD_SETTING_RE = re.compile(\n    r\"CLANG_CXX_LANGUAGE_STANDARD(?:\\[[^\\]]+\\])?\\s*=\\s*(?P<value>[^;]+);\"\n)\n@dataclass",
-    "detail": "scripts.verify-ios-cpp-standard",
-    "documentation": {}
-  },
-  {
-    "label": "CONFIG_ID_RE",
-    "kind": 5,
-    "importPath": "scripts.verify-ios-cpp-standard",
-    "description": "scripts.verify-ios-cpp-standard",
-    "peekOfCode": "CONFIG_ID_RE = re.compile(r\"([0-9A-Fa-f]+) /\\*\")\nSTD_SETTING_RE = re.compile(\n    r\"CLANG_CXX_LANGUAGE_STANDARD(?:\\[[^\\]]+\\])?\\s*=\\s*(?P<value>[^;]+);\"\n)\n@dataclass\nclass Configuration:\n    identifier: str\n    config_name: str\n    target_label: str\n    values: list[str]",
-    "detail": "scripts.verify-ios-cpp-standard",
-    "documentation": {}
-  },
-  {
-    "label": "STD_SETTING_RE",
-    "kind": 5,
-    "importPath": "scripts.verify-ios-cpp-standard",
-    "description": "scripts.verify-ios-cpp-standard",
-    "peekOfCode": "STD_SETTING_RE = re.compile(\n    r\"CLANG_CXX_LANGUAGE_STANDARD(?:\\[[^\\]]+\\])?\\s*=\\s*(?P<value>[^;]+);\"\n)\n@dataclass\nclass Configuration:\n    identifier: str\n    config_name: str\n    target_label: str\n    values: list[str]\ndef normalize_value(raw_value: str) -> str:",
-    "detail": "scripts.verify-ios-cpp-standard",
-    "documentation": {}
-  },
-  {
-    "label": "main",
-    "kind": 2,
-    "importPath": "scripts.verify-ios-rn-versions",
-    "description": "scripts.verify-ios-rn-versions",
-    "peekOfCode": "def main():\n    pkg_path = Path(\"package.json\")\n    lock_path = Path(\"ios/Podfile.lock\")\n    if not pkg_path.exists():\n        print(\"package.json not found\", file=sys.stderr)\n        sys.exit(2)\n    if not lock_path.exists():\n        print(\"ios/Podfile.lock not found (run pod install)\", file=sys.stderr)\n        sys.exit(2)\n    pkg = json.loads(pkg_path.read_text())",
-    "detail": "scripts.verify-ios-rn-versions",
-    "documentation": {}
-  },
-  {
-    "label": "main",
-    "kind": 2,
-    "importPath": "scripts.xcresult_top_issues",
-    "description": "scripts.xcresult_top_issues",
-    "peekOfCode": "def main() -> None:\n    try:\n        data = json.load(sys.stdin)\n    except Exception:\n        # If input isn't JSON for any reason, don't fail the step\n        return\n    pairs: List[Tuple[str, str]] = []\n    _collect_messages(data, pairs)\n    pairs = _dedupe_preserve_order(pairs)\n    for sev, msg in pairs[:200]:",
-    "detail": "scripts.xcresult_top_issues",
-    "documentation": {}
-  }
+    {
+        "label": "argparse",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "argparse",
+        "description": "argparse",
+        "detail": "argparse",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "subprocess",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "detail": "subprocess",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterator",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Sequence",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Set",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "unquote",
+        "importPath": "urllib.parse",
+        "description": "urllib.parse",
+        "isExtraImport": true,
+        "detail": "urllib.parse",
+        "documentation": {}
+    },
+    {
+        "label": "urlparse",
+        "importPath": "urllib.parse",
+        "description": "urllib.parse",
+        "isExtraImport": true,
+        "detail": "urllib.parse",
+        "documentation": {}
+    },
+    {
+        "label": "math",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "math",
+        "description": "math",
+        "detail": "math",
+        "documentation": {}
+    },
+    {
+        "label": "defaultdict",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "Counter",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "defaultdict",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "Counter",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "defaultdict",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "deque",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "Counter",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "defaultdict",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "load_dataset",
+        "importPath": "datasets",
+        "description": "datasets",
+        "isExtraImport": true,
+        "detail": "datasets",
+        "documentation": {}
+    },
+    {
+        "label": "load_dataset",
+        "importPath": "datasets",
+        "description": "datasets",
+        "isExtraImport": true,
+        "detail": "datasets",
+        "documentation": {}
+    },
+    {
+        "label": "load_dataset",
+        "importPath": "datasets",
+        "description": "datasets",
+        "isExtraImport": true,
+        "detail": "datasets",
+        "documentation": {}
+    },
+    {
+        "label": "warnings",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "warnings",
+        "description": "warnings",
+        "detail": "warnings",
+        "documentation": {}
+    },
+    {
+        "label": "coremltools",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "coremltools",
+        "description": "coremltools",
+        "detail": "coremltools",
+        "documentation": {}
+    },
+    {
+        "label": "coremltools.optimize",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "coremltools.optimize",
+        "description": "coremltools.optimize",
+        "detail": "coremltools.optimize",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "torch",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "torch",
+        "description": "torch",
+        "detail": "torch",
+        "documentation": {}
+    },
+    {
+        "label": "nn",
+        "importPath": "torch",
+        "description": "torch",
+        "isExtraImport": true,
+        "detail": "torch",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "importPath": "huggingface_hub",
+        "description": "huggingface_hub",
+        "isExtraImport": true,
+        "detail": "huggingface_hub",
+        "documentation": {}
+    },
+    {
+        "label": "AutoConfig",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "AutoModelForCausalLM",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "AutoModelForCausalLM",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "AutoTokenizer",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "AutoModelForCausalLM",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "AutoTokenizer",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "TrainingArguments",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "get_linear_schedule_with_warmup",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "AutoModelForCausalLM",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "AutoTokenizer",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "DataCollatorForLanguageModeling",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "Trainer",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "TrainingArguments",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "Cache",
+        "importPath": "transformers.cache_utils",
+        "description": "transformers.cache_utils",
+        "isExtraImport": true,
+        "detail": "transformers.cache_utils",
+        "documentation": {}
+    },
+    {
+        "label": "PeftModel",
+        "importPath": "peft",
+        "description": "peft",
+        "isExtraImport": true,
+        "detail": "peft",
+        "documentation": {}
+    },
+    {
+        "label": "LoraConfig",
+        "importPath": "peft",
+        "description": "peft",
+        "isExtraImport": true,
+        "detail": "peft",
+        "documentation": {}
+    },
+    {
+        "label": "get_peft_model",
+        "importPath": "peft",
+        "description": "peft",
+        "isExtraImport": true,
+        "detail": "peft",
+        "documentation": {}
+    },
+    {
+        "label": "PeftModel",
+        "importPath": "peft",
+        "description": "peft",
+        "isExtraImport": true,
+        "detail": "peft",
+        "documentation": {}
+    },
+    {
+        "label": "LoraConfig",
+        "importPath": "peft",
+        "description": "peft",
+        "isExtraImport": true,
+        "detail": "peft",
+        "documentation": {}
+    },
+    {
+        "label": "get_peft_model",
+        "importPath": "peft",
+        "description": "peft",
+        "isExtraImport": true,
+        "detail": "peft",
+        "documentation": {}
+    },
+    {
+        "label": "prepare_model_for_kbit_training",
+        "importPath": "peft",
+        "description": "peft",
+        "isExtraImport": true,
+        "detail": "peft",
+        "documentation": {}
+    },
+    {
+        "label": "ast",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "ast",
+        "description": "ast",
+        "detail": "ast",
+        "documentation": {}
+    },
+    {
+        "label": "dataclasses",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "asdict",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "hashlib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "hashlib",
+        "description": "hashlib",
+        "detail": "hashlib",
+        "documentation": {}
+    },
+    {
+        "label": "platform",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "platform",
+        "description": "platform",
+        "detail": "platform",
+        "documentation": {}
+    },
+    {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "shutil",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "shutil",
+        "description": "shutil",
+        "detail": "shutil",
+        "documentation": {}
+    },
+    {
+        "label": "textwrap",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "textwrap",
+        "description": "textwrap",
+        "detail": "textwrap",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "AdamW",
+        "importPath": "torch.optim",
+        "description": "torch.optim",
+        "isExtraImport": true,
+        "detail": "torch.optim",
+        "documentation": {}
+    },
+    {
+        "label": "SFTTrainer",
+        "importPath": "trl",
+        "description": "trl",
+        "isExtraImport": true,
+        "detail": "trl",
+        "documentation": {}
+    },
+    {
+        "label": "tempfile",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tempfile",
+        "description": "tempfile",
+        "detail": "tempfile",
+        "documentation": {}
+    },
+    {
+        "label": "zipfile",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "zipfile",
+        "description": "zipfile",
+        "detail": "zipfile",
+        "documentation": {}
+    },
+    {
+        "label": "json,",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json.",
+        "description": "json.",
+        "detail": "json.",
+        "documentation": {}
+    },
+    {
+        "label": "parse_args",
+        "kind": 2,
+        "importPath": "scripts.ci.build_report",
+        "description": "scripts.ci.build_report",
+        "peekOfCode": "def parse_args():\n    p = argparse.ArgumentParser(description=\"Generate CI build reports\")\n    p.add_argument(\"--log\", required=True, help=\"Path to xcodebuild.log\")\n    p.add_argument(\"--xcresult\", required=True, help=\"Path to .xcresult bundle\")\n    p.add_argument(\"--out\", default=\"REPORT.md\", help=\"Output human report path\")\n    p.add_argument(\"--agent\", default=\"report_agent.md\", help=\"Output agent report path\")\n    return p.parse_args()\ndef parse_log(path: Path):\n    errors, warnings = [], []\n    try:",
+        "detail": "scripts.ci.build_report",
+        "documentation": {}
+    },
+    {
+        "label": "parse_log",
+        "kind": 2,
+        "importPath": "scripts.ci.build_report",
+        "description": "scripts.ci.build_report",
+        "peekOfCode": "def parse_log(path: Path):\n    errors, warnings = [], []\n    try:\n        with path.open(errors=\"ignore\") as f:\n            for line in f:\n                low = line.lower().strip()\n                if \"error:\" in low:\n                    errors.append(line.strip())\n                elif \"warning:\" in low:\n                    warnings.append(line.strip())",
+        "detail": "scripts.ci.build_report",
+        "documentation": {}
+    },
+    {
+        "label": "parse_xcresult",
+        "kind": 2,
+        "importPath": "scripts.ci.build_report",
+        "description": "scripts.ci.build_report",
+        "peekOfCode": "def parse_xcresult(path: Path):\n    if not path.exists():\n        return []\n    try:\n        out = _run_xcresulttool(path)\n        data = json.loads(out)\n    except Exception as e:  # xcresulttool missing or parse error\n        return [f\"(xcresult parse failed: {e})\"]\n    issues = []\n    def walk(obj):",
+        "detail": "scripts.ci.build_report",
+        "documentation": {}
+    },
+    {
+        "label": "write_human_report",
+        "kind": 2,
+        "importPath": "scripts.ci.build_report",
+        "description": "scripts.ci.build_report",
+        "peekOfCode": "def write_human_report(out_path: Path, log_path: Path, xc_path: Path, errors, warnings, xc_issues):\n    with out_path.open(\"w\") as f:\n        f.write(\"# iOS CI Report\\n\\n\")\n        f.write(f\"- Workflow log: {log_path}\\n\")\n        f.write(f\"- Result bundle: {xc_path}\\n\\n\")\n        f.write(\"## Errors\\n\")\n        if errors:\n            f.write(\"\\n\".join(f\"- {e}\" for e in errors[:100]))\n            if len(errors) > 100:\n                f.write(f\"\\n... ({len(errors)-100} more)\\n\")",
+        "detail": "scripts.ci.build_report",
+        "documentation": {}
+    },
+    {
+        "label": "write_agent_report",
+        "kind": 2,
+        "importPath": "scripts.ci.build_report",
+        "description": "scripts.ci.build_report",
+        "peekOfCode": "def write_agent_report(out_path: Path, errors, warnings, xc_issues):\n    with out_path.open(\"w\") as f:\n        f.write(\"# agent_report\\n\")\n        f.write(f\"errors_count={len(errors)}\\n\")\n        f.write(f\"warnings_count={len(warnings)}\\n\")\n        f.write(f\"xcresult_issues_count={len(xc_issues)}\\n\")\n        if errors:\n            f.write(\"first_error=\" + errors[0].replace(\"|\", \"/\") + \"\\n\")\n        if warnings:\n            f.write(\"first_warning=\" + warnings[0].replace(\"|\", \"/\") + \"\\n\")",
+        "detail": "scripts.ci.build_report",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.ci.build_report",
+        "description": "scripts.ci.build_report",
+        "peekOfCode": "def main():\n    args = parse_args()\n    log_path = Path(args.log)\n    xc_path = Path(args.xcresult)\n    errors, warnings = parse_log(log_path)\n    xc_issues = parse_xcresult(xc_path)\n    write_human_report(Path(args.out), log_path, xc_path, errors, warnings, xc_issues)\n    write_agent_report(Path(args.agent), errors, warnings, xc_issues)\n    print(f\"✅ Reports generated: {args.out}, {args.agent}\")\nif __name__ == \"__main__\":",
+        "detail": "scripts.ci.build_report",
+        "documentation": {}
+    },
+    {
+        "label": "LEGACY_UNSUPPORTED_TOKENS",
+        "kind": 5,
+        "importPath": "scripts.ci.build_report",
+        "description": "scripts.ci.build_report",
+        "peekOfCode": "LEGACY_UNSUPPORTED_TOKENS = (\n    \"unknown option\",\n    \"unrecognized option\",\n    \"invalid option\",\n    \"invalid argument\",\n    \"not supported\",\n    \"no longer supported\",\n    \"unsupported option\",\n    \"does not support\",\n    \"has been removed\",",
+        "detail": "scripts.ci.build_report",
+        "documentation": {}
+    },
+    {
+        "label": "_LEGACY_SUPPORT_STATE",
+        "kind": 5,
+        "importPath": "scripts.ci.build_report",
+        "description": "scripts.ci.build_report",
+        "peekOfCode": "_LEGACY_SUPPORT_STATE = None\ndef parse_args():\n    p = argparse.ArgumentParser(description=\"Generate CI build reports\")\n    p.add_argument(\"--log\", required=True, help=\"Path to xcodebuild.log\")\n    p.add_argument(\"--xcresult\", required=True, help=\"Path to .xcresult bundle\")\n    p.add_argument(\"--out\", default=\"REPORT.md\", help=\"Output human report path\")\n    p.add_argument(\"--agent\", default=\"report_agent.md\", help=\"Output agent report path\")\n    return p.parse_args()\ndef parse_log(path: Path):\n    errors, warnings = [], []",
+        "detail": "scripts.ci.build_report",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.ci.emit_ios_diagnostics_summary",
+        "description": "scripts.ci.emit_ios_diagnostics_summary",
+        "peekOfCode": "def main() -> int:\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"--label\", default=\"iOS build\")\n    parser.add_argument(\"--env-log\", default=\"build/diagnostics/environment.log\")\n    parser.add_argument(\"--error-log\", default=\"build/diagnostics/xcodebuild-errors.log\")\n    parser.add_argument(\"--derived-log\", default=\"build/diagnostics/derived-data.txt\")\n    parser.add_argument(\"--unified-log\", default=\"build/diagnostics/unified-xcodebuild.log\")\n    parser.add_argument(\"--artifact-path\", default=\"build/diagnostics\")\n    parser.add_argument(\"--result-json\", action=\"append\", default=[])\n    parser.add_argument(\"--env-limit\", type=int, default=40)",
+        "detail": "scripts.ci.emit_ios_diagnostics_summary",
+        "documentation": {}
+    },
+    {
+        "label": "load_outputs",
+        "kind": 2,
+        "importPath": "scripts.eval.export_equivalence",
+        "description": "scripts.eval.export_equivalence",
+        "peekOfCode": "def load_outputs(path: Path) -> dict:\n    if not path.exists():\n        raise FileNotFoundError(f\"Output file not found: {path}\")\n    with path.open(\"r\", encoding=\"utf-8\") as handle:\n        return json.load(handle)\ndef compare_logits(reference: list[float], candidate: list[float]) -> dict:\n    if len(reference) != len(candidate):\n        raise ValueError(\"Logit lengths do not match\")\n    deltas = [abs(r - c) for r, c in zip(reference, candidate)]\n    return {",
+        "detail": "scripts.eval.export_equivalence",
+        "documentation": {}
+    },
+    {
+        "label": "compare_logits",
+        "kind": 2,
+        "importPath": "scripts.eval.export_equivalence",
+        "description": "scripts.eval.export_equivalence",
+        "peekOfCode": "def compare_logits(reference: list[float], candidate: list[float]) -> dict:\n    if len(reference) != len(candidate):\n        raise ValueError(\"Logit lengths do not match\")\n    deltas = [abs(r - c) for r, c in zip(reference, candidate)]\n    return {\n        \"max_delta\": max(deltas) if deltas else 0,\n        \"mean_delta\": sum(deltas) / len(deltas) if deltas else 0,\n        \"rmse\": math.sqrt(sum(d * d for d in deltas) / len(deltas))\n        if deltas\n        else 0,",
+        "detail": "scripts.eval.export_equivalence",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.eval.export_equivalence",
+        "description": "scripts.eval.export_equivalence",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(\n        description=\"Compare reference and candidate export outputs.\"\n    )\n    parser.add_argument(\"--reference\", required=True)\n    parser.add_argument(\"--candidate\", required=True)\n    parser.add_argument(\"--max-delta\", type=float, default=0.15)\n    args = parser.parse_args()\n    reference = load_outputs(Path(args.reference))\n    candidate = load_outputs(Path(args.candidate))",
+        "detail": "scripts.eval.export_equivalence",
+        "documentation": {}
+    },
+    {
+        "label": "load_pairs",
+        "kind": 2,
+        "importPath": "scripts.eval.retrieval_eval",
+        "description": "scripts.eval.retrieval_eval",
+        "peekOfCode": "def load_pairs(path: Path) -> list[dict]:\n    with path.open(\"r\", encoding=\"utf-8\") as handle:\n        return [json.loads(line) for line in handle if line.strip()]\ndef load_retrieval_events(path: Path) -> dict[str, list[dict]]:\n    events: dict[str, list[dict]] = defaultdict(list)\n    duplicates = 0\n    with path.open(\"r\", encoding=\"utf-8\") as handle:\n        for line in handle:\n            if not line.strip():\n                continue",
+        "detail": "scripts.eval.retrieval_eval",
+        "documentation": {}
+    },
+    {
+        "label": "load_retrieval_events",
+        "kind": 2,
+        "importPath": "scripts.eval.retrieval_eval",
+        "description": "scripts.eval.retrieval_eval",
+        "peekOfCode": "def load_retrieval_events(path: Path) -> dict[str, list[dict]]:\n    events: dict[str, list[dict]] = defaultdict(list)\n    duplicates = 0\n    with path.open(\"r\", encoding=\"utf-8\") as handle:\n        for line in handle:\n            if not line.strip():\n                continue\n            event = json.loads(line)\n            if event.get(\"event\") != \"retrieval\":\n                continue",
+        "detail": "scripts.eval.retrieval_eval",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.eval.retrieval_eval",
+        "description": "scripts.eval.retrieval_eval",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(description=\"Evaluate retrieval recall@k.\")\n    parser.add_argument(\"--pairs\", required=True)\n    parser.add_argument(\"--telemetry\", required=True)\n    parser.add_argument(\"--k\", type=int, default=3)\n    args = parser.parse_args()\n    pairs = load_pairs(Path(args.pairs))\n    telemetry = load_retrieval_events(Path(args.telemetry))\n    total = 0\n    hits = 0",
+        "detail": "scripts.eval.retrieval_eval",
+        "documentation": {}
+    },
+    {
+        "label": "build_prompt",
+        "kind": 2,
+        "importPath": "scripts.eval.run_prompt_regression",
+        "description": "scripts.eval.run_prompt_regression",
+        "peekOfCode": "def build_prompt(template: dict, tools: list[dict], context: list[dict], user_prompt: str) -> str:\n    tool_format = template[\"tool_format\"]\n    tools_sorted = sorted(tools, key=lambda t: t[\"name\"])\n    tools_desc = \"\\n\".join(\n        tool_format.format(\n            name=tool[\"name\"],\n            description=tool[\"description\"],\n            parameters=json.dumps(tool.get(\"parameters\", {}), ensure_ascii=False),\n        )\n        for tool in tools_sorted",
+        "detail": "scripts.eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.eval.run_prompt_regression",
+        "description": "scripts.eval.run_prompt_regression",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(description=\"Run prompt regression tests.\")\n    parser.add_argument(\n        \"--template\",\n        default=os.path.join(\n            os.path.dirname(__file__),\n            \"..\",\n            \"..\",\n            \"src\",\n            \"core\",",
+        "detail": "scripts.eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.mlops.generate_retrieval_pairs",
+        "description": "scripts.mlops.generate_retrieval_pairs",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(\n        description=\"Generate contrastive retrieval pairs from telemetry logs.\"\n    )\n    parser.add_argument(\"--telemetry\", required=True)\n    parser.add_argument(\"--output\", required=True)\n    parser.add_argument(\"--max-negatives\", type=int, default=4)\n    args = parser.parse_args()\n    telemetry_path = Path(args.telemetry)\n    if not telemetry_path.exists():",
+        "detail": "scripts.mlops.generate_retrieval_pairs",
+        "documentation": {}
+    },
+    {
+        "label": "load_manifest",
+        "kind": 2,
+        "importPath": "scripts.mlops.harvest_fr",
+        "description": "scripts.mlops.harvest_fr",
+        "peekOfCode": "def load_manifest(path: str) -> dict:\n    if not os.path.isfile(path):\n        raise FileNotFoundError(f\"Manifest not found: {path}\")\n    with open(path, \"r\", encoding=\"utf-8\") as handle:\n        return json.load(handle)\ndef stream_source_records(source: dict) -> Iterable[Dict[str, str]]:\n    dataset = load_dataset(\n        source[\"dataset\"],\n        source.get(\"subset\"),\n        split=source.get(\"split\", \"train\"),",
+        "detail": "scripts.mlops.harvest_fr",
+        "documentation": {}
+    },
+    {
+        "label": "stream_source_records",
+        "kind": 2,
+        "importPath": "scripts.mlops.harvest_fr",
+        "description": "scripts.mlops.harvest_fr",
+        "peekOfCode": "def stream_source_records(source: dict) -> Iterable[Dict[str, str]]:\n    dataset = load_dataset(\n        source[\"dataset\"],\n        source.get(\"subset\"),\n        split=source.get(\"split\", \"train\"),\n        streaming=True,\n    )\n    text_field = source.get(\"text_field\", \"text\")\n    for record in dataset:\n        text = record.get(text_field)",
+        "detail": "scripts.mlops.harvest_fr",
+        "documentation": {}
+    },
+    {
+        "label": "harvest_sources",
+        "kind": 2,
+        "importPath": "scripts.mlops.harvest_fr",
+        "description": "scripts.mlops.harvest_fr",
+        "peekOfCode": "def harvest_sources(\n    manifest: dict,\n    output_path: str,\n    max_records: int,\n    min_chars: int,\n    selected_sources: list[str],\n) -> None:\n    sources = manifest.get(\"sources\", [])\n    if selected_sources:\n        sources = [s for s in sources if s[\"name\"] in selected_sources]",
+        "detail": "scripts.mlops.harvest_fr",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.mlops.harvest_fr",
+        "description": "scripts.mlops.harvest_fr",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(\n        description=\"Harvest French text data from HF datasets using a manifest.\"\n    )\n    parser.add_argument(\n        \"--manifest\",\n        default=os.path.join(\n            os.path.dirname(__file__), \"sources_fr_manifest.json\"\n        ),\n    )",
+        "detail": "scripts.mlops.harvest_fr",
+        "documentation": {}
+    },
+    {
+        "label": "normalize_sft",
+        "kind": 2,
+        "importPath": "scripts.mlops.normalize_datasets",
+        "description": "scripts.mlops.normalize_datasets",
+        "peekOfCode": "def normalize_sft(record: dict) -> dict:\n    required = {\"instruction\", \"expected_answer\"}\n    missing = required - record.keys()\n    if missing:\n        raise ValueError(f\"Missing required keys for SFT: {missing}\")\n    return {\n        \"instruction\": (record.get(\"instruction\") or \"\").strip(),\n        \"context\": record.get(\"context\") or \"\",\n        \"tool_schema\": record.get(\"tool_schema\") or \"\",\n        \"expected_tool_call\": record.get(\"expected_tool_call\") or {},",
+        "detail": "scripts.mlops.normalize_datasets",
+        "documentation": {}
+    },
+    {
+        "label": "normalize_pretrain",
+        "kind": 2,
+        "importPath": "scripts.mlops.normalize_datasets",
+        "description": "scripts.mlops.normalize_datasets",
+        "peekOfCode": "def normalize_pretrain(record: dict) -> dict:\n    text = record.get(\"text\") or record.get(\"content\")\n    if not text:\n        raise ValueError(\"Missing 'text' content for pretrain normalization\")\n    if not isinstance(text, str):\n        raise ValueError(\"Expected 'text' to be a string\")\n    return {\n        \"text\": text.strip(),\n        \"metadata\": {k: v for k, v in record.items() if k not in {\"text\", \"content\"}},\n    }",
+        "detail": "scripts.mlops.normalize_datasets",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.mlops.normalize_datasets",
+        "description": "scripts.mlops.normalize_datasets",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(description=\"Normalize dataset JSONL files.\")\n    parser.add_argument(\"--input\", required=True)\n    parser.add_argument(\"--output\", required=True)\n    parser.add_argument(\n        \"--mode\",\n        choices=[\"sft\", \"pretrain\"],\n        required=True,\n        help=\"Normalization mode to apply.\",\n    )",
+        "detail": "scripts.mlops.normalize_datasets",
+        "documentation": {}
+    },
+    {
+        "label": "scan_jsonl",
+        "kind": 2,
+        "importPath": "scripts.mlops.scan_internal",
+        "description": "scripts.mlops.scan_internal",
+        "peekOfCode": "def scan_jsonl(path: Path, max_samples: int) -> dict:\n    stats = {\n        \"path\": str(path),\n        \"bytes\": path.stat().st_size,\n        \"records\": 0,\n        \"avg_text_length\": 0,\n        \"keys\": Counter(),\n        \"sample\": [],\n    }\n    total_length = 0",
+        "detail": "scripts.mlops.scan_internal",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.mlops.scan_internal",
+        "description": "scripts.mlops.scan_internal",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(description=\"Scan internal dataset files.\")\n    parser.add_argument(\"--data-dir\", required=True)\n    parser.add_argument(\"--output\", required=True)\n    parser.add_argument(\"--max-samples\", type=int, default=3)\n    args = parser.parse_args()\n    data_dir = Path(args.data_dir)\n    if not data_dir.exists():\n        raise FileNotFoundError(f\"Data directory not found: {data_dir}\")\n    reports = []",
+        "detail": "scripts.mlops.scan_internal",
+        "documentation": {}
+    },
+    {
+        "label": "load_tool_schema",
+        "kind": 2,
+        "importPath": "scripts.mlops.telemetry_to_sft",
+        "description": "scripts.mlops.telemetry_to_sft",
+        "peekOfCode": "def load_tool_schema(path: str) -> str:\n    if not path:\n        return \"\"\n    if not os.path.isfile(path):\n        raise FileNotFoundError(f\"Tool schema not found: {path}\")\n    with open(path, \"r\", encoding=\"utf-8\") as handle:\n        return handle.read().strip()\ndef parse_events(path: Path) -> dict:\n    grouped = defaultdict(lambda: {\"tool_calls\": []})\n    with path.open(\"r\", encoding=\"utf-8\") as handle:",
+        "detail": "scripts.mlops.telemetry_to_sft",
+        "documentation": {}
+    },
+    {
+        "label": "parse_events",
+        "kind": 2,
+        "importPath": "scripts.mlops.telemetry_to_sft",
+        "description": "scripts.mlops.telemetry_to_sft",
+        "peekOfCode": "def parse_events(path: Path) -> dict:\n    grouped = defaultdict(lambda: {\"tool_calls\": []})\n    with path.open(\"r\", encoding=\"utf-8\") as handle:\n        for line in handle:\n            if not line.strip():\n                continue\n            event = json.loads(line)\n            prompt_hash = event.get(\"prompt_hash\")\n            if not prompt_hash:\n                continue",
+        "detail": "scripts.mlops.telemetry_to_sft",
+        "documentation": {}
+    },
+    {
+        "label": "build_records",
+        "kind": 2,
+        "importPath": "scripts.mlops.telemetry_to_sft",
+        "description": "scripts.mlops.telemetry_to_sft",
+        "peekOfCode": "def build_records(grouped: dict, tool_schema: str) -> list[dict]:\n    records = []\n    for _, data in grouped.items():\n        instruction = data.get(\"instruction\")\n        expected_answer = data.get(\"expected_answer\")\n        if not instruction or not expected_answer:\n            continue\n        tool_calls = data.get(\"tool_calls\", [])\n        expected_tool_call = {\n            \"tools\": [",
+        "detail": "scripts.mlops.telemetry_to_sft",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.mlops.telemetry_to_sft",
+        "description": "scripts.mlops.telemetry_to_sft",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(\n        description=\"Convert telemetry JSONL into SFT-ready JSONL.\"\n    )\n    parser.add_argument(\"--telemetry\", required=True)\n    parser.add_argument(\"--output\", required=True)\n    parser.add_argument(\"--tool-schema\", default=\"\")\n    args = parser.parse_args()\n    telemetry_path = Path(args.telemetry)\n    if not telemetry_path.exists():",
+        "detail": "scripts.mlops.telemetry_to_sft",
+        "documentation": {}
+    },
+    {
+        "label": "SliceUpdateKeyValueCache",
+        "kind": 6,
+        "importPath": "scripts.convert_to_coreml",
+        "description": "scripts.convert_to_coreml",
+        "peekOfCode": "class SliceUpdateKeyValueCache(Cache):\n    def __init__(self, *, shape, dtype=torch.float32):\n        super().__init__()\n        self.register_buffer(\"k\", torch.zeros(shape, dtype=dtype))\n        self.register_buffer(\"v\", torch.zeros(shape, dtype=dtype))\n        self.register_buffer(\n            \"_current_length\",\n            torch.zeros(shape[0], dtype=torch.int32),\n            persistent=False,\n        )",
+        "detail": "scripts.convert_to_coreml",
+        "documentation": {}
+    },
+    {
+        "label": "convert",
+        "kind": 2,
+        "importPath": "scripts.convert_to_coreml",
+        "description": "scripts.convert_to_coreml",
+        "peekOfCode": "def convert(\n    hf_model_path: str,\n    out_prefix: str,\n    artifacts_path: str = \"coreml_artifacts.json\",\n    hf_token: str | None = None,\n):\n    if hf_token:\n        try:\n            login(token=hf_token)\n            print(\"Authenticated with Hugging Face Hub\")",
+        "detail": "scripts.convert_to_coreml",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.merge_lora",
+        "description": "scripts.merge_lora",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--base_model\", required=True)\n    parser.add_argument(\"--lora_dir\", required=True)\n    parser.add_argument(\"--output_dir\", required=True)\n    args = parser.parse_args()\n    base_model = AutoModelForCausalLM.from_pretrained(\n        args.base_model,\n        torch_dtype=\"auto\",\n    )",
+        "detail": "scripts.merge_lora",
+        "documentation": {}
+    },
+    {
+        "label": "PipelineConfig",
+        "kind": 6,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "class PipelineConfig:\n    \"\"\"Main configuration for the entire pipeline.\"\"\"\n    repo_root: Path\n    run_id: str\n    run_dir: Path\n    # Model configuration\n    base_model: str = \"cognitivecomputations/Dolphin3.0-Llama3.2-3B\"\n    base_model_revision: str | None = None\n    # Dataset configuration\n    datasets_dir: Path | None = None",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "ScanConfig",
+        "kind": 6,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "class ScanConfig:\n    \"\"\"Configuration for repository scanning.\"\"\"\n    repo_root: Path\n    run_id: str\n    out_base: Path = Path(\"runs/scad/focused\")\n    top_n_per_category: int = 8\n    max_targets: int = 45\n    diff_target: str = \"\"\n    emit_datasets: bool = True\n    blame: bool = False",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "TrainCfg",
+        "kind": 6,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "class TrainCfg:\n    \"\"\"Configuration for LLM2Vec training.\"\"\"\n    base_model: str\n    revision: str | None = None\n    adapter_dir: str | None = None\n    corpus_jsonl: str = \"\"\n    out: str = \"\"\n    max_steps: int = 1200\n    warmup_steps: int = 50\n    lr: float = 1e-4",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "PySymbol",
+        "kind": 6,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "class PySymbol:\n    kind: str  # function/class/async_function\n    name: str\n    qualname: str\n    start_line: int\n    end_line: int\n    doc: str\n    signals: Dict[str, int]\n    calls: List[str]\n@dataclass",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "CommandSpec",
+        "kind": 6,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "class CommandSpec:\n    path: str\n    parser_var: str\n    args: List[Dict[str, Any]]\n@dataclass\nclass EnvVarUse:\n    name: str\n    kind: str\n    line: int\n    context: str",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "EnvVarUse",
+        "kind": 6,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "class EnvVarUse:\n    name: str\n    kind: str\n    line: int\n    context: str\n@dataclass\nclass Callsite:\n    category: str\n    path: str\n    line: int",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "Callsite",
+        "kind": 6,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "class Callsite:\n    category: str\n    path: str\n    line: int\n    context: str\nclass RepositoryScanner:\n    \"\"\"SCAD: Static Code Analysis for Documentation and dataset generation.\"\"\"\n    IGNORE_DIRS = {\n        \".git\",\n        \".hg\",",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "RepositoryScanner",
+        "kind": 6,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "class RepositoryScanner:\n    \"\"\"SCAD: Static Code Analysis for Documentation and dataset generation.\"\"\"\n    IGNORE_DIRS = {\n        \".git\",\n        \".hg\",\n        \".svn\",\n        \"node_modules\",\n        \".venv\",\n        \"venv\",\n        \"__pycache__\",",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "DatasetBuilder",
+        "kind": 6,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "class DatasetBuilder:\n    \"\"\"Build training datasets from various sources.\"\"\"\n    @staticmethod\n    def build_french_datasets(out_dir: Path) -> Dict[str, Path]:\n        \"\"\"Build French language datasets.\"\"\"\n        datasets_dir = Path(\"datasets\")\n        output = {}\n        for name in [\"combined_instruct.jsonl\", \"combined_retrieval.jsonl\"]:\n            src = datasets_dir / name\n            if src.exists():",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "SFTTrainerWrapper",
+        "kind": 6,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "class SFTTrainerWrapper:\n    \"\"\"Wrapper for supervised fine-tuning with LoRA.\"\"\"\n    @staticmethod\n    def train(config: PipelineConfig, dataset_path: Path) -> Path:\n        \"\"\"Train a model with SFT using LoRA.\"\"\"\n        set_seed(42)\n        out_dir = config.run_dir / \"sft\"\n        out_dir.mkdir(parents=True, exist_ok=True)\n        # Load tokenizer and model\n        tokenizer = AutoTokenizer.from_pretrained(",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "UnslothTrainerWrapper",
+        "kind": 6,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "class UnslothTrainerWrapper:\n    \"\"\"Wrapper for supervised fine-tuning with Unsloth.\"\"\"\n    @staticmethod\n    def train(\n        config: PipelineConfig,\n        dataset_path: Path,\n        output_dir: Path,\n        max_steps: int,\n    ) -> Path:\n        try:",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "LLM2VecTrainer",
+        "kind": 6,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "class LLM2VecTrainer:\n    \"\"\"Train embedding-capable models using MNTP + SimCSE.\"\"\"\n    def __init__(self, config: TrainCfg):\n        self.config = config\n    def train(self) -> Dict[str, Any]:\n        \"\"\"Main training loop for LLM2Vec.\"\"\"\n        set_seed(self.config.seed)\n        out_dir = Path(self.config.out)\n        out_dir.mkdir(parents=True, exist_ok=True)\n        # Load model and tokenizer",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "MNTPDataCollator",
+        "kind": 6,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "class MNTPDataCollator:\n    \"\"\"Data collator for Masked Next Token Prediction.\"\"\"\n    def __init__(self, tokenizer, mask_prob: float = 0.15, max_length: int = 512):\n        self.tok = tokenizer\n        self.mask_prob = mask_prob\n        self.max_length = max_length\n        if self.tok.mask_token_id is None:\n            self.tok.add_special_tokens({\"mask_token\": \"<mask>\"})\n    def __call__(self, texts: List[str]) -> Dict[str, torch.Tensor]:\n        enc = self.tok(",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "PipelineOrchestrator",
+        "kind": 6,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "class PipelineOrchestrator:\n    \"\"\"Orchestrate the entire multi-stage pipeline.\"\"\"\n    def __init__(self, config: PipelineConfig):\n        self.config = resolve_pipeline_config(config)\n    def run(self, stages: List[str]) -> int:\n        \"\"\"Run specified stages of the pipeline.\"\"\"\n        if \"all\" in stages:\n            stages = [\n                \"full_scan\",\n                \"scan\",",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "TerminalUI",
+        "kind": 6,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "class TerminalUI:\n    \"\"\"Simple terminal UI for pipeline interaction.\"\"\"\n    @staticmethod\n    def interactive() -> int:\n        \"\"\"Run interactive terminal UI.\"\"\"\n        print(\"\\n\" + \"=\" * 50)\n        print(\"offLLM End-to-End Pipeline\")\n        print(\"=\" * 50)\n        choices = {\n            \"1\": \"Run EVERYTHING (full scan → datasets → training → export)\",",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "resolve_pipeline_config",
+        "kind": 2,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "def resolve_pipeline_config(config: PipelineConfig) -> PipelineConfig:\n    repo_root = config.repo_root.expanduser().resolve()\n    run_dir = config.run_dir.expanduser()\n    if not run_dir.is_absolute():\n        run_dir = repo_root / run_dir\n    datasets_dir = (config.datasets_dir or (run_dir / \"datasets\")).expanduser()\n    if not datasets_dir.is_absolute():\n        datasets_dir = repo_root / datasets_dir\n    telemetry_path = (config.telemetry_path or (datasets_dir / \"telemetry.jsonl\")).expanduser()\n    if not telemetry_path.is_absolute():",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "utc_now",
+        "kind": 2,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "def utc_now() -> str:\n    return datetime.now(timezone.utc).isoformat()\ndef default_run_id() -> str:\n    return datetime.now().strftime(\"%Y%m%d_%H%M%S\")\ndef set_seed(seed: int) -> None:\n    random.seed(seed)\n    torch.manual_seed(seed)\n    if torch.cuda.is_available():\n        torch.cuda.manual_seed_all(seed)\ndef git_commit(repo_root: Path) -> str | None:",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "default_run_id",
+        "kind": 2,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "def default_run_id() -> str:\n    return datetime.now().strftime(\"%Y%m%d_%H%M%S\")\ndef set_seed(seed: int) -> None:\n    random.seed(seed)\n    torch.manual_seed(seed)\n    if torch.cuda.is_available():\n        torch.cuda.manual_seed_all(seed)\ndef git_commit(repo_root: Path) -> str | None:\n    try:\n        out = subprocess.check_output([\"git\", \"rev-parse\", \"HEAD\"], cwd=str(repo_root))",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "set_seed",
+        "kind": 2,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "def set_seed(seed: int) -> None:\n    random.seed(seed)\n    torch.manual_seed(seed)\n    if torch.cuda.is_available():\n        torch.cuda.manual_seed_all(seed)\ndef git_commit(repo_root: Path) -> str | None:\n    try:\n        out = subprocess.check_output([\"git\", \"rev-parse\", \"HEAD\"], cwd=str(repo_root))\n        return out.decode(\"utf-8\").strip()\n    except Exception:",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "git_commit",
+        "kind": 2,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "def git_commit(repo_root: Path) -> str | None:\n    try:\n        out = subprocess.check_output([\"git\", \"rev-parse\", \"HEAD\"], cwd=str(repo_root))\n        return out.decode(\"utf-8\").strip()\n    except Exception:\n        return None\ndef sha256_file(path: Path, chunk: int = 1024 * 1024) -> str:\n    h = hashlib.sha256()\n    with path.open(\"rb\") as f:\n        while True:",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "sha256_file",
+        "kind": 2,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "def sha256_file(path: Path, chunk: int = 1024 * 1024) -> str:\n    h = hashlib.sha256()\n    with path.open(\"rb\") as f:\n        while True:\n            b = f.read(chunk)\n            if not b:\n                break\n            h.update(b)\n    return h.hexdigest()\ndef to_json_serializable(value: Any) -> Any:",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "to_json_serializable",
+        "kind": 2,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "def to_json_serializable(value: Any) -> Any:\n    if isinstance(value, Path):\n        return str(value)\n    if dataclasses.is_dataclass(value):\n        return to_json_serializable(dataclasses.asdict(value))\n    if isinstance(value, dict):\n        return {str(key): to_json_serializable(val) for key, val in value.items()}\n    if isinstance(value, (list, tuple, set)):\n        return [to_json_serializable(item) for item in value]\n    return value",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "run_command",
+        "kind": 2,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "def run_command(\n    command: List[str],\n    cwd: Optional[Path] = None,\n    env: Optional[Dict[str, str]] = None,\n) -> None:\n    printable = \" \".join(command)\n    print(f\"▶️  Running: {printable}\")\n    subprocess.run(\n        command,\n        check=True,",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "main_cli",
+        "kind": 2,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "def main_cli():\n    \"\"\"Command-line interface entry point.\"\"\"\n    parser = argparse.ArgumentParser(description=\"offLLM End-to-End Pipeline\")\n    parser.add_argument(\n        \"--stage\",\n        choices=[\n            \"full_scan\",\n            \"scan\",\n            \"internals\",\n            \"harvest\",",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "FileHit",
+        "kind": 6,
+        "importPath": "scripts.offllm_symbiosis_advisor_v3",
+        "description": "scripts.offllm_symbiosis_advisor_v3",
+        "peekOfCode": "class FileHit:\n    path: str\n    ext: str\n    size_bytes: int\n    loc: int\n    keyword_hits: dict[str, int]\n    sha1: str\n@dataclass\nclass Hotspot:\n    topic: str",
+        "detail": "scripts.offllm_symbiosis_advisor_v3",
+        "documentation": {}
+    },
+    {
+        "label": "Hotspot",
+        "kind": 6,
+        "importPath": "scripts.offllm_symbiosis_advisor_v3",
+        "description": "scripts.offllm_symbiosis_advisor_v3",
+        "peekOfCode": "class Hotspot:\n    topic: str\n    reason: str\n    files: list[str]\n@dataclass\nclass PlanSection:\n    title: str\n    bullets: list[str]\n    evidence: list[str]\n# -----------------------------",
+        "detail": "scripts.offllm_symbiosis_advisor_v3",
+        "documentation": {}
+    },
+    {
+        "label": "PlanSection",
+        "kind": 6,
+        "importPath": "scripts.offllm_symbiosis_advisor_v3",
+        "description": "scripts.offllm_symbiosis_advisor_v3",
+        "peekOfCode": "class PlanSection:\n    title: str\n    bullets: list[str]\n    evidence: list[str]\n# -----------------------------\n# Helpers\n# -----------------------------\ndef _sha1_bytes(b: bytes) -> str:\n    import hashlib\n    h = hashlib.sha1()",
+        "detail": "scripts.offllm_symbiosis_advisor_v3",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v3",
+        "description": "scripts.offllm_symbiosis_advisor_v3",
+        "peekOfCode": "def main(argv: list[str] | None = None) -> int:\n    ap = argparse.ArgumentParser()\n    ap.add_argument(\"--repo\", required=True, help=\"Path to repo folder or .zip\")\n    ap.add_argument(\"--out-dir\", default=\".\", help=\"Output directory\")\n    ap.add_argument(\n        \"--include-noncode\",\n        action=\"store_true\",\n        help=\"Scan all file extensions (slower, more noise)\",\n    )\n    args = ap.parse_args(argv)",
+        "detail": "scripts.offllm_symbiosis_advisor_v3",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_EXCLUDES",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v3",
+        "description": "scripts.offllm_symbiosis_advisor_v3",
+        "peekOfCode": "DEFAULT_EXCLUDES = {\n    \".git\",\n    \".venv\",\n    \"venv\",\n    \"node_modules\",\n    \"Pods\",\n    \"DerivedData\",\n    \"build\",\n    \"dist\",\n    \".next\",",
+        "detail": "scripts.offllm_symbiosis_advisor_v3",
+        "documentation": {}
+    },
+    {
+        "label": "SEARCH_SEEDS",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v3",
+        "description": "scripts.offllm_symbiosis_advisor_v3",
+        "peekOfCode": "SEARCH_SEEDS = [\n    \"scripts\",\n    \"src\",\n    \"app\",\n    \"packages\",\n    \"ios\",\n    \"android\",\n    \".github/workflows\",\n    \"configs\",\n    \"config\",",
+        "detail": "scripts.offllm_symbiosis_advisor_v3",
+        "documentation": {}
+    },
+    {
+        "label": "CODE_EXTS",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v3",
+        "description": "scripts.offllm_symbiosis_advisor_v3",
+        "peekOfCode": "CODE_EXTS = {\n    \".py\",\n    \".js\",\n    \".ts\",\n    \".tsx\",\n    \".jsx\",\n    \".swift\",\n    \".m\",\n    \".mm\",\n    \".h\",",
+        "detail": "scripts.offllm_symbiosis_advisor_v3",
+        "documentation": {}
+    },
+    {
+        "label": "MAX_READ_BYTES",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v3",
+        "description": "scripts.offllm_symbiosis_advisor_v3",
+        "peekOfCode": "MAX_READ_BYTES = 2_500_000  # 2.5MB; big enough for most code, avoids logs.\n# -----------------------------\n# Data model\n# -----------------------------\n@dataclass\nclass FileHit:\n    path: str\n    ext: str\n    size_bytes: int\n    loc: int",
+        "detail": "scripts.offllm_symbiosis_advisor_v3",
+        "documentation": {}
+    },
+    {
+        "label": "load_prompt_template",
+        "kind": 2,
+        "importPath": "scripts.train_lora",
+        "description": "scripts.train_lora",
+        "peekOfCode": "def load_prompt_template(template_path: str) -> dict:\n    if not os.path.isfile(template_path):\n        raise FileNotFoundError(f\"Prompt template not found: {template_path}\")\n    with open(template_path, \"r\", encoding=\"utf-8\") as handle:\n        return json.load(handle)\ndef format_example(example: dict, training_template: dict) -> str:\n    required_keys = {\"system_prompt\", \"user_prompt_template\", \"assistant_template\"}\n    missing = required_keys - training_template.keys()\n    if missing:\n        raise ValueError(f\"Training template missing required keys: {missing}\")",
+        "detail": "scripts.train_lora",
+        "documentation": {}
+    },
+    {
+        "label": "format_example",
+        "kind": 2,
+        "importPath": "scripts.train_lora",
+        "description": "scripts.train_lora",
+        "peekOfCode": "def format_example(example: dict, training_template: dict) -> str:\n    required_keys = {\"system_prompt\", \"user_prompt_template\", \"assistant_template\"}\n    missing = required_keys - training_template.keys()\n    if missing:\n        raise ValueError(f\"Training template missing required keys: {missing}\")\n    if not isinstance(training_template.get(\"user_prompt_template\"), str):\n        raise ValueError(\"Training template 'user_prompt_template' must be a string\")\n    system_prompt = training_template[\"system_prompt\"]\n    user_prompt = training_template[\"user_prompt_template\"].format(\n        instruction=example.get(\"instruction\", \"\"),",
+        "detail": "scripts.train_lora",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.train_lora",
+        "description": "scripts.train_lora",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--base_model\", required=True)\n    parser.add_argument(\"--train_file\", required=True)\n    parser.add_argument(\"--output_dir\", required=True)\n    parser.add_argument(\"--max_steps\", type=int, default=50)\n    parser.add_argument(\"--prompt_template\", default=None)\n    args = parser.parse_args()\n    if not os.path.isfile(args.train_file):\n        raise FileNotFoundError(f\"Dataset not found: {args.train_file}\")",
+        "detail": "scripts.train_lora",
+        "documentation": {}
+    },
+    {
+        "label": "Configuration",
+        "kind": 6,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "class Configuration:\n    identifier: str\n    config_name: str\n    target_label: str\n    values: list[str]\ndef normalize_value(raw_value: str) -> str:\n    value = raw_value.strip()\n    if value.startswith('\"') and value.endswith('\"'):\n        value = value[1:-1]\n    return value.strip()",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "normalize_value",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def normalize_value(raw_value: str) -> str:\n    value = raw_value.strip()\n    if value.startswith('\"') and value.endswith('\"'):\n        value = value[1:-1]\n    return value.strip()\ndef is_variable(value: str) -> bool:\n    return value.startswith(\"$(\") or value.startswith(\"${\")\ndef extract_section(text: str, section: str) -> str:\n    pattern = re.compile(SECTION_TEMPLATE.format(section=re.escape(section)), re.DOTALL)\n    match = pattern.search(text)",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "is_variable",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def is_variable(value: str) -> bool:\n    return value.startswith(\"$(\") or value.startswith(\"${\")\ndef extract_section(text: str, section: str) -> str:\n    pattern = re.compile(SECTION_TEMPLATE.format(section=re.escape(section)), re.DOTALL)\n    match = pattern.search(text)\n    return match.group(\"body\") if match else \"\"\ndef parse_configurations(text: str) -> dict[str, tuple[str, list[str]]]:\n    section = extract_section(text, \"XCBuildConfiguration\")\n    configurations: dict[str, tuple[str, list[str]]] = {}\n    for match in BUILD_CONFIG_RE.finditer(section):",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "extract_section",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def extract_section(text: str, section: str) -> str:\n    pattern = re.compile(SECTION_TEMPLATE.format(section=re.escape(section)), re.DOTALL)\n    match = pattern.search(text)\n    return match.group(\"body\") if match else \"\"\ndef parse_configurations(text: str) -> dict[str, tuple[str, list[str]]]:\n    section = extract_section(text, \"XCBuildConfiguration\")\n    configurations: dict[str, tuple[str, list[str]]] = {}\n    for match in BUILD_CONFIG_RE.finditer(section):\n        config_id = match.group(\"id\")\n        config_name = match.group(\"name\").strip()",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "parse_configurations",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def parse_configurations(text: str) -> dict[str, tuple[str, list[str]]]:\n    section = extract_section(text, \"XCBuildConfiguration\")\n    configurations: dict[str, tuple[str, list[str]]] = {}\n    for match in BUILD_CONFIG_RE.finditer(section):\n        config_id = match.group(\"id\")\n        config_name = match.group(\"name\").strip()\n        body = match.group(\"body\")\n        values: list[str] = []\n        for setting_match in STD_SETTING_RE.finditer(body):\n            if value := normalize_value(setting_match.group(\"value\")):",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "format_target",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def format_target(kind: str, name: str) -> str:\n    prefixes = {\n        \"PBXProject\": \"Project\",\n        \"PBXNativeTarget\": \"Target\",\n        \"PBXAggregateTarget\": \"Aggregate target\",\n    }\n    prefix = prefixes.get(kind.strip(), kind.strip() or \"Unknown\")\n    return f\"{prefix} \\\"{name.strip()}\\\"\"\ndef map_configuration_targets(text: str) -> dict[str, tuple[str, str]]:\n    section = extract_section(text, \"XCConfigurationList\")",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "map_configuration_targets",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def map_configuration_targets(text: str) -> dict[str, tuple[str, str]]:\n    section = extract_section(text, \"XCConfigurationList\")\n    mapping: dict[str, tuple[str, str]] = {}\n    for match in CONFIG_LIST_RE.finditer(section):\n        kind = match.group(\"kind\")\n        name = match.group(\"name\")\n        configs_blob = match.group(\"configs\")\n        for config_id_match in CONFIG_ID_RE.finditer(configs_blob):\n            config_id = config_id_match.group(1)\n            mapping[config_id] = (kind, name)",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "collect_configuration_reports",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def collect_configuration_reports(path: Path) -> list[Configuration]:\n    text = path.read_text(errors=\"ignore\")\n    values_by_id = parse_configurations(text)\n    target_mapping = map_configuration_targets(text)\n    reports: list[Configuration] = []\n    for config_id, (config_name, values) in values_by_id.items():\n        kind, name = target_mapping.get(config_id, (\"Unknown\", config_id))\n        reports.append(\n            Configuration(\n                identifier=config_id,",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "summarize_values",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def summarize_values(configurations: Iterable[Configuration]) -> set[str]:\n    values: set[str] = set()\n    for config in configurations:\n        values.update(config.values)\n    return values\ndef evaluate_pods_configs(configurations: list[Configuration]) -> tuple[bool, list[str]]:\n    failures: list[str] = []\n    for config in configurations:\n        explicit_values = [value for value in config.values if not is_variable(value)]\n        if not explicit_values:",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "evaluate_pods_configs",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def evaluate_pods_configs(configurations: list[Configuration]) -> tuple[bool, list[str]]:\n    failures: list[str] = []\n    for config in configurations:\n        explicit_values = [value for value in config.values if not is_variable(value)]\n        if not explicit_values:\n            failures.append(\n                f\"{config.target_label} [{config.config_name}]: \"\n                f\"{', '.join(config.values) if config.values else '(missing)'}\"\n            )\n            continue",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "print_app_summary",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def print_app_summary(configurations: list[Configuration]) -> None:\n    explicit_values = {\n        value\n        for config in configurations\n        for value in config.values\n        if not is_variable(value)\n    }\n    if explicit_values:\n        print(\"App CLANG_CXX_LANGUAGE_STANDARD values:\", explicit_values)\n    else:",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "def main() -> int:\n    if not PODS_PROJECT.exists():\n        print(\"Pods.xcodeproj not found (run pod install)\", file=sys.stderr)\n        return 2\n    pods_configs = collect_configuration_reports(PODS_PROJECT)\n    pods_values = summarize_values(pods_configs)\n    print(\"Pods CLANG_CXX_LANGUAGE_STANDARD values:\", pods_values or {\"(none)\"})\n    pods_ok, failures = evaluate_pods_configs(pods_configs)\n    if APP_PROJECT.exists():\n        app_configs = collect_configuration_reports(APP_PROJECT)",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "PODS_PROJECT",
+        "kind": 5,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "PODS_PROJECT = Path(\"ios/Pods/Pods.xcodeproj/project.pbxproj\")\nAPP_PROJECT = Path(\"ios/monGARS.xcodeproj/project.pbxproj\")\nSECTION_TEMPLATE = r\"/\\* Begin {section} section \\*/(?P<body>.*?)/\\* End {section} section \\*/\"\nBUILD_CONFIG_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* (?P<name>[^*]+) \\*/ = \\{\\s*\"\n    r\"isa = XCBuildConfiguration;\\s*(?P<body>.*?)\\};\",\n    re.DOTALL,\n)\nCONFIG_LIST_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* Build configuration list for (?P<kind>[^\\\"]+) \\\"(?P<name>[^\\\"]+)\\\" \\*/ = \\{\\s*\"",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "APP_PROJECT",
+        "kind": 5,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "APP_PROJECT = Path(\"ios/monGARS.xcodeproj/project.pbxproj\")\nSECTION_TEMPLATE = r\"/\\* Begin {section} section \\*/(?P<body>.*?)/\\* End {section} section \\*/\"\nBUILD_CONFIG_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* (?P<name>[^*]+) \\*/ = \\{\\s*\"\n    r\"isa = XCBuildConfiguration;\\s*(?P<body>.*?)\\};\",\n    re.DOTALL,\n)\nCONFIG_LIST_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* Build configuration list for (?P<kind>[^\\\"]+) \\\"(?P<name>[^\\\"]+)\\\" \\*/ = \\{\\s*\"\n    r\"isa = XCConfigurationList;\\s*buildConfigurations = \\((?P<configs>.*?)\\);\",",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "SECTION_TEMPLATE",
+        "kind": 5,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "SECTION_TEMPLATE = r\"/\\* Begin {section} section \\*/(?P<body>.*?)/\\* End {section} section \\*/\"\nBUILD_CONFIG_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* (?P<name>[^*]+) \\*/ = \\{\\s*\"\n    r\"isa = XCBuildConfiguration;\\s*(?P<body>.*?)\\};\",\n    re.DOTALL,\n)\nCONFIG_LIST_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* Build configuration list for (?P<kind>[^\\\"]+) \\\"(?P<name>[^\\\"]+)\\\" \\*/ = \\{\\s*\"\n    r\"isa = XCConfigurationList;\\s*buildConfigurations = \\((?P<configs>.*?)\\);\",\n    re.DOTALL,",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "BUILD_CONFIG_RE",
+        "kind": 5,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "BUILD_CONFIG_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* (?P<name>[^*]+) \\*/ = \\{\\s*\"\n    r\"isa = XCBuildConfiguration;\\s*(?P<body>.*?)\\};\",\n    re.DOTALL,\n)\nCONFIG_LIST_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* Build configuration list for (?P<kind>[^\\\"]+) \\\"(?P<name>[^\\\"]+)\\\" \\*/ = \\{\\s*\"\n    r\"isa = XCConfigurationList;\\s*buildConfigurations = \\((?P<configs>.*?)\\);\",\n    re.DOTALL,\n)",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "CONFIG_LIST_RE",
+        "kind": 5,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "CONFIG_LIST_RE = re.compile(\n    r\"\\s*(?P<id>[0-9A-Fa-f]+) /\\* Build configuration list for (?P<kind>[^\\\"]+) \\\"(?P<name>[^\\\"]+)\\\" \\*/ = \\{\\s*\"\n    r\"isa = XCConfigurationList;\\s*buildConfigurations = \\((?P<configs>.*?)\\);\",\n    re.DOTALL,\n)\nCONFIG_ID_RE = re.compile(r\"([0-9A-Fa-f]+) /\\*\")\nSTD_SETTING_RE = re.compile(\n    r\"CLANG_CXX_LANGUAGE_STANDARD(?:\\[[^\\]]+\\])?\\s*=\\s*(?P<value>[^;]+);\"\n)\n@dataclass",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "CONFIG_ID_RE",
+        "kind": 5,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "CONFIG_ID_RE = re.compile(r\"([0-9A-Fa-f]+) /\\*\")\nSTD_SETTING_RE = re.compile(\n    r\"CLANG_CXX_LANGUAGE_STANDARD(?:\\[[^\\]]+\\])?\\s*=\\s*(?P<value>[^;]+);\"\n)\n@dataclass\nclass Configuration:\n    identifier: str\n    config_name: str\n    target_label: str\n    values: list[str]",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "STD_SETTING_RE",
+        "kind": 5,
+        "importPath": "scripts.verify-ios-cpp-standard",
+        "description": "scripts.verify-ios-cpp-standard",
+        "peekOfCode": "STD_SETTING_RE = re.compile(\n    r\"CLANG_CXX_LANGUAGE_STANDARD(?:\\[[^\\]]+\\])?\\s*=\\s*(?P<value>[^;]+);\"\n)\n@dataclass\nclass Configuration:\n    identifier: str\n    config_name: str\n    target_label: str\n    values: list[str]\ndef normalize_value(raw_value: str) -> str:",
+        "detail": "scripts.verify-ios-cpp-standard",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.verify-ios-rn-versions",
+        "description": "scripts.verify-ios-rn-versions",
+        "peekOfCode": "def main():\n    pkg_path = Path(\"package.json\")\n    lock_path = Path(\"ios/Podfile.lock\")\n    if not pkg_path.exists():\n        print(\"package.json not found\", file=sys.stderr)\n        sys.exit(2)\n    if not lock_path.exists():\n        print(\"ios/Podfile.lock not found (run pod install)\", file=sys.stderr)\n        sys.exit(2)\n    pkg = json.loads(pkg_path.read_text())",
+        "detail": "scripts.verify-ios-rn-versions",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.xcresult_top_issues",
+        "description": "scripts.xcresult_top_issues",
+        "peekOfCode": "def main() -> None:\n    try:\n        data = json.load(sys.stdin)\n    except Exception:\n        # If input isn't JSON for any reason, don't fail the step\n        return\n    pairs: List[Tuple[str, str]] = []\n    _collect_messages(data, pairs)\n    pairs = _dedupe_preserve_order(pairs)\n    for sev, msg in pairs[:200]:",
+        "detail": "scripts.xcresult_top_issues",
+        "documentation": {}
+    }
 ]

@@ -21,3 +21,8 @@ ios/MyOfflineLLMApp/Models/*
 
 
 offLLM.code-workspace
+.venv/
+.vscode/
+runs/
+
+.vscode/PythonImportHelper-v2-Completion.json
