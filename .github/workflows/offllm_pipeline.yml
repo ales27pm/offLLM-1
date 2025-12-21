@@ -1,0 +1,164 @@
+name: offLLM Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: "Pipeline stage to run"
+        type: choice
+        options:
+          - full_scan
+          - scan
+          - internals
+          - harvest
+          - format_datasets
+          - retrieval_pairs
+          - datasets
+          - sft
+          - unsloth
+          - llm2vec
+          - mlx_export
+        default: scan
+      telemetry_path:
+        description: "Path to telemetry JSONL (required for retrieval_pairs)"
+        type: string
+        default: ""
+      tool_schema_path:
+        description: "Path to tool schema JSON (optional)"
+        type: string
+        default: ""
+      harvest_manifest:
+        description: "Path to harvest manifest JSON"
+        type: string
+        default: "scripts/mlops/sources_fr_manifest.json"
+      internet_max_records:
+        description: "Max records to harvest"
+        type: string
+        default: "2000"
+      internet_min_chars:
+        description: "Minimum characters per record"
+        type: string
+        default: "200"
+      retrieval_max_negatives:
+        description: "Max negatives per retrieval pair"
+        type: string
+        default: "4"
+      base_model:
+        description: "Base model identifier"
+        type: string
+        default: "cognitivecomputations/Dolphin3.0-Llama3.2-3B"
+      unsloth_max_steps:
+        description: "Unsloth training steps"
+        type: string
+        default: "800"
+      unsloth_lr:
+        description: "Unsloth learning rate"
+        type: string
+        default: "0.0002"
+      mlx_model_path:
+        description: "Local path or HF model id for MLX export"
+        type: string
+        default: ""
+      mlx_export_dir:
+        description: "Directory for MLX export"
+        type: string
+        default: "runs/mlx_export"
+      mlx_quantize_bits:
+        description: "Quantization bits for MLX export"
+        type: string
+        default: "4"
+      coreml_export_dir:
+        description: "Directory for CoreML export (optional)"
+        type: string
+        default: ""
+
+jobs:
+  pipeline:
+    if: ${{ inputs.stage != 'mlx_export' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch transformers datasets trl peft
+
+      - name: Run pipeline
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          args=(
+            "--stage" "${{ inputs.stage }}"
+            "--base-model" "${{ inputs.base_model }}"
+            "--harvest-manifest" "${{ inputs.harvest_manifest }}"
+            "--internet-max-records" "${{ inputs.internet_max_records }}"
+            "--internet-min-chars" "${{ inputs.internet_min_chars }}"
+            "--retrieval-max-negatives" "${{ inputs.retrieval_max_negatives }}"
+            "--unsloth-max-steps" "${{ inputs.unsloth_max_steps }}"
+            "--unsloth-lr" "${{ inputs.unsloth_lr }}"
+          )
+          if [ -n "${{ inputs.telemetry_path }}" ]; then
+            args+=("--telemetry-path" "${{ inputs.telemetry_path }}")
+          fi
+          if [ -n "${{ inputs.tool_schema_path }}" ]; then
+            args+=("--tool-schema-path" "${{ inputs.tool_schema_path }}")
+          fi
+          if [ -n "${{ inputs.mlx_model_path }}" ]; then
+            args+=("--mlx-model-path" "${{ inputs.mlx_model_path }}")
+          fi
+          if [ -n "${{ inputs.mlx_export_dir }}" ]; then
+            args+=("--mlx-export-dir" "${{ inputs.mlx_export_dir }}")
+          fi
+          if [ -n "${{ inputs.mlx_quantize_bits }}" ]; then
+            args+=("--mlx-quantize-bits" "${{ inputs.mlx_quantize_bits }}")
+          fi
+          if [ -n "${{ inputs.coreml_export_dir }}" ]; then
+            args+=("--coreml-export-dir" "${{ inputs.coreml_export_dir }}")
+          fi
+          python scripts/offllm_end_to_end_pipeline.py "${args[@]}"
+
+  mlx_export:
+    if: ${{ inputs.stage == 'mlx_export' }}
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch transformers datasets trl peft mlx mlx-lm
+
+      - name: Run MLX export
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          if [ -z "${{ inputs.mlx_model_path }}" ]; then
+            echo "mlx_model_path input is required for mlx_export" >&2
+            exit 1
+          fi
+          args=(
+            "--stage" "mlx_export"
+            "--base-model" "${{ inputs.base_model }}"
+            "--mlx-model-path" "${{ inputs.mlx_model_path }}"
+            "--mlx-export-dir" "${{ inputs.mlx_export_dir }}"
+            "--mlx-quantize-bits" "${{ inputs.mlx_quantize_bits }}"
+          )
+          if [ -n "${{ inputs.coreml_export_dir }}" ]; then
+            args+=("--coreml-export-dir" "${{ inputs.coreml_export_dir }}")
+          fi
+          python scripts/offllm_end_to_end_pipeline.py "${args[@]}"
