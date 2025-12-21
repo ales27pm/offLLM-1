@@ -165,6 +165,21 @@ export class ToolRegistry {
   }
 }
 
+const FILE_SYSTEM_INVALID_PATH_CODE = "ERR_FS_INVALID_PATH";
+
+const buildFileSystemInvalidPathError = (message) => {
+  const error = new Error(message);
+  error.code = FILE_SYSTEM_INVALID_PATH_CODE;
+  return error;
+};
+
+const shouldLogFileSystemToolError = (error) => {
+  if (!error || typeof error !== "object") {
+    return true;
+  }
+  return error.code !== FILE_SYSTEM_INVALID_PATH_CODE;
+};
+
 export const builtInTools = {
   webSearch: {
     name: "webSearch",
@@ -325,7 +340,7 @@ export const builtInTools = {
 
         const resolution = resolveSafePath(targetPath);
         if (!resolution.isSafe) {
-          throw new Error(
+          throw buildFileSystemInvalidPathError(
             "Invalid path: directory traversal detected or path outside the allowed root",
           );
         }
@@ -431,7 +446,9 @@ export const builtInTools = {
             throw new Error(`Unsupported file system operation: ${operation}`);
         }
       } catch (error) {
-        console.error("File system operation failed:", error);
+        if (shouldLogFileSystemToolError(error)) {
+          console.error("File system operation failed:", error);
+        }
         return {
           success: false,
           operation,
