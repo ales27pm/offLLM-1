@@ -181,10 +181,11 @@ jobs:
           fi
 
       - name: 🧱 Generate Xcode project + install pods
+        working-directory: ios
         run: |
           set -euo pipefail
           xcodegen generate
-          pod install --project-directory=ios
+          pod install --project-directory=.
 
       - name: Ensure shared app scheme exists
         run: |
