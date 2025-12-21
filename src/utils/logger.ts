@@ -106,23 +106,7 @@ class Logger {
     }
 
     if (!this.isProduction && !this.isTest) {
-      const formatted = this.formatMessage(level, tag, message);
-      switch (level) {
-        case LogLevel.DEBUG:
-          console.log(formatted, data ?? "");
-          break;
-        case LogLevel.INFO:
-          console.info(formatted, data ?? "");
-          break;
-        case LogLevel.WARN:
-          console.warn(formatted, data ?? "");
-          break;
-        case LogLevel.ERROR:
-          console.error(formatted, error ?? data ?? "");
-          break;
-        default:
-          console.log(formatted, data ?? "");
-      }
+      this.logToConsole(level, tag, message, data, error);
     }
 
     if (this.fileLoggingEnabled) {
@@ -210,6 +194,9 @@ class Logger {
 
   clearLogs(): void {
     this.logs = [];
+    if (!this.isProduction && !this.isTest) {
+      this.logToConsole(LogLevel.INFO, "Logger", "Logs cleared");
+    }
     if (this.fileLoggingEnabled) {
       this.writeLogsToFileWithGuard().catch((error) => {
         if (!this.isProduction) {
@@ -318,6 +305,32 @@ class Logger {
       });
     } else {
       void this.clearLogFile();
+    }
+  }
+
+  private logToConsole(
+    level: LogLevel,
+    tag: string,
+    message: string,
+    data?: unknown,
+    error?: Error,
+  ): void {
+    const formatted = this.formatMessage(level, tag, message);
+    switch (level) {
+      case LogLevel.DEBUG:
+        console.log(formatted, data ?? "");
+        break;
+      case LogLevel.INFO:
+        console.info(formatted, data ?? "");
+        break;
+      case LogLevel.WARN:
+        console.warn(formatted, data ?? "");
+        break;
+      case LogLevel.ERROR:
+        console.error(formatted, error ?? data ?? "");
+        break;
+      default:
+        console.log(formatted, data ?? "");
     }
   }
 }
