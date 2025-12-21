@@ -11,9 +11,9 @@ def normalize_sft(record: dict) -> dict:
         raise ValueError(f"Missing required keys for SFT: {missing}")
     return {
         "instruction": (record.get("instruction") or "").strip(),
-        "context": record.get("context", ""),
-        "tool_schema": record.get("tool_schema", ""),
-        "expected_tool_call": record.get("expected_tool_call", {}),
+        "context": record.get("context") or "",
+        "tool_schema": record.get("tool_schema") or "",
+        "expected_tool_call": record.get("expected_tool_call") or {},
         "expected_answer": (record.get("expected_answer") or "").strip(),
     }
 
