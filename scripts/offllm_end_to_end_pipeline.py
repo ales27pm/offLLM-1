@@ -1371,12 +1371,14 @@ class PipelineOrchestrator:
             )
         return formatted
 
-    def _build_retrieval_pairs(self) -> Path:
+    def _build_retrieval_pairs(self) -> Path | None:
         telemetry = self.config.telemetry_path
         if not telemetry:
-            raise FileNotFoundError("telemetry_path is required for retrieval pairs")
+            print("⚠️  Skipping retrieval pairs: telemetry_path is not configured.")
+            return None
         if not telemetry.exists():
-            raise FileNotFoundError(f"telemetry_path not found: {telemetry}")
+            print(f"⚠️  Skipping retrieval pairs: telemetry_path not found: {telemetry}")
+            return None
         datasets_dir = self.config.datasets_dir or (self.config.run_dir / "datasets")
         output_path = datasets_dir / "retrieval_pairs.jsonl"
         run_command(
