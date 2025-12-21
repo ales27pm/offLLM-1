@@ -766,6 +766,15 @@
         "documentation": {}
     },
     {
+        "label": "inspect",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "inspect",
+        "description": "inspect",
+        "detail": "inspect",
+        "documentation": {}
+    },
+    {
         "label": "platform",
         "kind": 6,
         "isExtraImport": true,
@@ -1388,6 +1397,15 @@
         "importPath": "scripts.offllm_end_to_end_pipeline",
         "description": "scripts.offllm_end_to_end_pipeline",
         "peekOfCode": "def run_command(\n    command: List[str],\n    cwd: Optional[Path] = None,\n    env: Optional[Dict[str, str]] = None,\n) -> None:\n    printable = \" \".join(command)\n    print(f\"▶️  Running: {printable}\")\n    subprocess.run(\n        command,\n        check=True,",
+        "detail": "scripts.offllm_end_to_end_pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "build_sft_trainer_kwargs",
+        "kind": 2,
+        "importPath": "scripts.offllm_end_to_end_pipeline",
+        "description": "scripts.offllm_end_to_end_pipeline",
+        "peekOfCode": "def build_sft_trainer_kwargs(\n    trainer_cls: type, tokenizer: AutoTokenizer, **kwargs: Any\n) -> Dict[str, Any]:\n    signature = inspect.signature(trainer_cls.__init__)\n    params = signature.parameters\n    trainer_kwargs = dict(kwargs)\n    max_seq_length = trainer_kwargs.pop(\"max_seq_length\", None)\n    if max_seq_length is not None:\n        if \"max_seq_length\" in params:\n            trainer_kwargs[\"max_seq_length\"] = max_seq_length",
         "detail": "scripts.offllm_end_to_end_pipeline",
         "documentation": {}
     },
