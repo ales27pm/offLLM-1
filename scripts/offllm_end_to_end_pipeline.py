@@ -874,6 +874,17 @@ class DatasetBuilder:
             )
         except subprocess.CalledProcessError as exc:
             if output_path.exists() and output_path.stat().st_size > 0:
+                # Validate that file contains at least one valid JSONL record
+                try:
+                    with output_path.open("r", encoding="utf-8") as f:
+                        first_line = f.readline().strip()
+                        if not first_line:
+                            raise ValueError("Output file is empty or contains only whitespace")
+                        json.loads(first_line)  # Validate first record is valid JSON
+                except (json.JSONDecodeError, ValueError, UnicodeDecodeError) as validation_error:
+                    print(f"⚠️  Harvest output file is invalid: {validation_error}")
+                    raise exc from validation_error
+                
                 print(
                     "⚠️  Harvest command failed after writing output; "
                     f"continuing with {output_path} (exit {exc.returncode})."
