@@ -345,7 +345,7 @@ class RepositoryScanner:
             rel = str(path.relative_to(self.repo_root))
             hits = {}
             for category, keywords in self.keyword_map.items():
-                score = sum(len(re.findall(rf"\\b{re.escape(k)}\\b", text, re.IGNORECASE)) for k in keywords)
+                score = sum(len(re.findall(rf"\b{re.escape(k)}\b", text, re.IGNORECASE)) for k in keywords)
                 if score:
                     hits[category] = score
             for category, score in hits.items():
