@@ -179,6 +179,18 @@ def sha256_file(path: Path, chunk: int = 1024 * 1024) -> str:
     return h.hexdigest()
 
 
+def to_json_serializable(value: Any) -> Any:
+    if isinstance(value, Path):
+        return str(value)
+    if dataclasses.is_dataclass(value):
+        return to_json_serializable(dataclasses.asdict(value))
+    if isinstance(value, dict):
+        return {str(key): to_json_serializable(val) for key, val in value.items()}
+    if isinstance(value, (list, tuple, set)):
+        return [to_json_serializable(item) for item in value]
+    return value
+
+
 def run_command(
     command: List[str],
     cwd: Optional[Path] = None,
@@ -1210,10 +1222,10 @@ class PipelineOrchestrator:
             "git_commit": git_commit(self.config.repo_root),
             "platform": {
                 "python": sys.version,
-                "os": platform.platform(),
-                "machine": platform.machine(),
-            },
-            "config": dataclasses.asdict(self.config),
+            "os": platform.platform(),
+            "machine": platform.machine(),
+        },
+            "config": to_json_serializable(dataclasses.asdict(self.config)),
         }
 
         (self.config.run_dir / "run_config.json").write_text(json.dumps(meta, indent=2))
