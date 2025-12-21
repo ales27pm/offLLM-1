@@ -1277,7 +1277,6 @@ class PipelineOrchestrator:
                 "format_datasets",
                 "retrieval_pairs",
                 "sft",
-                "unsloth",
                 "llm2vec",
                 "mlx_export",
             ]
