@@ -857,20 +857,29 @@ class DatasetBuilder:
         max_records: int,
         min_chars: int,
     ) -> Path:
-        run_command(
-            [
-                sys.executable,
-                str(Path(__file__).parent / "mlops" / "harvest_fr.py"),
-                "--manifest",
-                str(manifest_path),
-                "--output",
-                str(output_path),
-                "--max-records",
-                str(max_records),
-                "--min-chars",
-                str(min_chars),
-            ]
-        )
+        try:
+            run_command(
+                [
+                    sys.executable,
+                    str(Path(__file__).parent / "mlops" / "harvest_fr.py"),
+                    "--manifest",
+                    str(manifest_path),
+                    "--output",
+                    str(output_path),
+                    "--max-records",
+                    str(max_records),
+                    "--min-chars",
+                    str(min_chars),
+                ]
+            )
+        except subprocess.CalledProcessError as exc:
+            if output_path.exists() and output_path.stat().st_size > 0:
+                print(
+                    "⚠️  Harvest command failed after writing output; "
+                    f"continuing with {output_path} (exit {exc.returncode})."
+                )
+            else:
+                raise
         return output_path
 
 
