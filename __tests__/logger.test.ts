@@ -29,6 +29,7 @@ describe("logger", () => {
 
   it("clears logs without adding a new entry", () => {
     logger.info("Test", "message");
+    expect(logger.getLogs()).toHaveLength(1);
     logger.clearLogs();
     expect(logger.getLogs()).toHaveLength(0);
   });
