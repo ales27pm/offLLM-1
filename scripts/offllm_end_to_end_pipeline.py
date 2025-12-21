@@ -99,22 +99,41 @@ class PipelineConfig:
 
 
 def resolve_pipeline_config(config: PipelineConfig) -> PipelineConfig:
-    datasets_dir = config.datasets_dir or (config.run_dir / "datasets")
-    telemetry_path = config.telemetry_path or (datasets_dir / "telemetry.jsonl")
-    tool_schema_path = config.tool_schema_path or (datasets_dir / "tool_schema.json")
-    harvest_manifest = config.harvest_manifest or (
-        Path(__file__).parent / "mlops" / "sources_fr_manifest.json"
-    )
-    mlx_export_dir = config.mlx_export_dir or (config.run_dir / "mlx_export")
-    coreml_export_dir = config.coreml_export_dir or (config.run_dir / "coreml")
+    repo_root = config.repo_root.expanduser().resolve()
+    run_dir = config.run_dir.expanduser()
+    if not run_dir.is_absolute():
+        run_dir = repo_root / run_dir
+    datasets_dir = (config.datasets_dir or (run_dir / "datasets")).expanduser()
+    if not datasets_dir.is_absolute():
+        datasets_dir = repo_root / datasets_dir
+    telemetry_path = (config.telemetry_path or (datasets_dir / "telemetry.jsonl")).expanduser()
+    if not telemetry_path.is_absolute():
+        telemetry_path = repo_root / telemetry_path
+    tool_schema_path = (config.tool_schema_path or (datasets_dir / "tool_schema.json")).expanduser()
+    if not tool_schema_path.is_absolute():
+        tool_schema_path = repo_root / tool_schema_path
+    harvest_manifest = (
+        config.harvest_manifest
+        or (Path(__file__).parent / "mlops" / "sources_fr_manifest.json")
+    ).expanduser()
+    if not harvest_manifest.is_absolute():
+        harvest_manifest = repo_root / harvest_manifest
+    mlx_export_dir = (config.mlx_export_dir or (run_dir / "mlx_export")).expanduser()
+    if not mlx_export_dir.is_absolute():
+        mlx_export_dir = repo_root / mlx_export_dir
+    coreml_export_dir = (config.coreml_export_dir or (run_dir / "coreml")).expanduser()
+    if not coreml_export_dir.is_absolute():
+        coreml_export_dir = repo_root / coreml_export_dir
     mlx_model_path = config.mlx_model_path
     if not mlx_model_path:
-        for candidate in [config.run_dir / "unsloth", config.run_dir / "sft"]:
+        for candidate in [run_dir / "unsloth", run_dir / "sft"]:
             if candidate.exists():
                 mlx_model_path = candidate
                 break
     return dataclasses.replace(
         config,
+        repo_root=repo_root,
+        run_dir=run_dir,
         datasets_dir=datasets_dir,
         telemetry_path=telemetry_path,
         tool_schema_path=tool_schema_path,
