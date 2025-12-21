@@ -27,6 +27,12 @@ describe("logger", () => {
     ).toBe(false);
   });
 
+  it("clears logs without adding a new entry", () => {
+    logger.info("Test", "message");
+    logger.clearLogs();
+    expect(logger.getLogs()).toHaveLength(0);
+  });
+
   it("maintains only the most recent entries up to the cap", () => {
     for (let index = 0; index < 1100; index += 1) {
       logger.info("Ring", `message-${index}`);

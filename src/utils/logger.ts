@@ -210,7 +210,6 @@ class Logger {
 
   clearLogs(): void {
     this.logs = [];
-    this.info("Logger", "Logs cleared");
     if (this.fileLoggingEnabled) {
       this.writeLogsToFileWithGuard().catch((error) => {
         if (!this.isProduction) {
