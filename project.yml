@@ -20,7 +20,7 @@ targets:
     deploymentTarget: "18.0"
 
     sources:
-      - path: MyOfflineLLMApp
+      - path: ios/MyOfflineLLMApp
         excludes:
           - "../node_modules/**"
           - "../build/**"
@@ -52,10 +52,10 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.offllm.mongars
-        INFOPLIST_FILE: MyOfflineLLMApp/Info.plist
+        INFOPLIST_FILE: ios/MyOfflineLLMApp/Info.plist
         SWIFT_VERSION: "6.0"
         IPHONEOS_DEPLOYMENT_TARGET: "18.0"
-        SWIFT_OBJC_BRIDGING_HEADER: MyOfflineLLMApp/Bridging/monGARS-Bridging-Header.h
+        SWIFT_OBJC_BRIDGING_HEADER: ios/MyOfflineLLMApp/Bridging/monGARS-Bridging-Header.h
         HEADER_SEARCH_PATHS:
           - "$(inherited)"
           - "$(PODS_ROOT)/Headers/Public"
