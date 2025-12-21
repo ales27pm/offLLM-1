@@ -115,6 +115,8 @@ const flushTelemetryQueue = async () => {
     return null;
   }
   isWriting = true;
+  let hadError = false;
+  let lines = [];
   try {
     const directory = pendingDirectory || (await ensureTelemetryDirectory());
     if (!directory) {
@@ -123,15 +125,25 @@ const flushTelemetryQueue = async () => {
     }
     pendingDirectory = directory;
     const filePath = `${directory}${DEFAULT_FILE_NAME}`;
-    const lines = pendingEvents.splice(0, pendingEvents.length);
+    lines = pendingEvents.splice(0, pendingEvents.length);
     await appendJsonLines(filePath, lines);
     return filePath;
   } catch (error) {
-    logger.warn(TELEMETRY_TAG, "Failed to flush telemetry queue", error);
+    hadError = true;
+    if (lines.length) {
+      pendingEvents.unshift(...lines);
+      logger.warn(
+        TELEMETRY_TAG,
+        `Failed to flush telemetry queue; re-queued ${lines.length} events`,
+        error,
+      );
+    } else {
+      logger.warn(TELEMETRY_TAG, "Failed to flush telemetry queue", error);
+    }
     return null;
   } finally {
     isWriting = false;
-    if (pendingEvents.length) {
+    if (pendingEvents.length && !hadError) {
       void flushTelemetryQueue();
     }
   }
