@@ -1412,14 +1412,18 @@ class PipelineOrchestrator:
 
         if self.config.coreml_export_dir:
             self.config.coreml_export_dir.mkdir(parents=True, exist_ok=True)
+            out_prefix = self.config.coreml_export_dir / "coreml_model"
+            artifacts_path = self.config.coreml_export_dir / "coreml_artifacts.json"
             run_command(
                 [
                     sys.executable,
                     str(Path(__file__).parent / "convert_to_coreml.py"),
-                    "--model",
+                    "--hf_model",
                     str(self.config.mlx_model_path),
-                    "--output-dir",
-                    str(self.config.coreml_export_dir),
+                    "--out_prefix",
+                    str(out_prefix),
+                    "--artifacts_path",
+                    str(artifacts_path),
                 ]
             )
 
