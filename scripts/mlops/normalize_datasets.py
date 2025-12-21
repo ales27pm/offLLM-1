@@ -22,6 +22,8 @@ def normalize_pretrain(record: dict) -> dict:
     text = record.get("text") or record.get("content")
     if not text:
         raise ValueError("Missing 'text' content for pretrain normalization")
+    if not isinstance(text, str):
+        raise ValueError("Expected 'text' to be a string")
     return {
         "text": text.strip(),
         "metadata": {k: v for k, v in record.items() if k not in {"text", "content"}},
