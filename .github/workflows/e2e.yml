@@ -39,3 +39,9 @@ jobs:
 
       - name: Symbiosis advisor
         run: python scripts/offllm_symbiosis_advisor_v3.py --repo . --out-dir runs/symbiosis
+
+      - name: Upload symbiosis artifacts
+        uses: actions/upload-artifact@v5
+        with:
+          name: symbiosis-advisor
+          path: runs/symbiosis
