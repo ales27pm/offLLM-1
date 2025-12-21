@@ -34,12 +34,10 @@ import hashlib
 import json
 import os
 import re
-import sys
-import time
 from dataclasses import dataclass, asdict
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Iterable, Optional
+from typing import Any, Optional
 
 
 # -------------------------------
@@ -762,7 +760,7 @@ def main() -> int:
     }
 
     plan = SymbiosisPlan(
-        generated_at=datetime.utcnow().isoformat() + "Z",
+        generated_at=datetime.now(timezone.utc).isoformat(),
         repo_root=str(repo_root),
         repo_fingerprint=fp,
         totals=totals,

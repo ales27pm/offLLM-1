@@ -17,6 +17,7 @@ import argparse
 import ast
 import dataclasses
 import hashlib
+import importlib.util
 import inspect
 import json
 import os
@@ -34,11 +35,15 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, Iterator, List, Optional, Sequence, Tuple, Union
 
+def _module_available(name: str) -> bool:
+    return importlib.util.find_spec(name) is not None
+
+
 # Optional: if Unsloth is installed, import it EARLY (before transformers/trl/peft) to avoid patch-order warnings.
-try:
+if _module_available("unsloth"):
     import unsloth  # type: ignore  # noqa: F401
-except Exception:
-    unsloth = None  # noqa: F401
+else:
+    unsloth = None  # type: ignore  # noqa: F401
 
 import torch
 from torch import nn
@@ -89,6 +94,7 @@ class PipelineConfig:
     sft_min_rows: int = 50
     unsloth_max_steps: int = 800
     unsloth_lr: float = 2e-4
+    unsloth_max_seq_length: int = 1024
 
     llm2vec_max_steps: int = 1200
     llm2vec_lr: float = 1e-4
@@ -1043,18 +1049,17 @@ class UnslothTrainerWrapper:
         output_dir: Path,
         max_steps: int,
     ) -> Path:
-        try:
-            from unsloth import FastLanguageModel
-        except ImportError as exc:
+        if not _module_available("unsloth"):
             raise ImportError(
                 "Unsloth is required for the 'unsloth' stage. Install with "
                 "`pip install unsloth` (see Unsloth docs for hardware support)."
-            ) from exc
+            )
+        from unsloth import FastLanguageModel
 
         model, tokenizer = FastLanguageModel.from_pretrained(
             model_name=config.base_model,
-            max_seq_length=2048,
-            dtype=None,
+            max_seq_length=config.unsloth_max_seq_length,
+            dtype=torch.float16 if torch.cuda.is_available() else None,
             load_in_4bit=True,
         )
 
@@ -1082,8 +1087,8 @@ class UnslothTrainerWrapper:
 
         training_args = TrainingArguments(
             output_dir=str(output_dir),
-            per_device_train_batch_size=2,
-            gradient_accumulation_steps=4,
+            per_device_train_batch_size=1,
+            gradient_accumulation_steps=8,
             learning_rate=config.unsloth_lr,
             max_steps=max_steps,
             logging_steps=10,
@@ -1100,7 +1105,7 @@ class UnslothTrainerWrapper:
                 model=lora_model,
                 train_dataset=train_ds,
                 dataset_text_field="text",
-                max_seq_length=2048,
+                max_seq_length=config.unsloth_max_seq_length,
                 args=training_args,
             )
         )
@@ -1491,7 +1496,25 @@ class PipelineOrchestrator:
             except Exception:
                 return 0
 
-        # 1) explicit keys
+        def in_current_run(p: Path) -> bool:
+            try:
+                return self.config.run_dir in p.parents
+            except Exception:
+                return False
+
+        def mtime(p: Path) -> float:
+            try:
+                return p.stat().st_mtime
+            except Exception:
+                return 0.0
+
+        # 1) explicit keys (prefer current run artifacts)
+        for k in prefer_keys:
+            if k in candidates and candidates[k].suffix == ".jsonl" and candidates[k].exists():
+                p = candidates[k]
+                if in_current_run(p) and count_lines(p) >= min_rows:
+                    return p
+
         for k in prefer_keys:
             if k in candidates and candidates[k].suffix == ".jsonl" and candidates[k].exists():
                 p = candidates[k]
@@ -1499,23 +1522,32 @@ class PipelineOrchestrator:
                     return p
 
         # 2) substring match
-        scored: list[tuple[int, int, str, Path]] = []
+        scored: list[tuple[int, int, int, float, str, Path]] = []
         for k, p in candidates.items():
             if not p.exists() or p.suffix != ".jsonl":
                 continue
             name = (p.name + " " + k).lower()
             hits = sum(1 for s in prefer_name_substrings if s in name)
             lines = count_lines(p)
-            scored.append((hits, lines, k, p))
-        scored.sort(reverse=True, key=lambda t: (t[0], t[1]))
+            scored.append((hits, int(in_current_run(p)), lines, mtime(p), k, p))
+        scored.sort(reverse=True, key=lambda t: (t[0], t[1], t[2], t[3]))
 
-        for hits, lines, _k, p in scored:
+        for hits, _in_run, lines, _mt, _k, p in scored:
             if hits > 0 and lines >= min_rows:
                 return p
 
-        # 3) largest
+        # 3) largest (prefer current run + newest)
         if scored:
-            return scored[0][3]
+            viable = [row for row in scored if row[2] >= min_rows]
+            if viable:
+                return viable[0][5]
+            best = max(scored, key=lambda t: (t[1], t[2], t[3]))
+            if best[2] == 0:
+                raise FileNotFoundError("No non-empty JSONL dataset found")
+            print(
+                "⚠️  No JSONL met the minimum row threshold; falling back to the largest available dataset."
+            )
+            return best[5]
 
         raise FileNotFoundError("No JSONL dataset found")
 
@@ -1528,8 +1560,27 @@ class PipelineOrchestrator:
         """
         dataset_path = self._pick_best_jsonl(
             datasets,
-            prefer_keys=("offllm_sft", "french_sft", "telemetry_sft", "sft", "offllm"),
-            prefer_name_substrings=("sft", "instruction", "chat", "alpaca", "instruct"),
+            prefer_keys=(
+                "internet_pretrain",
+                "internet_raw",
+                "combined_instruct.jsonl",
+                "combined_retrieval.jsonl",
+                "offllm_sft",
+                "french_sft",
+                "telemetry_sft",
+                "sft",
+                "offllm",
+            ),
+            prefer_name_substrings=(
+                "normalized",
+                "harvested",
+                "french",
+                "sft",
+                "instruction",
+                "chat",
+                "alpaca",
+                "instruct",
+            ),
             min_rows=max(50, self.config.sft_min_rows),
         )
 
@@ -1557,12 +1608,11 @@ class PipelineOrchestrator:
             )
 
         # Dependency check (llm2vec is not installed in many envs)
-        try:
-            import llm2vec  # type: ignore  # noqa: F401
-        except Exception:
+        if not _module_available("llm2vec"):
             print("⚠️  LLM2Vec dependency missing. Install with: pip install llm2vec")
             print("    (See the LLM2Vec docs/model card for installation guidance.)")
             return
+        import llm2vec  # type: ignore  # noqa: F401
 
         train_cfg = TrainCfg(
             base_model=self.config.base_model,
@@ -1586,13 +1636,42 @@ class PipelineOrchestrator:
         """
         dataset_path = self._pick_best_jsonl(
             datasets,
-            prefer_keys=("offllm_sft", "french_sft", "telemetry_sft", "sft", "offllm"),
-            prefer_name_substrings=("sft", "instruction", "chat", "alpaca", "instruct"),
+            prefer_keys=(
+                "internet_pretrain",
+                "internet_raw",
+                "combined_instruct.jsonl",
+                "combined_retrieval.jsonl",
+                "offllm_sft",
+                "french_sft",
+                "telemetry_sft",
+                "sft",
+                "offllm",
+            ),
+            prefer_name_substrings=(
+                "normalized",
+                "harvested",
+                "french",
+                "sft",
+                "instruction",
+                "chat",
+                "alpaca",
+                "instruct",
+            ),
             min_rows=max(50, self.config.sft_min_rows),
         )
 
         output_dir = self.config.run_dir / "unsloth"
         output_dir.mkdir(parents=True, exist_ok=True)
+
+        if not _module_available("unsloth"):
+            message = (
+                "⚠️  Unsloth is not installed; skipping Unsloth stage. "
+                "Install with `pip install unsloth`."
+            )
+            if self.config.strict:
+                raise ImportError(message)
+            print(message)
+            return
 
         try:
             UnslothTrainerWrapper.train(
@@ -1765,6 +1844,7 @@ def main_cli():
     parser.add_argument("--retrieval-max-negatives", type=int, default=4)
     parser.add_argument("--unsloth-max-steps", type=int, default=800)
     parser.add_argument("--unsloth-lr", type=float, default=2e-4)
+    parser.add_argument("--unsloth-max-seq-length", type=int, default=1024)
     parser.add_argument("--mlx-model-path", default=None)
     parser.add_argument("--mlx-export-dir", default=None)
     parser.add_argument("--mlx-quantize-bits", type=int, default=4)
@@ -1801,6 +1881,7 @@ def main_cli():
         retrieval_max_negatives=args.retrieval_max_negatives,
         unsloth_max_steps=args.unsloth_max_steps,
         unsloth_lr=args.unsloth_lr,
+        unsloth_max_seq_length=args.unsloth_max_seq_length,
         mlx_model_path=Path(args.mlx_model_path).expanduser()
         if args.mlx_model_path
         else None,

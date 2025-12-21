@@ -1,6 +1,7 @@
 import argparse
 import json
 import os
+import sys
 from typing import Dict, Iterable
 
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
@@ -111,6 +112,6 @@ def main() -> None:
 if __name__ == "__main__":
     main()
     if os.environ.get("HARVEST_HARD_EXIT") == "1":
-        os.sys.stdout.flush()
-        os.sys.stderr.flush()
+        sys.stdout.flush()
+        sys.stderr.flush()
         os._exit(0)
