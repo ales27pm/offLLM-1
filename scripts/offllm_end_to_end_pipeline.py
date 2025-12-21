@@ -98,6 +98,52 @@ class PipelineConfig:
     verbose: bool = False
 
 
+def resolve_pipeline_config(config: PipelineConfig) -> PipelineConfig:
+    repo_root = config.repo_root.expanduser().resolve()
+    run_dir = config.run_dir.expanduser()
+    if not run_dir.is_absolute():
+        run_dir = repo_root / run_dir
+    datasets_dir = (config.datasets_dir or (run_dir / "datasets")).expanduser()
+    if not datasets_dir.is_absolute():
+        datasets_dir = repo_root / datasets_dir
+    telemetry_path = (config.telemetry_path or (datasets_dir / "telemetry.jsonl")).expanduser()
+    if not telemetry_path.is_absolute():
+        telemetry_path = repo_root / telemetry_path
+    tool_schema_path = (config.tool_schema_path or (datasets_dir / "tool_schema.json")).expanduser()
+    if not tool_schema_path.is_absolute():
+        tool_schema_path = repo_root / tool_schema_path
+    harvest_manifest = (
+        config.harvest_manifest
+        or (Path(__file__).parent / "mlops" / "sources_fr_manifest.json")
+    ).expanduser()
+    if not harvest_manifest.is_absolute():
+        harvest_manifest = repo_root / harvest_manifest
+    mlx_export_dir = (config.mlx_export_dir or (run_dir / "mlx_export")).expanduser()
+    if not mlx_export_dir.is_absolute():
+        mlx_export_dir = repo_root / mlx_export_dir
+    coreml_export_dir = (config.coreml_export_dir or (run_dir / "coreml")).expanduser()
+    if not coreml_export_dir.is_absolute():
+        coreml_export_dir = repo_root / coreml_export_dir
+    mlx_model_path = config.mlx_model_path
+    if not mlx_model_path:
+        for candidate in [run_dir / "unsloth", run_dir / "sft"]:
+            if candidate.exists():
+                mlx_model_path = candidate
+                break
+    return dataclasses.replace(
+        config,
+        repo_root=repo_root,
+        run_dir=run_dir,
+        datasets_dir=datasets_dir,
+        telemetry_path=telemetry_path,
+        tool_schema_path=tool_schema_path,
+        harvest_manifest=harvest_manifest,
+        mlx_export_dir=mlx_export_dir,
+        coreml_export_dir=coreml_export_dir,
+        mlx_model_path=mlx_model_path,
+    )
+
+
 @dataclass
 class ScanConfig:
     """Configuration for repository scanning."""
@@ -177,6 +223,18 @@ def sha256_file(path: Path, chunk: int = 1024 * 1024) -> str:
                 break
             h.update(b)
     return h.hexdigest()
+
+
+def to_json_serializable(value: Any) -> Any:
+    if isinstance(value, Path):
+        return str(value)
+    if dataclasses.is_dataclass(value):
+        return to_json_serializable(dataclasses.asdict(value))
+    if isinstance(value, dict):
+        return {str(key): to_json_serializable(val) for key, val in value.items()}
+    if isinstance(value, (list, tuple, set)):
+        return [to_json_serializable(item) for item in value]
+    return value
 
 
 def run_command(
@@ -1125,7 +1183,7 @@ class PipelineOrchestrator:
     """Orchestrate the entire multi-stage pipeline."""
 
     def __init__(self, config: PipelineConfig):
-        self.config = config
+        self.config = resolve_pipeline_config(config)
 
     def run(self, stages: List[str]) -> int:
         """Run specified stages of the pipeline."""
@@ -1204,16 +1262,17 @@ class PipelineOrchestrator:
 
     def _write_run_metadata(self):
         """Write run metadata file."""
+        self.config.run_dir.mkdir(parents=True, exist_ok=True)
         meta = {
             "run_id": self.config.run_id,
             "utc": utc_now(),
             "git_commit": git_commit(self.config.repo_root),
             "platform": {
                 "python": sys.version,
-                "os": platform.platform(),
-                "machine": platform.machine(),
-            },
-            "config": dataclasses.asdict(self.config),
+            "os": platform.platform(),
+            "machine": platform.machine(),
+        },
+            "config": to_json_serializable(dataclasses.asdict(self.config)),
         }
 
         (self.config.run_dir / "run_config.json").write_text(json.dumps(meta, indent=2))
@@ -1257,7 +1316,7 @@ class PipelineOrchestrator:
             emit_datasets=False,
         )
         scanner = RepositoryScanner(scan_config)
-        out_dir = self.config.run_dir / "datasets"
+        out_dir = self.config.datasets_dir or (self.config.run_dir / "datasets")
         out_dir.mkdir(parents=True, exist_ok=True)
         corpus_path = scanner.build_full_corpus(out_dir)
         print(f"Internal corpus written to {corpus_path}")
@@ -1267,7 +1326,8 @@ class PipelineOrchestrator:
         manifest = self.config.harvest_manifest or (
             Path(__file__).parent / "mlops" / "sources_fr_manifest.json"
         )
-        out_dir = self.config.run_dir / "datasets" / "internet"
+        datasets_dir = self.config.datasets_dir or (self.config.run_dir / "datasets")
+        out_dir = datasets_dir / "internet"
         out_dir.mkdir(parents=True, exist_ok=True)
         output_path = out_dir / "harvested_fr.jsonl"
         return DatasetBuilder.harvest_internet_dataset(
@@ -1278,10 +1338,11 @@ class PipelineOrchestrator:
         )
 
     def _format_datasets(self) -> Dict[str, Path]:
-        out_dir = self.config.run_dir / "datasets" / "normalized"
+        datasets_dir = self.config.datasets_dir or (self.config.run_dir / "datasets")
+        out_dir = datasets_dir / "normalized"
         out_dir.mkdir(parents=True, exist_ok=True)
         formatted = {}
-        harvested = self.config.run_dir / "datasets" / "internet" / "harvested_fr.jsonl"
+        harvested = datasets_dir / "internet" / "harvested_fr.jsonl"
         if harvested.exists():
             formatted["internet_pretrain"] = DatasetBuilder.normalize_dataset(
                 harvested,
@@ -1294,7 +1355,10 @@ class PipelineOrchestrator:
         telemetry = self.config.telemetry_path
         if not telemetry:
             raise FileNotFoundError("telemetry_path is required for retrieval pairs")
-        output_path = self.config.run_dir / "datasets" / "retrieval_pairs.jsonl"
+        if not telemetry.exists():
+            raise FileNotFoundError(f"telemetry_path not found: {telemetry}")
+        datasets_dir = self.config.datasets_dir or (self.config.run_dir / "datasets")
+        output_path = datasets_dir / "retrieval_pairs.jsonl"
         run_command(
             [
                 sys.executable,
@@ -1311,7 +1375,7 @@ class PipelineOrchestrator:
 
     def _build_datasets(self) -> Dict[str, Path]:
         """Build all datasets."""
-        datasets_dir = self.config.run_dir / "datasets"
+        datasets_dir = self.config.datasets_dir or (self.config.run_dir / "datasets")
         datasets_dir.mkdir(parents=True, exist_ok=True)
 
         datasets = {}

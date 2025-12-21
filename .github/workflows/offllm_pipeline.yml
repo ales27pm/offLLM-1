@@ -84,12 +84,11 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          cache: "pip"
 
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install torch transformers datasets trl peft
+          python -m pip install torch transformers datasets trl peft unsloth llm2vec
 
       - name: Run pipeline
         env:
@@ -136,7 +135,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          cache: "pip"
 
       - name: Install Python dependencies
         run: |
