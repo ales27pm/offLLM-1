@@ -38,8 +38,17 @@ def main() -> None:
 
     ref_logits = reference.get("logits")
     cand_logits = candidate.get("logits")
-    if ref_logits is None or cand_logits is None:
-        raise ValueError("Both files must contain a 'logits' array")
+
+    if not isinstance(ref_logits, list):
+        raise ValueError(
+            "Expected 'logits' to be a list in reference "
+            f"but found {type(ref_logits).__name__}"
+        )
+    if not isinstance(cand_logits, list):
+        raise ValueError(
+            "Expected 'logits' to be a list in candidate "
+            f"but found {type(cand_logits).__name__}"
+        )
 
     metrics = compare_logits(ref_logits, cand_logits)
     print(json.dumps(metrics, indent=2))

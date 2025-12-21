@@ -1,4 +1,4 @@
-import template from "./promptTemplates.json";
+import template from "./promptTemplates.json" with { type: "json" };
 
 export const PROMPT_TEMPLATE_VERSION = template.version;
 export const TOOL_SCHEMA_VERSION = template.tool_schema_version;
@@ -6,9 +6,9 @@ export const TOOL_SCHEMA_VERSION = template.tool_schema_version;
 export const formatToolDescription = (tool) => {
   const parameters = JSON.stringify(tool.parameters || {});
   return template.tool_format
-    .replace("{name}", tool.name)
-    .replace("{description}", tool.description)
-    .replace("{parameters}", parameters);
+    .replaceAll("{name}", tool.name)
+    .replaceAll("{description}", tool.description)
+    .replaceAll("{parameters}", parameters);
 };
 
 export const buildPrompt = ({ toolsDesc, contextLines, userPrompt }) => {

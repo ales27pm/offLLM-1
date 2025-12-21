@@ -22,6 +22,12 @@ def load_prompt_template(template_path: str) -> dict:
 
 
 def format_example(example: dict, training_template: dict) -> str:
+    required_keys = {"system_prompt", "user_prompt_template", "assistant_template"}
+    missing = required_keys - training_template.keys()
+    if missing:
+        raise ValueError(f"Training template missing required keys: {missing}")
+    if not isinstance(training_template.get("user_prompt_template"), str):
+        raise ValueError("Training template 'user_prompt_template' must be a string")
     system_prompt = training_template["system_prompt"]
     user_prompt = training_template["user_prompt_template"].format(
         instruction=example.get("instruction", ""),
