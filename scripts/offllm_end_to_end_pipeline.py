@@ -935,20 +935,15 @@ class UnslothTrainerWrapper:
                 "`pip install unsloth` (see Unsloth docs for hardware support)."
             ) from exc
 
-        tokenizer = AutoTokenizer.from_pretrained(
-            config.base_model,
-            revision=config.base_model_revision,
-            use_fast=True,
-        )
-        if tokenizer.pad_token is None:
-            tokenizer.pad_token = tokenizer.eos_token
-
         model, tokenizer = FastLanguageModel.from_pretrained(
             model_name=config.base_model,
             max_seq_length=2048,
             dtype=None,
             load_in_4bit=True,
         )
+
+        if tokenizer.pad_token is None:
+            tokenizer.pad_token = tokenizer.eos_token
 
         lora_model = FastLanguageModel.get_peft_model(
             model,
