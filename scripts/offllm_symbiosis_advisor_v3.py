@@ -310,8 +310,25 @@ def _scan_file(path: Path, rel: str) -> FileHit | None:
 
 
 def _extract_zip(zip_path: Path, dst: Path) -> Path:
+    dst.mkdir(parents=True, exist_ok=True)
+    dst_root = dst.resolve()
     with zipfile.ZipFile(zip_path, "r") as z:
-        z.extractall(dst)
+        for member in z.infolist():
+            member_path = Path(member.filename)
+            if member_path.is_absolute():
+                raise ValueError(f"Unsafe absolute path in zip: {member.filename}")
+            target = (dst / member_path).resolve()
+            if dst_root not in target.parents and target != dst_root:
+                raise ValueError(f"Unsafe path traversal in zip: {member.filename}")
+            if member.is_dir() or member.filename.endswith("/"):
+                target.mkdir(parents=True, exist_ok=True)
+                continue
+            target.parent.mkdir(parents=True, exist_ok=True)
+            with z.open(member, "r") as source, target.open("wb") as dest:
+                shutil.copyfileobj(source, dest)
+            mode = (member.external_attr >> 16) & 0o777
+            if mode:
+                os.chmod(target, mode)
     # common pattern: single top folder
     children = [p for p in dst.iterdir() if p.is_dir()]
     if len(children) == 1:
@@ -501,9 +518,7 @@ def _plan(files: list[FileHit], seeds: list[str]) -> list[PlanSection]:
     return sections
 
 
-def _render_md(
-    repo_root: Path, files: list[FileHit], seeds: list[str], sections: list[PlanSection]
-) -> str:
+def _render_md(repo_root: Path, files: list[FileHit], sections: list[PlanSection]) -> str:
     ranked = _rank_files(files)
     counts_by_ext = Counter(f.ext or "<none>" for f in files)
     biggest = sorted(files, key=lambda f: f.size_bytes, reverse=True)[:8]
@@ -578,7 +593,7 @@ def main(argv: list[str] | None = None) -> int:
     sections = _plan(files, seeds)
 
     # Write outputs
-    md = _render_md(repo_root, files, seeds, sections)
+    md = _render_md(repo_root, files, sections)
     (out_dir / "symbiosis_plan.md").write_text(md, encoding="utf-8")
     # Minimal repo index for other tools
     repo_index = {
