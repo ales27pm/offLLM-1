@@ -107,8 +107,12 @@ try_install_ios_platform() {
   sudo xcodebuild -downloadPlatform iOS || true
 }
 
-# Build list of devdirs with versions
-mapfile -t ALL_DEVDIRS < <(discover_devdirs)
+# Build list of devdirs with versions (bash 3.2 compatible)
+ALL_DEVDIRS=()
+while IFS= read -r devdir; do
+  [[ -n "$devdir" ]] || continue
+  ALL_DEVDIRS+=("$devdir")
+done < <(discover_devdirs)
 
 if [[ "${#ALL_DEVDIRS[@]}" -eq 0 ]]; then
   die "No Xcode installations found."
@@ -121,43 +125,67 @@ for d in "${ALL_DEVDIRS[@]}"; do
   log " - $d (Xcode ${v:-unknown})"
 done
 
-# Determine majors available, preferring newest
-declare -A majors_best_devdir=()
-declare -A majors_best_version=()
+# Determine majors available, preferring newest (bash 3.2 compatible)
+majors=()
+majors_best_versions=()
+majors_best_devdirs=()
+
+index_of_major() {
+  local target="$1"
+  local idx=0
+  for m in "${majors[@]}"; do
+    if [[ "$m" == "$target" ]]; then
+      printf '%s' "$idx"
+      return 0
+    fi
+    idx=$((idx + 1))
+  done
+  return 1
+}
 
 for d in "${ALL_DEVDIRS[@]}"; do
   v="$(version_of_devdir "$d")"
   [[ -n "$v" ]] || continue
   m="$(major_of_version "$v")"
-  cur="${majors_best_version[$m]:-}"
-  if ver_gt "$v" "$cur"; then
-    majors_best_version["$m"]="$v"
-    majors_best_devdir["$m"]="$d"
+  if idx="$(index_of_major "$m")"; then
+    cur="${majors_best_versions[$idx]}"
+    if ver_gt "$v" "$cur"; then
+      majors_best_versions[$idx]="$v"
+      majors_best_devdirs[$idx]="$d"
+    fi
+  else
+    majors+=("$m")
+    majors_best_versions+=("$v")
+    majors_best_devdirs+=("$d")
   fi
 done
 
 # Make an ordered list of majors (descending by numeric value)
-majors=()
-for k in "${!majors_best_version[@]}"; do majors+=("$k"); done
-IFS=$'\n' majors=($(printf '%s\n' "${majors[@]}" | awk 'NF' | sort -nr)) || true
-unset IFS
+sorted_majors=()
+if [[ "${#majors[@]}" -gt 0 ]]; then
+  sorted_majors_raw="$(printf '%s\n' "${majors[@]}" | awk 'NF' | sort -nr)"
+  while IFS= read -r m; do
+    [[ -n "$m" ]] || continue
+    sorted_majors+=("$m")
+  done <<<"$sorted_majors_raw"
+fi
 
-if [[ "${#majors[@]}" -eq 0 ]]; then
+if [[ "${#sorted_majors[@]}" -eq 0 ]]; then
   die "Could not parse Xcode versions from installed apps."
 fi
 
-log "Available Xcode majors (newest first): ${majors[*]}"
+log "Available Xcode majors (newest first): ${sorted_majors[*]}"
 
 # Build trial order:
 trial=()
 if [[ "$REQ_MAJOR" == "auto" ]]; then
-  trial=("${majors[@]}")
+  trial=("${sorted_majors[@]}")
 else
   if ! [[ "$REQ_MAJOR" =~ ^[0-9]+$ ]]; then
     die "Invalid argument: '$REQ_MAJOR' (use a number like 16, 26, or 'auto')"
   fi
   trial+=("$REQ_MAJOR")
-  for m in "${majors[@]}"; do
+  for m in "${sorted_majors[@]}"; do
     [[ "$m" == "$REQ_MAJOR" ]] && continue
     trial+=("$m")
   done
@@ -168,8 +196,12 @@ log "Trial order: ${trial[*]}"
 # --- Try majors until we end up with a working iphoneos SDK -------------------
 
 for m in "${trial[@]}"; do
-  devdir="${majors_best_devdir[$m]:-}"
-  ver="${majors_best_version[$m]:-}"
+  devdir=""
+  ver=""
+  if idx="$(index_of_major "$m")"; then
+    devdir="${majors_best_devdirs[$idx]}"
+    ver="${majors_best_versions[$idx]}"
+  fi
   if [[ -z "$devdir" || -z "$ver" ]]; then
     continue
   fi
