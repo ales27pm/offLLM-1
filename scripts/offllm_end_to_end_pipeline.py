@@ -98,6 +98,33 @@ class PipelineConfig:
     verbose: bool = False
 
 
+def resolve_pipeline_config(config: PipelineConfig) -> PipelineConfig:
+    datasets_dir = config.datasets_dir or (config.run_dir / "datasets")
+    telemetry_path = config.telemetry_path or (datasets_dir / "telemetry.jsonl")
+    tool_schema_path = config.tool_schema_path or (datasets_dir / "tool_schema.json")
+    harvest_manifest = config.harvest_manifest or (
+        Path(__file__).parent / "mlops" / "sources_fr_manifest.json"
+    )
+    mlx_export_dir = config.mlx_export_dir or (config.run_dir / "mlx_export")
+    coreml_export_dir = config.coreml_export_dir or (config.run_dir / "coreml")
+    mlx_model_path = config.mlx_model_path
+    if not mlx_model_path:
+        for candidate in [config.run_dir / "unsloth", config.run_dir / "sft"]:
+            if candidate.exists():
+                mlx_model_path = candidate
+                break
+    return dataclasses.replace(
+        config,
+        datasets_dir=datasets_dir,
+        telemetry_path=telemetry_path,
+        tool_schema_path=tool_schema_path,
+        harvest_manifest=harvest_manifest,
+        mlx_export_dir=mlx_export_dir,
+        coreml_export_dir=coreml_export_dir,
+        mlx_model_path=mlx_model_path,
+    )
+
+
 @dataclass
 class ScanConfig:
     """Configuration for repository scanning."""
@@ -1137,7 +1164,7 @@ class PipelineOrchestrator:
     """Orchestrate the entire multi-stage pipeline."""
 
     def __init__(self, config: PipelineConfig):
-        self.config = config
+        self.config = resolve_pipeline_config(config)
 
     def run(self, stages: List[str]) -> int:
         """Run specified stages of the pipeline."""
@@ -1270,7 +1297,7 @@ class PipelineOrchestrator:
             emit_datasets=False,
         )
         scanner = RepositoryScanner(scan_config)
-        out_dir = self.config.run_dir / "datasets"
+        out_dir = self.config.datasets_dir or (self.config.run_dir / "datasets")
         out_dir.mkdir(parents=True, exist_ok=True)
         corpus_path = scanner.build_full_corpus(out_dir)
         print(f"Internal corpus written to {corpus_path}")
@@ -1280,7 +1307,8 @@ class PipelineOrchestrator:
         manifest = self.config.harvest_manifest or (
             Path(__file__).parent / "mlops" / "sources_fr_manifest.json"
         )
-        out_dir = self.config.run_dir / "datasets" / "internet"
+        datasets_dir = self.config.datasets_dir or (self.config.run_dir / "datasets")
+        out_dir = datasets_dir / "internet"
         out_dir.mkdir(parents=True, exist_ok=True)
         output_path = out_dir / "harvested_fr.jsonl"
         return DatasetBuilder.harvest_internet_dataset(
@@ -1291,10 +1319,11 @@ class PipelineOrchestrator:
         )
 
     def _format_datasets(self) -> Dict[str, Path]:
-        out_dir = self.config.run_dir / "datasets" / "normalized"
+        datasets_dir = self.config.datasets_dir or (self.config.run_dir / "datasets")
+        out_dir = datasets_dir / "normalized"
         out_dir.mkdir(parents=True, exist_ok=True)
         formatted = {}
-        harvested = self.config.run_dir / "datasets" / "internet" / "harvested_fr.jsonl"
+        harvested = datasets_dir / "internet" / "harvested_fr.jsonl"
         if harvested.exists():
             formatted["internet_pretrain"] = DatasetBuilder.normalize_dataset(
                 harvested,
@@ -1307,7 +1336,10 @@ class PipelineOrchestrator:
         telemetry = self.config.telemetry_path
         if not telemetry:
             raise FileNotFoundError("telemetry_path is required for retrieval pairs")
-        output_path = self.config.run_dir / "datasets" / "retrieval_pairs.jsonl"
+        if not telemetry.exists():
+            raise FileNotFoundError(f"telemetry_path not found: {telemetry}")
+        datasets_dir = self.config.datasets_dir or (self.config.run_dir / "datasets")
+        output_path = datasets_dir / "retrieval_pairs.jsonl"
         run_command(
             [
                 sys.executable,
@@ -1324,7 +1356,7 @@ class PipelineOrchestrator:
 
     def _build_datasets(self) -> Dict[str, Path]:
         """Build all datasets."""
-        datasets_dir = self.config.run_dir / "datasets"
+        datasets_dir = self.config.datasets_dir or (self.config.run_dir / "datasets")
         datasets_dir.mkdir(parents=True, exist_ok=True)
 
         datasets = {}
