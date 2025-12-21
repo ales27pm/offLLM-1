@@ -1216,6 +1216,7 @@ class PipelineOrchestrator:
 
     def _write_run_metadata(self):
         """Write run metadata file."""
+        self.config.run_dir.mkdir(parents=True, exist_ok=True)
         meta = {
             "run_id": self.config.run_id,
             "utc": utc_now(),
