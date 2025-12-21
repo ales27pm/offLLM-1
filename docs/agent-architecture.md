@@ -2,14 +2,14 @@
 
 ## Orchestrator and Control Flow
 
-- `AgentOrchestrator` wires together the language model service, memory, prompt builder, tool handler, and plugin system. The `run` method retrieves long- and short-term context, builds an initial prompt, calls the LLM, parses any `TOOL_CALL` directives, executes the referenced tools, and then issues a final LLM call that incorporates tool output before persisting the exchange to memory.【F:src/core/AgentOrchestrator.js†L1-L46】
-- `PromptBuilder` makes the available tool roster explicit by enumerating the registered tools (name, description, parameter schema) and stitching both retrieved context and user input into the prompt template that is handed to the model.【F:src/core/prompt/PromptBuilder.js†L1-L27】
-- `ToolHandler` implements the dynamic routing layer: it parses structured tool invocations emitted by the LLM, validates arguments, executes the matching tool instance from the registry, and returns structured results that are appended to the conversational context.【F:src/core/tools/ToolHandler.js†L1-L61】
+- `AgentOrchestrator` wires together the language model service, memory, prompt builder, tool handler, and plugin system. The `run` method retrieves long- and short-term context, builds an initial prompt, calls the LLM, parses any `TOOL_CALL` directives, executes the referenced tools, and then issues a final LLM call that incorporates tool output before persisting the exchange to memory.【F:src/core/AgentOrchestrator.js†L1-L174】
+- `PromptBuilder` makes the available tool roster explicit by enumerating the registered tools (name, description, parameter schema) and stitching both retrieved context and user input into the prompt template that is handed to the model. Prompt formatting is now anchored to the versioned template in `promptTemplates.json` to keep runtime and training prompts aligned.【F:src/core/prompt/PromptBuilder.js†L1-L35】【F:src/core/prompt/promptTemplate.js†L1-L31】【F:src/core/prompt/promptTemplates.json†L1-L16】
+- `ToolHandler` implements the dynamic routing layer: it parses structured tool invocations emitted by the LLM, validates arguments, executes the matching tool instance from the registry, and returns structured results that are appended to the conversational context.【F:src/core/tools/ToolHandler.js†L1-L94】
 
 ## Memory and Context Management
 
 - `MemoryManager` couples a vector indexer, retriever, and bounded conversation history so that every interaction is embedded, added to the vector store, and made available for future context retrieval during orchestration.【F:src/core/memory/MemoryManager.js†L1-L37】
-- `VectorIndexer`, `Retriever`, and `HistoryService` handle the respective responsibilities of embedding new content, fetching similarity matches (with sparse-attention re-ranking), and tracking the sliding conversational window.【F:src/core/memory/services/VectorIndexer.js†L1-L26】【F:src/core/memory/services/Retriever.js†L1-L37】【F:src/core/memory/services/HistoryService.js†L1-L17】
+- `VectorIndexer`, `Retriever`, and `HistoryService` handle the respective responsibilities of embedding new content, fetching similarity matches (with sparse-attention re-ranking), and tracking the sliding conversational window.【F:src/core/memory/services/VectorIndexer.js†L1-L26】【F:src/core/memory/services/Retriever.js†L1-L57】【F:src/core/memory/services/HistoryService.js†L1-L17】
 - `ContextEngineer` provides higher-level context planning features such as hierarchical attention, sparse retrieval fallbacks, device-aware token budgeting, and adaptive summarization so the agent can scale prompts across device tiers.【F:src/services/contextEngineer.js†L1-L409】
 
 ## LLM Runtime and Plugin System
@@ -29,6 +29,12 @@
 - `ReadabilityService` fetches, cleans, and caches article content so agent prompts can include readable text along with metadata like title, byline, and reading time.【F:src/services/readabilityService.js†L1-L159】
 - `SearchService` wraps multiple web search providers, adds caching and rate-limiting, and optionally enriches results with cleaned page content via the readability service.【F:src/services/webSearchService.js†L1-L68】
 - `TreeOfThoughtReasoner` implements multi-branch reasoning with iterative candidate generation, evaluation, and path selection to supply deliberate answers for complex tasks.【F:src/services/treeOfThought.js†L1-L191】
+
+## Telemetry, Training, and Evaluation
+
+- Telemetry events capture prompts, tool calls, and retrieval signals with redaction and hash metadata so runtime behavior can be safely converted into SFT or retrieval training examples without leaking secrets.【F:src/utils/telemetry.js†L1-L154】【F:src/core/tools/ToolHandler.js†L94-L186】【F:src/core/memory/services/Retriever.js†L1-L57】
+- The LoRA training pipeline now consumes the shared prompt template, ensuring training prompts match the runtime tool-call schema and instruction text.【F:scripts/train_lora.py†L1-L142】【F:src/core/prompt/promptTemplates.json†L1-L16】
+- Evaluation scripts provide deterministic checks for prompt regression, retrieval recall, and export equivalence to keep runtime behavior aligned with tooling outputs and conversion pipelines.【F:scripts/eval/run_prompt_regression.py†L1-L72】【F:scripts/eval/retrieval_eval.py†L1-L54】【F:scripts/eval/export_equivalence.py†L1-L52】
 
 ## Workflow and Automation Patterns
 

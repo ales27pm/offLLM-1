@@ -1,3 +1,8 @@
+import {
+  buildToolInvocationEvent,
+  logTelemetryEvent,
+} from "../../utils/telemetry";
+
 export default class ToolHandler {
   constructor(toolRegistry) {
     this.toolRegistry = toolRegistry;
@@ -161,7 +166,7 @@ export default class ToolHandler {
 
   async execute(calls, options = {}) {
     const results = [];
-    const { tracer } = options;
+    const { tracer, telemetryContext } = options;
 
     for (const { name, args } of calls) {
       const tool = this.toolRegistry.getTool(name);
@@ -186,22 +191,42 @@ export default class ToolHandler {
 
       if (tracer) tracer.info(`Executing ${name}`, { args });
 
+      const startTime = Date.now();
+      let success = false;
+      let outputContent = "";
+      let errorMessage;
+
       try {
         const output = await tool.execute(args);
-        const content =
+        outputContent =
           output === undefined || output === null
             ? ""
             : typeof output === "string"
               ? output
               : (JSON.stringify(output) ?? String(output));
-        results.push({ role: "tool", name, content });
+        results.push({ role: "tool", name, content: outputContent });
+        success = true;
       } catch (error) {
+        errorMessage = error?.message || error;
         results.push({
           role: "tool",
           name,
-          content: `Error: ${error.message || error}`,
+          content: `Error: ${errorMessage}`,
         });
         if (tracer) tracer.error(`Tool ${name} failed`, error);
+      } finally {
+        const latencyMs = Date.now() - startTime;
+        void logTelemetryEvent(
+          buildToolInvocationEvent({
+            promptHash: telemetryContext?.promptHash,
+            toolName: name,
+            args,
+            success,
+            latencyMs,
+            resultSize: outputContent.length,
+            error: errorMessage,
+          }),
+        );
       }
     }
     return results;
