@@ -3,6 +3,10 @@ import json
 import os
 from typing import Dict, Iterable
 
+os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
+os.environ.setdefault("OMP_NUM_THREADS", "1")
+os.environ.setdefault("MKL_NUM_THREADS", "1")
+
 from datasets import load_dataset
 
 
@@ -106,3 +110,7 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    if os.environ.get("HARVEST_HARD_EXIT") == "1":
+        os.sys.stdout.flush()
+        os.sys.stderr.flush()
+        os._exit(0)

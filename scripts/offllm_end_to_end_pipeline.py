@@ -37,15 +37,6 @@ from typing import Any, Dict, Iterable, Iterator, List, Optional, Sequence, Tupl
 import torch
 from torch import nn
 from torch.optim import AdamW
-from transformers import (
-    AutoModelForCausalLM,
-    AutoTokenizer,
-    TrainingArguments,
-    get_linear_schedule_with_warmup,
-)
-from datasets import load_dataset
-from trl import SFTTrainer
-from peft import LoraConfig, get_peft_model, PeftModel
 
 
 # ============================================================================
@@ -82,6 +73,7 @@ class PipelineConfig:
     sft_lora_alpha: int = 32
     unsloth_max_steps: int = 800
     unsloth_lr: float = 2e-4
+    unsloth_max_seq_length: int = 1024
 
     llm2vec_max_steps: int = 1200
     llm2vec_lr: float = 1e-4
@@ -859,6 +851,10 @@ class DatasetBuilder:
         min_chars: int,
     ) -> Path:
         try:
+            env = {
+                **os.environ,
+                "HARVEST_HARD_EXIT": "1",
+            }
             run_command(
                 [
                     sys.executable,
@@ -871,7 +867,8 @@ class DatasetBuilder:
                     str(max_records),
                     "--min-chars",
                     str(min_chars),
-                ]
+                ],
+                env=env,
             )
         except subprocess.CalledProcessError as exc:
             if output_path.exists() and output_path.stat().st_size > 0:
@@ -901,7 +898,7 @@ class DatasetBuilder:
 
 
 def build_sft_trainer_kwargs(
-    trainer_cls: type, tokenizer: AutoTokenizer, **kwargs: Any
+    trainer_cls: type, tokenizer: Any, **kwargs: Any
 ) -> Dict[str, Any]:
     signature = inspect.signature(trainer_cls.__init__)
     params = signature.parameters
@@ -932,6 +929,11 @@ class SFTTrainerWrapper:
     @staticmethod
     def train(config: PipelineConfig, dataset_path: Path) -> Path:
         """Train a model with SFT using LoRA."""
+        from datasets import load_dataset
+        from peft import LoraConfig, get_peft_model
+        from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments
+        from trl import SFTTrainer
+
         set_seed(42)
         out_dir = config.run_dir / "sft"
         out_dir.mkdir(parents=True, exist_ok=True)
@@ -1035,19 +1037,24 @@ class UnslothTrainerWrapper:
         output_dir: Path,
         max_steps: int,
     ) -> Path:
-        try:
-            from unsloth import FastLanguageModel
-        except ImportError as exc:
-            raise ImportError(
-                "Unsloth is required for the 'unsloth' stage. Install with "
-                "`pip install unsloth` (see Unsloth docs for hardware support)."
-            ) from exc
+        from datasets import load_dataset
+        from transformers import TrainingArguments
+        from trl import SFTTrainer
+        from unsloth import FastLanguageModel
+
+        if torch.cuda.is_available():
+            device_map = {"": 0}
+            dtype = torch.float16
+        else:
+            device_map = {"": "cpu"}
+            dtype = torch.float32
 
         model, tokenizer = FastLanguageModel.from_pretrained(
             model_name=config.base_model,
-            max_seq_length=2048,
-            dtype=None,
+            max_seq_length=config.unsloth_max_seq_length,
+            dtype=dtype,
             load_in_4bit=True,
+            device_map=device_map,
         )
 
         if tokenizer.pad_token is None:
@@ -1074,8 +1081,8 @@ class UnslothTrainerWrapper:
 
         training_args = TrainingArguments(
             output_dir=str(output_dir),
-            per_device_train_batch_size=2,
-            gradient_accumulation_steps=4,
+            per_device_train_batch_size=1,
+            gradient_accumulation_steps=8,
             learning_rate=config.unsloth_lr,
             max_steps=max_steps,
             logging_steps=10,
@@ -1154,6 +1161,9 @@ class LLM2VecTrainer:
 
     def _load_model(self):
         """Load base model with optional LoRA adapter."""
+        from peft import PeftModel
+        from transformers import AutoModelForCausalLM, AutoTokenizer
+
         tokenizer = AutoTokenizer.from_pretrained(
             self.config.base_model,
             revision=self.config.revision,
@@ -1253,6 +1263,9 @@ class PipelineOrchestrator:
                 "llm2vec",
                 "mlx_export",
             ]
+
+        if "unsloth" in stages:
+            import unsloth  # noqa: F401
 
         datasets = {}
 
@@ -1435,6 +1448,13 @@ class PipelineOrchestrator:
 
         datasets = {}
 
+        formatted = self._format_datasets()
+        datasets.update(formatted)
+
+        harvested = datasets_dir / "internet" / "harvested_fr.jsonl"
+        if harvested.exists():
+            datasets["internet_raw"] = harvested
+
         # French datasets
         french_dir = datasets_dir / "french"
         french_dir.mkdir(exist_ok=True)
@@ -1449,17 +1469,27 @@ class PipelineOrchestrator:
 
         return datasets
 
+    def _select_training_dataset(self, datasets: Dict[str, Path]) -> Path:
+        datasets_dir = self.config.datasets_dir or (self.config.run_dir / "datasets")
+        candidates = [
+            datasets_dir / "normalized" / "harvested_fr_normalized.jsonl",
+            datasets_dir / "internet" / "harvested_fr.jsonl",
+            datasets_dir / "french" / "combined_instruct.jsonl",
+            datasets_dir / "french" / "combined_retrieval.jsonl",
+            datasets_dir / "offllm" / "offllm_dataset.jsonl",
+        ]
+        candidates.extend(datasets.values())
+
+        for path in candidates:
+            if path.exists() and path.suffix == ".jsonl" and path.stat().st_size > 0:
+                print(f"📦 Using training dataset: {path}")
+                return path
+
+        raise FileNotFoundError("No JSONL dataset found for training")
+
     def _run_sft(self, datasets: Dict[str, Path]):
         """Run SFT training."""
-        # Find dataset file
-        dataset_path = None
-        for path in datasets.values():
-            if path.suffix == ".jsonl":
-                dataset_path = path
-                break
-
-        if not dataset_path:
-            raise FileNotFoundError("No JSONL dataset found")
+        dataset_path = self._select_training_dataset(datasets)
 
         # Train
         sft_trainer = SFTTrainerWrapper()
@@ -1467,15 +1497,7 @@ class PipelineOrchestrator:
 
     def _run_llm2vec(self, datasets: Dict[str, Path]):
         """Run LLM2Vec training."""
-        # Find corpus file
-        corpus_path = None
-        for path in datasets.values():
-            if path.suffix == ".jsonl":
-                corpus_path = str(path)
-                break
-
-        if not corpus_path:
-            raise FileNotFoundError("No corpus JSONL found")
+        corpus_path = str(self._select_training_dataset(datasets))
 
         # Configure and train
         train_cfg = TrainCfg(
@@ -1492,13 +1514,7 @@ class PipelineOrchestrator:
         trainer.train()
 
     def _run_unsloth(self, datasets: Dict[str, Path]):
-        dataset_path = None
-        for path in datasets.values():
-            if path.suffix == ".jsonl":
-                dataset_path = path
-                break
-        if not dataset_path:
-            raise FileNotFoundError("No JSONL dataset found for Unsloth training")
+        dataset_path = self._select_training_dataset(datasets)
         output_dir = self.config.run_dir / "unsloth"
         output_dir.mkdir(parents=True, exist_ok=True)
         UnslothTrainerWrapper.train(
@@ -1659,6 +1675,7 @@ def main_cli():
     parser.add_argument("--retrieval-max-negatives", type=int, default=4)
     parser.add_argument("--unsloth-max-steps", type=int, default=800)
     parser.add_argument("--unsloth-lr", type=float, default=2e-4)
+    parser.add_argument("--unsloth-max-seq-length", type=int, default=1024)
     parser.add_argument("--mlx-model-path", default=None)
     parser.add_argument("--mlx-export-dir", default=None)
     parser.add_argument("--mlx-quantize-bits", type=int, default=4)
@@ -1694,6 +1711,7 @@ def main_cli():
         retrieval_max_negatives=args.retrieval_max_negatives,
         unsloth_max_steps=args.unsloth_max_steps,
         unsloth_lr=args.unsloth_lr,
+        unsloth_max_seq_length=args.unsloth_max_seq_length,
         mlx_model_path=Path(args.mlx_model_path).expanduser()
         if args.mlx_model_path
         else None,
