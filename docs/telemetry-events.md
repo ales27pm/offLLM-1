@@ -6,7 +6,7 @@ Telemetry is stored as JSON Lines under the app document directory so runtime tr
 
 - `prompt_received` captures a redacted prompt preview with a deterministic hash so later tool and response events can be correlated without storing raw content.【F:src/utils/telemetry.js†L139-L154】
 - `tool_invocation` records tool name, hashed arguments, redacted previews, latency, and success/failure to describe how tools were used in context.【F:src/utils/telemetry.js†L119-L137】
-- `retrieval` stores hashed queries and selected result ids to power retrieval evaluation and embedding fine-tuning workflows.【F:src/utils/telemetry.js†L157-L169】【F:src/core/memory/services/Retriever.js†L18-L61】
+- `retrieval` stores hashed queries, selected result ids, and raw candidate ids/scores to support debugging and recall evaluation before re-ranking.【F:src/utils/telemetry.js†L157-L172】【F:src/core/memory/services/Retriever.js†L18-L65】
 - `final_response` captures the redacted response payload and tool-call count to finish the training record associated with a prompt hash.【F:src/utils/telemetry.js†L145-L155】【F:src/core/AgentOrchestrator.js†L158-L170】
 
 ## Redaction rules

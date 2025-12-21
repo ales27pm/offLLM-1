@@ -79,14 +79,61 @@ const ensureTelemetryDirectory = async () => {
 };
 
 let isWriting = false;
+const pendingEvents = [];
+let pendingDirectory = null;
 
-const appendJsonLine = async (filePath, line) => {
+const appendJsonLines = async (filePath, lines) => {
+  const payload = lines.join("");
+  try {
+    await FileSystem.writeAsStringAsync(filePath, payload, {
+      encoding: FileSystem.EncodingType.UTF8,
+      append: true,
+    });
+    return;
+  } catch (error) {
+    logger.debug(
+      TELEMETRY_TAG,
+      "Append write not supported, falling back",
+      error,
+    );
+  }
+
   const info = await FileSystem.getInfoAsync(filePath);
   if (info.exists) {
     const current = await FileSystem.readAsStringAsync(filePath);
-    await FileSystem.writeAsStringAsync(filePath, `${current}${line}`);
+    await FileSystem.writeAsStringAsync(filePath, `${current}${payload}`);
   } else {
-    await FileSystem.writeAsStringAsync(filePath, line);
+    await FileSystem.writeAsStringAsync(filePath, payload);
+  }
+};
+
+const flushTelemetryQueue = async () => {
+  if (isWriting) {
+    return null;
+  }
+  if (!pendingEvents.length) {
+    return null;
+  }
+  isWriting = true;
+  try {
+    const directory = pendingDirectory || (await ensureTelemetryDirectory());
+    if (!directory) {
+      pendingEvents.splice(0, pendingEvents.length);
+      return null;
+    }
+    pendingDirectory = directory;
+    const filePath = `${directory}${DEFAULT_FILE_NAME}`;
+    const lines = pendingEvents.splice(0, pendingEvents.length);
+    await appendJsonLines(filePath, lines);
+    return filePath;
+  } catch (error) {
+    logger.warn(TELEMETRY_TAG, "Failed to flush telemetry queue", error);
+    return null;
+  } finally {
+    isWriting = false;
+    if (pendingEvents.length) {
+      void flushTelemetryQueue();
+    }
   }
 };
 
@@ -100,23 +147,9 @@ export const buildTelemetryEvent = (event) => {
 };
 
 export const logTelemetryEvent = async (event) => {
-  const directory = await ensureTelemetryDirectory();
-  if (!directory || isWriting) {
-    return null;
-  }
-  isWriting = true;
-  try {
-    const payload = buildTelemetryEvent(event);
-    const line = `${JSON.stringify(payload)}\n`;
-    const filePath = `${directory}${DEFAULT_FILE_NAME}`;
-    await appendJsonLine(filePath, line);
-    return filePath;
-  } catch (error) {
-    logger.warn(TELEMETRY_TAG, "Failed to write telemetry event", error);
-    return null;
-  } finally {
-    isWriting = false;
-  }
+  const payload = buildTelemetryEvent(event);
+  pendingEvents.push(`${JSON.stringify(payload)}\n`);
+  return flushTelemetryQueue();
 };
 
 export const buildToolInvocationEvent = ({
@@ -162,11 +195,15 @@ export const buildRetrievalEvent = ({
   resultIds,
   maxResults,
   latencyMs,
+  candidateIds,
+  candidateScores,
 }) => ({
   event: "retrieval",
   query_hash: hashString(query),
   query_preview: redactTelemetryValue(query),
   result_ids: resultIds,
+  candidate_ids: candidateIds,
+  candidate_scores: candidateScores,
   max_results: maxResults,
   latency_ms: latencyMs,
 });
