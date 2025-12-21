@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "tool_schema_version": "tool_schema_v1",
+  "system_intro": "You are an AI assistant with access to:",
+  "instructions_title": "Instructions:",
+  "instructions": "Use tools when additional data or actions are required. Emit calls as TOOL_CALL: toolName(param=\"value\"). Reply directly when you already have the answer. Observe tool results to form your final answer.",
+  "context_title": "Context:",
+  "user_prefix": "User:",
+  "assistant_prefix": "Assistant:",
+  "tool_format": "Tool: {name} - {description} (Params: {parameters})",
+  "training": {
+    "system_prompt": "You are an AI assistant with access to tools. Use tools when additional data or actions are required. Emit calls as TOOL_CALL: toolName(param=\"value\"). Reply directly when you already have the answer. Observe tool results to form your final answer.",
+    "user_prompt_template": "INSTRUCTION:\n{instruction}\nCONTEXT:\n{context}\nTOOL_SCHEMA:\n{schema}",
+    "assistant_template": "tool_call: {tool}\nfinal_answer: {answer}"
+  }
+}

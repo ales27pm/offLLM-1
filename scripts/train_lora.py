@@ -14,24 +14,24 @@ from transformers import (
 )
 
 
-def format_example(example: dict) -> str:
-    system_prompt = (
-        "You are an assistant that decides when to call tools. If a tool is needed, "
-        "output JSON 'tool_call' then 'final_answer'."
-    )
-    user_prompt = (
-        "INSTRUCTION:\n{instruction}\nCONTEXT:\n{context}\nTOOL_SCHEMA:\n{schema}".format(
-            instruction=example.get("instruction", ""),
-            context=example.get("context", ""),
-            schema=example.get("tool_schema", ""),
-        )
+def load_prompt_template(template_path: str) -> dict:
+    if not os.path.isfile(template_path):
+        raise FileNotFoundError(f"Prompt template not found: {template_path}")
+    with open(template_path, "r", encoding="utf-8") as handle:
+        return json.load(handle)
+
+
+def format_example(example: dict, training_template: dict) -> str:
+    system_prompt = training_template["system_prompt"]
+    user_prompt = training_template["user_prompt_template"].format(
+        instruction=example.get("instruction", ""),
+        context=example.get("context", ""),
+        schema=example.get("tool_schema", ""),
     )
     tool_call = json.dumps(example.get("expected_tool_call", {}), ensure_ascii=False)
-    assistant = (
-        "tool_call: {tool}\nfinal_answer: {answer}".format(
-            tool=tool_call,
-            answer=example.get("expected_answer", ""),
-        )
+    assistant = training_template["assistant_template"].format(
+        tool=tool_call,
+        answer=example.get("expected_answer", ""),
     )
     return f"<s>[SYSTEM]{system_prompt}\n[USER]{user_prompt}\n[ASSISTANT]{assistant}</s>"
 
@@ -42,10 +42,27 @@ def main() -> None:
     parser.add_argument("--train_file", required=True)
     parser.add_argument("--output_dir", required=True)
     parser.add_argument("--max_steps", type=int, default=50)
+    parser.add_argument("--prompt_template", default=None)
     args = parser.parse_args()
 
     if not os.path.isfile(args.train_file):
         raise FileNotFoundError(f"Dataset not found: {args.train_file}")
+
+    default_template_path = os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            "..",
+            "src",
+            "core",
+            "prompt",
+            "promptTemplates.json",
+        )
+    )
+    template_path = args.prompt_template or default_template_path
+    template = load_prompt_template(template_path)
+    training_template = template.get("training")
+    if not training_template:
+        raise ValueError("Prompt template missing 'training' section")
 
     tokenizer = AutoTokenizer.from_pretrained(args.base_model, use_fast=True)
     if tokenizer.pad_token is None:
@@ -80,7 +97,9 @@ def main() -> None:
         return record
 
     dataset = dataset.map(_validate)
-    dataset = dataset.map(lambda record: {"text": format_example(record)})
+    dataset = dataset.map(
+        lambda record: {"text": format_example(record, training_template)}
+    )
 
     model = AutoModelForCausalLM.from_pretrained(
         args.base_model,
@@ -150,6 +169,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-
-
