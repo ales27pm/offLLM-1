@@ -130,6 +130,17 @@ jobs:
 
           CERT_P12="$RUNNER_TEMP/dist.p12"
           clean_b64 "$IOS_DIST_CERT_BASE64" | base64 --decode > "$CERT_P12"
+          if [[ ! -s "$CERT_P12" ]]; then
+            echo "::error::Decoded signing certificate is empty. Check IOS_DIST_CERT_BASE64."
+            exit 1
+          fi
+
+          if ! openssl pkcs12 -in "$CERT_P12" -passin "pass:$IOS_DIST_CERT_PASSWORD" -info -nokeys >/dev/null 2>&1; then
+            echo "::error::Signing certificate is not a valid PKCS#12 archive or the password is incorrect."
+            echo "::error::Verify IOS_DIST_CERT_BASE64 is a .p12/.pfx and IOS_DIST_CERT_PASSWORD matches."
+            exit 1
+          fi
+
           security import "$CERT_P12" -k "$KEYCHAIN_PATH" -P "$IOS_DIST_CERT_PASSWORD" -T /usr/bin/codesign -T /usr/bin/security -T /usr/bin/xcodebuild
           security set-key-partition-list -S apple-tool:,apple: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
 
