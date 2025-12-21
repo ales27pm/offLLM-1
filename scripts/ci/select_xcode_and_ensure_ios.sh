@@ -6,6 +6,13 @@
 #   bash scripts/ci/select_xcode_and_ensure_ios.sh "26"
 #   bash scripts/ci/select_xcode_and_ensure_ios.sh "auto"
 #
+# Requirements/Environment:
+#   - Bash 3.2+ (CI runners ship 3.2; script is compatible with Bash 4+).
+#   - macOS with Xcode installed under /Applications.
+#   - Required tools on PATH: mdfind (Spotlight), xcode-select, xcodebuild,
+#     xcrun, PlistBuddy, awk, sort, sudo.
+#   - Assumes /usr/bin and /usr/libexec are on PATH (default on macOS).
+#
 # Behavior:
 #  - If a numeric major is provided, tries that major first.
 #  - If iphoneos SDK is missing, runs first-launch + tries to download iOS platform.
