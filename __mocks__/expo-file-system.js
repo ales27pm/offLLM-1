@@ -11,6 +11,12 @@ module.exports = {
   writeAsStringAsync: async (path, contents) => {
     files.set(path, contents);
   },
+  readAsStringAsync: async (path) => {
+    return files.get(path) || "";
+  },
+  getInfoAsync: async (path) => {
+    return { exists: files.has(path) };
+  },
   deleteAsync: async (path) => {
     files.delete(path);
   },
