@@ -89,8 +89,8 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: 🧰 Select Xcode (must include iphoneos SDK)
-        run: bash scripts/ci/select_xcode.sh "${{ inputs.xcode_major }}"
+      - name: 🧰 Select Xcode + Ensure iPhoneOS SDK
+        run: bash scripts/ci/select_xcode_and_ensure_ios.sh "16"
 
       - name: 📦 Ensure iPhoneOS SDK present
         run: bash scripts/ci/ensure_ios_platform.sh
