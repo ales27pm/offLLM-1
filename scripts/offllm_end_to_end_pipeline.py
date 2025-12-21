@@ -67,15 +67,28 @@ class PipelineConfig:
     # Dataset configuration
     datasets_dir: Path | None = None
     include_internals: bool = True
+    telemetry_path: Path | None = None
+    tool_schema_path: Path | None = None
+    harvest_manifest: Path | None = None
+    internet_max_records: int = 2000
+    internet_min_chars: int = 200
+    retrieval_max_negatives: int = 4
 
     # Training hyperparameters
     sft_max_steps: int = 800
     sft_lr: float = 2e-4
     sft_lora_r: int = 16
     sft_lora_alpha: int = 32
+    unsloth_max_steps: int = 800
+    unsloth_lr: float = 2e-4
 
     llm2vec_max_steps: int = 1200
     llm2vec_lr: float = 1e-4
+
+    mlx_model_path: Path | None = None
+    mlx_export_dir: Path | None = None
+    mlx_quantize_bits: int = 4
+    coreml_export_dir: Path | None = None
 
     # SCAD scan configuration
     scad_strict: bool = False
@@ -166,6 +179,21 @@ def sha256_file(path: Path, chunk: int = 1024 * 1024) -> str:
     return h.hexdigest()
 
 
+def run_command(
+    command: List[str],
+    cwd: Optional[Path] = None,
+    env: Optional[Dict[str, str]] = None,
+) -> None:
+    printable = " ".join(command)
+    print(f"▶️  Running: {printable}")
+    subprocess.run(
+        command,
+        check=True,
+        cwd=str(cwd) if cwd else None,
+        env=env,
+    )
+
+
 # ============================================================================
 # Repository Scanning (SCAD)
 # ============================================================================
@@ -253,6 +281,16 @@ class RepositoryScanner:
     def __init__(self, config: ScanConfig):
         self.config = config
         self.repo_root = config.repo_root
+        self.keyword_map = {
+            "telemetry": ["telemetry", "event", "analytics", "log"],
+            "prompt_templates": ["prompt", "template", "system_prompt"],
+            "retrieval": ["retrieval", "embedding", "vector", "hnsw", "rerank"],
+            "training": ["train", "fine-tune", "lora", "sft", "dataset"],
+            "export": ["export", "coreml", "mlx", "gguf", "quantize"],
+            "tool_calling": ["tool", "tool_call", "schema", "function_call"],
+            "ci_cd": ["ci", "workflow", "github", "xcodebuild"],
+            "safety_privacy": ["privacy", "consent", "redact", "safety"],
+        }
 
     def scan(self) -> Dict[str, Any]:
         """Main scanning entry point."""
@@ -262,7 +300,7 @@ class RepositoryScanner:
         # Find base scan report
         base_report = self._find_latest_scad_report()
         if not base_report:
-            raise FileNotFoundError("No SCAD report found")
+            base_report = self._run_base_scan(out_dir)
 
         base_data = json.loads(base_report.read_text())
         targets = self._select_targets(base_data)
@@ -293,6 +331,44 @@ class RepositoryScanner:
             return None
         candidates.sort(key=lambda p: p.stat().st_mtime, reverse=True)
         return candidates[0]
+
+    def _run_base_scan(self, out_dir: Path) -> Path:
+        report_dir = self.repo_root / "runs" / "scad" / self.config.run_id
+        report_dir.mkdir(parents=True, exist_ok=True)
+        candidates = []
+        files_scanned = 0
+        for path in self._iter_repo_files():
+            files_scanned += 1
+            text, err = self._safe_read_text(path)
+            if err or not text:
+                continue
+            rel = str(path.relative_to(self.repo_root))
+            hits = {}
+            for category, keywords in self.keyword_map.items():
+                score = sum(len(re.findall(rf"\b{re.escape(k)}\b", text, re.IGNORECASE)) for k in keywords)
+                if score:
+                    hits[category] = score
+            for category, score in hits.items():
+                candidates.append(
+                    {
+                        "path": rel,
+                        "category": category,
+                        "score": score,
+                    }
+                )
+
+        report = {
+            "meta": {
+                "generated_at": time.strftime("%Y-%m-%d %H:%M:%S"),
+                "repo_root": str(self.repo_root),
+                "run_id": self.config.run_id,
+                "files_scanned": files_scanned,
+            },
+            "candidates_top": candidates,
+        }
+        report_path = report_dir / "scad_report.json"
+        report_path.write_text(json.dumps(report, indent=2, ensure_ascii=False))
+        return report_path
 
     def _select_targets(self, base_report: Dict[str, Any]) -> List[str]:
         cands = base_report.get("candidates_top", []) or []
@@ -396,6 +472,15 @@ class RepositoryScanner:
         if suf in {".md", ".rst"}:
             return "markdown"
         return "other"
+
+    def _iter_repo_files(self) -> Iterator[Path]:
+        for root, dirs, files in os.walk(self.repo_root):
+            dirs[:] = [d for d in dirs if d not in self.IGNORE_DIRS]
+            for file in files:
+                path = Path(root) / file
+                if path.suffix.lower() in self.IGNORE_FILE_SUFFIXES:
+                    continue
+                yield path
 
     def _analyze_python(
         self, text: str, path: str
@@ -613,6 +698,28 @@ class RepositoryScanner:
             for item in cmd_data:
                 f.write(json.dumps(item) + "\n")
 
+    def build_full_corpus(self, out_dir: Path, max_chars: int = 8000) -> Path:
+        corpus_dir = out_dir / "internals_full"
+        corpus_dir.mkdir(parents=True, exist_ok=True)
+        corpus_path = corpus_dir / "internals_full_corpus.jsonl"
+        with corpus_path.open("w", encoding="utf-8") as handle:
+            for path in self._iter_repo_files():
+                text, err = self._safe_read_text(path)
+                if err or not text:
+                    continue
+                rel = str(path.relative_to(self.repo_root))
+                payload = {
+                    "id": hashlib.sha256(rel.encode()).hexdigest()[:16],
+                    "type": "file",
+                    "text": f"FILE: {rel}\n\n{text[:max_chars]}",
+                    "metadata": {
+                        "path": rel,
+                        "language": self._guess_language(path),
+                    },
+                }
+                handle.write(json.dumps(payload, ensure_ascii=False) + "\n")
+        return corpus_path
+
 
 # ============================================================================
 # Dataset Building
@@ -667,6 +774,45 @@ class DatasetBuilder:
             for item in dataset:
                 f.write(json.dumps(item) + "\n")
 
+        return output_path
+
+    @staticmethod
+    def normalize_dataset(input_path: Path, output_path: Path, mode: str) -> Path:
+        run_command(
+            [
+                sys.executable,
+                str(Path(__file__).parent / "mlops" / "normalize_datasets.py"),
+                "--input",
+                str(input_path),
+                "--output",
+                str(output_path),
+                "--mode",
+                mode,
+            ]
+        )
+        return output_path
+
+    @staticmethod
+    def harvest_internet_dataset(
+        manifest_path: Path,
+        output_path: Path,
+        max_records: int,
+        min_chars: int,
+    ) -> Path:
+        run_command(
+            [
+                sys.executable,
+                str(Path(__file__).parent / "mlops" / "harvest_fr.py"),
+                "--manifest",
+                str(manifest_path),
+                "--output",
+                str(output_path),
+                "--max-records",
+                str(max_records),
+                "--min-chars",
+                str(min_chars),
+            ]
+        )
         return output_path
 
 
@@ -764,6 +910,87 @@ class SFTTrainerWrapper:
 
         print(f"✅ SFT training complete: {out_dir}")
         return out_dir
+
+
+# ============================================================================
+# Unsloth Training
+# ============================================================================
+
+
+class UnslothTrainerWrapper:
+    """Wrapper for supervised fine-tuning with Unsloth."""
+
+    @staticmethod
+    def train(
+        config: PipelineConfig,
+        dataset_path: Path,
+        output_dir: Path,
+        max_steps: int,
+    ) -> Path:
+        try:
+            from unsloth import FastLanguageModel
+        except ImportError as exc:
+            raise ImportError(
+                "Unsloth is required for the 'unsloth' stage. Install with "
+                "`pip install unsloth` (see Unsloth docs for hardware support)."
+            ) from exc
+
+        model, tokenizer = FastLanguageModel.from_pretrained(
+            model_name=config.base_model,
+            max_seq_length=2048,
+            dtype=None,
+            load_in_4bit=True,
+        )
+
+        if tokenizer.pad_token is None:
+            tokenizer.pad_token = tokenizer.eos_token
+
+        lora_model = FastLanguageModel.get_peft_model(
+            model,
+            r=config.sft_lora_r,
+            lora_alpha=config.sft_lora_alpha,
+            lora_dropout=0.05,
+            target_modules=["q_proj", "k_proj", "v_proj", "o_proj"],
+            use_rslora=False,
+            use_gradient_checkpointing=True,
+        )
+
+        ds = load_dataset("json", data_files={"train": str(dataset_path)})
+
+        def to_text(record: Dict[str, Any]) -> Dict[str, str]:
+            instruction = record.get("instruction", "")
+            expected = record.get("expected_answer", record.get("output", ""))
+            return {"text": f"### Instruction\n{instruction}\n\n### Response\n{expected}"}
+
+        train_ds = ds["train"].map(to_text, remove_columns=ds["train"].column_names)
+
+        training_args = TrainingArguments(
+            output_dir=str(output_dir),
+            per_device_train_batch_size=2,
+            gradient_accumulation_steps=4,
+            learning_rate=config.unsloth_lr,
+            max_steps=max_steps,
+            logging_steps=10,
+            save_steps=max_steps,
+            save_total_limit=1,
+            fp16=torch.cuda.is_available(),
+            report_to=[],
+        )
+
+        trainer = SFTTrainer(
+            model=lora_model,
+            tokenizer=tokenizer,
+            train_dataset=train_ds,
+            dataset_text_field="text",
+            max_seq_length=2048,
+            args=training_args,
+        )
+        trainer.train()
+        lora_model.save_pretrained(output_dir)
+        tokenizer.save_pretrained(output_dir)
+
+        print(f"✅ Unsloth training complete: {output_dir}")
+        return output_dir
 
 
 # ============================================================================
@@ -903,7 +1130,18 @@ class PipelineOrchestrator:
     def run(self, stages: List[str]) -> int:
         """Run specified stages of the pipeline."""
         if "all" in stages:
-            stages = ["scan", "datasets", "sft", "llm2vec"]
+            stages = [
+                "full_scan",
+                "scan",
+                "internals",
+                "harvest",
+                "format_datasets",
+                "retrieval_pairs",
+                "sft",
+                "unsloth",
+                "llm2vec",
+                "mlx_export",
+            ]
 
         datasets = {}
 
@@ -915,6 +1153,26 @@ class PipelineOrchestrator:
             print("🔍 Running repository scan...")
             self._run_scan()
 
+        if "full_scan" in stages:
+            print("🔍 Running full repository scan...")
+            self._run_full_scan()
+
+        if "internals" in stages:
+            print("📚 Building internal datasets...")
+            self._build_internal_datasets()
+
+        if "harvest" in stages:
+            print("🌐 Harvesting internet datasets...")
+            self._harvest_internet_datasets()
+
+        if "format_datasets" in stages:
+            print("🧹 Formatting datasets...")
+            self._format_datasets()
+
+        if "retrieval_pairs" in stages:
+            print("🧲 Generating retrieval pairs...")
+            self._build_retrieval_pairs()
+
         if "datasets" in stages:
             print("📚 Building datasets...")
             datasets = self._build_datasets()
@@ -925,11 +1183,21 @@ class PipelineOrchestrator:
                 datasets = self._build_datasets()
             self._run_sft(datasets)
 
+        if "unsloth" in stages:
+            print("⚡ Running Unsloth training...")
+            if not datasets:
+                datasets = self._build_datasets()
+            self._run_unsloth(datasets)
+
         if "llm2vec" in stages:
             print("🧬 Running LLM2Vec training...")
             if not datasets:
                 datasets = self._build_datasets()
             self._run_llm2vec(datasets)
+
+        if "mlx_export" in stages:
+            print("📦 Exporting MLX/CoreML artifacts...")
+            self._run_mlx_export()
 
         print(f"✅ Pipeline complete! Outputs in: {self.config.run_dir}")
         return 0
@@ -964,6 +1232,82 @@ class PipelineOrchestrator:
         scanner.scan()
 
         return self.config.run_dir / "scad" / "focused_report.json"
+
+    def _run_full_scan(self) -> Path:
+        scan_config = ScanConfig(
+            repo_root=self.config.repo_root,
+            run_id=self.config.run_id,
+            strict=self.config.scad_strict,
+            strict_threshold=self.config.scad_strict_threshold,
+            emit_datasets=False,
+        )
+        scanner = RepositoryScanner(scan_config)
+        report_dir = self.config.repo_root / "runs" / "scad" / self.config.run_id
+        report_dir.mkdir(parents=True, exist_ok=True)
+        report = scanner._run_base_scan(report_dir)
+        print(f"Full scan report written to {report}")
+        return report
+
+    def _build_internal_datasets(self) -> Path:
+        scan_config = ScanConfig(
+            repo_root=self.config.repo_root,
+            run_id=self.config.run_id,
+            strict=self.config.scad_strict,
+            strict_threshold=self.config.scad_strict_threshold,
+            emit_datasets=False,
+        )
+        scanner = RepositoryScanner(scan_config)
+        out_dir = self.config.run_dir / "datasets"
+        out_dir.mkdir(parents=True, exist_ok=True)
+        corpus_path = scanner.build_full_corpus(out_dir)
+        print(f"Internal corpus written to {corpus_path}")
+        return corpus_path
+
+    def _harvest_internet_datasets(self) -> Path:
+        manifest = self.config.harvest_manifest or (
+            Path(__file__).parent / "mlops" / "sources_fr_manifest.json"
+        )
+        out_dir = self.config.run_dir / "datasets" / "internet"
+        out_dir.mkdir(parents=True, exist_ok=True)
+        output_path = out_dir / "harvested_fr.jsonl"
+        return DatasetBuilder.harvest_internet_dataset(
+            manifest,
+            output_path,
+            self.config.internet_max_records,
+            self.config.internet_min_chars,
+        )
+
+    def _format_datasets(self) -> Dict[str, Path]:
+        out_dir = self.config.run_dir / "datasets" / "normalized"
+        out_dir.mkdir(parents=True, exist_ok=True)
+        formatted = {}
+        harvested = self.config.run_dir / "datasets" / "internet" / "harvested_fr.jsonl"
+        if harvested.exists():
+            formatted["internet_pretrain"] = DatasetBuilder.normalize_dataset(
+                harvested,
+                out_dir / "harvested_fr_normalized.jsonl",
+                "pretrain",
+            )
+        return formatted
+
+    def _build_retrieval_pairs(self) -> Path:
+        telemetry = self.config.telemetry_path
+        if not telemetry:
+            raise FileNotFoundError("telemetry_path is required for retrieval pairs")
+        output_path = self.config.run_dir / "datasets" / "retrieval_pairs.jsonl"
+        run_command(
+            [
+                sys.executable,
+                str(Path(__file__).parent / "mlops" / "generate_retrieval_pairs.py"),
+                "--telemetry",
+                str(telemetry),
+                "--output",
+                str(output_path),
+                "--max-negatives",
+                str(self.config.retrieval_max_negatives),
+            ]
+        )
+        return output_path
 
     def _build_datasets(self) -> Dict[str, Path]:
         """Build all datasets."""
@@ -1028,6 +1372,56 @@ class PipelineOrchestrator:
         trainer = LLM2VecTrainer(train_cfg)
         trainer.train()
 
+    def _run_unsloth(self, datasets: Dict[str, Path]):
+        dataset_path = None
+        for path in datasets.values():
+            if path.suffix == ".jsonl":
+                dataset_path = path
+                break
+        if not dataset_path:
+            raise FileNotFoundError("No JSONL dataset found for Unsloth training")
+        output_dir = self.config.run_dir / "unsloth"
+        output_dir.mkdir(parents=True, exist_ok=True)
+        UnslothTrainerWrapper.train(
+            self.config, dataset_path, output_dir, self.config.unsloth_max_steps
+        )
+
+    def _run_mlx_export(self) -> None:
+        if not self.config.mlx_model_path:
+            raise FileNotFoundError("mlx_model_path must be set for MLX export")
+        export_dir = self.config.mlx_export_dir or (self.config.run_dir / "mlx_export")
+        export_dir.mkdir(parents=True, exist_ok=True)
+        run_command(
+            [
+                sys.executable,
+                "-m",
+                "mlx_lm.convert",
+                "--model",
+                str(self.config.mlx_model_path),
+                "--out",
+                str(export_dir),
+                "--quantize",
+                str(self.config.mlx_quantize_bits),
+            ]
+        )
+
+        if self.config.coreml_export_dir:
+            self.config.coreml_export_dir.mkdir(parents=True, exist_ok=True)
+            out_prefix = self.config.coreml_export_dir / "coreml_model"
+            artifacts_path = self.config.coreml_export_dir / "coreml_artifacts.json"
+            run_command(
+                [
+                    sys.executable,
+                    str(Path(__file__).parent / "convert_to_coreml.py"),
+                    "--hf_model",
+                    str(self.config.mlx_model_path),
+                    "--out_prefix",
+                    str(out_prefix),
+                    "--artifacts_path",
+                    str(artifacts_path),
+                ]
+            )
+
 
 # ============================================================================
 # Terminal UI
@@ -1045,28 +1439,34 @@ class TerminalUI:
         print("=" * 50)
 
         choices = {
-            "1": "Run EVERYTHING (scan → datasets → SFT → LLM2Vec)",
-            "2": "Scan only (SCAD + internals datasets)",
-            "3": "Datasets only",
-            "4": "SFT (LoRA) only",
-            "5": "LLM2Vec only",
-            "6": "Quit",
+            "1": "Run EVERYTHING (full scan → datasets → training → export)",
+            "2": "Full scan only",
+            "3": "Scan only (focused SCAD + internals datasets)",
+            "4": "Datasets only",
+            "5": "SFT (LoRA) only",
+            "6": "Unsloth only",
+            "7": "LLM2Vec only",
+            "8": "Export only",
+            "9": "Quit",
         }
 
         for key, desc in choices.items():
             print(f"{key}) {desc}")
 
-        choice = input("\nSelect [1-6]: ").strip()
+        choice = input("\nSelect [1-9]: ").strip()
 
-        if choice == "6":
+        if choice == "9":
             return 0
 
         stage_map = {
             "1": "all",
-            "2": "scan",
-            "3": "datasets",
-            "4": "sft",
-            "5": "llm2vec",
+            "2": "full_scan",
+            "3": "scan",
+            "4": "datasets",
+            "5": "sft",
+            "6": "unsloth",
+            "7": "llm2vec",
+            "8": "mlx_export",
         }
 
         if choice not in stage_map:
@@ -1111,12 +1511,39 @@ def main_cli():
     """Command-line interface entry point."""
     parser = argparse.ArgumentParser(description="offLLM End-to-End Pipeline")
     parser.add_argument(
-        "--stage", choices=["scan", "datasets", "sft", "llm2vec", "all"], default=None
+        "--stage",
+        choices=[
+            "full_scan",
+            "scan",
+            "internals",
+            "harvest",
+            "format_datasets",
+            "retrieval_pairs",
+            "datasets",
+            "sft",
+            "unsloth",
+            "llm2vec",
+            "mlx_export",
+            "all",
+        ],
+        default=None,
     )
     parser.add_argument("--run-id", default=None)
     parser.add_argument("--repo-root", default=".")
     parser.add_argument("--runs-dir", default="runs")
     parser.add_argument("--base-model", default="cognitivecomputations/Dolphin3.0-Llama3.2-3B")
+    parser.add_argument("--telemetry-path", default=None)
+    parser.add_argument("--tool-schema-path", default=None)
+    parser.add_argument("--harvest-manifest", default=None)
+    parser.add_argument("--internet-max-records", type=int, default=2000)
+    parser.add_argument("--internet-min-chars", type=int, default=200)
+    parser.add_argument("--retrieval-max-negatives", type=int, default=4)
+    parser.add_argument("--unsloth-max-steps", type=int, default=800)
+    parser.add_argument("--unsloth-lr", type=float, default=2e-4)
+    parser.add_argument("--mlx-model-path", default=None)
+    parser.add_argument("--mlx-export-dir", default=None)
+    parser.add_argument("--mlx-quantize-bits", type=int, default=4)
+    parser.add_argument("--coreml-export-dir", default=None)
     parser.add_argument("--verbose", action="store_true")
 
     args = parser.parse_args()
@@ -1134,6 +1561,30 @@ def main_cli():
         run_id=run_id,
         run_dir=run_dir,
         base_model=args.base_model,
+        telemetry_path=Path(args.telemetry_path).expanduser()
+        if args.telemetry_path
+        else None,
+        tool_schema_path=Path(args.tool_schema_path).expanduser()
+        if args.tool_schema_path
+        else None,
+        harvest_manifest=Path(args.harvest_manifest).expanduser()
+        if args.harvest_manifest
+        else None,
+        internet_max_records=args.internet_max_records,
+        internet_min_chars=args.internet_min_chars,
+        retrieval_max_negatives=args.retrieval_max_negatives,
+        unsloth_max_steps=args.unsloth_max_steps,
+        unsloth_lr=args.unsloth_lr,
+        mlx_model_path=Path(args.mlx_model_path).expanduser()
+        if args.mlx_model_path
+        else None,
+        mlx_export_dir=Path(args.mlx_export_dir).expanduser()
+        if args.mlx_export_dir
+        else None,
+        mlx_quantize_bits=args.mlx_quantize_bits,
+        coreml_export_dir=Path(args.coreml_export_dir).expanduser()
+        if args.coreml_export_dir
+        else None,
         verbose=args.verbose,
     )
 
