@@ -17,6 +17,7 @@ import argparse
 import ast
 import dataclasses
 import hashlib
+import inspect
 import json
 import os
 import platform
@@ -899,6 +900,32 @@ class DatasetBuilder:
 # ============================================================================
 
 
+def build_sft_trainer_kwargs(
+    trainer_cls: type, tokenizer: AutoTokenizer, **kwargs: Any
+) -> Dict[str, Any]:
+    signature = inspect.signature(trainer_cls.__init__)
+    params = signature.parameters
+    trainer_kwargs = dict(kwargs)
+
+    max_seq_length = trainer_kwargs.pop("max_seq_length", None)
+    if max_seq_length is not None:
+        if "max_seq_length" in params:
+            trainer_kwargs["max_seq_length"] = max_seq_length
+        elif "max_length" in params:
+            trainer_kwargs["max_length"] = max_seq_length
+
+    if "tokenizer" in params:
+        trainer_kwargs["tokenizer"] = tokenizer
+    elif "processing_class" in params:
+        trainer_kwargs["processing_class"] = tokenizer
+    else:
+        raise TypeError(
+            "SFTTrainer signature does not accept tokenizer or processing_class."
+        )
+
+    return {key: value for key, value in trainer_kwargs.items() if key in params}
+
+
 class SFTTrainerWrapper:
     """Wrapper for supervised fine-tuning with LoRA."""
 
@@ -974,12 +1001,15 @@ class SFTTrainerWrapper:
 
         # Train
         trainer = SFTTrainer(
-            model=model,
-            tokenizer=tokenizer,
-            train_dataset=train_ds,
-            dataset_text_field="text",
-            max_seq_length=2048,
-            args=training_args,
+            **build_sft_trainer_kwargs(
+                SFTTrainer,
+                tokenizer,
+                model=model,
+                train_dataset=train_ds,
+                dataset_text_field="text",
+                max_seq_length=2048,
+                args=training_args,
+            )
         )
 
         trainer.train()
@@ -1056,12 +1086,15 @@ class UnslothTrainerWrapper:
         )
 
         trainer = SFTTrainer(
-            model=lora_model,
-            tokenizer=tokenizer,
-            train_dataset=train_ds,
-            dataset_text_field="text",
-            max_seq_length=2048,
-            args=training_args,
+            **build_sft_trainer_kwargs(
+                SFTTrainer,
+                tokenizer,
+                model=lora_model,
+                train_dataset=train_ds,
+                dataset_text_field="text",
+                max_seq_length=2048,
+                args=training_args,
+            )
         )
         trainer.train()
         lora_model.save_pretrained(output_dir)
