@@ -12,7 +12,7 @@ test("hashString returns deterministic hash", () => {
 test("redactTelemetryValue masks sensitive fields", () => {
   const redacted = redactTelemetryValue({
     email: "person@example.com",
-    token: "tok_1234567890abcdef",
+    token: "example_token_value",
     phone: "+1 (555) 123-4567",
   });
   expect(redacted.email).toBe("[REDACTED_EMAIL]");
