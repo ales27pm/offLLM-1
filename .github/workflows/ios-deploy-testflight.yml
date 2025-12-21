@@ -89,8 +89,8 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: 🧰 Select Xcode (must include iphoneos SDK)
-        run: bash scripts/ci/select_xcode.sh "${{ inputs.xcode_major }}"
+      - name: 🧰 Select Xcode + Ensure iPhoneOS SDK
+        run: bash scripts/ci/select_xcode_and_ensure_ios.sh "16"
 
       - name: 📦 Ensure iPhoneOS SDK present
         run: bash scripts/ci/ensure_ios_platform.sh
@@ -110,8 +110,8 @@ jobs:
 
       - name: 🔐 Setup Keychain + Import Cert
         env:
-          IOS_DIST_CERT_BASE64: ${{ secrets.IOS_DIST_CERT_BASE64 }}
-          IOS_DIST_CERT_PASSWORD: ${{ secrets.IOS_DIST_CERT_PASSWORD }}
+          P12_BASE64: ${{ secrets.P12_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
         run: |
           set -euo pipefail
 
@@ -129,8 +129,19 @@ jobs:
           security default-keychain -d user -s "$KEYCHAIN_PATH"
 
           CERT_P12="$RUNNER_TEMP/dist.p12"
-          clean_b64 "$IOS_DIST_CERT_BASE64" | base64 --decode > "$CERT_P12"
-          security import "$CERT_P12" -k "$KEYCHAIN_PATH" -P "$IOS_DIST_CERT_PASSWORD" -T /usr/bin/codesign -T /usr/bin/security -T /usr/bin/xcodebuild
+          clean_b64 "$P12_BASE64" | base64 --decode > "$CERT_P12"
+          if [[ ! -s "$CERT_P12" ]]; then
+            echo "::error::Decoded signing certificate is empty. Check P12_BASE64."
+            exit 1
+          fi
+
+          if ! openssl pkcs12 -in "$CERT_P12" -passin "pass:$P12_PASSWORD" -info -nokeys >/dev/null 2>&1; then
+            echo "::error::Signing certificate is not a valid PKCS#12 archive or the password is incorrect."
+            echo "::error::Verify P12_BASE64 is a .p12/.pfx and P12_PASSWORD matches."
+            exit 1
+          fi
+
+          security import "$CERT_P12" -k "$KEYCHAIN_PATH" -P "$P12_PASSWORD" -T /usr/bin/codesign -T /usr/bin/security -T /usr/bin/xcodebuild
           security set-key-partition-list -S apple-tool:,apple: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
 
           security find-identity -v -p codesigning "$KEYCHAIN_PATH" || true
@@ -170,10 +181,11 @@ jobs:
           fi
 
       - name: 🧱 Generate Xcode project + install pods
+        working-directory: ios
         run: |
           set -euo pipefail
           xcodegen generate
-          pod install --project-directory=ios
+          pod install --project-directory=.
 
       - name: Ensure shared app scheme exists
         run: |
