@@ -662,19 +662,20 @@ def iter_candidate_files(
             if not rel:
                 stats["files_excluded"] += 1
                 continue
-            if not should_index_path(rel, exclude_dirs if not include_generated else set(), ignore_globs):
+            if not should_index_path(
+                rel, exclude_dirs if not include_generated else set(), ignore_globs
+            ):
                 stats["files_excluded"] += 1
                 continue
             ext = p.suffix.lower()
+            included = False
             if ext in TEXT_EXT_ALLOW or fn in ALWAYS_TEXT_NAMES:
+                included = True
+            if included:
                 out.append(p)
                 stats["files_included"] += 1
             else:
-                if p.suffix == "" and fn in ALWAYS_TEXT_NAMES:
-                    out.append(p)
-                    stats["files_included"] += 1
-                else:
-                    stats["files_excluded"] += 1
+                stats["files_excluded"] += 1
     return out, stats
 
 

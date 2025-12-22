@@ -146,17 +146,18 @@ def write_json(path: Path, obj: Any) -> None:
     )
 
 
-def write_sarif(path: Path, results: List[Dict[str, Any]]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    sarif = {
+def build_sarif(
+    tool_name: str, info_uri: str, results: List[Dict[str, Any]]
+) -> Dict[str, Any]:
+    return {
         "version": "2.1.0",
         "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
         "runs": [
             {
                 "tool": {
                     "driver": {
-                        "name": "prompt-regression",
-                        "informationUri": "https://example.invalid",
+                        "name": tool_name,
+                        "informationUri": info_uri,
                         "rules": [],
                     }
                 },
@@ -164,6 +165,10 @@ def write_sarif(path: Path, results: List[Dict[str, Any]]) -> None:
             }
         ],
     }
+
+
+def write_sarif(path: Path, sarif: Dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     write_json(path, sarif)
 
 
@@ -313,6 +318,7 @@ def invoke_model(prompt: str, command: str, seed: str | None, timeout_s: int) ->
             env=env,
             check=False,
             timeout=timeout_s,
+            shell=False,
         )
     except subprocess.TimeoutExpired as error:
         raise RuntimeError(f"Model command timed out after {timeout_s}s") from error
@@ -518,24 +524,6 @@ def evaluate_case(case: PromptCase, response: str) -> list[str]:
     return failures
 
 
-def build_eval_sarif(results: list[dict]) -> dict:
-    return {
-        "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
-        "version": "2.1.0",
-        "runs": [
-            {
-                "tool": {
-                    "driver": {
-                        "name": "offLLM prompt regression",
-                        "informationUri": "https://offllm.ai",
-                    }
-                },
-                "results": results,
-            }
-        ],
-    }
-
-
 # ----------------------------
 # CLI
 # ----------------------------
@@ -631,7 +619,14 @@ def run_registry_mode(args: argparse.Namespace) -> None:
 
     finally:
         # Always emit SARIF
-        write_sarif(sarif_out, sarif_results)
+        write_sarif(
+            sarif_out,
+            build_sarif(
+                "prompt-regression",
+                "https://example.invalid",
+                sarif_results,
+            ),
+        )
 
     sys.exit(exit_code)
 
@@ -673,7 +668,17 @@ def run_model_mode(args: argparse.Namespace) -> None:
 
     sarif_path = Path(args.sarif)
     sarif_path.parent.mkdir(parents=True, exist_ok=True)
-    sarif_path.write_text(json.dumps(build_eval_sarif(sarif_results), indent=2), encoding="utf-8")
+    sarif_path.write_text(
+        json.dumps(
+            build_sarif(
+                "offLLM prompt regression",
+                "https://offllm.ai",
+                sarif_results,
+            ),
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
 
     print(stable_dumps(summary))
     if failures:
