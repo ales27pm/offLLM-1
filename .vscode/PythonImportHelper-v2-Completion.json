@@ -373,6 +373,14 @@
         "documentation": {}
     },
     {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
         "label": "os",
         "kind": 6,
         "isExtraImport": true,
@@ -440,14 +448,6 @@
         "documentation": {}
     },
     {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
         "label": "Any",
         "importPath": "typing",
         "description": "typing",
@@ -456,7 +456,31 @@
         "documentation": {}
     },
     {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
         "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
@@ -2033,12 +2057,12 @@
         "documentation": {}
     },
     {
-        "label": "traceback",
+        "label": "hashlib",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "traceback",
-        "description": "traceback",
-        "detail": "traceback",
+        "importPath": "hashlib",
+        "description": "hashlib",
+        "detail": "hashlib",
         "documentation": {}
     },
     {
@@ -2384,6 +2408,87 @@
         "description": "dataclasses",
         "isExtraImport": true,
         "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "datetime",
+        "description": "datetime",
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
         "documentation": {}
     },
     {
@@ -3436,80 +3541,6 @@
         "description": "peft",
         "isExtraImport": true,
         "detail": "peft",
-        "documentation": {}
-    },
-    {
-        "label": "hashlib",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "hashlib",
-        "description": "hashlib",
-        "detail": "hashlib",
-        "documentation": {}
-    },
-    {
-        "label": "datetime",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "datetime",
-        "description": "datetime",
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "datetime",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "timezone",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "datetime",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "timezone",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "datetime",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "timezone",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "datetime",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
         "documentation": {}
     },
     {
@@ -12624,38 +12655,20 @@
         "documentation": {}
     },
     {
-        "label": "empty_sarif",
-        "kind": 2,
+        "label": "Finding",
+        "kind": 6,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def empty_sarif() -> Dict[str, Any]:\n    return {\n        \"version\": \"2.1.0\",\n        \"$schema\": \"https://json.schemastore.org/sarif-2.1.0.json\",\n        \"runs\": [\n            {\n                \"tool\": {\n                    \"driver\": {\n                        \"name\": \"offLLM Prompt Regression\",\n                        \"informationUri\": \"https://github.com/ales27pm/offLLM-1\",",
+        "peekOfCode": "class Finding:\n    stable_id: str\n    kind: str  # \"schema\" | \"hash\"\n    message: str\n    file: str\ndef _validate_case_schema(entry: Dict[str, Any]) -> List[str]:\n    \"\"\"\n    Strict schema contract expected by JS tests.\n    Required:\n      stable_id: str",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
     {
-        "label": "add_sarif_error",
+        "label": "parse_args",
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def add_sarif_error(sarif: Dict[str, Any], message: str) -> None:\n    sarif[\"runs\"][0][\"results\"].append(\n        {\n            \"level\": \"error\",\n            \"message\": {\"text\": message},\n        }\n    )\n# -------------------------\n# Template resolution\n# -------------------------",
-        "detail": "scripts.eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "resolve_template",
-        "kind": 2,
-        "importPath": "scripts.eval.run_prompt_regression",
-        "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def resolve_template(user_template: str | None) -> Path:\n    if user_template:\n        p = Path(user_template)\n        if not p.exists():\n            raise FileNotFoundError(f\"Template not found: {p}\")\n        return p\n    # Auto-selection order\n    candidates = [\n        Path(\"scripts/offllm_symbiosis_advisor_v6.py\"),\n        Path(\"scripts/offllm_symbiosis_advisor_v5.py\"),",
-        "detail": "scripts.eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "run_regression",
-        "kind": 2,
-        "importPath": "scripts.eval.run_prompt_regression",
-        "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def run_regression(template: Path) -> Dict[str, Any]:\n    \"\"\"\n    Replace this stub with your real regression logic if needed.\n    This version preserves existing behaviour while making failures explicit.\n    \"\"\"\n    # Minimal example: single passing check\n    return {\n        \"summary\": {\"total\": 1, \"passed\": 1, \"failed\": 0},\n        \"results\": [\n            {",
+        "peekOfCode": "def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:\n    p = argparse.ArgumentParser(prog=\"run_prompt_regression.py\")\n    p.add_argument(\n        \"--golden\",\n        default=str(Path(\"scripts\") / \"eval\" / \"golden_prompts.json\"),\n        help=\"Path to golden_prompts.json (default: scripts/eval/golden_prompts.json)\",\n    )\n    p.add_argument(\n        \"--report-out\",\n        required=True,",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
@@ -12664,25 +12677,7 @@
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def main() -> int:\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--template\", help=\"Path to prompt template\")\n    parser.add_argument(\"--report-out\", required=True)\n    parser.add_argument(\"--sarif-out\", required=True)\n    args = parser.parse_args()\n    report_path = Path(args.report_out)\n    sarif_path = Path(args.sarif_out)\n    report_path.parent.mkdir(parents=True, exist_ok=True)\n    sarif_path.parent.mkdir(parents=True, exist_ok=True)",
-        "detail": "scripts.eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "run_model_mode",
-        "kind": 2,
-        "importPath": "scripts.eval.run_prompt_regression",
-        "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def run_model_mode(args: argparse.Namespace) -> None:\n    prompt_paths = (args.prompts or []) + (args.golden or [])\n    if not prompt_paths:\n        raise ValueError(\"At least one --prompts (or --golden) path is required\")\n    if not args.model_cmd:\n        raise ValueError(\"--model-cmd is required for model-based regression\")\n    cases = load_cases(prompt_paths)\n    failures = []\n    sarif_results = []\n    rules = [",
-        "detail": "scripts.eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "main",
-        "kind": 2,
-        "importPath": "scripts.eval.run_prompt_regression",
-        "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def main() -> None:\n    args = parse_args()\n    if args.model_cmd or args.prompts or args.golden:\n        run_model_mode(args)\n    else:\n        run_registry_mode(args)\nif __name__ == \"__main__\":\n    raise SystemExit(main())",
+        "peekOfCode": "def main(argv: Optional[List[str]] = None) -> int:\n    args = parse_args(argv)\n    repo_root = Path(os.getcwd()).resolve()\n    golden_path = Path(args.golden).resolve()\n    report_out = Path(args.report_out).resolve()\n    sarif_out = Path(args.sarif_out).resolve()\n    started_at = _utc_now_iso()\n    findings: List[Finding] = []\n    cases_count = 0\n    hash_checked = 0",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
