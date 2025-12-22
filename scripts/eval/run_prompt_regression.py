@@ -36,6 +36,11 @@ REGISTRY_RE = re.compile(
     re.DOTALL | re.MULTILINE,
 )
 
+REGISTRY_JSON_RE = re.compile(
+    r"PROMPT_REGISTRY_JSON\s*=\s*`(.*?)`",
+    re.DOTALL | re.MULTILINE,
+)
+
 # ----------------------------
 # Utilities
 # ----------------------------
@@ -53,8 +58,26 @@ def ensure_jsonable(obj: Any) -> Any:
 def load_prompt_registry(template_path: str) -> Dict[str, Any]:
     text = Path(template_path).read_text(encoding="utf-8")
     match = REGISTRY_RE.search(text)
-    if not match:
-        raise ValueError(f"Prompt registry not found in template: {template_path}")
+    json_match = REGISTRY_JSON_RE.search(text)
+    if not match and not json_match:
+        raise ValueError(
+            "Prompt registry not found in template: "
+            f"{template_path} (expected PROMPT_REGISTRY or PROMPT_REGISTRY_JSON)"
+        )
+
+    if json_match:
+        raw = json_match.group(1).strip()
+        try:
+            data = json.loads(raw)
+        except json.JSONDecodeError:
+            unescaped = raw.encode("utf-8").decode("unicode_escape")
+            data = json.loads(unescaped)
+        if not isinstance(data, dict):
+            raise TypeError("Prompt registry root must be an object/dict")
+        registry_root = data.get("prompts", data)
+        if not isinstance(registry_root, dict):
+            raise TypeError("Prompt registry root must be an object/dict")
+        return registry_root
 
     raw = match.group(1).strip()
 
@@ -78,7 +101,11 @@ def load_prompt_registry(template_path: str) -> Dict[str, Any]:
     if not isinstance(data, dict):
         raise TypeError("Prompt registry root must be a dict")
 
-    return ensure_jsonable(data)
+    registry_root = data.get("prompts", data)
+    if not isinstance(registry_root, dict):
+        raise TypeError("Prompt registry root must be a dict")
+
+    return ensure_jsonable(registry_root)
 
 
 def write_json(path: Path, obj: Any) -> None:
@@ -158,7 +185,7 @@ def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser()
     p.add_argument(
         "--template",
-        default="offllm_symbiosis_advisor_v4.py",
+        default="src/core/prompt/PromptRegistry.ts",
         help="Template file containing PROMPT_REGISTRY",
     )
     p.add_argument(
@@ -222,6 +249,15 @@ def main() -> None:
                 "message": {
                     "text": f"{type(e).__name__}: {e}\n{tb}"
                 },
+                "locations": [
+                    {
+                        "physicalLocation": {
+                            "artifactLocation": {
+                                "uri": args.template
+                            }
+                        }
+                    }
+                ],
             }
         )
         raise
