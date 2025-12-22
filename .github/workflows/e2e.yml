@@ -83,7 +83,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p runs/symbiosis
-          python scripts/offllm_symbiosis_advisor_v3.py --repo . --out-dir runs/symbiosis
+          python scripts/offllm_symbiosis_advisor_v6.py --repo . --out-dir runs/symbiosis
 
       - name: Upload symbiosis artifacts
         if: always()
