@@ -12659,7 +12659,16 @@
         "kind": 6,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "class Finding:\n    stable_id: str\n    kind: str  # \"schema\" | \"hash\"\n    message: str\n    file: str\ndef _validate_case_schema(entry: Dict[str, Any]) -> List[str]:\n    \"\"\"\n    Strict schema contract expected by JS tests.\n    Required:\n      stable_id: str",
+        "peekOfCode": "class Finding:\n  stable_id: str\n  title: str\n  kind: str\n  message: str\n  expected_hash: Optional[str]\n  actual_hash: Optional[str]\ndef _sarif_result(rule_id: str, level: str, message: str, stable_id: str) -> Dict[str, Any]:\n  return {\n    \"ruleId\": rule_id,",
+        "detail": "scripts.eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "build_sarif",
+        "kind": 2,
+        "importPath": "scripts.eval.run_prompt_regression",
+        "description": "scripts.eval.run_prompt_regression",
+        "peekOfCode": "def build_sarif(findings: List[Finding]) -> Dict[str, Any]:\n  tool = {\n    \"driver\": {\n      \"name\": \"offLLM prompt regression\",\n      \"informationUri\": \"https://github.com/ales27pm/offLLM-1\",\n      \"rules\": [\n        {\n          \"id\": \"PROMPT_REGRESSION\",\n          \"name\": \"Prompt regression mismatch\",\n          \"shortDescription\": {\"text\": \"Golden prompt hash mismatch\"},",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
@@ -12668,7 +12677,7 @@
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:\n    p = argparse.ArgumentParser(prog=\"run_prompt_regression.py\")\n    p.add_argument(\n        \"--golden\",\n        default=str(Path(\"scripts\") / \"eval\" / \"golden_prompts.json\"),\n        help=\"Path to golden_prompts.json (default: scripts/eval/golden_prompts.json)\",\n    )\n    p.add_argument(\n        \"--report-out\",\n        required=True,",
+        "peekOfCode": "def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:\n  p = argparse.ArgumentParser(description=\"Run golden prompt regression checks and emit JSON + SARIF.\")\n  p.add_argument(\n    \"--golden\",\n    default=str(Path(\"scripts/eval/golden_prompts.json\")),\n    help=\"Path to golden_prompts.json\",\n  )\n  p.add_argument(\n    \"--report-out\",\n    required=True,",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
@@ -12677,7 +12686,7 @@
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def main(argv: Optional[List[str]] = None) -> int:\n    args = parse_args(argv)\n    repo_root = Path(os.getcwd()).resolve()\n    golden_path = Path(args.golden).resolve()\n    report_out = Path(args.report_out).resolve()\n    sarif_out = Path(args.sarif_out).resolve()\n    started_at = _utc_now_iso()\n    findings: List[Finding] = []\n    cases_count = 0\n    hash_checked = 0",
+        "peekOfCode": "def main(argv: Optional[List[str]] = None) -> int:\n  args = parse_args(argv)\n  golden_path = Path(args.golden)\n  report_out = Path(args.report_out)\n  sarif_out = Path(args.sarif_out)\n  findings: List[Finding] = []\n  report: Dict[str, Any] = {\n    \"tool\": \"offLLM prompt regression\",\n    \"ts\": _utc_now_iso(),\n    \"golden_path\": str(golden_path),",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },

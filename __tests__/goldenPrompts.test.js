@@ -58,6 +58,7 @@ describe("golden prompts", () => {
 
     const allowedTop = new Set([
       "stable_id",
+      "title", // ✅ allow metadata title
       "prompt",
       "tools",
       "context",
