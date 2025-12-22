@@ -26,3 +26,4 @@ offLLM.code-workspace
 runs/
 
 .vscode/PythonImportHelper-v2-Completion.json
+unsloth_compiled_cache/
