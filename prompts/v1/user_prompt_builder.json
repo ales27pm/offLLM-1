@@ -1,0 +1,4 @@
+{
+  "emotion_prefix": "The user sounds {emotion}. ",
+  "context_prefix": "Context:\n{context}\n\n"
+}

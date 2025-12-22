@@ -1,0 +1,9 @@
+{
+  "candidates": [
+    "Consider alternative perspectives on: {thought}",
+    "Break down the problem: {thought} into smaller components",
+    "What are the assumptions behind: {thought}",
+    "Consider the opposite of: {thought}",
+    "How would an expert approach: {thought}"
+  ]
+}

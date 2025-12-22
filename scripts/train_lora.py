@@ -1,7 +1,6 @@
 import argparse
 import json
 import os
-import re
 import subprocess
 import sys
 
@@ -21,11 +20,21 @@ def load_prompt_registry(registry_path: str) -> dict:
     if not os.path.isfile(registry_path):
         raise FileNotFoundError(f"Prompt registry not found: {registry_path}")
     with open(registry_path, "r", encoding="utf-8") as handle:
-        text = handle.read()
-    match = re.search(r"PROMPT_REGISTRY_JSON\s*=\s*`(.*?)`", text, re.S)
-    if not match:
-        raise ValueError("Unable to locate PROMPT_REGISTRY_JSON in registry file")
-    return json.loads(match.group(1))
+        return json.load(handle)
+
+
+def load_prompt_template(registry: dict, prompt_key: str, base_dir: str) -> dict:
+    entry = registry.get("prompts", {}).get(prompt_key)
+    if not entry:
+        raise ValueError(f"Prompt registry missing {prompt_key}")
+    template_file = entry.get("template_file")
+    if not template_file:
+        raise ValueError(f"Prompt registry entry missing template_file: {prompt_key}")
+    template_path = os.path.abspath(os.path.join(base_dir, template_file))
+    if not os.path.isfile(template_path):
+        raise FileNotFoundError(f"Prompt template not found: {template_path}")
+    with open(template_path, "r", encoding="utf-8") as handle:
+        return json.load(handle)
 
 
 def format_example(example: dict, training_template: dict) -> str:
@@ -66,22 +75,19 @@ def main() -> None:
     if not os.path.isfile(args.train_file):
         raise FileNotFoundError(f"Dataset not found: {args.train_file}")
 
-    default_template_path = os.path.abspath(
+    default_registry_path = os.path.abspath(
         os.path.join(
             os.path.dirname(__file__),
             "..",
-            "src",
-            "core",
-            "prompt",
-            "PromptRegistry.ts",
+            "prompts",
+            "registry.json",
         )
     )
-    template_path = args.prompt_template or default_template_path
-    registry = load_prompt_registry(template_path)
-    training_prompt = registry["prompts"].get("training_prompt_v1")
-    if not training_prompt:
-        raise ValueError("Prompt registry missing training_prompt_v1")
-    training_template = training_prompt.get("template")
+    registry_path = args.prompt_template or default_registry_path
+    registry = load_prompt_registry(registry_path)
+    training_template = load_prompt_template(
+        registry, "training_prompt_v1", os.path.dirname(registry_path)
+    )
 
     tokenizer = AutoTokenizer.from_pretrained(args.base_model, use_fast=True)
     if tokenizer.pad_token is None:

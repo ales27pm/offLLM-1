@@ -87,7 +87,17 @@ def stable_dumps(payload: Any) -> str:
 
 
 def load_prompt_registry(template_path: str) -> Dict[str, Any]:
-    text = Path(template_path).read_text(encoding="utf-8")
+    template_file = Path(template_path)
+    if template_file.suffix == ".json":
+        data = json.loads(template_file.read_text(encoding="utf-8"))
+        if not isinstance(data, dict):
+            raise TypeError("Prompt registry root must be an object/dict")
+        registry_root = data.get("prompts", data)
+        if not isinstance(registry_root, dict):
+            raise TypeError("Prompt registry root must be an object/dict")
+        return ensure_jsonable(registry_root)
+
+    text = template_file.read_text(encoding="utf-8")
     match = REGISTRY_RE.search(text)
     json_match = REGISTRY_JSON_RE.search(text)
     if not match and not json_match:
@@ -181,7 +191,7 @@ def write_sarif(path: Path, sarif: Dict[str, Any]) -> None:
 # ----------------------------
 
 
-def evaluate_registry(registry: Dict[str, Any]) -> Dict[str, Any]:
+def evaluate_registry(registry: Dict[str, Any], registry_root: Path) -> Dict[str, Any]:
     """
     This function performs *structural* regression checks.
 
@@ -203,9 +213,16 @@ def evaluate_registry(registry: Dict[str, Any]) -> Dict[str, Any]:
             failures.append(f"{prompt_id}: entry must be an object")
             continue
 
-        for required in ("id", "version", "template"):
+        for required in ("id", "version", "template_file"):
             if required not in entry:
                 failures.append(f"{prompt_id}: missing required field '{required}'")
+        template_file = entry.get("template_file")
+        if template_file:
+            template_path = registry_root / template_file
+            if not template_path.is_file():
+                failures.append(
+                    f"{prompt_id}: template file not found at {template_path}"
+                )
 
         if "tools" in entry and not isinstance(entry["tools"], list):
             failures.append(f"{prompt_id}: 'tools' must be a list if present")
@@ -548,8 +565,8 @@ def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Run prompt regression suite.")
     p.add_argument(
         "--template",
-        default="src/core/prompt/PromptRegistry.ts",
-        help="Template file containing PROMPT_REGISTRY",
+        default="prompts/registry.json",
+        help="Template file containing the prompt registry",
     )
     p.add_argument(
         "--report-out",
@@ -585,7 +602,7 @@ def run_registry_mode(args: argparse.Namespace) -> None:
 
     try:
         registry = load_prompt_registry(args.template)
-        report = evaluate_registry(registry)
+        report = evaluate_registry(registry, Path(args.template).parent)
 
         write_json(report_out, report)
 

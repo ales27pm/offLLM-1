@@ -1,0 +1,3 @@
+{
+  "prompt": "Evaluate the quality of this thought in the context of solving: \"{context}\"\n\nThought to evaluate: \"{thought}\"\n\nRate on a scale of 0.0 to 1.0 considering:\n- Relevance to the problem\n- Novelty and creativity\n- Practical feasibility\n- Logical coherence\n\nProvide only the numerical rating:"
+}
