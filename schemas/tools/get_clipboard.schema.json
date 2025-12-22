@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://offllm.ai/schemas/tools/get_clipboard.schema.json",
+  "title": "get_clipboard",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {}
+}

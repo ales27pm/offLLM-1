@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://offllm.ai/schemas/tools/send_message.schema.json",
+  "title": "send_message",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "recipient": { "type": "string" },
+    "body": { "type": "string" }
+  },
+  "required": ["recipient", "body"]
+}

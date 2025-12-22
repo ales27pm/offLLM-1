@@ -153,6 +153,10 @@ class LLMService {
     }
   }
 
+  getModelId() {
+    return this.modelPath || MODEL_CONFIG.url || "unknown";
+  }
+
   _updateMetrics(duration) {
     this.performanceMetrics.lastLatency = duration;
     this.performanceMetrics.totalInferenceTime += duration;
