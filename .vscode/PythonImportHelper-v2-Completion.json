@@ -252,6 +252,22 @@
         "documentation": {}
     },
     {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
         "label": "subprocess",
         "kind": 6,
         "isExtraImport": true,
@@ -275,6 +291,22 @@
         "importPath": "os",
         "description": "os",
         "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
         "documentation": {}
     },
     {
@@ -367,6 +399,14 @@
     },
     {
         "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
@@ -1976,6 +2016,351 @@
         "documentation": {}
     },
     {
+        "label": "dataclasses",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "asdict",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "asdict",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "asdict",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
         "label": "load_redaction_patterns",
         "importPath": "scripts.mlops.telemetry_redaction",
         "description": "scripts.mlops.telemetry_redaction",
@@ -3034,343 +3419,6 @@
         "importPath": "hashlib",
         "description": "hashlib",
         "detail": "hashlib",
-        "documentation": {}
-    },
-    {
-        "label": "dataclasses",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "asdict",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "asdict",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "asdict",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
         "documentation": {}
     },
     {
@@ -12217,6 +12265,51 @@
         "documentation": {}
     },
     {
+        "label": "iter_paths",
+        "kind": 2,
+        "importPath": "scripts.ci.guard_symbiosis_output",
+        "description": "scripts.ci.guard_symbiosis_output",
+        "peekOfCode": "def iter_paths(report: dict) -> Iterable[str]:\n    for snippet in report.get(\"prompt_snippets\", []):\n        file_path = snippet.get(\"file\")\n        if file_path:\n            yield file_path\n    for cluster in report.get(\"prompt_drift_clusters\", []):\n        for file_path in cluster.get(\"files\", []):\n            if file_path:\n                yield file_path\n    for entries in report.get(\"where_to_search\", {}).values():",
+        "detail": "scripts.ci.guard_symbiosis_output",
+        "documentation": {}
+    },
+    {
+        "label": "is_forbidden",
+        "kind": 2,
+        "importPath": "scripts.ci.guard_symbiosis_output",
+        "description": "scripts.ci.guard_symbiosis_output",
+        "peekOfCode": "def is_forbidden(path: str) -> bool:\n    path_lower = path.lower()\n    if path.startswith(FORBIDDEN_PREFIXES):\n        return True\n    return any(token in path_lower for token in FORBIDDEN_SUBSTRINGS)\ndef main() -> int:\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--report\", required=True, help=\"Path to symbiosis report JSON\")\n    args = parser.parse_args()\n    report_path = Path(args.report)",
+        "detail": "scripts.ci.guard_symbiosis_output",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.ci.guard_symbiosis_output",
+        "description": "scripts.ci.guard_symbiosis_output",
+        "peekOfCode": "def main() -> int:\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--report\", required=True, help=\"Path to symbiosis report JSON\")\n    args = parser.parse_args()\n    report_path = Path(args.report)\n    if not report_path.exists():\n        print(f\"[guard] Missing report: {report_path}\", file=sys.stderr)\n        return 1\n    report = json.loads(report_path.read_text(encoding=\"utf-8\"))\n    offenders = sorted({p for p in iter_paths(report) if is_forbidden(p)})",
+        "detail": "scripts.ci.guard_symbiosis_output",
+        "documentation": {}
+    },
+    {
+        "label": "FORBIDDEN_PREFIXES",
+        "kind": 5,
+        "importPath": "scripts.ci.guard_symbiosis_output",
+        "description": "scripts.ci.guard_symbiosis_output",
+        "peekOfCode": "FORBIDDEN_PREFIXES = (\"reports/\", \"runs/\")\nFORBIDDEN_SUBSTRINGS = (\"symbiosis\", \"prompt-regression\")\ndef iter_paths(report: dict) -> Iterable[str]:\n    for snippet in report.get(\"prompt_snippets\", []):\n        file_path = snippet.get(\"file\")\n        if file_path:\n            yield file_path\n    for cluster in report.get(\"prompt_drift_clusters\", []):\n        for file_path in cluster.get(\"files\", []):\n            if file_path:",
+        "detail": "scripts.ci.guard_symbiosis_output",
+        "documentation": {}
+    },
+    {
+        "label": "FORBIDDEN_SUBSTRINGS",
+        "kind": 5,
+        "importPath": "scripts.ci.guard_symbiosis_output",
+        "description": "scripts.ci.guard_symbiosis_output",
+        "peekOfCode": "FORBIDDEN_SUBSTRINGS = (\"symbiosis\", \"prompt-regression\")\ndef iter_paths(report: dict) -> Iterable[str]:\n    for snippet in report.get(\"prompt_snippets\", []):\n        file_path = snippet.get(\"file\")\n        if file_path:\n            yield file_path\n    for cluster in report.get(\"prompt_drift_clusters\", []):\n        for file_path in cluster.get(\"files\", []):\n            if file_path:\n                yield file_path",
+        "detail": "scripts.ci.guard_symbiosis_output",
+        "documentation": {}
+    },
+    {
         "label": "load_outputs",
         "kind": 2,
         "importPath": "scripts.eval.export_equivalence",
@@ -12312,6 +12405,24 @@
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
         "peekOfCode": "def main() -> int:\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--template\", help=\"Path to prompt template\")\n    parser.add_argument(\"--report-out\", required=True)\n    parser.add_argument(\"--sarif-out\", required=True)\n    args = parser.parse_args()\n    report_path = Path(args.report_out)\n    sarif_path = Path(args.sarif_out)\n    report_path.parent.mkdir(parents=True, exist_ok=True)\n    sarif_path.parent.mkdir(parents=True, exist_ok=True)",
+        "detail": "scripts.eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "run_model_mode",
+        "kind": 2,
+        "importPath": "scripts.eval.run_prompt_regression",
+        "description": "scripts.eval.run_prompt_regression",
+        "peekOfCode": "def run_model_mode(args: argparse.Namespace) -> None:\n    prompt_paths = (args.prompts or []) + (args.golden or [])\n    if not prompt_paths:\n        raise ValueError(\"At least one --prompts (or --golden) path is required\")\n    if not args.model_cmd:\n        raise ValueError(\"--model-cmd is required for model-based regression\")\n    cases = load_cases(prompt_paths)\n    failures = []\n    sarif_results = []\n    rules = [",
+        "detail": "scripts.eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.eval.run_prompt_regression",
+        "description": "scripts.eval.run_prompt_regression",
+        "peekOfCode": "def main() -> None:\n    args = parse_args()\n    if args.model_cmd or args.prompts or args.golden:\n        run_model_mode(args)\n    else:\n        run_registry_mode(args)\nif __name__ == \"__main__\":\n    raise SystemExit(main())",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
@@ -13904,7 +14015,16 @@
         "kind": 2,
         "importPath": "scripts.offllm_symbiosis_advisor_v6",
         "description": "scripts.offllm_symbiosis_advisor_v6",
-        "peekOfCode": "def cfg_int(cfg: Dict[str, Any], key: str, default: int) -> int:\n    v = cfg.get(key, default)\n    try:\n        return int(v)\n    except Exception:\n        return default\ndef _run_git(repo_root: Path, args: List[str]) -> Optional[str]:\n    try:\n        r = subprocess.run(\n            [\"git\"] + args,",
+        "peekOfCode": "def cfg_int(cfg: Dict[str, Any], key: str, default: int) -> int:\n    v = cfg.get(key, default)\n    try:\n        return int(v)\n    except Exception:\n        return default\ndef merge_ignore_globs(defaults: List[str], overrides: List[str]) -> List[str]:\n    out = []\n    seen = set()\n    for item in defaults + overrides:",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "merge_ignore_globs",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def merge_ignore_globs(defaults: List[str], overrides: List[str]) -> List[str]:\n    out = []\n    seen = set()\n    for item in defaults + overrides:\n        item = str(item)\n        if item in seen:\n            continue\n        seen.add(item)\n        out.append(item)\n    return out",
         "detail": "scripts.offllm_symbiosis_advisor_v6",
         "documentation": {}
     },
@@ -13967,7 +14087,7 @@
         "kind": 2,
         "importPath": "scripts.offllm_symbiosis_advisor_v6",
         "description": "scripts.offllm_symbiosis_advisor_v6",
-        "peekOfCode": "def should_index_path(rel: str, exclude_dirs: set[str], ignore_globs: List[str]) -> bool:\n    parts = rel.split(\"/\")\n    if any(part in exclude_dirs for part in parts):\n        return False\n    for g in ignore_globs:\n        if fnmatch.fnmatch(rel, g) or fnmatch.fnmatch(\"/\" + rel, g):\n            return False\n    return True\ndef iter_candidate_files(repo_root: Path, exclude_dirs: set[str], ignore_globs: List[str], include_generated: bool) -> List[Path]:\n    out: List[Path] = []",
+        "peekOfCode": "def should_index_path(rel: str, exclude_dirs: set[str], ignore_globs: List[str]) -> bool:\n    parts = rel.split(\"/\")\n    if any(part in exclude_dirs for part in parts):\n        return False\n    for g in ignore_globs:\n        if fnmatch.fnmatch(rel, g) or fnmatch.fnmatch(\"/\" + rel, g):\n            return False\n    return True\ndef iter_candidate_files(\n    repo_root: Path,",
         "detail": "scripts.offllm_symbiosis_advisor_v6",
         "documentation": {}
     },
@@ -13976,7 +14096,7 @@
         "kind": 2,
         "importPath": "scripts.offllm_symbiosis_advisor_v6",
         "description": "scripts.offllm_symbiosis_advisor_v6",
-        "peekOfCode": "def iter_candidate_files(repo_root: Path, exclude_dirs: set[str], ignore_globs: List[str], include_generated: bool) -> List[Path]:\n    out: List[Path] = []\n    for root, dirs, files in os.walk(repo_root):\n        pruned = []\n        for d in list(dirs):\n            if d in exclude_dirs and not include_generated:\n                pruned.append(d)\n        for d in pruned:\n            dirs.remove(d)\n        for fn in files:",
+        "peekOfCode": "def iter_candidate_files(\n    repo_root: Path,\n    exclude_dirs: set[str],\n    ignore_globs: List[str],\n    include_generated: bool,\n) -> Tuple[List[Path], Dict[str, int]]:\n    out: List[Path] = []\n    stats = {\n        \"files_seen\": 0,\n        \"files_included\": 0,",
         "detail": "scripts.offllm_symbiosis_advisor_v6",
         "documentation": {}
     },
@@ -14048,7 +14168,7 @@
         "kind": 2,
         "importPath": "scripts.offllm_symbiosis_advisor_v6",
         "description": "scripts.offllm_symbiosis_advisor_v6",
-        "peekOfCode": "def analyze_repo(args: argparse.Namespace) -> Dict[str, Any]:\n    repo_root = Path(args.repo_root).resolve()\n    out_dir = Path(args.out_dir).resolve()\n    mkdirp(out_dir)\n    cfg = load_user_config(repo_root, Path(args.config).resolve() if args.config else None)\n    exclude_dirs = set(cfg_list(cfg, \"exclude_dirs\", sorted(DEFAULT_EXCLUDE_DIRS)))\n    ignore_globs = cfg_list(cfg, \"ignore_globs\", [])\n    include_generated = bool(args.include_generated or cfg_bool(cfg, \"include_generated\", False))\n    use_git = bool(args.git or cfg_bool(cfg, \"use_git\", True))\n    include_git_churn = bool(args.git_churn or cfg_bool(cfg, \"include_git_churn\", False))",
+        "peekOfCode": "def analyze_repo(args: argparse.Namespace) -> Dict[str, Any]:\n    repo_root = Path(args.repo_root).resolve()\n    out_dir = Path(args.out_dir).resolve()\n    mkdirp(out_dir)\n    cfg = load_user_config(repo_root, Path(args.config).resolve() if args.config else None)\n    exclude_dirs = set(cfg_list(cfg, \"exclude_dirs\", sorted(DEFAULT_EXCLUDE_DIRS)))\n    ignore_globs = merge_ignore_globs(\n        DEFAULT_IGNORE_GLOBS,\n        cfg_list(cfg, \"ignore_globs\", []),\n    )",
         "detail": "scripts.offllm_symbiosis_advisor_v6",
         "documentation": {}
     },
@@ -14057,7 +14177,7 @@
         "kind": 2,
         "importPath": "scripts.offllm_symbiosis_advisor_v6",
         "description": "scripts.offllm_symbiosis_advisor_v6",
-        "peekOfCode": "def build_arg_parser() -> argparse.ArgumentParser:\n    p = argparse.ArgumentParser(description=\"offLLM Symbiosis Advisor v6 (stdlib-only)\")\n    p.add_argument(\"--repo-root\", default=\".\", help=\"Repository root\")\n    p.add_argument(\"--out-dir\", default=\"reports/symbiosis_v6\", help=\"Output directory\")\n    p.add_argument(\"--include-generated\", action=\"store_true\", help=\"Include typically generated dirs (runs, cache, etc.)\")\n    p.add_argument(\"--max-file-size\", type=int, default=2_000_000, help=\"Max bytes to read per file\")\n    p.add_argument(\"--workers\", type=int, default=0, help=\"Thread workers (0 => auto)\")\n    p.add_argument(\"--config\", default=\"\", help=\"Explicit config path (.symbiosis.json/.yaml)\")\n    p.add_argument(\"--git\", action=\"store_true\", help=\"Prefer git-based fingerprinting if available\")\n    p.add_argument(\"--git-churn\", action=\"store_true\", help=\"Compute git churn per file (slower)\")",
+        "peekOfCode": "def build_arg_parser() -> argparse.ArgumentParser:\n    p = argparse.ArgumentParser(description=\"offLLM Symbiosis Advisor v6 (stdlib-only)\")\n    p.add_argument(\"--repo-root\", default=\".\", help=\"Repository root\")\n    p.add_argument(\"--repo\", dest=\"repo_root\", help=\"Repository root (alias)\")\n    p.add_argument(\"--out-dir\", default=\"reports/symbiosis_v6\", help=\"Output directory\")\n    p.add_argument(\"--include-generated\", action=\"store_true\", help=\"Include typically generated dirs (runs, cache, etc.)\")\n    p.add_argument(\"--max-file-size\", type=int, default=2_000_000, help=\"Max bytes to read per file\")\n    p.add_argument(\"--workers\", type=int, default=0, help=\"Thread workers (0 => auto)\")\n    p.add_argument(\"--config\", default=\"\", help=\"Explicit config path (.symbiosis.json/.yaml)\")\n    p.add_argument(\"--git\", action=\"store_true\", help=\"Prefer git-based fingerprinting if available\")",
         "detail": "scripts.offllm_symbiosis_advisor_v6",
         "documentation": {}
     },
@@ -14075,7 +14195,16 @@
         "kind": 5,
         "importPath": "scripts.offllm_symbiosis_advisor_v6",
         "description": "scripts.offllm_symbiosis_advisor_v6",
-        "peekOfCode": "DEFAULT_EXCLUDE_DIRS = {\n    \".git\", \".hg\", \".svn\",\n    \"node_modules\", \"dist\", \"build\", \".next\", \".turbo\", \".cache\",\n    \".venv\", \"venv\", \"__pycache__\",\n    \"Pods\", \"DerivedData\",\n    \"runs\",\n    \"unsloth_compiled_cache\",\n}\nTEXT_EXT_ALLOW = {\n    \".py\", \".js\", \".ts\", \".tsx\", \".jsx\", \".m\", \".mm\", \".swift\", \".java\", \".kt\",",
+        "peekOfCode": "DEFAULT_EXCLUDE_DIRS = {\n    \".git\", \".hg\", \".svn\",\n    \"node_modules\", \"dist\", \"build\", \".next\", \".turbo\", \".cache\",\n    \".venv\", \"venv\", \"__pycache__\",\n    \"Pods\", \"DerivedData\",\n    \"runs\",\n    \"reports\",\n    \"unsloth_compiled_cache\",\n}\nDEFAULT_IGNORE_GLOBS = [",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_IGNORE_GLOBS",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "DEFAULT_IGNORE_GLOBS = [\n    \"reports/**\",\n    \"runs/**\",\n    \"node_modules/**\",\n    \".git/**\",\n    \"dist/**\",\n    \"build/**\",\n    \"**/*.sarif\",\n    \"**/*prompt-regression*.json\",\n    \"**/*prompt-regression*\",",
         "detail": "scripts.offllm_symbiosis_advisor_v6",
         "documentation": {}
     },
