@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://offllm.ai/schemas/tools/open_url.schema.json",
+  "title": "open_url",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "url": { "type": "string", "format": "uri" }
+  },
+  "required": ["url"]
+}

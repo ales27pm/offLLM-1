@@ -28,10 +28,12 @@ export default class Retriever {
     const items = raw.map((r) => {
       const node = this.store.nodeMap.get(r.id);
       const meta = r.metadata || node?.metadata || {};
+      const content =
+        node?.content || `User: ${meta.user}\nAssistant: ${meta.assistant}`;
       return {
         id: r.id,
         emb: node?.vector || [],
-        content: `User: ${meta.user}\nAssistant: ${meta.assistant}`,
+        content,
       };
     });
     if (!items.length) {
@@ -43,6 +45,10 @@ export default class Retriever {
           latencyMs: Date.now() - startTime,
           candidateIds,
           candidateScores,
+          modelId:
+            typeof this.llm.getModelId === "function"
+              ? this.llm.getModelId()
+              : "unknown",
         }),
       );
       return [];
@@ -63,6 +69,10 @@ export default class Retriever {
         latencyMs: Date.now() - startTime,
         candidateIds,
         candidateScores,
+        modelId:
+          typeof this.llm.getModelId === "function"
+            ? this.llm.getModelId()
+            : "unknown",
       }),
     );
 

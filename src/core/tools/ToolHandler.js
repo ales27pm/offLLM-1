@@ -2,10 +2,12 @@ import {
   buildToolInvocationEvent,
   logTelemetryEvent,
 } from "../../utils/telemetry";
+import { validateToolArgs } from "./toolSchemaValidator";
 
 export default class ToolHandler {
-  constructor(toolRegistry) {
+  constructor(toolRegistry, options = {}) {
     this.toolRegistry = toolRegistry;
+    this.schemaValidator = options.schemaValidator || validateToolArgs;
   }
 
   _scanBalanced(str, start, openChar, closeChar, initialDepth = 0) {
@@ -166,7 +168,8 @@ export default class ToolHandler {
 
   async execute(calls, options = {}) {
     const results = [];
-    const { tracer, telemetryContext } = options;
+    const { tracer, telemetryContext, allowedCategories, allowMissingSchema } =
+      options;
 
     for (const { name, args } of calls) {
       const tool = this.toolRegistry.getTool(name);
@@ -179,12 +182,33 @@ export default class ToolHandler {
         continue;
       }
 
-      const missing = this._missingRequired(tool.parameters, args);
-      if (missing.length) {
+      const toolCategories = this.toolRegistry.getToolCategories
+        ? this.toolRegistry.getToolCategories(name)
+        : [];
+      if (
+        Array.isArray(allowedCategories) &&
+        allowedCategories.length > 0 &&
+        !toolCategories.some((category) => allowedCategories.includes(category))
+      ) {
         results.push({
           role: "tool",
           name,
-          content: `Error: Missing required parameters: ${missing.join(", ")}`,
+          content: `Error: Tool '${name}' is not allowed for this capability scope`,
+        });
+        continue;
+      }
+
+      const validation = this.schemaValidator(name, args, {
+        allowMissingSchema:
+          allowMissingSchema === true || tool.allowMissingSchema === true,
+      });
+      if (!validation.valid) {
+        results.push({
+          role: "tool",
+          name,
+          content: `Error: Invalid parameters for '${name}': ${validation.errors.join(
+            "; ",
+          )}`,
         });
         continue;
       }
@@ -225,6 +249,7 @@ export default class ToolHandler {
             latencyMs,
             resultSize: outputContent.length,
             error: errorMessage,
+            modelId: telemetryContext?.modelId,
           }),
         );
       }
@@ -254,15 +279,5 @@ export default class ToolHandler {
       }
     }
     return value;
-  }
-
-  _missingRequired(parameters = {}, args = {}) {
-    const missing = [];
-    Object.entries(parameters || {}).forEach(([key, schema = {}]) => {
-      if (schema.required && args[key] === undefined) {
-        missing.push(key);
-      }
-    });
-    return missing;
   }
 }

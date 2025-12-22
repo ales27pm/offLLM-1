@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://offllm.ai/schemas/tools/toggle_flashlight.schema.json",
+  "title": "toggle_flashlight",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "on": { "type": "boolean" }
+  },
+  "required": ["on"]
+}

@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://offllm.ai/schemas/telemetry_event.schema.json",
+  "title": "TelemetryEvent",
+  "type": "object",
+  "oneOf": [
+    {
+      "title": "PromptReceivedEvent",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": { "type": "string" },
+        "event_type": { "const": "prompt_received" },
+        "timestamp": { "type": "string" },
+        "prompt_hash": { "type": "string" },
+        "prompt_preview": { "type": "string" },
+        "tool_schema_version": { "type": "string" },
+        "model_id": { "type": "string" }
+      },
+      "required": [
+        "schema_version",
+        "event_type",
+        "timestamp",
+        "prompt_hash",
+        "prompt_preview",
+        "tool_schema_version",
+        "model_id"
+      ]
+    },
+    {
+      "title": "ToolInvocationEvent",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": { "type": "string" },
+        "event_type": { "const": "tool_invocation" },
+        "timestamp": { "type": "string" },
+        "prompt_hash": { "type": "string" },
+        "tool_name": { "type": "string" },
+        "tool_args_hash": { "type": "string" },
+        "tool_args_preview": {
+          "type": ["object", "array", "string", "number", "boolean", "null"]
+        },
+        "tool_result_size": { "type": "integer" },
+        "success": { "type": "boolean" },
+        "latency_ms": { "type": "number" },
+        "error": { "type": ["string", "null"] },
+        "tool_schema_version": { "type": "string" },
+        "model_id": { "type": "string" }
+      },
+      "required": [
+        "schema_version",
+        "event_type",
+        "timestamp",
+        "prompt_hash",
+        "tool_name",
+        "tool_args_hash",
+        "tool_args_preview",
+        "tool_result_size",
+        "success",
+        "latency_ms",
+        "tool_schema_version",
+        "model_id"
+      ]
+    },
+    {
+      "title": "RetrievalEvent",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": { "type": "string" },
+        "event_type": { "const": "retrieval" },
+        "timestamp": { "type": "string" },
+        "query_hash": { "type": "string" },
+        "query_preview": { "type": "string" },
+        "result_ids": { "type": "array", "items": { "type": "string" } },
+        "max_results": { "type": "integer" },
+        "latency_ms": { "type": "number" },
+        "retrieval_trace": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "candidate_ids": { "type": "array", "items": { "type": "string" } },
+            "candidate_scores": {
+              "type": "array",
+              "items": { "type": "number" }
+            }
+          },
+          "required": ["candidate_ids", "candidate_scores"]
+        },
+        "tool_schema_version": { "type": "string" },
+        "model_id": { "type": "string" }
+      },
+      "required": [
+        "schema_version",
+        "event_type",
+        "timestamp",
+        "query_hash",
+        "query_preview",
+        "result_ids",
+        "max_results",
+        "latency_ms",
+        "retrieval_trace",
+        "tool_schema_version",
+        "model_id"
+      ]
+    },
+    {
+      "title": "FinalResponseEvent",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": { "type": "string" },
+        "event_type": { "const": "final_response" },
+        "timestamp": { "type": "string" },
+        "prompt_hash": { "type": "string" },
+        "response_hash": { "type": "string" },
+        "response_preview": { "type": "string" },
+        "tool_calls_count": { "type": "integer" },
+        "tool_schema_version": { "type": "string" },
+        "model_id": { "type": "string" }
+      },
+      "required": [
+        "schema_version",
+        "event_type",
+        "timestamp",
+        "prompt_hash",
+        "response_hash",
+        "response_preview",
+        "tool_calls_count",
+        "tool_schema_version",
+        "model_id"
+      ]
+    }
+  ]
+}

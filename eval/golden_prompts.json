@@ -1,0 +1,22 @@
+[
+  {
+    "id": "golden_v1_hello",
+    "prompt": "Say hello in one sentence.",
+    "expected": {
+      "tool_calls": [],
+      "json_valid": false,
+      "refusal": false,
+      "citations_required": false
+    }
+  },
+  {
+    "id": "golden_v1_math",
+    "prompt": "What is 2 + 2?",
+    "expected": {
+      "tool_calls": [],
+      "json_valid": false,
+      "refusal": false,
+      "citations_required": false
+    }
+  }
+]
