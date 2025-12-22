@@ -67,7 +67,11 @@ def load_prompt_registry(template_path: str) -> Dict[str, Any]:
 
     if json_match:
         raw = json_match.group(1).strip()
-        data = json.loads(raw)
+        try:
+            data = json.loads(raw)
+        except json.JSONDecodeError:
+            unescaped = raw.encode("utf-8").decode("unicode_escape")
+            data = json.loads(unescaped)
         if not isinstance(data, dict):
             raise TypeError("Prompt registry root must be an object/dict")
         registry_root = data.get("prompts", data)
