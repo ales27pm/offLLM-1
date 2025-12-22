@@ -1,16 +1,12 @@
 #!/usr/bin/env python3
-from __future__ import annotations
+"""
+Strict forwarder required by CI guard.
 
-import runpy
-from pathlib import Path
+This file must not contain business logic.
+All implementation lives in scripts/eval/run_prompt_regression.py
+"""
 
-
-def main() -> None:
-    repo_root = Path(__file__).resolve().parents[1]
-    canonical = "scripts/eval/run_prompt_regression.py"
-    target = repo_root / canonical
-    runpy.run_path(str(target), run_name="__main__")
-
+from scripts.eval.run_prompt_regression import main
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

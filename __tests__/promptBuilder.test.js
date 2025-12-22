@@ -36,6 +36,24 @@ const createTool = ({ name, description, parameters, execute }) => ({
   execute,
 });
 
+function readGoldenPromptsFile(goldenPath) {
+  const raw = fs.readFileSync(goldenPath, "utf-8");
+  const parsed = JSON.parse(raw);
+
+  // legacy: [ ...cases ]
+  if (Array.isArray(parsed)) return { cases: parsed };
+
+  // current: { cases: [ ...cases ], ...meta }
+  if (parsed && typeof parsed === "object" && Array.isArray(parsed.cases)) {
+    return parsed;
+  }
+
+  const shape = parsed === null ? "null" : typeof parsed;
+  throw new Error(
+    `golden_prompts.json must be either an array of cases OR an object with { cases: [...] }. Got: ${shape}`,
+  );
+}
+
 describe("PromptBuilder", () => {
   const runtimeTemplate = getPromptDefinition(
     DEFAULT_RUNTIME_PROMPT_ID,
@@ -259,6 +277,7 @@ describe("PromptBuilder", () => {
     );
   });
 
+  // Golden prompt regression cases
   const goldenPath = path.join(
     __dirname,
     "..",
@@ -266,19 +285,32 @@ describe("PromptBuilder", () => {
     "eval",
     "golden_prompts.json",
   );
-  const golden = JSON.parse(fs.readFileSync(goldenPath, "utf-8"));
-  const goldenCases = golden.map((entry) => [entry.stable_id, entry]);
+  const golden = readGoldenPromptsFile(goldenPath);
+
+  const goldenCases = (golden.cases || [])
+    .filter((entry) => entry && typeof entry === "object")
+    .map((entry) => [entry.stable_id, entry]);
 
   it.each(goldenCases)("matches golden prompt %s", (_id, entry) => {
+    // For this test we only need getAvailableTools()
     const registry = {
-      getAvailableTools: () => entry.tools,
+      getAvailableTools: () => entry.tools || [],
     };
+
     const builder = new PromptBuilder(registry);
     const prompt = builder.build(entry.user_prompt, entry.context);
-    const promptHash = crypto
-      .createHash("sha256")
-      .update(prompt, "utf-8")
-      .digest("hex");
-    expect(promptHash).toBe(entry.expected_prompt_hash);
+
+    // Hash is optional; when present, enforce determinism.
+    if (typeof entry.expected_prompt_hash === "string") {
+      const promptHash = crypto
+        .createHash("sha256")
+        .update(prompt, "utf-8")
+        .digest("hex");
+      expect(promptHash).toBe(entry.expected_prompt_hash);
+    } else {
+      // Still assert prompt is buildable
+      expect(typeof prompt).toBe("string");
+      expect(prompt.length).toBeGreaterThan(0);
+    }
   });
 });

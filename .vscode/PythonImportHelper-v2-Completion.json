@@ -244,12 +244,140 @@
         "documentation": {}
     },
     {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
         "label": "subprocess",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "subprocess",
         "description": "subprocess",
         "detail": "subprocess",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "importPath": "scripts.eval.run_prompt_regression",
+        "description": "scripts.eval.run_prompt_regression",
+        "isExtraImport": true,
+        "detail": "scripts.eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "print_function",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
         "documentation": {}
     },
     {
@@ -268,6 +396,1665 @@
         "importPath": "shlex",
         "description": "shlex",
         "detail": "shlex",
+        "documentation": {}
+    },
+    {
+        "label": "lldb",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "lldb",
+        "description": "lldb",
+        "detail": "lldb",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterator",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Sequence",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterator",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Sequence",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Set",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Set",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Set",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Set",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Set",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Set",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Set",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Set",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Set",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Set",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Set",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Set",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Set",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Set",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Set",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Set",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "unquote",
+        "importPath": "urllib.parse",
+        "description": "urllib.parse",
+        "isExtraImport": true,
+        "detail": "urllib.parse",
+        "documentation": {}
+    },
+    {
+        "label": "urlparse",
+        "importPath": "urllib.parse",
+        "description": "urllib.parse",
+        "isExtraImport": true,
+        "detail": "urllib.parse",
+        "documentation": {}
+    },
+    {
+        "label": "math",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "math",
+        "description": "math",
+        "detail": "math",
+        "documentation": {}
+    },
+    {
+        "label": "defaultdict",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "Counter",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "defaultdict",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "Counter",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "defaultdict",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "deque",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "Counter",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "defaultdict",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "Counter",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "defaultdict",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "hashlib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "hashlib",
+        "description": "hashlib",
+        "detail": "hashlib",
         "documentation": {}
     },
     {
@@ -616,1734 +2403,84 @@
         "documentation": {}
     },
     {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Iterable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Iterable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Iterable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Iterable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Iterator",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Sequence",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Union",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Iterable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Iterable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Iterable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Iterator",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Sequence",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Iterable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Iterable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Iterable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Set",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Union",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Set",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Callable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Union",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Set",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Callable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Union",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Set",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Callable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Union",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Set",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Callable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Union",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Set",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Callable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Union",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Set",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Callable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Union",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Set",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Callable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Union",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Set",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Callable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Union",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Set",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Callable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Union",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Set",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Callable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Union",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Set",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Callable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Union",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Set",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Callable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Union",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Set",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Callable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Union",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Set",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Callable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Union",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Dict",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Set",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Callable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "unquote",
-        "importPath": "urllib.parse",
-        "description": "urllib.parse",
-        "isExtraImport": true,
-        "detail": "urllib.parse",
-        "documentation": {}
-    },
-    {
-        "label": "urlparse",
-        "importPath": "urllib.parse",
-        "description": "urllib.parse",
-        "isExtraImport": true,
-        "detail": "urllib.parse",
-        "documentation": {}
-    },
-    {
-        "label": "math",
+        "label": "datetime",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "math",
-        "description": "math",
-        "detail": "math",
+        "importPath": "datetime",
+        "description": "datetime",
+        "detail": "datetime",
         "documentation": {}
     },
     {
-        "label": "defaultdict",
-        "importPath": "collections",
-        "description": "collections",
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
         "isExtraImport": true,
-        "detail": "collections",
+        "detail": "datetime",
         "documentation": {}
     },
     {
-        "label": "Counter",
-        "importPath": "collections",
-        "description": "collections",
+        "label": "timezone",
+        "importPath": "datetime",
+        "description": "datetime",
         "isExtraImport": true,
-        "detail": "collections",
+        "detail": "datetime",
         "documentation": {}
     },
     {
-        "label": "defaultdict",
-        "importPath": "collections",
-        "description": "collections",
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
         "isExtraImport": true,
-        "detail": "collections",
+        "detail": "datetime",
         "documentation": {}
     },
     {
-        "label": "Counter",
-        "importPath": "collections",
-        "description": "collections",
+        "label": "timezone",
+        "importPath": "datetime",
+        "description": "datetime",
         "isExtraImport": true,
-        "detail": "collections",
+        "detail": "datetime",
         "documentation": {}
     },
     {
-        "label": "defaultdict",
-        "importPath": "collections",
-        "description": "collections",
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
         "isExtraImport": true,
-        "detail": "collections",
+        "detail": "datetime",
         "documentation": {}
     },
     {
-        "label": "deque",
-        "importPath": "collections",
-        "description": "collections",
+        "label": "timezone",
+        "importPath": "datetime",
+        "description": "datetime",
         "isExtraImport": true,
-        "detail": "collections",
+        "detail": "datetime",
         "documentation": {}
     },
     {
-        "label": "Counter",
-        "importPath": "collections",
-        "description": "collections",
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
         "isExtraImport": true,
-        "detail": "collections",
+        "detail": "datetime",
         "documentation": {}
     },
     {
-        "label": "defaultdict",
-        "importPath": "collections",
-        "description": "collections",
+        "label": "timezone",
+        "importPath": "datetime",
+        "description": "datetime",
         "isExtraImport": true,
-        "detail": "collections",
+        "detail": "datetime",
         "documentation": {}
     },
     {
-        "label": "Counter",
-        "importPath": "collections",
-        "description": "collections",
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
         "isExtraImport": true,
-        "detail": "collections",
-        "documentation": {}
-    },
-    {
-        "label": "defaultdict",
-        "importPath": "collections",
-        "description": "collections",
-        "isExtraImport": true,
-        "detail": "collections",
-        "documentation": {}
-    },
-    {
-        "label": "ast",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "ast",
-        "description": "ast",
-        "detail": "ast",
-        "documentation": {}
-    },
-    {
-        "label": "traceback",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "traceback",
-        "description": "traceback",
-        "detail": "traceback",
+        "detail": "datetime",
         "documentation": {}
     },
     {
@@ -3399,80 +3536,6 @@
         "documentation": {}
     },
     {
-        "label": "hashlib",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "hashlib",
-        "description": "hashlib",
-        "detail": "hashlib",
-        "documentation": {}
-    },
-    {
-        "label": "datetime",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "datetime",
-        "description": "datetime",
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "datetime",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "timezone",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "datetime",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "timezone",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "datetime",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "timezone",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "datetime",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
         "label": "warnings",
         "kind": 6,
         "isExtraImport": true,
@@ -3522,6 +3585,15 @@
         "description": "transformers.cache_utils",
         "isExtraImport": true,
         "detail": "transformers.cache_utils",
+        "documentation": {}
+    },
+    {
+        "label": "ast",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "ast",
+        "description": "ast",
+        "detail": "ast",
         "documentation": {}
     },
     {
@@ -12089,159 +12161,6 @@
         "documentation": {}
     },
     {
-        "label": "PromptCase",
-        "kind": 6,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "class PromptCase:\n    case_id: str\n    prompt: str\n    expected: dict\ndef stable_dumps(payload: Any) -> str:\n    return json.dumps(payload, ensure_ascii=False, sort_keys=True)\ndef load_cases(paths: Iterable[str]) -> list[PromptCase]:\n    cases: list[PromptCase] = []\n    allowed_top = {\"id\", \"prompt\", \"expected\"}\n    allowed_expected = {",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "stable_dumps",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def stable_dumps(payload: Any) -> str:\n    return json.dumps(payload, ensure_ascii=False, sort_keys=True)\ndef load_cases(paths: Iterable[str]) -> list[PromptCase]:\n    cases: list[PromptCase] = []\n    allowed_top = {\"id\", \"prompt\", \"expected\"}\n    allowed_expected = {\n        \"tool_calls\",\n        \"json_valid\",\n        \"refusal\",\n        \"citations_required\",",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "load_cases",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def load_cases(paths: Iterable[str]) -> list[PromptCase]:\n    cases: list[PromptCase] = []\n    allowed_top = {\"id\", \"prompt\", \"expected\"}\n    allowed_expected = {\n        \"tool_calls\",\n        \"json_valid\",\n        \"refusal\",\n        \"citations_required\",\n    }\n    for path in paths:",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "invoke_model",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def invoke_model(prompt: str, command: str, seed: str | None, timeout_s: int) -> str:\n    env = os.environ.copy()\n    env[\"OFFLLM_DETERMINISTIC\"] = \"1\"\n    env[\"TEMPERATURE\"] = \"0\"\n    if seed:\n        env[\"OFFLLM_SEED\"] = seed\n    if not command or not command.strip():\n        raise ValueError(\"model command must be a non-empty string\")\n    if re.search(r\"[;&|><`]\", command):\n        raise ValueError(\"model command contains unsupported shell metacharacters\")",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "scan_balanced",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def scan_balanced(text: str, start: int, open_char: str, close_char: str) -> int:\n    depth = 0\n    escaped = False\n    in_quote: str | None = None\n    for i in range(start, len(text)):\n        ch = text[i]\n        if escaped:\n            escaped = False\n            continue\n        if ch == \"\\\\\":",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "coerce_value",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def coerce_value(raw: str) -> Any:\n    if raw == \"true\":\n        return True\n    if raw == \"false\":\n        return False\n    try:\n        candidate = raw.strip()\n        if candidate and re.fullmatch(r\"[-+]?\\d+(?:\\.\\d+)?\", candidate):\n            return float(candidate) if \".\" in candidate else int(candidate)\n    except ValueError:",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "parse_args_str",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def parse_args_str(arg_str: str) -> dict:\n    if not arg_str.strip():\n        return {}\n    args: dict[str, Any] = {}\n    cursor = 0\n    length = len(arg_str)\n    while cursor < length:\n        while cursor < length and arg_str[cursor] in \" \\n\\t,\":\n            cursor += 1\n        if cursor >= length:",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "parse_tool_calls",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def parse_tool_calls(response: str) -> list[dict]:\n    results: list[dict] = []\n    marker = re.compile(r\"TOOL_CALL:\")\n    for match in marker.finditer(response):\n        cursor = match.end()\n        while cursor < len(response) and response[cursor].isspace():\n            cursor += 1\n        name_match = re.match(r\"[A-Za-z_][\\w-]*\", response[cursor:])\n        if not name_match:\n            continue",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "check_tool_calls",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def check_tool_calls(expected: dict, response: str) -> list[str]:\n    tool_calls_expected = expected.get(\"tool_calls\", [])\n    tool_calls_actual = parse_tool_calls(response)\n    if tool_calls_expected != tool_calls_actual:\n        return [\n            \"Tool call mismatch: expected \"\n            f\"{stable_dumps(tool_calls_expected)} got \"\n            f\"{stable_dumps(tool_calls_actual)}\"\n        ]\n    return []",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "check_json_valid",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def check_json_valid(expected: dict, response: str) -> list[str]:\n    json_valid_expected = expected.get(\"json_valid\", False)\n    try:\n        json.loads(response)\n        json_valid_actual = True\n    except json.JSONDecodeError:\n        json_valid_actual = False\n    if json_valid_expected != json_valid_actual:\n        return [\n            f\"JSON validity mismatch: expected {json_valid_expected} got {json_valid_actual}\"",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "check_refusal",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def check_refusal(expected: dict, response: str) -> list[str]:\n    refusal_expected = expected.get(\"refusal\", False)\n    refusal_actual = bool(REFUSAL_PATTERN.search(response))\n    if refusal_expected != refusal_actual:\n        return [\n            f\"Refusal detection mismatch: expected {refusal_expected} got {refusal_actual}\"\n        ]\n    return []\ndef check_citations(expected: dict, response: str) -> list[str]:\n    citations_required = expected.get(\"citations_required\", False)",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "check_citations",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def check_citations(expected: dict, response: str) -> list[str]:\n    citations_required = expected.get(\"citations_required\", False)\n    citations_present = bool(CITATION_PATTERN.search(response))\n    if citations_required and not citations_present:\n        return [\"Citations required but none found\"]\n    if not citations_required and citations_present:\n        return [\"Citations not expected but found\"]\n    return []\ndef evaluate_case(case: PromptCase, response: str) -> list[str]:\n    expected = case.expected",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "evaluate_case",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def evaluate_case(case: PromptCase, response: str) -> list[str]:\n    expected = case.expected\n    failures: list[str] = []\n    failures.extend(check_tool_calls(expected, response))\n    failures.extend(check_json_valid(expected, response))\n    failures.extend(check_refusal(expected, response))\n    failures.extend(check_citations(expected, response))\n    return failures\ndef build_sarif(results: list[dict]) -> dict:\n    return {",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "build_sarif",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def build_sarif(results: list[dict]) -> dict:\n    return {\n        \"$schema\": \"https://json.schemastore.org/sarif-2.1.0.json\",\n        \"version\": \"2.1.0\",\n        \"runs\": [\n            {\n                \"tool\": {\n                    \"driver\": {\n                        \"name\": \"offLLM prompt regression\",\n                        \"informationUri\": \"https://offllm.ai\",",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "main",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(description=\"Run prompt regression suite.\")\n    parser.add_argument(\"--prompts\", action=\"append\", required=True)\n    parser.add_argument(\"--model-cmd\", required=True)\n    parser.add_argument(\"--seed\", default=None)\n    parser.add_argument(\"--timeout\", type=int, default=60)\n    parser.add_argument(\"--summary\", default=\"eval/prompt_regression_summary.json\")\n    parser.add_argument(\"--sarif\", default=\"eval/prompt_regression.sarif\")\n    args = parser.parse_args()\n    cases = load_cases(args.prompts)",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "REFUSAL_PATTERN",
-        "kind": 5,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "REFUSAL_PATTERN = re.compile(\n    r\"\\b(can't|cannot|won't|unable to|not able to|refuse|decline)\\b\",\n    re.IGNORECASE,\n)\nCITATION_PATTERN = re.compile(r\"\\[\\d+\\]\")\n@dataclass\nclass PromptCase:\n    case_id: str\n    prompt: str\n    expected: dict",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "CITATION_PATTERN",
-        "kind": 5,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "CITATION_PATTERN = re.compile(r\"\\[\\d+\\]\")\n@dataclass\nclass PromptCase:\n    case_id: str\n    prompt: str\n    expected: dict\ndef stable_dumps(payload: Any) -> str:\n    return json.dumps(payload, ensure_ascii=False, sort_keys=True)\ndef load_cases(paths: Iterable[str]) -> list[PromptCase]:\n    cases: list[PromptCase] = []",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
         "label": "_Known",
         "kind": 6,
         "importPath": "node_modules.flatted.python.flatted",
@@ -12275,6 +12194,240 @@
         "description": "node_modules.flatted.python.flatted",
         "peekOfCode": "def stringify(value, *args, **kwargs):\n    known = _Known()\n    input = []\n    output = []\n    i = int(_index(known, input, value))\n    while i < len(input):\n        output.append(_transform(known, input, input[i]))\n        i += 1\n    return _json.dumps(output, *args, **kwargs)",
         "detail": "node_modules.flatted.python.flatted",
+        "documentation": {}
+    },
+    {
+        "label": "current_thread",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def current_thread(debugger):\n  return debugger.GetSelectedTarget().GetProcess().GetSelectedThread()\ndef current_frame(debugger):\n  return current_thread(debugger).GetSelectedFrame()\ndef no_arg_cmd(debugger, cmd, print_error=True):\n  cast_to_void_expr = '(void) {}'.format(cmd)\n  evaluate_result = current_frame(debugger).EvaluateExpression(cast_to_void_expr)\n  # When a void function is called the return value type is 0x1001 which\n  # is specified in http://tiny.cc/bigskz. This does not indicate\n  # an error so we check for that value below.",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "current_frame",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def current_frame(debugger):\n  return current_thread(debugger).GetSelectedFrame()\ndef no_arg_cmd(debugger, cmd, print_error=True):\n  cast_to_void_expr = '(void) {}'.format(cmd)\n  evaluate_result = current_frame(debugger).EvaluateExpression(cast_to_void_expr)\n  # When a void function is called the return value type is 0x1001 which\n  # is specified in http://tiny.cc/bigskz. This does not indicate\n  # an error so we check for that value below.\n  kNoResult = 0x1001\n  result = evaluate_result.GetError()",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "no_arg_cmd",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def no_arg_cmd(debugger, cmd, print_error=True):\n  cast_to_void_expr = '(void) {}'.format(cmd)\n  evaluate_result = current_frame(debugger).EvaluateExpression(cast_to_void_expr)\n  # When a void function is called the return value type is 0x1001 which\n  # is specified in http://tiny.cc/bigskz. This does not indicate\n  # an error so we check for that value below.\n  kNoResult = 0x1001\n  result = evaluate_result.GetError()\n  is_success = not result.fail or result.value == kNoResult\n  if not is_success:",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "ptr_arg_cmd",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def ptr_arg_cmd(debugger, name, param, cmd, fields=[], print_error=True):\n  if not param:\n    print(\"'{}' requires an argument\".format(name))\n    return (False, None, \"\")\n  value = current_frame(debugger).EvaluateExpression(param)\n  error = value.GetError()\n  if error.fail:\n    print(\"Error evaluating {}\\n{}\".format(param, error))\n    return (False, error, \"\")\n  # Proceed, ignoring visualizers if they are enabled.",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "print_handle",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def print_handle(debugger, command_name, param, print_func):\n  value = current_frame(debugger).EvaluateExpression(param)\n  error = value.GetError()\n  if error.fail:\n    print(\"Error evaluating {}\\n{}\".format(param, error))\n    return (False, error, \"\")\n  # Attempt to print, ignoring visualizers if they are enabled\n  result = print_func(value.GetNonSyntheticValue())\n  if not result[0]:\n    print(\"{} cannot print a value of type {}\".format(command_name,",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "print_direct",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def print_direct(debugger, command_name, value):\n  CMD = \"_v8_internal_Print_Object((v8::internal::Address*)({}))\"\n  return no_arg_cmd(debugger, CMD.format(value))\ndef print_indirect(debugger, command_name, value):\n  CMD = \"_v8_internal_Print_Object(*(v8::internal::Address**)({}))\"\n  return no_arg_cmd(debugger, CMD.format(value))\nV8_LLDB_COMMANDS = []\ndef lldbCommand(fn):\n  V8_LLDB_COMMANDS.append(fn.__name__)\n  return fn",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "print_indirect",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def print_indirect(debugger, command_name, value):\n  CMD = \"_v8_internal_Print_Object(*(v8::internal::Address**)({}))\"\n  return no_arg_cmd(debugger, CMD.format(value))\nV8_LLDB_COMMANDS = []\ndef lldbCommand(fn):\n  V8_LLDB_COMMANDS.append(fn.__name__)\n  return fn\n#####################\n# lldb commands.    #\n#####################",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "lldbCommand",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def lldbCommand(fn):\n  V8_LLDB_COMMANDS.append(fn.__name__)\n  return fn\n#####################\n# lldb commands.    #\n#####################\n@lldbCommand\ndef job(debugger, param, *args):\n  \"\"\"Print a v8 heap object\"\"\"\n  CMD = \"_v8_internal_Print_Object((void*)({}))\"",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "job",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def job(debugger, param, *args):\n  \"\"\"Print a v8 heap object\"\"\"\n  CMD = \"_v8_internal_Print_Object((void*)({}))\"\n  # Allow for Tagged<T>, containing a ptr_.\n  ptr_arg_cmd(debugger, 'job', param, CMD, [\".ptr_\"])\n@lldbCommand\ndef jh(debugger, param, *args):\n  \"\"\"Print v8::internal::(Maybe)?(Direct|Indirect)?Handle value\"\"\"\n  def print_func(value):\n    # Indirect handles contain a location_.",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "jh",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def jh(debugger, param, *args):\n  \"\"\"Print v8::internal::(Maybe)?(Direct|Indirect)?Handle value\"\"\"\n  def print_func(value):\n    # Indirect handles contain a location_.\n    field = value.GetValueForExpressionPath(\".location_\")\n    if field.IsValid():\n      return print_indirect(debugger, 'jh', field.value)\n    # With v8_enable_direct_handle=true, direct handles contain a obj_.\n    field = value.GetValueForExpressionPath(\".obj_\")\n    if field.IsValid():",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "jlh",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def jlh(debugger, param, *args):\n  \"\"\"Print v8::(Maybe)?Local value\"\"\"\n  def print_func(value):\n    # After https://crrev.com/c/4335544, v8::MaybeLocal contains a local_.\n    field = value.GetValueForExpressionPath(\".local_\")\n    if field.IsValid():\n      value = field\n    # After https://crrev.com/c/4335544, v8::Local contains a location_.\n    field = value.GetValueForExpressionPath(\".location_\")\n    if field.IsValid():",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "jl",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def jl(debugger, param, *args):\n  \"\"\"Print v8::Local handle value\"\"\"\n  return jlh(debugger, param, *args)\n@lldbCommand\ndef jco(debugger, param, *args):\n  \"\"\"Print the code object at the given pc (default: current pc)\"\"\"\n  CMD = \"_v8_internal_Print_Code((void*)({}))\"\n  if not param:\n    param = str(current_frame(debugger).FindRegister(\"pc\").value)\n  no_arg_cmd(debugger, CMD.format(param))",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "jco",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def jco(debugger, param, *args):\n  \"\"\"Print the code object at the given pc (default: current pc)\"\"\"\n  CMD = \"_v8_internal_Print_Code((void*)({}))\"\n  if not param:\n    param = str(current_frame(debugger).FindRegister(\"pc\").value)\n  no_arg_cmd(debugger, CMD.format(param))\n@lldbCommand\ndef jdh(debugger, param, *args):\n  \"\"\"Print JSDispatchEntry object in the JSDispatchTable with the given dispatch handle\"\"\"\n  CMD = \"_v8_internal_Print_Dispatch_Handle((uint32_t)({}))\"",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "jdh",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def jdh(debugger, param, *args):\n  \"\"\"Print JSDispatchEntry object in the JSDispatchTable with the given dispatch handle\"\"\"\n  CMD = \"_v8_internal_Print_Dispatch_Handle((uint32_t)({}))\"\n  # Allow for JSDispatchHandle, containing a value_.\n  ptr_arg_cmd(debugger, 'jdh', param, CMD, [\".value_\"])\n@lldbCommand\ndef jca(debugger, param, *args):\n  \"\"\"Print a v8 Code object assembly code from an internal code address\"\"\"\n  param = shlex.split(param)\n  if not param:",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "jca",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def jca(debugger, param, *args):\n  \"\"\"Print a v8 Code object assembly code from an internal code address\"\"\"\n  param = shlex.split(param)\n  if not param:\n    obj = str(current_frame(debugger).FindRegister(\"pc\").value)\n  else:\n    obj = param[0]\n  range_limit = param[1] if len(param) > 1 else 30\n  CMD = \"_v8_internal_Print_OnlyCode((void*)({}), (size_t)({}))\"\n  no_arg_cmd(debugger, CMD.format(obj, range_limit))",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "jtt",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def jtt(debugger, param, *args):\n  \"\"\"Print the complete transition tree starting at the given v8 map\"\"\"\n  CMD = \"_v8_internal_Print_TransitionTree((void*)({}), false)\"\n  # Allow for Tagged<T>, containing a ptr_.\n  ptr_arg_cmd(debugger, 'jtt', param, CMD, [\".ptr_\"])\n@lldbCommand\ndef jttr(debugger, param, *args):\n  \"\"\"Print the complete transition tree starting at the root map of the given v8 map\"\"\"\n  CMD = \"_v8_internal_Print_TransitionTree((void*)({}), true)\"\n  # Allow for Tagged<T>, containing a ptr_.",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "jttr",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def jttr(debugger, param, *args):\n  \"\"\"Print the complete transition tree starting at the root map of the given v8 map\"\"\"\n  CMD = \"_v8_internal_Print_TransitionTree((void*)({}), true)\"\n  # Allow for Tagged<T>, containing a ptr_.\n  ptr_arg_cmd(debugger, 'jttr', param, CMD, [\".ptr_\"])\n@lldbCommand\ndef jst(debugger, *args):\n  \"\"\"Print the current JavaScript stack trace\"\"\"\n  no_arg_cmd(debugger, \"_v8_internal_Print_StackTrace()\")\n@lldbCommand",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "jst",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def jst(debugger, *args):\n  \"\"\"Print the current JavaScript stack trace\"\"\"\n  no_arg_cmd(debugger, \"_v8_internal_Print_StackTrace()\")\n@lldbCommand\ndef pn(debugger, param, *args):\n  \"\"\"Print a v8 TurboFan graph node\"\"\"\n  CMD = \"_v8_internal_Node_Print((void*)({}))\"\n  # Allow for Tagged<T>, containing a ptr_.\n  ptr_arg_cmd(debugger, 'pn', param, CMD, [\".ptr_\"])\n@lldbCommand",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "pn",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def pn(debugger, param, *args):\n  \"\"\"Print a v8 TurboFan graph node\"\"\"\n  CMD = \"_v8_internal_Node_Print((void*)({}))\"\n  # Allow for Tagged<T>, containing a ptr_.\n  ptr_arg_cmd(debugger, 'pn', param, CMD, [\".ptr_\"])\n@lldbCommand\ndef jss(debugger, *args):\n  \"\"\"Skip the jitted stack on x64 to where we entered JS last\"\"\"\n  frame = current_frame(debugger)\n  js_entry_sp = frame.EvaluateExpression(",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "jss",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def jss(debugger, *args):\n  \"\"\"Skip the jitted stack on x64 to where we entered JS last\"\"\"\n  frame = current_frame(debugger)\n  js_entry_sp = frame.EvaluateExpression(\n      \"v8::internal::Isolate::Current()->thread_local_top()->js_entry_sp_;\") \\\n       .GetValue()\n  sizeof_void = frame.EvaluateExpression(\"sizeof(void*)\").GetValue()\n  rbp = frame.FindRegister(\"rbp\")\n  rsp = frame.FindRegister(\"rsp\")\n  pc = frame.FindRegister(\"pc\")",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "jfci",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def jfci(debugger, param, *args):\n  \"\"\"Print v8::FunctionCallbackInfo<T>& info\"\"\"\n  CMD = \"_v8_internal_Print_FunctionCallbackInfo((void*)(&{}))\"\n  if not param:\n    print(\"'jfci' requires an argument\")\n  else:\n    no_arg_cmd(debugger, CMD.format(param))\n@lldbCommand\ndef jpci(debugger, param, *args):\n  \"\"\"Print v8::PropertyCallbackInfo<T>& info\"\"\"",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "jpci",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def jpci(debugger, param, *args):\n  \"\"\"Print v8::PropertyCallbackInfo<T>& info\"\"\"\n  CMD = \"_v8_internal_Print_PropertyCallbackInfo((void*)(&{}))\"\n  if not param:\n    print(\"'jpci' requires an argument\")\n  else:\n    no_arg_cmd(debugger, CMD.format(param))\n# Print whether the object is marked, the mark-bit cell and index. The address\n# of the cell is handy for reverse debugging to check when the object was\n# marked/unmarked.",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "jomb",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def jomb(debugger, param, *args):\n  \"\"\"Print whether the object is marked, the markbit cell and index\"\"\"\n  CMD = \"_v8_internal_Print_Object_MarkBit((void*)({}))\"\n  # Allow for Tagged<T>, containing a ptr_.\n  ptr_arg_cmd(debugger, 'jomb', param, CMD, [\".ptr_\"])\n@lldbCommand\ndef bta(debugger, *args):\n  \"\"\"Print stack trace with assertion scopes\"\"\"\n  func_name_re = re.compile(\"([^(<]+)(?:\\(.+\\))?\")\n  assert_re = re.compile(",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "bta",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def bta(debugger, *args):\n  \"\"\"Print stack trace with assertion scopes\"\"\"\n  func_name_re = re.compile(\"([^(<]+)(?:\\(.+\\))?\")\n  assert_re = re.compile(\n      \"^v8::internal::Per\\w+AssertType::(\\w+)_ASSERT, (false|true)>\")\n  thread = current_thread(debugger)\n  for frame in thread:\n    functionSignature = frame.GetDisplayFunctionName()\n    if functionSignature is None:\n      continue",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "setup_source_map_for_relative_paths",
+        "kind": 2,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "def setup_source_map_for_relative_paths(debugger):\n  # Copied from Chromium's tools/lldb/lldbinit.py.\n  # When relative paths are used for debug symbols, lldb cannot find source\n  # files. Set up a source map to point to V8's root.\n  this_dir = os.path.dirname(os.path.abspath(__file__))\n  source_dir = os.path.join(this_dir, os.pardir)\n  debugger.HandleCommand(\n    'settings set target.source-map ../.. ' + source_dir)\ndef __lldb_init_module(debugger, dict):\n  setup_source_map_for_relative_paths(debugger)",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "documentation": {}
+    },
+    {
+        "label": "V8_LLDB_COMMANDS",
+        "kind": 5,
+        "importPath": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "description": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
+        "peekOfCode": "V8_LLDB_COMMANDS = []\ndef lldbCommand(fn):\n  V8_LLDB_COMMANDS.append(fn.__name__)\n  return fn\n#####################\n# lldb commands.    #\n#####################\n@lldbCommand\ndef job(debugger, param, *args):\n  \"\"\"Print a v8 heap object\"\"\"",
+        "detail": "node_modules.node.node_modules.node-linux-x64.share.doc.node.lldb_commands",
         "documentation": {}
     },
     {
@@ -12359,6 +12512,87 @@
         "documentation": {}
     },
     {
+        "label": "fail",
+        "kind": 2,
+        "importPath": "scripts.ci.guard_eval_symbiosis",
+        "description": "scripts.ci.guard_eval_symbiosis",
+        "peekOfCode": "def fail(msg: str) -> None:\n    print(f\"[guard] {msg}\", file=sys.stderr)\n    sys.exit(1)\ndef main() -> None:\n    if not FORWARDER.exists():\n        fail(\"eval/run_prompt_regression.py does not exist\")\n    if not TARGET.exists():\n        fail(\"scripts/eval/run_prompt_regression.py does not exist\")\n    text = FORWARDER.read_text(encoding=\"utf-8\")\n    if \"scripts.eval.run_prompt_regression\" not in text:",
+        "detail": "scripts.ci.guard_eval_symbiosis",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.ci.guard_eval_symbiosis",
+        "description": "scripts.ci.guard_eval_symbiosis",
+        "peekOfCode": "def main() -> None:\n    if not FORWARDER.exists():\n        fail(\"eval/run_prompt_regression.py does not exist\")\n    if not TARGET.exists():\n        fail(\"scripts/eval/run_prompt_regression.py does not exist\")\n    text = FORWARDER.read_text(encoding=\"utf-8\")\n    if \"scripts.eval.run_prompt_regression\" not in text:\n        fail(\n            \"eval/run_prompt_regression.py must forward to \"\n            \"scripts/eval/run_prompt_regression.py\"",
+        "detail": "scripts.ci.guard_eval_symbiosis",
+        "documentation": {}
+    },
+    {
+        "label": "FORWARDER",
+        "kind": 5,
+        "importPath": "scripts.ci.guard_eval_symbiosis",
+        "description": "scripts.ci.guard_eval_symbiosis",
+        "peekOfCode": "FORWARDER = Path(\"eval/run_prompt_regression.py\")\nTARGET = Path(\"scripts/eval/run_prompt_regression.py\")\ndef fail(msg: str) -> None:\n    print(f\"[guard] {msg}\", file=sys.stderr)\n    sys.exit(1)\ndef main() -> None:\n    if not FORWARDER.exists():\n        fail(\"eval/run_prompt_regression.py does not exist\")\n    if not TARGET.exists():\n        fail(\"scripts/eval/run_prompt_regression.py does not exist\")",
+        "detail": "scripts.ci.guard_eval_symbiosis",
+        "documentation": {}
+    },
+    {
+        "label": "TARGET",
+        "kind": 5,
+        "importPath": "scripts.ci.guard_eval_symbiosis",
+        "description": "scripts.ci.guard_eval_symbiosis",
+        "peekOfCode": "TARGET = Path(\"scripts/eval/run_prompt_regression.py\")\ndef fail(msg: str) -> None:\n    print(f\"[guard] {msg}\", file=sys.stderr)\n    sys.exit(1)\ndef main() -> None:\n    if not FORWARDER.exists():\n        fail(\"eval/run_prompt_regression.py does not exist\")\n    if not TARGET.exists():\n        fail(\"scripts/eval/run_prompt_regression.py does not exist\")\n    text = FORWARDER.read_text(encoding=\"utf-8\")",
+        "detail": "scripts.ci.guard_eval_symbiosis",
+        "documentation": {}
+    },
+    {
+        "label": "iter_paths",
+        "kind": 2,
+        "importPath": "scripts.ci.guard_symbiosis_output",
+        "description": "scripts.ci.guard_symbiosis_output",
+        "peekOfCode": "def iter_paths(report: dict) -> Iterable[str]:\n    for snippet in report.get(\"prompt_snippets\", []):\n        file_path = snippet.get(\"file\")\n        if file_path:\n            yield file_path\n    for cluster in report.get(\"prompt_drift_clusters\", []):\n        for file_path in cluster.get(\"files\", []):\n            if file_path:\n                yield file_path\n    for entries in report.get(\"where_to_search\", {}).values():",
+        "detail": "scripts.ci.guard_symbiosis_output",
+        "documentation": {}
+    },
+    {
+        "label": "is_forbidden",
+        "kind": 2,
+        "importPath": "scripts.ci.guard_symbiosis_output",
+        "description": "scripts.ci.guard_symbiosis_output",
+        "peekOfCode": "def is_forbidden(path: str) -> bool:\n    path_lower = path.lower()\n    if path.startswith(FORBIDDEN_PREFIXES):\n        return True\n    return any(token in path_lower for token in FORBIDDEN_SUBSTRINGS)\ndef main() -> int:\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--report\", required=True, help=\"Path to symbiosis report JSON\")\n    args = parser.parse_args()\n    report_path = Path(args.report)",
+        "detail": "scripts.ci.guard_symbiosis_output",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.ci.guard_symbiosis_output",
+        "description": "scripts.ci.guard_symbiosis_output",
+        "peekOfCode": "def main() -> int:\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--report\", required=True, help=\"Path to symbiosis report JSON\")\n    args = parser.parse_args()\n    report_path = Path(args.report)\n    if not report_path.exists():\n        print(f\"[guard] Missing report: {report_path}\", file=sys.stderr)\n        return 1\n    report = json.loads(report_path.read_text(encoding=\"utf-8\"))\n    offenders = sorted({p for p in iter_paths(report) if is_forbidden(p)})",
+        "detail": "scripts.ci.guard_symbiosis_output",
+        "documentation": {}
+    },
+    {
+        "label": "FORBIDDEN_PREFIXES",
+        "kind": 5,
+        "importPath": "scripts.ci.guard_symbiosis_output",
+        "description": "scripts.ci.guard_symbiosis_output",
+        "peekOfCode": "FORBIDDEN_PREFIXES = (\"reports/\", \"runs/\")\nFORBIDDEN_SUBSTRINGS = (\"symbiosis\", \"prompt-regression\")\ndef iter_paths(report: dict) -> Iterable[str]:\n    for snippet in report.get(\"prompt_snippets\", []):\n        file_path = snippet.get(\"file\")\n        if file_path:\n            yield file_path\n    for cluster in report.get(\"prompt_drift_clusters\", []):\n        for file_path in cluster.get(\"files\", []):\n            if file_path:",
+        "detail": "scripts.ci.guard_symbiosis_output",
+        "documentation": {}
+    },
+    {
+        "label": "FORBIDDEN_SUBSTRINGS",
+        "kind": 5,
+        "importPath": "scripts.ci.guard_symbiosis_output",
+        "description": "scripts.ci.guard_symbiosis_output",
+        "peekOfCode": "FORBIDDEN_SUBSTRINGS = (\"symbiosis\", \"prompt-regression\")\ndef iter_paths(report: dict) -> Iterable[str]:\n    for snippet in report.get(\"prompt_snippets\", []):\n        file_path = snippet.get(\"file\")\n        if file_path:\n            yield file_path\n    for cluster in report.get(\"prompt_drift_clusters\", []):\n        for file_path in cluster.get(\"files\", []):\n            if file_path:\n                yield file_path",
+        "detail": "scripts.ci.guard_symbiosis_output",
+        "documentation": {}
+    },
+    {
         "label": "load_outputs",
         "kind": 2,
         "importPath": "scripts.eval.export_equivalence",
@@ -12413,47 +12647,20 @@
         "documentation": {}
     },
     {
-        "label": "ensure_jsonable",
-        "kind": 2,
+        "label": "Finding",
+        "kind": 6,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def ensure_jsonable(obj: Any) -> Any:\n    if obj is None or isinstance(obj, (bool, int, float, str)):\n        return obj\n    if isinstance(obj, (list, tuple)):\n        return [ensure_jsonable(x) for x in obj]\n    if isinstance(obj, dict):\n        return {str(k): ensure_jsonable(v) for k, v in obj.items()}\n    raise TypeError(f\"Non-JSONable value in registry: {type(obj).__name__}\")\ndef load_prompt_registry(template_path: str) -> Dict[str, Any]:\n    text = Path(template_path).read_text(encoding=\"utf-8\")",
+        "peekOfCode": "class Finding:\n  stable_id: str\n  title: str\n  kind: str\n  message: str\n  expected_hash: Optional[str]\n  actual_hash: Optional[str]\ndef _workspace_root() -> Path:\n  # In GitHub Actions, GITHUB_WORKSPACE is the repo root.\n  ws = os.environ.get(\"GITHUB_WORKSPACE\")",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
     {
-        "label": "load_prompt_registry",
+        "label": "build_sarif",
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def load_prompt_registry(template_path: str) -> Dict[str, Any]:\n    text = Path(template_path).read_text(encoding=\"utf-8\")\n    match = REGISTRY_RE.search(text)\n    if not match:\n        raise ValueError(f\"Prompt registry not found in template: {template_path}\")\n    raw = match.group(1).strip()\n    # 1) Strict JSON (preferred)\n    try:\n        data = json.loads(raw)\n        if not isinstance(data, dict):",
-        "detail": "scripts.eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "write_json",
-        "kind": 2,
-        "importPath": "scripts.eval.run_prompt_regression",
-        "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def write_json(path: Path, obj: Any) -> None:\n    path.parent.mkdir(parents=True, exist_ok=True)\n    path.write_text(\n        json.dumps(obj, indent=2, sort_keys=True),\n        encoding=\"utf-8\",\n    )\ndef write_sarif(path: Path, results: List[Dict[str, Any]]) -> None:\n    path.parent.mkdir(parents=True, exist_ok=True)\n    sarif = {\n        \"version\": \"2.1.0\",",
-        "detail": "scripts.eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "write_sarif",
-        "kind": 2,
-        "importPath": "scripts.eval.run_prompt_regression",
-        "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def write_sarif(path: Path, results: List[Dict[str, Any]]) -> None:\n    path.parent.mkdir(parents=True, exist_ok=True)\n    sarif = {\n        \"version\": \"2.1.0\",\n        \"$schema\": \"https://json.schemastore.org/sarif-2.1.0.json\",\n        \"runs\": [\n            {\n                \"tool\": {\n                    \"driver\": {\n                        \"name\": \"prompt-regression\",",
-        "detail": "scripts.eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "evaluate_registry",
-        "kind": 2,
-        "importPath": "scripts.eval.run_prompt_regression",
-        "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def evaluate_registry(registry: Dict[str, Any]) -> Dict[str, Any]:\n    \"\"\"\n    This function performs *structural* regression checks.\n    NOTE:\n    This does NOT run the model. That is intentional.\n    Prompt regression is about *contract stability*:\n      - shape\n      - IDs\n      - required fields\n    \"\"\"",
+        "peekOfCode": "def build_sarif(findings: List[Finding], repo_root: Path, rel_path: str) -> Dict[str, Any]:\n  tool = {\n    \"driver\": {\n      \"name\": \"offLLM prompt regression\",\n      \"informationUri\": \"https://github.com/ales27pm/offLLM-1\",\n      \"rules\": [\n        {\n          \"id\": \"PROMPT_REGRESSION\",\n          \"name\": \"Prompt regression mismatch\",\n          \"shortDescription\": {\"text\": \"Golden prompt hash mismatch\"},",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
@@ -12462,7 +12669,7 @@
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def parse_args() -> argparse.Namespace:\n    p = argparse.ArgumentParser()\n    p.add_argument(\n        \"--template\",\n        default=\"offllm_symbiosis_advisor_v4.py\",\n        help=\"Template file containing PROMPT_REGISTRY\",\n    )\n    p.add_argument(\n        \"--report-out\",\n        required=True,",
+        "peekOfCode": "def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:\n  p = argparse.ArgumentParser(description=\"Run golden prompt regression checks and emit JSON + SARIF.\")\n  p.add_argument(\n    \"--golden\",\n    default=str(Path(\"scripts/eval/golden_prompts.json\")),\n    help=\"Path to golden_prompts.json\",\n  )\n  p.add_argument(\n    \"--report-out\",\n    required=True,",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
@@ -12471,16 +12678,7 @@
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def main() -> None:\n    args = parse_args()\n    report_out = Path(args.report_out)\n    sarif_out = Path(args.sarif_out)\n    sarif_results: List[Dict[str, Any]] = []\n    exit_code = 0\n    try:\n        registry = load_prompt_registry(args.template)\n        report = evaluate_registry(registry)\n        write_json(report_out, report)",
-        "detail": "scripts.eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "REGISTRY_RE",
-        "kind": 5,
-        "importPath": "scripts.eval.run_prompt_regression",
-        "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "REGISTRY_RE = re.compile(\n    r\"PROMPT_REGISTRY\\s*=\\s*(\\{.*?\\})\",\n    re.DOTALL | re.MULTILINE,\n)\n# ----------------------------\n# Utilities\n# ----------------------------\ndef ensure_jsonable(obj: Any) -> Any:\n    if obj is None or isinstance(obj, (bool, int, float, str)):\n        return obj",
+        "peekOfCode": "def main(argv: Optional[List[str]] = None) -> int:\n  args = parse_args(argv)\n  repo_root = _workspace_root()\n  golden_path = Path(args.golden)\n  report_out = Path(args.report_out)\n  sarif_out = Path(args.sarif_out)\n  findings: List[Finding] = []\n  report: Dict[str, Any] = {\n    \"tool\": \"offLLM prompt regression\",\n    \"ts\": _utc_now_iso(),",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
@@ -14073,7 +14271,16 @@
         "kind": 2,
         "importPath": "scripts.offllm_symbiosis_advisor_v6",
         "description": "scripts.offllm_symbiosis_advisor_v6",
-        "peekOfCode": "def cfg_int(cfg: Dict[str, Any], key: str, default: int) -> int:\n    v = cfg.get(key, default)\n    try:\n        return int(v)\n    except Exception:\n        return default\ndef _run_git(repo_root: Path, args: List[str]) -> Optional[str]:\n    try:\n        r = subprocess.run(\n            [\"git\"] + args,",
+        "peekOfCode": "def cfg_int(cfg: Dict[str, Any], key: str, default: int) -> int:\n    v = cfg.get(key, default)\n    try:\n        return int(v)\n    except Exception:\n        return default\ndef merge_ignore_globs(defaults: List[str], overrides: List[str]) -> List[str]:\n    out = []\n    seen = set()\n    for item in defaults + overrides:",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "merge_ignore_globs",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def merge_ignore_globs(defaults: List[str], overrides: List[str]) -> List[str]:\n    out = []\n    seen = set()\n    for item in defaults + overrides:\n        item = str(item)\n        if item in seen:\n            continue\n        seen.add(item)\n        out.append(item)\n    return out",
         "detail": "scripts.offllm_symbiosis_advisor_v6",
         "documentation": {}
     },
@@ -14136,7 +14343,7 @@
         "kind": 2,
         "importPath": "scripts.offllm_symbiosis_advisor_v6",
         "description": "scripts.offllm_symbiosis_advisor_v6",
-        "peekOfCode": "def should_index_path(rel: str, exclude_dirs: set[str], ignore_globs: List[str]) -> bool:\n    parts = rel.split(\"/\")\n    if any(part in exclude_dirs for part in parts):\n        return False\n    for g in ignore_globs:\n        if fnmatch.fnmatch(rel, g) or fnmatch.fnmatch(\"/\" + rel, g):\n            return False\n    return True\ndef iter_candidate_files(repo_root: Path, exclude_dirs: set[str], ignore_globs: List[str], include_generated: bool) -> List[Path]:\n    out: List[Path] = []",
+        "peekOfCode": "def should_index_path(rel: str, exclude_dirs: set[str], ignore_globs: List[str]) -> bool:\n    parts = rel.split(\"/\")\n    if any(part in exclude_dirs for part in parts):\n        return False\n    for g in ignore_globs:\n        if fnmatch.fnmatch(rel, g) or fnmatch.fnmatch(\"/\" + rel, g):\n            return False\n    return True\ndef iter_candidate_files(\n    repo_root: Path,",
         "detail": "scripts.offllm_symbiosis_advisor_v6",
         "documentation": {}
     },
@@ -14145,7 +14352,7 @@
         "kind": 2,
         "importPath": "scripts.offllm_symbiosis_advisor_v6",
         "description": "scripts.offllm_symbiosis_advisor_v6",
-        "peekOfCode": "def iter_candidate_files(repo_root: Path, exclude_dirs: set[str], ignore_globs: List[str], include_generated: bool) -> List[Path]:\n    out: List[Path] = []\n    for root, dirs, files in os.walk(repo_root):\n        pruned = []\n        for d in list(dirs):\n            if d in exclude_dirs and not include_generated:\n                pruned.append(d)\n        for d in pruned:\n            dirs.remove(d)\n        for fn in files:",
+        "peekOfCode": "def iter_candidate_files(\n    repo_root: Path,\n    exclude_dirs: set[str],\n    ignore_globs: List[str],\n    include_generated: bool,\n) -> Tuple[List[Path], Dict[str, int]]:\n    out: List[Path] = []\n    stats = {\n        \"files_seen\": 0,\n        \"files_included\": 0,",
         "detail": "scripts.offllm_symbiosis_advisor_v6",
         "documentation": {}
     },
@@ -14217,7 +14424,7 @@
         "kind": 2,
         "importPath": "scripts.offllm_symbiosis_advisor_v6",
         "description": "scripts.offllm_symbiosis_advisor_v6",
-        "peekOfCode": "def analyze_repo(args: argparse.Namespace) -> Dict[str, Any]:\n    repo_root = Path(args.repo_root).resolve()\n    out_dir = Path(args.out_dir).resolve()\n    mkdirp(out_dir)\n    cfg = load_user_config(repo_root, Path(args.config).resolve() if args.config else None)\n    exclude_dirs = set(cfg_list(cfg, \"exclude_dirs\", sorted(DEFAULT_EXCLUDE_DIRS)))\n    ignore_globs = cfg_list(cfg, \"ignore_globs\", [])\n    include_generated = bool(args.include_generated or cfg_bool(cfg, \"include_generated\", False))\n    use_git = bool(args.git or cfg_bool(cfg, \"use_git\", True))\n    include_git_churn = bool(args.git_churn or cfg_bool(cfg, \"include_git_churn\", False))",
+        "peekOfCode": "def analyze_repo(args: argparse.Namespace) -> Dict[str, Any]:\n    repo_root = Path(args.repo_root).resolve()\n    out_dir = Path(args.out_dir).resolve()\n    mkdirp(out_dir)\n    cfg = load_user_config(repo_root, Path(args.config).resolve() if args.config else None)\n    exclude_dirs = set(cfg_list(cfg, \"exclude_dirs\", sorted(DEFAULT_EXCLUDE_DIRS)))\n    ignore_globs = merge_ignore_globs(\n        DEFAULT_IGNORE_GLOBS,\n        cfg_list(cfg, \"ignore_globs\", []),\n    )",
         "detail": "scripts.offllm_symbiosis_advisor_v6",
         "documentation": {}
     },
@@ -14226,7 +14433,7 @@
         "kind": 2,
         "importPath": "scripts.offllm_symbiosis_advisor_v6",
         "description": "scripts.offllm_symbiosis_advisor_v6",
-        "peekOfCode": "def build_arg_parser() -> argparse.ArgumentParser:\n    p = argparse.ArgumentParser(description=\"offLLM Symbiosis Advisor v6 (stdlib-only)\")\n    p.add_argument(\"--repo-root\", default=\".\", help=\"Repository root\")\n    p.add_argument(\"--out-dir\", default=\"reports/symbiosis_v6\", help=\"Output directory\")\n    p.add_argument(\"--include-generated\", action=\"store_true\", help=\"Include typically generated dirs (runs, cache, etc.)\")\n    p.add_argument(\"--max-file-size\", type=int, default=2_000_000, help=\"Max bytes to read per file\")\n    p.add_argument(\"--workers\", type=int, default=0, help=\"Thread workers (0 => auto)\")\n    p.add_argument(\"--config\", default=\"\", help=\"Explicit config path (.symbiosis.json/.yaml)\")\n    p.add_argument(\"--git\", action=\"store_true\", help=\"Prefer git-based fingerprinting if available\")\n    p.add_argument(\"--git-churn\", action=\"store_true\", help=\"Compute git churn per file (slower)\")",
+        "peekOfCode": "def build_arg_parser() -> argparse.ArgumentParser:\n    p = argparse.ArgumentParser(description=\"offLLM Symbiosis Advisor v6 (stdlib-only)\")\n    p.add_argument(\"--repo-root\", default=\".\", help=\"Repository root\")\n    p.add_argument(\"--repo\", dest=\"repo_root\", help=\"Repository root (alias)\")\n    p.add_argument(\"--out-dir\", default=\"reports/symbiosis_v6\", help=\"Output directory\")\n    p.add_argument(\"--include-generated\", action=\"store_true\", help=\"Include typically generated dirs (runs, cache, etc.)\")\n    p.add_argument(\"--max-file-size\", type=int, default=2_000_000, help=\"Max bytes to read per file\")\n    p.add_argument(\"--workers\", type=int, default=0, help=\"Thread workers (0 => auto)\")\n    p.add_argument(\"--config\", default=\"\", help=\"Explicit config path (.symbiosis.json/.yaml)\")\n    p.add_argument(\"--git\", action=\"store_true\", help=\"Prefer git-based fingerprinting if available\")",
         "detail": "scripts.offllm_symbiosis_advisor_v6",
         "documentation": {}
     },
@@ -14244,7 +14451,16 @@
         "kind": 5,
         "importPath": "scripts.offllm_symbiosis_advisor_v6",
         "description": "scripts.offllm_symbiosis_advisor_v6",
-        "peekOfCode": "DEFAULT_EXCLUDE_DIRS = {\n    \".git\", \".hg\", \".svn\",\n    \"node_modules\", \"dist\", \"build\", \".next\", \".turbo\", \".cache\",\n    \".venv\", \"venv\", \"__pycache__\",\n    \"Pods\", \"DerivedData\",\n    \"runs\",\n    \"unsloth_compiled_cache\",\n}\nTEXT_EXT_ALLOW = {\n    \".py\", \".js\", \".ts\", \".tsx\", \".jsx\", \".m\", \".mm\", \".swift\", \".java\", \".kt\",",
+        "peekOfCode": "DEFAULT_EXCLUDE_DIRS = {\n    \".git\", \".hg\", \".svn\",\n    \"node_modules\", \"dist\", \"build\", \".next\", \".turbo\", \".cache\",\n    \".venv\", \"venv\", \"__pycache__\",\n    \"Pods\", \"DerivedData\",\n    \"runs\",\n    \"reports\",\n    \"unsloth_compiled_cache\",\n}\nDEFAULT_IGNORE_GLOBS = [",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_IGNORE_GLOBS",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "DEFAULT_IGNORE_GLOBS = [\n    \"reports/**\",\n    \"runs/**\",\n    \"node_modules/**\",\n    \".git/**\",\n    \"dist/**\",\n    \"build/**\",\n    \"**/*.sarif\",\n    \"**/*prompt-regression*.json\",\n    \"**/*prompt-regression*\",",
         "detail": "scripts.offllm_symbiosis_advisor_v6",
         "documentation": {}
     },

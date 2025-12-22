@@ -1,3 +1,4 @@
+// eslint.config.mjs
 import js from "@eslint/js";
 import reactPlugin from "eslint-plugin-react";
 import globals from "globals";
@@ -7,15 +8,42 @@ import tsPlugin from "@typescript-eslint/eslint-plugin";
 export default [
   {
     ignores: [
+      // build outputs
       "coverage/",
+      "dist/",
+      "build/",
+
+      // deps / package managers
+      "node_modules/",
+
+      // python virtualenvs (your lint was walking into these)
+      ".venv/",
+      ".venv/**",
+      "venv/",
+      "venv/**",
+      "**/.venv/**",
+      "**/venv/**",
+
+      // common caches / generated dirs
+      ".cache/",
+      ".cache/**",
+      "__pycache__/",
+      "__pycache__/**",
+      "DerivedData/",
+      "DerivedData/**",
+      "reports/",
+      "reports/**",
+      "runs/",
+      "runs/**",
+      "unsloth_compiled_cache/",
+      "unsloth_compiled_cache/**",
+
+      // mobile build artifacts
       "ios/build/",
       "ios/Pods/",
       "android/app/build/",
       "android/.gradle/",
       "android/.idea/",
-      "node_modules/",
-      "dist/",
-      "build/",
     ],
   },
   js.configs.recommended,
