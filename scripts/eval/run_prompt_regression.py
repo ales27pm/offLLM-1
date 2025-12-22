@@ -49,7 +49,11 @@ def build_prompt(
         tool_format.format(
             name=tool["name"],
             description=tool["description"],
-            parameters=json.dumps(tool.get("parameters", {}), ensure_ascii=False),
+            parameters=json.dumps(
+                tool.get("parameters", {}),
+                ensure_ascii=False,
+                separators=(",", ":"),
+            ),
         )
         for tool in tools_sorted
     )

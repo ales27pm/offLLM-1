@@ -11,19 +11,38 @@
         "name": "calc",
         "description": "Add numbers",
         "parameters": {
-          "a": { "type": "number" },
-          "b": { "type": "number", "required": true }
+          "a": {
+            "type": "number"
+          },
+          "b": {
+            "type": "number",
+            "required": true
+          }
         }
       }
     ],
     "context": [
-      { "role": "user", "content": "hello" },
-      { "role": "assistant", "content": "previous answer" }
+      {
+        "role": "user",
+        "content": "hello"
+      },
+      {
+        "role": "assistant",
+        "content": "previous answer"
+      }
     ],
     "user_prompt": "What's 2+2?",
     "expected_prompt": "You are an AI assistant with access to:\nTool: calc - Add numbers (Params: {\"a\":{\"type\":\"number\"},\"b\":{\"type\":\"number\",\"required\":true}})\nTool: weather - Get weather (Params: {})\nInstructions:\nUse tools when additional data or actions are required. Emit calls as TOOL_CALL: toolName(param=\"value\"). Reply directly when you already have the answer. Observe tool results to form your final answer.\nContext:\nUser: hello\nAssistant: previous answer\nUser: What's 2+2?\nAssistant:",
     "expected_response": "TOOL_CALL:calc(a=2, b=2)",
-    "expected_tool_calls": [{ "name": "calc", "args": { "a": 2, "b": 2 } }],
+    "expected_tool_calls": [
+      {
+        "name": "calc",
+        "args": {
+          "a": 2,
+          "b": 2
+        }
+      }
+    ],
     "expects_json": false,
     "expects_refusal": false,
     "requires_citations": false
