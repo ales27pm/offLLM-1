@@ -1,56 +1,112 @@
 {
-  "version": "2.1.0",
   "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
   "runs": [
     {
+      "results": [
+        {
+          "level": "warning",
+          "message": {
+            "text": "expected_prompt_hash missing (baseline not locked yet)"
+          },
+          "properties": {
+            "stable_id": "tool-json-basics"
+          },
+          "ruleId": "PROMPT_REGRESSION"
+        },
+        {
+          "level": "warning",
+          "message": {
+            "text": "expected_prompt_hash missing (baseline not locked yet)"
+          },
+          "properties": {
+            "stable_id": "citations-required"
+          },
+          "ruleId": "PROMPT_REGRESSION"
+        },
+        {
+          "level": "warning",
+          "message": {
+            "text": "expected_prompt_hash missing (baseline not locked yet)"
+          },
+          "properties": {
+            "stable_id": "refusal-self-harm"
+          },
+          "ruleId": "PROMPT_REGRESSION"
+        },
+        {
+          "level": "warning",
+          "message": {
+            "text": "expected_prompt_hash missing (baseline not locked yet)"
+          },
+          "properties": {
+            "stable_id": "math-no-tool"
+          },
+          "ruleId": "PROMPT_REGRESSION"
+        },
+        {
+          "level": "warning",
+          "message": {
+            "text": "expected_prompt_hash missing (baseline not locked yet)"
+          },
+          "properties": {
+            "stable_id": "tool-finance"
+          },
+          "ruleId": "PROMPT_REGRESSION"
+        },
+        {
+          "level": "warning",
+          "message": {
+            "text": "expected_prompt_hash missing (baseline not locked yet)"
+          },
+          "properties": {
+            "stable_id": "tool-sports"
+          },
+          "ruleId": "PROMPT_REGRESSION"
+        },
+        {
+          "level": "warning",
+          "message": {
+            "text": "expected_prompt_hash missing (baseline not locked yet)"
+          },
+          "properties": {
+            "stable_id": "doc-summarize"
+          },
+          "ruleId": "PROMPT_REGRESSION"
+        },
+        {
+          "level": "warning",
+          "message": {
+            "text": "expected_prompt_hash missing (baseline not locked yet)"
+          },
+          "properties": {
+            "stable_id": "tool-web-search"
+          },
+          "ruleId": "PROMPT_REGRESSION"
+        }
+      ],
       "tool": {
         "driver": {
-          "name": "offLLM prompt regression",
           "informationUri": "https://github.com/ales27pm/offLLM-1",
+          "name": "offLLM prompt regression",
           "rules": [
             {
-              "id": "PROMPT_HASH",
-              "name": "Prompt hash regression",
+              "id": "PROMPT_REGRESSION",
+              "name": "Prompt regression mismatch",
               "shortDescription": {
-                "text": "Prompt hash does not match expected hash."
-              },
-              "helpUri": "https://github.com/ales27pm/offLLM-1",
-              "defaultConfiguration": {
-                "level": "error"
+                "text": "Golden prompt hash mismatch"
               }
             },
             {
-              "id": "REGISTRY_SCHEMA",
-              "name": "Registry schema error",
+              "id": "PROMPT_REGRESSION_SCHEMA",
+              "name": "Golden prompt schema invalid",
               "shortDescription": {
-                "text": "Prompt registry JSON is invalid or missing required fields."
-              },
-              "helpUri": "https://github.com/ales27pm/offLLM-1",
-              "defaultConfiguration": {
-                "level": "error"
+                "text": "Golden prompt file/schema invalid"
               }
             }
           ]
         }
-      },
-      "results": [
-        {
-          "ruleId": "REGISTRY_SCHEMA",
-          "level": "error",
-          "message": {
-            "text": "Registry file not found: prompts/registry.json"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "prompts/registry.json"
-                }
-              }
-            }
-          ]
-        }
-      ]
+      }
     }
-  ]
+  ],
+  "version": "2.1.0"
 }

@@ -1,1 +1,53 @@
-{"generated_at":"2025-12-22T14:49:41.020454+00:00","hash_mismatches":[],"registry":"prompts/registry.json","schema_errors":["Registry file not found: prompts/registry.json"],"summary":{"hash_mismatches":0,"schema_errors":1},"tool":"offLLM-prompt-regression"}
+{
+  "cases_checked": 8,
+  "cases_total": 8,
+  "golden_path": "scripts/eval/golden_prompts.json",
+  "mismatches": 0,
+  "missing_baselines": 8,
+  "notes": [],
+  "results": [
+    {
+      "stable_id": "tool-json-basics",
+      "status": "missing_baseline",
+      "title": "Tool call JSON basics"
+    },
+    {
+      "stable_id": "citations-required",
+      "status": "missing_baseline",
+      "title": "Citations required"
+    },
+    {
+      "stable_id": "refusal-self-harm",
+      "status": "missing_baseline",
+      "title": "Refusal for self-harm"
+    },
+    {
+      "stable_id": "math-no-tool",
+      "status": "missing_baseline",
+      "title": "No-tool arithmetic"
+    },
+    {
+      "stable_id": "tool-finance",
+      "status": "missing_baseline",
+      "title": "Finance tool request"
+    },
+    {
+      "stable_id": "tool-sports",
+      "status": "missing_baseline",
+      "title": "Sports schedule tool request"
+    },
+    {
+      "stable_id": "doc-summarize",
+      "status": "missing_baseline",
+      "title": "Summarize provided text (no web)"
+    },
+    {
+      "stable_id": "tool-web-search",
+      "status": "missing_baseline",
+      "title": "Web search required"
+    }
+  ],
+  "schema_errors": 0,
+  "tool": "offLLM prompt regression",
+  "ts": "2025-12-22T15:12:19.007797+00:00"
+}
