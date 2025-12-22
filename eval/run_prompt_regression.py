@@ -84,6 +84,11 @@ def invoke_model(prompt: str, command: str, seed: str | None, timeout_s: int) ->
     if re.search(r"[;&|><`]", command):
         raise ValueError("model command contains unsupported shell metacharacters")
     cmd = shlex.split(command)
+    if not cmd:
+        raise ValueError("model command must contain an executable")
+    for arg in cmd:
+        if not re.fullmatch(r"[A-Za-z0-9_./:=+-]+", arg):
+            raise ValueError(f"model command contains unsafe token: {arg!r}")
     try:
         result = subprocess.run(
             cmd,
