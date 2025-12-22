@@ -132,6 +132,78 @@
         "documentation": {}
     },
     {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
         "label": "annotations",
         "importPath": "__future__",
         "description": "__future__",
@@ -237,6 +309,62 @@
         "documentation": {}
     },
     {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
         "label": "Iterable",
         "importPath": "typing",
         "description": "typing",
@@ -302,6 +430,142 @@
     },
     {
         "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterator",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Sequence",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
@@ -1526,11 +1790,19 @@
         "documentation": {}
     },
     {
-        "label": "load_dataset",
-        "importPath": "datasets",
-        "description": "datasets",
+        "label": "Counter",
+        "importPath": "collections",
+        "description": "collections",
         "isExtraImport": true,
-        "detail": "datasets",
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "defaultdict",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
         "documentation": {}
     },
     {
@@ -1550,39 +1822,28 @@
         "documentation": {}
     },
     {
-        "label": "warnings",
-        "kind": 6,
+        "label": "load_dataset",
+        "importPath": "datasets",
+        "description": "datasets",
         "isExtraImport": true,
-        "importPath": "warnings",
-        "description": "warnings",
-        "detail": "warnings",
+        "detail": "datasets",
         "documentation": {}
     },
     {
-        "label": "coremltools",
-        "kind": 6,
+        "label": "load_dataset",
+        "importPath": "datasets",
+        "description": "datasets",
         "isExtraImport": true,
-        "importPath": "coremltools",
-        "description": "coremltools",
-        "detail": "coremltools",
+        "detail": "datasets",
         "documentation": {}
     },
     {
-        "label": "coremltools.optimize",
+        "label": "random",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "coremltools.optimize",
-        "description": "coremltools.optimize",
-        "detail": "coremltools.optimize",
-        "documentation": {}
-    },
-    {
-        "label": "numpy",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "numpy",
-        "description": "numpy",
-        "detail": "numpy",
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
         "documentation": {}
     },
     {
@@ -1723,11 +1984,301 @@
         "documentation": {}
     },
     {
-        "label": "login",
-        "importPath": "huggingface_hub",
-        "description": "huggingface_hub",
+        "label": "torch.nn",
+        "kind": 6,
         "isExtraImport": true,
-        "detail": "huggingface_hub",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "functional",
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "isExtraImport": true,
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "torch.nn.functional",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "torch.nn.functional",
+        "description": "torch.nn.functional",
+        "detail": "torch.nn.functional",
+        "documentation": {}
+    },
+    {
+        "label": "DataLoader",
+        "importPath": "torch.utils.data",
+        "description": "torch.utils.data",
+        "isExtraImport": true,
+        "detail": "torch.utils.data",
+        "documentation": {}
+    },
+    {
+        "label": "Dataset",
+        "importPath": "torch.utils.data",
+        "description": "torch.utils.data",
+        "isExtraImport": true,
+        "detail": "torch.utils.data",
+        "documentation": {}
+    },
+    {
+        "label": "AutoTokenizer",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "AutoModelForCausalLM",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "BitsAndBytesConfig",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
         "documentation": {}
     },
     {
@@ -2075,11 +2626,11 @@
         "documentation": {}
     },
     {
-        "label": "Cache",
-        "importPath": "transformers.cache_utils",
-        "description": "transformers.cache_utils",
+        "label": "PeftModel",
+        "importPath": "peft",
+        "description": "peft",
         "isExtraImport": true,
-        "detail": "transformers.cache_utils",
+        "detail": "peft",
         "documentation": {}
     },
     {
@@ -2139,12 +2690,21 @@
         "documentation": {}
     },
     {
-        "label": "ast",
+        "label": "hashlib",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "ast",
-        "description": "ast",
-        "detail": "ast",
+        "importPath": "hashlib",
+        "description": "hashlib",
+        "detail": "hashlib",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
         "documentation": {}
     },
     {
@@ -2153,6 +2713,22 @@
         "isExtraImport": true,
         "importPath": "dataclasses",
         "description": "dataclasses",
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "asdict",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
         "detail": "dataclasses",
         "documentation": {}
     },
@@ -2197,6 +2773,38 @@
         "documentation": {}
     },
     {
+        "label": "asdict",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
         "label": "dataclass",
         "importPath": "dataclasses",
         "description": "dataclasses",
@@ -2437,12 +3045,122 @@
         "documentation": {}
     },
     {
-        "label": "hashlib",
+        "label": "datetime",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "hashlib",
-        "description": "hashlib",
-        "detail": "hashlib",
+        "importPath": "datetime",
+        "description": "datetime",
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "warnings",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "warnings",
+        "description": "warnings",
+        "detail": "warnings",
+        "documentation": {}
+    },
+    {
+        "label": "coremltools",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "coremltools",
+        "description": "coremltools",
+        "detail": "coremltools",
+        "documentation": {}
+    },
+    {
+        "label": "coremltools.optimize",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "coremltools.optimize",
+        "description": "coremltools.optimize",
+        "detail": "coremltools.optimize",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "importPath": "huggingface_hub",
+        "description": "huggingface_hub",
+        "isExtraImport": true,
+        "detail": "huggingface_hub",
+        "documentation": {}
+    },
+    {
+        "label": "Cache",
+        "importPath": "transformers.cache_utils",
+        "description": "transformers.cache_utils",
+        "isExtraImport": true,
+        "detail": "transformers.cache_utils",
+        "documentation": {}
+    },
+    {
+        "label": "ast",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "ast",
+        "description": "ast",
+        "detail": "ast",
+        "documentation": {}
+    },
+    {
+        "label": "importlib.util",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "importlib.util",
+        "description": "importlib.util",
+        "detail": "importlib.util",
         "documentation": {}
     },
     {
@@ -2461,24 +3179,6 @@
         "importPath": "platform",
         "description": "platform",
         "detail": "platform",
-        "documentation": {}
-    },
-    {
-        "label": "random",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "random",
-        "description": "random",
-        "detail": "random",
-        "documentation": {}
-    },
-    {
-        "label": "re",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "re",
-        "description": "re",
-        "detail": "re",
         "documentation": {}
     },
     {
@@ -2506,22 +3206,6 @@
         "importPath": "time",
         "description": "time",
         "detail": "time",
-        "documentation": {}
-    },
-    {
-        "label": "datetime",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "timezone",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
         "documentation": {}
     },
     {
@@ -2559,261 +3243,30 @@
         "documentation": {}
     },
     {
+        "label": "concurrent.futures",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "concurrent.futures",
+        "description": "concurrent.futures",
+        "detail": "concurrent.futures",
+        "documentation": {}
+    },
+    {
+        "label": "fnmatch",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "fnmatch",
+        "description": "fnmatch",
+        "detail": "fnmatch",
+        "documentation": {}
+    },
+    {
         "label": "json,",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "json.",
         "description": "json.",
         "detail": "json.",
-        "documentation": {}
-    },
-    {
-        "label": "torch.nn",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
-        "documentation": {}
-    },
-    {
-        "label": "functional",
-        "importPath": "torch.nn",
-        "description": "torch.nn",
-        "isExtraImport": true,
-        "detail": "torch.nn",
         "documentation": {}
     },
     {
@@ -11384,6 +11837,42 @@
         "documentation": {}
     },
     {
+        "label": "TextDataset",
+        "kind": 6,
+        "importPath": "scripts.mlops.llm2vec_train",
+        "description": "scripts.mlops.llm2vec_train",
+        "peekOfCode": "class TextDataset(Dataset):\n    def __init__(self, texts: List[str]):\n        self.texts = [t for t in texts if isinstance(t, str) and t.strip()]\n    def __len__(self) -> int:\n        return len(self.texts)\n    def __getitem__(self, idx: int) -> str:\n        return self.texts[idx]\ndef _random_token_window(input_ids: torch.Tensor, max_len: int) -> torch.Tensor:\n    # input_ids: (seq,)\n    seq_len = int(input_ids.numel())",
+        "detail": "scripts.mlops.llm2vec_train",
+        "documentation": {}
+    },
+    {
+        "label": "Embedder",
+        "kind": 6,
+        "importPath": "scripts.mlops.llm2vec_train",
+        "description": "scripts.mlops.llm2vec_train",
+        "peekOfCode": "class Embedder(nn.Module):\n    def __init__(self, base_model: nn.Module, hidden_size: int, proj_dim: int):\n        super().__init__()\n        self.base_model = base_model\n        self.proj = nn.Linear(hidden_size, proj_dim, bias=False)\n    @staticmethod\n    def mean_pool(last_hidden: torch.Tensor, attention_mask: torch.Tensor) -> torch.Tensor:\n        # last_hidden: (B, T, H), attention_mask: (B, T)\n        mask = attention_mask.unsqueeze(-1).to(last_hidden.dtype)  # (B,T,1)\n        summed = (last_hidden * mask).sum(dim=1)",
+        "detail": "scripts.mlops.llm2vec_train",
+        "documentation": {}
+    },
+    {
+        "label": "info_nce",
+        "kind": 2,
+        "importPath": "scripts.mlops.llm2vec_train",
+        "description": "scripts.mlops.llm2vec_train",
+        "peekOfCode": "def info_nce(z1: torch.Tensor, z2: torch.Tensor, temperature: float) -> torch.Tensor:\n    # z1,z2: (B,D), normalized\n    logits = (z1 @ z2.t()) / temperature  # (B,B)\n    labels = torch.arange(z1.size(0), device=z1.device)\n    loss_a = F.cross_entropy(logits, labels)\n    loss_b = F.cross_entropy(logits.t(), labels)\n    return 0.5 * (loss_a + loss_b)\ndef main() -> int:\n    ap = argparse.ArgumentParser()\n    ap.add_argument(\"--base_model\", required=True)",
+        "detail": "scripts.mlops.llm2vec_train",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.mlops.llm2vec_train",
+        "description": "scripts.mlops.llm2vec_train",
+        "peekOfCode": "def main() -> int:\n    ap = argparse.ArgumentParser()\n    ap.add_argument(\"--base_model\", required=True)\n    ap.add_argument(\"--base_model_revision\", default=None)\n    ap.add_argument(\"--lora_dir\", required=True)\n    ap.add_argument(\"--output_dir\", required=True)\n    # These are what your pipeline passes (previously unrecognized)\n    ap.add_argument(\"--epochs\", type=int, default=1)\n    ap.add_argument(\"--batch_size\", type=int, default=1)\n    ap.add_argument(\"--lr\", type=float, default=2e-5)",
+        "detail": "scripts.mlops.llm2vec_train",
+        "documentation": {}
+    },
+    {
         "label": "normalize_sft",
         "kind": 2,
         "importPath": "scripts.mlops.normalize_datasets",
@@ -11408,6 +11897,330 @@
         "description": "scripts.mlops.normalize_datasets",
         "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(description=\"Normalize dataset JSONL files.\")\n    parser.add_argument(\"--input\", required=True)\n    parser.add_argument(\"--output\", required=True)\n    parser.add_argument(\n        \"--mode\",\n        choices=[\"sft\", \"pretrain\"],\n        required=True,\n        help=\"Normalization mode to apply.\",\n    )",
         "detail": "scripts.mlops.normalize_datasets",
+        "documentation": {}
+    },
+    {
+        "label": "FileSignals",
+        "kind": 6,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "class FileSignals:\n    path: str\n    ext: str\n    size: int\n    sha1: str\n    markers: dict[str, int]\n    imports: list[str]\n    exports: list[str]\n    contains_todo: bool\nIMPORT_RE_PY = re.compile(",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "SearchMap",
+        "kind": 6,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "class SearchMap:\n    prompts: list[str]\n    tools: list[str]\n    telemetry: list[str]\n    rag: list[str]\n    eval: list[str]\n    ios: list[str]\n    security: list[str]\n@dataclass\nclass RefactorFinding:",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "RefactorFinding",
+        "kind": 6,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "class RefactorFinding:\n    title: str\n    severity: str  # low/med/high\n    why: str\n    where: list[str]\n    suggested_actions: list[str]\n@dataclass\nclass FineTuneAxis:\n    axis: str\n    goal: str",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "FineTuneAxis",
+        "kind": 6,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "class FineTuneAxis:\n    axis: str\n    goal: str\n    dataset_sources: list[str]\n    evals: list[str]\n    notes: str\n@dataclass\nclass SymbiosisPlan:\n    generated_at: str\n    repo_root: str",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "SymbiosisPlan",
+        "kind": 6,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "class SymbiosisPlan:\n    generated_at: str\n    repo_root: str\n    repo_fingerprint: str\n    totals: dict[str, Any]\n    search_map: SearchMap\n    refactor_findings: list[RefactorFinding]\n    finetune_axes: list[FineTuneAxis]\ndef fingerprint_repo(repo_root: Path, file_sigs: list[FileSignals]) -> str:\n    # deterministic fingerprint from sorted (path, sha1)",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "sha1_bytes",
+        "kind": 2,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def sha1_bytes(b: bytes) -> str:\n    h = hashlib.sha1()\n    h.update(b)\n    return h.hexdigest()\ndef safe_read_text(path: Path, limit_bytes: int = DEFAULT_LIMIT_BYTES) -> str:\n    try:\n        data = path.read_bytes()\n    except Exception:\n        return \"\"\n    if len(data) > limit_bytes:",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "safe_read_text",
+        "kind": 2,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def safe_read_text(path: Path, limit_bytes: int = DEFAULT_LIMIT_BYTES) -> str:\n    try:\n        data = path.read_bytes()\n    except Exception:\n        return \"\"\n    if len(data) > limit_bytes:\n        data = data[:limit_bytes]\n    try:\n        return data.decode(\"utf-8\", errors=\"replace\")\n    except Exception:",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "rel",
+        "kind": 2,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def rel(repo_root: Path, p: Path) -> str:\n    try:\n        return str(p.relative_to(repo_root))\n    except Exception:\n        return str(p)\ndef is_probably_binary(path: Path) -> bool:\n    ext = path.suffix.lower()\n    if ext in BINARY_EXTS:\n        return True\n    return False",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "is_probably_binary",
+        "kind": 2,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def is_probably_binary(path: Path) -> bool:\n    ext = path.suffix.lower()\n    if ext in BINARY_EXTS:\n        return True\n    return False\ndef walk_repo(repo_root: Path, max_files: int) -> list[Path]:\n    out: list[Path] = []\n    for root, dirs, files in os.walk(repo_root):\n        # prune\n        dirs[:] = [d for d in dirs if d not in SKIP_DIR_NAMES]",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "walk_repo",
+        "kind": 2,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def walk_repo(repo_root: Path, max_files: int) -> list[Path]:\n    out: list[Path] = []\n    for root, dirs, files in os.walk(repo_root):\n        # prune\n        dirs[:] = [d for d in dirs if d not in SKIP_DIR_NAMES]\n        for fn in files:\n            p = Path(root) / fn\n            if len(out) >= max_files:\n                return out\n            out.append(p)",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "count_markers",
+        "kind": 2,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def count_markers(text: str, markers: list[str]) -> int:\n    low = text.lower()\n    n = 0\n    for m in markers:\n        n += low.count(m.lower())\n    return n\ndef extract_imports_exports(path: Path, text: str) -> tuple[list[str], list[str]]:\n    ext = path.suffix.lower()\n    imports: list[str] = []\n    exports: list[str] = []",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "extract_imports_exports",
+        "kind": 2,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def extract_imports_exports(path: Path, text: str) -> tuple[list[str], list[str]]:\n    ext = path.suffix.lower()\n    imports: list[str] = []\n    exports: list[str] = []\n    if ext == \".py\":\n        for a, b in IMPORT_RE_PY.findall(text):\n            mod = a or b\n            if mod:\n                imports.append(mod)\n    elif ext in {\".js\", \".ts\", \".tsx\", \".jsx\"}:",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "signals_for_file",
+        "kind": 2,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def signals_for_file(\n    repo_root: Path, p: Path, limit_bytes: int\n) -> Optional[FileSignals]:\n    try:\n        st = p.stat()\n    except Exception:\n        return None\n    if p.is_dir():\n        return None\n    if is_probably_binary(p):",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "fingerprint_repo",
+        "kind": 2,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def fingerprint_repo(repo_root: Path, file_sigs: list[FileSignals]) -> str:\n    # deterministic fingerprint from sorted (path, sha1)\n    h = hashlib.sha1()\n    for fs in sorted(file_sigs, key=lambda x: x.path):\n        h.update(fs.path.encode(\"utf-8\"))\n        h.update(fs.sha1.encode(\"utf-8\"))\n    return h.hexdigest()\ndef top_paths(file_sigs: list[FileSignals], key: str, k: int = 20) -> list[str]:\n    scored = [\n        (fs.markers.get(key, 0), fs.path)",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "top_paths",
+        "kind": 2,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def top_paths(file_sigs: list[FileSignals], key: str, k: int = 20) -> list[str]:\n    scored = [\n        (fs.markers.get(key, 0), fs.path)\n        for fs in file_sigs\n        if fs.markers.get(key, 0) > 0\n    ]\n    scored.sort(reverse=True)\n    return [p for _, p in scored[:k]]\ndef build_search_map(file_sigs: list[FileSignals]) -> SearchMap:\n    return SearchMap(",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "build_search_map",
+        "kind": 2,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def build_search_map(file_sigs: list[FileSignals]) -> SearchMap:\n    return SearchMap(\n        prompts=top_paths(file_sigs, \"prompts\", 35),\n        tools=top_paths(file_sigs, \"tools\", 35),\n        telemetry=top_paths(file_sigs, \"telemetry\", 35),\n        rag=top_paths(file_sigs, \"rag\", 35),\n        eval=top_paths(file_sigs, \"eval\", 35),\n        ios=top_paths(file_sigs, \"ios\", 35),\n        security=top_paths(file_sigs, \"security\", 35),\n    )",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "find_dup_candidates",
+        "kind": 2,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def find_dup_candidates(\n    file_sigs: list[FileSignals], key: str, min_hits: int = 3\n) -> dict[str, list[str]]:\n    # quick-and-dirty \"duplication smell\": many files with the same marker set > threshold\n    buckets: dict[str, list[str]] = {}\n    for fs in file_sigs:\n        if fs.markers.get(key, 0) >= min_hits:\n            bucket_key = f\"{key}:{min_hits}\"\n            buckets.setdefault(bucket_key, []).append(fs.path)\n    return buckets",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "build_refactor_findings",
+        "kind": 2,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def build_refactor_findings(\n    repo_root: Path, file_sigs: list[FileSignals], search: SearchMap\n) -> list[RefactorFinding]:\n    findings: list[RefactorFinding] = []\n    # 1) Prompt & tool surfaces: encourage single schema & versioned templates\n    if len(search.prompts) > 0:\n        findings.append(\n            RefactorFinding(\n                title=\"Unify prompt surfaces into versioned templates\",\n                severity=\"high\",",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "build_finetune_axes",
+        "kind": 2,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def build_finetune_axes(search: SearchMap) -> list[FineTuneAxis]:\n    # This is deterministic but still \"policy\"—it suggests a rational alignment.\n    axes: list[FineTuneAxis] = []\n    axes.append(\n        FineTuneAxis(\n            axis=\"Tool calling & JSON robustness\",\n            goal=\"Valid tool JSON, correct tool selection, safe refusal when schema cannot be satisfied.\",\n            dataset_sources=(\n                [\"telemetry: tool_calls + outcomes\"]\n                + ([\"code: tool schemas + handlers\"] if search.tools else [])",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "write_markdown",
+        "kind": 2,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def write_markdown(plan: SymbiosisPlan, out_md: Path) -> None:\n    sm = plan.search_map\n    lines: list[str] = []\n    lines.append(\"# offLLM Symbiosis Report\\n\")\n    lines.append(f\"- Generated: **{plan.generated_at}**\")\n    lines.append(f\"- Repo root: `{plan.repo_root}`\")\n    lines.append(f\"- Repo fingerprint: `{plan.repo_fingerprint}`\")\n    lines.append(\"\")\n    lines.append(\"## Totals\")\n    for k, v in plan.totals.items():",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def main() -> int:\n    ap = argparse.ArgumentParser()\n    ap.add_argument(\"--repo-root\", required=True, help=\"Path to repo root\")\n    ap.add_argument(\"--out-dir\", required=True, help=\"Output directory\")\n    ap.add_argument(\"--max-files\", type=int, default=20000)\n    ap.add_argument(\"--limit-bytes\", type=int, default=DEFAULT_LIMIT_BYTES)\n    args = ap.parse_args()\n    repo_root = Path(args.repo_root).resolve()\n    out_dir = Path(args.out_dir).resolve()\n    out_dir.mkdir(parents=True, exist_ok=True)",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "TEXT_EXTS",
+        "kind": 5,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "TEXT_EXTS = {\n    \".py\",\n    \".js\",\n    \".ts\",\n    \".tsx\",\n    \".jsx\",\n    \".md\",\n    \".json\",\n    \".yml\",\n    \".yaml\",",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "BINARY_EXTS",
+        "kind": 5,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "BINARY_EXTS = {\n    \".png\",\n    \".jpg\",\n    \".jpeg\",\n    \".gif\",\n    \".webp\",\n    \".mp4\",\n    \".mov\",\n    \".zip\",\n    \".a\",",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "SKIP_DIR_NAMES",
+        "kind": 5,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "SKIP_DIR_NAMES = {\n    \".git\",\n    \".hg\",\n    \".svn\",\n    \"__pycache__\",\n    \".venv\",\n    \"venv\",\n    \"node_modules\",\n    \"Pods\",\n    \"build\",",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_LIMIT_BYTES",
+        "kind": 5,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "DEFAULT_LIMIT_BYTES = 1_500_000  # avoid slurping giant files\ndef sha1_bytes(b: bytes) -> str:\n    h = hashlib.sha1()\n    h.update(b)\n    return h.hexdigest()\ndef safe_read_text(path: Path, limit_bytes: int = DEFAULT_LIMIT_BYTES) -> str:\n    try:\n        data = path.read_bytes()\n    except Exception:\n        return \"\"",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "PROMPT_MARKERS",
+        "kind": 5,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "PROMPT_MARKERS = [\n    \"SYSTEM_PROMPT\",\n    \"system prompt\",\n    \"You are\",\n    \"### Instruction\",\n    \"### Response\",\n    \"prompt_template\",\n    \"PROMPT_TEMPLATE\",\n    \"few-shot\",\n    \"chain-of-thought\",",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "TOOL_MARKERS",
+        "kind": 5,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "TOOL_MARKERS = [\n    \"tool\",\n    \"tools\",\n    \"tool_call\",\n    \"call_tool\",\n    \"ToolHandler\",\n    \"ToolParser\",\n    \"function_call\",\n    \"schema\",\n    \"jsonschema\",",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "TELEMETRY_MARKERS",
+        "kind": 5,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "TELEMETRY_MARKERS = [\n    \"telemetry\",\n    \"trace\",\n    \"span\",\n    \"opentelemetry\",\n    \"metrics\",\n    \"prometheus\",\n    \"statsd\",\n    \"sentry\",\n    \"event_name\",",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "RAG_MARKERS",
+        "kind": 5,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "RAG_MARKERS = [\n    \"embedding\",\n    \"vector\",\n    \"hnsw\",\n    \"faiss\",\n    \"pgvector\",\n    \"retrieval\",\n    \"rerank\",\n    \"reranker\",\n    \"chunk\",",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "EVAL_MARKERS",
+        "kind": 5,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "EVAL_MARKERS = [\n    \"eval\",\n    \"evaluation\",\n    \"benchmark\",\n    \"golden\",\n    \"regression\",\n    \"score\",\n    \"accuracy\",\n    \"mmlu\",\n    \"truthful\",",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "IOS_MARKERS",
+        "kind": 5,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "IOS_MARKERS = [\n    \"CoreML\",\n    \"coreml\",\n    \"mlmodel\",\n    \"MLModel\",\n    \"mlx\",\n    \"Metal\",\n    \"ANE\",\n    \"Xcode\",\n    \"xcworkspace\",",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "SECURITY_MARKERS",
+        "kind": 5,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "SECURITY_MARKERS = [\n    \"sanitize\",\n    \"redact\",\n    \"secret\",\n    \"token\",\n    \"apikey\",\n    \"api_key\",\n    \"PII\",\n    \"prompt injection\",\n    \"injection\",",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "IMPORT_RE_PY",
+        "kind": 5,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "IMPORT_RE_PY = re.compile(\n    r\"^\\s*(?:from\\s+([a-zA-Z0-9_\\.]+)\\s+import|import\\s+([a-zA-Z0-9_\\.]+))\",\n    re.M,\n)\nIMPORT_RE_JS = re.compile(r\"^\\s*import\\s+.*?\\s+from\\s+['\\\"]([^'\\\"]+)['\\\"]\\s*;?\", re.M)\nREQUIRE_RE_JS = re.compile(r\"require\\(\\s*['\\\"]([^'\\\"]+)['\\\"]\\s*\\)\")\nEXPORT_RE_JS = re.compile(r\"^\\s*export\\s+(?:default\\s+)?\", re.M)\ndef count_markers(text: str, markers: list[str]) -> int:\n    low = text.lower()\n    n = 0",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "IMPORT_RE_JS",
+        "kind": 5,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "IMPORT_RE_JS = re.compile(r\"^\\s*import\\s+.*?\\s+from\\s+['\\\"]([^'\\\"]+)['\\\"]\\s*;?\", re.M)\nREQUIRE_RE_JS = re.compile(r\"require\\(\\s*['\\\"]([^'\\\"]+)['\\\"]\\s*\\)\")\nEXPORT_RE_JS = re.compile(r\"^\\s*export\\s+(?:default\\s+)?\", re.M)\ndef count_markers(text: str, markers: list[str]) -> int:\n    low = text.lower()\n    n = 0\n    for m in markers:\n        n += low.count(m.lower())\n    return n\ndef extract_imports_exports(path: Path, text: str) -> tuple[list[str], list[str]]:",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "REQUIRE_RE_JS",
+        "kind": 5,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "REQUIRE_RE_JS = re.compile(r\"require\\(\\s*['\\\"]([^'\\\"]+)['\\\"]\\s*\\)\")\nEXPORT_RE_JS = re.compile(r\"^\\s*export\\s+(?:default\\s+)?\", re.M)\ndef count_markers(text: str, markers: list[str]) -> int:\n    low = text.lower()\n    n = 0\n    for m in markers:\n        n += low.count(m.lower())\n    return n\ndef extract_imports_exports(path: Path, text: str) -> tuple[list[str], list[str]]:\n    ext = path.suffix.lower()",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "EXPORT_RE_JS",
+        "kind": 5,
+        "importPath": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "description": "scripts.mlops.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "EXPORT_RE_JS = re.compile(r\"^\\s*export\\s+(?:default\\s+)?\", re.M)\ndef count_markers(text: str, markers: list[str]) -> int:\n    low = text.lower()\n    n = 0\n    for m in markers:\n        n += low.count(m.lower())\n    return n\ndef extract_imports_exports(path: Path, text: str) -> tuple[list[str], list[str]]:\n    ext = path.suffix.lower()\n    imports: list[str] = []",
+        "detail": "scripts.mlops.offllm_symbiosis_advisor_v4",
         "documentation": {}
     },
     {
@@ -11586,7 +12399,7 @@
         "kind": 6,
         "importPath": "scripts.offllm_end_to_end_pipeline",
         "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "class UnslothTrainerWrapper:\n    \"\"\"Wrapper for supervised fine-tuning with Unsloth.\"\"\"\n    @staticmethod\n    def train(\n        config: PipelineConfig,\n        dataset_path: Path,\n        output_dir: Path,\n        max_steps: int,\n    ) -> Path:\n        try:",
+        "peekOfCode": "class UnslothTrainerWrapper:\n    \"\"\"Wrapper for supervised fine-tuning with Unsloth.\"\"\"\n    @staticmethod\n    def train(\n        config: PipelineConfig,\n        dataset_path: Path,\n        output_dir: Path,\n        max_steps: int,\n    ) -> Path:\n        if not _module_available(\"unsloth\"):",
         "detail": "scripts.offllm_end_to_end_pipeline",
         "documentation": {}
     },
@@ -11703,7 +12516,7 @@
         "kind": 2,
         "importPath": "scripts.offllm_end_to_end_pipeline",
         "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "def build_sft_trainer_kwargs(\n    trainer_cls: type, tokenizer: AutoTokenizer, **kwargs: Any\n) -> Dict[str, Any]:\n    signature = inspect.signature(trainer_cls.__init__)\n    params = signature.parameters\n    trainer_kwargs = dict(kwargs)\n    max_seq_length = trainer_kwargs.pop(\"max_seq_length\", None)\n    if max_seq_length is not None:\n        if \"max_seq_length\" in params:\n            trainer_kwargs[\"max_seq_length\"] = max_seq_length",
+        "peekOfCode": "def build_sft_trainer_kwargs(\n    trainer_cls: type, tokenizer: Any, **kwargs: Any\n) -> Dict[str, Any]:\n    signature = inspect.signature(trainer_cls.__init__)\n    params = signature.parameters\n    trainer_kwargs = dict(kwargs)\n    max_seq_length = trainer_kwargs.pop(\"max_seq_length\", None)\n    if max_seq_length is not None:\n        if \"max_seq_length\" in params:\n            trainer_kwargs[\"max_seq_length\"] = max_seq_length",
         "detail": "scripts.offllm_end_to_end_pipeline",
         "documentation": {}
     },
@@ -11786,6 +12599,807 @@
         "description": "scripts.offllm_symbiosis_advisor_v3",
         "peekOfCode": "MAX_READ_BYTES = 2_500_000  # 2.5MB; big enough for most code, avoids logs.\n# -----------------------------\n# Data model\n# -----------------------------\n@dataclass\nclass FileHit:\n    path: str\n    ext: str\n    size_bytes: int\n    loc: int",
         "detail": "scripts.offllm_symbiosis_advisor_v3",
+        "documentation": {}
+    },
+    {
+        "label": "FileSignals",
+        "kind": 6,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "class FileSignals:\n    path: str\n    ext: str\n    size: int\n    sha1: str\n    markers: dict[str, int]\n    imports: list[str]\n    exports: list[str]\n    contains_todo: bool\nIMPORT_RE_PY = re.compile(r\"^\\s*(?:from\\s+([a-zA-Z0-9_\\.]+)\\s+import|import\\s+([a-zA-Z0-9_\\.]+))\", re.M)",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "SearchMap",
+        "kind": 6,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "class SearchMap:\n    prompts: list[str]\n    tools: list[str]\n    telemetry: list[str]\n    rag: list[str]\n    eval: list[str]\n    ios: list[str]\n    security: list[str]\n@dataclass\nclass RefactorFinding:",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "RefactorFinding",
+        "kind": 6,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "class RefactorFinding:\n    title: str\n    severity: str  # low/med/high\n    why: str\n    where: list[str]\n    suggested_actions: list[str]\n@dataclass\nclass FineTuneAxis:\n    axis: str\n    goal: str",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "FineTuneAxis",
+        "kind": 6,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "class FineTuneAxis:\n    axis: str\n    goal: str\n    dataset_sources: list[str]\n    evals: list[str]\n    notes: str\n@dataclass\nclass SymbiosisPlan:\n    generated_at: str\n    repo_root: str",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "SymbiosisPlan",
+        "kind": 6,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "class SymbiosisPlan:\n    generated_at: str\n    repo_root: str\n    repo_fingerprint: str\n    totals: dict[str, Any]\n    search_map: SearchMap\n    refactor_findings: list[RefactorFinding]\n    finetune_axes: list[FineTuneAxis]\ndef fingerprint_repo(repo_root: Path, file_sigs: list[FileSignals]) -> str:\n    # deterministic fingerprint from sorted (path, sha1)",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "sha1_bytes",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def sha1_bytes(b: bytes) -> str:\n    h = hashlib.sha1()\n    h.update(b)\n    return h.hexdigest()\ndef safe_read_text(path: Path, limit_bytes: int = DEFAULT_LIMIT_BYTES) -> str:\n    try:\n        data = path.read_bytes()\n    except Exception:\n        return \"\"\n    if len(data) > limit_bytes:",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "safe_read_text",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def safe_read_text(path: Path, limit_bytes: int = DEFAULT_LIMIT_BYTES) -> str:\n    try:\n        data = path.read_bytes()\n    except Exception:\n        return \"\"\n    if len(data) > limit_bytes:\n        data = data[:limit_bytes]\n    try:\n        return data.decode(\"utf-8\", errors=\"replace\")\n    except Exception:",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "rel",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def rel(repo_root: Path, p: Path) -> str:\n    try:\n        return str(p.relative_to(repo_root))\n    except Exception:\n        return str(p)\ndef is_probably_binary(path: Path) -> bool:\n    ext = path.suffix.lower()\n    if ext in BINARY_EXTS:\n        return True\n    return False",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "is_probably_binary",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def is_probably_binary(path: Path) -> bool:\n    ext = path.suffix.lower()\n    if ext in BINARY_EXTS:\n        return True\n    return False\ndef walk_repo(repo_root: Path, max_files: int) -> list[Path]:\n    out: list[Path] = []\n    for root, dirs, files in os.walk(repo_root):\n        # prune\n        dirs[:] = [d for d in dirs if d not in SKIP_DIR_NAMES]",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "walk_repo",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def walk_repo(repo_root: Path, max_files: int) -> list[Path]:\n    out: list[Path] = []\n    for root, dirs, files in os.walk(repo_root):\n        # prune\n        dirs[:] = [d for d in dirs if d not in SKIP_DIR_NAMES]\n        for fn in files:\n            p = Path(root) / fn\n            if len(out) >= max_files:\n                return out\n            out.append(p)",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "count_markers",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def count_markers(text: str, markers: list[str]) -> int:\n    low = text.lower()\n    n = 0\n    for m in markers:\n        n += low.count(m.lower())\n    return n\ndef extract_imports_exports(path: Path, text: str) -> tuple[list[str], list[str]]:\n    ext = path.suffix.lower()\n    imports: list[str] = []\n    exports: list[str] = []",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "extract_imports_exports",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def extract_imports_exports(path: Path, text: str) -> tuple[list[str], list[str]]:\n    ext = path.suffix.lower()\n    imports: list[str] = []\n    exports: list[str] = []\n    if ext == \".py\":\n        for a, b in IMPORT_RE_PY.findall(text):\n            mod = a or b\n            if mod:\n                imports.append(mod)\n    elif ext in {\".js\", \".ts\", \".tsx\", \".jsx\"}:",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "signals_for_file",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def signals_for_file(repo_root: Path, p: Path, limit_bytes: int) -> Optional[FileSignals]:\n    try:\n        st = p.stat()\n    except Exception:\n        return None\n    if p.is_dir():\n        return None\n    if is_probably_binary(p):\n        return None\n    ext = p.suffix.lower()",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "fingerprint_repo",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def fingerprint_repo(repo_root: Path, file_sigs: list[FileSignals]) -> str:\n    # deterministic fingerprint from sorted (path, sha1)\n    h = hashlib.sha1()\n    for fs in sorted(file_sigs, key=lambda x: x.path):\n        h.update(fs.path.encode(\"utf-8\"))\n        h.update(fs.sha1.encode(\"utf-8\"))\n    return h.hexdigest()\ndef top_paths(file_sigs: list[FileSignals], key: str, k: int = 20) -> list[str]:\n    scored = [(fs.markers.get(key, 0), fs.path) for fs in file_sigs if fs.markers.get(key, 0) > 0]\n    scored.sort(reverse=True)",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "top_paths",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def top_paths(file_sigs: list[FileSignals], key: str, k: int = 20) -> list[str]:\n    scored = [(fs.markers.get(key, 0), fs.path) for fs in file_sigs if fs.markers.get(key, 0) > 0]\n    scored.sort(reverse=True)\n    return [p for _, p in scored[:k]]\ndef build_search_map(file_sigs: list[FileSignals]) -> SearchMap:\n    return SearchMap(\n        prompts=top_paths(file_sigs, \"prompts\", 35),\n        tools=top_paths(file_sigs, \"tools\", 35),\n        telemetry=top_paths(file_sigs, \"telemetry\", 35),\n        rag=top_paths(file_sigs, \"rag\", 35),",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "build_search_map",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def build_search_map(file_sigs: list[FileSignals]) -> SearchMap:\n    return SearchMap(\n        prompts=top_paths(file_sigs, \"prompts\", 35),\n        tools=top_paths(file_sigs, \"tools\", 35),\n        telemetry=top_paths(file_sigs, \"telemetry\", 35),\n        rag=top_paths(file_sigs, \"rag\", 35),\n        eval=top_paths(file_sigs, \"eval\", 35),\n        ios=top_paths(file_sigs, \"ios\", 35),\n        security=top_paths(file_sigs, \"security\", 35),\n    )",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "find_dup_candidates",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def find_dup_candidates(file_sigs: list[FileSignals], key: str, min_hits: int = 3) -> dict[str, list[str]]:\n    # quick-and-dirty \"duplication smell\": many files with the same marker set > threshold\n    buckets: dict[str, list[str]] = {}\n    for fs in file_sigs:\n        if fs.markers.get(key, 0) >= min_hits:\n            bucket_key = f\"{key}:{min_hits}\"\n            buckets.setdefault(bucket_key, []).append(fs.path)\n    return buckets\ndef build_refactor_findings(repo_root: Path, file_sigs: list[FileSignals], search: SearchMap) -> list[RefactorFinding]:\n    findings: list[RefactorFinding] = []",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "build_refactor_findings",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def build_refactor_findings(repo_root: Path, file_sigs: list[FileSignals], search: SearchMap) -> list[RefactorFinding]:\n    findings: list[RefactorFinding] = []\n    # 1) Prompt & tool surfaces: encourage single schema & versioned templates\n    if len(search.prompts) > 0:\n        findings.append(RefactorFinding(\n            title=\"Unify prompt surfaces into versioned templates\",\n            severity=\"high\",\n            why=(\n                \"Multiple prompt definitions scattered across the repo tend to drift. \"\n                \"Drift breaks fine-tuning, evaluation, and runtime behaviour alignment.\"",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "build_finetune_axes",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def build_finetune_axes(search: SearchMap) -> list[FineTuneAxis]:\n    # This is deterministic but still \"policy\"—it suggests a rational alignment.\n    axes: list[FineTuneAxis] = []\n    axes.append(FineTuneAxis(\n        axis=\"Tool calling & JSON robustness\",\n        goal=\"Valid tool JSON, correct tool selection, safe refusal when schema cannot be satisfied.\",\n        dataset_sources=(\n            [\"telemetry: tool_calls + outcomes\"] +\n            ([\"code: tool schemas + handlers\"] if search.tools else [])\n        ),",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "write_markdown",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def write_markdown(plan: SymbiosisPlan, out_md: Path) -> None:\n    sm = plan.search_map\n    lines: list[str] = []\n    lines.append(\"# offLLM Symbiosis Report\\n\")\n    lines.append(f\"- Generated: **{plan.generated_at}**\")\n    lines.append(f\"- Repo root: `{plan.repo_root}`\")\n    lines.append(f\"- Repo fingerprint: `{plan.repo_fingerprint}`\")\n    lines.append(\"\")\n    lines.append(\"## Totals\")\n    for k, v in plan.totals.items():",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "def main() -> int:\n    ap = argparse.ArgumentParser()\n    ap.add_argument(\"--repo-root\", required=True, help=\"Path to repo root\")\n    ap.add_argument(\"--out-dir\", required=True, help=\"Output directory\")\n    ap.add_argument(\"--max-files\", type=int, default=20000)\n    ap.add_argument(\"--limit-bytes\", type=int, default=DEFAULT_LIMIT_BYTES)\n    args = ap.parse_args()\n    repo_root = Path(args.repo_root).resolve()\n    out_dir = Path(args.out_dir).resolve()\n    out_dir.mkdir(parents=True, exist_ok=True)",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "TEXT_EXTS",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "TEXT_EXTS = {\n    \".py\", \".js\", \".ts\", \".tsx\", \".jsx\", \".md\", \".json\", \".yml\", \".yaml\", \".toml\",\n    \".swift\", \".m\", \".mm\", \".h\", \".hpp\", \".cc\", \".cpp\", \".c\", \".rs\", \".java\",\n    \".gradle\", \".kt\", \".kts\", \".sh\", \".rb\", \".txt\",\n}\nBINARY_EXTS = {\n    \".png\", \".jpg\", \".jpeg\", \".gif\", \".webp\", \".mp4\", \".mov\", \".zip\", \".a\", \".o\",\n    \".so\", \".dylib\", \".framework\", \".xcarchive\", \".ipa\", \".jar\", \".aar\",\n    \".pdf\", \".ttf\", \".otf\", \".woff\", \".woff2\",\n}",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "BINARY_EXTS",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "BINARY_EXTS = {\n    \".png\", \".jpg\", \".jpeg\", \".gif\", \".webp\", \".mp4\", \".mov\", \".zip\", \".a\", \".o\",\n    \".so\", \".dylib\", \".framework\", \".xcarchive\", \".ipa\", \".jar\", \".aar\",\n    \".pdf\", \".ttf\", \".otf\", \".woff\", \".woff2\",\n}\nSKIP_DIR_NAMES = {\n    \".git\", \".hg\", \".svn\", \"__pycache__\", \".venv\", \"venv\", \"node_modules\", \"Pods\",\n    \"build\", \"dist\", \".gradle\", \".idea\", \".vscode\", \".DS_Store\",\n}\nDEFAULT_LIMIT_BYTES = 1_500_000  # avoid slurping giant files",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "SKIP_DIR_NAMES",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "SKIP_DIR_NAMES = {\n    \".git\", \".hg\", \".svn\", \"__pycache__\", \".venv\", \"venv\", \"node_modules\", \"Pods\",\n    \"build\", \"dist\", \".gradle\", \".idea\", \".vscode\", \".DS_Store\",\n}\nDEFAULT_LIMIT_BYTES = 1_500_000  # avoid slurping giant files\ndef sha1_bytes(b: bytes) -> str:\n    h = hashlib.sha1()\n    h.update(b)\n    return h.hexdigest()\ndef safe_read_text(path: Path, limit_bytes: int = DEFAULT_LIMIT_BYTES) -> str:",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_LIMIT_BYTES",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "DEFAULT_LIMIT_BYTES = 1_500_000  # avoid slurping giant files\ndef sha1_bytes(b: bytes) -> str:\n    h = hashlib.sha1()\n    h.update(b)\n    return h.hexdigest()\ndef safe_read_text(path: Path, limit_bytes: int = DEFAULT_LIMIT_BYTES) -> str:\n    try:\n        data = path.read_bytes()\n    except Exception:\n        return \"\"",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "PROMPT_MARKERS",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "PROMPT_MARKERS = [\n    \"SYSTEM_PROMPT\", \"system prompt\", \"You are\", \"### Instruction\", \"### Response\",\n    \"prompt_template\", \"PROMPT_TEMPLATE\", \"few-shot\", \"chain-of-thought\",\n    \"tool_calls\", \"function_call\", \"ReAct\", \"scratchpad\", \"tool parser\",\n]\nTOOL_MARKERS = [\n    \"tool\", \"tools\", \"tool_call\", \"call_tool\", \"ToolHandler\", \"ToolParser\",\n    \"function_call\", \"schema\", \"jsonschema\",\n]\nTELEMETRY_MARKERS = [",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "TOOL_MARKERS",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "TOOL_MARKERS = [\n    \"tool\", \"tools\", \"tool_call\", \"call_tool\", \"ToolHandler\", \"ToolParser\",\n    \"function_call\", \"schema\", \"jsonschema\",\n]\nTELEMETRY_MARKERS = [\n    \"telemetry\", \"trace\", \"span\", \"opentelemetry\", \"metrics\", \"prometheus\",\n    \"statsd\", \"sentry\", \"event_name\", \"eventType\", \"log_event\", \"structured log\",\n]\nRAG_MARKERS = [\n    \"embedding\", \"vector\", \"hnsw\", \"faiss\", \"pgvector\", \"retrieval\", \"rerank\",",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "TELEMETRY_MARKERS",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "TELEMETRY_MARKERS = [\n    \"telemetry\", \"trace\", \"span\", \"opentelemetry\", \"metrics\", \"prometheus\",\n    \"statsd\", \"sentry\", \"event_name\", \"eventType\", \"log_event\", \"structured log\",\n]\nRAG_MARKERS = [\n    \"embedding\", \"vector\", \"hnsw\", \"faiss\", \"pgvector\", \"retrieval\", \"rerank\",\n    \"reranker\", \"chunk\", \"chunking\", \"similarity\", \"cosine\",\n]\nEVAL_MARKERS = [\n    \"eval\", \"evaluation\", \"benchmark\", \"golden\", \"regression\", \"score\",",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "RAG_MARKERS",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "RAG_MARKERS = [\n    \"embedding\", \"vector\", \"hnsw\", \"faiss\", \"pgvector\", \"retrieval\", \"rerank\",\n    \"reranker\", \"chunk\", \"chunking\", \"similarity\", \"cosine\",\n]\nEVAL_MARKERS = [\n    \"eval\", \"evaluation\", \"benchmark\", \"golden\", \"regression\", \"score\",\n    \"accuracy\", \"mmlu\", \"truthful\", \"bleu\", \"rouge\", \"pass@\", \"unit test\",\n]\nIOS_MARKERS = [\n    \"CoreML\", \"coreml\", \"mlmodel\", \"MLModel\", \"mlx\", \"Metal\", \"ANE\",",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "EVAL_MARKERS",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "EVAL_MARKERS = [\n    \"eval\", \"evaluation\", \"benchmark\", \"golden\", \"regression\", \"score\",\n    \"accuracy\", \"mmlu\", \"truthful\", \"bleu\", \"rouge\", \"pass@\", \"unit test\",\n]\nIOS_MARKERS = [\n    \"CoreML\", \"coreml\", \"mlmodel\", \"MLModel\", \"mlx\", \"Metal\", \"ANE\",\n    \"Xcode\", \"xcworkspace\", \"xcodebuild\",\n]\nSECURITY_MARKERS = [\n    \"sanitize\", \"redact\", \"secret\", \"token\", \"apikey\", \"api_key\", \"PII\",",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "IOS_MARKERS",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "IOS_MARKERS = [\n    \"CoreML\", \"coreml\", \"mlmodel\", \"MLModel\", \"mlx\", \"Metal\", \"ANE\",\n    \"Xcode\", \"xcworkspace\", \"xcodebuild\",\n]\nSECURITY_MARKERS = [\n    \"sanitize\", \"redact\", \"secret\", \"token\", \"apikey\", \"api_key\", \"PII\",\n    \"prompt injection\", \"injection\", \"ssrf\", \"rce\", \"sandbox\", \"allowlist\",\n]\n@dataclass(frozen=True)\nclass FileSignals:",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "SECURITY_MARKERS",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "SECURITY_MARKERS = [\n    \"sanitize\", \"redact\", \"secret\", \"token\", \"apikey\", \"api_key\", \"PII\",\n    \"prompt injection\", \"injection\", \"ssrf\", \"rce\", \"sandbox\", \"allowlist\",\n]\n@dataclass(frozen=True)\nclass FileSignals:\n    path: str\n    ext: str\n    size: int\n    sha1: str",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "IMPORT_RE_PY",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "IMPORT_RE_PY = re.compile(r\"^\\s*(?:from\\s+([a-zA-Z0-9_\\.]+)\\s+import|import\\s+([a-zA-Z0-9_\\.]+))\", re.M)\nIMPORT_RE_JS = re.compile(r\"^\\s*import\\s+.*?\\s+from\\s+['\\\"]([^'\\\"]+)['\\\"]\\s*;?\", re.M)\nREQUIRE_RE_JS = re.compile(r\"require\\(\\s*['\\\"]([^'\\\"]+)['\\\"]\\s*\\)\")\nEXPORT_RE_JS = re.compile(r\"^\\s*export\\s+(?:default\\s+)?\", re.M)\ndef count_markers(text: str, markers: list[str]) -> int:\n    low = text.lower()\n    n = 0\n    for m in markers:\n        n += low.count(m.lower())\n    return n",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "IMPORT_RE_JS",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "IMPORT_RE_JS = re.compile(r\"^\\s*import\\s+.*?\\s+from\\s+['\\\"]([^'\\\"]+)['\\\"]\\s*;?\", re.M)\nREQUIRE_RE_JS = re.compile(r\"require\\(\\s*['\\\"]([^'\\\"]+)['\\\"]\\s*\\)\")\nEXPORT_RE_JS = re.compile(r\"^\\s*export\\s+(?:default\\s+)?\", re.M)\ndef count_markers(text: str, markers: list[str]) -> int:\n    low = text.lower()\n    n = 0\n    for m in markers:\n        n += low.count(m.lower())\n    return n\ndef extract_imports_exports(path: Path, text: str) -> tuple[list[str], list[str]]:",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "REQUIRE_RE_JS",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "REQUIRE_RE_JS = re.compile(r\"require\\(\\s*['\\\"]([^'\\\"]+)['\\\"]\\s*\\)\")\nEXPORT_RE_JS = re.compile(r\"^\\s*export\\s+(?:default\\s+)?\", re.M)\ndef count_markers(text: str, markers: list[str]) -> int:\n    low = text.lower()\n    n = 0\n    for m in markers:\n        n += low.count(m.lower())\n    return n\ndef extract_imports_exports(path: Path, text: str) -> tuple[list[str], list[str]]:\n    ext = path.suffix.lower()",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "EXPORT_RE_JS",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v4",
+        "description": "scripts.offllm_symbiosis_advisor_v4",
+        "peekOfCode": "EXPORT_RE_JS = re.compile(r\"^\\s*export\\s+(?:default\\s+)?\", re.M)\ndef count_markers(text: str, markers: list[str]) -> int:\n    low = text.lower()\n    n = 0\n    for m in markers:\n        n += low.count(m.lower())\n    return n\ndef extract_imports_exports(path: Path, text: str) -> tuple[list[str], list[str]]:\n    ext = path.suffix.lower()\n    imports: list[str] = []",
+        "detail": "scripts.offllm_symbiosis_advisor_v4",
+        "documentation": {}
+    },
+    {
+        "label": "PromptSnippet",
+        "kind": 6,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "class PromptSnippet:\n    file: str\n    start_line: int\n    end_line: int\n    kind: str\n    preview: str\n    sha256: str\n@dataclass(frozen=True)\nclass FileSignals:\n    file: str",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "FileSignals",
+        "kind": 6,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "class FileSignals:\n    file: str\n    size: int\n    prompt_score: int\n    tool_score: int\n    telemetry_score: int\n    rag_score: int\n    eval_score: int\n    ios_score: int\n    todos: int",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "DriftCluster",
+        "kind": 6,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "class DriftCluster:\n    signature: str\n    count: int\n    files: List[str]\n    sample_previews: List[str]\ndef eprint(*a: Any) -> None:\n    print(*a, file=sys.stderr)\ndef mkdirp(p: Path) -> None:\n    p.mkdir(parents=True, exist_ok=True)\ndef is_probably_text(b: bytes) -> bool:",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "eprint",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def eprint(*a: Any) -> None:\n    print(*a, file=sys.stderr)\ndef mkdirp(p: Path) -> None:\n    p.mkdir(parents=True, exist_ok=True)\ndef is_probably_text(b: bytes) -> bool:\n    if b\"\\x00\" in b:\n        return False\n    if not b:\n        return True\n    sample = b[:4096]",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "mkdirp",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def mkdirp(p: Path) -> None:\n    p.mkdir(parents=True, exist_ok=True)\ndef is_probably_text(b: bytes) -> bool:\n    if b\"\\x00\" in b:\n        return False\n    if not b:\n        return True\n    sample = b[:4096]\n    bad = 0\n    for ch in sample:",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "is_probably_text",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def is_probably_text(b: bytes) -> bool:\n    if b\"\\x00\" in b:\n        return False\n    if not b:\n        return True\n    sample = b[:4096]\n    bad = 0\n    for ch in sample:\n        if ch in (9, 10, 13):\n            continue",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "safe_relpath",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def safe_relpath(p: Path, root: Path) -> Optional[str]:\n    try:\n        rp = p.resolve()\n        rr = root.resolve()\n        rel = rp.relative_to(rr)\n        if \"..\" in rel.parts:\n            return None\n        return rel.as_posix()\n    except Exception:\n        return None",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "read_text_limited",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def read_text_limited(path: Path, max_bytes: int) -> Optional[str]:\n    try:\n        st = path.stat()\n        if st.st_size > max_bytes:\n            with path.open(\"rb\") as f:\n                b = f.read(min(max_bytes, 262144))\n            if not is_probably_text(b):\n                return None\n            return b.decode(\"utf-8\", errors=\"replace\")\n        with path.open(\"rb\") as f:",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "compile_patterns",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def compile_patterns(pats: Sequence[str]) -> List[re.Pattern[str]]:\n    out: List[re.Pattern[str]] = []\n    for s in pats:\n        try:\n            out.append(re.compile(s, re.IGNORECASE | re.MULTILINE))\n        except re.error:\n            continue\n    return out\ndef score_text(text: str, patterns: List[re.Pattern[str]]) -> int:\n    if not text:",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "score_text",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def score_text(text: str, patterns: List[re.Pattern[str]]) -> int:\n    if not text:\n        return 0\n    score = 0\n    for rx in patterns:\n        score += len(rx.findall(text))\n    return score\ndef count_todos_fixmes(text: str) -> Tuple[int, int]:\n    if not text:\n        return (0, 0)",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "count_todos_fixmes",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def count_todos_fixmes(text: str) -> Tuple[int, int]:\n    if not text:\n        return (0, 0)\n    todos = len(re.findall(r\"\\bTODO\\b\", text))\n    fixmes = len(re.findall(r\"\\bFIXME\\b\", text))\n    return (todos, fixmes)\ndef infer_lang(p: Path) -> str:\n    ext = p.suffix.lower()\n    if ext == \".py\":\n        return \"python\"",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "infer_lang",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def infer_lang(p: Path) -> str:\n    ext = p.suffix.lower()\n    if ext == \".py\":\n        return \"python\"\n    if ext in (\".js\", \".jsx\"):\n        return \"javascript\"\n    if ext in (\".ts\", \".tsx\"):\n        return \"typescript\"\n    if ext in (\".m\", \".mm\"):\n        return \"objc\"",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "load_user_config",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def load_user_config(repo_root: Path, explicit: Optional[Path]) -> Dict[str, Any]:\n    candidates: List[Path] = []\n    if explicit:\n        candidates.append(explicit)\n    else:\n        candidates.extend([\n            repo_root / \".symbiosis.json\",\n            repo_root / \".symbiosis.yaml\",\n            repo_root / \".symbiosis.yml\",\n        ])",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "cfg_list",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def cfg_list(cfg: Dict[str, Any], key: str, default: List[str]) -> List[str]:\n    v = cfg.get(key, default)\n    if isinstance(v, list):\n        return [str(x) for x in v]\n    if isinstance(v, str):\n        return [v]\n    return default\ndef cfg_bool(cfg: Dict[str, Any], key: str, default: bool) -> bool:\n    v = cfg.get(key, default)\n    if isinstance(v, bool):",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "cfg_bool",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def cfg_bool(cfg: Dict[str, Any], key: str, default: bool) -> bool:\n    v = cfg.get(key, default)\n    if isinstance(v, bool):\n        return v\n    if isinstance(v, str):\n        return v.lower() in (\"1\", \"true\", \"yes\", \"y\", \"on\")\n    return default\ndef cfg_int(cfg: Dict[str, Any], key: str, default: int) -> int:\n    v = cfg.get(key, default)\n    try:",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "cfg_int",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def cfg_int(cfg: Dict[str, Any], key: str, default: int) -> int:\n    v = cfg.get(key, default)\n    try:\n        return int(v)\n    except Exception:\n        return default\ndef _run_git(repo_root: Path, args: List[str]) -> Optional[str]:\n    try:\n        r = subprocess.run(\n            [\"git\"] + args,",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "git_head_and_dirty",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def git_head_and_dirty(repo_root: Path) -> Optional[str]:\n    head = _run_git(repo_root, [\"rev-parse\", \"HEAD\"])\n    if not head:\n        return None\n    dirty = _run_git(repo_root, [\"status\", \"--porcelain\"])\n    dirty_flag = \"dirty\" if (dirty and dirty.strip()) else \"clean\"\n    return f\"{head}:{dirty_flag}\"\ndef git_churn(repo_root: Path, relpath: str, max_commits: int = 2000) -> int:\n    out = _run_git(repo_root, [\"log\", f\"-n{max_commits}\", \"--oneline\", \"--\", relpath])\n    if not out:",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "git_churn",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def git_churn(repo_root: Path, relpath: str, max_commits: int = 2000) -> int:\n    out = _run_git(repo_root, [\"log\", f\"-n{max_commits}\", \"--oneline\", \"--\", relpath])\n    if not out:\n        return 0\n    return len([ln for ln in out.splitlines() if ln.strip()])\ndef file_content_hash(p: Path, max_bytes: int) -> Optional[str]:\n    txt = read_text_limited(p, max_bytes=max_bytes)\n    if txt is None:\n        return None\n    h = hashlib.sha256()",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "file_content_hash",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def file_content_hash(p: Path, max_bytes: int) -> Optional[str]:\n    txt = read_text_limited(p, max_bytes=max_bytes)\n    if txt is None:\n        return None\n    h = hashlib.sha256()\n    h.update(txt.encode(\"utf-8\", errors=\"ignore\"))\n    return h.hexdigest()\ndef repo_fingerprint(repo_root: Path, files: Sequence[Path], max_bytes: int, use_git: bool) -> str:\n    if use_git:\n        g = git_head_and_dirty(repo_root)",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "repo_fingerprint",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def repo_fingerprint(repo_root: Path, files: Sequence[Path], max_bytes: int, use_git: bool) -> str:\n    if use_git:\n        g = git_head_and_dirty(repo_root)\n        if g:\n            return \"git:\" + hashlib.sha1(g.encode(\"utf-8\", errors=\"ignore\")).hexdigest()\n    h = hashlib.sha1()\n    for p in sorted(files, key=lambda x: x.as_posix()):\n        rel = safe_relpath(p, repo_root)\n        if not rel:\n            continue",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "extract_prompt_snippets",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def extract_prompt_snippets(rel: str, text: str, max_preview_chars: int = 240) -> List[PromptSnippet]:\n    snippets: List[PromptSnippet] = []\n    lines = text.splitlines()\n    n = len(lines)\n    # JSON chat extraction\n    if RE_JSON_CHAT_ROLE.search(text):\n        try:\n            obj = json.loads(text)\n            def walk(x: Any) -> Iterator[Tuple[str, str]]:\n                if isinstance(x, dict):",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "analyze_one_file",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def analyze_one_file(\n    p: Path,\n    repo_root: Path,\n    max_bytes: int,\n    patterns: Dict[str, List[re.Pattern[str]]],\n    include_git_churn: bool,\n) -> Tuple[Optional[FileSignals], List[PromptSnippet]]:\n    rel = safe_relpath(p, repo_root)\n    if not rel:\n        return (None, [])",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "should_index_path",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def should_index_path(rel: str, exclude_dirs: set[str], ignore_globs: List[str]) -> bool:\n    parts = rel.split(\"/\")\n    if any(part in exclude_dirs for part in parts):\n        return False\n    for g in ignore_globs:\n        if fnmatch.fnmatch(rel, g) or fnmatch.fnmatch(\"/\" + rel, g):\n            return False\n    return True\ndef iter_candidate_files(repo_root: Path, exclude_dirs: set[str], ignore_globs: List[str], include_generated: bool) -> List[Path]:\n    out: List[Path] = []",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "iter_candidate_files",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def iter_candidate_files(repo_root: Path, exclude_dirs: set[str], ignore_globs: List[str], include_generated: bool) -> List[Path]:\n    out: List[Path] = []\n    for root, dirs, files in os.walk(repo_root):\n        pruned = []\n        for d in list(dirs):\n            if d in exclude_dirs and not include_generated:\n                pruned.append(d)\n        for d in pruned:\n            dirs.remove(d)\n        for fn in files:",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "token_signature",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def token_signature(snippet: str, max_tokens: int = 64) -> str:\n    toks = re.findall(r\"[A-Za-z_][A-Za-z0-9_]+\", snippet.lower())\n    if not toks:\n        return \"empty\"\n    c = Counter(toks)\n    top = [t for t, _ in c.most_common(max_tokens)]\n    h = hashlib.sha256()\n    h.update((\" \".join(top)).encode(\"utf-8\", errors=\"ignore\"))\n    return h.hexdigest()[:16]\ndef cluster_prompts(snippets: List[PromptSnippet]) -> List[DriftCluster]:",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "cluster_prompts",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def cluster_prompts(snippets: List[PromptSnippet]) -> List[DriftCluster]:\n    by_sig: Dict[str, List[PromptSnippet]] = defaultdict(list)\n    for s in snippets:\n        by_sig[token_signature(s.preview)].append(s)\n    clusters: List[DriftCluster] = []\n    for sig, items in by_sig.items():\n        files = sorted({it.file for it in items})\n        previews = [f\"{it.kind}@{it.start_line}-{it.end_line}: {it.preview}\" for it in items[:3]]\n        clusters.append(DriftCluster(sig, len(items), files, previews))\n    clusters.sort(key=lambda c: (-c.count, len(c.files), c.signature))",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "top_files_by",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def top_files_by(signals: List[FileSignals], key: str, n: int = 25) -> List[str]:\n    idx = {\n        \"prompt\": lambda s: s.prompt_score,\n        \"tool\": lambda s: s.tool_score,\n        \"telemetry\": lambda s: s.telemetry_score,\n        \"rag\": lambda s: s.rag_score,\n        \"eval\": lambda s: s.eval_score,\n        \"ios\": lambda s: s.ios_score,\n        \"todos\": lambda s: s.todos + s.fixmes,\n        \"churn\": lambda s: s.git_churn,",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "build_actions",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def build_actions(report: Dict[str, Any]) -> List[Dict[str, Any]]:\n    actions: List[Dict[str, Any]] = []\n    totals = report.get(\"totals\", {})\n    if totals.get(\"prompt_signal_files\", 0) >= 10:\n        actions.append({\n            \"priority\": \"high\",\n            \"title\": \"Unify prompt surfaces into versioned templates\",\n            \"why\": \"Prompt drift breaks alignment between runtime, fine-tuning, and eval.\",\n            \"next_steps\": [\n                \"Create prompts/v1/*.json and a registry.json (id+version).\",",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "export_sarif",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def export_sarif(report: Dict[str, Any], out_path: Path) -> None:\n    tool = {\"driver\": {\"name\": \"offLLM Symbiosis Advisor\", \"rules\": [\n        {\"id\": \"prompt-drift\", \"name\": \"Prompt drift surface\"},\n        {\"id\": \"hotspot\", \"name\": \"High-signal hotspot\"},\n    ]}}\n    results: List[Dict[str, Any]] = []\n    for c in report.get(\"prompt_drift_clusters\", [])[:25]:\n        for f in c.get(\"files\", [])[:10]:\n            results.append({\n                \"ruleId\": \"prompt-drift\",",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "compare_with_baseline",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def compare_with_baseline(current: Dict[str, Any], baseline_path: Path) -> Dict[str, Any]:\n    if not baseline_path.exists():\n        return {\"baseline_found\": False, \"summary\": \"No baseline file found.\", \"diff\": {}}\n    try:\n        baseline = json.loads(baseline_path.read_text(encoding=\"utf-8\", errors=\"replace\"))\n    except Exception as ex:\n        return {\"baseline_found\": True, \"summary\": f\"Failed to read baseline: {ex}\", \"diff\": {}}\n    cur_tot = current.get(\"totals\", {})\n    base_tot = baseline.get(\"totals\", {})\n    keys = sorted(set(cur_tot.keys()) | set(base_tot.keys()))",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "render_markdown",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def render_markdown(report: Dict[str, Any]) -> str:\n    lines: List[str] = []\n    lines.append(\"# offLLM Symbiosis Deep Report (v6)\\n\")\n    lines.append(f\"- Generated: **{report.get('generated_at','')}**\")\n    lines.append(f\"- Repo root: `{report.get('repo_root','')}`\")\n    lines.append(f\"- Repo fingerprint: `{report.get('repo_fingerprint','')}`\")\n    if report.get(\"config_path\"):\n        lines.append(f\"- Config: `{report.get('config_path')}`\")\n    if report.get(\"baseline\", {}).get(\"baseline_found\"):\n        lines.append(f\"- Baseline: `{report.get('baseline', {}).get('path','')}`\")",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "analyze_repo",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def analyze_repo(args: argparse.Namespace) -> Dict[str, Any]:\n    repo_root = Path(args.repo_root).resolve()\n    out_dir = Path(args.out_dir).resolve()\n    mkdirp(out_dir)\n    cfg = load_user_config(repo_root, Path(args.config).resolve() if args.config else None)\n    exclude_dirs = set(cfg_list(cfg, \"exclude_dirs\", sorted(DEFAULT_EXCLUDE_DIRS)))\n    ignore_globs = cfg_list(cfg, \"ignore_globs\", [])\n    include_generated = bool(args.include_generated or cfg_bool(cfg, \"include_generated\", False))\n    use_git = bool(args.git or cfg_bool(cfg, \"use_git\", True))\n    include_git_churn = bool(args.git_churn or cfg_bool(cfg, \"include_git_churn\", False))",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "build_arg_parser",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def build_arg_parser() -> argparse.ArgumentParser:\n    p = argparse.ArgumentParser(description=\"offLLM Symbiosis Advisor v6 (stdlib-only)\")\n    p.add_argument(\"--repo-root\", default=\".\", help=\"Repository root\")\n    p.add_argument(\"--out-dir\", default=\"reports/symbiosis_v6\", help=\"Output directory\")\n    p.add_argument(\"--include-generated\", action=\"store_true\", help=\"Include typically generated dirs (runs, cache, etc.)\")\n    p.add_argument(\"--max-file-size\", type=int, default=2_000_000, help=\"Max bytes to read per file\")\n    p.add_argument(\"--workers\", type=int, default=0, help=\"Thread workers (0 => auto)\")\n    p.add_argument(\"--config\", default=\"\", help=\"Explicit config path (.symbiosis.json/.yaml)\")\n    p.add_argument(\"--git\", action=\"store_true\", help=\"Prefer git-based fingerprinting if available\")\n    p.add_argument(\"--git-churn\", action=\"store_true\", help=\"Compute git churn per file (slower)\")",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "def main() -> int:\n    args = build_arg_parser().parse_args()\n    report = analyze_repo(args)\n    print(json.dumps({\n        \"ok\": True,\n        \"version\": report.get(\"version\"),\n        \"generated_at\": report.get(\"generated_at\"),\n        \"repo_fingerprint\": report.get(\"repo_fingerprint\"),\n        \"out_dir\": Path(args.out_dir).resolve().as_posix(),\n    }, indent=2))",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_EXCLUDE_DIRS",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "DEFAULT_EXCLUDE_DIRS = {\n    \".git\", \".hg\", \".svn\",\n    \"node_modules\", \"dist\", \"build\", \".next\", \".turbo\", \".cache\",\n    \".venv\", \"venv\", \"__pycache__\",\n    \"Pods\", \"DerivedData\",\n    \"runs\",\n    \"unsloth_compiled_cache\",\n}\nTEXT_EXT_ALLOW = {\n    \".py\", \".js\", \".ts\", \".tsx\", \".jsx\", \".m\", \".mm\", \".swift\", \".java\", \".kt\",",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "TEXT_EXT_ALLOW",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "TEXT_EXT_ALLOW = {\n    \".py\", \".js\", \".ts\", \".tsx\", \".jsx\", \".m\", \".mm\", \".swift\", \".java\", \".kt\",\n    \".c\", \".cc\", \".cpp\", \".h\", \".hpp\",\n    \".md\", \".txt\", \".rst\",\n    \".json\", \".yml\", \".yaml\",\n    \".toml\", \".ini\", \".cfg\", \".env\", \".properties\",\n    \".sh\", \".bash\", \".zsh\",\n    \".gradle\",\n    \".rb\", \".go\",\n    \".hbs\", \".mustache\",",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "ALWAYS_TEXT_NAMES",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "ALWAYS_TEXT_NAMES = {\n    \"package.json\", \"package-lock.json\", \"yarn.lock\", \"pnpm-lock.yaml\",\n    \"Podfile\", \"Gemfile\", \"Gemfile.lock\",\n    \"AGENTS.md\", \"README.md\", \"LICENSE\",\n}\nDEFAULT_PATTERN_STRINGS: Dict[str, List[str]] = {\n    \"prompt_markers\": [\n        r\"\\bsystem\\s+prompt\\b\",\n        r\"\\bdeveloper\\s+message\\b\",\n        r\"\\bprompt_template\\b\",",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "RE_JSON_CHAT_ROLE",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "RE_JSON_CHAT_ROLE = re.compile(r'\"role\"\\s*:\\s*\"(system|developer)\"', re.IGNORECASE)\nRE_HEREDOC_START = re.compile(r\"<<-?\\s*([\\\"']?)([A-Za-z0-9_]+)\\1\")\nRE_TRIPLE_QUOTE = re.compile(r\"([\\\"']{3})\")\nRE_BACKTICK_BLOCK = re.compile(r\"```\")\n@dataclass(frozen=True)\nclass PromptSnippet:\n    file: str\n    start_line: int\n    end_line: int\n    kind: str",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "RE_HEREDOC_START",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "RE_HEREDOC_START = re.compile(r\"<<-?\\s*([\\\"']?)([A-Za-z0-9_]+)\\1\")\nRE_TRIPLE_QUOTE = re.compile(r\"([\\\"']{3})\")\nRE_BACKTICK_BLOCK = re.compile(r\"```\")\n@dataclass(frozen=True)\nclass PromptSnippet:\n    file: str\n    start_line: int\n    end_line: int\n    kind: str\n    preview: str",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "RE_TRIPLE_QUOTE",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "RE_TRIPLE_QUOTE = re.compile(r\"([\\\"']{3})\")\nRE_BACKTICK_BLOCK = re.compile(r\"```\")\n@dataclass(frozen=True)\nclass PromptSnippet:\n    file: str\n    start_line: int\n    end_line: int\n    kind: str\n    preview: str\n    sha256: str",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "RE_BACKTICK_BLOCK",
+        "kind": 5,
+        "importPath": "scripts.offllm_symbiosis_advisor_v6",
+        "description": "scripts.offllm_symbiosis_advisor_v6",
+        "peekOfCode": "RE_BACKTICK_BLOCK = re.compile(r\"```\")\n@dataclass(frozen=True)\nclass PromptSnippet:\n    file: str\n    start_line: int\n    end_line: int\n    kind: str\n    preview: str\n    sha256: str\n@dataclass(frozen=True)",
+        "detail": "scripts.offllm_symbiosis_advisor_v6",
+        "documentation": {}
+    },
+    {
+        "label": "SarifFinding",
+        "kind": 6,
+        "importPath": "scripts.offllm_symbiosis_conductor_v1",
+        "description": "scripts.offllm_symbiosis_conductor_v1",
+        "peekOfCode": "class SarifFinding:\n    rule_id: str\n    level: str\n    message: str\n    uri: str\n    start_line: Optional[int] = None\n@dataclass(frozen=True)\nclass Hotspot:\n    path: str\n    score: float",
+        "detail": "scripts.offllm_symbiosis_conductor_v1",
+        "documentation": {}
+    },
+    {
+        "label": "Hotspot",
+        "kind": 6,
+        "importPath": "scripts.offllm_symbiosis_conductor_v1",
+        "description": "scripts.offllm_symbiosis_conductor_v1",
+        "peekOfCode": "class Hotspot:\n    path: str\n    score: float\n    reasons: List[str]\n    churn_commits: int\n# ----------------------------\n# Small utilities\n# ----------------------------\ndef _utc_now() -> str:\n    return _dt.datetime.now(tz=_dt.timezone.utc).replace(microsecond=0).isoformat().replace(\"+00:00\", \"Z\")",
+        "detail": "scripts.offllm_symbiosis_conductor_v1",
+        "documentation": {}
+    },
+    {
+        "label": "ConductorConfig",
+        "kind": 6,
+        "importPath": "scripts.offllm_symbiosis_conductor_v1",
+        "description": "scripts.offllm_symbiosis_conductor_v1",
+        "peekOfCode": "class ConductorConfig:\n    max_hotspots: int = 30\n    churn_max_count: int = 200\n    rg_bin: str = \"rg\"\n    include_rg_commands: bool = True\n    include_git_churn: bool = True\n    extra_search_patterns: Dict[str, List[str]] = dataclasses.field(default_factory=dict)\n    surfaces_order: List[str] = dataclasses.field(default_factory=lambda: [\n        \"prompts\",\n        \"tools_orchestration\",",
+        "detail": "scripts.offllm_symbiosis_conductor_v1",
+        "documentation": {}
+    },
+    {
+        "label": "load_user_config",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_conductor_v1",
+        "description": "scripts.offllm_symbiosis_conductor_v1",
+        "peekOfCode": "def load_user_config(repo_root: Path) -> ConductorConfig:\n    \"\"\"\n    Load optional config from:\n      - .offllm-symbiosis.toml\n      - .offllm-symbiosis.json\n    TOML is preferred (py>=3.11). JSON always supported.\n    \"\"\"\n    toml_p = repo_root / \".offllm-symbiosis.toml\"\n    json_p = repo_root / \".offllm-symbiosis.json\"\n    data: Dict[str, Any] = {}",
+        "detail": "scripts.offllm_symbiosis_conductor_v1",
+        "documentation": {}
+    },
+    {
+        "label": "load_sarif_findings",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_conductor_v1",
+        "description": "scripts.offllm_symbiosis_conductor_v1",
+        "peekOfCode": "def load_sarif_findings(sarif_path: Path) -> List[SarifFinding]:\n    obj = _read_json(sarif_path)\n    findings: List[SarifFinding] = []\n    try:\n        runs = obj.get(\"runs\", [])\n        if not runs:\n            return []\n        results = runs[0].get(\"results\", [])\n        for r in results:\n            rule_id = str(r.get(\"ruleId\", \"unknown\"))",
+        "detail": "scripts.offllm_symbiosis_conductor_v1",
+        "documentation": {}
+    },
+    {
+        "label": "build_rg_commands",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_conductor_v1",
+        "description": "scripts.offllm_symbiosis_conductor_v1",
+        "peekOfCode": "def build_rg_commands(cfg: ConductorConfig, repo_root: Path, where: Dict[str, List[str]]) -> Dict[str, List[str]]:\n    \"\"\"\n    Create ripgrep commands per surface, targeted to the file lists from where_to_search.\n    \"\"\"\n    cmds: Dict[str, List[str]] = {}\n    patterns = dict(DEFAULT_RG_PATTERNS)\n    # merge in user patterns\n    for surf, pats in cfg.extra_search_patterns.items():\n        patterns[_surface_key_normalize(surf)] = patterns.get(_surface_key_normalize(surf), []) + list(pats)\n    for surf, files in where.items():",
+        "detail": "scripts.offllm_symbiosis_conductor_v1",
+        "documentation": {}
+    },
+    {
+        "label": "compute_hotspots",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_conductor_v1",
+        "description": "scripts.offllm_symbiosis_conductor_v1",
+        "peekOfCode": "def compute_hotspots(\n    repo_root: Path,\n    where: Dict[str, List[str]],\n    sarif: List[SarifFinding],\n    cfg: ConductorConfig,\n) -> List[Hotspot]:\n    \"\"\"\n    Hotspot score heuristic:\n      - base score from number of surfaces a file appears in\n      - + SARIF findings weight",
+        "detail": "scripts.offllm_symbiosis_conductor_v1",
+        "documentation": {}
+    },
+    {
+        "label": "compare_baseline",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_conductor_v1",
+        "description": "scripts.offllm_symbiosis_conductor_v1",
+        "peekOfCode": "def compare_baseline(current: Dict[str, Any], baseline: Dict[str, Any]) -> Dict[str, Any]:\n    \"\"\"\n    Compare report surfaces + actions + prompt clusters.\n    Output is deterministic and safe to print in CI.\n    \"\"\"\n    cur_where = _extract_where_to_search(current)\n    base_where = _extract_where_to_search(baseline)\n    def _setmap(d: Dict[str, List[str]]) -> Dict[str, set]:\n        return {k: set(v) for k, v in d.items()}\n    cur_sm = _setmap(cur_where)",
+        "detail": "scripts.offllm_symbiosis_conductor_v1",
+        "documentation": {}
+    },
+    {
+        "label": "build_fine_tune_manifest",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_conductor_v1",
+        "description": "scripts.offllm_symbiosis_conductor_v1",
+        "peekOfCode": "def build_fine_tune_manifest(where: Dict[str, List[str]], actions: List[Dict[str, Any]]) -> Dict[str, Any]:\n    \"\"\"\n    Produce a manifest of training data sources and intended evals.\n    This is meant to be consumed by your end-to-end pipeline as \"what to harvest next\".\n    \"\"\"\n    # Map surfaces to dataset intents\n    surface_to_intent = {\n        \"prompts\": {\"type\": \"prompt_registry\", \"weight\": 3},\n        \"tools_orchestration\": {\"type\": \"tool_schemas_and_handlers\", \"weight\": 3},\n        \"telemetry\": {\"type\": \"telemetry_events\", \"weight\": 4},",
+        "detail": "scripts.offllm_symbiosis_conductor_v1",
+        "documentation": {}
+    },
+    {
+        "label": "action_backlog",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_conductor_v1",
+        "description": "scripts.offllm_symbiosis_conductor_v1",
+        "peekOfCode": "def action_backlog(actions: List[Dict[str, Any]]) -> List[Dict[str, Any]]:\n    out: List[Dict[str, Any]] = []\n    for a in actions:\n        title = str(a.get(\"title\") or \"\")\n        template = ACTION_TO_REFACTOR_TEMPLATES.get(title, {})\n        out.append({\n            \"priority\": a.get(\"priority\", \"med\"),\n            \"title\": title,\n            \"why\": a.get(\"why\", \"\"),\n            \"next_steps\": a.get(\"next_steps\", []),",
+        "detail": "scripts.offllm_symbiosis_conductor_v1",
+        "documentation": {}
+    },
+    {
+        "label": "render_md",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_conductor_v1",
+        "description": "scripts.offllm_symbiosis_conductor_v1",
+        "peekOfCode": "def render_md(\n    repo_root: Path,\n    report_path: Path,\n    sarif_path: Optional[Path],\n    cfg: ConductorConfig,\n    fingerprint: str,\n    where: Dict[str, List[str]],\n    rg_cmds: Dict[str, List[str]],\n    hotspots: List[Hotspot],\n    backlog: List[Dict[str, Any]],",
+        "detail": "scripts.offllm_symbiosis_conductor_v1",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.offllm_symbiosis_conductor_v1",
+        "description": "scripts.offllm_symbiosis_conductor_v1",
+        "peekOfCode": "def main(argv: Optional[List[str]] = None) -> int:\n    ap = argparse.ArgumentParser(description=\"offLLM Symbiosis Conductor (v1)\")\n    ap.add_argument(\"--repo\", required=True, help=\"Repo root (e.g. /home/ales27pm/offLLM-1)\")\n    ap.add_argument(\"--report\", required=True, help=\"Path to symbiosis_deep_report.json\")\n    ap.add_argument(\"--sarif\", default=None, help=\"Optional path to symbiosis_deep_report.sarif.json\")\n    ap.add_argument(\"--baseline\", default=None, help=\"Optional baseline report json to compare against\")\n    ap.add_argument(\"--out\", required=True, help=\"Output directory (will be created)\")\n    ap.add_argument(\"--max-hotspots\", type=int, default=None, help=\"Override max hotspots\")\n    args = ap.parse_args(argv)\n    repo_root = Path(args.repo).expanduser().resolve()",
+        "detail": "scripts.offllm_symbiosis_conductor_v1",
         "documentation": {}
     },
     {
