@@ -1,113 +1,20 @@
-import logger from "../src/utils/logger";
-import {
-  buildPromptEvent,
-  buildRetrievalEvent,
-  buildTelemetryEvent,
-  buildToolInvocationEvent,
-  hashString,
-  logTelemetryEvent,
-  redactTelemetryValue,
-  validateTelemetryEvent,
-} from "../src/utils/telemetry";
+import { TelemetrySink, sha256 } from "../src/utils/telemetry";
 
-test("hashString returns deterministic hash", () => {
-  expect(hashString("hello")).toBe(hashString("hello"));
-  expect(hashString("hello")).not.toBe(hashString("world"));
+test("sha256 returns deterministic hash", () => {
+  expect(sha256("hello")).toBe(sha256("hello"));
+  expect(sha256("hello")).not.toBe(sha256("world"));
 });
 
-test("redactTelemetryValue masks sensitive fields", () => {
-  const redacted = redactTelemetryValue({
-    email: "person@example.com",
-    token: "example_token_value",
-    phone: "+1 (555) 123-4567",
+test("TelemetrySink records events with required fields", () => {
+  const sink = new TelemetrySink({ appName: "offLLM", appVersion: "1.0.0" });
+  const eventId = sink.event("model_interaction", { phase: "request" });
+  const snapshot = sink.snapshot();
+
+  expect(typeof eventId).toBe("string");
+  expect(snapshot).toHaveLength(1);
+  expect(snapshot[0]).toMatchObject({
+    event_id: eventId,
+    type: "model_interaction",
+    app: { name: "offLLM", version: "1.0.0" },
   });
-  expect(redacted.email).toBe("[REDACTED_EMAIL]");
-  expect(redacted.token).toBe("[REDACTED]");
-  expect(redacted.phone).toBe("[REDACTED_PHONE]");
-});
-
-test("buildToolInvocationEvent includes hashes", () => {
-  const event = buildToolInvocationEvent({
-    promptHash: "abc",
-    toolName: "demo",
-    args: { q: "test" },
-    success: true,
-    latencyMs: 10,
-    resultSize: 5,
-    modelId: "model-test",
-  });
-  expect(event.tool_name).toBe("demo");
-  expect(event.tool_args_hash).toContain("sha256_");
-  expect(event.model_id).toBe("model-test");
-  expect(event.tool_calls).toHaveLength(1);
-  expect(event.outcome).toBe("success");
-  expect(event.latency).toBe(10);
-});
-
-test("telemetry builders set schema fields via buildTelemetryEvent", () => {
-  const base = buildPromptEvent({
-    promptHash: "hash",
-    promptText: "hello",
-    modelId: "model-test",
-  });
-  const payload = buildTelemetryEvent(base);
-  expect(payload.schema_version).toBeDefined();
-  expect(payload.event_type).toBe("prompt_received");
-  expect(payload.prompt_id).toBeDefined();
-  expect(payload.prompt_version).toBeDefined();
-  expect(payload.tool_calls).toEqual([]);
-  expect(payload.retrieval_hits).toEqual([]);
-  expect(payload.redaction_applied).toBe(false);
-});
-
-test("validateTelemetryEvent rejects invalid payloads", () => {
-  const invalid = {
-    schema_version: 123,
-    event_type: "unknown",
-    timestamp: "now",
-  };
-  const result = validateTelemetryEvent(invalid);
-  expect(result.valid).toBe(false);
-  expect(result.errors.length).toBeGreaterThan(0);
-});
-
-test("validateTelemetryEvent accepts retrieval payloads", () => {
-  const event = buildRetrievalEvent({
-    query: "test",
-    resultIds: ["1"],
-    maxResults: 1,
-    latencyMs: 5,
-    candidateIds: ["1"],
-    candidateScores: [0.5],
-    modelId: "model-test",
-  });
-  const payload = buildTelemetryEvent(event);
-  const result = validateTelemetryEvent(payload);
-  expect(result.valid).toBe(true);
-  expect(payload.retrieval_hits).toEqual(["1"]);
-});
-
-test("logTelemetryEvent skips invalid events and logs an error", async () => {
-  const errorSpy = jest.spyOn(logger, "error").mockImplementation(() => {});
-  const result = await logTelemetryEvent({ prompt_hash: "missing_type" });
-  expect(result).toBeNull();
-  expect(errorSpy).toHaveBeenCalled();
-  errorSpy.mockRestore();
-});
-
-test("logTelemetryEvent enqueues valid events", async () => {
-  const errorSpy = jest.spyOn(logger, "error").mockImplementation(() => {});
-  const event = buildToolInvocationEvent({
-    promptHash: "abc",
-    toolName: "demo",
-    args: { q: "test" },
-    success: true,
-    latencyMs: 10,
-    resultSize: 5,
-    modelId: "model-test",
-  });
-  const result = await logTelemetryEvent(event);
-  expect(result).toContain("events.jsonl");
-  expect(errorSpy).not.toHaveBeenCalled();
-  errorSpy.mockRestore();
 });

@@ -1,84 +1,64 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://offllm.ai/schemas/telemetry_event.schema.json",
-  "title": "TelemetryEvent",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://offllm.local/schemas/telemetry_event.schema.json",
+  "title": "offLLM Telemetry Event",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "schema_version",
-    "event_type",
-    "timestamp",
-    "prompt_id",
-    "prompt_version",
-    "model_id",
-    "tool_calls",
-    "retrieval_hits",
-    "outcome",
-    "latency",
-    "redaction_applied"
-  ],
+  "required": ["event_id", "ts_ms", "type", "app", "model"],
   "properties": {
-    "schema_version": { "type": "string" },
-    "event_type": {
+    "event_id": { "type": "string", "minLength": 8 },
+    "ts_ms": { "type": "integer", "minimum": 0 },
+    "type": {
       "type": "string",
       "enum": [
-        "prompt_received",
-        "tool_invocation",
-        "retrieval",
-        "final_response"
+        "model_interaction",
+        "tool_call",
+        "tool_result",
+        "retrieval_trace",
+        "eval_result",
+        "error"
       ]
     },
-    "timestamp": { "type": "string" },
-    "prompt_id": { "type": "string" },
-    "prompt_version": { "type": "string" },
-    "model_id": { "type": "string" },
-    "tool_calls": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": ["name", "args"],
-        "properties": {
-          "name": { "type": "string" },
-          "args": {
-            "type": ["object", "array", "string", "number", "boolean", "null"]
-          },
-          "success": { "type": ["boolean", "null"] },
-          "error": { "type": ["string", "null"] }
-        }
+    "app": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "platform": { "type": "string" }
       }
     },
-    "retrieval_hits": { "type": "array", "items": { "type": "string" } },
-    "outcome": { "type": "string" },
-    "latency": { "type": "number" },
-    "redaction_applied": { "type": "boolean" },
-    "prompt_hash": { "type": "string" },
-    "prompt_preview": { "type": "string" },
-    "tool_schema_version": { "type": "string" },
-    "tool_name": { "type": "string" },
-    "tool_args_hash": { "type": "string" },
-    "tool_args_preview": {
-      "type": ["object", "array", "string", "number", "boolean", "null"]
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id"],
+      "properties": {
+        "id": { "type": "string" },
+        "runtime": { "type": "string" },
+        "quant": { "type": "string" }
+      }
     },
-    "tool_result_size": { "type": "integer" },
-    "success": { "type": "boolean" },
-    "latency_ms": { "type": "number" },
-    "error": { "type": ["string", "null"] },
-    "response_hash": { "type": "string" },
-    "response_preview": { "type": "string" },
-    "tool_calls_count": { "type": "integer" },
-    "query_hash": { "type": "string" },
-    "query_preview": { "type": "string" },
-    "result_ids": { "type": "array", "items": { "type": "string" } },
-    "max_results": { "type": "integer" },
-    "retrieval_trace": {
+    "prompt": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "candidate_ids": { "type": "array", "items": { "type": "string" } },
-        "candidate_scores": { "type": "array", "items": { "type": "number" } }
-      },
-      "required": ["candidate_ids", "candidate_scores"]
+        "prompt_id": { "type": "string" },
+        "prompt_version": { "type": "string" },
+        "system_hash": { "type": "string" }
+      }
+    },
+    "conversation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "turn_id": { "type": "string" },
+        "session_id": { "type": "string" }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": true
     }
   }
 }

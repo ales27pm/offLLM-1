@@ -71,6 +71,29 @@ def validate_tool_args(tool_name: str, args: Any) -> list[str]:
     return errors
 
 
+def _prompt_meta(event: dict) -> dict:
+    prompt = event.get("prompt") or {}
+    return {
+        "prompt_id": prompt.get("prompt_id") or event.get("prompt_id"),
+        "prompt_version": prompt.get("prompt_version") or event.get("prompt_version"),
+        "prompt_hash": prompt.get("system_hash") or event.get("prompt_hash"),
+        "model_id": event.get("model_id") or (event.get("model") or {}).get("id"),
+    }
+
+
+def _extract_tool_call(event: dict) -> tuple[str | None, dict | None, dict]:
+    if event.get("event_type") == "tool_invocation":
+        return (
+            event.get("tool_name"),
+            event.get("tool_args_preview"),
+            _prompt_meta(event),
+        )
+    if event.get("type") == "tool_call":
+        payload = event.get("payload") or {}
+        return payload.get("tool"), payload.get("args"), _prompt_meta(event)
+    return None, None, {}
+
+
 def build_tool_call_records(path: Path, strict_schema: bool) -> list[dict]:
     patterns = load_redaction_patterns()
     schema = load_telemetry_schema()
@@ -91,10 +114,7 @@ def build_tool_call_records(path: Path, strict_schema: bool) -> list[dict]:
                         f"Telemetry schema validation failed: {'; '.join(errors)}"
                     )
                 continue
-            if redacted.get("event_type") != "tool_invocation":
-                continue
-            tool_name = redacted.get("tool_name")
-            tool_args = redacted.get("tool_args_preview")
+            tool_name, tool_args, meta = _extract_tool_call(redacted)
             if not tool_name:
                 continue
             tool_errors = validate_tool_args(tool_name, tool_args)
@@ -105,10 +125,10 @@ def build_tool_call_records(path: Path, strict_schema: bool) -> list[dict]:
                 continue
             records.append(
                 {
-                    "prompt_id": redacted.get("prompt_id"),
-                    "prompt_version": redacted.get("prompt_version"),
-                    "model_id": redacted.get("model_id"),
-                    "prompt_hash": redacted.get("prompt_hash"),
+                    "prompt_id": meta.get("prompt_id"),
+                    "prompt_version": meta.get("prompt_version"),
+                    "model_id": meta.get("model_id"),
+                    "prompt_hash": meta.get("prompt_hash"),
                     "tool_name": tool_name,
                     "tool_args": tool_args,
                     "success": redacted.get("success"),

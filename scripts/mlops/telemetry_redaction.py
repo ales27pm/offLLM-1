@@ -95,17 +95,6 @@ def validate_event_schema(event: dict, schema: dict) -> list[str]:
         expected_type = properties.get(field, {}).get("type")
         if expected_type and not _matches_type(event.get(field), expected_type):
             errors.append(f"invalid type for {field}")
-    tool_calls = event.get("tool_calls")
-    if tool_calls is not None:
-        if not isinstance(tool_calls, list):
-            errors.append("tool_calls must be an array")
-        else:
-            for entry in tool_calls:
-                if not isinstance(entry, dict):
-                    errors.append("tool_calls entries must be objects")
-                    continue
-                if "name" not in entry or "args" not in entry:
-                    errors.append("tool_calls entries require name and args")
     return errors
 
 

@@ -1,40 +1,66 @@
-import { buildPrompt, formatToolDescription } from "./promptTemplate";
+import { PromptRegistry } from "./PromptRegistry";
+import { PromptLoader } from "./PromptLoader";
+
+const stableJson = (value) => {
+  const seen = new WeakSet();
+
+  const sortAny = (val) => {
+    if (val === null || val === undefined) return val;
+    if (typeof val !== "object") return val;
+    if (seen.has(val)) return null;
+    seen.add(val);
+
+    if (Array.isArray(val)) return val.map(sortAny);
+    return Object.keys(val)
+      .sort()
+      .reduce((acc, key) => {
+        acc[key] = sortAny(val[key]);
+        return acc;
+      }, {});
+  };
+
+  return JSON.stringify(sortAny(value), null, 2);
+};
 
 export default class PromptBuilder {
-  constructor(toolRegistry) {
+  constructor({
+    toolRegistry,
+    promptId = "runtime_system",
+    promptVersion = "v1",
+  } = {}) {
+    if (!toolRegistry) {
+      throw new Error("PromptBuilder: toolRegistry required");
+    }
     this.toolRegistry = toolRegistry;
+    this.promptId = promptId;
+    this.promptVersion = promptVersion;
+    this.registry = new PromptRegistry();
+    this.loader = new PromptLoader(this.registry);
+    this.now = () => new Date();
   }
 
-  build(userPrompt, context = []) {
-    const tools = (this.toolRegistry.getAvailableTools() || [])
-      .filter((tool) => tool?.name && tool?.description)
-      .map((tool) => ({
-        name: tool.name,
-        description: tool.description,
-        parameters: tool.parameters || {},
-      }))
-      .sort((a, b) => a.name.localeCompare(b.name));
+  buildSystemPrompt(allowCapabilities) {
+    const toolsJson = this.toolRegistry.toolsJson(
+      allowCapabilities ? { allowCapabilities } : {},
+    );
 
-    const toolsDesc = tools.map(formatToolDescription).join("\n");
+    const vars = {
+      DATE_ISO: this.now().toISOString(),
+      TOOLS_JSON: stableJson(toolsJson),
+    };
 
-    const contextLines = (context || [])
-      .map((entry) => this._formatContextEntry(entry))
-      .filter(Boolean)
-      .join("\n");
+    const systemPrompt = this.loader.loadAsString(
+      this.promptId,
+      this.promptVersion,
+      vars,
+    );
 
-    return buildPrompt({ toolsDesc, contextLines, userPrompt });
-  }
-
-  _formatContextEntry(entry) {
-    if (entry === null || entry === undefined) return "";
-    if (typeof entry === "string") return entry;
-    const roleLabel = entry.role
-      ? `${entry.role.charAt(0).toUpperCase()}${entry.role.slice(1)}:`
-      : "";
-    const content =
-      typeof entry.content === "string"
-        ? entry.content
-        : JSON.stringify(entry.content);
-    return roleLabel ? `${roleLabel} ${content}` : content;
+    return {
+      systemPrompt,
+      promptMeta: {
+        prompt_id: this.promptId,
+        prompt_version: this.promptVersion,
+      },
+    };
   }
 }

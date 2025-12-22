@@ -1,109 +1,51 @@
-name: Prompt Regression Suite
+name: Prompt Regression
 
 on:
-  pull_request:
   push:
-    branches:
-      - main
-      - master
-
-permissions:
-  contents: read
-  security-events: write
+    branches: [main]
+  pull_request:
 
 jobs:
-  prompt_regression:
+  prompt-regression:
     runs-on: ubuntu-latest
-
-    env:
-      OFFLLM_EVAL_MODEL_CMD: ${{ secrets.OFFLLM_EVAL_MODEL_CMD }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Gate (detect model cmd)
-        id: gate
-        shell: bash
-        run: |
-          set -euo pipefail
-          if [ -z "${OFFLLM_EVAL_MODEL_CMD:-}" ]; then
-            echo "enabled=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::OFFLLM_EVAL_MODEL_CMD secret not set; running schema-only prompt regression (no model execution)."
-          else
-            echo "enabled=true" >> "$GITHUB_OUTPUT"
-            echo "::notice::OFFLLM_EVAL_MODEL_CMD set; running full prompt regression."
-          fi
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install deps
-        shell: bash
+      - name: Install Node deps
         run: |
-          set -euo pipefail
-          python -V
+          npm ci
+
+      - name: Prompt registry lint (no drift)
+        run: |
+          python scripts/ci/lint_prompt_registry.py
+
+      - name: Unit tests
+        run: |
+          npm test --silent
+
+      - name: Offline eval gate (golden + refusal + tool-call format)
+        env:
+          OFFLLM_EVAL_ENDPOINT: ${{ secrets.OFFLLM_EVAL_ENDPOINT }}
+          OFFLLM_EVAL_MODEL: ${{ secrets.OFFLLM_EVAL_MODEL }}
+        run: |
           python -m pip install --upgrade pip
-          if [ -f "requirements-dev.txt" ]; then
-            python -m pip install -r requirements-dev.txt
-          fi
-          if [ -f "requirements.txt" ]; then
-            python -m pip install -r requirements.txt
-          fi
+          python scripts/eval/offline_eval.py --fail_below 1.0
 
-      - name: Run prompt regression (schema-only or full)
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p reports
-
-          # Always run at least schema validation + SARIF emission.
-          # If OFFLLM_EVAL_MODEL_CMD is set, the script will additionally attempt full checks.
-          python scripts/eval/run_prompt_regression.py \
-            --prompts scripts/eval/golden_prompts.json \
-            --prompts scripts/eval/redteam_tool_injection.json \
-            --report-out reports/prompt-regression.json \
-            --sarif-out reports/prompt-regression.sarif \
-            ${OFFLLM_EVAL_MODEL_CMD:+--model-cmd "${OFFLLM_EVAL_MODEL_CMD}"} \
-            --no-fail
-
-      - name: Upload JSON report artifact
-        uses: actions/upload-artifact@v5
+      - name: Upload eval failures artifact
+        if: failure()
+        uses: actions/upload-artifact@v4
         with:
-          name: prompt-regression-json
-          path: reports/prompt-regression.json
-          if-no-files-found: warn
-
-      - name: Upload SARIF artifact
-        uses: actions/upload-artifact@v5
-        with:
-          name: prompt-regression-sarif
-          path: reports/prompt-regression.sarif
-          if-no-files-found: warn
-
-      - name: Upload SARIF to Code Scanning
-        # Always attempt upload if SARIF exists. If it’s empty/invalid, Code Scanning will fail;
-        # our generator always emits valid SARIF with at least one location per result.
-        uses: github/codeql-action/upload-sarif@v4
-        with:
-          sarif_file: reports/prompt-regression.sarif
-
-      - name: Enforce policy (optional hard fail)
-        # Only fail the job when you explicitly enable full regression AND the report says it failed.
-        # Schema-only runs should not block PRs.
-        if: steps.gate.outputs.enabled == 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          import json, sys
-          p = "reports/prompt-regression.json"
-          data = json.load(open(p, "r", encoding="utf-8"))
-          failed = bool(data.get("failed"))
-          if failed:
-            print("[prompt-regression] Report indicates failure.")
-            sys.exit(1)
-          print("[prompt-regression] OK.")
-          PY
+          name: offline-eval-failures
+          path: reports/offline_eval_failures.json

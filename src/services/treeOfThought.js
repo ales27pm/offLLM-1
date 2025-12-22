@@ -1,16 +1,7 @@
 import LLMService from "./llmService";
-import {
-  TREE_OF_THOUGHT_CANDIDATE_ID,
-  TREE_OF_THOUGHT_EVALUATION_ID,
-  TREE_OF_THOUGHT_FALLBACK_ID,
-  getPromptDefinition,
-} from "../core/prompt/PromptRegistry";
-import {
-  buildFinalResponseEvent,
-  buildPromptEvent,
-  hashString,
-  logTelemetryEvent,
-} from "../utils/telemetry";
+import candidateTemplate from "../../prompts/v1/tree_of_thought_candidate.json";
+import evaluationTemplate from "../../prompts/v1/tree_of_thought_evaluation.json";
+import fallbackTemplate from "../../prompts/v1/tree_of_thought_fallback_candidates.json";
 
 const renderPromptTemplate = (template, values) =>
   Object.entries(values).reduce(
@@ -22,47 +13,6 @@ const normalizeModelOutput = (result) => {
   if (typeof result === "string") return result;
   if (result && typeof result.text === "string") return result.text;
   return "";
-};
-
-const getModelId = () =>
-  typeof LLMService.getModelId === "function"
-    ? LLMService.getModelId()
-    : "unknown";
-
-const logPromptStart = ({ prompt, promptDefinition }) => {
-  const promptHash = hashString(prompt);
-  const modelId = getModelId();
-  void logTelemetryEvent(
-    buildPromptEvent({
-      promptHash,
-      promptText: prompt,
-      modelId,
-      promptId: promptDefinition.id,
-      promptVersion: promptDefinition.version,
-    }),
-  );
-  return { promptHash, modelId };
-};
-
-const logPromptResponse = ({
-  promptHash,
-  modelId,
-  responseText,
-  promptDefinition,
-}) => {
-  if (responseText === null || responseText === undefined) {
-    return;
-  }
-  void logTelemetryEvent(
-    buildFinalResponseEvent({
-      promptHash,
-      responseText,
-      toolCallsCount: 0,
-      modelId,
-      promptId: promptDefinition.id,
-      promptVersion: promptDefinition.version,
-    }),
-  );
 };
 
 export class TreeOfThoughtReasoner {
@@ -79,7 +29,6 @@ export class TreeOfThoughtReasoner {
       evaluationThreshold = this.evaluationThreshold,
     } = options;
 
-    // Initialize the tree with the root problem
     const rootNode = {
       thought: problem,
       evaluation: 0,
@@ -87,10 +36,8 @@ export class TreeOfThoughtReasoner {
       depth: 0,
     };
 
-    // Develop the tree through iterative expansion
     await this.expandTree(rootNode, maxBranches, maxDepth, evaluationThreshold);
 
-    // Find the best solution path
     const bestSolution = this.findBestSolution(rootNode);
 
     return {
@@ -106,13 +53,11 @@ export class TreeOfThoughtReasoner {
       return;
     }
 
-    // Generate candidate thoughts
     const candidateThoughts = await this.generateCandidateThoughts(
       node.thought,
       maxBranches,
     );
 
-    // Evaluate each candidate
     for (const thought of candidateThoughts) {
       const evaluation = await this.evaluateThought(thought, node.thought);
 
@@ -126,7 +71,6 @@ export class TreeOfThoughtReasoner {
 
       node.children.push(childNode);
 
-      // Recursively expand promising branches
       if (evaluation > evaluationThreshold * 0.6) {
         await this.expandTree(
           childNode,
@@ -137,31 +81,18 @@ export class TreeOfThoughtReasoner {
       }
     }
 
-    // Sort children by evaluation score
     node.children.sort((a, b) => b.evaluation - a.evaluation);
   }
 
   async generateCandidateThoughts(currentThought, maxCandidates) {
-    const promptDefinition = getPromptDefinition(TREE_OF_THOUGHT_CANDIDATE_ID);
-    const promptTemplate = promptDefinition.template.prompt;
-    const prompt = renderPromptTemplate(promptTemplate, {
+    const prompt = renderPromptTemplate(candidateTemplate.prompt, {
       current_thought: currentThought,
       max_candidates: maxCandidates,
-    });
-    const { promptHash, modelId } = logPromptStart({
-      prompt,
-      promptDefinition,
     });
 
     try {
       const response = await LLMService.generate(prompt, 200, 0.8);
       const responseText = normalizeModelOutput(response);
-      logPromptResponse({
-        promptHash,
-        modelId,
-        responseText,
-        promptDefinition,
-      });
       return this.parseNumberedList(responseText).slice(0, maxCandidates);
     } catch (error) {
       console.error("Failed to generate candidate thoughts:", error);
@@ -178,10 +109,7 @@ export class TreeOfThoughtReasoner {
   }
 
   generateFallbackCandidates(thought, maxCandidates) {
-    // Fallback candidates for when LLM generation fails
-    const fallbackTemplates = getPromptDefinition(TREE_OF_THOUGHT_FALLBACK_ID)
-      .template.candidates;
-    const baseCandidates = fallbackTemplates.map((template) =>
+    const baseCandidates = fallbackTemplate.candidates.map((template) =>
       renderPromptTemplate(template, { thought }),
     );
 
@@ -189,28 +117,19 @@ export class TreeOfThoughtReasoner {
   }
 
   async evaluateThought(thought, context) {
-    const promptDefinition = getPromptDefinition(TREE_OF_THOUGHT_EVALUATION_ID);
-    const promptTemplate = promptDefinition.template.prompt;
-    const prompt = renderPromptTemplate(promptTemplate, { context, thought });
-    const { promptHash, modelId } = logPromptStart({
-      prompt,
-      promptDefinition,
+    const prompt = renderPromptTemplate(evaluationTemplate.prompt, {
+      context,
+      thought,
     });
 
     try {
       const response = await LLMService.generate(prompt, 10, 0.1);
       const responseText = normalizeModelOutput(response);
-      logPromptResponse({
-        promptHash,
-        modelId,
-        responseText,
-        promptDefinition,
-      });
       const rating = parseFloat(responseText.trim());
-      return isNaN(rating) ? 0.5 : Math.max(0, Math.min(1, rating));
+      return Number.isNaN(rating) ? 0.5 : Math.max(0, Math.min(1, rating));
     } catch (error) {
       console.error("Failed to evaluate thought:", error);
-      return 0.5; // Default neutral rating
+      return 0.5;
     }
   }
 
@@ -219,7 +138,6 @@ export class TreeOfThoughtReasoner {
       return node;
     }
 
-    // Find the best child and continue down that path
     const bestChild = node.children[0];
     return this.findBestSolution(bestChild);
   }
@@ -228,7 +146,6 @@ export class TreeOfThoughtReasoner {
     let currentNode = solutionNode;
     const path = [];
 
-    // Trace back the solution path
     while (currentNode && currentNode !== rootNode) {
       path.unshift(currentNode.thought);
       currentNode = currentNode.parent;
@@ -244,10 +161,9 @@ export class TreeOfThoughtReasoner {
   }
 
   async parallelTreeSearch(problem, numTrees = 3) {
-    // Run multiple tree searches in parallel for better exploration
     const trees = [];
 
-    for (let i = 0; i < numTrees; i++) {
+    for (let i = 0; i < numTrees; i += 1) {
       trees.push(
         this.solveComplexProblem(problem, {
           maxBranches: Math.floor(this.maxBranches / numTrees),
@@ -258,14 +174,17 @@ export class TreeOfThoughtReasoner {
 
     const results = await Promise.allSettled(trees);
     const successfulResults = results
-      .filter((r) => r.status === "fulfilled")
-      .map((r) => r.value);
+      .filter((result) => result.status === "fulfilled")
+      .map((result) => result.value);
 
     if (successfulResults.length === 0) {
-      throw new Error("All tree searches failed");
+      throw new Error("All tree search attempts failed");
     }
 
-    // Return the best solution across all trees
-    return successfulResults.sort((a, b) => b.confidence - a.confidence)[0];
+    return successfulResults.reduce((best, current) =>
+      current.confidence > best.confidence ? current : best,
+    );
   }
 }
+
+export default TreeOfThoughtReasoner;

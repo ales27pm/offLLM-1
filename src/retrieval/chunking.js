@@ -1,42 +1,64 @@
-export const DEFAULT_CHUNKING_OPTIONS = {
-  maxChars: 12000,
-  overlap: 200,
+/**
+ * Deterministic chunker.
+ * - Normalizes newlines
+ * - Splits into paragraphs
+ * - Packs into fixed-size windows with overlap
+ */
+
+const normalizeText = (value) =>
+  String(value).replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+
+const splitParagraphs = (value) => {
+  const normalized = normalizeText(value);
+  const parts = normalized
+    .split(/\n{2,}/g)
+    .map((part) => part.trim())
+    .filter(Boolean);
+  return parts.length ? parts : [normalized.trim()].filter(Boolean);
 };
 
-const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+const chunkText = (text, opts = {}) => {
+  const maxChars = Number.isFinite(opts.maxChars) ? opts.maxChars : 1200;
+  const overlap = Number.isFinite(opts.overlap) ? opts.overlap : 150;
 
-export const chunkText = (text, options = {}) => {
-  if (!text) return [];
-  const trimmedText = text.trim();
-  if (!trimmedText) return [];
-  const maxChars = clamp(
-    Number(options.maxChars ?? DEFAULT_CHUNKING_OPTIONS.maxChars),
-    1,
-    Number.MAX_SAFE_INTEGER,
-  );
-  const overlap = clamp(
-    Number(options.overlap ?? DEFAULT_CHUNKING_OPTIONS.overlap),
-    0,
-    maxChars - 1,
-  );
+  if (maxChars <= 0) throw new Error("chunkText: maxChars must be > 0");
+  if (overlap < 0) throw new Error("chunkText: overlap must be >= 0");
+  if (overlap >= maxChars)
+    throw new Error("chunkText: overlap must be < maxChars");
+
+  const paras = splitParagraphs(text);
   const chunks = [];
-  let cursor = 0;
+  let buffer = "";
 
-  while (cursor < text.length) {
-    let end = Math.min(cursor + maxChars, text.length);
-    if (end < text.length) {
-      const lastSpace = text.lastIndexOf(" ", end);
-      if (lastSpace > cursor + Math.floor(maxChars * 0.5)) {
-        end = lastSpace;
-      }
+  const flushBuffer = () => {
+    if (!buffer.trim()) return;
+    let i = 0;
+    const body = buffer.trim();
+    while (i < body.length) {
+      const end = Math.min(i + maxChars, body.length);
+      const piece = body.slice(i, end).trim();
+      if (piece) chunks.push(piece);
+      if (end >= body.length) break;
+      i = Math.max(0, end - overlap);
     }
-    const slice = text.slice(cursor, end).trim();
-    if (slice) {
-      chunks.push(slice);
+    buffer = "";
+  };
+
+  for (const para of paras) {
+    if (!buffer) {
+      buffer = para;
+      continue;
     }
-    if (end >= text.length) break;
-    cursor = Math.max(cursor + 1, end - overlap);
+    if (buffer.length + 2 + para.length <= maxChars) {
+      buffer = `${buffer}\n\n${para}`;
+    } else {
+      flushBuffer();
+      buffer = para;
+    }
   }
+  flushBuffer();
 
-  return chunks.length ? chunks : [trimmedText];
+  return chunks.map((chunk) => chunk.replace(/\s+/g, " ").trim());
 };
+
+export { chunkText, normalizeText, splitParagraphs };
