@@ -24,7 +24,17 @@ jobs:
         env:
           OFFLLM_EVAL_MODEL_CMD: ${{ secrets.OFFLLM_EVAL_MODEL_CMD }}
 
+      - name: Check SARIF output
+        id: sarif_check
+        run: |
+          if [ -f "eval/prompt_regression.sarif" ]; then
+            echo "found=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "found=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Upload SARIF
-        uses: github/codeql-action/upload-sarif@v3
+        if: steps.sarif_check.outputs.found == 'true'
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: eval/prompt_regression.sarif
