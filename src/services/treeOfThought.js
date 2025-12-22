@@ -5,12 +5,65 @@ import {
   TREE_OF_THOUGHT_FALLBACK_ID,
   getPromptDefinition,
 } from "../core/prompt/PromptRegistry";
+import {
+  buildFinalResponseEvent,
+  buildPromptEvent,
+  hashString,
+  logTelemetryEvent,
+} from "../utils/telemetry";
 
 const renderPromptTemplate = (template, values) =>
   Object.entries(values).reduce(
     (acc, [key, value]) => acc.replaceAll(`{${key}}`, String(value)),
     template,
   );
+
+const normalizeModelOutput = (result) => {
+  if (typeof result === "string") return result;
+  if (result && typeof result.text === "string") return result.text;
+  return "";
+};
+
+const getModelId = () =>
+  typeof LLMService.getModelId === "function"
+    ? LLMService.getModelId()
+    : "unknown";
+
+const logPromptStart = ({ prompt, promptDefinition }) => {
+  const promptHash = hashString(prompt);
+  const modelId = getModelId();
+  void logTelemetryEvent(
+    buildPromptEvent({
+      promptHash,
+      promptText: prompt,
+      modelId,
+      promptId: promptDefinition.id,
+      promptVersion: promptDefinition.version,
+    }),
+  );
+  return { promptHash, modelId };
+};
+
+const logPromptResponse = ({
+  promptHash,
+  modelId,
+  responseText,
+  promptDefinition,
+}) => {
+  if (responseText === null || responseText === undefined) {
+    return;
+  }
+  void logTelemetryEvent(
+    buildFinalResponseEvent({
+      promptHash,
+      responseText,
+      toolCallsCount: 0,
+      modelId,
+      promptId: promptDefinition.id,
+      promptVersion: promptDefinition.version,
+    }),
+  );
+};
 
 export class TreeOfThoughtReasoner {
   constructor() {
@@ -89,16 +142,27 @@ export class TreeOfThoughtReasoner {
   }
 
   async generateCandidateThoughts(currentThought, maxCandidates) {
-    const promptTemplate = getPromptDefinition(TREE_OF_THOUGHT_CANDIDATE_ID)
-      .template.prompt;
+    const promptDefinition = getPromptDefinition(TREE_OF_THOUGHT_CANDIDATE_ID);
+    const promptTemplate = promptDefinition.template.prompt;
     const prompt = renderPromptTemplate(promptTemplate, {
       current_thought: currentThought,
       max_candidates: maxCandidates,
     });
+    const { promptHash, modelId } = logPromptStart({
+      prompt,
+      promptDefinition,
+    });
 
     try {
       const response = await LLMService.generate(prompt, 200, 0.8);
-      return this.parseNumberedList(response.text).slice(0, maxCandidates);
+      const responseText = normalizeModelOutput(response);
+      logPromptResponse({
+        promptHash,
+        modelId,
+        responseText,
+        promptDefinition,
+      });
+      return this.parseNumberedList(responseText).slice(0, maxCandidates);
     } catch (error) {
       console.error("Failed to generate candidate thoughts:", error);
       return this.generateFallbackCandidates(currentThought, maxCandidates);
@@ -125,13 +189,24 @@ export class TreeOfThoughtReasoner {
   }
 
   async evaluateThought(thought, context) {
-    const promptTemplate = getPromptDefinition(TREE_OF_THOUGHT_EVALUATION_ID)
-      .template.prompt;
+    const promptDefinition = getPromptDefinition(TREE_OF_THOUGHT_EVALUATION_ID);
+    const promptTemplate = promptDefinition.template.prompt;
     const prompt = renderPromptTemplate(promptTemplate, { context, thought });
+    const { promptHash, modelId } = logPromptStart({
+      prompt,
+      promptDefinition,
+    });
 
     try {
       const response = await LLMService.generate(prompt, 10, 0.1);
-      const rating = parseFloat(response.text.trim());
+      const responseText = normalizeModelOutput(response);
+      logPromptResponse({
+        promptHash,
+        modelId,
+        responseText,
+        promptDefinition,
+      });
+      const rating = parseFloat(responseText.trim());
       return isNaN(rating) ? 0.5 : Math.max(0, Math.min(1, rating));
     } catch (error) {
       console.error("Failed to evaluate thought:", error);

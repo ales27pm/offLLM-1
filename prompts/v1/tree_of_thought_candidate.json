@@ -1,0 +1,3 @@
+{
+  "prompt": "Given the current thought: \"{current_thought}\"\n\nGenerate {max_candidates} diverse alternative approaches or next steps. Format as a numbered list:"
+}
