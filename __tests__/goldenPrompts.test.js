@@ -143,6 +143,50 @@ describe("golden prompts schema", () => {
           expect(entry.expected.citations_required).toBe(
             entry.requires_citations,
           );
+      expect(typeof entry.expected_prompt_hash).toBe("string");
+      expect(entry.expected_prompt_hash.length).toBeGreaterThan(0);
+
+      // Validate expected.* schema and consistency with legacy expectation fields
+      if (entry.expected && typeof entry.expected === "object") {
+        // Ensure only allowed keys appear under `expected`
+        Object.keys(entry.expected).forEach((key) => {
+          expect(allowedExpected.has(key)).toBe(true);
+        });
+
+        // When both legacy and normalized fields are present, they must agree
+        if (
+          Object.prototype.hasOwnProperty.call(entry, "expected_tool_calls") &&
+          Object.prototype.hasOwnProperty.call(entry.expected, "tool_calls")
+        ) {
+          expect(entry.expected.tool_calls).toEqual(
+            entry.expected_tool_calls,
+          );
+        }
+
+        if (
+          Object.prototype.hasOwnProperty.call(entry, "expects_json") &&
+          Object.prototype.hasOwnProperty.call(entry.expected, "json_valid")
+        ) {
+          expect(entry.expected.json_valid).toBe(entry.expects_json);
+        }
+
+        if (
+          Object.prototype.hasOwnProperty.call(entry, "expects_refusal") &&
+          Object.prototype.hasOwnProperty.call(entry.expected, "refusal")
+        ) {
+          expect(entry.expected.refusal).toBe(entry.expects_refusal);
+        }
+
+        if (
+          Object.prototype.hasOwnProperty.call(entry, "requires_citations") &&
+          Object.prototype.hasOwnProperty.call(
+            entry.expected,
+            "citations_required",
+          )
+        ) {
+          expect(entry.expected.citations_required).toBe(
+            entry.requires_citations,
+          );
         }
       }
 
