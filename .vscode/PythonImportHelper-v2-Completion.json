@@ -18,221 +18,12 @@
         "documentation": {}
     },
     {
-        "label": "os",
+        "label": "re",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
-        "documentation": {}
-    },
-    {
-        "label": "subprocess",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "subprocess",
-        "description": "subprocess",
-        "detail": "subprocess",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
         "documentation": {}
     },
     {
@@ -245,6 +36,562 @@
         "documentation": {}
     },
     {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "subprocess",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "detail": "subprocess",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "shlex",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "shlex",
+        "description": "shlex",
+        "detail": "shlex",
+        "documentation": {}
+    },
+    {
+        "label": "dataclasses",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "asdict",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "asdict",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "asdict",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
         "label": "Any",
         "importPath": "typing",
         "description": "typing",
@@ -270,6 +617,22 @@
     },
     {
         "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
@@ -326,6 +689,22 @@
     },
     {
         "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
@@ -1698,6 +2077,70 @@
         "description": "typing",
         "isExtraImport": true,
         "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
         "documentation": {}
     },
     {
@@ -1803,6 +2246,63 @@
         "description": "collections",
         "isExtraImport": true,
         "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "hashlib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "hashlib",
+        "description": "hashlib",
+        "detail": "hashlib",
+        "documentation": {}
+    },
+    {
+        "label": "load_redaction_patterns",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "redact_value",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "stable_dumps",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "load_redaction_patterns",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "redact_value",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "stable_dumps",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
         "documentation": {}
     },
     {
@@ -2687,361 +3187,6 @@
         "description": "peft",
         "isExtraImport": true,
         "detail": "peft",
-        "documentation": {}
-    },
-    {
-        "label": "hashlib",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "hashlib",
-        "description": "hashlib",
-        "detail": "hashlib",
-        "documentation": {}
-    },
-    {
-        "label": "re",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "re",
-        "description": "re",
-        "detail": "re",
-        "documentation": {}
-    },
-    {
-        "label": "dataclasses",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "asdict",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "asdict",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "asdict",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
         "documentation": {}
     },
     {
@@ -11639,6 +11784,231 @@
         "documentation": {}
     },
     {
+        "label": "load_outputs",
+        "kind": 2,
+        "importPath": "eval.export_equivalence",
+        "description": "eval.export_equivalence",
+        "peekOfCode": "def load_outputs(path: Path) -> dict:\n    outputs = {}\n    with path.open(\"r\", encoding=\"utf-8\") as handle:\n        for line in handle:\n            if not line.strip():\n                continue\n            entry = json.loads(line)\n            entry_id = entry.get(\"id\")\n            if not entry_id:\n                raise ValueError(f\"Missing id in {path}\")",
+        "detail": "eval.export_equivalence",
+        "documentation": {}
+    },
+    {
+        "label": "logits_max_diff",
+        "kind": 2,
+        "importPath": "eval.export_equivalence",
+        "description": "eval.export_equivalence",
+        "peekOfCode": "def logits_max_diff(a: list, b: list) -> float:\n    if len(a) != len(b):\n        return float(\"inf\")\n    return max(abs(x - y) for x, y in zip(a, b)) if a else 0.0\ndef json_valid(text: str) -> bool:\n    try:\n        json.loads(text)\n        return True\n    except json.JSONDecodeError:\n        return False",
+        "detail": "eval.export_equivalence",
+        "documentation": {}
+    },
+    {
+        "label": "json_valid",
+        "kind": 2,
+        "importPath": "eval.export_equivalence",
+        "description": "eval.export_equivalence",
+        "peekOfCode": "def json_valid(text: str) -> bool:\n    try:\n        json.loads(text)\n        return True\n    except json.JSONDecodeError:\n        return False\ndef main() -> None:\n    parser = argparse.ArgumentParser(\n        description=\"Validate CoreML/MLX export equivalence against Python outputs.\"\n    )",
+        "detail": "eval.export_equivalence",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "eval.export_equivalence",
+        "description": "eval.export_equivalence",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(\n        description=\"Validate CoreML/MLX export equivalence against Python outputs.\"\n    )\n    parser.add_argument(\"--python-output\", required=True)\n    parser.add_argument(\"--coreml-output\", required=True)\n    parser.add_argument(\"--logits-tolerance\", type=float, default=1e-3)\n    args = parser.parse_args()\n    py_outputs = load_outputs(Path(args.python_output))\n    core_outputs = load_outputs(Path(args.coreml_output))",
+        "detail": "eval.export_equivalence",
+        "documentation": {}
+    },
+    {
+        "label": "REFUSAL_PATTERN",
+        "kind": 5,
+        "importPath": "eval.export_equivalence",
+        "description": "eval.export_equivalence",
+        "peekOfCode": "REFUSAL_PATTERN = re.compile(\n    r\"\\b(can't|cannot|won't|unable to|not able to|refuse|decline)\\b\",\n    re.IGNORECASE,\n)\ndef load_outputs(path: Path) -> dict:\n    outputs = {}\n    with path.open(\"r\", encoding=\"utf-8\") as handle:\n        for line in handle:\n            if not line.strip():\n                continue",
+        "detail": "eval.export_equivalence",
+        "documentation": {}
+    },
+    {
+        "label": "load_documents",
+        "kind": 2,
+        "importPath": "eval.retrieval_eval",
+        "description": "eval.retrieval_eval",
+        "peekOfCode": "def load_documents(directory: Path) -> list[dict]:\n    docs = []\n    for path in sorted(directory.glob(\"**/*\")):\n        if path.is_dir():\n            continue\n        text = path.read_text(encoding=\"utf-8\", errors=\"ignore\").strip()\n        if not text:\n            continue\n        docs.append({\"id\": path.relative_to(directory).as_posix(), \"text\": text})\n    return docs",
+        "detail": "eval.retrieval_eval",
+        "documentation": {}
+    },
+    {
+        "label": "run_chunking",
+        "kind": 2,
+        "importPath": "eval.retrieval_eval",
+        "description": "eval.retrieval_eval",
+        "peekOfCode": "def run_chunking(documents: list[dict], options: dict, timeout_s: int) -> dict:\n    payload = json.dumps({\"documents\": documents, \"options\": options})\n    try:\n        result = subprocess.run(\n            [\"node\", \"eval/chunk_text.mjs\"],\n            input=payload,\n            text=True,\n            capture_output=True,\n            check=False,\n            timeout=timeout_s,",
+        "detail": "eval.retrieval_eval",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "eval.retrieval_eval",
+        "description": "eval.retrieval_eval",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(\n        description=\"Evaluate retrieval chunking stability and distribution.\"\n    )\n    parser.add_argument(\"--documents\", required=True)\n    parser.add_argument(\"--max-chars\", type=int, default=12000)\n    parser.add_argument(\"--overlap\", type=int, default=200)\n    parser.add_argument(\"--min-docs\", type=int, default=20)\n    parser.add_argument(\"--timeout\", type=int, default=30)\n    args = parser.parse_args()",
+        "detail": "eval.retrieval_eval",
+        "documentation": {}
+    },
+    {
+        "label": "PromptCase",
+        "kind": 6,
+        "importPath": "eval.run_prompt_regression",
+        "description": "eval.run_prompt_regression",
+        "peekOfCode": "class PromptCase:\n    case_id: str\n    prompt: str\n    expected: dict\ndef stable_dumps(payload: Any) -> str:\n    return json.dumps(payload, ensure_ascii=False, sort_keys=True)\ndef load_cases(paths: Iterable[str]) -> list[PromptCase]:\n    cases: list[PromptCase] = []\n    allowed_top = {\"id\", \"prompt\", \"expected\"}\n    allowed_expected = {",
+        "detail": "eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "stable_dumps",
+        "kind": 2,
+        "importPath": "eval.run_prompt_regression",
+        "description": "eval.run_prompt_regression",
+        "peekOfCode": "def stable_dumps(payload: Any) -> str:\n    return json.dumps(payload, ensure_ascii=False, sort_keys=True)\ndef load_cases(paths: Iterable[str]) -> list[PromptCase]:\n    cases: list[PromptCase] = []\n    allowed_top = {\"id\", \"prompt\", \"expected\"}\n    allowed_expected = {\n        \"tool_calls\",\n        \"json_valid\",\n        \"refusal\",\n        \"citations_required\",",
+        "detail": "eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "load_cases",
+        "kind": 2,
+        "importPath": "eval.run_prompt_regression",
+        "description": "eval.run_prompt_regression",
+        "peekOfCode": "def load_cases(paths: Iterable[str]) -> list[PromptCase]:\n    cases: list[PromptCase] = []\n    allowed_top = {\"id\", \"prompt\", \"expected\"}\n    allowed_expected = {\n        \"tool_calls\",\n        \"json_valid\",\n        \"refusal\",\n        \"citations_required\",\n    }\n    for path in paths:",
+        "detail": "eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "invoke_model",
+        "kind": 2,
+        "importPath": "eval.run_prompt_regression",
+        "description": "eval.run_prompt_regression",
+        "peekOfCode": "def invoke_model(prompt: str, command: str, seed: str | None, timeout_s: int) -> str:\n    env = os.environ.copy()\n    env[\"OFFLLM_DETERMINISTIC\"] = \"1\"\n    env[\"TEMPERATURE\"] = \"0\"\n    if seed:\n        env[\"OFFLLM_SEED\"] = seed\n    if not command or not command.strip():\n        raise ValueError(\"model command must be a non-empty string\")\n    if re.search(r\"[;&|><`]\", command):\n        raise ValueError(\"model command contains unsupported shell metacharacters\")",
+        "detail": "eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "scan_balanced",
+        "kind": 2,
+        "importPath": "eval.run_prompt_regression",
+        "description": "eval.run_prompt_regression",
+        "peekOfCode": "def scan_balanced(text: str, start: int, open_char: str, close_char: str) -> int:\n    depth = 0\n    escaped = False\n    in_quote: str | None = None\n    for i in range(start, len(text)):\n        ch = text[i]\n        if escaped:\n            escaped = False\n            continue\n        if ch == \"\\\\\":",
+        "detail": "eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "coerce_value",
+        "kind": 2,
+        "importPath": "eval.run_prompt_regression",
+        "description": "eval.run_prompt_regression",
+        "peekOfCode": "def coerce_value(raw: str) -> Any:\n    if raw == \"true\":\n        return True\n    if raw == \"false\":\n        return False\n    try:\n        candidate = raw.strip()\n        if candidate and re.fullmatch(r\"[-+]?\\d+(?:\\.\\d+)?\", candidate):\n            return float(candidate) if \".\" in candidate else int(candidate)\n    except ValueError:",
+        "detail": "eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "parse_args_str",
+        "kind": 2,
+        "importPath": "eval.run_prompt_regression",
+        "description": "eval.run_prompt_regression",
+        "peekOfCode": "def parse_args_str(arg_str: str) -> dict:\n    if not arg_str.strip():\n        return {}\n    args: dict[str, Any] = {}\n    cursor = 0\n    length = len(arg_str)\n    while cursor < length:\n        while cursor < length and arg_str[cursor] in \" \\n\\t,\":\n            cursor += 1\n        if cursor >= length:",
+        "detail": "eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "parse_tool_calls",
+        "kind": 2,
+        "importPath": "eval.run_prompt_regression",
+        "description": "eval.run_prompt_regression",
+        "peekOfCode": "def parse_tool_calls(response: str) -> list[dict]:\n    results: list[dict] = []\n    marker = re.compile(r\"TOOL_CALL:\")\n    for match in marker.finditer(response):\n        cursor = match.end()\n        while cursor < len(response) and response[cursor].isspace():\n            cursor += 1\n        name_match = re.match(r\"[A-Za-z_][\\w-]*\", response[cursor:])\n        if not name_match:\n            continue",
+        "detail": "eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "check_tool_calls",
+        "kind": 2,
+        "importPath": "eval.run_prompt_regression",
+        "description": "eval.run_prompt_regression",
+        "peekOfCode": "def check_tool_calls(expected: dict, response: str) -> list[str]:\n    tool_calls_expected = expected.get(\"tool_calls\", [])\n    tool_calls_actual = parse_tool_calls(response)\n    if tool_calls_expected != tool_calls_actual:\n        return [\n            \"Tool call mismatch: expected \"\n            f\"{stable_dumps(tool_calls_expected)} got \"\n            f\"{stable_dumps(tool_calls_actual)}\"\n        ]\n    return []",
+        "detail": "eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "check_json_valid",
+        "kind": 2,
+        "importPath": "eval.run_prompt_regression",
+        "description": "eval.run_prompt_regression",
+        "peekOfCode": "def check_json_valid(expected: dict, response: str) -> list[str]:\n    json_valid_expected = expected.get(\"json_valid\", False)\n    try:\n        json.loads(response)\n        json_valid_actual = True\n    except json.JSONDecodeError:\n        json_valid_actual = False\n    if json_valid_expected != json_valid_actual:\n        return [\n            f\"JSON validity mismatch: expected {json_valid_expected} got {json_valid_actual}\"",
+        "detail": "eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "check_refusal",
+        "kind": 2,
+        "importPath": "eval.run_prompt_regression",
+        "description": "eval.run_prompt_regression",
+        "peekOfCode": "def check_refusal(expected: dict, response: str) -> list[str]:\n    refusal_expected = expected.get(\"refusal\", False)\n    refusal_actual = bool(REFUSAL_PATTERN.search(response))\n    if refusal_expected != refusal_actual:\n        return [\n            f\"Refusal detection mismatch: expected {refusal_expected} got {refusal_actual}\"\n        ]\n    return []\ndef check_citations(expected: dict, response: str) -> list[str]:\n    citations_required = expected.get(\"citations_required\", False)",
+        "detail": "eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "check_citations",
+        "kind": 2,
+        "importPath": "eval.run_prompt_regression",
+        "description": "eval.run_prompt_regression",
+        "peekOfCode": "def check_citations(expected: dict, response: str) -> list[str]:\n    citations_required = expected.get(\"citations_required\", False)\n    citations_present = bool(CITATION_PATTERN.search(response))\n    if citations_required and not citations_present:\n        return [\"Citations required but none found\"]\n    if not citations_required and citations_present:\n        return [\"Citations not expected but found\"]\n    return []\ndef evaluate_case(case: PromptCase, response: str) -> list[str]:\n    expected = case.expected",
+        "detail": "eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "evaluate_case",
+        "kind": 2,
+        "importPath": "eval.run_prompt_regression",
+        "description": "eval.run_prompt_regression",
+        "peekOfCode": "def evaluate_case(case: PromptCase, response: str) -> list[str]:\n    expected = case.expected\n    failures: list[str] = []\n    failures.extend(check_tool_calls(expected, response))\n    failures.extend(check_json_valid(expected, response))\n    failures.extend(check_refusal(expected, response))\n    failures.extend(check_citations(expected, response))\n    return failures\ndef build_sarif(results: list[dict]) -> dict:\n    return {",
+        "detail": "eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "build_sarif",
+        "kind": 2,
+        "importPath": "eval.run_prompt_regression",
+        "description": "eval.run_prompt_regression",
+        "peekOfCode": "def build_sarif(results: list[dict]) -> dict:\n    return {\n        \"$schema\": \"https://json.schemastore.org/sarif-2.1.0.json\",\n        \"version\": \"2.1.0\",\n        \"runs\": [\n            {\n                \"tool\": {\n                    \"driver\": {\n                        \"name\": \"offLLM prompt regression\",\n                        \"informationUri\": \"https://offllm.ai\",",
+        "detail": "eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "eval.run_prompt_regression",
+        "description": "eval.run_prompt_regression",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(description=\"Run prompt regression suite.\")\n    parser.add_argument(\"--prompts\", action=\"append\", required=True)\n    parser.add_argument(\"--model-cmd\", required=True)\n    parser.add_argument(\"--seed\", default=None)\n    parser.add_argument(\"--timeout\", type=int, default=60)\n    parser.add_argument(\"--summary\", default=\"eval/prompt_regression_summary.json\")\n    parser.add_argument(\"--sarif\", default=\"eval/prompt_regression.sarif\")\n    args = parser.parse_args()\n    cases = load_cases(args.prompts)",
+        "detail": "eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "REFUSAL_PATTERN",
+        "kind": 5,
+        "importPath": "eval.run_prompt_regression",
+        "description": "eval.run_prompt_regression",
+        "peekOfCode": "REFUSAL_PATTERN = re.compile(\n    r\"\\b(can't|cannot|won't|unable to|not able to|refuse|decline)\\b\",\n    re.IGNORECASE,\n)\nCITATION_PATTERN = re.compile(r\"\\[\\d+\\]\")\n@dataclass\nclass PromptCase:\n    case_id: str\n    prompt: str\n    expected: dict",
+        "detail": "eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "CITATION_PATTERN",
+        "kind": 5,
+        "importPath": "eval.run_prompt_regression",
+        "description": "eval.run_prompt_regression",
+        "peekOfCode": "CITATION_PATTERN = re.compile(r\"\\[\\d+\\]\")\n@dataclass\nclass PromptCase:\n    case_id: str\n    prompt: str\n    expected: dict\ndef stable_dumps(payload: Any) -> str:\n    return json.dumps(payload, ensure_ascii=False, sort_keys=True)\ndef load_cases(paths: Iterable[str]) -> list[PromptCase]:\n    cases: list[PromptCase] = []",
+        "detail": "eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
         "label": "parse_args",
         "kind": 2,
         "importPath": "scripts.ci.build_report",
@@ -11760,7 +12130,7 @@
         "kind": 2,
         "importPath": "scripts.eval.retrieval_eval",
         "description": "scripts.eval.retrieval_eval",
-        "peekOfCode": "def load_retrieval_events(path: Path) -> dict[str, list[dict]]:\n    events: dict[str, list[dict]] = defaultdict(list)\n    duplicates = 0\n    with path.open(\"r\", encoding=\"utf-8\") as handle:\n        for line in handle:\n            if not line.strip():\n                continue\n            event = json.loads(line)\n            if event.get(\"event\") != \"retrieval\":\n                continue",
+        "peekOfCode": "def load_retrieval_events(path: Path) -> dict[str, list[dict]]:\n    events: dict[str, list[dict]] = defaultdict(list)\n    duplicates = 0\n    with path.open(\"r\", encoding=\"utf-8\") as handle:\n        for line in handle:\n            if not line.strip():\n                continue\n            event = json.loads(line)\n            if event.get(\"event_type\") != \"retrieval\":\n                continue",
         "detail": "scripts.eval.retrieval_eval",
         "documentation": {}
     },
@@ -11774,11 +12144,92 @@
         "documentation": {}
     },
     {
+        "label": "ToolCall",
+        "kind": 6,
+        "importPath": "scripts.eval.run_prompt_regression",
+        "description": "scripts.eval.run_prompt_regression",
+        "peekOfCode": "class ToolCall:\n    name: str\n    args: dict[str, Any]\nREQUIRED_FIELDS = {\n    \"stable_id\",\n    \"tools\",\n    \"context\",\n    \"user_prompt\",\n    \"expected_prompt\",\n    \"expected_response\",",
+        "detail": "scripts.eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
         "label": "build_prompt",
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def build_prompt(template: dict, tools: list[dict], context: list[dict], user_prompt: str) -> str:\n    tool_format = template[\"tool_format\"]\n    tools_sorted = sorted(tools, key=lambda t: t[\"name\"])\n    tools_desc = \"\\n\".join(\n        tool_format.format(\n            name=tool[\"name\"],\n            description=tool[\"description\"],\n            parameters=json.dumps(tool.get(\"parameters\", {}), ensure_ascii=False),\n        )\n        for tool in tools_sorted",
+        "peekOfCode": "def build_prompt(\n    template: dict, tools: list[dict], context: list[dict], user_prompt: str\n) -> str:\n    tool_format = template[\"tool_format\"]\n    tools_sorted = sorted(tools, key=lambda t: t[\"name\"])\n    tools_desc = \"\\n\".join(\n        tool_format.format(\n            name=tool[\"name\"],\n            description=tool[\"description\"],\n            parameters=json.dumps(",
+        "detail": "scripts.eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "parse_tool_calls",
+        "kind": 2,
+        "importPath": "scripts.eval.run_prompt_regression",
+        "description": "scripts.eval.run_prompt_regression",
+        "peekOfCode": "def parse_tool_calls(response: str) -> list[ToolCall]:\n    calls: list[ToolCall] = []\n    marker = \"TOOL_CALL:\"\n    cursor = 0\n    while True:\n        index = response.find(marker, cursor)\n        if index == -1:\n            break\n        cursor = index + len(marker)\n        while cursor < len(response) and response[cursor].isspace():",
+        "detail": "scripts.eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "contains_markdown_citation",
+        "kind": 2,
+        "importPath": "scripts.eval.run_prompt_regression",
+        "description": "scripts.eval.run_prompt_regression",
+        "peekOfCode": "def contains_markdown_citation(text: str) -> bool:\n    cursor = 0\n    while cursor < len(text):\n        start = text.find(\"[\", cursor)\n        if start == -1:\n            return False\n        middle = text.find(\"](\", start)\n        if middle == -1:\n            cursor = start + 1\n            continue",
+        "detail": "scripts.eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "normalize_tool_calls",
+        "kind": 2,
+        "importPath": "scripts.eval.run_prompt_regression",
+        "description": "scripts.eval.run_prompt_regression",
+        "peekOfCode": "def normalize_tool_calls(calls: list[ToolCall]) -> list[dict[str, Any]]:\n    return [{\"name\": call.name, \"args\": call.args} for call in calls]\ndef validate_entry_schema(entry: dict) -> list[str]:\n    errors = []\n    extra = set(entry.keys()) - REQUIRED_FIELDS\n    missing = REQUIRED_FIELDS - set(entry.keys())\n    if extra:\n        errors.append(f\"Unexpected fields: {sorted(extra)}\")\n    if missing:\n        errors.append(f\"Missing fields: {sorted(missing)}\")",
+        "detail": "scripts.eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "validate_entry_schema",
+        "kind": 2,
+        "importPath": "scripts.eval.run_prompt_regression",
+        "description": "scripts.eval.run_prompt_regression",
+        "peekOfCode": "def validate_entry_schema(entry: dict) -> list[str]:\n    errors = []\n    extra = set(entry.keys()) - REQUIRED_FIELDS\n    missing = REQUIRED_FIELDS - set(entry.keys())\n    if extra:\n        errors.append(f\"Unexpected fields: {sorted(extra)}\")\n    if missing:\n        errors.append(f\"Missing fields: {sorted(missing)}\")\n    if not isinstance(entry.get(\"stable_id\"), str) or not entry.get(\"stable_id\"):\n        errors.append(\"stable_id must be a non-empty string\")",
+        "detail": "scripts.eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "invoke_model",
+        "kind": 2,
+        "importPath": "scripts.eval.run_prompt_regression",
+        "description": "scripts.eval.run_prompt_regression",
+        "peekOfCode": "def invoke_model(entry: dict, prompt: str) -> str:\n    _ = prompt\n    response = entry.get(\"expected_response\")\n    if not response:\n        raise ValueError(\"Model response fixture missing\")\n    return response\ndef parse_json_response(response: str) -> Any:\n    return json.loads(response)\ndef find_line_number(path: str, stable_id: str) -> int:\n    try:",
+        "detail": "scripts.eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "parse_json_response",
+        "kind": 2,
+        "importPath": "scripts.eval.run_prompt_regression",
+        "description": "scripts.eval.run_prompt_regression",
+        "peekOfCode": "def parse_json_response(response: str) -> Any:\n    return json.loads(response)\ndef find_line_number(path: str, stable_id: str) -> int:\n    try:\n        with open(path, \"r\", encoding=\"utf-8\") as handle:\n            for line_number, line in enumerate(handle, start=1):\n                if stable_id in line:\n                    return line_number\n    except OSError:\n        return 1",
+        "detail": "scripts.eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "find_line_number",
+        "kind": 2,
+        "importPath": "scripts.eval.run_prompt_regression",
+        "description": "scripts.eval.run_prompt_regression",
+        "peekOfCode": "def find_line_number(path: str, stable_id: str) -> int:\n    try:\n        with open(path, \"r\", encoding=\"utf-8\") as handle:\n            for line_number, line in enumerate(handle, start=1):\n                if stable_id in line:\n                    return line_number\n    except OSError:\n        return 1\n    return 1\ndef build_sarif(",
+        "detail": "scripts.eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "build_sarif",
+        "kind": 2,
+        "importPath": "scripts.eval.run_prompt_regression",
+        "description": "scripts.eval.run_prompt_regression",
+        "peekOfCode": "def build_sarif(\n    failures: list[dict[str, Any]], golden_path: str\n) -> dict[str, Any]:\n    rules = []\n    rule_ids = sorted({issue[\"code\"] for issue in failures})\n    for rule_id in rule_ids:\n        rules.append(\n            {\n                \"id\": rule_id,\n                \"name\": rule_id,",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
@@ -11788,6 +12239,24 @@
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
         "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(description=\"Run prompt regression tests.\")\n    parser.add_argument(\n        \"--template\",\n        default=os.path.join(\n            os.path.dirname(__file__),\n            \"..\",\n            \"..\",\n            \"src\",\n            \"core\",",
+        "detail": "scripts.eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "REQUIRED_FIELDS",
+        "kind": 5,
+        "importPath": "scripts.eval.run_prompt_regression",
+        "description": "scripts.eval.run_prompt_regression",
+        "peekOfCode": "REQUIRED_FIELDS = {\n    \"stable_id\",\n    \"tools\",\n    \"context\",\n    \"user_prompt\",\n    \"expected_prompt\",\n    \"expected_response\",\n    \"expected_tool_calls\",\n    \"expects_json\",\n    \"expects_refusal\",",
+        "detail": "scripts.eval.run_prompt_regression",
+        "documentation": {}
+    },
+    {
+        "label": "RULE_METADATA",
+        "kind": 5,
+        "importPath": "scripts.eval.run_prompt_regression",
+        "description": "scripts.eval.run_prompt_regression",
+        "peekOfCode": "RULE_METADATA = {\n    \"schema_invalid\": \"Golden prompt schema validation failed\",\n    \"prompt_mismatch\": \"Prompt output mismatch\",\n    \"model_response_missing\": \"Model response fixture missing\",\n    \"unexpected_json\": \"Response was JSON when JSON was not expected\",\n    \"invalid_json\": \"Response was not valid JSON\",\n    \"tool_calls_parse_error\": \"Failed to parse tool calls\",\n    \"tool_calls_mismatch\": \"Tool calls did not match expected\",\n    \"refusal_missing\": \"Refusal expectation requires JSON response with refusal flag\",\n    \"refusal_mismatch\": \"Refusal flag did not match expectation\",",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
@@ -12242,11 +12711,65 @@
         "documentation": {}
     },
     {
+        "label": "load_redaction_patterns",
+        "kind": 2,
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "peekOfCode": "def load_redaction_patterns() -> dict[str, re.Pattern]:\n    patterns_path = (\n        Path(__file__).resolve().parents[2] / \"schemas\" / \"redaction_patterns.json\"\n    )\n    with patterns_path.open(\"r\", encoding=\"utf-8\") as handle:\n        raw = json.load(handle)\n    return {\n        \"email\": re.compile(raw[\"email\"], re.IGNORECASE),\n        \"phone\": re.compile(raw[\"phone\"]),\n        \"token\": re.compile(raw[\"token\"]),",
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "redact_string",
+        "kind": 2,
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "peekOfCode": "def redact_string(value: str, patterns: dict[str, re.Pattern]) -> str:\n    result = patterns[\"email\"].sub(\"[REDACTED_EMAIL]\", value)\n    result = patterns[\"phone\"].sub(\"[REDACTED_PHONE]\", result)\n    result = patterns[\"bearer\"].sub(\"Bearer [REDACTED]\", result)\n    result = patterns[\"token\"].sub(\"[REDACTED_TOKEN]\", result)\n    result = patterns[\"secret\"].sub(\"[REDACTED_SECRET]\", result)\n    if len(result) > MAX_VALUE_LENGTH:\n        result = f\"{result[:MAX_VALUE_LENGTH]}…[TRUNCATED]\"\n    return result\ndef redact_value(value: Any, patterns: dict[str, re.Pattern]) -> Any:",
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "redact_value",
+        "kind": 2,
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "peekOfCode": "def redact_value(value: Any, patterns: dict[str, re.Pattern]) -> Any:\n    if value is None:\n        return value\n    if isinstance(value, str):\n        return redact_string(value, patterns)\n    if isinstance(value, (int, float, bool)):\n        return value\n    if isinstance(value, list):\n        return [redact_value(item, patterns) for item in value]\n    if isinstance(value, dict):",
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "stable_dumps",
+        "kind": 2,
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "peekOfCode": "def stable_dumps(payload: Any) -> str:\n    return json.dumps(payload, ensure_ascii=False, sort_keys=True)",
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "MAX_VALUE_LENGTH",
+        "kind": 5,
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "peekOfCode": "MAX_VALUE_LENGTH = 2000\ndef load_redaction_patterns() -> dict[str, re.Pattern]:\n    patterns_path = (\n        Path(__file__).resolve().parents[2] / \"schemas\" / \"redaction_patterns.json\"\n    )\n    with patterns_path.open(\"r\", encoding=\"utf-8\") as handle:\n        raw = json.load(handle)\n    return {\n        \"email\": re.compile(raw[\"email\"], re.IGNORECASE),\n        \"phone\": re.compile(raw[\"phone\"]),",
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
         "label": "load_tool_schema",
         "kind": 2,
         "importPath": "scripts.mlops.telemetry_to_sft",
         "description": "scripts.mlops.telemetry_to_sft",
-        "peekOfCode": "def load_tool_schema(path: str) -> str:\n    if not path:\n        return \"\"\n    if not os.path.isfile(path):\n        raise FileNotFoundError(f\"Tool schema not found: {path}\")\n    with open(path, \"r\", encoding=\"utf-8\") as handle:\n        return handle.read().strip()\ndef parse_events(path: Path) -> dict:\n    grouped = defaultdict(lambda: {\"tool_calls\": []})\n    with path.open(\"r\", encoding=\"utf-8\") as handle:",
+        "peekOfCode": "def load_tool_schema(path: str) -> str:\n    if not path:\n        return \"\"\n    if not os.path.isfile(path):\n        raise FileNotFoundError(f\"Tool schema not found: {path}\")\n    with open(path, \"r\", encoding=\"utf-8\") as handle:\n        return handle.read().strip()\ndef normalize_event_type(event: dict, strict_schema: bool) -> Optional[str]:\n    event_type = event.get(\"event_type\") or event.get(\"event\")\n    if not event_type:",
+        "detail": "scripts.mlops.telemetry_to_sft",
+        "documentation": {}
+    },
+    {
+        "label": "normalize_event_type",
+        "kind": 2,
+        "importPath": "scripts.mlops.telemetry_to_sft",
+        "description": "scripts.mlops.telemetry_to_sft",
+        "peekOfCode": "def normalize_event_type(event: dict, strict_schema: bool) -> Optional[str]:\n    event_type = event.get(\"event_type\") or event.get(\"event\")\n    if not event_type:\n        if strict_schema:\n            raise ValueError(\"Telemetry event missing event_type\")\n        return None\n    return event_type\ndef parse_events(path: Path, strict_schema: bool) -> dict:\n    grouped = defaultdict(lambda: {\"tool_calls\": []})\n    patterns = load_redaction_patterns()",
         "detail": "scripts.mlops.telemetry_to_sft",
         "documentation": {}
     },
@@ -12255,7 +12778,7 @@
         "kind": 2,
         "importPath": "scripts.mlops.telemetry_to_sft",
         "description": "scripts.mlops.telemetry_to_sft",
-        "peekOfCode": "def parse_events(path: Path) -> dict:\n    grouped = defaultdict(lambda: {\"tool_calls\": []})\n    with path.open(\"r\", encoding=\"utf-8\") as handle:\n        for line in handle:\n            if not line.strip():\n                continue\n            event = json.loads(line)\n            prompt_hash = event.get(\"prompt_hash\")\n            if not prompt_hash:\n                continue",
+        "peekOfCode": "def parse_events(path: Path, strict_schema: bool) -> dict:\n    grouped = defaultdict(lambda: {\"tool_calls\": []})\n    patterns = load_redaction_patterns()\n    missing_event_type = 0\n    missing_schema_version = 0\n    missing_prompt_hash = 0\n    with path.open(\"r\", encoding=\"utf-8\") as handle:\n        for line in handle:\n            if not line.strip():\n                continue",
         "detail": "scripts.mlops.telemetry_to_sft",
         "documentation": {}
     },
@@ -12264,7 +12787,7 @@
         "kind": 2,
         "importPath": "scripts.mlops.telemetry_to_sft",
         "description": "scripts.mlops.telemetry_to_sft",
-        "peekOfCode": "def build_records(grouped: dict, tool_schema: str) -> list[dict]:\n    records = []\n    for _, data in grouped.items():\n        instruction = data.get(\"instruction\")\n        expected_answer = data.get(\"expected_answer\")\n        if not instruction or not expected_answer:\n            continue\n        tool_calls = data.get(\"tool_calls\", [])\n        expected_tool_call = {\n            \"tools\": [",
+        "peekOfCode": "def build_records(grouped: dict, tool_schema: str) -> list[dict]:\n    records = []\n    for prompt_hash in sorted(grouped.keys()):\n        data = grouped[prompt_hash]\n        instruction = data.get(\"instruction\")\n        expected_answer = data.get(\"expected_answer\")\n        if not instruction or not expected_answer:\n            continue\n        tool_calls = data.get(\"tool_calls\", [])\n        tool_calls_sorted = sorted(",
         "detail": "scripts.mlops.telemetry_to_sft",
         "documentation": {}
     },
@@ -12273,7 +12796,7 @@
         "kind": 2,
         "importPath": "scripts.mlops.telemetry_to_sft",
         "description": "scripts.mlops.telemetry_to_sft",
-        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(\n        description=\"Convert telemetry JSONL into SFT-ready JSONL.\"\n    )\n    parser.add_argument(\"--telemetry\", required=True)\n    parser.add_argument(\"--output\", required=True)\n    parser.add_argument(\"--tool-schema\", default=\"\")\n    args = parser.parse_args()\n    telemetry_path = Path(args.telemetry)\n    if not telemetry_path.exists():",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(\n        description=\"Convert telemetry JSONL into SFT-ready JSONL.\"\n    )\n    parser.add_argument(\"--telemetry\", required=True)\n    parser.add_argument(\"--output\", required=True)\n    parser.add_argument(\"--tool-schema\", default=\"\")\n    parser.add_argument(\n        \"--strict-schema\",\n        action=\"store_true\",",
         "detail": "scripts.mlops.telemetry_to_sft",
         "documentation": {}
     },

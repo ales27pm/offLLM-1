@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "offLLM Symbiosis Advisor",
+          "rules": [
+            {
+              "id": "prompt-drift",
+              "name": "Prompt drift surface"
+            },
+            {
+              "id": "hotspot",
+              "name": "High-signal hotspot"
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "prompt-drift",
+          "level": "warning",
+          "message": {
+            "text": "Prompt drift cluster 2e867b002b71be04 appears in 1 snippets."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mlops/offllm_symbiosis_advisor_v4.py"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "prompt-drift",
+          "level": "warning",
+          "message": {
+            "text": "Prompt drift cluster 7cc67bd659d8b5d8 appears in 1 snippets."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mlops/offllm_symbiosis_advisor_v4.py"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "prompt-drift",
+          "level": "warning",
+          "message": {
+            "text": "Prompt drift cluster 83a9f1c3daa7e538 appears in 1 snippets."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "offllm_symbiosis_advisor_v4.py"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "prompt-drift",
+          "level": "warning",
+          "message": {
+            "text": "Prompt drift cluster c73fc5fe43476bd2 appears in 1 snippets."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "offllm_symbiosis_advisor_v4.py"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "hotspot",
+          "level": "note",
+          "message": {
+            "text": "High prompt-signal file (review for prompt drift / registry compliance)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mlops/offllm_symbiosis_advisor_v4.py"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "hotspot",
+          "level": "note",
+          "message": {
+            "text": "High prompt-signal file (review for prompt drift / registry compliance)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "offllm_symbiosis_advisor_v4.py"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "hotspot",
+          "level": "note",
+          "message": {
+            "text": "High prompt-signal file (review for prompt drift / registry compliance)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "ci/download-mlx-model.sh"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "hotspot",
+          "level": "note",
+          "message": {
+            "text": "High prompt-signal file (review for prompt drift / registry compliance)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "train_lora.py"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "hotspot",
+          "level": "note",
+          "message": {
+            "text": "High prompt-signal file (review for prompt drift / registry compliance)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "eval/golden_prompts.json"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

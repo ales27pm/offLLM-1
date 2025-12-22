@@ -1,0 +1,7071 @@
+[
+  {
+    "path": ".prettierignore",
+    "ext": "<none>",
+    "size": 829,
+    "sha1": "f84ba2e904c7e8a5cf7482c17a303bd99f6ddc88",
+    "markers": {
+      "prompts": 0,
+      "tools": 2,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 2
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "Gemfile",
+    "ext": "<none>",
+    "size": 195,
+    "sha1": "ec261c40f0cbe17182100e046591f0bf568f9fea",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 2,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "MLXModule.swift",
+    "ext": ".swift",
+    "size": 3443,
+    "sha1": "f78547f5d183265e2d6810e3f5c7d1627ff618b9",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 5,
+      "eval": 0,
+      "ios": 18,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "index.js",
+    "ext": ".js",
+    "size": 214,
+    "sha1": "5972fb779fbea739286f1419bd0ac1808037f2d2",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "./app.json",
+      "./src/App",
+      "react-native"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": ".ruby-version",
+    "ext": "<none>",
+    "size": 9,
+    "sha1": "a2df2332f80ff77be9ab8e193ed7abc591dce111",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "build.sh",
+    "ext": ".sh",
+    "size": 4793,
+    "sha1": "b3d9be8979d71262a9513656bcc8a9bdf8bc0ad4",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 22,
+      "security": 10
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "READ_ME_FIX.txt",
+    "ext": ".txt",
+    "size": 1168,
+    "sha1": "cee092db2f423fa66e267e04c51243d964ceb526",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 2,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "app.json",
+    "ext": ".json",
+    "size": 208,
+    "sha1": "f746d705abe6a6ebbe08753697902136d007c111",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "package.json",
+    "ext": ".json",
+    "size": 4556,
+    "sha1": "677973d47baeb7b380cfc893ce1112b84f4561db",
+    "markers": {
+      "prompts": 36,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 8,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "package-lock.json",
+    "ext": ".json",
+    "size": 710553,
+    "sha1": "dc9c7d611491e49aefb39d5ff850a04a9d8638f0",
+    "markers": {
+      "prompts": 396,
+      "tools": 144,
+      "telemetry": 35,
+      "rag": 0,
+      "eval": 0,
+      "ios": 10,
+      "security": 100
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "babel.config.js",
+    "ext": ".js",
+    "size": 72,
+    "sha1": "e228bea35deab1d7acbe515739cc99d214a1f98c",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "jest.config.js",
+    "ext": ".js",
+    "size": 203,
+    "sha1": "949cf7658eb924418aa2dfb641ad3302782cc5cc",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "jest.setup.js",
+    "ext": ".js",
+    "size": 955,
+    "sha1": "7308fda8ef8a80ed0d82ffe707173ec7ac8f670f",
+    "markers": {
+      "prompts": 3,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 2,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "README.md",
+    "ext": ".md",
+    "size": 3941,
+    "sha1": "b1847ecf3b6d44e182c4327ae6c1c4d0d6d910a4",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 24,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "AGENTS.md",
+    "ext": ".md",
+    "size": 5976,
+    "sha1": "6a22bb310a2c1aed16f0716209f00de870fe7c00",
+    "markers": {
+      "prompts": 0,
+      "tools": 47,
+      "telemetry": 6,
+      "rag": 8,
+      "eval": 3,
+      "ios": 3,
+      "security": 2
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": ".gitignore",
+    "ext": "<none>",
+    "size": 587,
+    "sha1": "72135518f7778d2022b4e78dfe7d8f719a0600d5",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 1,
+      "eval": 0,
+      "ios": 4,
+      "security": 2
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "CONTRIBUTING.md",
+    "ext": ".md",
+    "size": 2290,
+    "sha1": "0c4bd6fa3f12a83f10d4e39a19737d1286ffc435",
+    "markers": {
+      "prompts": 0,
+      "tools": 2,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 1,
+      "ios": 0,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "project.yml",
+    "ext": ".yml",
+    "size": 4014,
+    "sha1": "0a7911e2832ad4cf9fa1b2cb2aa6afa8ff2c7643",
+    "markers": {
+      "prompts": 1,
+      "tools": 1,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 33,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": ".npmrc",
+    "ext": "<none>",
+    "size": 48,
+    "sha1": "5275a2704cb0048a02c5683ed67a44d3eb043047",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "tools/xcresult-parser.js",
+    "ext": ".js",
+    "size": 4165,
+    "sha1": "ab2e6e393921910ca64dbb392cceef8059ff8ea8",
+    "markers": {
+      "prompts": 0,
+      "tools": 11,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 1,
+      "security": 4
+    },
+    "imports": [
+      "./util.mjs",
+      "node:path",
+      "node:url"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "tools/AGENTS.md",
+    "ext": ".md",
+    "size": 3249,
+    "sha1": "5c4acb45b4f6b841aa15a588151f4438914c123b",
+    "markers": {
+      "prompts": 0,
+      "tools": 24,
+      "telemetry": 2,
+      "rag": 0,
+      "eval": 2,
+      "ios": 2,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "docs/codebase-audit-20250215.md",
+    "ext": ".md",
+    "size": 2953,
+    "sha1": "3e8913dfebe28aaff5d6e79bd911e9fa444969a8",
+    "markers": {
+      "prompts": 2,
+      "tools": 11,
+      "telemetry": 2,
+      "rag": 1,
+      "eval": 0,
+      "ios": 0,
+      "security": 4
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "docs/agent-architecture.md",
+    "ext": ".md",
+    "size": 11239,
+    "sha1": "71346b0c52feae5079bc7188b23e7b1903a148da",
+    "markers": {
+      "prompts": 1,
+      "tools": 59,
+      "telemetry": 6,
+      "rag": 18,
+      "eval": 21,
+      "ios": 7,
+      "security": 11
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "docs/telemetry-events.md",
+    "ext": ".md",
+    "size": 2010,
+    "sha1": "05317f936250e80275ef479752d2936e9481d2ea",
+    "markers": {
+      "prompts": 0,
+      "tools": 9,
+      "telemetry": 15,
+      "rag": 4,
+      "eval": 7,
+      "ios": 0,
+      "security": 8
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "docs/AGENTS.md",
+    "ext": ".md",
+    "size": 2396,
+    "sha1": "5e9f62fb411fd0ec56f935a7cc9e15d4892c1bd2",
+    "markers": {
+      "prompts": 0,
+      "tools": 7,
+      "telemetry": 0,
+      "rag": 1,
+      "eval": 0,
+      "ios": 1,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "docs/codebase-audit.md",
+    "ext": ".md",
+    "size": 4594,
+    "sha1": "4a1e1b7a3bf18725b6691983d629cbab2686f3d9",
+    "markers": {
+      "prompts": 1,
+      "tools": 17,
+      "telemetry": 3,
+      "rag": 3,
+      "eval": 2,
+      "ios": 0,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/merge_lora.py",
+    "ext": ".py",
+    "size": 818,
+    "sha1": "d9b6e0b13f4efdc670d0707f0f06a9233afe0427",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 4
+    },
+    "imports": [
+      "argparse",
+      "peft",
+      "transformers"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/build_unsigned_ios.sh",
+    "ext": ".sh",
+    "size": 2257,
+    "sha1": "9f3ee9be706ebbecf300eedb1becfc7d329a90cb",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 12,
+      "security": 6
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/package_ipa.sh",
+    "ext": ".sh",
+    "size": 1809,
+    "sha1": "dc31d00add2e9f63651b87a78270194a2ca8f818",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/clean-build-ios.sh",
+    "ext": ".sh",
+    "size": 1642,
+    "sha1": "1bff9372fbb08836f3f11c54ae89865e6573feab",
+    "markers": {
+      "prompts": 3,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 1,
+      "security": 4
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/verify-ios-rn-versions.py",
+    "ext": ".py",
+    "size": 2358,
+    "sha1": "a552f8540c898c0eed06eabf9b8a35b6a69c61a4",
+    "markers": {
+      "prompts": 14,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "json",
+      "pathlib"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/convert_to_coreml.py",
+    "ext": ".py",
+    "size": 8697,
+    "sha1": "4295572d9732cf9d74b81e5a94df399d27434500",
+    "markers": {
+      "prompts": 0,
+      "tools": 5,
+      "telemetry": 4,
+      "rag": 0,
+      "eval": 2,
+      "ios": 22,
+      "security": 14
+    },
+    "imports": [
+      "argparse",
+      "coremltools",
+      "coremltools.optimize",
+      "huggingface_hub",
+      "json",
+      "numpy",
+      "os",
+      "torch",
+      "transformers",
+      "transformers.cache_utils",
+      "warnings"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/detect_mlx_symbols.sh",
+    "ext": ".sh",
+    "size": 1498,
+    "sha1": "6cb7b5346c6b37951ac5dae2044a64ec54ae991e",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 14,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/select-simulator.js",
+    "ext": ".js",
+    "size": 2194,
+    "sha1": "fdb6798ee855d23834647dcec345e28a9e07a7a9",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 5,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/train_lora.py",
+    "ext": ".py",
+    "size": 5870,
+    "sha1": "6b1b518057e31e44b13c5e5ff71985d1d789c579",
+    "markers": {
+      "prompts": 20,
+      "tools": 21,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 16
+    },
+    "imports": [
+      "argparse",
+      "datasets",
+      "json",
+      "os",
+      "peft",
+      "torch",
+      "transformers"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/strip_hermes_phase.rb",
+    "ext": ".rb",
+    "size": 1008,
+    "sha1": "e8680768a3caa4f9a2c47629dac07c5d299c11ea",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 3,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/offllm_symbiosis_advisor_v3.py",
+    "ext": ".py",
+    "size": 18532,
+    "sha1": "4e566838822fc0dee0cb5965ef5cb2ed7a61e7f4",
+    "markers": {
+      "prompts": 13,
+      "tools": 23,
+      "telemetry": 14,
+      "rag": 27,
+      "eval": 30,
+      "ios": 18,
+      "security": 11
+    },
+    "imports": [
+      "__future__",
+      "argparse",
+      "collections",
+      "dataclasses",
+      "hashlib",
+      "json",
+      "os",
+      "pathlib",
+      "re",
+      "shutil",
+      "sys",
+      "tempfile",
+      "textwrap",
+      "time",
+      "typing",
+      "zipfile"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/offllm_symbiosis_advisor_v4.py",
+    "ext": ".py",
+    "size": 21522,
+    "sha1": "4ee152ddcd9d378e0a7f26bce4fd638a7addcff6",
+    "markers": {
+      "prompts": 21,
+      "tools": 76,
+      "telemetry": 40,
+      "rag": 45,
+      "eval": 75,
+      "ios": 19,
+      "security": 39
+    },
+    "imports": [
+      "__future__",
+      "argparse",
+      "dataclasses",
+      "datetime",
+      "hashlib",
+      "json",
+      "os",
+      "pathlib",
+      "re",
+      "sys",
+      "time",
+      "typing"
+    ],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "scripts/ios_doctor.sh",
+    "ext": ".sh",
+    "size": 1024,
+    "sha1": "1b996ba95a3f904bbb49b69e60651b058eac0b64",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 3,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/build-ios-unsigned.sh",
+    "ext": ".sh",
+    "size": 3310,
+    "sha1": "273c1a818626356f2f9250dab9eb04acc65afe5b",
+    "markers": {
+      "prompts": 2,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 16,
+      "security": 7
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/AGENTS.md",
+    "ext": ".md",
+    "size": 3280,
+    "sha1": "bb71c8ba068d88d39f4340b0b24cfda3e20c53dd",
+    "markers": {
+      "prompts": 0,
+      "tools": 6,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 11,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/apply_ios_mlx_fixes.sh",
+    "ext": ".sh",
+    "size": 826,
+    "sha1": "1df55ec3dc51dab954fd86fb32d4e325ebae1ec7",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 7,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/xcresult_top_issues.py",
+    "ext": ".py",
+    "size": 4832,
+    "sha1": "de252ac5d2b92fecb9ab2bdeb6dd0ec10712e351",
+    "markers": {
+      "prompts": 0,
+      "tools": 2,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 1,
+      "security": 0
+    },
+    "imports": [
+      "json",
+      "sys",
+      "typing"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/verify-ios-cpp-standard.py",
+    "ext": ".py",
+    "size": 6865,
+    "sha1": "5378fe0c0b971386f060edad1866ac918adaa6fb",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 2,
+      "ios": 3,
+      "security": 0
+    },
+    "imports": [
+      "__future__",
+      "dataclasses",
+      "pathlib",
+      "re",
+      "sys",
+      "typing"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/offllm_end_to_end_pipeline.py",
+    "ext": ".py",
+    "size": 64392,
+    "sha1": "e4cfce2595aeafcffb38eae476cd12c0f1715b8c",
+    "markers": {
+      "prompts": 8,
+      "tools": 33,
+      "telemetry": 31,
+      "rag": 37,
+      "eval": 39,
+      "ios": 96,
+      "security": 62
+    },
+    "imports": [
+      "__future__",
+      "argparse",
+      "ast",
+      "collections",
+      "dataclasses",
+      "datasets",
+      "datetime",
+      "hashlib",
+      "importlib.util",
+      "inspect",
+      "json",
+      "llm2vec",
+      "os",
+      "pathlib",
+      "peft",
+      "platform",
+      "random",
+      "re",
+      "shutil",
+      "subprocess",
+      "sys",
+      "textwrap",
+      "time",
+      "torch",
+      "torch.optim",
+      "traceback",
+      "transformers",
+      "trl",
+      "typing",
+      "unsloth"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/mlops/telemetry_to_sft.py",
+    "ext": ".py",
+    "size": 3368,
+    "sha1": "dcbb74ec272b21a876d57791671a5f93d862066d",
+    "markers": {
+      "prompts": 5,
+      "tools": 41,
+      "telemetry": 8,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "argparse",
+      "collections",
+      "json",
+      "os",
+      "pathlib"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/mlops/offllm_symbiosis_advisor_v4.py",
+    "ext": ".py",
+    "size": 22842,
+    "sha1": "fa75ac7359accfd425bef3ae02a81320641a731e",
+    "markers": {
+      "prompts": 21,
+      "tools": 76,
+      "telemetry": 40,
+      "rag": 45,
+      "eval": 75,
+      "ios": 19,
+      "security": 39
+    },
+    "imports": [
+      "__future__",
+      "argparse",
+      "dataclasses",
+      "datetime",
+      "hashlib",
+      "json",
+      "os",
+      "pathlib",
+      "re",
+      "typing"
+    ],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "scripts/mlops/harvest_fr.py",
+    "ext": ".py",
+    "size": 3466,
+    "sha1": "90754c8110a423cb72b45595afb4cb6e996f2ee2",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 36
+    },
+    "imports": [
+      "argparse",
+      "datasets",
+      "json",
+      "os",
+      "sys",
+      "typing"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/mlops/sources_fr_manifest.json",
+    "ext": ".json",
+    "size": 515,
+    "sha1": "84f8ff43621d3ab697df4817a96c351cd1799b71",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/mlops/scan_internal.py",
+    "ext": ".py",
+    "size": 1831,
+    "sha1": "ececf4ccc654a1f8359068803b7522c1af0fd251",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "argparse",
+      "collections",
+      "json",
+      "os",
+      "pathlib"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/mlops/normalize_datasets.py",
+    "ext": ".py",
+    "size": 2169,
+    "sha1": "15350e2193519e3a31951d81aee729b3c78ad1d1",
+    "markers": {
+      "prompts": 0,
+      "tools": 8,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 2
+    },
+    "imports": [
+      "argparse",
+      "json",
+      "os",
+      "pathlib"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/mlops/generate_retrieval_pairs.py",
+    "ext": ".py",
+    "size": 1687,
+    "sha1": "a5691c6993b598296459dd7456f4b77dfb11cdcd",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 8,
+      "rag": 2,
+      "eval": 2,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "argparse",
+      "json",
+      "pathlib"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/eval/run_prompt_regression.py",
+    "ext": ".py",
+    "size": 2386,
+    "sha1": "f7f58426e854efac8dd8613815fec5006936c07c",
+    "markers": {
+      "prompts": 0,
+      "tools": 21,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 8,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "argparse",
+      "json",
+      "os"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/eval/export_equivalence.py",
+    "ext": ".py",
+    "size": 1972,
+    "sha1": "e84b62eddba9aa53acfdd109c26582fd987273b0",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 4,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "argparse",
+      "json",
+      "math",
+      "pathlib"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/eval/golden_prompts.json",
+    "ext": ".json",
+    "size": 1055,
+    "sha1": "b2e7f3d4133c6cb1bedbf572f9a56ae5d0154ef5",
+    "markers": {
+      "prompts": 1,
+      "tools": 12,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/eval/retrieval_eval.py",
+    "ext": ".py",
+    "size": 2032,
+    "sha1": "5588c6b87ff9f4790766a1482fb2dfebe56db3cc",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 4,
+      "rag": 4,
+      "eval": 5,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "argparse",
+      "collections",
+      "json",
+      "pathlib",
+      "sys"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/dev/doctor.sh",
+    "ext": ".sh",
+    "size": 14315,
+    "sha1": "4b7bf24e84af012b3bc6b51f22aac609fd20f43b",
+    "markers": {
+      "prompts": 0,
+      "tools": 16,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 44,
+      "security": 10
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/dev/commit-reports.sh",
+    "ext": ".sh",
+    "size": 3155,
+    "sha1": "a1727d3fafefdd6d98789d66ae05fac854309ae4",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/lib/xcode_env.sh",
+    "ext": ".sh",
+    "size": 718,
+    "sha1": "f6f11cac18c47759ab03972e41ea2ced5a2f0d67",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 7,
+      "security": 4
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/lib/npm_env.sh",
+    "ext": ".sh",
+    "size": 1822,
+    "sha1": "85d91dade98be021b908995c7b6200761fe3cc5e",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/ci/import_signing.sh",
+    "ext": ".sh",
+    "size": 7429,
+    "sha1": "d691a86f228a3f96fe55695b230d6ae4f10a3e1f",
+    "markers": {
+      "prompts": 0,
+      "tools": 1,
+      "telemetry": 4,
+      "rag": 0,
+      "eval": 0,
+      "ios": 2,
+      "security": 4
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/ci/post_install_hardening_hook.rb",
+    "ext": ".rb",
+    "size": 355,
+    "sha1": "94f95f48274bbeea5b8aeb0688c02a965a4114aa",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/ci/check_mlx_bridge.js",
+    "ext": ".js",
+    "size": 6781,
+    "sha1": "32b6e854cfa4a2727c9c67bdcd94e79f382844f2",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 59,
+      "security": 0
+    },
+    "imports": [
+      "fs",
+      "path"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/ci/download-mlx-model.sh",
+    "ext": ".sh",
+    "size": 7453,
+    "sha1": "d4468ae64a7f949087dd890e72a8471d737e7e7c",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 30,
+      "security": 17
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/ci/export_ipa.sh",
+    "ext": ".sh",
+    "size": 6993,
+    "sha1": "c0056907d1a5e61e04ff3ce44d359b721b1b42ea",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 3,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/ci/upload_testflight.sh",
+    "ext": ".sh",
+    "size": 805,
+    "sha1": "5c8509e8ab38333a6b9ed4f55546c830723e3f98",
+    "markers": {
+      "prompts": 0,
+      "tools": 2,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 2
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/ci/select_xcode_and_ensure_ios.sh",
+    "ext": ".sh",
+    "size": 6566,
+    "sha1": "7c6d4032eeaf819b5e7a5ae3f456b99b1a7e9418",
+    "markers": {
+      "prompts": 0,
+      "tools": 3,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 40,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/ci/bootstrap-build.sh",
+    "ext": ".sh",
+    "size": 6321,
+    "sha1": "5741f018bf59ddb7235a315f78070a7d0c981131",
+    "markers": {
+      "prompts": 0,
+      "tools": 5,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 15,
+      "security": 13
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/ci/select_xcode.sh",
+    "ext": ".sh",
+    "size": 3749,
+    "sha1": "5ce032f1ab4518c37f60b9674ebf9781e8a3d856",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 31,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/ci/ensure_ios_platform.sh",
+    "ext": ".sh",
+    "size": 1188,
+    "sha1": "646512908a9221c35e20b9bd937d14165e5ff60f",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 14,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/ci/bootstrap_ios.sh",
+    "ext": ".sh",
+    "size": 13977,
+    "sha1": "bede84c2c2f530e2fd206ac973b20b810201c61c",
+    "markers": {
+      "prompts": 15,
+      "tools": 6,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 20,
+      "security": 12
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/ci/prep-ios-unsigned-archive.sh",
+    "ext": ".sh",
+    "size": 3527,
+    "sha1": "5146ba48d3fde427204d1cb8a4a6b994d6031522",
+    "markers": {
+      "prompts": 12,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 2,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/ci/build_report.py",
+    "ext": ".py",
+    "size": 7078,
+    "sha1": "741ee988f85161e3af7a121d5921623d296e359f",
+    "markers": {
+      "prompts": 0,
+      "tools": 8,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 4,
+      "security": 4
+    },
+    "imports": [
+      "argparse",
+      "json",
+      "os",
+      "pathlib",
+      "subprocess"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "scripts/ci/emit_ios_diagnostics_summary.py",
+    "ext": ".py",
+    "size": 9646,
+    "sha1": "06f5e11329acb2baa1be91714399feb6193709cd",
+    "markers": {
+      "prompts": 0,
+      "tools": 1,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 12,
+      "security": 8
+    },
+    "imports": [
+      "__future__",
+      "argparse",
+      "json",
+      "os",
+      "pathlib",
+      "sys",
+      "typing",
+      "urllib.parse"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "src/App.js",
+    "ext": ".js",
+    "size": 13756,
+    "sha1": "fcdbfd8a4af8c245a30e372b4030c8107291f68d",
+    "markers": {
+      "prompts": 2,
+      "tools": 76,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 12,
+      "security": 0
+    },
+    "imports": [
+      "./architecture/dependencyInjector",
+      "./architecture/pluginManager",
+      "./architecture/toolSystem",
+      "./components/ChatInterface",
+      "./config/model",
+      "./debug/DebugConsole",
+      "./hooks/useChat",
+      "./hooks/useSpeechRecognition",
+      "./services/llmService",
+      "./store/llmStore",
+      "./utils/hfRepoDownloader",
+      "./utils/modelDownloader",
+      "react"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/registerTurboModules.ts",
+    "ext": ".ts",
+    "size": 519,
+    "sha1": "edcafc0eff246d463bfdfce79a67d13fe1f2e0ed",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "./specs/NativeLLM",
+      "react-native"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "src/emotion/ProsodyDetector.ts",
+    "ext": ".ts",
+    "size": 664,
+    "sha1": "9d80fb26aa369a2c9a8c10a7a955f7379e1889a5",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../config"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/components/ExtractedContent.js",
+    "ext": ".js",
+    "size": 3572,
+    "sha1": "b84d076ec7a4f5a1f20c2eaac28a67da7f521e7b",
+    "markers": {
+      "prompts": 2,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 1
+    },
+    "imports": [
+      "react-native",
+      "react-native-render-html"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/components/ChatInterface.js",
+    "ext": ".js",
+    "size": 31790,
+    "sha1": "f72b59037e03fc877e420767dee9c2c909bb88f3",
+    "markers": {
+      "prompts": 2,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 9
+    },
+    "imports": [
+      "react"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/tools/webSearchTool.js",
+    "ext": ".js",
+    "size": 2137,
+    "sha1": "7e7ea19d058e89a9f86a88a3c8e03cea24d74ed4",
+    "markers": {
+      "prompts": 0,
+      "tools": 1,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 3
+    },
+    "imports": [
+      "../services/utils/apiKeys",
+      "../services/webSearchService"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/tools/androidTools.js",
+    "ext": ".js",
+    "size": 665,
+    "sha1": "1957a598fc78e28261763fec05a8c6c8af41f435",
+    "markers": {
+      "prompts": 0,
+      "tools": 8,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/tools/iosTools.js",
+    "ext": ".js",
+    "size": 10246,
+    "sha1": "e25d1ccc0d5867d3c0de4e0275b3a8aab1cdfcbe",
+    "markers": {
+      "prompts": 1,
+      "tools": 28,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 2,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "react-native"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/tools/AGENTS.md",
+    "ext": ".md",
+    "size": 2139,
+    "sha1": "6827cc345a926ba1682f245bdcead65e7b3b2da8",
+    "markers": {
+      "prompts": 0,
+      "tools": 41,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "src/hooks/useMlxChat.ts",
+    "ext": ".ts",
+    "size": 1378,
+    "sha1": "741b133c5768c82acdc907f6b3b773897a6571a7",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 8,
+      "security": 0
+    },
+    "imports": [
+      "../services/chat/mlxChat",
+      "react"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/hooks/useMemory.ts",
+    "ext": ".ts",
+    "size": 768,
+    "sha1": "7774a594fd9bbfba6b2c58600bdf9fc2633c9014",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../config",
+      "../core/memory/MemorySingleton"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/hooks/useEmotion.ts",
+    "ext": ".ts",
+    "size": 1050,
+    "sha1": "c7e2b0781ae8da67a10c337813027294fc894fe1",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../emotion/ProsodyDetector",
+      "react"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/hooks/useSpeechRecognition.js",
+    "ext": ".js",
+    "size": 1400,
+    "sha1": "bcae04c01d7650b346fb8b6f6fd4462aea1187d4",
+    "markers": {
+      "prompts": 2,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "@react-native-voice/voice",
+      "react"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/hooks/useChat.js",
+    "ext": ".js",
+    "size": 1468,
+    "sha1": "89b5e050e1a3386a22b78d0fdf3ff4e3ffc4ce1c",
+    "markers": {
+      "prompts": 2,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../core/AgentOrchestrator",
+      "../store/llmStore",
+      "./useEmotion",
+      "react",
+      "react-native-tts"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/system/memoryPressure.js",
+    "ext": ".js",
+    "size": 612,
+    "sha1": "9b716b42211720f144dff23a7f0db2660f5d9ad0",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 9,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "react-native"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/store/llmStore.js",
+    "ext": ".js",
+    "size": 5724,
+    "sha1": "16f01bf8bc34392d8a668ae4f889fd72d1208443",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "zustand"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/config/index.js",
+    "ext": ".js",
+    "size": 667,
+    "sha1": "ad5938c1a3fa5f265988574f3ea7c01fc735796a",
+    "markers": {
+      "prompts": 5,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "react-native-config"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/config/runtime.js",
+    "ext": ".js",
+    "size": 284,
+    "sha1": "b3f7e36a482c5e40754a453471f79ff54fe9c1b2",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/config/model.js",
+    "ext": ".js",
+    "size": 383,
+    "sha1": "5be70e28d096f924d205617bd130d8b32b73ae82",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "./index"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/specs/NativeLLM.ts",
+    "ext": ".ts",
+    "size": 2174,
+    "sha1": "a402937be116ea3e14c8c149b003187f73fcfbc4",
+    "markers": {
+      "prompts": 2,
+      "tools": 3,
+      "telemetry": 3,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 7
+    },
+    "imports": [
+      "react-native"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/specs/registerTurboModules.ts",
+    "ext": ".ts",
+    "size": 34,
+    "sha1": "cfda1dcdeb7efadc97b10a62f557aa69b1148836",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "src/llm/contextGovernor.js",
+    "ext": ".js",
+    "size": 391,
+    "sha1": "1bfeea66f7cd66696d182bccf866b3c91ad5e531",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 5
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/llm/modelManager.js",
+    "ext": ".js",
+    "size": 831,
+    "sha1": "919fc471fa63593625f43f52ac82e2dc18c4bb7c",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 6,
+      "security": 0
+    },
+    "imports": [
+      "../native/CoreMLInference",
+      "../native/ONNXInference",
+      "./modelRegistry",
+      "react-native"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/llm/speculativeDecode.js",
+    "ext": ".js",
+    "size": 540,
+    "sha1": "4912704b9e43d5eeb1e850e30a7d7e47fb19701d",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 11
+    },
+    "imports": [
+      "./draftPropose",
+      "./modelManager",
+      "./runtimePolicy",
+      "./verifyDraft"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/llm/modelRegistry.js",
+    "ext": ".js",
+    "size": 461,
+    "sha1": "d03f451cf166cf9d9914d1e45969d91c38d02516",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/llm/runtimePolicy.js",
+    "ext": ".js",
+    "size": 241,
+    "sha1": "657fd29509237c6aebe617d9477509f8880f89e5",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../system/memoryPressure"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/architecture/diSetup.js",
+    "ext": ".js",
+    "size": 222,
+    "sha1": "aa68151548525c739d7eb087813831d1c458e26e",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 3,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/architecture/pluginSetup.js",
+    "ext": ".js",
+    "size": 1230,
+    "sha1": "aa512fffc06856044c58e29f03253f7dc34d9f83",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/architecture/toolSystem.js",
+    "ext": ".js",
+    "size": 12596,
+    "sha1": "eeb4614f0e22bcba7beb43444dabed406a7d79b4",
+    "markers": {
+      "prompts": 2,
+      "tools": 54,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 3
+    },
+    "imports": [
+      "../services/utils/apiKeys",
+      "../services/webSearchService"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/architecture/AGENTS.md",
+    "ext": ".md",
+    "size": 1934,
+    "sha1": "4bd0301f28fe1de3b9319e0d8e58d8501af37cd0",
+    "markers": {
+      "prompts": 0,
+      "tools": 12,
+      "telemetry": 3,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "src/architecture/pluginManager.js",
+    "ext": ".js",
+    "size": 6094,
+    "sha1": "38357d6dc0c584485df7b278e438b114648cb12b",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/architecture/dependencyInjector.js",
+    "ext": ".js",
+    "size": 505,
+    "sha1": "dbe436e8533f13a36ff3598b375a624aec1a3489",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/debug/useDebugSettings.ts",
+    "ext": ".ts",
+    "size": 1248,
+    "sha1": "9bfc494ebae6b1f9dd5204c77e26140156b5230e",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../utils/logger",
+      "react-native-config",
+      "zustand"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/debug/DebugConsole.tsx",
+    "ext": ".tsx",
+    "size": 3268,
+    "sha1": "e3385cd18decd69d043940ff1ba210d496f3f849",
+    "markers": {
+      "prompts": 4,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../utils/logger",
+      "./useDebugSettings",
+      "@react-native-clipboard/clipboard",
+      "react"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/services/readabilityService.js",
+    "ext": ".js",
+    "size": 4764,
+    "sha1": "9ccd46bbd227b96d4b45a8d29344e61eb19d1799",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 3
+    },
+    "imports": [
+      "react-native"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/services/encryption.ts",
+    "ext": ".ts",
+    "size": 1266,
+    "sha1": "f606551dd829e7bf48dc37fc41204dc948ed481f",
+    "markers": {
+      "prompts": 2,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "crypto"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/services/fileStorage.ts",
+    "ext": ".ts",
+    "size": 1276,
+    "sha1": "a3cc8f7de692f35eb4a1f4a73cc81c7fdcd47f16",
+    "markers": {
+      "prompts": 4,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "fs",
+      "react-native-fs"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/services/webSearchService.js",
+    "ext": ".js",
+    "size": 2109,
+    "sha1": "7cba632370f66813edc25e08bf327b02293b9dd4",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 1
+    },
+    "imports": [
+      "./providers/bing",
+      "./providers/brave",
+      "./providers/duckduckgo",
+      "./providers/google",
+      "./readabilityService",
+      "./utils/apiKeys",
+      "./utils/cacheAndRate"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/services/contextEngineer.js",
+    "ext": ".js",
+    "size": 11707,
+    "sha1": "690e0ed03928947e853cd42f35d800912b34e573",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 57,
+      "eval": 22,
+      "ios": 0,
+      "security": 67
+    },
+    "imports": [
+      "../utils/deviceUtils",
+      "../utils/sparseAttention",
+      "../utils/vectorUtils",
+      "./llmService",
+      "react-native",
+      "tiktoken"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/services/AGENTS.md",
+    "ext": ".md",
+    "size": 3097,
+    "sha1": "55977e8b9f66b1bcf531b6b9eff3755db01a718e",
+    "markers": {
+      "prompts": 0,
+      "tools": 8,
+      "telemetry": 2,
+      "rag": 7,
+      "eval": 6,
+      "ios": 0,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "src/services/treeOfThought.js",
+    "ext": ".js",
+    "size": 5547,
+    "sha1": "076f310dc90cda4d11f946ace6ddbc5039de00ca",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 1,
+      "rag": 0,
+      "eval": 43,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "./llmService"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/services/llmService.js",
+    "ext": ".js",
+    "size": 5697,
+    "sha1": "5f92ca638cfe46584721d556bd88ff61ed1fdf16",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 11,
+      "rag": 1,
+      "eval": 0,
+      "ios": 1,
+      "security": 5
+    },
+    "imports": [
+      "../architecture/dependencyInjector",
+      "../architecture/diSetup",
+      "../architecture/pluginManager",
+      "../architecture/pluginSetup",
+      "../config/model",
+      "../specs/NativeLLM",
+      "../utils/deviceUtils",
+      "../utils/modelDownloader",
+      "react-native"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/services/chat/mlxChat.ts",
+    "ext": ".ts",
+    "size": 1537,
+    "sha1": "768f52e6bc81e55ab8818f41dc6b3705deaca4af",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 7,
+      "security": 0
+    },
+    "imports": [
+      "../../native/MLXModule"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/services/providers/brave.js",
+    "ext": ".js",
+    "size": 1116,
+    "sha1": "78fb80850f06f1506257bb9190866de90ec26ca3",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 10
+    },
+    "imports": [
+      "../utils/apiKeys",
+      "../utils/timeRange"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/services/providers/google.js",
+    "ext": ".js",
+    "size": 1207,
+    "sha1": "14e6e40699e6a5353a79307e85f78e98b42ea9cc",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 9
+    },
+    "imports": [
+      "../utils/apiKeys",
+      "../utils/timeRange"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/services/providers/duckduckgo.js",
+    "ext": ".js",
+    "size": 1027,
+    "sha1": "80c098dfceb26d1ab8d1c40a4b5e5df3635ba747",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/services/providers/bing.js",
+    "ext": ".js",
+    "size": 1041,
+    "sha1": "27fe4c30410b21523cc1dfd1e0ea5efff99314be",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 9
+    },
+    "imports": [
+      "../utils/apiKeys",
+      "../utils/timeRange"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/services/utils/cacheAndRate.js",
+    "ext": ".js",
+    "size": 2986,
+    "sha1": "c1f0d722c08996bf4a36e1066b5451760a224d14",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/services/utils/apiKeys.js",
+    "ext": ".js",
+    "size": 666,
+    "sha1": "f3044613171a86017372fa3f52b027ffd9c0841e",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 11
+    },
+    "imports": [
+      "../../config"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/services/utils/timeRange.js",
+    "ext": ".js",
+    "size": 240,
+    "sha1": "c21bcfc6531e9d765f0fc8e894471fe61ffe26d2",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/core/AgentOrchestrator.js",
+    "ext": ".js",
+    "size": 6133,
+    "sha1": "815268e52d56a476e65c43ea3070b8233fe70b30",
+    "markers": {
+      "prompts": 2,
+      "tools": 45,
+      "telemetry": 21,
+      "rag": 1,
+      "eval": 1,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../services/llmService",
+      "./memory/MemorySingleton",
+      "./plugins/PluginSystem",
+      "./prompt/PromptBuilder",
+      "./tools/ToolHandler",
+      "./tools/ToolRegistry",
+      "./workflows/WorkflowTracer"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/core/AGENTS.md",
+    "ext": ".md",
+    "size": 3050,
+    "sha1": "878b5b0e5c242615129cdcaab077435a4571de60",
+    "markers": {
+      "prompts": 0,
+      "tools": 32,
+      "telemetry": 8,
+      "rag": 9,
+      "eval": 2,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "src/core/plugins/PluginSystem.js",
+    "ext": ".js",
+    "size": 197,
+    "sha1": "f5b92b60914049671a8a7ed322a40fdf0c3e9bf7",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/core/tools/ToolRegistry.js",
+    "ext": ".js",
+    "size": 2775,
+    "sha1": "4366632765265411d16812ebd6e61a20e1f6d1cc",
+    "markers": {
+      "prompts": 1,
+      "tools": 86,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../../tools/androidTools",
+      "../../tools/iosTools",
+      "../../tools/webSearchTool",
+      "react-native"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/core/tools/ToolHandler.js",
+    "ext": ".js",
+    "size": 7330,
+    "sha1": "7bdff1a3e01660dd9866cf1b9b3afc63b360cca9",
+    "markers": {
+      "prompts": 0,
+      "tools": 30,
+      "telemetry": 10,
+      "rag": 0,
+      "eval": 3,
+      "ios": 0,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/core/prompt/promptTemplate.js",
+    "ext": ".js",
+    "size": 962,
+    "sha1": "dcc763f358e0f13d894dace52bf927c97860ab67",
+    "markers": {
+      "prompts": 2,
+      "tools": 14,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "./promptTemplates.json"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/core/prompt/PromptBuilder.js",
+    "ext": ".js",
+    "size": 1256,
+    "sha1": "cd686751cbd466992f3a26c8859403debe46aca2",
+    "markers": {
+      "prompts": 0,
+      "tools": 23,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "./promptTemplate"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/core/prompt/promptTemplates.json",
+    "ext": ".json",
+    "size": 1028,
+    "sha1": "a0a8525e4bfbc7ca448e936be327acceecfd0b7d",
+    "markers": {
+      "prompts": 5,
+      "tools": 26,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "src/core/workflows/WorkflowTracer.js",
+    "ext": ".js",
+    "size": 2922,
+    "sha1": "2e6f04ade35e0eee817cc5e827b8a6215aa379cb",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 2,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../../utils/logger"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/core/memory/MemorySingleton.ts",
+    "ext": ".ts",
+    "size": 96,
+    "sha1": "f41bbaae0f49bcb79139b1070904155939bfa65f",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "./MemoryManager"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/core/memory/MemoryManager.js",
+    "ext": ".js",
+    "size": 1195,
+    "sha1": "ca9da7e3bc980988f574e8a24606f486955dd4c3",
+    "markers": {
+      "prompts": 0,
+      "tools": 2,
+      "telemetry": 0,
+      "rag": 11,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../../services/llmService",
+      "../../utils/hnswVectorStore",
+      "../../utils/sparseAttention",
+      "./services/HistoryService",
+      "./services/Retriever",
+      "./services/VectorIndexer"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/core/memory/services/VectorIndexer.js",
+    "ext": ".js",
+    "size": 641,
+    "sha1": "e5c5cd378d59affcac7a81557047c5ce0d5a593f",
+    "markers": {
+      "prompts": 0,
+      "tools": 4,
+      "telemetry": 0,
+      "rag": 6,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/core/memory/services/Retriever.js",
+    "ext": ".js",
+    "size": 1889,
+    "sha1": "18280ce2d24c3b3041f45e43c1ee9bffcd3b66fb",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 4,
+      "rag": 8,
+      "eval": 6,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/core/memory/services/HistoryService.js",
+    "ext": ".js",
+    "size": 320,
+    "sha1": "452be2838ad72837c58cf9d1845ae08ab813cbdf",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/native/MLXModule.ts",
+    "ext": ".ts",
+    "size": 870,
+    "sha1": "ac7e8edd1dcdcc49e191159a92d29f65d9f2520f",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 1,
+      "rag": 0,
+      "eval": 0,
+      "ios": 7,
+      "security": 1
+    },
+    "imports": [
+      "react-native"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/native/mlx.ts",
+    "ext": ".ts",
+    "size": 1909,
+    "sha1": "76012d7ac38925693b9f049fdc481d4a5bd73b09",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 17,
+      "security": 3
+    },
+    "imports": [
+      "./MLXModule"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/memory/VectorMemory.ts",
+    "ext": ".ts",
+    "size": 4107,
+    "sha1": "3160b5e4615845ea2954a56191c1b053c8ebaeee",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 13,
+      "eval": 8,
+      "ios": 0,
+      "security": 2
+    },
+    "imports": [
+      "../config",
+      "../services/encryption",
+      "../services/fileStorage",
+      "../utils/vectorUtils",
+      "./migrations",
+      "crypto",
+      "path"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/memory/AGENTS.md",
+    "ext": ".md",
+    "size": 1787,
+    "sha1": "e750bc3d8be894e6fc3bc0228e7ad75d49e58a76",
+    "markers": {
+      "prompts": 0,
+      "tools": 2,
+      "telemetry": 0,
+      "rag": 11,
+      "eval": 1,
+      "ios": 0,
+      "security": 2
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "src/memory/migrations/0001_initial.ts",
+    "ext": ".ts",
+    "size": 60,
+    "sha1": "2432d4d0540daf04d89dd3576de145fa5fa3e382",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/memory/migrations/index.ts",
+    "ext": ".ts",
+    "size": 214,
+    "sha1": "3b80f9dbda53cb858927a7cd0fc90e65ea87a0af",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "./0001_initial"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/utils/vectorUtils.js",
+    "ext": ".js",
+    "size": 669,
+    "sha1": "a003fca8c7dddb582fff4c247174780614758ee8",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 8,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/utils/NativeLogger.ts",
+    "ext": ".ts",
+    "size": 356,
+    "sha1": "8d5e3c9865901bc46f0bf19b0af3856c8b4ee0c7",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "react-native"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/utils/machoFatBinary.js",
+    "ext": ".js",
+    "size": 16649,
+    "sha1": "983ccc4beb1462c316c5aaed208ca22612a43b3c",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 4,
+      "ios": 0,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/utils/quantumSafeCrypto.js",
+    "ext": ".js",
+    "size": 6579,
+    "sha1": "5e69fd07135c9935ce893f95f80c73f133708db4",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 24
+    },
+    "imports": [
+      "crypto-js",
+      "noble-post-quantum"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/utils/normalizeUtils.js",
+    "ext": ".js",
+    "size": 2621,
+    "sha1": "342d11ed09408f996e09c16655f84c823995bbd8",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/utils/sparseAttention.js",
+    "ext": ".js",
+    "size": 5738,
+    "sha1": "c5cea00764de65050c67ed7453b4c30cf493c36c",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 70,
+      "eval": 30,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "./vectorUtils"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/utils/deviceUtils.js",
+    "ext": ".js",
+    "size": 10752,
+    "sha1": "8af8cc07597d559de28fe5649b388f636bbbc1e4",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 2,
+      "ios": 0,
+      "security": 13
+    },
+    "imports": [
+      "react-native"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/utils/hnswVectorStore.js",
+    "ext": ".js",
+    "size": 12847,
+    "sha1": "f69e3c20b6356a88c0adc392b05672b90b6b6c12",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 68,
+      "eval": 4,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../config",
+      "../services/encryption",
+      "./vectorUtils",
+      "buffer",
+      "react-native-sqlite-storage"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/utils/modelDownloader.js",
+    "ext": ".js",
+    "size": 2127,
+    "sha1": "b7064d2aef9be6a7d2e69defa82fc17283a2c2e3",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "react-native-fs"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/utils/telemetry.js",
+    "ext": ".js",
+    "size": 6013,
+    "sha1": "86ae24b078e8664d1699066ef094ddbeb397487d",
+    "markers": {
+      "prompts": 2,
+      "tools": 18,
+      "telemetry": 29,
+      "rag": 2,
+      "eval": 5,
+      "ios": 0,
+      "security": 19
+    },
+    "imports": [
+      "../core/prompt/promptTemplate",
+      "./logger",
+      "expo-file-system",
+      "react-native"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/utils/hfRepoDownloader.js",
+    "ext": ".js",
+    "size": 3747,
+    "sha1": "487fd3bfa6ad43a4a55733e8a1fa564548c02325",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 13,
+      "security": 5
+    },
+    "imports": [
+      "react-native-fs"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/utils/logger.ts",
+    "ext": ".ts",
+    "size": 8731,
+    "sha1": "9188ca24ad4f489ed3fe425e1789ed7a48f4569d",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 2
+    },
+    "imports": [
+      "expo-file-system",
+      "react-native"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/utils/fsUtils.js",
+    "ext": ".js",
+    "size": 8342,
+    "sha1": "df6fdd000bbbf2527c9ed1970e6dd7f899a381e3",
+    "markers": {
+      "prompts": 9,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "react-native-fs"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/utils/envUtils.js",
+    "ext": ".js",
+    "size": 891,
+    "sha1": "ed0925a7b3b680c78dd061e947f24d5d8977b5f2",
+    "markers": {
+      "prompts": 3,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/utils/buildPrompt.ts",
+    "ext": ".ts",
+    "size": 377,
+    "sha1": "688a9d091fc108cc5e6fc6617a3754c851335bc4",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/utils/paramUtils.js",
+    "ext": ".js",
+    "size": 3292,
+    "sha1": "a3367482b75e686f46f6f497d865d2926029d781",
+    "markers": {
+      "prompts": 0,
+      "tools": 6,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/utils/pathUtils.js",
+    "ext": ".js",
+    "size": 2679,
+    "sha1": "cb961665e308b2fa271aa5dd5800e4b831046264",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "./envUtils"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "src/utils/consents.ts",
+    "ext": ".ts",
+    "size": 1641,
+    "sha1": "ed0eb80375a3b830f8835f064259e7e50591a98b",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "@react-native-async-storage/async-storage"
+    ],
+    "exports": [
+      "export"
+    ],
+    "contains_todo": false
+  },
+  {
+    "path": "unsloth_compiled_cache/UnslothPPOTrainer.py",
+    "ext": ".py",
+    "size": 74154,
+    "sha1": "d2a50f0624dc0604c60aca8f5541698a8f6710ab",
+    "markers": {
+      "prompts": 0,
+      "tools": 4,
+      "telemetry": 51,
+      "rag": 26,
+      "eval": 129,
+      "ios": 0,
+      "security": 124
+    },
+    "imports": [
+      "contextlib",
+      "dataclasses",
+      "functools",
+      "inspect",
+      "multiprocessing",
+      "numpy",
+      "os",
+      "packaging.version",
+      "torch",
+      "torch.nn",
+      "transformers",
+      "transformers.training_args",
+      "trl.trainer.ppo_trainer",
+      "types",
+      "typing",
+      "unsloth_zoo.logging_utils",
+      "unsloth_zoo.utils",
+      "unsloth_zoo.vision_utils",
+      "wandb"
+    ],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "unsloth_compiled_cache/UnslothKTOTrainer.py",
+    "ext": ".py",
+    "size": 106502,
+    "sha1": "b5eb88c4ef1e0186e7ee83e87be142ac064d952e",
+    "markers": {
+      "prompts": 0,
+      "tools": 4,
+      "telemetry": 94,
+      "rag": 30,
+      "eval": 207,
+      "ios": 0,
+      "security": 144
+    },
+    "imports": [
+      "contextlib",
+      "dataclasses",
+      "functools",
+      "inspect",
+      "logging",
+      "multiprocessing",
+      "numpy",
+      "os",
+      "packaging.version",
+      "torch",
+      "torch.nn",
+      "transformers",
+      "transformers.training_args",
+      "trl.trainer.kto_trainer",
+      "types",
+      "typing",
+      "unsloth_zoo.logging_utils",
+      "unsloth_zoo.utils",
+      "unsloth_zoo.vision_utils",
+      "wandb"
+    ],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "unsloth_compiled_cache/UnslothBCOTrainer.py",
+    "ext": ".py",
+    "size": 95981,
+    "sha1": "eeba9a9484cdf6043083009f9d783e96c01bbf6d",
+    "markers": {
+      "prompts": 0,
+      "tools": 4,
+      "telemetry": 92,
+      "rag": 127,
+      "eval": 196,
+      "ios": 0,
+      "security": 160
+    },
+    "imports": [
+      "contextlib",
+      "dataclasses",
+      "functools",
+      "inspect",
+      "logging",
+      "multiprocessing",
+      "numpy",
+      "os",
+      "packaging.version",
+      "torch",
+      "torch.nn",
+      "transformers",
+      "transformers.training_args",
+      "trl.trainer.bco_trainer",
+      "types",
+      "typing",
+      "unsloth_zoo.logging_utils",
+      "unsloth_zoo.utils",
+      "unsloth_zoo.vision_utils",
+      "wandb"
+    ],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "unsloth_compiled_cache/UnslothGKDTrainer.py",
+    "ext": ".py",
+    "size": 53517,
+    "sha1": "3505f5c67f6e7fb7526920a56fc5f03e1895690b",
+    "markers": {
+      "prompts": 0,
+      "tools": 4,
+      "telemetry": 34,
+      "rag": 28,
+      "eval": 99,
+      "ios": 0,
+      "security": 109
+    },
+    "imports": [
+      "contextlib",
+      "dataclasses",
+      "functools",
+      "inspect",
+      "multiprocessing",
+      "numpy",
+      "os",
+      "packaging.version",
+      "torch",
+      "torch.nn",
+      "transformers",
+      "transformers.training_args",
+      "trl.trainer.gkd_trainer",
+      "types",
+      "typing",
+      "unsloth_zoo.flex_attention",
+      "unsloth_zoo.logging_utils",
+      "unsloth_zoo.utils",
+      "unsloth_zoo.vision_utils",
+      "wandb"
+    ],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "unsloth_compiled_cache/UnslothGRPOTrainer.py",
+    "ext": ".py",
+    "size": 187507,
+    "sha1": "68ec46f4bd72f2b6451b2ec540d376d08a391b36",
+    "markers": {
+      "prompts": 2,
+      "tools": 4,
+      "telemetry": 76,
+      "rag": 86,
+      "eval": 126,
+      "ios": 0,
+      "security": 392
+    },
+    "imports": [
+      "contextlib",
+      "dataclasses",
+      "datasets",
+      "functools",
+      "inspect",
+      "logging",
+      "numpy",
+      "os",
+      "packaging.version",
+      "pandas",
+      "torch",
+      "torch.nn",
+      "transformers",
+      "transformers.training_args",
+      "trl",
+      "trl.trainer.grpo_trainer",
+      "trl.trainer.utils",
+      "types",
+      "typing",
+      "unsloth_zoo.logging_utils",
+      "unsloth_zoo.utils",
+      "vllm",
+      "wandb"
+    ],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "unsloth_compiled_cache/UnslothCPOTrainer.py",
+    "ext": ".py",
+    "size": 86262,
+    "sha1": "8055bbe6fa5950ebfcd3d73613f7007112410748",
+    "markers": {
+      "prompts": 1,
+      "tools": 4,
+      "telemetry": 80,
+      "rag": 28,
+      "eval": 151,
+      "ios": 0,
+      "security": 264
+    },
+    "imports": [
+      "contextlib",
+      "dataclasses",
+      "functools",
+      "inspect",
+      "logging",
+      "multiprocessing",
+      "numpy",
+      "os",
+      "packaging.version",
+      "torch",
+      "torch.nn",
+      "transformers",
+      "transformers.training_args",
+      "trl.trainer.cpo_trainer",
+      "types",
+      "typing",
+      "unsloth_zoo.logging_utils",
+      "unsloth_zoo.utils",
+      "unsloth_zoo.vision_utils",
+      "wandb"
+    ],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "unsloth_compiled_cache/UnslothSFTTrainer.py",
+    "ext": ".py",
+    "size": 71797,
+    "sha1": "b39be7360859286768a0647437e2b2f110362a53",
+    "markers": {
+      "prompts": 3,
+      "tools": 4,
+      "telemetry": 45,
+      "rag": 28,
+      "eval": 122,
+      "ios": 0,
+      "security": 221
+    },
+    "imports": [
+      "contextlib",
+      "dataclasses",
+      "datasets",
+      "functools",
+      "inspect",
+      "logging",
+      "multiprocessing",
+      "numpy",
+      "os",
+      "packaging.version",
+      "torch",
+      "torch.nn",
+      "transformers",
+      "transformers.training_args",
+      "trl",
+      "trl.trainer.sft_trainer",
+      "types",
+      "typing",
+      "unsloth_zoo.flex_attention",
+      "unsloth_zoo.logging_utils",
+      "unsloth_zoo.tokenizer_utils",
+      "unsloth_zoo.training_utils",
+      "unsloth_zoo.utils",
+      "unsloth_zoo.vision_utils",
+      "wandb"
+    ],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "unsloth_compiled_cache/UnslothPRMTrainer.py",
+    "ext": ".py",
+    "size": 45178,
+    "sha1": "221eba07b973f014f2abbb80ddd6f222068c0ab9",
+    "markers": {
+      "prompts": 0,
+      "tools": 4,
+      "telemetry": 36,
+      "rag": 26,
+      "eval": 110,
+      "ios": 0,
+      "security": 108
+    },
+    "imports": [
+      "contextlib",
+      "dataclasses",
+      "functools",
+      "inspect",
+      "multiprocessing",
+      "numpy",
+      "os",
+      "packaging.version",
+      "torch",
+      "torch.nn",
+      "transformers",
+      "transformers.training_args",
+      "trl.trainer.prm_trainer",
+      "types",
+      "typing",
+      "unsloth_zoo.logging_utils",
+      "unsloth_zoo.utils",
+      "unsloth_zoo.vision_utils",
+      "wandb"
+    ],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "unsloth_compiled_cache/UnslothXPOTrainer.py",
+    "ext": ".py",
+    "size": 57385,
+    "sha1": "5385e2830ed223f79155418f566e49e4ed31cbdb",
+    "markers": {
+      "prompts": 0,
+      "tools": 4,
+      "telemetry": 34,
+      "rag": 26,
+      "eval": 123,
+      "ios": 0,
+      "security": 101
+    },
+    "imports": [
+      "contextlib",
+      "dataclasses",
+      "functools",
+      "inspect",
+      "multiprocessing",
+      "numpy",
+      "os",
+      "packaging.version",
+      "torch",
+      "torch.nn",
+      "transformers",
+      "transformers.training_args",
+      "trl.trainer.xpo_trainer",
+      "types",
+      "typing",
+      "unsloth_zoo.logging_utils",
+      "unsloth_zoo.utils",
+      "unsloth_zoo.vision_utils",
+      "wandb"
+    ],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "unsloth_compiled_cache/UnslothDPOTrainer.py",
+    "ext": ".py",
+    "size": 142179,
+    "sha1": "feb1c6515ce3279fa5308dbbdb1260f1dccbfbd4",
+    "markers": {
+      "prompts": 2,
+      "tools": 18,
+      "telemetry": 86,
+      "rag": 30,
+      "eval": 193,
+      "ios": 0,
+      "security": 282
+    },
+    "imports": [
+      "contextlib",
+      "dataclasses",
+      "functools",
+      "inspect",
+      "logging",
+      "math",
+      "multiprocessing",
+      "numpy",
+      "os",
+      "packaging.version",
+      "torch",
+      "torch.nn",
+      "transformers",
+      "transformers.training_args",
+      "trl.trainer.dpo_trainer",
+      "types",
+      "typing",
+      "unsloth_zoo.logging_utils",
+      "unsloth_zoo.utils",
+      "unsloth_zoo.vision_utils",
+      "wandb"
+    ],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "unsloth_compiled_cache/UnslothRLOOTrainer.py",
+    "ext": ".py",
+    "size": 138507,
+    "sha1": "ec20ca55d090b59b1359f8abd5514bcd97b7dc66",
+    "markers": {
+      "prompts": 2,
+      "tools": 4,
+      "telemetry": 49,
+      "rag": 27,
+      "eval": 131,
+      "ios": 0,
+      "security": 242
+    },
+    "imports": [
+      "contextlib",
+      "dataclasses",
+      "datasets",
+      "deepspeed",
+      "functools",
+      "inspect",
+      "logging",
+      "multiprocessing",
+      "numpy",
+      "os",
+      "packaging.version",
+      "pandas",
+      "torch",
+      "torch.nn",
+      "transformers",
+      "transformers.training_args",
+      "trl",
+      "trl.trainer.rloo_trainer",
+      "types",
+      "typing",
+      "unsloth_zoo.logging_utils",
+      "unsloth_zoo.utils",
+      "unsloth_zoo.vision_utils",
+      "vllm",
+      "wandb"
+    ],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "unsloth_compiled_cache/UnslothOnlineDPOTrainer.py",
+    "ext": ".py",
+    "size": 116125,
+    "sha1": "f4efba0661f76e80fe24629cc089ef1308f75b75",
+    "markers": {
+      "prompts": 2,
+      "tools": 4,
+      "telemetry": 49,
+      "rag": 26,
+      "eval": 161,
+      "ios": 0,
+      "security": 256
+    },
+    "imports": [
+      "contextlib",
+      "dataclasses",
+      "deepspeed",
+      "functools",
+      "inspect",
+      "logging",
+      "multiprocessing",
+      "numpy",
+      "os",
+      "packaging.version",
+      "torch",
+      "torch.nn",
+      "transformers",
+      "transformers.training_args",
+      "trl.trainer.online_dpo_trainer",
+      "types",
+      "typing",
+      "unsloth_zoo.logging_utils",
+      "unsloth_zoo.utils",
+      "unsloth_zoo.vision_utils",
+      "vllm",
+      "wandb"
+    ],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "unsloth_compiled_cache/UnslothRewardTrainer.py",
+    "ext": ".py",
+    "size": 58070,
+    "sha1": "9b87f6e7bb0d41b2d9271942ae19282968354530",
+    "markers": {
+      "prompts": 0,
+      "tools": 12,
+      "telemetry": 54,
+      "rag": 29,
+      "eval": 124,
+      "ios": 0,
+      "security": 176
+    },
+    "imports": [
+      "contextlib",
+      "dataclasses",
+      "datasets",
+      "functools",
+      "inspect",
+      "logging",
+      "multiprocessing",
+      "numpy",
+      "os",
+      "packaging.version",
+      "torch",
+      "torch.nn",
+      "transformers",
+      "transformers.training_args",
+      "trl",
+      "trl.trainer.reward_trainer",
+      "types",
+      "typing",
+      "unsloth_zoo.flex_attention",
+      "unsloth_zoo.logging_utils",
+      "unsloth_zoo.utils",
+      "unsloth_zoo.vision_utils",
+      "wandb"
+    ],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "unsloth_compiled_cache/UnslothORPOTrainer.py",
+    "ext": ".py",
+    "size": 82624,
+    "sha1": "111de4ddfba34450a714d7ee9073881a2dc530e1",
+    "markers": {
+      "prompts": 1,
+      "tools": 4,
+      "telemetry": 86,
+      "rag": 28,
+      "eval": 150,
+      "ios": 0,
+      "security": 265
+    },
+    "imports": [
+      "contextlib",
+      "dataclasses",
+      "functools",
+      "inspect",
+      "logging",
+      "multiprocessing",
+      "numpy",
+      "os",
+      "packaging.version",
+      "torch",
+      "torch.nn",
+      "transformers",
+      "transformers.training_args",
+      "trl.trainer.orpo_trainer",
+      "types",
+      "typing",
+      "unsloth_zoo.logging_utils",
+      "unsloth_zoo.utils",
+      "unsloth_zoo.vision_utils",
+      "wandb"
+    ],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "unsloth_compiled_cache/UnslothNashMDTrainer.py",
+    "ext": ".py",
+    "size": 54863,
+    "sha1": "d3f726eb0b329c8100682e697e3c7730884212f8",
+    "markers": {
+      "prompts": 0,
+      "tools": 4,
+      "telemetry": 34,
+      "rag": 26,
+      "eval": 126,
+      "ios": 0,
+      "security": 98
+    },
+    "imports": [
+      "contextlib",
+      "dataclasses",
+      "functools",
+      "inspect",
+      "multiprocessing",
+      "numpy",
+      "os",
+      "packaging.version",
+      "torch",
+      "torch.nn",
+      "transformers",
+      "transformers.training_args",
+      "trl.trainer.nash_md_trainer",
+      "types",
+      "typing",
+      "unsloth_zoo.logging_utils",
+      "unsloth_zoo.utils",
+      "unsloth_zoo.vision_utils",
+      "wandb"
+    ],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "unsloth_compiled_cache/.locks/.lock.UnslothKTOTrainer.py",
+    "ext": ".py",
+    "size": 0,
+    "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "unsloth_compiled_cache/.locks/.lock.UnslothGRPOTrainer.py",
+    "ext": ".py",
+    "size": 0,
+    "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "unsloth_compiled_cache/.locks/.lock.UnslothXPOTrainer.py",
+    "ext": ".py",
+    "size": 0,
+    "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "unsloth_compiled_cache/.locks/.lock.UnslothRLOOTrainer.py",
+    "ext": ".py",
+    "size": 0,
+    "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "unsloth_compiled_cache/.locks/.lock.UnslothPPOTrainer.py",
+    "ext": ".py",
+    "size": 0,
+    "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "unsloth_compiled_cache/.locks/.lock.UnslothDPOTrainer.py",
+    "ext": ".py",
+    "size": 0,
+    "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "unsloth_compiled_cache/.locks/.lock.UnslothBCOTrainer.py",
+    "ext": ".py",
+    "size": 0,
+    "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "unsloth_compiled_cache/.locks/.lock.UnslothRewardTrainer.py",
+    "ext": ".py",
+    "size": 0,
+    "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "unsloth_compiled_cache/.locks/.lock.UnslothSFTTrainer.py",
+    "ext": ".py",
+    "size": 0,
+    "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "unsloth_compiled_cache/.locks/.lock.UnslothCPOTrainer.py",
+    "ext": ".py",
+    "size": 0,
+    "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "unsloth_compiled_cache/.locks/.lock.UnslothPRMTrainer.py",
+    "ext": ".py",
+    "size": 0,
+    "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "unsloth_compiled_cache/.locks/.lock.UnslothGKDTrainer.py",
+    "ext": ".py",
+    "size": 0,
+    "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "unsloth_compiled_cache/.locks/.lock.UnslothORPOTrainer.py",
+    "ext": ".py",
+    "size": 0,
+    "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "unsloth_compiled_cache/.locks/.lock.UnslothNashMDTrainer.py",
+    "ext": ".py",
+    "size": 0,
+    "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "unsloth_compiled_cache/.locks/.lock.UnslothOnlineDPOTrainer.py",
+    "ext": ".py",
+    "size": 0,
+    "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/Podfile",
+    "ext": "<none>",
+    "size": 14590,
+    "sha1": "27b733c72f5773229a399a6157caa663f6574f34",
+    "markers": {
+      "prompts": 36,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 11,
+      "security": 142
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/AGENTS.md",
+    "ext": ".md",
+    "size": 898,
+    "sha1": "d39b3d8d78458edda76525b580e4f4796830724b",
+    "markers": {
+      "prompts": 0,
+      "tools": 2,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 4,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/project.yml",
+    "ext": ".yml",
+    "size": 4064,
+    "sha1": "1d6976ad5f253b70b1077baf51914c54a9f16874",
+    "markers": {
+      "prompts": 7,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 24,
+      "security": 5
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/scripts/purge-rctdeprecation-caches.sh",
+    "ext": ".sh",
+    "size": 3916,
+    "sha1": "172e865d2fe662970c666388473ac5d30c6a4548",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 1,
+      "security": 4
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/scripts/doctor.sh",
+    "ext": ".sh",
+    "size": 1094,
+    "sha1": "f11161a3c43a43df58df82b0da6f89c44191c648",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 12,
+      "security": 4
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/scripts/patch-react-native-contacts.sh",
+    "ext": ".sh",
+    "size": 4400,
+    "sha1": "66679926993bfaee3e07691157ca80ec53a0d6ee",
+    "markers": {
+      "prompts": 10,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/scripts/ensure-rctdeprecation-legacy.sh",
+    "ext": ".sh",
+    "size": 795,
+    "sha1": "edda221d4b4555859fb96270c4bc354796840a49",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/scripts/patch-mlx-metal-cxx17.sh",
+    "ext": ".sh",
+    "size": 5565,
+    "sha1": "eece6c238790b98fd00139eb204790991fcf687c",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 18,
+      "security": 10
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/BatteryTurboModule.mm",
+    "ext": ".mm",
+    "size": 690,
+    "sha1": "9d69ee4d6b2bc2fb945b9c43c608b8475a7472b7",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/MusicTurboModule.mm",
+    "ext": ".mm",
+    "size": 2271,
+    "sha1": "a86d69e2953bf7d011c4efa199e8a8d70a5eb1a1",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/PhotosTurboModule.mm",
+    "ext": ".mm",
+    "size": 2120,
+    "sha1": "200adfaee584fd6b0cdc9ad7953694310243e671",
+    "markers": {
+      "prompts": 2,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 2
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/Logging.swift",
+    "ext": ".swift",
+    "size": 720,
+    "sha1": "e60946129072a3cfcf7dac2249c030782eb28236",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/CalendarTurboModule.mm",
+    "ext": ".mm",
+    "size": 2525,
+    "sha1": "098b1a8198ec5c594d3c5abf8819417ed367f292",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 2,
+      "rag": 0,
+      "eval": 1,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/MyOfflineLLMApp.h",
+    "ext": ".h",
+    "size": 163,
+    "sha1": "edcadbb24563bc34ced6f93d3d5c56fd2c69c037",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/AppDelegate.mm",
+    "ext": ".mm",
+    "size": 4301,
+    "sha1": "f17df16cb7447106628bd8961fa882f9fe5e54bf",
+    "markers": {
+      "prompts": 30,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 4
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/BrightnessTurboModule.mm",
+    "ext": ".mm",
+    "size": 464,
+    "sha1": "0120a2a330abcf8cebb303d4e4b39876c401f3ff",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/CallTurboModule.mm",
+    "ext": ".mm",
+    "size": 313,
+    "sha1": "fecbc3808c02fc5c7778bf65f58568356c6c1ffa",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/SensorsTurboModule.h",
+    "ext": ".h",
+    "size": 137,
+    "sha1": "2bc6c67b528554e8b05535f61483c732e4d75f59",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/MapsTurboModule.mm",
+    "ext": ".mm",
+    "size": 5371,
+    "sha1": "61f7279de6e4671afca404510b3628fb33a96e7f",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 2,
+      "rag": 0,
+      "eval": 4,
+      "ios": 0,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/FilesTurboModule.mm",
+    "ext": ".mm",
+    "size": 8179,
+    "sha1": "344db033b4af22056629f4501033bd242fbdf57c",
+    "markers": {
+      "prompts": 3,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 2,
+      "ios": 0,
+      "security": 10
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/AppDelegate.h",
+    "ext": ".h",
+    "size": 695,
+    "sha1": "be1d846acced395a7dffa309534b8a868c2a7f99",
+    "markers": {
+      "prompts": 13,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/DeviceInfoTurboModule.mm",
+    "ext": ".mm",
+    "size": 836,
+    "sha1": "46f84b08b402d917ed1da5f8879b5f2e252c1a3d",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/CameraTurboModule.mm",
+    "ext": ".mm",
+    "size": 1879,
+    "sha1": "5ec3d35a5917a76b05d811762fefb43552d78b9f",
+    "markers": {
+      "prompts": 2,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 2
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/ContactsTurboModule.mm",
+    "ext": ".mm",
+    "size": 10139,
+    "sha1": "4d4e58111bf28e7c35e11deac1ff09f0fe97cbf0",
+    "markers": {
+      "prompts": 2,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 4,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/FlashlightTurboModule.mm",
+    "ext": ".mm",
+    "size": 926,
+    "sha1": "60d02115bb7250598745907d29347b21d265fc16",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/LocationTurboModule.mm",
+    "ext": ".mm",
+    "size": 2655,
+    "sha1": "2928dbb1687a97a340c65ccfbdf1b4cf0855eb20",
+    "markers": {
+      "prompts": 2,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 11,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/MessagesTurboModule.mm",
+    "ext": ".mm",
+    "size": 2230,
+    "sha1": "aa20fc66025d211e1561568e34154eb56a189de1",
+    "markers": {
+      "prompts": 2,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/PhotosTurboModule.h",
+    "ext": ".h",
+    "size": 225,
+    "sha1": "f9268d14a9bdb14c497553af9fed8a1ce9fe2c95",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/SensorsTurboModule.mm",
+    "ext": ".mm",
+    "size": 3310,
+    "sha1": "8167486083917d592f5f7678d28a2eca4ed037df",
+    "markers": {
+      "prompts": 2,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 3,
+      "ios": 0,
+      "security": 6
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/ReactStubs.m",
+    "ext": ".m",
+    "size": 89,
+    "sha1": "702f023888853842379171d78c6058d77341640e",
+    "markers": {
+      "prompts": 2,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/main.m",
+    "ext": ".m",
+    "size": 202,
+    "sha1": "795fc4596212fd4cb91b96c1721698ca6ead47e2",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/MLX/MLXModule.swift",
+    "ext": ".swift",
+    "size": 7476,
+    "sha1": "0fe35bb71abf40f8a2378b2f33de24503322f1b4",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 4,
+      "eval": 0,
+      "ios": 15,
+      "security": 7
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/MLX/MLXModuleBridge.m",
+    "ext": ".m",
+    "size": 890,
+    "sha1": "f575a7e1eaae9628b6022828fb1bb5149d634f6c",
+    "markers": {
+      "prompts": 3,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 2,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/MLX/MLXEventsBridge.m",
+    "ext": ".m",
+    "size": 134,
+    "sha1": "c124697690625d17d5dcef941cf5a40ff51b14ae",
+    "markers": {
+      "prompts": 2,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 1,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/MLX/MLXEvents.swift",
+    "ext": ".swift",
+    "size": 1285,
+    "sha1": "bdc4fb93d60d41a4c09beca39ec742f1b9510fb2",
+    "markers": {
+      "prompts": 2,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 16,
+      "security": 4
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/MLX/BundledModelLocator.swift",
+    "ext": ".swift",
+    "size": 1574,
+    "sha1": "5b94ca7fa8fc76d3332a6d056af026a590f97cb8",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 5,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/Resources/.gitkeep",
+    "ext": "<none>",
+    "size": 3,
+    "sha1": "7c338ed2840d2bf55f9f5e4eed04f66c80840eb3",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/Resources/Models/.gitkeep",
+    "ext": "<none>",
+    "size": 3,
+    "sha1": "7c338ed2840d2bf55f9f5e4eed04f66c80840eb3",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/Models/fallback_models.json",
+    "ext": ".json",
+    "size": 189,
+    "sha1": "95d9fc7b58a1f41000b79953569bc91b38bea682",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 3,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/Bridging/monGARS-Bridging-Header.h",
+    "ext": ".h",
+    "size": 71,
+    "sha1": "4a1869e44d8babc5d01bf4ee6d60d91741223932",
+    "markers": {
+      "prompts": 2,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/Scripts/verify_deployment_target.sh",
+    "ext": ".sh",
+    "size": 327,
+    "sha1": "081cb721ed53102eaade94d269ab043dcfed47e0",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/Turbo/TurboHeaderProbe.mm",
+    "ext": ".mm",
+    "size": 525,
+    "sha1": "2198f1ace970d0153e8062d915e5d3fe14059c9a",
+    "markers": {
+      "prompts": 4,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/Turbo/LLM+Turbo.mm",
+    "ext": ".mm",
+    "size": 2747,
+    "sha1": "49c4f304a70feda0816aa4c732bf917b79d4e609",
+    "markers": {
+      "prompts": 31,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "ios/MyOfflineLLMApp/Turbo/LLM.swift",
+    "ext": ".swift",
+    "size": 31118,
+    "sha1": "517ebabcdb0954190be37fb92a1c9b3ad11bc4ea",
+    "markers": {
+      "prompts": 5,
+      "tools": 17,
+      "telemetry": 6,
+      "rag": 20,
+      "eval": 3,
+      "ios": 11,
+      "security": 28
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/deviceUtils.test.js",
+    "ext": ".js",
+    "size": 2558,
+    "sha1": "78f144a7dee20db628d82432b156a8c09d1f2ba7",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 1,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../src/utils/deviceUtils"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/prosodyDetector.test.js",
+    "ext": ".js",
+    "size": 519,
+    "sha1": "eb1a7115f8ecf8efbcf0b8998785f1b20ff4de63",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../src/emotion/ProsodyDetector"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/iosDiagnosticsSummary.test.js",
+    "ext": ".js",
+    "size": 3275,
+    "sha1": "c4d6bb937dbb9071b2b6988397b2c6da95dd6f78",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 3,
+      "security": 1
+    },
+    "imports": [
+      "child_process",
+      "fs",
+      "os",
+      "path"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/readability.test.js",
+    "ext": ".js",
+    "size": 1804,
+    "sha1": "2e5481f6d82ea3808e97522d765c6ce8062bc59f",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../src/services/readabilityService"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/contextEngineer.test.js",
+    "ext": ".js",
+    "size": 2982,
+    "sha1": "35d51a13ba3e01eeb298846f6f19cb1497553cf8",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 24,
+      "eval": 8,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../src/services/contextEngineer"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/machoFatBinary.test.js",
+    "ext": ".js",
+    "size": 4824,
+    "sha1": "1521bfe63cfd9991e60b5d33b77d17b442bf03fb",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 2
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/hfRepoDownloader.test.js",
+    "ext": ".js",
+    "size": 3360,
+    "sha1": "d312baa5ee064f505a2a714e952983b950bb861f",
+    "markers": {
+      "prompts": 2,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 48,
+      "security": 0
+    },
+    "imports": [
+      "../src/utils/hfRepoDownloader",
+      "react-native-fs"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/cacheAndRate.test.js",
+    "ext": ".js",
+    "size": 8155,
+    "sha1": "194e22262b6323b15c5aec8f32751cfb5a7a6f82",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../src/services/utils/cacheAndRate"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/buildReport.test.js",
+    "ext": ".js",
+    "size": 5850,
+    "sha1": "3c409ef5946add0568feabb745c47529cf0983d9",
+    "markers": {
+      "prompts": 0,
+      "tools": 5,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../test-utils/buildReportFixture",
+      "fs"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/hnswVectorStore.test.js",
+    "ext": ".js",
+    "size": 1848,
+    "sha1": "6c57933f659989e2f1d72ea343e9a217383cd801",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 27,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../src/utils/hnswVectorStore",
+      "../src/utils/vectorUtils"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/toolHandler.test.js",
+    "ext": ".js",
+    "size": 3412,
+    "sha1": "2fb72c0ea7726f1edcd6581c9dae3f0c7abf4600",
+    "markers": {
+      "prompts": 0,
+      "tools": 53,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../src/core/tools/ToolHandler"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/toolSystem.test.js",
+    "ext": ".js",
+    "size": 6273,
+    "sha1": "56adc0967b78fafdb6d88e7668c0a0a831be8432",
+    "markers": {
+      "prompts": 8,
+      "tools": 28,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 6
+    },
+    "imports": [
+      "../src/architecture/toolSystem"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/vectorMemory.test.js",
+    "ext": ".js",
+    "size": 1998,
+    "sha1": "1386d42404eb98213edcf27a71b1442e21ae436f",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 22,
+      "eval": 0,
+      "ios": 0,
+      "security": 3
+    },
+    "imports": [
+      "../src/memory/VectorMemory",
+      "fs"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/logger.test.ts",
+    "ext": ".ts",
+    "size": 1892,
+    "sha1": "09db340b0bb19d6924d8fe3e62d32c4bca2cb917",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../src/utils/logger",
+      "expo-file-system"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/consents.test.js",
+    "ext": ".js",
+    "size": 1895,
+    "sha1": "2e11decb720eeb697bd92ee23037d75de5b91734",
+    "markers": {
+      "prompts": 2,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../src/utils/consents",
+      "@react-native-async-storage/async-storage"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/toolRegistry.test.js",
+    "ext": ".js",
+    "size": 936,
+    "sha1": "5ae7a5f67d1ceb10c081312afca4c3ee8c00980a",
+    "markers": {
+      "prompts": 1,
+      "tools": 34,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../src/core/tools/ToolRegistry"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/workflowTracer.test.js",
+    "ext": ".js",
+    "size": 1708,
+    "sha1": "532a794c7121a7461596ef8fd0ed1e5a8f85d2f3",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 11,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../src/core/workflows/WorkflowTracer",
+      "../src/utils/logger"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/AGENTS.md",
+    "ext": ".md",
+    "size": 2609,
+    "sha1": "3e4b5e3d922e96351b5d660cd16e0b8d0a769125",
+    "markers": {
+      "prompts": 0,
+      "tools": 19,
+      "telemetry": 4,
+      "rag": 8,
+      "eval": 2,
+      "ios": 0,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/sample.test.js",
+    "ext": ".js",
+    "size": 58,
+    "sha1": "d81e3e123164e14f26929372f77960662c12f50a",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/telemetry.test.js",
+    "ext": ".js",
+    "size": 974,
+    "sha1": "73d959448e7b74fd666cc78565cf3ca635abcdd5",
+    "markers": {
+      "prompts": 0,
+      "tools": 6,
+      "telemetry": 4,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 13
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/llmService.test.js",
+    "ext": ".js",
+    "size": 1954,
+    "sha1": "a016442f8a700c7aa0fe23bb4fd6e16307f0521e",
+    "markers": {
+      "prompts": 3,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 6,
+      "security": 0
+    },
+    "imports": [
+      "../src/config/model",
+      "../src/services/llmService",
+      "../src/utils/modelDownloader",
+      "react-native"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/promptBuilder.test.js",
+    "ext": ".js",
+    "size": 8240,
+    "sha1": "b148ab0147ab6e4a13a071981ea4bdfd09e3c6a0",
+    "markers": {
+      "prompts": 2,
+      "tools": 120,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 9,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [
+      "../src/core/prompt/PromptBuilder",
+      "../src/core/tools/ToolHandler",
+      "fs",
+      "path"
+    ],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/fixtures/iosUnsigned/ResultBundle_unsigned_sample.json",
+    "ext": ".json",
+    "size": 3452,
+    "sha1": "b598020bb5fb6b820decd6b7ecff0f187fe13a4c",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 2,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__tests__/fixtures/iosUnsigned/archive_result_sample.json",
+    "ext": ".json",
+    "size": 2819,
+    "sha1": "60b5fce14b9dc98cd3d34a510edb882fd92442a9",
+    "markers": {
+      "prompts": 2,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 2,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "fastlane/Fastfile",
+    "ext": "<none>",
+    "size": 6219,
+    "sha1": "2fb8a7c18cf861ad0083e3031c3e1fc71cb2bdac",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 6,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": ".github/dependabot.yml",
+    "ext": ".yml",
+    "size": 270,
+    "sha1": "f2c7c73c22958ef5eefd5757de1510919c8a8082",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": ".github/actions/ios-setup/action.yml",
+    "ext": ".yml",
+    "size": 695,
+    "sha1": "db8e0b462bd58367832b1872fef4461e398bc02f",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 8,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": ".github/actions/signing-secrets-check/action.yml",
+    "ext": ".yml",
+    "size": 4337,
+    "sha1": "5768a9fe83eb265956971ac127f5c35832d4a1ea",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 4,
+      "ios": 0,
+      "security": 16
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": ".github/actions/verify-ios-config/action.yml",
+    "ext": ".yml",
+    "size": 382,
+    "sha1": "6f45b06dd3ee520b21710f150f642b2ad4410832",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": ".github/workflows/ios-build-signed-ipa.yml",
+    "ext": ".yml",
+    "size": 11862,
+    "sha1": "db67d8bb62ca66d66f4c7c14b18dfd4ad9f4b386",
+    "markers": {
+      "prompts": 0,
+      "tools": 1,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 30,
+      "security": 11
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": ".github/workflows/fine_tune_and_convert.yml",
+    "ext": ".yml",
+    "size": 3860,
+    "sha1": "dfbe8d35f90872a581301ebf4a4bb64adbae26f4",
+    "markers": {
+      "prompts": 0,
+      "tools": 2,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 8,
+      "security": 9
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": ".github/workflows/e2e.yml",
+    "ext": ".yml",
+    "size": 978,
+    "sha1": "7108ff3f49dfc8a21b22db6cad1a3508cd437711",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 1,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": ".github/workflows/ios-signing-validate.yml",
+    "ext": ".yml",
+    "size": 9262,
+    "sha1": "466c63057f1e2e6a217b9ca8f09423c265ac3017",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 14
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": ".github/workflows/csr.yml",
+    "ext": ".yml",
+    "size": 776,
+    "sha1": "538c3415e39470f3f730a624ae00e3ec61e7d375",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": ".github/workflows/ios-signed-monGARS.yml",
+    "ext": ".yml",
+    "size": 15189,
+    "sha1": "3a79e9cae5b462f2c652ddd69be32dcb38ea8ec1",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 15,
+      "security": 21
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": ".github/workflows/CoreML.yml",
+    "ext": ".yml",
+    "size": 1316,
+    "sha1": "fc5754a5e08f32a0554a29ef5898a67589ec4cbe",
+    "markers": {
+      "prompts": 0,
+      "tools": 2,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 8,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": ".github/workflows/ios-deploy-testflight.yml",
+    "ext": ".yml",
+    "size": 14364,
+    "sha1": "0b349fda1e4c820b6fbf07aa1e26d8616837664f",
+    "markers": {
+      "prompts": 0,
+      "tools": 6,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 33,
+      "security": 15
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": ".github/workflows/README_CI.md",
+    "ext": ".md",
+    "size": 1849,
+    "sha1": "1d63848be95ab91d36efdb2552ceeb7d372ef367",
+    "markers": {
+      "prompts": 0,
+      "tools": 3,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 8,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": ".github/workflows/offllm_pipeline.yml",
+    "ext": ".yml",
+    "size": 5352,
+    "sha1": "956067e0ebb1494510f2ee184f911652e53d75e7",
+    "markers": {
+      "prompts": 0,
+      "tools": 10,
+      "telemetry": 5,
+      "rag": 6,
+      "eval": 6,
+      "ios": 49,
+      "security": 7
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "bin/act",
+    "ext": "<none>",
+    "size": 20881592,
+    "sha1": "7424b9c55bf36a74aa5d2ebf2a3eff5edad47992",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "reports/resolve-package.json",
+    "ext": ".json",
+    "size": 187,
+    "sha1": "20c8705a014840c90370c78b0a45f5da480114cc",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "reports/Temp",
+    "ext": "<none>",
+    "size": 1,
+    "sha1": "adc83b19e793491b1c6ea0fd8b46cd9f32e592fc",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "reports/archive-result.json",
+    "ext": ".json",
+    "size": 377681,
+    "sha1": "22300607bba16be35ab9d984a63d6110f9254ced",
+    "markers": {
+      "prompts": 468,
+      "tools": 0,
+      "telemetry": 14,
+      "rag": 0,
+      "eval": 0,
+      "ios": 46,
+      "security": 14
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "reports/ResultBundle_unsigned.json",
+    "ext": ".json",
+    "size": 377681,
+    "sha1": "22300607bba16be35ab9d984a63d6110f9254ced",
+    "markers": {
+      "prompts": 468,
+      "tools": 0,
+      "telemetry": 14,
+      "rag": 0,
+      "eval": 0,
+      "ios": 46,
+      "security": 14
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "reports/AGENTS.md",
+    "ext": ".md",
+    "size": 1914,
+    "sha1": "7cab5b47643f869924b6341c4273c18f28a8ca80",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "reports/build-log.txt",
+    "ext": ".txt",
+    "size": 15460107,
+    "sha1": "0cd916f7bc992bc646c91f9112056d1c9a724cb5",
+    "markers": {
+      "prompts": 6485,
+      "tools": 202,
+      "telemetry": 0,
+      "rag": 23,
+      "eval": 1,
+      "ios": 6729,
+      "security": 596
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__mocks__/react-native-fs.js",
+    "ext": ".js",
+    "size": 345,
+    "sha1": "7932336bf3ff62cc7fcc2e4107e74daa2722c9b6",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__mocks__/react-native-config.js",
+    "ext": ".js",
+    "size": 41,
+    "sha1": "f68a20fbae985a8fa1c4762be8a5ba43f86fc5fb",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "__mocks__/expo-file-system.js",
+    "ext": ".js",
+    "size": 516,
+    "sha1": "d973ace14f3ee0807030ca40f7fa4c1597df88a8",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/gradlew",
+    "ext": "<none>",
+    "size": 122,
+    "sha1": "c5c3be3c33f45c2c3f5a8d14a1dcef3bece80ef5",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/app/src/main/cpp/llama_jni.cpp",
+    "ext": ".cpp",
+    "size": 13542,
+    "sha1": "78f324b7a5f11ee89287ab55b826058be5646325",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 1,
+      "rag": 17,
+      "eval": 2,
+      "ios": 0,
+      "security": 42
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/app/src/main/java/com/mongars/BatteryTurboModule.java",
+    "ext": ".java",
+    "size": 2687,
+    "sha1": "b3466a7dc8339dee3f028f20b270f86ff0898796",
+    "markers": {
+      "prompts": 18,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/app/src/main/java/com/mongars/DeviceInfoTurboModule.java",
+    "ext": ".java",
+    "size": 2562,
+    "sha1": "5147054af91abc4d6143ca45f81d91d2ead41ea9",
+    "markers": {
+      "prompts": 19,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/app/src/main/java/com/mongars/FlashlightTurboModule.java",
+    "ext": ".java",
+    "size": 3316,
+    "sha1": "6448cc5f7867369fb3061425945402321918e2a9",
+    "markers": {
+      "prompts": 18,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/app/src/main/java/com/mongars/MessagesTurboModule.java",
+    "ext": ".java",
+    "size": 1940,
+    "sha1": "ff67c99102048619d5bc92e7453cae2bebc58d31",
+    "markers": {
+      "prompts": 18,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/app/src/main/java/com/mongars/CallTurboModule.java",
+    "ext": ".java",
+    "size": 2808,
+    "sha1": "5bb8ffead75adcd5ee15ec911cf399054cc2ed3f",
+    "markers": {
+      "prompts": 20,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/app/src/main/java/com/mongars/SensorsTurboModule.java",
+    "ext": ".java",
+    "size": 4091,
+    "sha1": "0e4c625a88261ecb56687ada89446066f76afb5e",
+    "markers": {
+      "prompts": 18,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 2,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/app/src/main/java/com/mongars/LlamaTurboModule.java",
+    "ext": ".java",
+    "size": 8627,
+    "sha1": "33f7abad987c21c808881c430ff930237808d912",
+    "markers": {
+      "prompts": 29,
+      "tools": 0,
+      "telemetry": 7,
+      "rag": 4,
+      "eval": 0,
+      "ios": 0,
+      "security": 7
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/app/src/main/java/com/mongars/LocationTurboModule.java",
+    "ext": ".java",
+    "size": 7272,
+    "sha1": "f7306f4bd96d2c128e6b123afeee76bae6f532c3",
+    "markers": {
+      "prompts": 24,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 8,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/app/src/main/java/com/mongars/CameraTurboModule.java",
+    "ext": ".java",
+    "size": 1247,
+    "sha1": "2845dd0d6b9a029e0eb8c393aa5cc196d3fd660a",
+    "markers": {
+      "prompts": 16,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/app/src/main/java/com/mongars/CalendarTurboModule.java",
+    "ext": ".java",
+    "size": 5842,
+    "sha1": "2b218faf7aa1894c6fd80eba57d4bc71aec7d2ac",
+    "markers": {
+      "prompts": 19,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/app/src/main/java/com/mongars/MonGarsPackage.java",
+    "ext": ".java",
+    "size": 2094,
+    "sha1": "a85da16437a3f8bcbce422b86a945eb7b161c921",
+    "markers": {
+      "prompts": 30,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/app/src/main/java/com/mongars/FilesTurboModule.java",
+    "ext": ".java",
+    "size": 1241,
+    "sha1": "fda63de33cf54e36526f9aeaf50663f1920b8806",
+    "markers": {
+      "prompts": 17,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/app/src/main/java/com/mongars/PhotosTurboModule.java",
+    "ext": ".java",
+    "size": 1122,
+    "sha1": "f2c88bc7386c9913aa5564af45a15919bda24ba0",
+    "markers": {
+      "prompts": 16,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/app/src/main/java/com/mongars/ContactsTurboModule.java",
+    "ext": ".java",
+    "size": 8057,
+    "sha1": "2a29256b1ee56023bada15fb0a85d8b786b188ee",
+    "markers": {
+      "prompts": 24,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/app/src/main/java/com/mongars/ModuleUtils.java",
+    "ext": ".java",
+    "size": 1308,
+    "sha1": "b4071c36e935979e7c23610040c2824dc11d7bd0",
+    "markers": {
+      "prompts": 1,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/app/src/main/java/com/mongars/BrightnessTurboModule.java",
+    "ext": ".java",
+    "size": 2265,
+    "sha1": "36053eef754f71e1ac9447723b30d6c82a697f33",
+    "markers": {
+      "prompts": 15,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/app/src/main/java/com/mongars/MapsTurboModule.java",
+    "ext": ".java",
+    "size": 2786,
+    "sha1": "e7d56bf9580fdb6136d2f8a1fdbd18a1ab1493e7",
+    "markers": {
+      "prompts": 19,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "android/app/src/main/java/com/mongars/MusicTurboModule.java",
+    "ext": ".java",
+    "size": 1344,
+    "sha1": "f342be2a7ee6849f5212fe844b42d0a2ac99ab0e",
+    "markers": {
+      "prompts": 16,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_161242/run_config.json",
+    "ext": ".json",
+    "size": 1562,
+    "sha1": "cfea5318734b2ba44e05a9be7aae861c5b9ba06e",
+    "markers": {
+      "prompts": 0,
+      "tools": 4,
+      "telemetry": 2,
+      "rag": 1,
+      "eval": 1,
+      "ios": 8,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_161858/run_config.json",
+    "ext": ".json",
+    "size": 1562,
+    "sha1": "c7aa89980f6c0f6a6107ba4656180673c5d209c3",
+    "markers": {
+      "prompts": 0,
+      "tools": 4,
+      "telemetry": 2,
+      "rag": 1,
+      "eval": 1,
+      "ios": 8,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_161858/datasets/french/manifest.json",
+    "ext": ".json",
+    "size": 71,
+    "sha1": "0ec3ca36c24cb67c19bdac911e8a489ebc2e5413",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_191939/run_config.json",
+    "ext": ".json",
+    "size": 1643,
+    "sha1": "1f546ea5a3cbebf3448cc3eb2296b4e32ae934d7",
+    "markers": {
+      "prompts": 0,
+      "tools": 4,
+      "telemetry": 2,
+      "rag": 1,
+      "eval": 1,
+      "ios": 8,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_191939/datasets/french/manifest.json",
+    "ext": ".json",
+    "size": 71,
+    "sha1": "70fd6fd75b69765115548b224be0b56f293da712",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/scad/20251221_161242/scad_report.json",
+    "ext": ".json",
+    "size": 45459,
+    "sha1": "87f332dc63c5d1fa4341f3855aba36f4170a616f",
+    "markers": {
+      "prompts": 76,
+      "tools": 144,
+      "telemetry": 96,
+      "rag": 50,
+      "eval": 468,
+      "ios": 48,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/scad/focused/20251221_161242/focused_report.json",
+    "ext": ".json",
+    "size": 1941,
+    "sha1": "19e7e9857ce9d7dca3c3fd642f79a5b22b025268",
+    "markers": {
+      "prompts": 1,
+      "tools": 13,
+      "telemetry": 1,
+      "rag": 4,
+      "eval": 2,
+      "ios": 2,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/scad/focused/20251221_161858/focused_report.json",
+    "ext": ".json",
+    "size": 1941,
+    "sha1": "f6185a027e9a64f5c1ccf5a0ca5bb1c7e4669a0e",
+    "markers": {
+      "prompts": 1,
+      "tools": 13,
+      "telemetry": 1,
+      "rag": 4,
+      "eval": 2,
+      "ios": 2,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/scad/focused/20251221_191939/focused_report.json",
+    "ext": ".json",
+    "size": 1941,
+    "sha1": "8ec5d4b9095970db0573121ef2ff33d1839752b5",
+    "markers": {
+      "prompts": 1,
+      "tools": 13,
+      "telemetry": 1,
+      "rag": 4,
+      "eval": 2,
+      "ios": 2,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/scad/focused/20251221_160110/focused_report.json",
+    "ext": ".json",
+    "size": 1942,
+    "sha1": "666fa393babc8a514d552f24d8974b0d244e96ad",
+    "markers": {
+      "prompts": 1,
+      "tools": 13,
+      "telemetry": 1,
+      "rag": 4,
+      "eval": 2,
+      "ios": 2,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/scad/focused/20251221_162349/focused_report.json",
+    "ext": ".json",
+    "size": 1941,
+    "sha1": "ebaacac6ffbcb9b81f7f27dd14d5c22a249b3f75",
+    "markers": {
+      "prompts": 1,
+      "tools": 13,
+      "telemetry": 1,
+      "rag": 4,
+      "eval": 2,
+      "ios": 2,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/scad/20251221_161858/scad_report.json",
+    "ext": ".json",
+    "size": 45459,
+    "sha1": "c4d59983942651fe089179abc414cffa35945ae9",
+    "markers": {
+      "prompts": 76,
+      "tools": 144,
+      "telemetry": 96,
+      "rag": 50,
+      "eval": 468,
+      "ios": 48,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/scad/20251221_191939/scad_report.json",
+    "ext": ".json",
+    "size": 53919,
+    "sha1": "50dc329f8c0a559dbd5a6e30fec266ddd5dbb6b4",
+    "markers": {
+      "prompts": 108,
+      "tools": 146,
+      "telemetry": 112,
+      "rag": 54,
+      "eval": 540,
+      "ios": 48,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/scad/20251221_160110/scad_report.json",
+    "ext": ".json",
+    "size": 45459,
+    "sha1": "a537764bf7892bc25a4bc70a6286a9f853611f81",
+    "markers": {
+      "prompts": 76,
+      "tools": 144,
+      "telemetry": 96,
+      "rag": 50,
+      "eval": 468,
+      "ios": 48,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/scad/20251221_162349/scad_report.json",
+    "ext": ".json",
+    "size": 45459,
+    "sha1": "078b1f9f211d38cfa7a0c6057f0aaae0beaacdae",
+    "markers": {
+      "prompts": 76,
+      "tools": 144,
+      "telemetry": 96,
+      "rag": 50,
+      "eval": 468,
+      "ios": 48,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_160110/run_config.json",
+    "ext": ".json",
+    "size": 1592,
+    "sha1": "5b49009a13733abc742c51ca0f4140079eacb087",
+    "markers": {
+      "prompts": 0,
+      "tools": 4,
+      "telemetry": 2,
+      "rag": 1,
+      "eval": 1,
+      "ios": 8,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_162349/run_config.json",
+    "ext": ".json",
+    "size": 1562,
+    "sha1": "6605a2caa404cc0af18882c0aa70b3a095ab62e3",
+    "markers": {
+      "prompts": 0,
+      "tools": 4,
+      "telemetry": 2,
+      "rag": 1,
+      "eval": 1,
+      "ios": 8,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_162349/sft/special_tokens_map.json",
+    "ext": ".json",
+    "size": 444,
+    "sha1": "ee2859c2dcbc9fac06a232b88387b7adac043032",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_162349/sft/adapter_config.json",
+    "ext": ".json",
+    "size": 1026,
+    "sha1": "d3bbdfef08f8368178565724c55b3e2429e44567",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 2
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_162349/sft/tokenizer.json",
+    "ext": ".json",
+    "size": 17210297,
+    "sha1": "057f96f876be881d64db028d62bb2584fb69ac3c",
+    "markers": {
+      "prompts": 17,
+      "tools": 75,
+      "telemetry": 39,
+      "rag": 30,
+      "eval": 54,
+      "ios": 96,
+      "security": 446
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "runs/20251221_162349/sft/README.md",
+    "ext": ".md",
+    "size": 1579,
+    "sha1": "db70b6ae3547d22f5c20c4ae78b93489504f2b03",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_162349/sft/tokenizer_config.json",
+    "ext": ".json",
+    "size": 50916,
+    "sha1": "45f0b14ba427d913a2863e414fc083948200213e",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 256
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_162349/sft/checkpoint-800/special_tokens_map.json",
+    "ext": ".json",
+    "size": 444,
+    "sha1": "ee2859c2dcbc9fac06a232b88387b7adac043032",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_162349/sft/checkpoint-800/adapter_config.json",
+    "ext": ".json",
+    "size": 1026,
+    "sha1": "d3bbdfef08f8368178565724c55b3e2429e44567",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 2
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_162349/sft/checkpoint-800/trainer_state.json",
+    "ext": ".json",
+    "size": 22945,
+    "sha1": "5fb1d30de8ac27966874eda7bee18d67ff23db32",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 82,
+      "ios": 0,
+      "security": 161
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_162349/sft/checkpoint-800/tokenizer.json",
+    "ext": ".json",
+    "size": 17210297,
+    "sha1": "057f96f876be881d64db028d62bb2584fb69ac3c",
+    "markers": {
+      "prompts": 17,
+      "tools": 75,
+      "telemetry": 39,
+      "rag": 30,
+      "eval": 54,
+      "ios": 96,
+      "security": 446
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "runs/20251221_162349/sft/checkpoint-800/README.md",
+    "ext": ".md",
+    "size": 5254,
+    "sha1": "8116c8022e073457f4a20ed8a0c763fd2608d468",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 3,
+      "rag": 0,
+      "eval": 8,
+      "ios": 0,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_162349/sft/checkpoint-800/tokenizer_config.json",
+    "ext": ".json",
+    "size": 50916,
+    "sha1": "45f0b14ba427d913a2863e414fc083948200213e",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 256
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_162349/sft/checkpoint-600/special_tokens_map.json",
+    "ext": ".json",
+    "size": 444,
+    "sha1": "ee2859c2dcbc9fac06a232b88387b7adac043032",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 3
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_162349/sft/checkpoint-600/adapter_config.json",
+    "ext": ".json",
+    "size": 1026,
+    "sha1": "d3bbdfef08f8368178565724c55b3e2429e44567",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 2
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_162349/sft/checkpoint-600/trainer_state.json",
+    "ext": ".json",
+    "size": 17393,
+    "sha1": "034b5a22410229ab292c8a35b80d85648904f51a",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 62,
+      "ios": 0,
+      "security": 121
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_162349/sft/checkpoint-600/tokenizer.json",
+    "ext": ".json",
+    "size": 17210297,
+    "sha1": "057f96f876be881d64db028d62bb2584fb69ac3c",
+    "markers": {
+      "prompts": 17,
+      "tools": 75,
+      "telemetry": 39,
+      "rag": 30,
+      "eval": 54,
+      "ios": 96,
+      "security": 446
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": true
+  },
+  {
+    "path": "runs/20251221_162349/sft/checkpoint-600/README.md",
+    "ext": ".md",
+    "size": 5254,
+    "sha1": "8116c8022e073457f4a20ed8a0c763fd2608d468",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 3,
+      "rag": 0,
+      "eval": 8,
+      "ios": 0,
+      "security": 1
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_162349/sft/checkpoint-600/tokenizer_config.json",
+    "ext": ".json",
+    "size": 50916,
+    "sha1": "45f0b14ba427d913a2863e414fc083948200213e",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 256
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "runs/20251221_162349/datasets/french/manifest.json",
+    "ext": ".json",
+    "size": 71,
+    "sha1": "047815da02b87e2057968aa650cece2f04a38df5",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 0,
+      "security": 0
+    },
+    "imports": [],
+    "exports": [],
+    "contains_todo": false
+  },
+  {
+    "path": "test-utils/buildReportFixture.js",
+    "ext": ".js",
+    "size": 2439,
+    "sha1": "86928a40458710f96e11ad0a7396da7acf6f4767",
+    "markers": {
+      "prompts": 0,
+      "tools": 0,
+      "telemetry": 0,
+      "rag": 0,
+      "eval": 0,
+      "ios": 2,
+      "security": 1
+    },
+    "imports": [
+      "child_process",
+      "fs",
+      "os",
+      "path"
+    ],
+    "exports": [],
+    "contains_todo": false
+  }
+]

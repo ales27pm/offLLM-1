@@ -1,0 +1,829 @@
+{
+  "backlog": [
+    {
+      "acceptance": [
+        "CI job runs eval suite and fails on regressions (JSON validity, tool parsing, refusal correctness).",
+        "Golden cases are versioned and tied to prompt template version."
+      ],
+      "deliverables": [
+        "eval/golden_prompts.json expanded with ids + expected tool calls",
+        "eval/run_prompt_regression.py wired into CI",
+        "reports/ outputs include SARIF for GitHub code scanning"
+      ],
+      "evidence": [
+        "mlops/offllm_symbiosis_advisor_v4.py",
+        "offllm_symbiosis_advisor_v4.py",
+        "reports/symbiosis_v6/symbiosis_deep_report.json",
+        "reports/symbiosis_v6/symbiosis_deep_report.md",
+        "offllm_symbiosis_advisor_v6.py",
+        "offllm_symbiosis_advisor_v3.py",
+        "eval/run_prompt_regression.py",
+        "eval/export_equivalence.py",
+        "convert_to_coreml.py",
+        "reports/symbiosis_v6/symbiosis_deep_report.sarif.json"
+      ],
+      "next_steps": [
+        "Create a golden eval suite: tool parsing, JSON validity, groundedness/citations, refusal correctness.",
+        "Add an offline eval CLI and a CI job that blocks regressions.",
+        "Version eval cases alongside prompt templates."
+      ],
+      "priority": "high",
+      "title": "Make evaluation first-class (golden set + regression gates)",
+      "why": "Fine-tuning without a regression gate is just vibe-training."
+    },
+    {
+      "acceptance": [
+        "All telemetry events validate against JSON Schema in CI.",
+        "PII redaction applied before writing to disk; unit tests include emails/tokens/keys.",
+        "telemetry→SFT and telemetry→retrieval transforms are deterministic (stable hashes)."
+      ],
+      "deliverables": [
+        "schemas/telemetry_event.schema.json",
+        "src/utils/telemetry.{js,ts} updated to emit versioned schema ids",
+        "scripts/mlops/telemetry_to_sft.py updated to validate input schema"
+      ],
+      "evidence": [
+        "mlops/offllm_symbiosis_advisor_v4.py",
+        "offllm_symbiosis_advisor_v4.py",
+        "offllm_symbiosis_advisor_v6.py",
+        "offllm_symbiosis_advisor_v3.py",
+        "offllm_end_to_end_pipeline.py",
+        "reports/symbiosis_v6/symbiosis_deep_report.json",
+        "reports/symbiosis_v6/symbiosis_deep_report.md",
+        "mlops/telemetry_to_sft.py",
+        "eval/retrieval_eval.py",
+        "eval/export_equivalence.py",
+        "mlops/generate_retrieval_pairs.py",
+        "convert_to_coreml.py"
+      ],
+      "next_steps": [
+        "Define an event schema for model interactions.",
+        "Centralise PII redaction (emails, tokens, keys).",
+        "Implement telemetry→SFT and telemetry→retrieval pairs transforms."
+      ],
+      "priority": "high",
+      "title": "Standardise telemetry schema and redaction",
+      "why": "Telemetry is the bridge between what the app did and what the model should learn."
+    },
+    {
+      "acceptance": [
+        "All tool args validated against schema before execution (reject unknown fields).",
+        "Tool allowlist depends on capability context; tests cover allow/deny.",
+        "Red-team eval cases included and run in CI."
+      ],
+      "deliverables": [
+        "schemas/tools/*.schema.json",
+        "src/core/tools/ToolRegistry.js enforces schema+allowlist",
+        "eval/redteam_tool_injection.json"
+      ],
+      "evidence": [
+        "mlops/offllm_symbiosis_advisor_v4.py",
+        "offllm_symbiosis_advisor_v4.py",
+        "mlops/telemetry_to_sft.py",
+        "reports/symbiosis_v6/symbiosis_deep_report.json",
+        "reports/symbiosis_v6/symbiosis_deep_report.md",
+        "offllm_symbiosis_advisor_v3.py",
+        "offllm_symbiosis_advisor_v6.py",
+        "train_lora.py",
+        "offllm_end_to_end_pipeline.py",
+        "eval/golden_prompts.json"
+      ],
+      "next_steps": [
+        "Validate tool args against JSON schema before execution.",
+        "Capability-based allowlists.",
+        "Add red-team eval set: injection, schema smuggling, exfil attempts."
+      ],
+      "priority": "med",
+      "title": "Harden tool-calling boundaries and injection resistance",
+      "why": "Tool-calling is the highest-risk surface; harden and train for safe behaviour."
+    },
+    {
+      "acceptance": [
+        "Chunking outputs are stable: golden tests cover at least 20 representative documents.",
+        "Runtime retrieval logs query+topk ids+scores into telemetry.",
+        "Offline indexing uses the exact same chunker + embedding config as runtime."
+      ],
+      "deliverables": [
+        "src/retrieval/chunking.js (or .ts)",
+        "src/retrieval/embedding_config.json",
+        "eval/retrieval_eval.py extended with chunk distribution checks"
+      ],
+      "evidence": [
+        "mlops/offllm_symbiosis_advisor_v4.py",
+        "offllm_symbiosis_advisor_v4.py",
+        "offllm_symbiosis_advisor_v3.py",
+        "offllm_end_to_end_pipeline.py",
+        "offllm_symbiosis_advisor_v6.py",
+        "reports/symbiosis_v6/symbiosis_deep_report.md",
+        "reports/symbiosis_v6/symbiosis_deep_report.json",
+        "eval/retrieval_eval.py",
+        "mlops/generate_retrieval_pairs.py"
+      ],
+      "next_steps": [
+        "Extract chunking rules into one module with golden tests.",
+        "Log retrieval traces into telemetry.",
+        "Train embeddings/LLM2Vec with the same chunk distribution used at runtime."
+      ],
+      "priority": "med",
+      "title": "Isolate retrieval + chunking into a single library surface",
+      "why": "Stable chunking/embedding settings prevent offline vs runtime mismatch."
+    }
+  ],
+  "baseline_diff": null,
+  "fine_tune_manifest": {
+    "generated_at": "2025-12-22T03:20:18Z",
+    "recommended_evals": [
+      "chunk_stability",
+      "citation_groundedness",
+      "prompt_regression",
+      "refusal_correctness",
+      "retrieval_recall_at_k",
+      "telemetry_schema_validation",
+      "tool_json_validity",
+      "tool_selection_accuracy"
+    ],
+    "sources": [
+      {
+        "intent": "prompt_registry",
+        "path": "ci/download-mlx-model.sh",
+        "surface": "prompts",
+        "weight": 3
+      },
+      {
+        "intent": "prompt_registry",
+        "path": "eval/golden_prompts.json",
+        "surface": "prompts",
+        "weight": 3
+      },
+      {
+        "intent": "prompt_registry",
+        "path": "mlops/offllm_symbiosis_advisor_v4.py",
+        "surface": "prompts",
+        "weight": 3
+      },
+      {
+        "intent": "prompt_registry",
+        "path": "offllm_symbiosis_advisor_v4.py",
+        "surface": "prompts",
+        "weight": 3
+      },
+      {
+        "intent": "prompt_registry",
+        "path": "reports/symbiosis_v6/symbiosis_deep_report.json",
+        "surface": "prompts",
+        "weight": 3
+      },
+      {
+        "intent": "prompt_registry",
+        "path": "reports/symbiosis_v6/symbiosis_deep_report.md",
+        "surface": "prompts",
+        "weight": 3
+      },
+      {
+        "intent": "prompt_registry",
+        "path": "train_lora.py",
+        "surface": "prompts",
+        "weight": 3
+      },
+      {
+        "intent": "tool_schemas_and_handlers",
+        "path": "eval/golden_prompts.json",
+        "surface": "tools_orchestration",
+        "weight": 3
+      },
+      {
+        "intent": "tool_schemas_and_handlers",
+        "path": "mlops/offllm_symbiosis_advisor_v4.py",
+        "surface": "tools_orchestration",
+        "weight": 3
+      },
+      {
+        "intent": "tool_schemas_and_handlers",
+        "path": "mlops/telemetry_to_sft.py",
+        "surface": "tools_orchestration",
+        "weight": 3
+      },
+      {
+        "intent": "tool_schemas_and_handlers",
+        "path": "offllm_end_to_end_pipeline.py",
+        "surface": "tools_orchestration",
+        "weight": 3
+      },
+      {
+        "intent": "tool_schemas_and_handlers",
+        "path": "offllm_symbiosis_advisor_v3.py",
+        "surface": "tools_orchestration",
+        "weight": 3
+      },
+      {
+        "intent": "tool_schemas_and_handlers",
+        "path": "offllm_symbiosis_advisor_v4.py",
+        "surface": "tools_orchestration",
+        "weight": 3
+      },
+      {
+        "intent": "tool_schemas_and_handlers",
+        "path": "offllm_symbiosis_advisor_v6.py",
+        "surface": "tools_orchestration",
+        "weight": 3
+      },
+      {
+        "intent": "tool_schemas_and_handlers",
+        "path": "reports/symbiosis_v6/symbiosis_deep_report.json",
+        "surface": "tools_orchestration",
+        "weight": 3
+      },
+      {
+        "intent": "tool_schemas_and_handlers",
+        "path": "reports/symbiosis_v6/symbiosis_deep_report.md",
+        "surface": "tools_orchestration",
+        "weight": 3
+      },
+      {
+        "intent": "tool_schemas_and_handlers",
+        "path": "train_lora.py",
+        "surface": "tools_orchestration",
+        "weight": 3
+      },
+      {
+        "intent": "telemetry_events",
+        "path": "convert_to_coreml.py",
+        "surface": "telemetry",
+        "weight": 4
+      },
+      {
+        "intent": "telemetry_events",
+        "path": "eval/export_equivalence.py",
+        "surface": "telemetry",
+        "weight": 4
+      },
+      {
+        "intent": "telemetry_events",
+        "path": "eval/retrieval_eval.py",
+        "surface": "telemetry",
+        "weight": 4
+      },
+      {
+        "intent": "telemetry_events",
+        "path": "mlops/generate_retrieval_pairs.py",
+        "surface": "telemetry",
+        "weight": 4
+      },
+      {
+        "intent": "telemetry_events",
+        "path": "mlops/offllm_symbiosis_advisor_v4.py",
+        "surface": "telemetry",
+        "weight": 4
+      },
+      {
+        "intent": "telemetry_events",
+        "path": "mlops/telemetry_to_sft.py",
+        "surface": "telemetry",
+        "weight": 4
+      },
+      {
+        "intent": "telemetry_events",
+        "path": "offllm_end_to_end_pipeline.py",
+        "surface": "telemetry",
+        "weight": 4
+      },
+      {
+        "intent": "telemetry_events",
+        "path": "offllm_symbiosis_advisor_v3.py",
+        "surface": "telemetry",
+        "weight": 4
+      },
+      {
+        "intent": "telemetry_events",
+        "path": "offllm_symbiosis_advisor_v4.py",
+        "surface": "telemetry",
+        "weight": 4
+      },
+      {
+        "intent": "telemetry_events",
+        "path": "offllm_symbiosis_advisor_v6.py",
+        "surface": "telemetry",
+        "weight": 4
+      },
+      {
+        "intent": "telemetry_events",
+        "path": "reports/symbiosis_v6/symbiosis_deep_report.json",
+        "surface": "telemetry",
+        "weight": 4
+      },
+      {
+        "intent": "telemetry_events",
+        "path": "reports/symbiosis_v6/symbiosis_deep_report.md",
+        "surface": "telemetry",
+        "weight": 4
+      },
+      {
+        "intent": "retrieval_pairs",
+        "path": "eval/retrieval_eval.py",
+        "surface": "retrieval_rag",
+        "weight": 4
+      },
+      {
+        "intent": "retrieval_pairs",
+        "path": "mlops/generate_retrieval_pairs.py",
+        "surface": "retrieval_rag",
+        "weight": 4
+      },
+      {
+        "intent": "retrieval_pairs",
+        "path": "mlops/offllm_symbiosis_advisor_v4.py",
+        "surface": "retrieval_rag",
+        "weight": 4
+      },
+      {
+        "intent": "retrieval_pairs",
+        "path": "offllm_end_to_end_pipeline.py",
+        "surface": "retrieval_rag",
+        "weight": 4
+      },
+      {
+        "intent": "retrieval_pairs",
+        "path": "offllm_symbiosis_advisor_v3.py",
+        "surface": "retrieval_rag",
+        "weight": 4
+      },
+      {
+        "intent": "retrieval_pairs",
+        "path": "offllm_symbiosis_advisor_v4.py",
+        "surface": "retrieval_rag",
+        "weight": 4
+      },
+      {
+        "intent": "retrieval_pairs",
+        "path": "offllm_symbiosis_advisor_v6.py",
+        "surface": "retrieval_rag",
+        "weight": 4
+      },
+      {
+        "intent": "retrieval_pairs",
+        "path": "reports/symbiosis_v6/symbiosis_deep_report.json",
+        "surface": "retrieval_rag",
+        "weight": 4
+      },
+      {
+        "intent": "retrieval_pairs",
+        "path": "reports/symbiosis_v6/symbiosis_deep_report.md",
+        "surface": "retrieval_rag",
+        "weight": 4
+      },
+      {
+        "intent": "eval_cases",
+        "path": "convert_to_coreml.py",
+        "surface": "evaluation",
+        "weight": 5
+      },
+      {
+        "intent": "eval_cases",
+        "path": "eval/export_equivalence.py",
+        "surface": "evaluation",
+        "weight": 5
+      },
+      {
+        "intent": "eval_cases",
+        "path": "eval/run_prompt_regression.py",
+        "surface": "evaluation",
+        "weight": 5
+      },
+      {
+        "intent": "eval_cases",
+        "path": "mlops/offllm_symbiosis_advisor_v4.py",
+        "surface": "evaluation",
+        "weight": 5
+      },
+      {
+        "intent": "eval_cases",
+        "path": "offllm_symbiosis_advisor_v3.py",
+        "surface": "evaluation",
+        "weight": 5
+      },
+      {
+        "intent": "eval_cases",
+        "path": "offllm_symbiosis_advisor_v4.py",
+        "surface": "evaluation",
+        "weight": 5
+      },
+      {
+        "intent": "eval_cases",
+        "path": "offllm_symbiosis_advisor_v6.py",
+        "surface": "evaluation",
+        "weight": 5
+      },
+      {
+        "intent": "eval_cases",
+        "path": "reports/symbiosis_v6/symbiosis_deep_report.json",
+        "surface": "evaluation",
+        "weight": 5
+      },
+      {
+        "intent": "eval_cases",
+        "path": "reports/symbiosis_v6/symbiosis_deep_report.md",
+        "surface": "evaluation",
+        "weight": 5
+      },
+      {
+        "intent": "eval_cases",
+        "path": "reports/symbiosis_v6/symbiosis_deep_report.sarif.json",
+        "surface": "evaluation",
+        "weight": 5
+      }
+    ],
+    "version": "v1"
+  },
+  "generated_at": "2025-12-22T03:20:18Z",
+  "hotspots": [
+    {
+      "churn_commits": 0,
+      "path": "mlops/offllm_symbiosis_advisor_v4.py",
+      "reasons": [
+        "appears_in_surfaces=['evaluation', 'hot_churn', 'ios_mlx_coreml', 'prompts', 'retrieval_rag', 'telemetry', 'todos_fixmes', 'tools_orchestration']",
+        "sarif_findings=3"
+      ],
+      "score": 120.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "offllm_symbiosis_advisor_v4.py",
+      "reasons": [
+        "appears_in_surfaces=['evaluation', 'ios_mlx_coreml', 'prompts', 'retrieval_rag', 'telemetry', 'todos_fixmes', 'tools_orchestration']",
+        "sarif_findings=3"
+      ],
+      "score": 110.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "offllm_symbiosis_advisor_v3.py",
+      "reasons": [
+        "appears_in_surfaces=['evaluation', 'hot_churn', 'ios_mlx_coreml', 'retrieval_rag', 'telemetry', 'tools_orchestration']"
+      ],
+      "score": 60.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "reports/symbiosis_v6/symbiosis_deep_report.json",
+      "reasons": [
+        "appears_in_surfaces=['evaluation', 'ios_mlx_coreml', 'prompts', 'retrieval_rag', 'telemetry', 'tools_orchestration']"
+      ],
+      "score": 60.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "reports/symbiosis_v6/symbiosis_deep_report.md",
+      "reasons": [
+        "appears_in_surfaces=['evaluation', 'ios_mlx_coreml', 'prompts', 'retrieval_rag', 'telemetry', 'tools_orchestration']"
+      ],
+      "score": 60.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "offllm_end_to_end_pipeline.py",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml', 'retrieval_rag', 'telemetry', 'tools_orchestration']"
+      ],
+      "score": 50.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "offllm_symbiosis_advisor_v6.py",
+      "reasons": [
+        "appears_in_surfaces=['evaluation', 'ios_mlx_coreml', 'retrieval_rag', 'telemetry', 'tools_orchestration']"
+      ],
+      "score": 50.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "ci/download-mlx-model.sh",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml', 'prompts']",
+        "sarif_findings=1"
+      ],
+      "score": 40.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "convert_to_coreml.py",
+      "reasons": [
+        "appears_in_surfaces=['evaluation', 'hot_churn', 'ios_mlx_coreml', 'telemetry']"
+      ],
+      "score": 40.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "train_lora.py",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'prompts', 'tools_orchestration']",
+        "sarif_findings=1"
+      ],
+      "score": 40.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "eval/export_equivalence.py",
+      "reasons": [
+        "appears_in_surfaces=['evaluation', 'hot_churn', 'telemetry']"
+      ],
+      "score": 30.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "eval/golden_prompts.json",
+      "reasons": [
+        "appears_in_surfaces=['prompts', 'tools_orchestration']",
+        "sarif_findings=1"
+      ],
+      "score": 30.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "eval/retrieval_eval.py",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'retrieval_rag', 'telemetry']"
+      ],
+      "score": 30.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "mlops/telemetry_to_sft.py",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'telemetry', 'tools_orchestration']"
+      ],
+      "score": 30.0
+    },
+    {
+      "churn_commits": 1,
+      "path": "AGENTS.md",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']",
+        "git_churn_commits~1"
+      ],
+      "score": 28.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "build-ios-unsigned.sh",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
+      ],
+      "score": 20.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "build_unsigned_ios.sh",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
+      ],
+      "score": 20.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "ci/bootstrap-build.sh",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
+      ],
+      "score": 20.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "ci/bootstrap_ios.sh",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
+      ],
+      "score": 20.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "ci/build_report.py",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
+      ],
+      "score": 20.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "ci/check_mlx_bridge.js",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
+      ],
+      "score": 20.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "ci/emit_ios_diagnostics_summary.py",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
+      ],
+      "score": 20.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "ci/ensure_ios_platform.sh",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
+      ],
+      "score": 20.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "ci/export_ipa.sh",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
+      ],
+      "score": 20.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "ci/import_signing.sh",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
+      ],
+      "score": 20.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "ci/prep-ios-unsigned-archive.sh",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
+      ],
+      "score": 20.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "ci/select_xcode.sh",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
+      ],
+      "score": 20.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "ci/select_xcode_and_ensure_ios.sh",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
+      ],
+      "score": 20.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "ci/upload_testflight.sh",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
+      ],
+      "score": 20.0
+    },
+    {
+      "churn_commits": 0,
+      "path": "dev/doctor.sh",
+      "reasons": [
+        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
+      ],
+      "score": 20.0
+    }
+  ],
+  "inputs": {
+    "baseline": null,
+    "report": "/home/ales27pm/offLLM-1/scripts/reports/symbiosis_v6/symbiosis_deep_report.json",
+    "sarif": "/home/ales27pm/offLLM-1/scripts/reports/symbiosis_v6/symbiosis_deep_report.sarif.json"
+  },
+  "repo_fingerprint": "git:5f20f16736d280d7a03471367b8e600ceafe0d72",
+  "repo_root": "/home/ales27pm/offLLM-1",
+  "version": "v1",
+  "where_to_search": {
+    "evaluation": [
+      "mlops/offllm_symbiosis_advisor_v4.py",
+      "offllm_symbiosis_advisor_v4.py",
+      "reports/symbiosis_v6/symbiosis_deep_report.json",
+      "reports/symbiosis_v6/symbiosis_deep_report.md",
+      "offllm_symbiosis_advisor_v6.py",
+      "offllm_symbiosis_advisor_v3.py",
+      "eval/run_prompt_regression.py",
+      "eval/export_equivalence.py",
+      "convert_to_coreml.py",
+      "reports/symbiosis_v6/symbiosis_deep_report.sarif.json"
+    ],
+    "hot_churn": [
+      "offllm_end_to_end_pipeline.py",
+      "mlops/normalize_datasets.py",
+      "mlops/offllm_symbiosis_advisor_v4.py",
+      "ci/download-mlx-model.sh",
+      "ci/select_xcode_and_ensure_ios.sh",
+      "train_lora.py",
+      "ci/select_xcode.sh",
+      "mlops/harvest_fr.py",
+      "ci/upload_testflight.sh",
+      "offllm_symbiosis_advisor_v3.py",
+      "ci/check_mlx_bridge.js",
+      "select-simulator.js",
+      "eval/retrieval_eval.py",
+      "eval/export_equivalence.py",
+      "ci/ensure_ios_platform.sh",
+      "mlops/sources_fr_manifest.json",
+      "dev/doctor.sh",
+      "ci/bootstrap_ios.sh",
+      "ci/emit_ios_diagnostics_summary.py",
+      "convert_to_coreml.py",
+      "ci/import_signing.sh",
+      "ci/build_report.py",
+      "ci/export_ipa.sh",
+      "verify-ios-cpp-standard.py",
+      "ci/bootstrap-build.sh",
+      "xcresult_top_issues.py",
+      "ci/prep-ios-unsigned-archive.sh",
+      "mlops/telemetry_to_sft.py",
+      "build-ios-unsigned.sh",
+      "AGENTS.md",
+      "dev/commit-reports.sh",
+      "eval/run_prompt_regression.py",
+      "verify-ios-rn-versions.py",
+      "build_unsigned_ios.sh",
+      "mlops/scan_internal.py"
+    ],
+    "ios_mlx_coreml": [
+      "ci/check_mlx_bridge.js",
+      "ci/download-mlx-model.sh",
+      "offllm_end_to_end_pipeline.py",
+      "offllm_symbiosis_advisor_v3.py",
+      "detect_mlx_symbols.sh",
+      "dev/doctor.sh",
+      "build-ios-unsigned.sh",
+      "apply_ios_mlx_fixes.sh",
+      "mlops/offllm_symbiosis_advisor_v4.py",
+      "offllm_symbiosis_advisor_v4.py",
+      "ci/bootstrap_ios.sh",
+      "convert_to_coreml.py",
+      "ci/select_xcode_and_ensure_ios.sh",
+      "reports/symbiosis_v6/symbiosis_deep_report.md",
+      "verify-ios-rn-versions.py",
+      "offllm_symbiosis_advisor_v6.py",
+      "AGENTS.md",
+      "ci/ensure_ios_platform.sh",
+      "reports/symbiosis_v6/symbiosis_deep_report.json",
+      "ci/emit_ios_diagnostics_summary.py",
+      "ci/export_ipa.sh",
+      "ci/bootstrap-build.sh",
+      "ci/select_xcode.sh",
+      "ci/import_signing.sh",
+      "ci/build_report.py",
+      "reports/symbiosis_v6/symbiosis_deep_report.sarif.json",
+      "ci/prep-ios-unsigned-archive.sh",
+      "build_unsigned_ios.sh",
+      "package_ipa.sh",
+      "ci/upload_testflight.sh",
+      "clean-build-ios.sh",
+      "lib/xcode_env.sh"
+    ],
+    "prompts": [
+      "reports/symbiosis_v6/symbiosis_deep_report.json",
+      "reports/symbiosis_v6/symbiosis_deep_report.md",
+      "mlops/offllm_symbiosis_advisor_v4.py",
+      "offllm_symbiosis_advisor_v4.py",
+      "ci/download-mlx-model.sh",
+      "train_lora.py",
+      "eval/golden_prompts.json"
+    ],
+    "retrieval_rag": [
+      "mlops/offllm_symbiosis_advisor_v4.py",
+      "offllm_symbiosis_advisor_v4.py",
+      "offllm_symbiosis_advisor_v3.py",
+      "offllm_end_to_end_pipeline.py",
+      "offllm_symbiosis_advisor_v6.py",
+      "reports/symbiosis_v6/symbiosis_deep_report.md",
+      "reports/symbiosis_v6/symbiosis_deep_report.json",
+      "eval/retrieval_eval.py",
+      "mlops/generate_retrieval_pairs.py"
+    ],
+    "telemetry": [
+      "mlops/offllm_symbiosis_advisor_v4.py",
+      "offllm_symbiosis_advisor_v4.py",
+      "offllm_symbiosis_advisor_v6.py",
+      "offllm_symbiosis_advisor_v3.py",
+      "offllm_end_to_end_pipeline.py",
+      "reports/symbiosis_v6/symbiosis_deep_report.json",
+      "reports/symbiosis_v6/symbiosis_deep_report.md",
+      "mlops/telemetry_to_sft.py",
+      "eval/retrieval_eval.py",
+      "eval/export_equivalence.py",
+      "mlops/generate_retrieval_pairs.py",
+      "convert_to_coreml.py"
+    ],
+    "todos_fixmes": [
+      "mlops/offllm_symbiosis_advisor_v4.py",
+      "offllm_symbiosis_advisor_v4.py"
+    ],
+    "tools_orchestration": [
+      "mlops/offllm_symbiosis_advisor_v4.py",
+      "offllm_symbiosis_advisor_v4.py",
+      "mlops/telemetry_to_sft.py",
+      "reports/symbiosis_v6/symbiosis_deep_report.json",
+      "reports/symbiosis_v6/symbiosis_deep_report.md",
+      "offllm_symbiosis_advisor_v3.py",
+      "offllm_symbiosis_advisor_v6.py",
+      "train_lora.py",
+      "offllm_end_to_end_pipeline.py",
+      "eval/golden_prompts.json"
+    ]
+  }
+}
