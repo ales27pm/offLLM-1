@@ -81,7 +81,7 @@ def build_prompt(
 def load_prompt_registry(registry_path: str) -> dict:
     with open(registry_path, "r", encoding="utf-8") as handle:
         text = handle.read()
-    match = re.search(r"PROMPT_REGISTRY_JSON\\s*=\\s*`(.*?)`", text, re.S)
+    match = re.search(r"PROMPT_REGISTRY_JSON\s*=\s*`(.*?)`", text, re.S)
     if not match:
         raise ValueError("Unable to locate PROMPT_REGISTRY_JSON in registry file")
     return json.loads(match.group(1))
