@@ -88,6 +88,9 @@ jobs:
           mkdir -p runs/symbiosis
           python scripts/offllm_symbiosis_advisor.py --repo . --out-dir runs/symbiosis
 
+      - name: Symbiosis artifact guard
+        run: python scripts/ci/guard_symbiosis_output.py --report runs/symbiosis/symbiosis_deep_report.json
+
       - name: Upload symbiosis artifacts
         if: always()
         uses: actions/upload-artifact@v5

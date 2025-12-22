@@ -64,6 +64,7 @@ class PromptCase:
     case_id: str
     prompt: str
     expected: dict
+    category: str
 
 
 # ----------------------------
@@ -147,7 +148,10 @@ def write_json(path: Path, obj: Any) -> None:
 
 
 def build_sarif(
-    tool_name: str, info_uri: str, results: List[Dict[str, Any]]
+    tool_name: str,
+    info_uri: str,
+    rules: List[Dict[str, Any]],
+    results: List[Dict[str, Any]],
 ) -> Dict[str, Any]:
     return {
         "version": "2.1.0",
@@ -158,7 +162,7 @@ def build_sarif(
                     "driver": {
                         "name": tool_name,
                         "informationUri": info_uri,
-                        "rules": [],
+                        "rules": rules,
                     }
                 },
                 "results": results,
@@ -252,6 +256,7 @@ def load_cases(paths: Iterable[str]) -> list[PromptCase]:
         "refusal",
         "citations_required",
     }
+    valid_categories = {"tool-call", "refusal", "json-validity", "citation"}
     for path in paths:
         with open(path, "r", encoding="utf-8") as handle:
             data = json.load(handle)
@@ -283,11 +288,17 @@ def load_cases(paths: Iterable[str]) -> list[PromptCase]:
                 prompt = entry.get("user_prompt")
             if prompt is None:
                 raise ValueError("Prompt entry must include prompt or user_prompt")
+            category = entry.get("sarif_category")
+            if not category or category not in valid_categories:
+                raise ValueError(
+                    f"Prompt entry must include valid sarif_category: {valid_categories}"
+                )
             cases.append(
                 PromptCase(
                     case_id=str(case_id),
                     prompt=str(prompt),
                     expected=expected,
+                    category=str(category),
                 )
             )
     return cases
@@ -628,6 +639,18 @@ def run_registry_mode(args: argparse.Namespace) -> None:
             build_sarif(
                 "prompt-regression",
                 "https://example.invalid",
+                [
+                    {
+                        "id": "prompt-regression/structure",
+                        "name": "Prompt registry structure",
+                        "properties": {"category": "structure"},
+                    },
+                    {
+                        "id": "prompt-regression/crash",
+                        "name": "Prompt registry crash",
+                        "properties": {"category": "crash"},
+                    },
+                ],
                 sarif_results,
             ),
         )
@@ -645,6 +668,29 @@ def run_model_mode(args: argparse.Namespace) -> None:
     cases = load_cases(prompt_paths)
     failures = []
     sarif_results = []
+    rules = [
+        {
+            "id": "prompt-regression/tool-call",
+            "name": "Tool call regression",
+            "properties": {"category": "tool-call"},
+        },
+        {
+            "id": "prompt-regression/refusal",
+            "name": "Refusal regression",
+            "properties": {"category": "refusal"},
+        },
+        {
+            "id": "prompt-regression/json-validity",
+            "name": "JSON validity regression",
+            "properties": {"category": "json-validity"},
+        },
+        {
+            "id": "prompt-regression/citation",
+            "name": "Citation regression",
+            "properties": {"category": "citation"},
+        },
+    ]
+
     for case in cases:
         response = invoke_model(case.prompt, args.model_cmd, args.seed, args.timeout)
         case_failures = evaluate_case(case, response)
@@ -656,7 +702,7 @@ def run_model_mode(args: argparse.Namespace) -> None:
                     "message": {
                         "text": f"{case.case_id}: {'; '.join(case_failures)}",
                     },
-                    "ruleId": "prompt-regression",
+                    "ruleId": f"prompt-regression/{case.category}",
                 }
             )
 
@@ -677,6 +723,7 @@ def run_model_mode(args: argparse.Namespace) -> None:
             build_sarif(
                 "offLLM prompt regression",
                 "https://offllm.ai",
+                rules,
                 sarif_results,
             ),
             indent=2,

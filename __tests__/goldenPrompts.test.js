@@ -74,6 +74,7 @@ describe("golden prompts schema", () => {
       "context",
       "user_prompt",
       "expected_prompt_hash",
+      "sarif_category",
       "expected",
       "expects_json",
       "expects_refusal",
@@ -84,6 +85,12 @@ describe("golden prompts schema", () => {
       "json_valid",
       "refusal",
       "citations_required",
+    ]);
+    const allowedCategories = new Set([
+      "tool-call",
+      "refusal",
+      "json-validity",
+      "citation",
     ]);
 
     data.forEach((entry) => {
@@ -98,6 +105,7 @@ describe("golden prompts schema", () => {
       expect(entry.prompt).toBe(entry.user_prompt);
       expect(typeof entry.expected_prompt_hash).toBe("string");
       expect(entry.expected_prompt_hash.length).toBeGreaterThan(0);
+      expect(allowedCategories.has(entry.sarif_category)).toBe(true);
 
       if (entry.expected && typeof entry.expected === "object") {
         Object.keys(entry.expected).forEach((key) => {

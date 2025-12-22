@@ -61,6 +61,7 @@ DEFAULT_IGNORE_GLOBS = [
     "dist/**",
     "build/**",
     "**/*.sarif",
+    "**/*prompt-regression*.json",
     "**/*prompt-regression*",
     "**/*symbiosis*report*",
 ]
@@ -1006,6 +1007,15 @@ def analyze_repo(args: argparse.Namespace) -> Dict[str, Any]:
         "repo_root": repo_root.as_posix(),
         "repo_fingerprint": repo_fp,
         "config_path": cfg.get("_config_path"),
+        "indexing_summary": {
+            "files_scanned": int(index_stats.get("files_seen", 0)),
+            "files_indexed": int(index_stats.get("files_included", len(paths))),
+            "files_excluded": int(index_stats.get("files_excluded", 0)),
+            "excluded_patterns": sorted(
+                set(ignore_globs)
+                | {f"{name}/**" for name in exclude_dirs}
+            ),
+        },
         "indexing": {
             "exclude_dirs": sorted(exclude_dirs),
             "ignore_globs": ignore_globs,
