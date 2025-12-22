@@ -480,14 +480,6 @@
         "documentation": {}
     },
     {
-        "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
         "label": "Any",
         "importPath": "typing",
         "description": "typing",
@@ -12659,7 +12651,7 @@
         "kind": 6,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "class Finding:\n  stable_id: str\n  title: str\n  kind: str\n  message: str\n  expected_hash: Optional[str]\n  actual_hash: Optional[str]\ndef _sarif_result(rule_id: str, level: str, message: str, stable_id: str) -> Dict[str, Any]:\n  return {\n    \"ruleId\": rule_id,",
+        "peekOfCode": "class Finding:\n  stable_id: str\n  title: str\n  kind: str\n  message: str\n  expected_hash: Optional[str]\n  actual_hash: Optional[str]\ndef _workspace_root() -> Path:\n  # In GitHub Actions, GITHUB_WORKSPACE is the repo root.\n  ws = os.environ.get(\"GITHUB_WORKSPACE\")",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
@@ -12668,7 +12660,7 @@
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def build_sarif(findings: List[Finding]) -> Dict[str, Any]:\n  tool = {\n    \"driver\": {\n      \"name\": \"offLLM prompt regression\",\n      \"informationUri\": \"https://github.com/ales27pm/offLLM-1\",\n      \"rules\": [\n        {\n          \"id\": \"PROMPT_REGRESSION\",\n          \"name\": \"Prompt regression mismatch\",\n          \"shortDescription\": {\"text\": \"Golden prompt hash mismatch\"},",
+        "peekOfCode": "def build_sarif(findings: List[Finding], repo_root: Path, rel_path: str) -> Dict[str, Any]:\n  tool = {\n    \"driver\": {\n      \"name\": \"offLLM prompt regression\",\n      \"informationUri\": \"https://github.com/ales27pm/offLLM-1\",\n      \"rules\": [\n        {\n          \"id\": \"PROMPT_REGRESSION\",\n          \"name\": \"Prompt regression mismatch\",\n          \"shortDescription\": {\"text\": \"Golden prompt hash mismatch\"},",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
@@ -12686,7 +12678,7 @@
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def main(argv: Optional[List[str]] = None) -> int:\n  args = parse_args(argv)\n  golden_path = Path(args.golden)\n  report_out = Path(args.report_out)\n  sarif_out = Path(args.sarif_out)\n  findings: List[Finding] = []\n  report: Dict[str, Any] = {\n    \"tool\": \"offLLM prompt regression\",\n    \"ts\": _utc_now_iso(),\n    \"golden_path\": str(golden_path),",
+        "peekOfCode": "def main(argv: Optional[List[str]] = None) -> int:\n  args = parse_args(argv)\n  repo_root = _workspace_root()\n  golden_path = Path(args.golden)\n  report_out = Path(args.report_out)\n  sarif_out = Path(args.sarif_out)\n  findings: List[Finding] = []\n  report: Dict[str, Any] = {\n    \"tool\": \"offLLM prompt regression\",\n    \"ts\": _utc_now_iso(),",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },

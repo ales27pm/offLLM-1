@@ -9,7 +9,7 @@ import sys
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 
 def _utc_now_iso() -> str:
@@ -56,16 +56,58 @@ class Finding:
   actual_hash: Optional[str]
 
 
-def _sarif_result(rule_id: str, level: str, message: str, stable_id: str) -> Dict[str, Any]:
+def _workspace_root() -> Path:
+  # In GitHub Actions, GITHUB_WORKSPACE is the repo root.
+  ws = os.environ.get("GITHUB_WORKSPACE")
+  if ws:
+    return Path(ws).resolve()
+  return Path.cwd().resolve()
+
+
+def _pick_default_relpath(golden_path: Path, repo_root: Path) -> str:
+  """
+  Prefer pointing SARIF locations at the golden file (the "thing" we're validating).
+  If it doesn't exist, fall back to this script's path so Code Scanning still has
+  a valid location.
+  """
+  try:
+    if golden_path.exists():
+      return str(golden_path.resolve().relative_to(repo_root))
+  except Exception:
+    pass
+  return "scripts/eval/run_prompt_regression.py"
+
+
+def _sarif_location(repo_root: Path, rel_path: str, start_line: int = 1) -> Dict[str, Any]:
+  # GitHub Code Scanning requires each result to have at least one location.
+  abs_path = (repo_root / rel_path).resolve()
+  return {
+    "physicalLocation": {
+      "artifactLocation": {"uri": abs_path.as_uri()},
+      "region": {"startLine": int(start_line)},
+    }
+  }
+
+
+def _sarif_result(
+  rule_id: str,
+  level: str,
+  message: str,
+  stable_id: str,
+  repo_root: Path,
+  rel_path: str,
+  start_line: int = 1,
+) -> Dict[str, Any]:
   return {
     "ruleId": rule_id,
     "level": level,
     "message": {"text": message},
+    "locations": [_sarif_location(repo_root, rel_path, start_line)],
     "properties": {"stable_id": stable_id},
   }
 
 
-def build_sarif(findings: List[Finding]) -> Dict[str, Any]:
+def build_sarif(findings: List[Finding], repo_root: Path, rel_path: str) -> Dict[str, Any]:
   tool = {
     "driver": {
       "name": "offLLM prompt regression",
@@ -87,14 +129,57 @@ def build_sarif(findings: List[Finding]) -> Dict[str, Any]:
 
   results: List[Dict[str, Any]] = []
   for f in findings:
+    # Put everything on the same file+line unless you want per-case mapping later.
+    start_line = 1
+
     if f.kind == "schema":
-      results.append(_sarif_result("PROMPT_REGRESSION_SCHEMA", "error", f.message, f.stable_id))
+      results.append(
+        _sarif_result(
+          "PROMPT_REGRESSION_SCHEMA",
+          "error",
+          f.message,
+          f.stable_id,
+          repo_root,
+          rel_path,
+          start_line,
+        )
+      )
     elif f.kind == "mismatch":
-      results.append(_sarif_result("PROMPT_REGRESSION", "error", f.message, f.stable_id))
+      results.append(
+        _sarif_result(
+          "PROMPT_REGRESSION",
+          "error",
+          f.message,
+          f.stable_id,
+          repo_root,
+          rel_path,
+          start_line,
+        )
+      )
     elif f.kind == "missing_baseline":
-      results.append(_sarif_result("PROMPT_REGRESSION", "warning", f.message, f.stable_id))
+      results.append(
+        _sarif_result(
+          "PROMPT_REGRESSION",
+          "warning",
+          f.message,
+          f.stable_id,
+          repo_root,
+          rel_path,
+          start_line,
+        )
+      )
     else:
-      results.append(_sarif_result("PROMPT_REGRESSION", "note", f.message, f.stable_id))
+      results.append(
+        _sarif_result(
+          "PROMPT_REGRESSION",
+          "note",
+          f.message,
+          f.stable_id,
+          repo_root,
+          rel_path,
+          start_line,
+        )
+      )
 
   return {
     "version": "2.1.0",
@@ -203,6 +288,8 @@ def _validate_case(entry: Dict[str, Any]) -> List[str]:
 def main(argv: Optional[List[str]] = None) -> int:
   args = parse_args(argv)
 
+  repo_root = _workspace_root()
+
   golden_path = Path(args.golden)
   report_out = Path(args.report_out)
   sarif_out = Path(args.sarif_out)
@@ -212,6 +299,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     "tool": "offLLM prompt regression",
     "ts": _utc_now_iso(),
     "golden_path": str(golden_path),
+    "repo_root": str(repo_root),
     "cases_total": 0,
     "cases_checked": 0,
     "mismatches": 0,
@@ -221,15 +309,26 @@ def main(argv: Optional[List[str]] = None) -> int:
     "results": [],
   }
 
+  rel_path_for_sarif = _pick_default_relpath(golden_path, repo_root)
+
   try:
     parsed = _read_json(golden_path)
     golden = _normalise_golden(parsed)
   except Exception as e:
     msg = f"Failed to load golden prompts: {e}"
-    findings.append(Finding(stable_id="(file)", title="golden_prompts.json", kind="schema", message=msg, expected_hash=None, actual_hash=None))
+    findings.append(
+      Finding(
+        stable_id="(file)",
+        title="golden_prompts.json",
+        kind="schema",
+        message=msg,
+        expected_hash=None,
+        actual_hash=None,
+      )
+    )
     report["schema_errors"] += 1
     _write_json(report_out, report)
-    _write_json(sarif_out, build_sarif(findings))
+    _write_json(sarif_out, build_sarif(findings, repo_root=repo_root, rel_path=rel_path_for_sarif))
     return 1 if not args.no_fail else 0
 
   cases = golden.get("cases", [])
@@ -296,12 +395,17 @@ def main(argv: Optional[List[str]] = None) -> int:
     # If the baseline exists, we still can’t compute the real prompt hash here without JS,
     # so we just acknowledge that a baseline exists.
     report["results"].append(
-      {"stable_id": stable_id, "title": title, "status": "baseline_present", "expected_prompt_hash": eph}
+      {
+        "stable_id": stable_id,
+        "title": title,
+        "status": "baseline_present",
+        "expected_prompt_hash": eph,
+      }
     )
 
   # Write artifacts always.
   _write_json(report_out, report)
-  _write_json(sarif_out, build_sarif(findings))
+  _write_json(sarif_out, build_sarif(findings, repo_root=repo_root, rel_path=rel_path_for_sarif))
 
   # Exit code policy:
   # - non-strict: only fail on schema errors
