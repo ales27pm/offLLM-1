@@ -1,34 +1,3 @@
-reports
-ci-reports
-CI-REPORT.md
-report_agent.md
-REPORT.md
-# ignore environment templates generated per developer
-.env*
-# CocoaPods outputs are third-party and not maintained by Prettier
-ios/Pods
-ios/MyOfflineLLMApp/Models
-ios/MyOfflineLLMApp/Resources/Models
-.github/workflows/ios.yml
-.github/workflows/ios-unsigned.yml
-.github/workflows/ios-unsigned-device.yml
-# ignore disabled workflow files
-.github/workflows/*.yml.disabled
-# Prettier lacks a Java parser; skip Android sources so format:check can run
-android/**/*.java
-README.md
-CONTRIBUTING.md
-# keep architecture doc unformatted so inline diagrams remain stable
-docs/agent-architecture.md
-# embedded script confuses prettier
-scripts/package_ipa.sh
-ci/run_prompt_regression.sh
-bin/act
-AGENTS.md
-__tests__/AGENTS.md
-scripts/AGENTS.md
-tools/AGENTS.md
-reports/AGENTS.md
-.github/workflows/ios-build.yml
-
-
+# Ignore artifacts:
+build
+coverage

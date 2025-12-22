@@ -9,6 +9,7 @@
 ## Where to search (from Symbiosis Advisor)
 
 ### prompts
+
 - `reports/symbiosis_v6/symbiosis_deep_report.json`
 - `reports/symbiosis_v6/symbiosis_deep_report.md`
 - `mlops/offllm_symbiosis_advisor_v4.py`
@@ -27,6 +28,7 @@ Suggested ripgrep probes:
 - `rg -n --hidden --no-ignore-vcs '###\s*Response' 'mlops/offllm_symbiosis_advisor_v4.py' 'offllm_symbiosis_advisor_v4.py' 'ci/download-mlx-model.sh' 'train_lora.py' 'eval/golden_prompts.json'`
 
 ### tools_orchestration
+
 - `mlops/offllm_symbiosis_advisor_v4.py`
 - `offllm_symbiosis_advisor_v4.py`
 - `mlops/telemetry_to_sft.py`
@@ -48,6 +50,7 @@ Suggested ripgrep probes:
 - `rg -n --hidden --no-ignore-vcs '\bschema\b' 'mlops/offllm_symbiosis_advisor_v4.py' 'offllm_symbiosis_advisor_v4.py' 'mlops/telemetry_to_sft.py' 'offllm_symbiosis_advisor_v3.py' 'offllm_symbiosis_advisor_v6.py' 'train_lora.py' 'offllm_end_to_end_pipeline.py' 'eval/golden_prompts.json'`
 
 ### telemetry
+
 - `mlops/offllm_symbiosis_advisor_v4.py`
 - `offllm_symbiosis_advisor_v4.py`
 - `offllm_symbiosis_advisor_v6.py`
@@ -71,6 +74,7 @@ Suggested ripgrep probes:
 - `rg -n --hidden --no-ignore-vcs '\blatenc(y|ies)\b' 'mlops/offllm_symbiosis_advisor_v4.py' 'offllm_symbiosis_advisor_v4.py' 'offllm_symbiosis_advisor_v6.py' 'offllm_symbiosis_advisor_v3.py' 'offllm_end_to_end_pipeline.py' 'mlops/telemetry_to_sft.py' 'eval/retrieval_eval.py' 'eval/export_equivalence.py' 'mlops/generate_retrieval_pairs.py' 'convert_to_coreml.py'`
 
 ### retrieval_rag
+
 - `mlops/offllm_symbiosis_advisor_v4.py`
 - `offllm_symbiosis_advisor_v4.py`
 - `offllm_symbiosis_advisor_v3.py`
@@ -91,6 +95,7 @@ Suggested ripgrep probes:
 - `rg -n --hidden --no-ignore-vcs '\bretriev(er|al)\b' 'mlops/offllm_symbiosis_advisor_v4.py' 'offllm_symbiosis_advisor_v4.py' 'offllm_symbiosis_advisor_v3.py' 'offllm_end_to_end_pipeline.py' 'offllm_symbiosis_advisor_v6.py' 'eval/retrieval_eval.py' 'mlops/generate_retrieval_pairs.py'`
 
 ### evaluation
+
 - `mlops/offllm_symbiosis_advisor_v4.py`
 - `offllm_symbiosis_advisor_v4.py`
 - `reports/symbiosis_v6/symbiosis_deep_report.json`
@@ -147,23 +152,28 @@ Suggested ripgrep probes:
 ## Refactor backlog (acceptance-test shaped)
 
 ### Make evaluation first-class (golden set + regression gates) (high)
+
 **Why:** Fine-tuning without a regression gate is just vibe-training.
 
 **Next steps:**
+
 - Create a golden eval suite: tool parsing, JSON validity, groundedness/citations, refusal correctness.
 - Add an offline eval CLI and a CI job that blocks regressions.
 - Version eval cases alongside prompt templates.
 
 **Acceptance checks:**
+
 - CI job runs eval suite and fails on regressions (JSON validity, tool parsing, refusal correctness).
 - Golden cases are versioned and tied to prompt template version.
 
 **Suggested deliverables:**
+
 - `eval/golden_prompts.json expanded with ids + expected tool calls`
 - `eval/run_prompt_regression.py wired into CI`
 - `reports/ outputs include SARIF for GitHub code scanning`
 
 **Evidence files:**
+
 - `mlops/offllm_symbiosis_advisor_v4.py`
 - `offllm_symbiosis_advisor_v4.py`
 - `reports/symbiosis_v6/symbiosis_deep_report.json`
@@ -176,24 +186,29 @@ Suggested ripgrep probes:
 - `reports/symbiosis_v6/symbiosis_deep_report.sarif.json`
 
 ### Standardise telemetry schema and redaction (high)
+
 **Why:** Telemetry is the bridge between what the app did and what the model should learn.
 
 **Next steps:**
+
 - Define an event schema for model interactions.
 - Centralise PII redaction (emails, tokens, keys).
 - Implement telemetry→SFT and telemetry→retrieval pairs transforms.
 
 **Acceptance checks:**
+
 - All telemetry events validate against JSON Schema in CI.
 - PII redaction applied before writing to disk; unit tests include emails/tokens/keys.
 - telemetry→SFT and telemetry→retrieval transforms are deterministic (stable hashes).
 
 **Suggested deliverables:**
+
 - `schemas/telemetry_event.schema.json`
 - `src/utils/telemetry.{js,ts} updated to emit versioned schema ids`
 - `scripts/mlops/telemetry_to_sft.py updated to validate input schema`
 
 **Evidence files:**
+
 - `mlops/offllm_symbiosis_advisor_v4.py`
 - `offllm_symbiosis_advisor_v4.py`
 - `offllm_symbiosis_advisor_v6.py`
@@ -208,24 +223,29 @@ Suggested ripgrep probes:
 - `convert_to_coreml.py`
 
 ### Harden tool-calling boundaries and injection resistance (med)
+
 **Why:** Tool-calling is the highest-risk surface; harden and train for safe behaviour.
 
 **Next steps:**
+
 - Validate tool args against JSON schema before execution.
 - Capability-based allowlists.
 - Add red-team eval set: injection, schema smuggling, exfil attempts.
 
 **Acceptance checks:**
+
 - All tool args validated against schema before execution (reject unknown fields).
 - Tool allowlist depends on capability context; tests cover allow/deny.
 - Red-team eval cases included and run in CI.
 
 **Suggested deliverables:**
+
 - `schemas/tools/*.schema.json`
 - `src/core/tools/ToolRegistry.js enforces schema+allowlist`
 - `eval/redteam_tool_injection.json`
 
 **Evidence files:**
+
 - `mlops/offllm_symbiosis_advisor_v4.py`
 - `offllm_symbiosis_advisor_v4.py`
 - `mlops/telemetry_to_sft.py`
@@ -238,24 +258,29 @@ Suggested ripgrep probes:
 - `eval/golden_prompts.json`
 
 ### Isolate retrieval + chunking into a single library surface (med)
+
 **Why:** Stable chunking/embedding settings prevent offline vs runtime mismatch.
 
 **Next steps:**
+
 - Extract chunking rules into one module with golden tests.
 - Log retrieval traces into telemetry.
 - Train embeddings/LLM2Vec with the same chunk distribution used at runtime.
 
 **Acceptance checks:**
+
 - Chunking outputs are stable: golden tests cover at least 20 representative documents.
 - Runtime retrieval logs query+topk ids+scores into telemetry.
 - Offline indexing uses the exact same chunker + embedding config as runtime.
 
 **Suggested deliverables:**
+
 - `src/retrieval/chunking.js (or .ts)`
 - `src/retrieval/embedding_config.json`
 - `eval/retrieval_eval.py extended with chunk distribution checks`
 
 **Evidence files:**
+
 - `mlops/offllm_symbiosis_advisor_v4.py`
 - `offllm_symbiosis_advisor_v4.py`
 - `offllm_symbiosis_advisor_v3.py`

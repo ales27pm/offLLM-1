@@ -22,7 +22,7 @@
 
 - The runtime `toolRegistry` auto-registers every native tool exported for the current platform (iOS or Android) so the agent can execute native capabilities like calendar events, location, messaging, and more without manual wiring.【F:src/core/tools/ToolRegistry.js†L1-L39】
 - For more advanced scenarios, `src/architecture/toolSystem.js` exposes a richer `ToolRegistry` with categories, validation, usage analytics, and a `MCPClient` that can call remote Model Context Protocol servers, plus sample calculator, web search, and filesystem tools to use as templates.【F:src/architecture/toolSystem.js†L1-L392】
-- The built-in file-system tool sanitises requested paths and reports UTF-8 byte counts for reads and writes so telemetry reflects the real disk footprint even when strings include multi-byte characters.【F:src/architecture/toolSystem.js†L299-L420】【F:__tests__/toolSystem.test.js†L122-L184】
+- The built-in file-system tool sanitises requested paths and reports UTF-8 byte counts for reads and writes so telemetry reflects the real disk footprint even when strings include multi-byte characters.【F:src/architecture/toolSystem.js†L299-L420】【F:**tests**/toolSystem.test.js†L122-L184】
 
 ## Services Exposed as Tools or Skills
 

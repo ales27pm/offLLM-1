@@ -458,13 +458,8 @@
     {
       "axis": "Product voice + prompt adherence",
       "goal": "Consistent style, safety rules, and system prompt compliance across versions.",
-      "dataset_sources": [
-        "prompt_registry: versioned templates"
-      ],
-      "evals": [
-        "prompt-adherence",
-        "format-compliance"
-      ],
+      "dataset_sources": ["prompt_registry: versioned templates"],
+      "evals": ["prompt-adherence", "format-compliance"],
       "notes": "Treat prompts as API: version them, test them, and log them."
     },
     {
@@ -475,10 +470,7 @@
         "your internal French docs + UI strings",
         "telemetry from francophone usage (after redaction)"
       ],
-      "evals": [
-        "fr-grammar-score (heuristic)",
-        "fr-instruction-following"
-      ],
+      "evals": ["fr-grammar-score (heuristic)", "fr-instruction-following"],
       "notes": "Prefer curated, domain-relevant French data. Avoid mixing in noisy web text without filtering."
     }
   ]

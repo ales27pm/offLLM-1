@@ -565,121 +565,91 @@
     {
       "churn_commits": 0,
       "path": "build-ios-unsigned.sh",
-      "reasons": [
-        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
-      ],
+      "reasons": ["appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"],
       "score": 20.0
     },
     {
       "churn_commits": 0,
       "path": "build_unsigned_ios.sh",
-      "reasons": [
-        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
-      ],
+      "reasons": ["appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"],
       "score": 20.0
     },
     {
       "churn_commits": 0,
       "path": "ci/bootstrap-build.sh",
-      "reasons": [
-        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
-      ],
+      "reasons": ["appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"],
       "score": 20.0
     },
     {
       "churn_commits": 0,
       "path": "ci/bootstrap_ios.sh",
-      "reasons": [
-        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
-      ],
+      "reasons": ["appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"],
       "score": 20.0
     },
     {
       "churn_commits": 0,
       "path": "ci/build_report.py",
-      "reasons": [
-        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
-      ],
+      "reasons": ["appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"],
       "score": 20.0
     },
     {
       "churn_commits": 0,
       "path": "ci/check_mlx_bridge.js",
-      "reasons": [
-        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
-      ],
+      "reasons": ["appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"],
       "score": 20.0
     },
     {
       "churn_commits": 0,
       "path": "ci/emit_ios_diagnostics_summary.py",
-      "reasons": [
-        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
-      ],
+      "reasons": ["appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"],
       "score": 20.0
     },
     {
       "churn_commits": 0,
       "path": "ci/ensure_ios_platform.sh",
-      "reasons": [
-        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
-      ],
+      "reasons": ["appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"],
       "score": 20.0
     },
     {
       "churn_commits": 0,
       "path": "ci/export_ipa.sh",
-      "reasons": [
-        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
-      ],
+      "reasons": ["appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"],
       "score": 20.0
     },
     {
       "churn_commits": 0,
       "path": "ci/import_signing.sh",
-      "reasons": [
-        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
-      ],
+      "reasons": ["appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"],
       "score": 20.0
     },
     {
       "churn_commits": 0,
       "path": "ci/prep-ios-unsigned-archive.sh",
-      "reasons": [
-        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
-      ],
+      "reasons": ["appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"],
       "score": 20.0
     },
     {
       "churn_commits": 0,
       "path": "ci/select_xcode.sh",
-      "reasons": [
-        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
-      ],
+      "reasons": ["appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"],
       "score": 20.0
     },
     {
       "churn_commits": 0,
       "path": "ci/select_xcode_and_ensure_ios.sh",
-      "reasons": [
-        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
-      ],
+      "reasons": ["appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"],
       "score": 20.0
     },
     {
       "churn_commits": 0,
       "path": "ci/upload_testflight.sh",
-      "reasons": [
-        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
-      ],
+      "reasons": ["appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"],
       "score": 20.0
     },
     {
       "churn_commits": 0,
       "path": "dev/doctor.sh",
-      "reasons": [
-        "appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"
-      ],
+      "reasons": ["appears_in_surfaces=['hot_churn', 'ios_mlx_coreml']"],
       "score": 20.0
     }
   ],

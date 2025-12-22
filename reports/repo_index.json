@@ -67,11 +67,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "./app.json",
-      "./src/App",
-      "react-native"
-    ],
+    "imports": ["./app.json", "./src/App", "react-native"],
     "exports": [],
     "contains_todo": false
   },
@@ -359,14 +355,8 @@
       "ios": 1,
       "security": 4
     },
-    "imports": [
-      "./util.mjs",
-      "node:path",
-      "node:url"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["./util.mjs", "node:path", "node:url"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -491,11 +481,7 @@
       "ios": 0,
       "security": 4
     },
-    "imports": [
-      "argparse",
-      "peft",
-      "transformers"
-    ],
+    "imports": ["argparse", "peft", "transformers"],
     "exports": [],
     "contains_todo": false
   },
@@ -567,10 +553,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "json",
-      "pathlib"
-    ],
+    "imports": ["json", "pathlib"],
     "exports": [],
     "contains_todo": false
   },
@@ -836,11 +819,7 @@
       "ios": 1,
       "security": 0
     },
-    "imports": [
-      "json",
-      "sys",
-      "typing"
-    ],
+    "imports": ["json", "sys", "typing"],
     "exports": [],
     "contains_todo": false
   },
@@ -858,14 +837,7 @@
       "ios": 3,
       "security": 0
     },
-    "imports": [
-      "__future__",
-      "dataclasses",
-      "pathlib",
-      "re",
-      "sys",
-      "typing"
-    ],
+    "imports": ["__future__", "dataclasses", "pathlib", "re", "sys", "typing"],
     "exports": [],
     "contains_todo": false
   },
@@ -932,13 +904,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "argparse",
-      "collections",
-      "json",
-      "os",
-      "pathlib"
-    ],
+    "imports": ["argparse", "collections", "json", "os", "pathlib"],
     "exports": [],
     "contains_todo": false
   },
@@ -985,14 +951,7 @@
       "ios": 0,
       "security": 36
     },
-    "imports": [
-      "argparse",
-      "datasets",
-      "json",
-      "os",
-      "sys",
-      "typing"
-    ],
+    "imports": ["argparse", "datasets", "json", "os", "sys", "typing"],
     "exports": [],
     "contains_todo": false
   },
@@ -1028,13 +987,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "argparse",
-      "collections",
-      "json",
-      "os",
-      "pathlib"
-    ],
+    "imports": ["argparse", "collections", "json", "os", "pathlib"],
     "exports": [],
     "contains_todo": false
   },
@@ -1052,12 +1005,7 @@
       "ios": 0,
       "security": 2
     },
-    "imports": [
-      "argparse",
-      "json",
-      "os",
-      "pathlib"
-    ],
+    "imports": ["argparse", "json", "os", "pathlib"],
     "exports": [],
     "contains_todo": false
   },
@@ -1075,11 +1023,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "argparse",
-      "json",
-      "pathlib"
-    ],
+    "imports": ["argparse", "json", "pathlib"],
     "exports": [],
     "contains_todo": false
   },
@@ -1097,11 +1041,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "argparse",
-      "json",
-      "os"
-    ],
+    "imports": ["argparse", "json", "os"],
     "exports": [],
     "contains_todo": false
   },
@@ -1119,12 +1059,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "argparse",
-      "json",
-      "math",
-      "pathlib"
-    ],
+    "imports": ["argparse", "json", "math", "pathlib"],
     "exports": [],
     "contains_todo": false
   },
@@ -1160,13 +1095,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "argparse",
-      "collections",
-      "json",
-      "pathlib",
-      "sys"
-    ],
+    "imports": ["argparse", "collections", "json", "pathlib", "sys"],
     "exports": [],
     "contains_todo": false
   },
@@ -1292,10 +1221,7 @@
       "ios": 59,
       "security": 0
     },
-    "imports": [
-      "fs",
-      "path"
-    ],
+    "imports": ["fs", "path"],
     "exports": [],
     "contains_todo": false
   },
@@ -1475,13 +1401,7 @@
       "ios": 4,
       "security": 4
     },
-    "imports": [
-      "argparse",
-      "json",
-      "os",
-      "pathlib",
-      "subprocess"
-    ],
+    "imports": ["argparse", "json", "os", "pathlib", "subprocess"],
     "exports": [],
     "contains_todo": false
   },
@@ -1541,9 +1461,7 @@
       "./utils/modelDownloader",
       "react"
     ],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -1560,10 +1478,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "./specs/NativeLLM",
-      "react-native"
-    ],
+    "imports": ["./specs/NativeLLM", "react-native"],
     "exports": [],
     "contains_todo": false
   },
@@ -1581,12 +1496,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "../config"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["../config"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -1603,13 +1514,8 @@
       "ios": 0,
       "security": 1
     },
-    "imports": [
-      "react-native",
-      "react-native-render-html"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["react-native", "react-native-render-html"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -1626,12 +1532,8 @@
       "ios": 0,
       "security": 9
     },
-    "imports": [
-      "react"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["react"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -1648,13 +1550,8 @@
       "ios": 0,
       "security": 3
     },
-    "imports": [
-      "../services/utils/apiKeys",
-      "../services/webSearchService"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["../services/utils/apiKeys", "../services/webSearchService"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -1672,9 +1569,7 @@
       "security": 0
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -1691,12 +1586,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "react-native"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["react-native"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -1731,13 +1622,8 @@
       "ios": 8,
       "security": 0
     },
-    "imports": [
-      "../services/chat/mlxChat",
-      "react"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["../services/chat/mlxChat", "react"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -1754,13 +1640,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "../config",
-      "../core/memory/MemorySingleton"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["../config", "../core/memory/MemorySingleton"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -1777,13 +1658,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "../emotion/ProsodyDetector",
-      "react"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["../emotion/ProsodyDetector", "react"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -1800,13 +1676,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "@react-native-voice/voice",
-      "react"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["@react-native-voice/voice", "react"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -1830,9 +1701,7 @@
       "react",
       "react-native-tts"
     ],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -1849,12 +1718,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "react-native"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["react-native"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -1871,12 +1736,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "zustand"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["zustand"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -1893,12 +1754,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "react-native-config"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["react-native-config"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -1916,9 +1773,7 @@
       "security": 0
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -1935,12 +1790,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "./index"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["./index"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -1957,12 +1808,8 @@
       "ios": 0,
       "security": 7
     },
-    "imports": [
-      "react-native"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["react-native"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -1998,9 +1845,7 @@
       "security": 5
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2023,9 +1868,7 @@
       "./modelRegistry",
       "react-native"
     ],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2048,9 +1891,7 @@
       "./runtimePolicy",
       "./verifyDraft"
     ],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2068,9 +1909,7 @@
       "security": 0
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2087,12 +1926,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "../system/memoryPressure"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["../system/memoryPressure"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2110,9 +1945,7 @@
       "security": 0
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2130,9 +1963,7 @@
       "security": 3
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2149,13 +1980,8 @@
       "ios": 0,
       "security": 3
     },
-    "imports": [
-      "../services/utils/apiKeys",
-      "../services/webSearchService"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["../services/utils/apiKeys", "../services/webSearchService"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2191,9 +2017,7 @@
       "security": 0
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2211,9 +2035,7 @@
       "security": 0
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2230,14 +2052,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "../utils/logger",
-      "react-native-config",
-      "zustand"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["../utils/logger", "react-native-config", "zustand"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2260,9 +2076,7 @@
       "@react-native-clipboard/clipboard",
       "react"
     ],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2279,12 +2093,8 @@
       "ios": 0,
       "security": 3
     },
-    "imports": [
-      "react-native"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["react-native"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2301,12 +2111,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "crypto"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["crypto"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2323,13 +2129,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "fs",
-      "react-native-fs"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["fs", "react-native-fs"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2355,9 +2156,7 @@
       "./utils/apiKeys",
       "./utils/cacheAndRate"
     ],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2382,9 +2181,7 @@
       "react-native",
       "tiktoken"
     ],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2419,12 +2216,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "./llmService"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["./llmService"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2452,9 +2245,7 @@
       "../utils/modelDownloader",
       "react-native"
     ],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2471,12 +2262,8 @@
       "ios": 7,
       "security": 0
     },
-    "imports": [
-      "../../native/MLXModule"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["../../native/MLXModule"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2493,13 +2280,8 @@
       "ios": 0,
       "security": 10
     },
-    "imports": [
-      "../utils/apiKeys",
-      "../utils/timeRange"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["../utils/apiKeys", "../utils/timeRange"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2516,13 +2298,8 @@
       "ios": 0,
       "security": 9
     },
-    "imports": [
-      "../utils/apiKeys",
-      "../utils/timeRange"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["../utils/apiKeys", "../utils/timeRange"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2540,9 +2317,7 @@
       "security": 0
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2559,13 +2334,8 @@
       "ios": 0,
       "security": 9
     },
-    "imports": [
-      "../utils/apiKeys",
-      "../utils/timeRange"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["../utils/apiKeys", "../utils/timeRange"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2583,9 +2353,7 @@
       "security": 0
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2602,12 +2370,8 @@
       "ios": 0,
       "security": 11
     },
-    "imports": [
-      "../../config"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["../../config"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2625,9 +2389,7 @@
       "security": 0
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2653,9 +2415,7 @@
       "./tools/ToolRegistry",
       "./workflows/WorkflowTracer"
     ],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2691,9 +2451,7 @@
       "security": 0
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2716,9 +2474,7 @@
       "../../tools/webSearchTool",
       "react-native"
     ],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2736,9 +2492,7 @@
       "security": 3
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2755,12 +2509,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "./promptTemplates.json"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["./promptTemplates.json"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2777,12 +2527,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "./promptTemplate"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["./promptTemplate"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2817,12 +2563,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "../../utils/logger"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["../../utils/logger"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2839,12 +2581,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "./MemoryManager"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["./MemoryManager"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2869,9 +2607,7 @@
       "./services/Retriever",
       "./services/VectorIndexer"
     ],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2889,9 +2625,7 @@
       "security": 0
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2909,9 +2643,7 @@
       "security": 0
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2929,9 +2661,7 @@
       "security": 0
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2948,12 +2678,8 @@
       "ios": 7,
       "security": 1
     },
-    "imports": [
-      "react-native"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["react-native"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -2970,12 +2696,8 @@
       "ios": 17,
       "security": 3
     },
-    "imports": [
-      "./MLXModule"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["./MLXModule"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3001,9 +2723,7 @@
       "crypto",
       "path"
     ],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3039,9 +2759,7 @@
       "security": 0
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3058,12 +2776,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "./0001_initial"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["./0001_initial"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3081,9 +2795,7 @@
       "security": 0
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3100,12 +2812,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "react-native"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["react-native"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3123,9 +2831,7 @@
       "security": 1
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3142,13 +2848,8 @@
       "ios": 0,
       "security": 24
     },
-    "imports": [
-      "crypto-js",
-      "noble-post-quantum"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["crypto-js", "noble-post-quantum"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3166,9 +2867,7 @@
       "security": 0
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3185,12 +2884,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "./vectorUtils"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["./vectorUtils"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3207,12 +2902,8 @@
       "ios": 0,
       "security": 13
     },
-    "imports": [
-      "react-native"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["react-native"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3236,9 +2927,7 @@
       "buffer",
       "react-native-sqlite-storage"
     ],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3255,12 +2944,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "react-native-fs"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["react-native-fs"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3283,9 +2968,7 @@
       "expo-file-system",
       "react-native"
     ],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3302,12 +2985,8 @@
       "ios": 13,
       "security": 5
     },
-    "imports": [
-      "react-native-fs"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["react-native-fs"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3324,13 +3003,8 @@
       "ios": 0,
       "security": 2
     },
-    "imports": [
-      "expo-file-system",
-      "react-native"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["expo-file-system", "react-native"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3347,12 +3021,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "react-native-fs"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["react-native-fs"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3370,9 +3040,7 @@
       "security": 0
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3390,9 +3058,7 @@
       "security": 0
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3410,9 +3076,7 @@
       "security": 0
     },
     "imports": [],
-    "exports": [
-      "export"
-    ],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3429,12 +3093,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "./envUtils"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["./envUtils"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -3451,12 +3111,8 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "@react-native-async-storage/async-storage"
-    ],
-    "exports": [
-      "export"
-    ],
+    "imports": ["@react-native-async-storage/async-storage"],
+    "exports": ["export"],
     "contains_todo": false
   },
   {
@@ -5135,9 +4791,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "../src/utils/deviceUtils"
-    ],
+    "imports": ["../src/utils/deviceUtils"],
     "exports": [],
     "contains_todo": false
   },
@@ -5155,9 +4809,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "../src/emotion/ProsodyDetector"
-    ],
+    "imports": ["../src/emotion/ProsodyDetector"],
     "exports": [],
     "contains_todo": false
   },
@@ -5175,12 +4827,7 @@
       "ios": 3,
       "security": 1
     },
-    "imports": [
-      "child_process",
-      "fs",
-      "os",
-      "path"
-    ],
+    "imports": ["child_process", "fs", "os", "path"],
     "exports": [],
     "contains_todo": false
   },
@@ -5198,9 +4845,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "../src/services/readabilityService"
-    ],
+    "imports": ["../src/services/readabilityService"],
     "exports": [],
     "contains_todo": false
   },
@@ -5218,9 +4863,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "../src/services/contextEngineer"
-    ],
+    "imports": ["../src/services/contextEngineer"],
     "exports": [],
     "contains_todo": false
   },
@@ -5256,10 +4899,7 @@
       "ios": 48,
       "security": 0
     },
-    "imports": [
-      "../src/utils/hfRepoDownloader",
-      "react-native-fs"
-    ],
+    "imports": ["../src/utils/hfRepoDownloader", "react-native-fs"],
     "exports": [],
     "contains_todo": false
   },
@@ -5277,9 +4917,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "../src/services/utils/cacheAndRate"
-    ],
+    "imports": ["../src/services/utils/cacheAndRate"],
     "exports": [],
     "contains_todo": false
   },
@@ -5297,10 +4935,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "../test-utils/buildReportFixture",
-      "fs"
-    ],
+    "imports": ["../test-utils/buildReportFixture", "fs"],
     "exports": [],
     "contains_todo": false
   },
@@ -5318,10 +4953,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "../src/utils/hnswVectorStore",
-      "../src/utils/vectorUtils"
-    ],
+    "imports": ["../src/utils/hnswVectorStore", "../src/utils/vectorUtils"],
     "exports": [],
     "contains_todo": false
   },
@@ -5339,9 +4971,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "../src/core/tools/ToolHandler"
-    ],
+    "imports": ["../src/core/tools/ToolHandler"],
     "exports": [],
     "contains_todo": false
   },
@@ -5359,9 +4989,7 @@
       "ios": 0,
       "security": 6
     },
-    "imports": [
-      "../src/architecture/toolSystem"
-    ],
+    "imports": ["../src/architecture/toolSystem"],
     "exports": [],
     "contains_todo": false
   },
@@ -5379,10 +5007,7 @@
       "ios": 0,
       "security": 3
     },
-    "imports": [
-      "../src/memory/VectorMemory",
-      "fs"
-    ],
+    "imports": ["../src/memory/VectorMemory", "fs"],
     "exports": [],
     "contains_todo": false
   },
@@ -5400,10 +5025,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "../src/utils/logger",
-      "expo-file-system"
-    ],
+    "imports": ["../src/utils/logger", "expo-file-system"],
     "exports": [],
     "contains_todo": false
   },
@@ -5442,9 +5064,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "../src/core/tools/ToolRegistry"
-    ],
+    "imports": ["../src/core/tools/ToolRegistry"],
     "exports": [],
     "contains_todo": false
   },
@@ -5462,10 +5082,7 @@
       "ios": 0,
       "security": 0
     },
-    "imports": [
-      "../src/core/workflows/WorkflowTracer",
-      "../src/utils/logger"
-    ],
+    "imports": ["../src/core/workflows/WorkflowTracer", "../src/utils/logger"],
     "exports": [],
     "contains_todo": false
   },
@@ -7059,12 +6676,7 @@
       "ios": 2,
       "security": 1
     },
-    "imports": [
-      "child_process",
-      "fs",
-      "os",
-      "path"
-    ],
+    "imports": ["child_process", "fs", "os", "path"],
     "exports": [],
     "contains_todo": false
   }

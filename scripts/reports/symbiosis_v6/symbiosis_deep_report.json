@@ -153,9 +153,7 @@
     {
       "signature": "c109d064a17e6c7c",
       "count": 2,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@289-296: ## Prompt snippet index (sample) - `mlops/offllm_symbiosis_advisor_v4.py`:171-178 [marker-window] PROMPT_MARKERS = [     \"SYSTEM_PROMPT\",     \"system prompt\",     \"You are\",     \"### Instruction\",     \"### Response\",     \"prompt_template\", ",
         "marker-window@290-297: ## Prompt snippet index (sample) - `mlops/offllm_symbiosis_advisor_v4.py`:171-178 [marker-window] PROMPT_MARKERS = [     \"SYSTEM_PROMPT\",     \"system prompt\",     \"You are\",     \"### Instruction\",     \"### Response\",     \"prompt_template\", "
@@ -164,9 +162,7 @@
     {
       "signature": "0079681099007259",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@170-177: ### Cluster `5347bf6411216d89` (1 snippets, 1 files) - marker-window@191-196: ## Prompt snippet index (sample) - `offllm_symbiosis_advisor_v4.py`:118-125 [marker-window] PROMPT_MARKERS = [     \"SYSTEM_PROMPT\", \"system prompt\", \"You are\", \"#"
       ]
@@ -174,9 +170,7 @@
     {
       "signature": "025aee25afc4fefe",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@295-302: - `reports/symbiosis_v6/symbiosis_deep_report.json`:128-135 [marker-window] ],       \"sample_previews\": [         \"marker-window@118-125: PROMPT_MARKERS = [     \\\"SYSTEM_PROMPT\\\", \\\"system prompt\\\", \\\"You are\\\", \\\"### Instruction\\\", \\\"### R"
       ]
@@ -184,9 +178,7 @@
     {
       "signature": "037d30adddf384db",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@302-309: - `offllm_symbiosis_advisor_v4.py`:478-485 [marker-window] axes.append(FineTuneAxis(         axis=\"Product voice + prompt adherence\",         goal=\"Consistent style, safety rules, and system prompt compliance across versions.\",         data"
       ]
@@ -194,9 +186,7 @@
     {
       "signature": "0836aae38906f2ac",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@424-431: \"end_line\": 116,       \"kind\": \"marker-window\",       \"preview\": \"### Cluster `83a9f1c3daa7e538` (1 snippets, 1 files) - marker-window@118-125: PROMPT_MARKERS = [     \\\"SYSTEM_PROMPT\\\", \\\"system prompt\\\", \\\"You are\\\", \\\"### Instruction\\\", \\"
       ]
@@ -204,9 +194,7 @@
     {
       "signature": "1046781b8897a8ce",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@192-199: ],       \"sample_previews\": [         \"marker-window@109-116: ### Cluster `83a9f1c3daa7e538` (1 snippets, 1 files) - marker-window@118-125: PROMPT_MARKERS = [     \\\"SYSTEM_PROMPT\\\", \\\"system prompt\\\", \\\"You are\\\", \\\"### Instruction\\\", \\\"###"
       ]
@@ -214,9 +202,7 @@
     {
       "signature": "170e0d18f54b6720",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@320-327: \"end_line\": 636,       \"kind\": \"marker-window\",       \"preview\": \"FineTuneAxis(             axis=\\\"Product voice + prompt adherence\\\",             goal=\\\"Consistent style, safety rules, and system prompt compliance across versions.\\\",      "
       ]
@@ -224,9 +210,7 @@
     {
       "signature": "18a84af2d05134f1",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@262-269: ],       \"sample_previews\": [         \"marker-window@156-163: \\\"end_line\\\": 485,       \\\"kind\\\": \\\"marker-window\\\",       \\\"preview\\\": \\\"axes.append(FineTuneAxis(         axis=\\\\\\\"Product voice + prompt adherence\\\\\\\",         goal=\\\\\\\"Consi"
       ]
@@ -234,9 +218,7 @@
     {
       "signature": "1aa9cb6ac5dd4088",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@296-303: - `reports/symbiosis_v6/symbiosis_deep_report.json`:138-145 [marker-window] ],       \"sample_previews\": [         \"marker-window@478-485: axes.append(FineTuneAxis(         axis=\\\"Product voice + prompt adherence\\\",         goal=\\\"Consistent"
       ]
@@ -244,9 +226,7 @@
     {
       "signature": "1b2f068add2f841b",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@301-308: - `offllm_symbiosis_advisor_v4.py`:118-125 [marker-window] PROMPT_MARKERS = [     \"SYSTEM_PROMPT\", \"system prompt\", \"You are\", \"### Instruction\", \"### Response\",     \"prompt_template\", \"PROMPT_TEMPLATE\", \"few-shot\", \"chain-of-thought\",     "
       ]
@@ -254,9 +234,7 @@
     {
       "signature": "1c524698d2d008ad",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@178-185: ### Cluster `67a2e521030bf0d2` (1 snippets, 1 files) - marker-window@138-145: ],       \"sample_previews\": [         \"marker-window@478-485: axes.append(FineTuneAxis(         axis=\\\"Product voice + prompt adherence\\\",         goal=\\\"Consiste"
       ]
@@ -264,9 +242,7 @@
     {
       "signature": "2184c736c8d90c0d",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@252-259: ],       \"sample_previews\": [         \"marker-window@108-115: ],       \\\"sample_previews\\\": [         \\\"marker-window@171-178: PROMPT_MARKERS = [     \\\\\\\"SYSTEM_PROMPT\\\\\\\",     \\\\\\\"system prompt\\\\\\\",     \\\\\\\"You are\\\\\\\",     \\\\\\\"### Instruc"
       ]
@@ -274,9 +250,7 @@
     {
       "signature": "23487197594bed7e",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@456-463: \"end_line\": 196,       \"kind\": \"marker-window\",       \"preview\": \"- `offllm_symbiosis_advisor_v4.py`:478-485 [marker-window] axes.append(FineTuneAxis(         axis=\\\"Product voice + prompt adherence\\\",         goal=\\\"Consistent style, safet"
       ]
@@ -284,9 +258,7 @@
     {
       "signature": "2960583c132d9c01",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@328-335: \"end_line\": 115,       \"kind\": \"marker-window\",       \"preview\": \"],       \\\"sample_previews\\\": [         \\\"marker-window@171-178: PROMPT_MARKERS = [     \\\\\\\"SYSTEM_PROMPT\\\\\\\",     \\\\\\\"system prompt\\\\\\\",     \\\\\\\"You are\\\\\\\",     \\\\\\\"### Ins"
       ]
@@ -294,9 +266,7 @@
     {
       "signature": "2a4663eedbaf7d12",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@384-391: \"end_line\": 179,       \"kind\": \"marker-window\",       \"preview\": \"\\\"end_line\\\": 636,       \\\"kind\\\": \\\"marker-window\\\",       \\\"preview\\\": \\\"FineTuneAxis(             axis=\\\\\\\"Product voice + prompt adherence\\\\\\\",             goal=\\\\\\\"Consi"
       ]
@@ -304,9 +274,7 @@
     {
       "signature": "2a9946fab11ce324",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@368-375: \"end_line\": 163,       \"kind\": \"marker-window\",       \"preview\": \"\\\"end_line\\\": 485,       \\\"kind\\\": \\\"marker-window\\\",       \\\"preview\\\": \\\"axes.append(FineTuneAxis(         axis=\\\\\\\"Product voice + prompt adherence\\\\\\\",         goal=\\\\\\\"C"
       ]
@@ -314,9 +282,7 @@
     {
       "signature": "2bc90a9d8aee6b1a",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@232-239: ],       \"sample_previews\": [         \"marker-window@118-125: PROMPT_MARKERS = [     \\\"SYSTEM_PROMPT\\\", \\\"system prompt\\\", \\\"You are\\\", \\\"### Instruction\\\", \\\"### Response\\\",     \\\"prompt_template\\\", \\\"PROMPT_TEMPLATE\\\", \\\"few-shot\\\", \\\"cha"
       ]
@@ -324,9 +290,7 @@
     {
       "signature": "2e3e974a10b5ade9",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@194-201: ### Cluster `8d6ca1f045158927` (1 snippets, 1 files) - marker-window@118-125: ],       \"sample_previews\": [         \"marker-window@629-636: FineTuneAxis(             axis=\\\"Product voice + prompt adherence\\\",             goal=\\\"Consistent s"
       ]
@@ -334,9 +298,7 @@
     {
       "signature": "2e867b002b71be04",
       "count": 1,
-      "files": [
-        "mlops/offllm_symbiosis_advisor_v4.py"
-      ],
+      "files": ["mlops/offllm_symbiosis_advisor_v4.py"],
       "sample_previews": [
         "marker-window@171-178: PROMPT_MARKERS = [     \"SYSTEM_PROMPT\",     \"system prompt\",     \"You are\",     \"### Instruction\",     \"### Response\",     \"prompt_template\",     \"PROMPT_TEMPLATE\","
       ]
@@ -344,9 +306,7 @@
     {
       "signature": "2f7a6733ece8da17",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@432-439: \"end_line\": 120,       \"kind\": \"marker-window\",       \"preview\": \"### Cluster `c73fc5fe43476bd2` (1 snippets, 1 files) - marker-window@478-485: axes.append(FineTuneAxis(         axis=\\\"Product voice + prompt adherence\\\",         goal=\\\"Cons"
       ]
@@ -354,9 +314,7 @@
     {
       "signature": "30a457e8e0de6307",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@202-209: ### Cluster `bafbfe035cb367b6` (1 snippets, 1 files) - marker-window@156-163: \"end_line\": 485,       \"kind\": \"marker-window\",       \"preview\": \"axes.append(FineTuneAxis(         axis=\\\"Product voice + prompt adherence\\\",         goal=\\\"Cons"
       ]
@@ -364,9 +322,7 @@
     {
       "signature": "36050bbd9056f6e3",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@448-455: \"end_line\": 196,       \"kind\": \"marker-window\",       \"preview\": \"- `offllm_symbiosis_advisor_v4.py`:118-125 [marker-window] PROMPT_MARKERS = [     \\\"SYSTEM_PROMPT\\\", \\\"system prompt\\\", \\\"You are\\\", \\\"### Instruction\\\", \\\"### Response\\\",   "
       ]
@@ -374,9 +330,7 @@
     {
       "signature": "3664bd484d62c41c",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@182-189: ### Cluster `76a4db4988b50e70` (1 snippets, 1 files) - marker-window@113-120: ### Cluster `c73fc5fe43476bd2` (1 snippets, 1 files) - marker-window@478-485: axes.append(FineTuneAxis(         axis=\"Product voice + prompt adherence\",         g"
       ]
@@ -384,9 +338,7 @@
     {
       "signature": "3f4636ea3c66acea",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@360-367: \"end_line\": 155,       \"kind\": \"marker-window\",       \"preview\": \"\\\"end_line\\\": 125,       \\\"kind\\\": \\\"marker-window\\\",       \\\"preview\\\": \\\"PROMPT_MARKERS = [     \\\\\\\"SYSTEM_PROMPT\\\\\\\", \\\\\\\"system prompt\\\\\\\", \\\\\\\"You are\\\\\\\", \\\\\\\"### Instr"
       ]
@@ -394,9 +346,7 @@
     {
       "signature": "424edf522db558ed",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@172-179: ],       \"sample_previews\": [         \"marker-window@101-108: ### Cluster `2e867b002b71be04` (1 snippets, 1 files) - marker-window@171-178: PROMPT_MARKERS = [     \\\"SYSTEM_PROMPT\\\",     \\\"system prompt\\\",     \\\"You are\\\",     \\\"### Instruct"
       ]
@@ -404,9 +354,7 @@
     {
       "signature": "4c2ce881e7d3d74b",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@292-299: ],       \"sample_previews\": [         \"marker-window@105-112: ### Cluster `7cc67bd659d8b5d8` (1 snippets, 1 files) - marker-window@629-636: FineTuneAxis(             axis=\\\"Product voice + prompt adherence\\\",             goal=\\\"Consistent s"
       ]
@@ -414,9 +362,7 @@
     {
       "signature": "4d2b199a17ac1c28",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@162-169: ### Cluster `2e867b002b71be04` (1 snippets, 1 files) - marker-window@171-178: PROMPT_MARKERS = [     \"SYSTEM_PROMPT\",     \"system prompt\",     \"You are\",     \"### Instruction\",     \"### Response\",     \"prompt_template\",     \"PROMPT_TEMPLATE"
       ]
@@ -424,9 +370,7 @@
     {
       "signature": "54b40f99f2556c5a",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@152-159: ],       \"sample_previews\": [         \"marker-window@128-135: ],       \\\"sample_previews\\\": [         \\\"marker-window@118-125: PROMPT_MARKERS = [     \\\\\\\"SYSTEM_PROMPT\\\\\\\", \\\\\\\"system prompt\\\\\\\", \\\\\\\"You are\\\\\\\", \\\\\\\"### Instruction\\\\\\\", \\\\"
       ]
@@ -434,9 +378,7 @@
     {
       "signature": "55e8785ffb42ed24",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@294-301: - `reports/symbiosis_v6/symbiosis_deep_report.json`:118-125 [marker-window] ],       \"sample_previews\": [         \"marker-window@629-636: FineTuneAxis(             axis=\\\"Product voice + prompt adherence\\\",             goal=\\\"Consistent sty"
       ]
@@ -444,9 +386,7 @@
     {
       "signature": "58e4fffa7cad3466",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@190-197: ### Cluster `83a9f1c3daa7e538` (1 snippets, 1 files) - marker-window@118-125: PROMPT_MARKERS = [     \"SYSTEM_PROMPT\", \"system prompt\", \"You are\", \"### Instruction\", \"### Response\",     \"prompt_template\", \"PROMPT_TEMPLATE\", \"few-shot\", \"chai"
       ]
@@ -454,9 +394,7 @@
     {
       "signature": "5fea71762531a68f",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@202-209: ],       \"sample_previews\": [         \"marker-window@138-145: ],       \\\"sample_previews\\\": [         \\\"marker-window@478-485: axes.append(FineTuneAxis(         axis=\\\\\\\"Product voice + prompt adherence\\\\\\\",         goal=\\\\\\\"Consistent styl"
       ]
@@ -464,9 +402,7 @@
     {
       "signature": "65f0d6c13daf8ccf",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@212-219: ],       \"sample_previews\": [         \"marker-window@113-120: ### Cluster `c73fc5fe43476bd2` (1 snippets, 1 files) - marker-window@478-485: axes.append(FineTuneAxis(         axis=\\\"Product voice + prompt adherence\\\",         goal=\\\"Consiste"
       ]
@@ -474,9 +410,7 @@
     {
       "signature": "67a2e521030bf0d2",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@282-289: ],       \"sample_previews\": [         \"marker-window@478-485: axes.append(FineTuneAxis(         axis=\\\"Product voice + prompt adherence\\\",         goal=\\\"Consistent style, safety rules, and system prompt compliance across versions.\\\",      "
       ]
@@ -484,9 +418,7 @@
     {
       "signature": "6f4f1a1d895852ac",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@307-309: - `reports/symbiosis_v6/symbiosis_deep_report.md`:191-196 [marker-window] ## Prompt snippet index (sample) - `offllm_symbiosis_advisor_v4.py`:118-125 [marker-window] PROMPT_MARKERS = [     \"SYSTEM_PROMPT\", \"system prompt\", \"You are\", \"### I"
       ]
@@ -494,9 +426,7 @@
     {
       "signature": "7830162b7a40938b",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@154-161: ### Cluster `1b2f068add2f841b` (1 snippets, 1 files) - marker-window@193-196: - `offllm_symbiosis_advisor_v4.py`:118-125 [marker-window] PROMPT_MARKERS = [     \"SYSTEM_PROMPT\", \"system prompt\", \"You are\", \"### Instruction\", \"### Response\", "
       ]
@@ -504,9 +434,7 @@
     {
       "signature": "78c9079ba10132f3",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@306-309: - `reports/symbiosis_v6/symbiosis_deep_report.md`:113-120 [marker-window] ### Cluster `c73fc5fe43476bd2` (1 snippets, 1 files) - marker-window@478-485: axes.append(FineTuneAxis(         axis=\"Product voice + prompt adherence\",         goal="
       ]
@@ -514,9 +442,7 @@
     {
       "signature": "7cc67bd659d8b5d8",
       "count": 1,
-      "files": [
-        "mlops/offllm_symbiosis_advisor_v4.py"
-      ],
+      "files": ["mlops/offllm_symbiosis_advisor_v4.py"],
       "sample_previews": [
         "marker-window@629-636: FineTuneAxis(             axis=\"Product voice + prompt adherence\",             goal=\"Consistent style, safety rules, and system prompt compliance across versions.\",             dataset_sources=(                 [\"prompt_registry: versioned "
       ]
@@ -524,9 +450,7 @@
     {
       "signature": "7e2b6dcdfdef7df2",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@302-309: ],       \"sample_previews\": [         \"marker-window@164-171: \\\"end_line\\\": 178,       \\\"kind\\\": \\\"marker-window\\\",       \\\"preview\\\": \\\"PROMPT_MARKERS = [     \\\\\\\"SYSTEM_PROMPT\\\\\\\",     \\\\\\\"system prompt\\\\\\\",     \\\\\\\"You are\\\\\\\",     \\\\\\\"#"
       ]
@@ -534,9 +458,7 @@
     {
       "signature": "83a9f1c3daa7e538",
       "count": 1,
-      "files": [
-        "offllm_symbiosis_advisor_v4.py"
-      ],
+      "files": ["offllm_symbiosis_advisor_v4.py"],
       "sample_previews": [
         "marker-window@118-125: PROMPT_MARKERS = [     \"SYSTEM_PROMPT\", \"system prompt\", \"You are\", \"### Instruction\", \"### Response\",     \"prompt_template\", \"PROMPT_TEMPLATE\", \"few-shot\", \"chain-of-thought\",     \"tool_calls\", \"function_call\", \"ReAct\", \"scratchpad\", \"tool"
       ]
@@ -544,9 +466,7 @@
     {
       "signature": "8893ed2e0b84f74f",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@300-307: - `reports/symbiosis_v6/symbiosis_deep_report.json`:172-179 [marker-window] \"end_line\": 636,       \"kind\": \"marker-window\",       \"preview\": \"FineTuneAxis(             axis=\\\"Product voice + prompt adherence\\\",             goal=\\\"Consistent"
       ]
@@ -554,9 +474,7 @@
     {
       "signature": "8a6bf102c4e583a7",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@292-299: - `mlops/offllm_symbiosis_advisor_v4.py`:629-636 [marker-window] FineTuneAxis(             axis=\"Product voice + prompt adherence\",             goal=\"Consistent style, safety rules, and system prompt compliance across versions.\",           "
       ]
@@ -564,9 +482,7 @@
     {
       "signature": "8bcd0e60b16b51a9",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@298-305: - `reports/symbiosis_v6/symbiosis_deep_report.json`:156-163 [marker-window] \"end_line\": 485,       \"kind\": \"marker-window\",       \"preview\": \"axes.append(FineTuneAxis(         axis=\\\"Product voice + prompt adherence\\\",         goal=\\\"Consis"
       ]
@@ -574,9 +490,7 @@
     {
       "signature": "8cb7f8d171a4ad75",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@376-383: \"end_line\": 171,       \"kind\": \"marker-window\",       \"preview\": \"\\\"end_line\\\": 178,       \\\"kind\\\": \\\"marker-window\\\",       \\\"preview\\\": \\\"PROMPT_MARKERS = [     \\\\\\\"SYSTEM_PROMPT\\\\\\\",     \\\\\\\"system prompt\\\\\\\",     \\\\\\\"You are\\\\\\\",     \\"
       ]
@@ -584,9 +498,7 @@
     {
       "signature": "8d6ca1f045158927",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@222-229: ],       \"sample_previews\": [         \"marker-window@629-636: FineTuneAxis(             axis=\\\"Product voice + prompt adherence\\\",             goal=\\\"Consistent style, safety rules, and system prompt compliance across versions.\\\",          "
       ]
@@ -594,9 +506,7 @@
     {
       "signature": "95592bbe517b83e8",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@291-298: - `mlops/offllm_symbiosis_advisor_v4.py`:171-178 [marker-window] PROMPT_MARKERS = [     \"SYSTEM_PROMPT\",     \"system prompt\",     \"You are\",     \"### Instruction\",     \"### Response\",     \"prompt_template\",     \"PROMPT_TEMPLATE\", - `mlops/o"
       ]
@@ -604,9 +514,7 @@
     {
       "signature": "996c6fa5a889f62f",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@162-169: ],       \"sample_previews\": [         \"marker-window@171-178: PROMPT_MARKERS = [     \\\"SYSTEM_PROMPT\\\",     \\\"system prompt\\\",     \\\"You are\\\",     \\\"### Instruction\\\",     \\\"### Response\\\",     \\\"prompt_template\\\",     \\\"PROMPT_TEMPLATE\\\","
       ]
@@ -614,9 +522,7 @@
     {
       "signature": "9de2f0d4f57a2ffb",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@336-343: \"end_line\": 125,       \"kind\": \"marker-window\",       \"preview\": \"],       \\\"sample_previews\\\": [         \\\"marker-window@629-636: FineTuneAxis(             axis=\\\\\\\"Product voice + prompt adherence\\\\\\\",             goal=\\\\\\\"Consistent styl"
       ]
@@ -624,9 +530,7 @@
     {
       "signature": "a11c98af0921841f",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@166-173: ### Cluster `4d2b199a17ac1c28` (1 snippets, 1 files) - marker-window@101-108: ### Cluster `2e867b002b71be04` (1 snippets, 1 files) - marker-window@171-178: PROMPT_MARKERS = [     \"SYSTEM_PROMPT\",     \"system prompt\",     \"You are\",     \"###"
       ]
@@ -634,9 +538,7 @@
     {
       "signature": "a312d54c0da95b6e",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@182-189: ],       \"sample_previews\": [         \"marker-window@191-196: ## Prompt snippet index (sample) - `offllm_symbiosis_advisor_v4.py`:118-125 [marker-window] PROMPT_MARKERS = [     \\\"SYSTEM_PROMPT\\\", \\\"system prompt\\\", \\\"You are\\\", \\\"### Instru"
       ]
@@ -644,9 +546,7 @@
     {
       "signature": "ab6187af24b79a45",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@272-279: ],       \"sample_previews\": [         \"marker-window@148-155: \\\"end_line\\\": 125,       \\\"kind\\\": \\\"marker-window\\\",       \\\"preview\\\": \\\"PROMPT_MARKERS = [     \\\\\\\"SYSTEM_PROMPT\\\\\\\", \\\\\\\"system prompt\\\\\\\", \\\\\\\"You are\\\\\\\", \\\\\\\"### Instructi"
       ]
@@ -654,9 +554,7 @@
     {
       "signature": "af02b711ec9f9cbc",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@440-447: \"end_line\": 196,       \"kind\": \"marker-window\",       \"preview\": \"## Prompt snippet index (sample) - `offllm_symbiosis_advisor_v4.py`:118-125 [marker-window] PROMPT_MARKERS = [     \\\"SYSTEM_PROMPT\\\", \\\"system prompt\\\", \\\"You are\\\", \\\"### In"
       ]
@@ -664,9 +562,7 @@
     {
       "signature": "bafbfe035cb367b6",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@400-407: \"end_line\": 485,       \"kind\": \"marker-window\",       \"preview\": \"axes.append(FineTuneAxis(         axis=\\\"Product voice + prompt adherence\\\",         goal=\\\"Consistent style, safety rules, and system prompt compliance across versions.\\\",  "
       ]
@@ -674,9 +570,7 @@
     {
       "signature": "bafd15db9881b0c3",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@408-415: \"end_line\": 108,       \"kind\": \"marker-window\",       \"preview\": \"### Cluster `2e867b002b71be04` (1 snippets, 1 files) - marker-window@171-178: PROMPT_MARKERS = [     \\\"SYSTEM_PROMPT\\\",     \\\"system prompt\\\",     \\\"You are\\\",     \\\"### Inst"
       ]
@@ -684,9 +578,7 @@
     {
       "signature": "bd31fb6d0a5add5e",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@293-300: - `reports/symbiosis_v6/symbiosis_deep_report.json`:108-115 [marker-window] ],       \"sample_previews\": [         \"marker-window@171-178: PROMPT_MARKERS = [     \\\"SYSTEM_PROMPT\\\",     \\\"system prompt\\\",     \\\"You are\\\",     \\\"### Instructio"
       ]
@@ -694,9 +586,7 @@
     {
       "signature": "beaca0da2ed7c48c",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@305-309: - `reports/symbiosis_v6/symbiosis_deep_report.md`:109-116 [marker-window] ### Cluster `83a9f1c3daa7e538` (1 snippets, 1 files) - marker-window@118-125: PROMPT_MARKERS = [     \"SYSTEM_PROMPT\", \"system prompt\", \"You are\", \"### Instruction\", \""
       ]
@@ -704,9 +594,7 @@
     {
       "signature": "c30c48823b4faddf",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@352-359: \"end_line\": 145,       \"kind\": \"marker-window\",       \"preview\": \"],       \\\"sample_previews\\\": [         \\\"marker-window@478-485: axes.append(FineTuneAxis(         axis=\\\\\\\"Product voice + prompt adherence\\\\\\\",         goal=\\\\\\\"Consistent "
       ]
@@ -714,9 +602,7 @@
     {
       "signature": "c31251cd201ffc50",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@198-205: ### Cluster `996c6fa5a889f62f` (1 snippets, 1 files) - marker-window@108-115: ],       \"sample_previews\": [         \"marker-window@171-178: PROMPT_MARKERS = [     \\\"SYSTEM_PROMPT\\\",     \\\"system prompt\\\",     \\\"You are\\\",     \\\"### Instruct"
       ]
@@ -724,9 +610,7 @@
     {
       "signature": "c422a0e96ff8c3d7",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@392-399: \"end_line\": 125,       \"kind\": \"marker-window\",       \"preview\": \"PROMPT_MARKERS = [     \\\"SYSTEM_PROMPT\\\", \\\"system prompt\\\", \\\"You are\\\", \\\"### Instruction\\\", \\\"### Response\\\",     \\\"prompt_template\\\", \\\"PROMPT_TEMPLATE\\\", \\\"few-shot\\\", \\"
       ]
@@ -734,9 +618,7 @@
     {
       "signature": "c73fc5fe43476bd2",
       "count": 1,
-      "files": [
-        "offllm_symbiosis_advisor_v4.py"
-      ],
+      "files": ["offllm_symbiosis_advisor_v4.py"],
       "sample_previews": [
         "marker-window@478-485: axes.append(FineTuneAxis(         axis=\"Product voice + prompt adherence\",         goal=\"Consistent style, safety rules, and system prompt compliance across versions.\",         dataset_sources=([\"prompt_registry: versioned templates\"] if se"
       ]
@@ -744,9 +626,7 @@
     {
       "signature": "cfa1fb18ce811ae4",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@297-304: - `reports/symbiosis_v6/symbiosis_deep_report.json`:148-155 [marker-window] \"end_line\": 125,       \"kind\": \"marker-window\",       \"preview\": \"PROMPT_MARKERS = [     \\\"SYSTEM_PROMPT\\\", \\\"system prompt\\\", \\\"You are\\\", \\\"### Instruction\\\", \\\"#"
       ]
@@ -754,9 +634,7 @@
     {
       "signature": "d4e4476ed781eb78",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@299-306: - `reports/symbiosis_v6/symbiosis_deep_report.json`:164-171 [marker-window] \"end_line\": 178,       \"kind\": \"marker-window\",       \"preview\": \"PROMPT_MARKERS = [     \\\"SYSTEM_PROMPT\\\",     \\\"system prompt\\\",     \\\"You are\\\",     \\\"### Instru"
       ]
@@ -764,9 +642,7 @@
     {
       "signature": "d52be25a9cb08d9d",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@158-165: ### Cluster `2bc90a9d8aee6b1a` (1 snippets, 1 files) - marker-window@128-135: ],       \"sample_previews\": [         \"marker-window@118-125: PROMPT_MARKERS = [     \\\"SYSTEM_PROMPT\\\", \\\"system prompt\\\", \\\"You are\\\", \\\"### Instruction\\\", \\\"###"
       ]
@@ -774,9 +650,7 @@
     {
       "signature": "d685d0f172449939",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@344-351: \"end_line\": 135,       \"kind\": \"marker-window\",       \"preview\": \"],       \\\"sample_previews\\\": [         \\\"marker-window@118-125: PROMPT_MARKERS = [     \\\\\\\"SYSTEM_PROMPT\\\\\\\", \\\\\\\"system prompt\\\\\\\", \\\\\\\"You are\\\\\\\", \\\\\\\"### Instruction\\\\\\\""
       ]
@@ -784,9 +658,7 @@
     {
       "signature": "e1199fdf66333254",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@303-309: - `reports/symbiosis_v6/symbiosis_deep_report.md`:101-108 [marker-window] ### Cluster `2e867b002b71be04` (1 snippets, 1 files) - marker-window@171-178: PROMPT_MARKERS = [     \"SYSTEM_PROMPT\",     \"system prompt\",     \"You are\",     \"### Ins"
       ]
@@ -794,9 +666,7 @@
     {
       "signature": "e12fc3d07c098207",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@174-181: ### Cluster `58e4fffa7cad3466` (1 snippets, 1 files) - marker-window@109-116: ### Cluster `83a9f1c3daa7e538` (1 snippets, 1 files) - marker-window@118-125: PROMPT_MARKERS = [     \"SYSTEM_PROMPT\", \"system prompt\", \"You are\", \"### Instruction"
       ]
@@ -804,9 +674,7 @@
     {
       "signature": "e595a65326e8e7fa",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@304-309: - `reports/symbiosis_v6/symbiosis_deep_report.md`:105-112 [marker-window] ### Cluster `7cc67bd659d8b5d8` (1 snippets, 1 files) - marker-window@629-636: FineTuneAxis(             axis=\"Product voice + prompt adherence\",             goal=\"Con"
       ]
@@ -814,9 +682,7 @@
     {
       "signature": "f0888b6c8c10d716",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@150-157: ### Cluster `170e0d18f54b6720` (1 snippets, 1 files) - marker-window@172-179: \"end_line\": 636,       \"kind\": \"marker-window\",       \"preview\": \"FineTuneAxis(             axis=\\\"Product voice + prompt adherence\\\",             goal=\\\"Consiste"
       ]
@@ -824,9 +690,7 @@
     {
       "signature": "f1abf19abe42852d",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@186-193: ### Cluster `7cc67bd659d8b5d8` (1 snippets, 1 files) - marker-window@629-636: FineTuneAxis(             axis=\"Product voice + prompt adherence\",             goal=\"Consistent style, safety rules, and system prompt compliance across versions."
       ]
@@ -834,9 +698,7 @@
     {
       "signature": "f20177004558b2b1",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@416-423: \"end_line\": 112,       \"kind\": \"marker-window\",       \"preview\": \"### Cluster `7cc67bd659d8b5d8` (1 snippets, 1 files) - marker-window@629-636: FineTuneAxis(             axis=\\\"Product voice + prompt adherence\\\",             goal=\\\"Consiste"
       ]
@@ -844,9 +706,7 @@
     {
       "signature": "f306d92abf8a3dc0",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@242-249: ],       \"sample_previews\": [         \"marker-window@118-125: ],       \\\"sample_previews\\\": [         \\\"marker-window@629-636: FineTuneAxis(             axis=\\\\\\\"Product voice + prompt adherence\\\\\\\",             goal=\\\\\\\"Consistent style, s"
       ]
@@ -854,9 +714,7 @@
     {
       "signature": "f36fd7d5f8eaa6a3",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@312-319: \"end_line\": 178,       \"kind\": \"marker-window\",       \"preview\": \"PROMPT_MARKERS = [     \\\"SYSTEM_PROMPT\\\",     \\\"system prompt\\\",     \\\"You are\\\",     \\\"### Instruction\\\",     \\\"### Response\\\",     \\\"prompt_template\\\",     \\\"PROMPT_TEMPLAT"
       ]
@@ -864,9 +722,7 @@
     {
       "signature": "f72ef48d606f6345",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@122-129: ],       \"sample_previews\": [         \"marker-window@194-196: - `offllm_symbiosis_advisor_v4.py`:478-485 [marker-window] axes.append(FineTuneAxis(         axis=\\\"Product voice + prompt adherence\\\",         goal=\\\"Consistent style, safety ru"
       ]
@@ -874,9 +730,7 @@
     {
       "signature": "f79931d7af25068f",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@132-139: ],       \"sample_previews\": [         \"marker-window@172-179: \\\"end_line\\\": 636,       \\\"kind\\\": \\\"marker-window\\\",       \\\"preview\\\": \\\"FineTuneAxis(             axis=\\\\\\\"Product voice + prompt adherence\\\\\\\",             goal=\\\\\\\"Consisten"
       ]
@@ -884,9 +738,7 @@
     {
       "signature": "fdda0c45b1051321",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.md"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.md"],
       "sample_previews": [
         "marker-window@146-153: ### Cluster `037d30adddf384db` (1 snippets, 1 files) - marker-window@194-196: - `offllm_symbiosis_advisor_v4.py`:478-485 [marker-window] axes.append(FineTuneAxis(         axis=\"Product voice + prompt adherence\",         goal=\"Consistent sty"
       ]
@@ -894,9 +746,7 @@
     {
       "signature": "fe05c530327fe11e",
       "count": 1,
-      "files": [
-        "reports/symbiosis_v6/symbiosis_deep_report.json"
-      ],
+      "files": ["reports/symbiosis_v6/symbiosis_deep_report.json"],
       "sample_previews": [
         "marker-window@142-149: ],       \"sample_previews\": [         \"marker-window@193-196: - `offllm_symbiosis_advisor_v4.py`:118-125 [marker-window] PROMPT_MARKERS = [     \\\"SYSTEM_PROMPT\\\", \\\"system prompt\\\", \\\"You are\\\", \\\"### Instruction\\\", \\\"### Response\\\",     \\\""
       ]

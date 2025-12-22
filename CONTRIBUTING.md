@@ -9,6 +9,7 @@ Offline LLM Application is designed to provide advanced language model functiona
 ## Setup Instructions
 
 To get started with contributing:
+
 1. Fork the repository and clone it locally.
 2. Ensure you have Node.js (version 20) and Ruby (version 3.2) installed.
 3. Install dependencies using `npm ci` and `bundle install`.
@@ -17,6 +18,7 @@ To get started with contributing:
 ## Reporting Bugs and Requesting Features
 
 To report bugs or request features:
+
 1. Check if a similar issue already exists in the [Issue Tracker](https://github.com/ales27pm/offLLM/issues).
 2. Open a new issue with a descriptive title and detailed description, including steps to reproduce for bugs.
    - Use the templates if available.
