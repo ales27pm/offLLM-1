@@ -158,7 +158,7 @@ def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser()
     p.add_argument(
         "--template",
-        default="offllm_symbiosis_advisor_v4.py",
+        default="scripts/offllm_symbiosis_advisor_v6.py",
         help="Template file containing PROMPT_REGISTRY",
     )
     p.add_argument(
@@ -222,6 +222,15 @@ def main() -> None:
                 "message": {
                     "text": f"{type(e).__name__}: {e}\n{tb}"
                 },
+                "locations": [
+                    {
+                        "physicalLocation": {
+                            "artifactLocation": {
+                                "uri": args.template
+                            }
+                        }
+                    }
+                ],
             }
         )
         raise
