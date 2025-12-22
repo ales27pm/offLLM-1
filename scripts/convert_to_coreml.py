@@ -268,7 +268,7 @@ if __name__ == "__main__":
     ap.add_argument("--hf_token")
     ap.add_argument(
         "--manifest",
-        default=os.path.join("export", "manifest.json"),
+        default=None,
         help="Path to export manifest for verification.",
     )
     args = ap.parse_args()
