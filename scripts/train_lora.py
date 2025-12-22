@@ -2,6 +2,8 @@ import argparse
 import json
 import os
 import re
+import subprocess
+import sys
 
 import torch
 from datasets import load_dataset
@@ -54,6 +56,11 @@ def main() -> None:
     parser.add_argument("--output_dir", required=True)
     parser.add_argument("--max_steps", type=int, default=50)
     parser.add_argument("--prompt_template", default=None)
+    parser.add_argument(
+        "--manifest-out",
+        default=os.path.join("export", "manifest.json"),
+        help="Path to write export manifest JSON.",
+    )
     args = parser.parse_args()
 
     if not os.path.isfile(args.train_file):
@@ -177,6 +184,23 @@ def main() -> None:
     trainer.train()
     model.save_pretrained(args.output_dir)
     tokenizer.save_pretrained(args.output_dir)
+
+    manifest_script = os.path.join(
+        os.path.dirname(__file__), "mlops", "write_export_manifest.py"
+    )
+    subprocess.run(
+        [
+            sys.executable,
+            manifest_script,
+            "--datasets",
+            os.path.abspath(args.train_file),
+            "--model-path",
+            os.path.abspath(args.output_dir),
+            "--output",
+            os.path.abspath(args.manifest_out),
+        ],
+        check=True,
+    )
 
 
 if __name__ == "__main__":

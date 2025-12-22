@@ -33,7 +33,7 @@
 ## Telemetry, Training, and Evaluation
 
 - Telemetry events capture prompts, tool calls, and retrieval signals with redaction and SHA-256 hash metadata, and each event validates against the canonical telemetry JSON Schema before it is persisted for training or evaluation workflows.【F:src/utils/telemetry.js†L1-L236】【F:schemas/telemetry_event.schema.json†L1-L118】
-- The LoRA training pipeline now consumes the shared prompt registry, ensuring training prompts match the runtime tool-call schema and instruction text.【F:scripts/train_lora.py†L1-L147】【F:src/core/prompt/PromptRegistry.ts†L1-L113】
+- The LoRA training pipeline now consumes the shared prompt registry, ensuring training prompts match the runtime tool-call schema and instruction text while emitting an export manifest with dataset and model hashes for reproducible training runs.【F:scripts/train_lora.py†L1-L170】【F:src/core/prompt/PromptRegistry.ts†L1-L113】【F:scripts/mlops/write_export_manifest.py†L1-L78】
 - Evaluation scripts provide deterministic checks for prompt regression (prompt output, tool-call diffs, JSON/refusal/citation expectations, and SARIF export), retrieval recall, and export equivalence to keep runtime behavior aligned with tooling outputs and conversion pipelines.【F:scripts/eval/run_prompt_regression.py†L1-L361】【F:scripts/eval/retrieval_eval.py†L1-L54】【F:scripts/eval/export_equivalence.py†L1-L52】
 
 ## Workflow and Automation Patterns
