@@ -13,9 +13,13 @@ const compileSchema = (name) => {
   return validate;
 };
 
-export const validateToolArgs = (name, args) => {
+export const validateToolArgs = (name, args, options = {}) => {
+  const { allowMissingSchema = false } = options;
   const schema = getToolSchema(name);
   if (!schema) {
+    if (allowMissingSchema) {
+      return { valid: true, errors: [] };
+    }
     return {
       valid: false,
       errors: [`Missing schema for tool '${name}'`],

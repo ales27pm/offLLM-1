@@ -73,21 +73,29 @@ def load_cases(paths: Iterable[str]) -> list[PromptCase]:
     return cases
 
 
-def invoke_model(prompt: str, command: str, seed: str | None) -> str:
+def invoke_model(prompt: str, command: str, seed: str | None, timeout_s: int) -> str:
     env = os.environ.copy()
     env["OFFLLM_DETERMINISTIC"] = "1"
     env["TEMPERATURE"] = "0"
     if seed:
         env["OFFLLM_SEED"] = seed
+    if not command or not command.strip():
+        raise ValueError("model command must be a non-empty string")
+    if re.search(r"[;&|><`]", command):
+        raise ValueError("model command contains unsupported shell metacharacters")
     cmd = shlex.split(command)
-    result = subprocess.run(
-        cmd,
-        input=prompt,
-        text=True,
-        capture_output=True,
-        env=env,
-        check=False,
-    )
+    try:
+        result = subprocess.run(
+            cmd,
+            input=prompt,
+            text=True,
+            capture_output=True,
+            env=env,
+            check=False,
+            timeout=timeout_s,
+        )
+    except subprocess.TimeoutExpired as error:
+        raise RuntimeError(f"Model command timed out after {timeout_s}s") from error
     if result.returncode != 0:
         raise RuntimeError(
             f"Model command failed: {result.returncode}\n{result.stderr.strip()}"
@@ -234,17 +242,19 @@ def parse_tool_calls(response: str) -> list[dict]:
     return results
 
 
-def evaluate_case(case: PromptCase, response: str) -> list[str]:
-    failures: list[str] = []
-    expected = case.expected
+def check_tool_calls(expected: dict, response: str) -> list[str]:
     tool_calls_expected = expected.get("tool_calls", [])
     tool_calls_actual = parse_tool_calls(response)
     if tool_calls_expected != tool_calls_actual:
-        failures.append(
+        return [
             "Tool call mismatch: expected "
             f"{stable_dumps(tool_calls_expected)} got "
             f"{stable_dumps(tool_calls_actual)}"
-        )
+        ]
+    return []
+
+
+def check_json_valid(expected: dict, response: str) -> list[str]:
     json_valid_expected = expected.get("json_valid", False)
     try:
         json.loads(response)
@@ -252,21 +262,39 @@ def evaluate_case(case: PromptCase, response: str) -> list[str]:
     except json.JSONDecodeError:
         json_valid_actual = False
     if json_valid_expected != json_valid_actual:
-        failures.append(
+        return [
             f"JSON validity mismatch: expected {json_valid_expected} got {json_valid_actual}"
-        )
+        ]
+    return []
+
+
+def check_refusal(expected: dict, response: str) -> list[str]:
     refusal_expected = expected.get("refusal", False)
     refusal_actual = bool(REFUSAL_PATTERN.search(response))
     if refusal_expected != refusal_actual:
-        failures.append(
+        return [
             f"Refusal detection mismatch: expected {refusal_expected} got {refusal_actual}"
-        )
+        ]
+    return []
+
+
+def check_citations(expected: dict, response: str) -> list[str]:
     citations_required = expected.get("citations_required", False)
     citations_present = bool(CITATION_PATTERN.search(response))
     if citations_required and not citations_present:
-        failures.append("Citations required but none found")
+        return ["Citations required but none found"]
     if not citations_required and citations_present:
-        failures.append("Citations not expected but found")
+        return ["Citations not expected but found"]
+    return []
+
+
+def evaluate_case(case: PromptCase, response: str) -> list[str]:
+    expected = case.expected
+    failures: list[str] = []
+    failures.extend(check_tool_calls(expected, response))
+    failures.extend(check_json_valid(expected, response))
+    failures.extend(check_refusal(expected, response))
+    failures.extend(check_citations(expected, response))
     return failures
 
 
@@ -293,6 +321,7 @@ def main() -> None:
     parser.add_argument("--prompts", action="append", required=True)
     parser.add_argument("--model-cmd", required=True)
     parser.add_argument("--seed", default=None)
+    parser.add_argument("--timeout", type=int, default=60)
     parser.add_argument("--summary", default="eval/prompt_regression_summary.json")
     parser.add_argument("--sarif", default="eval/prompt_regression.sarif")
     args = parser.parse_args()
@@ -301,7 +330,7 @@ def main() -> None:
     failures = []
     sarif_results = []
     for case in cases:
-        response = invoke_model(case.prompt, args.model_cmd, args.seed)
+        response = invoke_model(case.prompt, args.model_cmd, args.seed, args.timeout)
         case_failures = evaluate_case(case, response)
         if case_failures:
             failures.append({"id": case.case_id, "errors": case_failures})

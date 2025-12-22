@@ -17,15 +17,19 @@ def load_documents(directory: Path) -> list[dict]:
     return docs
 
 
-def run_chunking(documents: list[dict], options: dict) -> dict:
+def run_chunking(documents: list[dict], options: dict, timeout_s: int) -> dict:
     payload = json.dumps({"documents": documents, "options": options})
-    result = subprocess.run(
-        ["node", "eval/chunk_text.mjs"],
-        input=payload,
-        text=True,
-        capture_output=True,
-        check=False,
-    )
+    try:
+        result = subprocess.run(
+            ["node", "eval/chunk_text.mjs"],
+            input=payload,
+            text=True,
+            capture_output=True,
+            check=False,
+            timeout=timeout_s,
+        )
+    except subprocess.TimeoutExpired as error:
+        raise RuntimeError(f"Chunking timed out after {timeout_s}s") from error
     if result.returncode != 0:
         raise RuntimeError(result.stderr.strip() or "Chunking failed")
     return json.loads(result.stdout).get("chunks", {})
@@ -39,6 +43,7 @@ def main() -> None:
     parser.add_argument("--max-chars", type=int, default=12000)
     parser.add_argument("--overlap", type=int, default=200)
     parser.add_argument("--min-docs", type=int, default=20)
+    parser.add_argument("--timeout", type=int, default=30)
     args = parser.parse_args()
 
     docs_dir = Path(args.documents)
@@ -52,8 +57,8 @@ def main() -> None:
         )
 
     options = {"maxChars": args.max_chars, "overlap": args.overlap}
-    first = run_chunking(documents, options)
-    second = run_chunking(documents, options)
+    first = run_chunking(documents, options, args.timeout)
+    second = run_chunking(documents, options, args.timeout)
 
     if first != second:
         raise SystemExit("Chunking is non-deterministic across runs")

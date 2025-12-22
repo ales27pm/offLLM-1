@@ -168,7 +168,8 @@ export default class ToolHandler {
 
   async execute(calls, options = {}) {
     const results = [];
-    const { tracer, telemetryContext, allowedCategories } = options;
+    const { tracer, telemetryContext, allowedCategories, allowMissingSchema } =
+      options;
 
     for (const { name, args } of calls) {
       const tool = this.toolRegistry.getTool(name);
@@ -197,7 +198,10 @@ export default class ToolHandler {
         continue;
       }
 
-      const validation = this.schemaValidator(name, args);
+      const validation = this.schemaValidator(name, args, {
+        allowMissingSchema:
+          allowMissingSchema === true || tool.allowMissingSchema === true,
+      });
       if (!validation.valid) {
         results.push({
           role: "tool",

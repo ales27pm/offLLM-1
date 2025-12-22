@@ -130,6 +130,37 @@ test("ToolHandler blocks invalid parameters without executing the tool", async (
   ]);
 });
 
+test("ToolHandler aggregates multiple validation errors and does not execute the tool", async () => {
+  let executedCount = 0;
+  const execute = () => {
+    executedCount += 1;
+  };
+  const registry = {
+    getTool: (name) => (name === "ping" ? { execute } : null),
+  };
+  const localHandler = new ToolHandler(registry, {
+    schemaValidator: () => ({
+      valid: false,
+      errors: [
+        "(root) must have required property 'foo'",
+        "(root) must have required property 'bar'",
+      ],
+    }),
+  });
+
+  const result = await localHandler.execute([{ name: "ping", args: {} }]);
+
+  expect(executedCount).toBe(0);
+  expect(result).toEqual([
+    {
+      role: "tool",
+      name: "ping",
+      content:
+        "Error: Invalid parameters for 'ping': (root) must have required property 'foo'; (root) must have required property 'bar'",
+    },
+  ]);
+});
+
 test("ToolHandler enforces capability allowlists", async () => {
   const execute = jest.fn().mockResolvedValue({ ok: true });
   const registry = {
@@ -153,5 +184,26 @@ test("ToolHandler enforces capability allowlists", async () => {
       content:
         "Error: Tool 'web_search' is not allowed for this capability scope",
     },
+  ]);
+});
+
+test("ToolHandler allows tools within capability allowlists", async () => {
+  const execute = jest.fn().mockResolvedValue({ ok: true });
+  const registry = {
+    getTool: (name) => (name === "web_search" ? { execute } : null),
+    getToolCategories: () => ["online"],
+  };
+  const localHandler = new ToolHandler(registry, {
+    schemaValidator: allowAllSchema,
+  });
+
+  const result = await localHandler.execute(
+    [{ name: "web_search", args: { query: "test" } }],
+    { allowedCategories: ["online"] },
+  );
+
+  expect(execute).toHaveBeenCalledTimes(1);
+  expect(result).toEqual([
+    { role: "tool", name: "web_search", content: JSON.stringify({ ok: true }) },
   ]);
 });

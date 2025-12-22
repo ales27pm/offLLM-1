@@ -10,10 +10,10 @@ test("redactTelemetryValue removes PII and secrets deterministically", () => {
   const input = {
     email: "user@example.com",
     phone: "+1 (415) 555-1234",
-    apiKey: "apiKey-1234567890",
-    bearer: "Bearer sk-test_ABC123",
+    apiKey: "apiKey-example-value",
+    bearer: "Bearer token-example",
     nested: {
-      token: "sk-abcdef123456",
+      token: "sk-test",
       text: "Contact me at admin@example.com",
     },
   };

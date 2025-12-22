@@ -1,54 +1,15 @@
 import argparse
 import json
 import os
-import re
+import sys
 from collections import defaultdict
 from pathlib import Path
-from typing import Any
 
-
-EMAIL_PATTERN = re.compile(r"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}", re.IGNORECASE)
-PHONE_PATTERN = re.compile(r"\+?\d[\d\s().-]{7,}\d")
-TOKEN_PATTERN = re.compile(r"\b(?:sk|rk|pk)-[A-Za-z0-9_-]{8,}\b")
-SECRET_PATTERN = re.compile(r"\b(?:api|key|secret|token)[-_]?[A-Za-z0-9]{8,}\b", re.IGNORECASE)
-BEARER_PATTERN = re.compile(r"\bBearer\s+[A-Za-z0-9._-]+\b")
-SENSITIVE_KEY_PATTERN = re.compile(r"(token|secret|password|auth|api[_-]?key|session)", re.IGNORECASE)
-MAX_VALUE_LENGTH = 2000
-
-
-def redact_string(value: str) -> str:
-    result = EMAIL_PATTERN.sub("[REDACTED_EMAIL]", value)
-    result = PHONE_PATTERN.sub("[REDACTED_PHONE]", result)
-    result = BEARER_PATTERN.sub("Bearer [REDACTED]", result)
-    result = TOKEN_PATTERN.sub("[REDACTED_TOKEN]", result)
-    result = SECRET_PATTERN.sub("[REDACTED_SECRET]", result)
-    if len(result) > MAX_VALUE_LENGTH:
-        result = f"{result[:MAX_VALUE_LENGTH]}…[TRUNCATED]"
-    return result
-
-
-def redact_value(value: Any) -> Any:
-    if value is None:
-        return value
-    if isinstance(value, str):
-        return redact_string(value)
-    if isinstance(value, (int, float, bool)):
-        return value
-    if isinstance(value, list):
-        return [redact_value(item) for item in value]
-    if isinstance(value, dict):
-        redacted = {}
-        for key, entry in value.items():
-            if SENSITIVE_KEY_PATTERN.search(str(key)):
-                redacted[key] = "[REDACTED]"
-            else:
-                redacted[key] = redact_value(entry)
-        return redacted
-    return redact_string(str(value))
-
-
-def stable_dumps(payload: Any) -> str:
-    return json.dumps(payload, ensure_ascii=False, sort_keys=True)
+from scripts.mlops.telemetry_redaction import (
+    load_redaction_patterns,
+    redact_value,
+    stable_dumps,
+)
 
 
 def load_tool_schema(path: str) -> str:
@@ -60,39 +21,76 @@ def load_tool_schema(path: str) -> str:
         return handle.read().strip()
 
 
-def parse_events(path: Path) -> dict:
+def normalize_event_type(event: dict, strict_schema: bool) -> str | None:
+    event_type = event.get("event_type") or event.get("event")
+    if not event_type:
+        if strict_schema:
+            raise ValueError("Telemetry event missing event_type")
+        return None
+    return event_type
+
+
+def parse_events(path: Path, strict_schema: bool) -> dict:
     grouped = defaultdict(lambda: {"tool_calls": []})
+    patterns = load_redaction_patterns()
+    missing_event_type = 0
+    missing_schema_version = 0
+    missing_prompt_hash = 0
     with path.open("r", encoding="utf-8") as handle:
         for line in handle:
             if not line.strip():
                 continue
             event = json.loads(line)
-            event_type = event.get("event_type")
+            event_type = normalize_event_type(event, strict_schema)
             if not event_type:
-                raise ValueError("Telemetry event missing event_type")
+                missing_event_type += 1
+                continue
             if event.get("schema_version") is None:
-                raise ValueError("Telemetry event missing schema_version")
+                if strict_schema:
+                    raise ValueError("Telemetry event missing schema_version")
+                missing_schema_version += 1
             prompt_hash = event.get("prompt_hash")
             if event_type in {"prompt_received", "tool_invocation", "final_response"}:
-                if not prompt_hash:
+                if not prompt_hash and strict_schema:
                     raise ValueError("Telemetry event missing prompt_hash")
             if not prompt_hash:
+                missing_prompt_hash += 1
                 continue
             bucket = grouped[prompt_hash]
             if event_type == "prompt_received":
-                bucket["instruction"] = redact_value(event.get("prompt_preview", ""))
+                bucket["instruction"] = redact_value(
+                    event.get("prompt_preview", ""), patterns
+                )
             elif event_type == "tool_invocation":
                 bucket["tool_calls"].append(
                     {
                         "name": event.get("tool_name"),
-                        "args": redact_value(event.get("tool_args_preview", {})),
+                        "args": redact_value(
+                            event.get("tool_args_preview", {}), patterns
+                        ),
                         "success": event.get("success"),
                     }
                 )
             elif event_type == "final_response":
                 bucket["expected_answer"] = redact_value(
-                    event.get("response_preview", "")
+                    event.get("response_preview", ""), patterns
                 )
+    if not strict_schema:
+        if missing_event_type:
+            print(
+                f"Warning: skipped {missing_event_type} events without event_type",
+                file=sys.stderr,
+            )
+        if missing_schema_version:
+            print(
+                f"Warning: skipped schema_version validation for {missing_schema_version} events",
+                file=sys.stderr,
+            )
+        if missing_prompt_hash:
+            print(
+                f"Warning: skipped {missing_prompt_hash} events without prompt_hash",
+                file=sys.stderr,
+            )
     return grouped
 
 
@@ -139,6 +137,11 @@ def main() -> None:
     parser.add_argument("--telemetry", required=True)
     parser.add_argument("--output", required=True)
     parser.add_argument("--tool-schema", default="")
+    parser.add_argument(
+        "--strict-schema",
+        action="store_true",
+        help="Fail when telemetry events miss schema fields (event_type/schema_version).",
+    )
     args = parser.parse_args()
 
     telemetry_path = Path(args.telemetry)
@@ -146,7 +149,7 @@ def main() -> None:
         raise FileNotFoundError(f"Telemetry not found: {telemetry_path}")
 
     tool_schema = load_tool_schema(args.tool_schema)
-    grouped = parse_events(telemetry_path)
+    grouped = parse_events(telemetry_path, args.strict_schema)
     records = build_records(grouped, tool_schema)
 
     os.makedirs(Path(args.output).parent, exist_ok=True)

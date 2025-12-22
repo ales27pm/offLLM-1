@@ -10,8 +10,14 @@ const MAX_VALUE_LENGTH = 2000;
 const DEFAULT_FILE_NAME = "events.jsonl";
 const TELEMETRY_SCHEMA_VERSION = "telemetry_v1";
 
-const sensitiveKeyPattern = /(token|secret|password|auth|api[_-]?key|session)/i;
+const redactionPatterns = require("../../schemas/redaction_patterns.json");
+const sensitiveKeyPattern = new RegExp(redactionPatterns.sensitive_key, "i");
 const telemetrySchema = require("../../schemas/telemetry_event.schema.json");
+const emailPattern = new RegExp(redactionPatterns.email, "gi");
+const phonePattern = new RegExp(redactionPatterns.phone, "g");
+const tokenPattern = new RegExp(redactionPatterns.token, "g");
+const secretPattern = new RegExp(redactionPatterns.secret, "gi");
+const bearerPattern = new RegExp(redactionPatterns.bearer, "g");
 
 const ajv = new Ajv({ allErrors: true, strict: true, allowUnionTypes: true });
 const validateTelemetry = ajv.compile(telemetrySchema);
@@ -34,20 +40,11 @@ const stableStringify = (value) => JSON.stringify(stableSort(value));
 const redactString = (value) => {
   if (!value) return value;
   let result = value;
-  result = result.replace(
-    /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi,
-    "[REDACTED_EMAIL]",
-  );
-  result = result.replace(/\+?\d[\d\s().-]{7,}\d/g, "[REDACTED_PHONE]");
-  result = result.replace(/\bBearer\s+[A-Za-z0-9._-]+\b/g, "Bearer [REDACTED]");
-  result = result.replace(
-    /\b(?:sk|rk|pk)-[A-Za-z0-9_-]{8,}\b/g,
-    "[REDACTED_TOKEN]",
-  );
-  result = result.replace(
-    /\b(?:api|key|secret|token)[-_]?[A-Za-z0-9]{8,}\b/gi,
-    "[REDACTED_SECRET]",
-  );
+  result = result.replace(emailPattern, "[REDACTED_EMAIL]");
+  result = result.replace(phonePattern, "[REDACTED_PHONE]");
+  result = result.replace(bearerPattern, "Bearer [REDACTED]");
+  result = result.replace(tokenPattern, "[REDACTED_TOKEN]");
+  result = result.replace(secretPattern, "[REDACTED_SECRET]");
   if (result.length > MAX_VALUE_LENGTH) {
     result = `${result.slice(0, MAX_VALUE_LENGTH)}…[TRUNCATED]`;
   }
