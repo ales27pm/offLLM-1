@@ -4,8 +4,11 @@ from pathlib import Path
 
 from scripts.mlops.telemetry_redaction import (
     load_redaction_patterns,
+    load_telemetry_schema,
+    redact_event,
     redact_value,
     stable_dumps,
+    validate_event_schema,
 )
 
 
@@ -24,23 +27,29 @@ def main() -> None:
 
     pairs = []
     patterns = load_redaction_patterns()
+    schema = load_telemetry_schema()
     with telemetry_path.open("r", encoding="utf-8") as handle:
         for line in handle:
             if not line.strip():
                 continue
             event = json.loads(line)
-            event_type = event.get("event_type") or event.get("event")
+            redacted = redact_event(event, patterns)
+            if validate_event_schema(redacted, schema):
+                continue
+            event_type = redacted.get("event_type") or redacted.get("event")
             if event_type != "retrieval":
                 continue
-            result_ids = event.get("result_ids") or []
+            result_ids = redacted.get("retrieval_hits") or redacted.get("result_ids") or []
             if not result_ids:
                 continue
             positive_id = result_ids[0]
             negatives = result_ids[1 : 1 + args.max_negatives]
             pairs.append(
                 {
-                    "query_hash": event.get("query_hash"),
-                    "query_preview": redact_value(event.get("query_preview"), patterns),
+                    "query_hash": redacted.get("query_hash"),
+                    "query_preview": redact_value(
+                        redacted.get("query_preview"), patterns
+                    ),
                     "positive_id": positive_id,
                     "negative_ids": negatives,
                 }

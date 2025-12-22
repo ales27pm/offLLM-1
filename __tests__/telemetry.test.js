@@ -39,6 +39,9 @@ test("buildToolInvocationEvent includes hashes", () => {
   expect(event.tool_name).toBe("demo");
   expect(event.tool_args_hash).toContain("sha256_");
   expect(event.model_id).toBe("model-test");
+  expect(event.tool_calls).toHaveLength(1);
+  expect(event.outcome).toBe("success");
+  expect(event.latency).toBe(10);
 });
 
 test("telemetry builders set schema fields via buildTelemetryEvent", () => {
@@ -50,6 +53,11 @@ test("telemetry builders set schema fields via buildTelemetryEvent", () => {
   const payload = buildTelemetryEvent(base);
   expect(payload.schema_version).toBeDefined();
   expect(payload.event_type).toBe("prompt_received");
+  expect(payload.prompt_id).toBeDefined();
+  expect(payload.prompt_version).toBeDefined();
+  expect(payload.tool_calls).toEqual([]);
+  expect(payload.retrieval_hits).toEqual([]);
+  expect(payload.redaction_applied).toBe(false);
 });
 
 test("validateTelemetryEvent rejects invalid payloads", () => {
@@ -76,6 +84,7 @@ test("validateTelemetryEvent accepts retrieval payloads", () => {
   const payload = buildTelemetryEvent(event);
   const result = validateTelemetryEvent(payload);
   expect(result.valid).toBe(true);
+  expect(payload.retrieval_hits).toEqual(["1"]);
 });
 
 test("logTelemetryEvent skips invalid events and logs an error", async () => {

@@ -103,6 +103,7 @@ class PipelineConfig:
     mlx_export_dir: Path | None = None
     mlx_quantize_bits: int = 4
     coreml_export_dir: Path | None = None
+    export_manifest: Path | None = None
 
     # SCAD scan configuration
     scad_strict: bool = False
@@ -139,6 +140,11 @@ def resolve_pipeline_config(config: PipelineConfig) -> PipelineConfig:
     coreml_export_dir = (config.coreml_export_dir or (run_dir / "coreml")).expanduser()
     if not coreml_export_dir.is_absolute():
         coreml_export_dir = repo_root / coreml_export_dir
+    export_manifest = (
+        config.export_manifest or (repo_root / "export" / "manifest.json")
+    ).expanduser()
+    if not export_manifest.is_absolute():
+        export_manifest = repo_root / export_manifest
     mlx_model_path = config.mlx_model_path
     if not mlx_model_path:
         for candidate in [run_dir / "unsloth", run_dir / "sft"]:
@@ -156,6 +162,7 @@ def resolve_pipeline_config(config: PipelineConfig) -> PipelineConfig:
         mlx_export_dir=mlx_export_dir,
         coreml_export_dir=coreml_export_dir,
         mlx_model_path=mlx_model_path,
+        export_manifest=export_manifest,
     )
 
 
@@ -1692,6 +1699,20 @@ class PipelineOrchestrator:
     def _run_mlx_export(self) -> None:
         if not self.config.mlx_model_path:
             raise FileNotFoundError("mlx_model_path must be set for MLX export")
+        if not self.config.export_manifest or not self.config.export_manifest.exists():
+            raise FileNotFoundError(
+                "export_manifest must exist for MLX/CoreML export"
+            )
+        run_command(
+            [
+                sys.executable,
+                str(Path(__file__).parent / "mlops" / "verify_export_manifest.py"),
+                "--manifest",
+                str(self.config.export_manifest),
+                "--model-path",
+                str(self.config.mlx_model_path),
+            ]
+        )
         export_dir = self.config.mlx_export_dir or (self.config.run_dir / "mlx_export")
         export_dir.mkdir(parents=True, exist_ok=True)
         run_command(
@@ -1722,6 +1743,8 @@ class PipelineOrchestrator:
                     str(out_prefix),
                     "--artifacts_path",
                     str(artifacts_path),
+                    "--manifest",
+                    str(self.config.export_manifest),
                 ]
             )
 
@@ -1849,6 +1872,7 @@ def main_cli():
     parser.add_argument("--mlx-export-dir", default=None)
     parser.add_argument("--mlx-quantize-bits", type=int, default=4)
     parser.add_argument("--coreml-export-dir", default=None)
+    parser.add_argument("--export-manifest", default=None)
     parser.add_argument("--verbose", action="store_true")
     parser.add_argument("--strict", action="store_true")
 
@@ -1891,6 +1915,9 @@ def main_cli():
         mlx_quantize_bits=args.mlx_quantize_bits,
         coreml_export_dir=Path(args.coreml_export_dir).expanduser()
         if args.coreml_export_dir
+        else None,
+        export_manifest=Path(args.export_manifest).expanduser()
+        if args.export_manifest
         else None,
         verbose=args.verbose,
         strict=args.strict,

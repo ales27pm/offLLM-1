@@ -8,8 +8,10 @@ from pathlib import Path
 
 from scripts.mlops.telemetry_redaction import (
     load_redaction_patterns,
-    redact_value,
+    load_telemetry_schema,
+    redact_event,
     stable_dumps,
+    validate_event_schema,
 )
 
 
@@ -34,23 +36,29 @@ def normalize_event_type(event: dict, strict_schema: bool) -> Optional[str]:
 def parse_events(path: Path, strict_schema: bool) -> dict:
     grouped = defaultdict(lambda: {"tool_calls": []})
     patterns = load_redaction_patterns()
+    schema = load_telemetry_schema()
     missing_event_type = 0
-    missing_schema_version = 0
     missing_prompt_hash = 0
+    invalid_schema = 0
     with path.open("r", encoding="utf-8") as handle:
         for line in handle:
             if not line.strip():
                 continue
             event = json.loads(line)
-            event_type = normalize_event_type(event, strict_schema)
+            redacted = redact_event(event, patterns)
+            errors = validate_event_schema(redacted, schema)
+            if errors:
+                invalid_schema += 1
+                if strict_schema:
+                    raise ValueError(
+                        f"Telemetry schema validation failed: {'; '.join(errors)}"
+                    )
+                continue
+            event_type = normalize_event_type(redacted, strict_schema)
             if not event_type:
                 missing_event_type += 1
                 continue
-            if event.get("schema_version") is None:
-                if strict_schema:
-                    raise ValueError("Telemetry event missing schema_version")
-                missing_schema_version += 1
-            prompt_hash = event.get("prompt_hash")
+            prompt_hash = redacted.get("prompt_hash")
             if event_type in {"prompt_received", "tool_invocation", "final_response"}:
                 if not prompt_hash and strict_schema:
                     raise ValueError("Telemetry event missing prompt_hash")
@@ -58,38 +66,35 @@ def parse_events(path: Path, strict_schema: bool) -> dict:
                 missing_prompt_hash += 1
                 continue
             bucket = grouped[prompt_hash]
+            bucket["prompt_id"] = redacted.get("prompt_id")
+            bucket["prompt_version"] = redacted.get("prompt_version")
+            bucket["model_id"] = redacted.get("model_id")
             if event_type == "prompt_received":
-                bucket["instruction"] = redact_value(
-                    event.get("prompt_preview", ""), patterns
-                )
+                bucket["instruction"] = redacted.get("prompt_preview", "")
             elif event_type == "tool_invocation":
                 bucket["tool_calls"].append(
                     {
-                        "name": event.get("tool_name"),
-                        "args": redact_value(
-                            event.get("tool_args_preview", {}), patterns
-                        ),
-                        "success": event.get("success"),
+                        "name": redacted.get("tool_name"),
+                        "args": redacted.get("tool_args_preview", {}),
+                        "success": redacted.get("success"),
                     }
                 )
             elif event_type == "final_response":
-                bucket["expected_answer"] = redact_value(
-                    event.get("response_preview", ""), patterns
-                )
+                bucket["expected_answer"] = redacted.get("response_preview", "")
     if not strict_schema:
         if missing_event_type:
             print(
                 f"Warning: skipped {missing_event_type} events without event_type",
                 file=sys.stderr,
             )
-        if missing_schema_version:
-            print(
-                f"Warning: skipped schema_version validation for {missing_schema_version} events",
-                file=sys.stderr,
-            )
         if missing_prompt_hash:
             print(
                 f"Warning: skipped {missing_prompt_hash} events without prompt_hash",
+                file=sys.stderr,
+            )
+        if invalid_schema:
+            print(
+                f"Warning: skipped {invalid_schema} events that failed schema validation",
                 file=sys.stderr,
             )
     return grouped
@@ -123,6 +128,9 @@ def build_records(grouped: dict, tool_schema: str) -> list[dict]:
             {
                 "instruction": instruction,
                 "context": "",
+                "prompt_id": data.get("prompt_id"),
+                "prompt_version": data.get("prompt_version"),
+                "model_id": data.get("model_id"),
                 "tool_schema": tool_schema,
                 "expected_tool_call": expected_tool_call,
                 "expected_answer": expected_answer,

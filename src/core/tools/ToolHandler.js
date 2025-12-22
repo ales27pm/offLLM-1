@@ -243,6 +243,8 @@ export default class ToolHandler {
         void logTelemetryEvent(
           buildToolInvocationEvent({
             promptHash: telemetryContext?.promptHash,
+            promptId: telemetryContext?.promptId,
+            promptVersion: telemetryContext?.promptVersion,
             toolName: name,
             args,
             success,

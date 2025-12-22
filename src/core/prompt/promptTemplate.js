@@ -1,7 +1,15 @@
-import template from "./promptTemplates.json" with { type: "json" };
+import {
+  DEFAULT_RUNTIME_PROMPT_ID,
+  DEFAULT_TRAINING_PROMPT_ID,
+  getPromptDefinition,
+} from "./PromptRegistry";
 
-export const PROMPT_TEMPLATE_VERSION = template.version;
-export const TOOL_SCHEMA_VERSION = template.tool_schema_version;
+const runtimePrompt = getPromptDefinition(DEFAULT_RUNTIME_PROMPT_ID);
+const template = runtimePrompt.template;
+
+export const PROMPT_TEMPLATE_VERSION = runtimePrompt.version;
+export const TOOL_SCHEMA_VERSION =
+  runtimePrompt.expected_tool_schema?.tool_schema_version ?? "tool_schema_v1";
 
 export const formatToolDescription = (tool) => {
   const parameters = JSON.stringify(tool.parameters || {});
@@ -26,6 +34,7 @@ export const buildPrompt = ({ toolsDesc, contextLines, userPrompt }) => {
   return promptSections.join("\n");
 };
 
-export const getTrainingTemplate = () => template.training;
+export const getTrainingTemplate = () =>
+  getPromptDefinition(DEFAULT_TRAINING_PROMPT_ID).template;
 
 export default template;

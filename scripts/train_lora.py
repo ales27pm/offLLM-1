@@ -1,6 +1,9 @@
 import argparse
 import json
 import os
+import re
+import subprocess
+import sys
 
 import torch
 from datasets import load_dataset
@@ -14,11 +17,15 @@ from transformers import (
 )
 
 
-def load_prompt_template(template_path: str) -> dict:
-    if not os.path.isfile(template_path):
-        raise FileNotFoundError(f"Prompt template not found: {template_path}")
-    with open(template_path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+def load_prompt_registry(registry_path: str) -> dict:
+    if not os.path.isfile(registry_path):
+        raise FileNotFoundError(f"Prompt registry not found: {registry_path}")
+    with open(registry_path, "r", encoding="utf-8") as handle:
+        text = handle.read()
+    match = re.search(r"PROMPT_REGISTRY_JSON\s*=\s*`(.*?)`", text, re.S)
+    if not match:
+        raise ValueError("Unable to locate PROMPT_REGISTRY_JSON in registry file")
+    return json.loads(match.group(1))
 
 
 def format_example(example: dict, training_template: dict) -> str:
@@ -49,6 +56,11 @@ def main() -> None:
     parser.add_argument("--output_dir", required=True)
     parser.add_argument("--max_steps", type=int, default=50)
     parser.add_argument("--prompt_template", default=None)
+    parser.add_argument(
+        "--manifest-out",
+        default=os.path.join("export", "manifest.json"),
+        help="Path to write export manifest JSON.",
+    )
     args = parser.parse_args()
 
     if not os.path.isfile(args.train_file):
@@ -61,14 +73,15 @@ def main() -> None:
             "src",
             "core",
             "prompt",
-            "promptTemplates.json",
+            "PromptRegistry.ts",
         )
     )
     template_path = args.prompt_template or default_template_path
-    template = load_prompt_template(template_path)
-    training_template = template.get("training")
-    if not training_template:
-        raise ValueError("Prompt template missing 'training' section")
+    registry = load_prompt_registry(template_path)
+    training_prompt = registry["prompts"].get("training_prompt_v1")
+    if not training_prompt:
+        raise ValueError("Prompt registry missing training_prompt_v1")
+    training_template = training_prompt.get("template")
 
     tokenizer = AutoTokenizer.from_pretrained(args.base_model, use_fast=True)
     if tokenizer.pad_token is None:
@@ -171,6 +184,23 @@ def main() -> None:
     trainer.train()
     model.save_pretrained(args.output_dir)
     tokenizer.save_pretrained(args.output_dir)
+
+    manifest_script = os.path.join(
+        os.path.dirname(__file__), "mlops", "write_export_manifest.py"
+    )
+    subprocess.run(
+        [
+            sys.executable,
+            manifest_script,
+            "--datasets",
+            os.path.abspath(args.train_file),
+            "--model-path",
+            os.path.abspath(args.output_dir),
+            "--output",
+            os.path.abspath(args.manifest_out),
+        ],
+        check=True,
+    )
 
 
 if __name__ == "__main__":
