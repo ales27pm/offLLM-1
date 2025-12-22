@@ -38,6 +38,7 @@ test("buildToolInvocationEvent includes hashes", () => {
   });
   expect(event.tool_name).toBe("demo");
   expect(event.tool_args_hash).toContain("sha256_");
+  expect(event.model_id).toBe("model-test");
 });
 
 test("telemetry builders set schema fields via buildTelemetryEvent", () => {

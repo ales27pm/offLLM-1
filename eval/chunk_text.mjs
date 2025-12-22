@@ -17,11 +17,15 @@ const main = async () => {
   }
   const payload = JSON.parse(raw);
   const documents = payload.documents || [];
+  if (!Array.isArray(documents)) {
+    throw new Error("payload.documents must be an array");
+  }
   const options = payload.options || {};
   const results = {};
 
-  documents.forEach((doc) => {
-    results[doc.id] = chunkText(doc.text || "", options);
+  documents.forEach((doc, index) => {
+    const key = doc?.id ?? `doc_${index}`;
+    results[key] = chunkText(doc?.text || "", options);
   });
 
   process.stdout.write(JSON.stringify({ chunks: results }));

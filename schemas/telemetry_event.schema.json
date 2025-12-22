@@ -41,7 +41,7 @@
         "tool_args_preview": {
           "type": ["object", "array", "string", "number", "boolean", "null"]
         },
-        "tool_result_size": { "type": "number" },
+        "tool_result_size": { "type": "integer" },
         "success": { "type": "boolean" },
         "latency_ms": { "type": "number" },
         "error": { "type": ["string", "null"] },
@@ -74,7 +74,7 @@
         "query_hash": { "type": "string" },
         "query_preview": { "type": "string" },
         "result_ids": { "type": "array", "items": { "type": "string" } },
-        "max_results": { "type": "number" },
+        "max_results": { "type": "integer" },
         "latency_ms": { "type": "number" },
         "retrieval_trace": {
           "type": "object",
@@ -116,7 +116,7 @@
         "prompt_hash": { "type": "string" },
         "response_hash": { "type": "string" },
         "response_preview": { "type": "string" },
-        "tool_calls_count": { "type": "number" },
+        "tool_calls_count": { "type": "integer" },
         "tool_schema_version": { "type": "string" },
         "model_id": { "type": "string" }
       },

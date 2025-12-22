@@ -9,6 +9,7 @@ on:
 
 jobs:
   prompt_regression:
+    if: ${{ secrets.OFFLLM_EVAL_MODEL_CMD != '' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,6 +27,7 @@ jobs:
 
       - name: Check SARIF output
         id: sarif_check
+        if: always()
         run: |
           if [ -f "eval/prompt_regression.sarif" ]; then
             echo "found=true" >> "$GITHUB_OUTPUT"
@@ -34,7 +36,7 @@ jobs:
           fi
 
       - name: Upload SARIF
-        if: steps.sarif_check.outputs.found == 'true'
+        if: always() && steps.sarif_check.outputs.found == 'true'
         uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: eval/prompt_regression.sarif

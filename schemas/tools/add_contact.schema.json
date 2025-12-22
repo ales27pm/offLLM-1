@@ -6,8 +6,8 @@
   "additionalProperties": false,
   "properties": {
     "name": { "type": "string" },
-    "phone": { "type": "string" },
-    "email": { "type": "string" }
+    "phone": { "type": "string", "pattern": "^\\+?[1-9]\\d{1,14}$" },
+    "email": { "type": "string", "format": "email" }
   },
   "required": ["name"]
 }

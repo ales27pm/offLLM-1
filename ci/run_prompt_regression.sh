@@ -2,8 +2,8 @@
 set -euo pipefail
 
 if [[ -z "${OFFLLM_EVAL_MODEL_CMD:-}" ]]; then
-  echo "OFFLLM_EVAL_MODEL_CMD is not set; skipping prompt regression run." >&2
-  exit 0
+  echo "OFFLLM_EVAL_MODEL_CMD must be set to the deterministic model command." >&2
+  exit 1
 fi
 
 python eval/run_prompt_regression.py \

@@ -3,6 +3,7 @@ import json
 import os
 import sys
 from collections import defaultdict
+from typing import Optional
 from pathlib import Path
 
 from scripts.mlops.telemetry_redaction import (
@@ -21,7 +22,7 @@ def load_tool_schema(path: str) -> str:
         return handle.read().strip()
 
 
-def normalize_event_type(event: dict, strict_schema: bool) -> str | None:
+def normalize_event_type(event: dict, strict_schema: bool) -> Optional[str]:
     event_type = event.get("event_type") or event.get("event")
     if not event_type:
         if strict_schema:

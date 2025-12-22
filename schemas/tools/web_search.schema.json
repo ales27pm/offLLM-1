@@ -6,7 +6,7 @@
   "additionalProperties": false,
   "properties": {
     "query": { "type": "string" },
-    "maxResults": { "type": "number", "minimum": 1, "maximum": 20 },
+    "maxResults": { "type": "integer", "minimum": 1, "maximum": 20 },
     "provider": {
       "type": "string",
       "enum": ["google", "bing", "duckduckgo", "brave"]

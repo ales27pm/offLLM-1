@@ -9,7 +9,7 @@
       "type": "string",
       "enum": ["accelerometer", "gyroscope", "magnetometer"]
     },
-    "duration": { "type": "number", "minimum": 1 }
+    "duration": { "type": "number", "minimum": 1, "maximum": 3600 }
   },
   "required": ["type"]
 }

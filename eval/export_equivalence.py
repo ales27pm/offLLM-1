@@ -66,8 +66,14 @@ def main() -> None:
             )
         if py_entry.get("tokens") != core_entry.get("tokens"):
             failures.append(f"Token alignment mismatch for {entry_id}")
-        py_response = str(py_entry.get("response", ""))
-        core_response = str(core_entry.get("response", ""))
+        py_response = py_entry.get("response", "")
+        core_response = core_entry.get("response", "")
+        if not isinstance(py_response, str):
+            failures.append(f"Non-string response in Python entry {entry_id}")
+            continue
+        if not isinstance(core_response, str):
+            failures.append(f"Non-string response in CoreML entry {entry_id}")
+            continue
         if bool(REFUSAL_PATTERN.search(py_response)) != bool(
             REFUSAL_PATTERN.search(core_response)
         ):

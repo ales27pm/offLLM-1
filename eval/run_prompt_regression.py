@@ -137,8 +137,9 @@ def coerce_value(raw: str) -> Any:
     if raw == "false":
         return False
     try:
-        if raw.strip() and raw.replace(".", "", 1).isdigit():
-            return float(raw) if "." in raw else int(raw)
+        candidate = raw.strip()
+        if candidate and re.fullmatch(r"[-+]?\d+(?:\.\d+)?", candidate):
+            return float(candidate) if "." in candidate else int(candidate)
     except ValueError:
         pass
     if raw.strip().startswith("{") or raw.strip().startswith("["):
@@ -232,11 +233,10 @@ def parse_tool_calls(response: str) -> list[dict]:
             cursor += 1
         if cursor >= len(response) or response[cursor] != "(":
             continue
-        cursor += 1
         end_index = scan_balanced(response, cursor, "(", ")")
         if end_index == -1:
             continue
-        arg_str = response[cursor:end_index]
+        arg_str = response[cursor + 1 : end_index]
         args = parse_args_str(arg_str.strip())
         results.append({"name": name, "args": args})
     return results

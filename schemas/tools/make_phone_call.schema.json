@@ -5,7 +5,7 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "phoneNumber": { "type": "string" }
+    "phoneNumber": { "type": "string", "pattern": "^\\+?[1-9]\\d{1,14}$" }
   },
   "required": ["phoneNumber"]
 }

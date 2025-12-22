@@ -5,6 +5,6 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "limit": { "type": "number", "minimum": 1 }
+    "limit": { "type": "integer", "minimum": 1 }
   }
 }

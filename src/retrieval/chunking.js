@@ -7,6 +7,8 @@ const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
 export const chunkText = (text, options = {}) => {
   if (!text) return [];
+  const trimmedText = text.trim();
+  if (!trimmedText) return [];
   const maxChars = clamp(
     Number(options.maxChars ?? DEFAULT_CHUNKING_OPTIONS.maxChars),
     1,
@@ -33,8 +35,8 @@ export const chunkText = (text, options = {}) => {
       chunks.push(slice);
     }
     if (end >= text.length) break;
-    cursor = Math.max(0, end - overlap);
+    cursor = Math.max(cursor + 1, end - overlap);
   }
 
-  return chunks.length ? chunks : [text];
+  return chunks.length ? chunks : [trimmedText];
 };

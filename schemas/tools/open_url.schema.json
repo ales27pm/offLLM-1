@@ -5,7 +5,7 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "url": { "type": "string" }
+    "url": { "type": "string", "format": "uri" }
   },
   "required": ["url"]
 }

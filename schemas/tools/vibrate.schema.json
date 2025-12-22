@@ -5,6 +5,9 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "pattern": { "type": "array", "items": { "type": "number" } }
+    "pattern": {
+      "type": "array",
+      "items": { "type": "number", "minimum": 0 }
+    }
   }
 }

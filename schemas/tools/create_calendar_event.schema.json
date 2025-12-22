@@ -6,8 +6,8 @@
   "additionalProperties": false,
   "properties": {
     "title": { "type": "string" },
-    "startDate": { "type": "string" },
-    "endDate": { "type": "string" },
+    "startDate": { "type": "string", "format": "date-time" },
+    "endDate": { "type": "string", "format": "date-time" },
     "location": { "type": "string" },
     "notes": { "type": "string" }
   },
