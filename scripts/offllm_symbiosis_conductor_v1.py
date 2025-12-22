@@ -421,8 +421,8 @@ ACTION_TO_REFACTOR_TEMPLATES: Dict[str, Dict[str, Any]] = {
             "Golden cases are versioned and tied to prompt template version.",
         ],
         "deliverables": [
-            "eval/golden_prompts.json expanded with ids + expected tool calls",
-            "eval/run_prompt_regression.py wired into CI",
+            "scripts/eval/golden_prompts.json expanded with ids + expected tool calls",
+            "scripts/eval/run_prompt_regression.py wired into CI",
             "reports/ outputs include SARIF for GitHub code scanning",
         ],
     },

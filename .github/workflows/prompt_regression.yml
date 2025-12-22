@@ -59,11 +59,12 @@ jobs:
           set -euo pipefail
           # OFFLLM_EVAL_MODEL_CMD should be a command string your eval runner uses, e.g.:
           # python -m offllm.eval.run_model --model ... (whatever your system expects)
-          python eval/run_prompt_regression.py \
+          python scripts/eval/run_prompt_regression.py \
             --model-cmd "${OFFLLM_EVAL_MODEL_CMD}" \
-            --golden eval/golden_prompts.json \
+            --prompts scripts/eval/golden_prompts.json \
+            --prompts eval/redteam_tool_injection.json \
             --sarif eval/prompt_regression.sarif \
-            --json eval/prompt_regression.json
+            --summary eval/prompt_regression.json
 
       - name: SARIF exists?
         id: sarif_check

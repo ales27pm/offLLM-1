@@ -5,6 +5,7 @@ import json
 import os
 import sys
 import traceback
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Any, List
 
@@ -150,6 +151,92 @@ def main() -> int:
         json.dump(sarif, f, indent=2)
 
     return exit_code
+
+
+def run_model_mode(args: argparse.Namespace) -> None:
+    prompt_paths = (args.prompts or []) + (args.golden or [])
+    if not prompt_paths:
+        raise ValueError("At least one --prompts (or --golden) path is required")
+    if not args.model_cmd:
+        raise ValueError("--model-cmd is required for model-based regression")
+
+    cases = load_cases(prompt_paths)
+    failures = []
+    sarif_results = []
+    rules = [
+        {
+            "id": "prompt-regression/tool-call",
+            "name": "Tool call regression",
+            "properties": {"category": "tool-call"},
+        },
+        {
+            "id": "prompt-regression/refusal",
+            "name": "Refusal regression",
+            "properties": {"category": "refusal"},
+        },
+        {
+            "id": "prompt-regression/json-validity",
+            "name": "JSON validity regression",
+            "properties": {"category": "json-validity"},
+        },
+        {
+            "id": "prompt-regression/citation",
+            "name": "Citation regression",
+            "properties": {"category": "citation"},
+        },
+    ]
+
+    for case in cases:
+        response = invoke_model(case.prompt, args.model_cmd, args.seed, args.timeout)
+        case_failures = evaluate_case(case, response)
+        if case_failures:
+            failures.append({"id": case.case_id, "errors": case_failures})
+            sarif_results.append(
+                {
+                    "level": "error",
+                    "message": {
+                        "text": f"{case.case_id}: {'; '.join(case_failures)}",
+                    },
+                    "ruleId": f"prompt-regression/{case.category}",
+                }
+            )
+
+    summary = {
+        "total": len(cases),
+        "failed": len(failures),
+        "failures": failures,
+    }
+
+    summary_path = Path(args.summary)
+    summary_path.parent.mkdir(parents=True, exist_ok=True)
+    summary_path.write_text(stable_dumps(summary), encoding="utf-8")
+
+    sarif_path = Path(args.sarif)
+    sarif_path.parent.mkdir(parents=True, exist_ok=True)
+    sarif_path.write_text(
+        json.dumps(
+            build_sarif(
+                "offLLM prompt regression",
+                "https://offllm.ai",
+                rules,
+                sarif_results,
+            ),
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+    print(stable_dumps(summary))
+    if failures:
+        sys.exit(1)
+
+
+def main() -> None:
+    args = parse_args()
+    if args.model_cmd or args.prompts or args.golden:
+        run_model_mode(args)
+    else:
+        run_registry_mode(args)
 
 
 if __name__ == "__main__":
