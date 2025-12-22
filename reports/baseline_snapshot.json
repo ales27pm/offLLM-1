@@ -40,17 +40,11 @@
     },
     {
       "file": "src/core/tools/ToolHandler.js",
-      "functions": [
-        "buildToolInvocationEvent",
-        "logTelemetryEvent"
-      ]
+      "functions": ["buildToolInvocationEvent", "logTelemetryEvent"]
     },
     {
       "file": "src/core/memory/services/Retriever.js",
-      "functions": [
-        "buildRetrievalEvent",
-        "logTelemetryEvent"
-      ]
+      "functions": ["buildRetrievalEvent", "logTelemetryEvent"]
     }
   ],
   "eval_entry_points": [
