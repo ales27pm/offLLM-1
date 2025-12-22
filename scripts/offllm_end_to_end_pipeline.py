@@ -20,7 +20,6 @@ import argparse
 import json
 import os
 import shutil
-import sys
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -92,14 +91,12 @@ def detect_accelerator() -> AcceleratorInfo:
     # CUDA
     try:
         if hasattr(torch, "cuda") and torch.cuda.is_available():
-            name = "cuda"
             try:
                 dev = torch.cuda.get_device_name(0)
-                return AcceleratorInfo(True, name, f"{dev}")
+                return AcceleratorInfo(True, "cuda", f"{dev}")
             except Exception:
-                return AcceleratorInfo(True, name, "cuda available")
+                return AcceleratorInfo(True, "cuda", "cuda available")
     except Exception as e:
-        # If torch.cuda access breaks, treat as not available
         return AcceleratorInfo(False, "cpu", f"cuda check failed: {e}")
 
     # MPS (Apple)
@@ -134,16 +131,12 @@ def _stage_plan(stage: str) -> List[str]:
         return ["finetune"]
     if stage == "export":
         return ["export"]
-    # fallback
     return ["harvest", "retrieval", "finetune", "export"]
 
 
 # -----------------------------
-# Placeholder implementations (wiring points)
+# Wiring points
 # -----------------------------
-# NOTE: This file is the runner/orchestrator. Your repo likely has real implementations
-# in other modules. We call them if present; otherwise we emit actionable errors.
-# This keeps the runner stable and prevents CI from exploding on missing optional deps.
 
 def _call_if_exists(module_name: str, fn_name: str, kwargs: Dict[str, Any]) -> Tuple[bool, str]:
     """
@@ -245,7 +238,7 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     plan = _stage_plan(args.stage)
 
-    # If user explicitly tries to run finetune on CPU-only, decide policy
+    # If finetune is planned but no accelerator, decide policy
     if "finetune" in plan and not acc.available:
         msg = "No accelerator detected; finetune requires GPU/accelerator (Unsloth)."
         if args.require_accelerator:
@@ -255,7 +248,6 @@ def main(argv: Optional[List[str]] = None) -> int:
                 _write_json(Path(args.report_out), report)
             return _die(msg, 1)
 
-        # Non-strict default: skip finetune rather than crash CI
         _warn(msg + " Skipping finetune (use --require-accelerator to fail instead).")
         report["warnings"].append(msg + " skipped finetune")
         plan = [s for s in plan if s != "finetune"]
@@ -265,7 +257,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     if "harvest" in plan:
         step = {"stage": "harvest", "ok": True, "detail": ""}
         _log("[stage] harvest")
-        # Call your real implementation if present
+
         ok, detail = _call_if_exists(
             "scripts.mlops.harvest",
             "run_harvest",
@@ -278,7 +270,7 @@ def main(argv: Optional[List[str]] = None) -> int:
             },
         )
         if not ok:
-            # Fall back: ensure manifest is valid JSON at least
+            # fallback: validate manifest JSON at least
             try:
                 _read_json(manifest_path)
                 _warn("harvest runner not found; manifest JSON is valid but harvest was not executed")
@@ -299,6 +291,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     if "retrieval" in plan and report["ok"]:
         step = {"stage": "retrieval", "ok": True, "detail": ""}
         _log("[stage] retrieval")
+
         ok, detail = _call_if_exists(
             "scripts.mlops.retrieval",
             "run_retrieval",
@@ -330,7 +323,6 @@ def main(argv: Optional[List[str]] = None) -> int:
         try:
             import unsloth  # type: ignore  # noqa: F401
         except Exception as e:
-            # If we got here, we believed an accelerator existed. Still, fail gracefully.
             step["ok"] = False
             step["detail"] = f"unsloth import failed: {e}"
             report["steps"].append(step)
@@ -366,7 +358,6 @@ def main(argv: Optional[List[str]] = None) -> int:
 
         exports: Dict[str, Any] = {}
 
-        # MLX export (optional)
         mlx_export_dir = (args.mlx_export_dir or "").strip()
         if mlx_export_dir:
             ok, detail = _call_if_exists(
@@ -383,7 +374,6 @@ def main(argv: Optional[List[str]] = None) -> int:
             if not ok:
                 _warn(f"MLX export not executed: {detail}")
 
-        # CoreML export (optional)
         coreml_export_dir = (args.coreml_export_dir or "").strip()
         if coreml_export_dir:
             ok, detail = _call_if_exists(
@@ -405,13 +395,10 @@ def main(argv: Optional[List[str]] = None) -> int:
         step["detail"] = "export stage completed"
         report["steps"].append(step)
 
-    # Write report if requested
     if args.report_out:
         _write_json(Path(args.report_out), report)
 
-    if not report["ok"]:
-        return 1
-    return 0
+    return 0 if report["ok"] else 1
 
 
 if __name__ == "__main__":
