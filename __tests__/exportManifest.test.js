@@ -28,5 +28,13 @@ describe("export manifest writer", () => {
     expect(manifest.dataset_hashes[datasetPath]).toBeTruthy();
     expect(manifest.model_hash).toBeTruthy();
     expect(manifest.model_path).toBe(modelDir);
+
+    execFileSync("python", [
+      "scripts/mlops/verify_export_manifest.py",
+      "--manifest",
+      manifestPath,
+      "--model-path",
+      modelDir,
+    ]);
   });
 });

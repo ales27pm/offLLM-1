@@ -14,6 +14,8 @@ Environment:
 import argparse
 import json
 import os
+import subprocess
+import sys
 import warnings
 
 import coremltools as ct
@@ -79,7 +81,24 @@ def convert(
     out_prefix: str,
     artifacts_path: str = "coreml_artifacts.json",
     hf_token: str | None = None,
+    manifest_path: str | None = None,
 ):
+    if manifest_path:
+        subprocess.run(
+            [
+                sys.executable,
+                os.path.join(
+                    os.path.dirname(__file__),
+                    "mlops",
+                    "verify_export_manifest.py",
+                ),
+                "--manifest",
+                manifest_path,
+                "--model-path",
+                hf_model_path,
+            ],
+            check=True,
+        )
     if hf_token:
         try:
             login(token=hf_token)
@@ -247,9 +266,19 @@ if __name__ == "__main__":
     ap.add_argument("--out_prefix", required=True)
     ap.add_argument("--artifacts_path", default="coreml_artifacts.json")
     ap.add_argument("--hf_token")
+    ap.add_argument(
+        "--manifest",
+        default=os.path.join("export", "manifest.json"),
+        help="Path to export manifest for verification.",
+    )
     args = ap.parse_args()
     token = args.hf_token or os.getenv("HF_TOKEN")
-    convert(args.hf_model, args.out_prefix, args.artifacts_path, token)
-
+    convert(
+        args.hf_model,
+        args.out_prefix,
+        args.artifacts_path,
+        token,
+        args.manifest,
+    )
 
 
