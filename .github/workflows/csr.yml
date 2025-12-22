@@ -26,7 +26,7 @@ jobs:
         run: cat certs/ios_dev.csr
 
       - name: Upload CSR and Private Key as Artifacts
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: ios_certificate_files
           path: certs/

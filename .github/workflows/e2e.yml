@@ -62,7 +62,7 @@ jobs:
       # Always keep the SARIF file (even on fork PRs where Code Scanning upload is blocked)
       - name: Upload prompt regression SARIF artifact
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: prompt-regression-sarif
           path: reports/prompt-regression.sarif
@@ -97,7 +97,7 @@ jobs:
 
       - name: Upload symbiosis artifacts
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: symbiosis-advisor
           path: runs/symbiosis

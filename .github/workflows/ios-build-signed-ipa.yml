@@ -275,7 +275,7 @@ jobs:
 
       - name: 📄 Upload build logs
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: ios-build-logs
           path: build/logs
@@ -283,7 +283,7 @@ jobs:
           retention-days: 7
 
       - name: ⬆️ Upload IPA artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: ios-signed-ipa
           path: |

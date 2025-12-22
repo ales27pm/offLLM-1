@@ -40,7 +40,7 @@ jobs:
             --out_prefix "Dolphin3.0-Llama3.2-3B"
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: coreml-model
           path: |
