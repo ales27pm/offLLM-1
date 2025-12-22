@@ -22,27 +22,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Gate (skip if OFFLLM_EVAL_MODEL_CMD is missing)
+      - name: Gate (detect model cmd)
         id: gate
         shell: bash
         run: |
-          if [ -z "${OFFLLM_EVAL_MODEL_CMD}" ]; then
+          set -euo pipefail
+          if [ -z "${OFFLLM_EVAL_MODEL_CMD:-}" ]; then
             echo "enabled=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::OFFLLM_EVAL_MODEL_CMD secret not set; skipping prompt regression suite."
+            echo "::notice::OFFLLM_EVAL_MODEL_CMD secret not set; running schema-only prompt regression (no model execution)."
           else
             echo "enabled=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::OFFLLM_EVAL_MODEL_CMD set; running full prompt regression."
           fi
 
       - name: Set up Python
-        if: steps.gate.outputs.enabled == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Install deps
-        if: steps.gate.outputs.enabled == 'true'
         shell: bash
         run: |
+          set -euo pipefail
           python -V
           python -m pip install --upgrade pip
           if [ -f "requirements-dev.txt" ]; then
@@ -52,33 +53,57 @@ jobs:
             python -m pip install -r requirements.txt
           fi
 
-      - name: Run prompt regression
+      - name: Run prompt regression (schema-only or full)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p reports
+
+          # Always run at least schema validation + SARIF emission.
+          # If OFFLLM_EVAL_MODEL_CMD is set, the script will additionally attempt full checks.
+          python scripts/eval/run_prompt_regression.py \
+            --prompts scripts/eval/golden_prompts.json \
+            --prompts scripts/eval/redteam_tool_injection.json \
+            --report-out reports/prompt-regression.json \
+            --sarif-out reports/prompt-regression.sarif \
+            ${OFFLLM_EVAL_MODEL_CMD:+--model-cmd "${OFFLLM_EVAL_MODEL_CMD}"} \
+            --no-fail
+
+      - name: Upload JSON report artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: prompt-regression-json
+          path: reports/prompt-regression.json
+          if-no-files-found: warn
+
+      - name: Upload SARIF artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: prompt-regression-sarif
+          path: reports/prompt-regression.sarif
+          if-no-files-found: warn
+
+      - name: Upload SARIF to Code Scanning
+        # Always attempt upload if SARIF exists. If it’s empty/invalid, Code Scanning will fail;
+        # our generator always emits valid SARIF with at least one location per result.
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: reports/prompt-regression.sarif
+
+      - name: Enforce policy (optional hard fail)
+        # Only fail the job when you explicitly enable full regression AND the report says it failed.
+        # Schema-only runs should not block PRs.
         if: steps.gate.outputs.enabled == 'true'
         shell: bash
         run: |
           set -euo pipefail
-          # OFFLLM_EVAL_MODEL_CMD should be a command string your eval runner uses, e.g.:
-          # python -m offllm.eval.run_model --model ... (whatever your system expects)
-          python scripts/eval/run_prompt_regression.py \
-            --model-cmd "${OFFLLM_EVAL_MODEL_CMD}" \
-            --prompts scripts/eval/golden_prompts.json \
-            --prompts eval/redteam_tool_injection.json \
-            --sarif eval/prompt_regression.sarif \
-            --summary eval/prompt_regression.json
-
-      - name: SARIF exists?
-        id: sarif_check
-        if: steps.gate.outputs.enabled == 'true'
-        shell: bash
-        run: |
-          if [ -f "eval/prompt_regression.sarif" ]; then
-            echo "found=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "found=false" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Upload SARIF
-        if: steps.gate.outputs.enabled == 'true' && steps.sarif_check.outputs.found == 'true'
-        uses: github/codeql-action/upload-sarif@v4
-        with:
-          sarif_file: eval/prompt_regression.sarif
+          python - <<'PY'
+          import json, sys
+          p = "reports/prompt-regression.json"
+          data = json.load(open(p, "r", encoding="utf-8"))
+          failed = bool(data.get("failed"))
+          if failed:
+            print("[prompt-regression] Report indicates failure.")
+            sys.exit(1)
+          print("[prompt-regression] OK.")
+          PY
