@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://offllm.ai/schemas/tools/play_music.schema.json",
+  "title": "play_music",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "query": { "type": "string" }
+  },
+  "required": ["query"]
+}

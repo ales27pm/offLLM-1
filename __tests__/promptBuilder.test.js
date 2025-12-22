@@ -161,7 +161,9 @@ describe("PromptBuilder", () => {
 
     registry.register(doublerTool);
 
-    const toolHandler = new ToolHandler(registry);
+    const toolHandler = new ToolHandler(registry, {
+      schemaValidator: () => ({ valid: true, errors: [] }),
+    });
     const llmResponse = 'TOOL_CALL:doubler(value="21")';
     const calls = toolHandler.parse(llmResponse);
     const toolResults = await toolHandler.execute(calls);
@@ -222,18 +224,25 @@ describe("PromptBuilder", () => {
     });
 
     registry.register(validatorTool);
-    const toolHandler = new ToolHandler(registry);
+    const toolHandler = new ToolHandler(registry, {
+      schemaValidator: () => ({
+        valid: false,
+        errors: ["(root) must have required property 'foo'"],
+      }),
+    });
 
     const calls = toolHandler.parse("TOOL_CALL:validator()");
     const toolResults = await toolHandler.execute(calls);
 
     expect(toolResults).toHaveLength(1);
     expect(toolResults[0].content).toContain(
-      "Missing required parameters: foo",
+      "Invalid parameters for 'validator': (root) must have required property 'foo'",
     );
 
     const prompt = builder.build("Proceed", toolResults);
-    expect(prompt).toContain("Missing required parameters: foo");
+    expect(prompt).toContain(
+      "Invalid parameters for 'validator': (root) must have required property 'foo'",
+    );
     expect(prompt).toContain(
       `Tool: ${validatorTool.name} - ${validatorTool.description}`,
     );
