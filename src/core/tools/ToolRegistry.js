@@ -50,6 +50,14 @@ const createToolRegistry = () => {
       return tools.get(name);
     },
 
+    getToolCategories(name) {
+      const categories = [];
+      toolCategories.forEach((set, category) => {
+        if (set.has(name)) categories.push(category);
+      });
+      return categories;
+    },
+
     getAvailableTools(category) {
       const names = category
         ? Array.from(toolCategories.get(category) || [])

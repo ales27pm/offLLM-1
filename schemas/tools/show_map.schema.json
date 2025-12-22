@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://offllm.ai/schemas/tools/show_map.schema.json",
+  "title": "show_map",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "latitude": { "type": "number" },
+    "longitude": { "type": "number" },
+    "title": { "type": "string" }
+  },
+  "required": ["latitude", "longitude"]
+}

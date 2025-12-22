@@ -37,6 +37,21 @@ jobs:
       - name: Format check
         run: npm run format:check
 
+      - name: Prompt regression
+        id: prompt_regression
+        continue-on-error: true
+        run: python scripts/eval/run_prompt_regression.py --report-out reports/prompt-regression.json --sarif-out reports/prompt-regression.sarif
+
+      - name: Upload prompt regression SARIF
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: reports/prompt-regression.sarif
+
+      - name: Enforce prompt regression
+        if: steps.prompt_regression.outcome == 'failure'
+        run: exit 1
+
       - name: Symbiosis advisor
         run: python scripts/offllm_symbiosis_advisor_v3.py --repo . --out-dir runs/symbiosis
 

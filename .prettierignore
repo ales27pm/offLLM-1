@@ -22,6 +22,7 @@ CONTRIBUTING.md
 docs/agent-architecture.md
 # embedded script confuses prettier
 scripts/package_ipa.sh
+ci/run_prompt_regression.sh
 bin/act
 AGENTS.md
 __tests__/AGENTS.md
@@ -29,6 +30,5 @@ scripts/AGENTS.md
 tools/AGENTS.md
 reports/AGENTS.md
 .github/workflows/ios-build.yml
-
 
 

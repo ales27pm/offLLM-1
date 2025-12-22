@@ -1,27 +1,50 @@
 import { Platform } from "react-native";
 import * as FileSystem from "expo-file-system";
+import Ajv from "ajv";
+import SHA256 from "crypto-js/sha256";
 import logger from "./logger";
 import { TOOL_SCHEMA_VERSION } from "../core/prompt/promptTemplate";
 
 const TELEMETRY_TAG = "Telemetry";
 const MAX_VALUE_LENGTH = 2000;
 const DEFAULT_FILE_NAME = "events.jsonl";
+const TELEMETRY_SCHEMA_VERSION = "telemetry_v1";
 
-const sensitiveKeyPattern = /(token|secret|password|auth|api[_-]?key|session)/i;
+const redactionPatterns = require("../../schemas/redaction_patterns.json");
+const sensitiveKeyPattern = new RegExp(redactionPatterns.sensitive_key, "i");
+const telemetrySchema = require("../../schemas/telemetry_event.schema.json");
+const emailPattern = new RegExp(redactionPatterns.email, "gi");
+const phonePattern = new RegExp(redactionPatterns.phone, "g");
+const tokenPattern = new RegExp(redactionPatterns.token, "g");
+const secretPattern = new RegExp(redactionPatterns.secret, "gi");
+const bearerPattern = new RegExp(redactionPatterns.bearer, "g");
+
+const ajv = new Ajv({ allErrors: true, strict: true, allowUnionTypes: true });
+const validateTelemetry = ajv.compile(telemetrySchema);
+
+const stableSort = (value) => {
+  if (Array.isArray(value)) return value.map((entry) => stableSort(entry));
+  if (value && typeof value === "object") {
+    return Object.keys(value)
+      .sort()
+      .reduce((acc, key) => {
+        acc[key] = stableSort(value[key]);
+        return acc;
+      }, {});
+  }
+  return value;
+};
+
+const stableStringify = (value) => JSON.stringify(stableSort(value));
 
 const redactString = (value) => {
   if (!value) return value;
   let result = value;
-  result = result.replace(
-    /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi,
-    "[REDACTED_EMAIL]",
-  );
-  result = result.replace(/\+?\d[\d\s().-]{7,}\d/g, "[REDACTED_PHONE]");
-  result = result.replace(
-    /\b(?:sk|rk|pk)-[A-Za-z0-9_-]{8,}\b/g,
-    "[REDACTED_TOKEN]",
-  );
-  result = result.replace(/\bBearer\s+[A-Za-z0-9._-]+\b/g, "Bearer [REDACTED]");
+  result = result.replace(emailPattern, "[REDACTED_EMAIL]");
+  result = result.replace(phonePattern, "[REDACTED_PHONE]");
+  result = result.replace(bearerPattern, "Bearer [REDACTED]");
+  result = result.replace(tokenPattern, "[REDACTED_TOKEN]");
+  result = result.replace(secretPattern, "[REDACTED_SECRET]");
   if (result.length > MAX_VALUE_LENGTH) {
     result = `${result.slice(0, MAX_VALUE_LENGTH)}…[TRUNCATED]`;
   }
@@ -50,13 +73,11 @@ export const redactTelemetryValue = (value) => {
 
 export const hashString = (value) => {
   if (value === null || value === undefined) return "";
-  const input = String(value);
-  let hash = 2166136261;
-  for (let i = 0; i < input.length; i += 1) {
-    hash ^= input.charCodeAt(i);
-    hash = Math.imul(hash, 16777619);
-  }
-  return `fnv1a_${(hash >>> 0).toString(16)}`;
+  const input =
+    typeof value === "string"
+      ? value
+      : stableStringify(redactTelemetryValue(value));
+  return `sha256_${SHA256(input).toString()}`;
 };
 
 const getTelemetryDirectory = () => {
@@ -152,14 +173,33 @@ const flushTelemetryQueue = async () => {
 export const buildTelemetryEvent = (event) => {
   const timestamp = new Date().toISOString();
   return {
+    schema_version: TELEMETRY_SCHEMA_VERSION,
+    event_type: event.event_type,
     timestamp,
     tool_schema_version: TOOL_SCHEMA_VERSION,
     ...redactTelemetryValue(event),
   };
 };
 
+export const validateTelemetryEvent = (payload) => {
+  const valid = validateTelemetry(payload);
+  if (valid) return { valid: true, errors: [] };
+  const errors = (validateTelemetry.errors || []).map(
+    (error) => `${error.instancePath || "(root)"} ${error.message}`,
+  );
+  return { valid: false, errors };
+};
+
 export const logTelemetryEvent = async (event) => {
   const payload = buildTelemetryEvent(event);
+  const validation = validateTelemetryEvent(payload);
+  if (!validation.valid) {
+    logger.error(
+      TELEMETRY_TAG,
+      `Telemetry schema validation failed: ${validation.errors.join("; ")}`,
+    );
+    return null;
+  }
   pendingEvents.push(`${JSON.stringify(payload)}\n`);
   return flushTelemetryQueue();
 };
@@ -172,34 +212,39 @@ export const buildToolInvocationEvent = ({
   latencyMs,
   resultSize,
   error,
+  modelId,
 }) => ({
-  event: "tool_invocation",
+  event_type: "tool_invocation",
   prompt_hash: promptHash,
   tool_name: toolName,
-  tool_args_hash: hashString(JSON.stringify(redactTelemetryValue(args))),
+  tool_args_hash: hashString(args),
   tool_args_preview: redactTelemetryValue(args),
   tool_result_size: resultSize,
   success,
   latency_ms: latencyMs,
-  error: error ? String(error) : undefined,
+  error: error ? String(error) : null,
+  model_id: modelId,
 });
 
-export const buildPromptEvent = ({ promptHash, promptText }) => ({
-  event: "prompt_received",
+export const buildPromptEvent = ({ promptHash, promptText, modelId }) => ({
+  event_type: "prompt_received",
   prompt_hash: promptHash,
   prompt_preview: redactTelemetryValue(promptText),
+  model_id: modelId,
 });
 
 export const buildFinalResponseEvent = ({
   promptHash,
   responseText,
   toolCallsCount,
+  modelId,
 }) => ({
-  event: "final_response",
+  event_type: "final_response",
   prompt_hash: promptHash,
   response_hash: hashString(responseText || ""),
   response_preview: redactTelemetryValue(responseText),
   tool_calls_count: toolCallsCount,
+  model_id: modelId,
 });
 
 export const buildRetrievalEvent = ({
@@ -209,13 +254,17 @@ export const buildRetrievalEvent = ({
   latencyMs,
   candidateIds,
   candidateScores,
+  modelId,
 }) => ({
-  event: "retrieval",
+  event_type: "retrieval",
   query_hash: hashString(query),
   query_preview: redactTelemetryValue(query),
   result_ids: resultIds,
-  candidate_ids: candidateIds,
-  candidate_scores: candidateScores,
   max_results: maxResults,
   latency_ms: latencyMs,
+  retrieval_trace: {
+    candidate_ids: candidateIds,
+    candidate_scores: candidateScores,
+  },
+  model_id: modelId,
 });
