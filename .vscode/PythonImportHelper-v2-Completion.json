@@ -196,6 +196,54 @@
         "documentation": {}
     },
     {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
         "label": "subprocess",
         "kind": 6,
         "isExtraImport": true,
@@ -248,14 +296,6 @@
         "documentation": {}
     },
     {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
         "label": "asdict",
         "importPath": "dataclasses",
         "description": "dataclasses",
@@ -632,7 +672,23 @@
         "documentation": {}
     },
     {
-        "label": "Optional",
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
@@ -721,6 +777,22 @@
     },
     {
         "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
@@ -2077,6 +2149,14 @@
         "description": "typing",
         "isExtraImport": true,
         "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
         "documentation": {}
     },
     {
@@ -2249,16 +2329,41 @@
         "documentation": {}
     },
     {
-        "label": "hashlib",
+        "label": "ast",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "hashlib",
-        "description": "hashlib",
-        "detail": "hashlib",
+        "importPath": "ast",
+        "description": "ast",
+        "detail": "ast",
+        "documentation": {}
+    },
+    {
+        "label": "traceback",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "traceback",
+        "description": "traceback",
+        "detail": "traceback",
         "documentation": {}
     },
     {
         "label": "load_redaction_patterns",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "load_telemetry_schema",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "redact_event",
         "importPath": "scripts.mlops.telemetry_redaction",
         "description": "scripts.mlops.telemetry_redaction",
         "isExtraImport": true,
@@ -2282,7 +2387,7 @@
         "documentation": {}
     },
     {
-        "label": "load_redaction_patterns",
+        "label": "validate_event_schema",
         "importPath": "scripts.mlops.telemetry_redaction",
         "description": "scripts.mlops.telemetry_redaction",
         "isExtraImport": true,
@@ -2290,7 +2395,23 @@
         "documentation": {}
     },
     {
-        "label": "redact_value",
+        "label": "# noqa: E402\n    load_redaction_patterns",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "load_telemetry_schema",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "redact_event",
         "importPath": "scripts.mlops.telemetry_redaction",
         "description": "scripts.mlops.telemetry_redaction",
         "isExtraImport": true,
@@ -2299,6 +2420,94 @@
     },
     {
         "label": "stable_dumps",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "validate_event_schema",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "load_redaction_patterns",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "load_telemetry_schema",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "redact_event",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "stable_dumps",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "validate_event_schema",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "# noqa: E402\n    load_redaction_patterns",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "load_telemetry_schema",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "redact_event",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "stable_dumps",
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "isExtraImport": true,
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "validate_event_schema",
         "importPath": "scripts.mlops.telemetry_redaction",
         "description": "scripts.mlops.telemetry_redaction",
         "isExtraImport": true,
@@ -3190,11 +3399,36 @@
         "documentation": {}
     },
     {
+        "label": "hashlib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "hashlib",
+        "description": "hashlib",
+        "detail": "hashlib",
+        "documentation": {}
+    },
+    {
         "label": "datetime",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "datetime",
         "description": "datetime",
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
         "detail": "datetime",
         "documentation": {}
     },
@@ -3288,15 +3522,6 @@
         "description": "transformers.cache_utils",
         "isExtraImport": true,
         "detail": "transformers.cache_utils",
-        "documentation": {}
-    },
-    {
-        "label": "ast",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "ast",
-        "description": "ast",
-        "detail": "ast",
         "documentation": {}
     },
     {
@@ -12188,92 +12413,56 @@
         "documentation": {}
     },
     {
-        "label": "ToolCall",
-        "kind": 6,
+        "label": "ensure_jsonable",
+        "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "class ToolCall:\n    name: str\n    args: dict[str, Any]\nREQUIRED_FIELDS = {\n    \"stable_id\",\n    \"tools\",\n    \"context\",\n    \"user_prompt\",\n    \"expected_prompt\",\n    \"expected_response\",",
+        "peekOfCode": "def ensure_jsonable(obj: Any) -> Any:\n    if obj is None or isinstance(obj, (bool, int, float, str)):\n        return obj\n    if isinstance(obj, (list, tuple)):\n        return [ensure_jsonable(x) for x in obj]\n    if isinstance(obj, dict):\n        return {str(k): ensure_jsonable(v) for k, v in obj.items()}\n    raise TypeError(f\"Non-JSONable value in registry: {type(obj).__name__}\")\ndef load_prompt_registry(template_path: str) -> Dict[str, Any]:\n    text = Path(template_path).read_text(encoding=\"utf-8\")",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
     {
-        "label": "build_prompt",
+        "label": "load_prompt_registry",
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def build_prompt(\n    template: dict, tools: list[dict], context: list[dict], user_prompt: str\n) -> str:\n    tool_format = template[\"tool_format\"]\n    tools_sorted = sorted(tools, key=lambda t: t[\"name\"])\n    tools_desc = \"\\n\".join(\n        tool_format.format(\n            name=tool[\"name\"],\n            description=tool[\"description\"],\n            parameters=json.dumps(",
+        "peekOfCode": "def load_prompt_registry(template_path: str) -> Dict[str, Any]:\n    text = Path(template_path).read_text(encoding=\"utf-8\")\n    match = REGISTRY_RE.search(text)\n    if not match:\n        raise ValueError(f\"Prompt registry not found in template: {template_path}\")\n    raw = match.group(1).strip()\n    # 1) Strict JSON (preferred)\n    try:\n        data = json.loads(raw)\n        if not isinstance(data, dict):",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
     {
-        "label": "parse_tool_calls",
+        "label": "write_json",
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def parse_tool_calls(response: str) -> list[ToolCall]:\n    calls: list[ToolCall] = []\n    marker = \"TOOL_CALL:\"\n    cursor = 0\n    while True:\n        index = response.find(marker, cursor)\n        if index == -1:\n            break\n        cursor = index + len(marker)\n        while cursor < len(response) and response[cursor].isspace():",
+        "peekOfCode": "def write_json(path: Path, obj: Any) -> None:\n    path.parent.mkdir(parents=True, exist_ok=True)\n    path.write_text(\n        json.dumps(obj, indent=2, sort_keys=True),\n        encoding=\"utf-8\",\n    )\ndef write_sarif(path: Path, results: List[Dict[str, Any]]) -> None:\n    path.parent.mkdir(parents=True, exist_ok=True)\n    sarif = {\n        \"version\": \"2.1.0\",",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
     {
-        "label": "contains_markdown_citation",
+        "label": "write_sarif",
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def contains_markdown_citation(text: str) -> bool:\n    cursor = 0\n    while cursor < len(text):\n        start = text.find(\"[\", cursor)\n        if start == -1:\n            return False\n        middle = text.find(\"](\", start)\n        if middle == -1:\n            cursor = start + 1\n            continue",
+        "peekOfCode": "def write_sarif(path: Path, results: List[Dict[str, Any]]) -> None:\n    path.parent.mkdir(parents=True, exist_ok=True)\n    sarif = {\n        \"version\": \"2.1.0\",\n        \"$schema\": \"https://json.schemastore.org/sarif-2.1.0.json\",\n        \"runs\": [\n            {\n                \"tool\": {\n                    \"driver\": {\n                        \"name\": \"prompt-regression\",",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
     {
-        "label": "normalize_tool_calls",
+        "label": "evaluate_registry",
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def normalize_tool_calls(calls: list[ToolCall]) -> list[dict[str, Any]]:\n    return [{\"name\": call.name, \"args\": call.args} for call in calls]\ndef validate_entry_schema(entry: dict) -> list[str]:\n    errors = []\n    extra = set(entry.keys()) - REQUIRED_FIELDS\n    missing = REQUIRED_FIELDS - set(entry.keys())\n    if extra:\n        errors.append(f\"Unexpected fields: {sorted(extra)}\")\n    if missing:\n        errors.append(f\"Missing fields: {sorted(missing)}\")",
+        "peekOfCode": "def evaluate_registry(registry: Dict[str, Any]) -> Dict[str, Any]:\n    \"\"\"\n    This function performs *structural* regression checks.\n    NOTE:\n    This does NOT run the model. That is intentional.\n    Prompt regression is about *contract stability*:\n      - shape\n      - IDs\n      - required fields\n    \"\"\"",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
     {
-        "label": "validate_entry_schema",
+        "label": "parse_args",
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def validate_entry_schema(entry: dict) -> list[str]:\n    errors = []\n    extra = set(entry.keys()) - REQUIRED_FIELDS\n    missing = REQUIRED_FIELDS - set(entry.keys())\n    if extra:\n        errors.append(f\"Unexpected fields: {sorted(extra)}\")\n    if missing:\n        errors.append(f\"Missing fields: {sorted(missing)}\")\n    if not isinstance(entry.get(\"stable_id\"), str) or not entry.get(\"stable_id\"):\n        errors.append(\"stable_id must be a non-empty string\")",
-        "detail": "scripts.eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "invoke_model",
-        "kind": 2,
-        "importPath": "scripts.eval.run_prompt_regression",
-        "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def invoke_model(entry: dict, prompt: str) -> str:\n    _ = prompt\n    response = entry.get(\"expected_response\")\n    if not response:\n        raise ValueError(\"Model response fixture missing\")\n    return response\ndef parse_json_response(response: str) -> Any:\n    return json.loads(response)\ndef find_line_number(path: str, stable_id: str) -> int:\n    try:",
-        "detail": "scripts.eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "parse_json_response",
-        "kind": 2,
-        "importPath": "scripts.eval.run_prompt_regression",
-        "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def parse_json_response(response: str) -> Any:\n    return json.loads(response)\ndef find_line_number(path: str, stable_id: str) -> int:\n    try:\n        with open(path, \"r\", encoding=\"utf-8\") as handle:\n            for line_number, line in enumerate(handle, start=1):\n                if stable_id in line:\n                    return line_number\n    except OSError:\n        return 1",
-        "detail": "scripts.eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "find_line_number",
-        "kind": 2,
-        "importPath": "scripts.eval.run_prompt_regression",
-        "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def find_line_number(path: str, stable_id: str) -> int:\n    try:\n        with open(path, \"r\", encoding=\"utf-8\") as handle:\n            for line_number, line in enumerate(handle, start=1):\n                if stable_id in line:\n                    return line_number\n    except OSError:\n        return 1\n    return 1\ndef build_sarif(",
-        "detail": "scripts.eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "build_sarif",
-        "kind": 2,
-        "importPath": "scripts.eval.run_prompt_regression",
-        "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def build_sarif(\n    failures: list[dict[str, Any]], golden_path: str\n) -> dict[str, Any]:\n    rules = []\n    rule_ids = sorted({issue[\"code\"] for issue in failures})\n    for rule_id in rule_ids:\n        rules.append(\n            {\n                \"id\": rule_id,\n                \"name\": rule_id,",
+        "peekOfCode": "def parse_args() -> argparse.Namespace:\n    p = argparse.ArgumentParser()\n    p.add_argument(\n        \"--template\",\n        default=\"offllm_symbiosis_advisor_v4.py\",\n        help=\"Template file containing PROMPT_REGISTRY\",\n    )\n    p.add_argument(\n        \"--report-out\",\n        required=True,",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
@@ -12282,26 +12471,80 @@
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(description=\"Run prompt regression tests.\")\n    parser.add_argument(\n        \"--template\",\n        default=os.path.join(\n            os.path.dirname(__file__),\n            \"..\",\n            \"..\",\n            \"src\",\n            \"core\",",
+        "peekOfCode": "def main() -> None:\n    args = parse_args()\n    report_out = Path(args.report_out)\n    sarif_out = Path(args.sarif_out)\n    sarif_results: List[Dict[str, Any]] = []\n    exit_code = 0\n    try:\n        registry = load_prompt_registry(args.template)\n        report = evaluate_registry(registry)\n        write_json(report_out, report)",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
     {
-        "label": "REQUIRED_FIELDS",
+        "label": "REGISTRY_RE",
         "kind": 5,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "REQUIRED_FIELDS = {\n    \"stable_id\",\n    \"tools\",\n    \"context\",\n    \"user_prompt\",\n    \"expected_prompt\",\n    \"expected_response\",\n    \"expected_tool_calls\",\n    \"expects_json\",\n    \"expects_refusal\",",
+        "peekOfCode": "REGISTRY_RE = re.compile(\n    r\"PROMPT_REGISTRY\\s*=\\s*(\\{.*?\\})\",\n    re.DOTALL | re.MULTILINE,\n)\n# ----------------------------\n# Utilities\n# ----------------------------\ndef ensure_jsonable(obj: Any) -> Any:\n    if obj is None or isinstance(obj, (bool, int, float, str)):\n        return obj",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
     {
-        "label": "RULE_METADATA",
+        "label": "load_json",
+        "kind": 2,
+        "importPath": "scripts.eval.write_eval_summary",
+        "description": "scripts.eval.write_eval_summary",
+        "peekOfCode": "def load_json(path: Path) -> dict[str, Any]:\n    if not path.exists():\n        raise FileNotFoundError(f\"Input not found: {path}\")\n    with path.open(\"r\", encoding=\"utf-8\") as handle:\n        return json.load(handle)\ndef require_fields(payload: dict[str, Any], fields: set[str], label: str) -> None:\n    missing = [field for field in fields if field not in payload]\n    if missing:\n        raise ValueError(f\"{label} missing required fields: {missing}\")\ndef compare_metric(",
+        "detail": "scripts.eval.write_eval_summary",
+        "documentation": {}
+    },
+    {
+        "label": "require_fields",
+        "kind": 2,
+        "importPath": "scripts.eval.write_eval_summary",
+        "description": "scripts.eval.write_eval_summary",
+        "peekOfCode": "def require_fields(payload: dict[str, Any], fields: set[str], label: str) -> None:\n    missing = [field for field in fields if field not in payload]\n    if missing:\n        raise ValueError(f\"{label} missing required fields: {missing}\")\ndef compare_metric(\n    name: str, current: float | int | bool, baseline: float | int | bool\n) -> dict[str, Any]:\n    if name in HIGHER_IS_BETTER:\n        regressed = current < baseline\n    elif name in LOWER_IS_BETTER:",
+        "detail": "scripts.eval.write_eval_summary",
+        "documentation": {}
+    },
+    {
+        "label": "compare_metric",
+        "kind": 2,
+        "importPath": "scripts.eval.write_eval_summary",
+        "description": "scripts.eval.write_eval_summary",
+        "peekOfCode": "def compare_metric(\n    name: str, current: float | int | bool, baseline: float | int | bool\n) -> dict[str, Any]:\n    if name in HIGHER_IS_BETTER:\n        regressed = current < baseline\n    elif name in LOWER_IS_BETTER:\n        regressed = current > baseline\n    else:\n        regressed = current != baseline\n    return {",
+        "detail": "scripts.eval.write_eval_summary",
+        "documentation": {}
+    },
+    {
+        "label": "build_summary",
+        "kind": 2,
+        "importPath": "scripts.eval.write_eval_summary",
+        "description": "scripts.eval.write_eval_summary",
+        "peekOfCode": "def build_summary(\n    prompt_regression: dict[str, Any],\n    tool_json: dict[str, Any],\n    retrieval: dict[str, Any],\n    latency: dict[str, Any],\n    memory: dict[str, Any],\n    baseline: dict[str, Any] | None,\n) -> dict[str, Any]:\n    require_fields(prompt_regression, {\"passed\", \"failures\"}, \"prompt_regression\")\n    require_fields(tool_json, {\"valid_rate\"}, \"tool_json\")",
+        "detail": "scripts.eval.write_eval_summary",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.eval.write_eval_summary",
+        "description": "scripts.eval.write_eval_summary",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(\n        description=\"Write eval summary and enforce regression gating.\"\n    )\n    parser.add_argument(\"--prompt-regression\", required=True)\n    parser.add_argument(\"--tool-json\", required=True)\n    parser.add_argument(\"--retrieval\", required=True)\n    parser.add_argument(\"--latency\", required=True)\n    parser.add_argument(\"--memory\", required=True)\n    parser.add_argument(\"--baseline\", default=None)",
+        "detail": "scripts.eval.write_eval_summary",
+        "documentation": {}
+    },
+    {
+        "label": "HIGHER_IS_BETTER",
         "kind": 5,
-        "importPath": "scripts.eval.run_prompt_regression",
-        "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "RULE_METADATA = {\n    \"schema_invalid\": \"Golden prompt schema validation failed\",\n    \"prompt_mismatch\": \"Prompt output mismatch\",\n    \"model_response_missing\": \"Model response fixture missing\",\n    \"unexpected_json\": \"Response was JSON when JSON was not expected\",\n    \"invalid_json\": \"Response was not valid JSON\",\n    \"tool_calls_parse_error\": \"Failed to parse tool calls\",\n    \"tool_calls_mismatch\": \"Tool calls did not match expected\",\n    \"refusal_missing\": \"Refusal expectation requires JSON response with refusal flag\",\n    \"refusal_mismatch\": \"Refusal flag did not match expectation\",",
-        "detail": "scripts.eval.run_prompt_regression",
+        "importPath": "scripts.eval.write_eval_summary",
+        "description": "scripts.eval.write_eval_summary",
+        "peekOfCode": "HIGHER_IS_BETTER = {\"mrr\", \"ndcg\", \"valid_rate\", \"passed\"}\nLOWER_IS_BETTER = {\"p95_latency_ms\", \"peak_memory_mb\"}\ndef load_json(path: Path) -> dict[str, Any]:\n    if not path.exists():\n        raise FileNotFoundError(f\"Input not found: {path}\")\n    with path.open(\"r\", encoding=\"utf-8\") as handle:\n        return json.load(handle)\ndef require_fields(payload: dict[str, Any], fields: set[str], label: str) -> None:\n    missing = [field for field in fields if field not in payload]\n    if missing:",
+        "detail": "scripts.eval.write_eval_summary",
+        "documentation": {}
+    },
+    {
+        "label": "LOWER_IS_BETTER",
+        "kind": 5,
+        "importPath": "scripts.eval.write_eval_summary",
+        "description": "scripts.eval.write_eval_summary",
+        "peekOfCode": "LOWER_IS_BETTER = {\"p95_latency_ms\", \"peak_memory_mb\"}\ndef load_json(path: Path) -> dict[str, Any]:\n    if not path.exists():\n        raise FileNotFoundError(f\"Input not found: {path}\")\n    with path.open(\"r\", encoding=\"utf-8\") as handle:\n        return json.load(handle)\ndef require_fields(payload: dict[str, Any], fields: set[str], label: str) -> None:\n    missing = [field for field in fields if field not in payload]\n    if missing:\n        raise ValueError(f\"{label} missing required fields: {missing}\")",
+        "detail": "scripts.eval.write_eval_summary",
         "documentation": {}
     },
     {
@@ -12786,7 +13029,43 @@
         "kind": 2,
         "importPath": "scripts.mlops.telemetry_redaction",
         "description": "scripts.mlops.telemetry_redaction",
-        "peekOfCode": "def stable_dumps(payload: Any) -> str:\n    return json.dumps(payload, ensure_ascii=False, sort_keys=True)",
+        "peekOfCode": "def stable_dumps(payload: Any) -> str:\n    return json.dumps(payload, ensure_ascii=False, sort_keys=True)\ndef load_telemetry_schema() -> dict:\n    schema_path = Path(__file__).resolve().parents[2] / \"schemas\" / \"telemetry_event.schema.json\"\n    with schema_path.open(\"r\", encoding=\"utf-8\") as handle:\n        return json.load(handle)\ndef _matches_type(value: Any, expected: Any) -> bool:\n    if isinstance(expected, list):\n        return any(_matches_type(value, entry) for entry in expected)\n    if expected == \"string\":",
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "load_telemetry_schema",
+        "kind": 2,
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "peekOfCode": "def load_telemetry_schema() -> dict:\n    schema_path = Path(__file__).resolve().parents[2] / \"schemas\" / \"telemetry_event.schema.json\"\n    with schema_path.open(\"r\", encoding=\"utf-8\") as handle:\n        return json.load(handle)\ndef _matches_type(value: Any, expected: Any) -> bool:\n    if isinstance(expected, list):\n        return any(_matches_type(value, entry) for entry in expected)\n    if expected == \"string\":\n        return isinstance(value, str)\n    if expected == \"number\":",
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "validate_event_schema",
+        "kind": 2,
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "peekOfCode": "def validate_event_schema(event: dict, schema: dict) -> list[str]:\n    errors: list[str] = []\n    required = schema.get(\"required\", [])\n    properties = schema.get(\"properties\", {})\n    for field in required:\n        if field not in event:\n            errors.append(f\"missing required field: {field}\")\n            continue\n        expected_type = properties.get(field, {}).get(\"type\")\n        if expected_type and not _matches_type(event.get(field), expected_type):",
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "redact_event",
+        "kind": 2,
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "peekOfCode": "def redact_event(event: dict, patterns: dict[str, re.Pattern]) -> dict:\n    redacted = redact_value(event, patterns)\n    if isinstance(redacted, dict):\n        redacted[\"redaction_applied\"] = stable_dumps(redacted) != stable_dumps(event)\n    return redacted\ndef main() -> None:\n    parser = argparse.ArgumentParser(\n        description=\"Redact telemetry JSONL and validate against the schema.\"\n    )\n    parser.add_argument(\"--input\", required=True)",
+        "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.mlops.telemetry_redaction",
+        "description": "scripts.mlops.telemetry_redaction",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(\n        description=\"Redact telemetry JSONL and validate against the schema.\"\n    )\n    parser.add_argument(\"--input\", required=True)\n    parser.add_argument(\"--output\", required=True)\n    parser.add_argument(\n        \"--strict\",\n        action=\"store_true\",\n        help=\"Fail if any event fails schema validation.\",",
         "detail": "scripts.mlops.telemetry_redaction",
         "documentation": {}
     },
@@ -12797,6 +13076,33 @@
         "description": "scripts.mlops.telemetry_redaction",
         "peekOfCode": "MAX_VALUE_LENGTH = 2000\ndef load_redaction_patterns() -> dict[str, re.Pattern]:\n    patterns_path = (\n        Path(__file__).resolve().parents[2] / \"schemas\" / \"redaction_patterns.json\"\n    )\n    with patterns_path.open(\"r\", encoding=\"utf-8\") as handle:\n        raw = json.load(handle)\n    return {\n        \"email\": re.compile(raw[\"email\"], re.IGNORECASE),\n        \"phone\": re.compile(raw[\"phone\"]),",
         "detail": "scripts.mlops.telemetry_redaction",
+        "documentation": {}
+    },
+    {
+        "label": "build_retrieval_triples",
+        "kind": 2,
+        "importPath": "scripts.mlops.telemetry_to_retrieval_triples",
+        "description": "scripts.mlops.telemetry_to_retrieval_triples",
+        "peekOfCode": "def build_retrieval_triples(path: Path, strict_schema: bool) -> list[dict]:\n    patterns = load_redaction_patterns()\n    schema = load_telemetry_schema()\n    triples = []\n    invalid_events = 0\n    with path.open(\"r\", encoding=\"utf-8\") as handle:\n        for line in handle:\n            if not line.strip():\n                continue\n            event = json.loads(line)",
+        "detail": "scripts.mlops.telemetry_to_retrieval_triples",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.mlops.telemetry_to_retrieval_triples",
+        "description": "scripts.mlops.telemetry_to_retrieval_triples",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(\n        description=\"Generate retrieval triples from telemetry JSONL.\"\n    )\n    parser.add_argument(\"--telemetry\", required=True)\n    parser.add_argument(\"--output\", required=True)\n    parser.add_argument(\"--max-records\", type=int, default=500000)\n    parser.add_argument(\n        \"--strict\",\n        action=\"store_true\",",
+        "detail": "scripts.mlops.telemetry_to_retrieval_triples",
+        "documentation": {}
+    },
+    {
+        "label": "REPO_ROOT",
+        "kind": 5,
+        "importPath": "scripts.mlops.telemetry_to_retrieval_triples",
+        "description": "scripts.mlops.telemetry_to_retrieval_triples",
+        "peekOfCode": "REPO_ROOT = Path(__file__).resolve().parents[2]\nsys.path.insert(0, str(REPO_ROOT))\nfrom scripts.mlops.telemetry_redaction import (  # noqa: E402\n    load_redaction_patterns,\n    load_telemetry_schema,\n    redact_event,\n    stable_dumps,\n    validate_event_schema,\n)\ndef build_retrieval_triples(path: Path, strict_schema: bool) -> list[dict]:",
+        "detail": "scripts.mlops.telemetry_to_retrieval_triples",
         "documentation": {}
     },
     {
@@ -12822,7 +13128,7 @@
         "kind": 2,
         "importPath": "scripts.mlops.telemetry_to_sft",
         "description": "scripts.mlops.telemetry_to_sft",
-        "peekOfCode": "def parse_events(path: Path, strict_schema: bool) -> dict:\n    grouped = defaultdict(lambda: {\"tool_calls\": []})\n    patterns = load_redaction_patterns()\n    missing_event_type = 0\n    missing_schema_version = 0\n    missing_prompt_hash = 0\n    with path.open(\"r\", encoding=\"utf-8\") as handle:\n        for line in handle:\n            if not line.strip():\n                continue",
+        "peekOfCode": "def parse_events(path: Path, strict_schema: bool) -> dict:\n    grouped = defaultdict(lambda: {\"tool_calls\": []})\n    patterns = load_redaction_patterns()\n    schema = load_telemetry_schema()\n    missing_event_type = 0\n    missing_prompt_hash = 0\n    invalid_schema = 0\n    with path.open(\"r\", encoding=\"utf-8\") as handle:\n        for line in handle:\n            if not line.strip():",
         "detail": "scripts.mlops.telemetry_to_sft",
         "documentation": {}
     },
@@ -12845,6 +13151,141 @@
         "documentation": {}
     },
     {
+        "label": "load_tool_schema",
+        "kind": 2,
+        "importPath": "scripts.mlops.telemetry_to_tool_calls",
+        "description": "scripts.mlops.telemetry_to_tool_calls",
+        "peekOfCode": "def load_tool_schema(tool_name: str) -> dict:\n    schema_path = (\n        Path(__file__).resolve().parents[2]\n        / \"schemas\"\n        / \"tools\"\n        / f\"{tool_name}.schema.json\"\n    )\n    if not schema_path.exists():\n        raise FileNotFoundError(f\"Tool schema not found: {schema_path}\")\n    with schema_path.open(\"r\", encoding=\"utf-8\") as handle:",
+        "detail": "scripts.mlops.telemetry_to_tool_calls",
+        "documentation": {}
+    },
+    {
+        "label": "validate_tool_args",
+        "kind": 2,
+        "importPath": "scripts.mlops.telemetry_to_tool_calls",
+        "description": "scripts.mlops.telemetry_to_tool_calls",
+        "peekOfCode": "def validate_tool_args(tool_name: str, args: Any) -> list[str]:\n    if not isinstance(args, dict):\n        return [f\"{tool_name} args must be an object\"]\n    schema = load_tool_schema(tool_name)\n    errors: list[str] = []\n    properties = schema.get(\"properties\", {})\n    required = schema.get(\"required\", [])\n    for field in required:\n        if field not in args:\n            errors.append(f\"{tool_name} missing required field: {field}\")",
+        "detail": "scripts.mlops.telemetry_to_tool_calls",
+        "documentation": {}
+    },
+    {
+        "label": "build_tool_call_records",
+        "kind": 2,
+        "importPath": "scripts.mlops.telemetry_to_tool_calls",
+        "description": "scripts.mlops.telemetry_to_tool_calls",
+        "peekOfCode": "def build_tool_call_records(path: Path, strict_schema: bool) -> list[dict]:\n    patterns = load_redaction_patterns()\n    schema = load_telemetry_schema()\n    records = []\n    invalid_events = 0\n    invalid_tools = 0\n    with path.open(\"r\", encoding=\"utf-8\") as handle:\n        for line in handle:\n            if not line.strip():\n                continue",
+        "detail": "scripts.mlops.telemetry_to_tool_calls",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.mlops.telemetry_to_tool_calls",
+        "description": "scripts.mlops.telemetry_to_tool_calls",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(\n        description=\"Generate tool call traces from telemetry JSONL.\"\n    )\n    parser.add_argument(\"--telemetry\", required=True)\n    parser.add_argument(\"--output\", required=True)\n    parser.add_argument(\"--max-records\", type=int, default=500000)\n    parser.add_argument(\n        \"--strict\",\n        action=\"store_true\",",
+        "detail": "scripts.mlops.telemetry_to_tool_calls",
+        "documentation": {}
+    },
+    {
+        "label": "REPO_ROOT",
+        "kind": 5,
+        "importPath": "scripts.mlops.telemetry_to_tool_calls",
+        "description": "scripts.mlops.telemetry_to_tool_calls",
+        "peekOfCode": "REPO_ROOT = Path(__file__).resolve().parents[2]\nsys.path.insert(0, str(REPO_ROOT))\nfrom scripts.mlops.telemetry_redaction import (  # noqa: E402\n    load_redaction_patterns,\n    load_telemetry_schema,\n    redact_event,\n    stable_dumps,\n    validate_event_schema,\n)\ndef load_tool_schema(tool_name: str) -> dict:",
+        "detail": "scripts.mlops.telemetry_to_tool_calls",
+        "documentation": {}
+    },
+    {
+        "label": "sha256_file",
+        "kind": 2,
+        "importPath": "scripts.mlops.verify_export_manifest",
+        "description": "scripts.mlops.verify_export_manifest",
+        "peekOfCode": "def sha256_file(path: Path) -> str:\n    hasher = hashlib.sha256()\n    with path.open(\"rb\") as handle:\n        for chunk in iter(lambda: handle.read(1024 * 1024), b\"\"):\n            hasher.update(chunk)\n    return hasher.hexdigest()\ndef sha256_directory(path: Path) -> str:\n    hasher = hashlib.sha256()\n    files = sorted([p for p in path.rglob(\"*\") if p.is_file()])\n    for file_path in files:",
+        "detail": "scripts.mlops.verify_export_manifest",
+        "documentation": {}
+    },
+    {
+        "label": "sha256_directory",
+        "kind": 2,
+        "importPath": "scripts.mlops.verify_export_manifest",
+        "description": "scripts.mlops.verify_export_manifest",
+        "peekOfCode": "def sha256_directory(path: Path) -> str:\n    hasher = hashlib.sha256()\n    files = sorted([p for p in path.rglob(\"*\") if p.is_file()])\n    for file_path in files:\n        rel_path = file_path.relative_to(path).as_posix()\n        file_hash = sha256_file(file_path)\n        hasher.update(rel_path.encode(\"utf-8\"))\n        hasher.update(file_hash.encode(\"utf-8\"))\n    return hasher.hexdigest()\ndef resolve_commit_sha(repo_root: Path) -> str:",
+        "detail": "scripts.mlops.verify_export_manifest",
+        "documentation": {}
+    },
+    {
+        "label": "resolve_commit_sha",
+        "kind": 2,
+        "importPath": "scripts.mlops.verify_export_manifest",
+        "description": "scripts.mlops.verify_export_manifest",
+        "peekOfCode": "def resolve_commit_sha(repo_root: Path) -> str:\n    result = subprocess.run(\n        [\"git\", \"rev-parse\", \"HEAD\"],\n        cwd=repo_root,\n        capture_output=True,\n        text=True,\n        check=False,\n    )\n    if result.returncode != 0:\n        raise RuntimeError(result.stderr.strip() or \"Unable to resolve git SHA\")",
+        "detail": "scripts.mlops.verify_export_manifest",
+        "documentation": {}
+    },
+    {
+        "label": "verify_manifest",
+        "kind": 2,
+        "importPath": "scripts.mlops.verify_export_manifest",
+        "description": "scripts.mlops.verify_export_manifest",
+        "peekOfCode": "def verify_manifest(\n    manifest: dict[str, Any], repo_root: Path, model_override: Path | None\n) -> dict[str, Any]:\n    errors = []\n    commit_sha = manifest.get(\"commit_sha\")\n    if commit_sha != resolve_commit_sha(repo_root):\n        errors.append(\"commit_sha does not match repository HEAD\")\n    model_path = Path(manifest.get(\"model_path\", \"\"))\n    if not model_path.exists():\n        errors.append(f\"model_path not found: {model_path}\")",
+        "detail": "scripts.mlops.verify_export_manifest",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.mlops.verify_export_manifest",
+        "description": "scripts.mlops.verify_export_manifest",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(\n        description=\"Verify export/manifest.json against repo and artifacts.\"\n    )\n    parser.add_argument(\"--manifest\", required=True)\n    parser.add_argument(\"--model-path\", default=None)\n    args = parser.parse_args()\n    manifest_path = Path(args.manifest)\n    if not manifest_path.exists():\n        raise FileNotFoundError(f\"Manifest not found: {manifest_path}\")",
+        "detail": "scripts.mlops.verify_export_manifest",
+        "documentation": {}
+    },
+    {
+        "label": "sha256_file",
+        "kind": 2,
+        "importPath": "scripts.mlops.write_export_manifest",
+        "description": "scripts.mlops.write_export_manifest",
+        "peekOfCode": "def sha256_file(path: Path) -> str:\n    hasher = hashlib.sha256()\n    with path.open(\"rb\") as handle:\n        for chunk in iter(lambda: handle.read(1024 * 1024), b\"\"):\n            hasher.update(chunk)\n    return hasher.hexdigest()\ndef sha256_directory(path: Path) -> str:\n    hasher = hashlib.sha256()\n    files = sorted([p for p in path.rglob(\"*\") if p.is_file()])\n    for file_path in files:",
+        "detail": "scripts.mlops.write_export_manifest",
+        "documentation": {}
+    },
+    {
+        "label": "sha256_directory",
+        "kind": 2,
+        "importPath": "scripts.mlops.write_export_manifest",
+        "description": "scripts.mlops.write_export_manifest",
+        "peekOfCode": "def sha256_directory(path: Path) -> str:\n    hasher = hashlib.sha256()\n    files = sorted([p for p in path.rglob(\"*\") if p.is_file()])\n    for file_path in files:\n        rel_path = file_path.relative_to(path).as_posix()\n        file_hash = sha256_file(file_path)\n        hasher.update(rel_path.encode(\"utf-8\"))\n        hasher.update(file_hash.encode(\"utf-8\"))\n    return hasher.hexdigest()\ndef resolve_commit_sha(repo_root: Path) -> str:",
+        "detail": "scripts.mlops.write_export_manifest",
+        "documentation": {}
+    },
+    {
+        "label": "resolve_commit_sha",
+        "kind": 2,
+        "importPath": "scripts.mlops.write_export_manifest",
+        "description": "scripts.mlops.write_export_manifest",
+        "peekOfCode": "def resolve_commit_sha(repo_root: Path) -> str:\n    result = subprocess.run(\n        [\"git\", \"rev-parse\", \"HEAD\"],\n        cwd=repo_root,\n        capture_output=True,\n        text=True,\n        check=False,\n    )\n    if result.returncode != 0:\n        raise RuntimeError(result.stderr.strip() or \"Unable to resolve git SHA\")",
+        "detail": "scripts.mlops.write_export_manifest",
+        "documentation": {}
+    },
+    {
+        "label": "build_manifest",
+        "kind": 2,
+        "importPath": "scripts.mlops.write_export_manifest",
+        "description": "scripts.mlops.write_export_manifest",
+        "peekOfCode": "def build_manifest(datasets: list[Path], model_path: Path, repo_root: Path) -> dict:\n    dataset_hashes = {}\n    for dataset in datasets:\n        dataset_hashes[dataset.as_posix()] = sha256_file(dataset)\n    if model_path.is_dir():\n        model_hash = sha256_directory(model_path)\n    else:\n        model_hash = sha256_file(model_path)\n    return {\n        \"commit_sha\": resolve_commit_sha(repo_root),",
+        "detail": "scripts.mlops.write_export_manifest",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.mlops.write_export_manifest",
+        "description": "scripts.mlops.write_export_manifest",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(\n        description=\"Write export/manifest.json for training outputs.\"\n    )\n    parser.add_argument(\"--datasets\", action=\"append\", required=True)\n    parser.add_argument(\"--model-path\", required=True)\n    parser.add_argument(\"--output\", default=\"export/manifest.json\")\n    args = parser.parse_args()\n    repo_root = Path(__file__).resolve().parents[2]\n    datasets = [Path(dataset) for dataset in args.datasets]",
+        "detail": "scripts.mlops.write_export_manifest",
+        "documentation": {}
+    },
+    {
         "label": "SliceUpdateKeyValueCache",
         "kind": 6,
         "importPath": "scripts.convert_to_coreml",
@@ -12858,7 +13299,7 @@
         "kind": 2,
         "importPath": "scripts.convert_to_coreml",
         "description": "scripts.convert_to_coreml",
-        "peekOfCode": "def convert(\n    hf_model_path: str,\n    out_prefix: str,\n    artifacts_path: str = \"coreml_artifacts.json\",\n    hf_token: str | None = None,\n):\n    if hf_token:\n        try:\n            login(token=hf_token)\n            print(\"Authenticated with Hugging Face Hub\")",
+        "peekOfCode": "def convert(\n    hf_model_path: str,\n    out_prefix: str,\n    artifacts_path: str = \"coreml_artifacts.json\",\n    hf_token: str | None = None,\n    manifest_path: str | None = None,\n):\n    if manifest_path:\n        subprocess.run(\n            [",
         "detail": "scripts.convert_to_coreml",
         "documentation": {}
     },
@@ -13970,11 +14411,11 @@
         "documentation": {}
     },
     {
-        "label": "load_prompt_template",
+        "label": "load_prompt_registry",
         "kind": 2,
         "importPath": "scripts.train_lora",
         "description": "scripts.train_lora",
-        "peekOfCode": "def load_prompt_template(template_path: str) -> dict:\n    if not os.path.isfile(template_path):\n        raise FileNotFoundError(f\"Prompt template not found: {template_path}\")\n    with open(template_path, \"r\", encoding=\"utf-8\") as handle:\n        return json.load(handle)\ndef format_example(example: dict, training_template: dict) -> str:\n    required_keys = {\"system_prompt\", \"user_prompt_template\", \"assistant_template\"}\n    missing = required_keys - training_template.keys()\n    if missing:\n        raise ValueError(f\"Training template missing required keys: {missing}\")",
+        "peekOfCode": "def load_prompt_registry(registry_path: str) -> dict:\n    if not os.path.isfile(registry_path):\n        raise FileNotFoundError(f\"Prompt registry not found: {registry_path}\")\n    with open(registry_path, \"r\", encoding=\"utf-8\") as handle:\n        text = handle.read()\n    match = re.search(r\"PROMPT_REGISTRY_JSON\\s*=\\s*`(.*?)`\", text, re.S)\n    if not match:\n        raise ValueError(\"Unable to locate PROMPT_REGISTRY_JSON in registry file\")\n    return json.loads(match.group(1))\ndef format_example(example: dict, training_template: dict) -> str:",
         "detail": "scripts.train_lora",
         "documentation": {}
     },
@@ -13992,7 +14433,7 @@
         "kind": 2,
         "importPath": "scripts.train_lora",
         "description": "scripts.train_lora",
-        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--base_model\", required=True)\n    parser.add_argument(\"--train_file\", required=True)\n    parser.add_argument(\"--output_dir\", required=True)\n    parser.add_argument(\"--max_steps\", type=int, default=50)\n    parser.add_argument(\"--prompt_template\", default=None)\n    args = parser.parse_args()\n    if not os.path.isfile(args.train_file):\n        raise FileNotFoundError(f\"Dataset not found: {args.train_file}\")",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--base_model\", required=True)\n    parser.add_argument(\"--train_file\", required=True)\n    parser.add_argument(\"--output_dir\", required=True)\n    parser.add_argument(\"--max_steps\", type=int, default=50)\n    parser.add_argument(\"--prompt_template\", default=None)\n    parser.add_argument(\n        \"--manifest-out\",\n        default=os.path.join(\"export\", \"manifest.json\"),",
         "detail": "scripts.train_lora",
         "documentation": {}
     },
