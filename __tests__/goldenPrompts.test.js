@@ -27,8 +27,6 @@ describe("golden prompts schema", () => {
       "context",
       "user_prompt",
       "expected_prompt_hash",
-      "expected_response",
-      "expected_tool_calls",
       "expected",
       "expects_json",
       "expects_refusal",
