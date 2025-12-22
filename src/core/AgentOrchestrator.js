@@ -3,6 +3,10 @@ import { toolRegistry } from "./tools/ToolRegistry";
 import { memoryManager } from "./memory/MemorySingleton";
 import PluginSystem from "./plugins/PluginSystem";
 import PromptBuilder from "./prompt/PromptBuilder";
+import {
+  DEFAULT_RUNTIME_PROMPT_ID,
+  getPromptDefinition,
+} from "./prompt/PromptRegistry";
 import ToolHandler from "./tools/ToolHandler";
 import { WorkflowTracer } from "./workflows/WorkflowTracer";
 import {
@@ -86,6 +90,9 @@ export class AgentOrchestrator {
     });
 
     const promptHash = hashString(String(prompt ?? ""));
+    const promptDefinition = getPromptDefinition(DEFAULT_RUNTIME_PROMPT_ID);
+    const promptId = promptDefinition.id;
+    const promptVersion = promptDefinition.version;
     const modelId =
       typeof this.llm.getModelId === "function"
         ? this.llm.getModelId()
@@ -95,6 +102,8 @@ export class AgentOrchestrator {
         promptHash,
         promptText: String(prompt ?? ""),
         modelId,
+        promptId,
+        promptVersion,
       }),
     );
 
@@ -149,7 +158,12 @@ export class AgentOrchestrator {
           () =>
             this.toolHandler.execute(toolCalls, {
               tracer,
-              telemetryContext: { promptHash, modelId },
+              telemetryContext: {
+                promptHash,
+                modelId,
+                promptId,
+                promptVersion,
+              },
             }),
           { successData: (results) => ({ count: results.length }) },
         );
@@ -175,6 +189,8 @@ export class AgentOrchestrator {
           responseText: finalResponse,
           toolCallsCount: totalToolCalls,
           modelId,
+          promptId,
+          promptVersion,
         }),
       );
 

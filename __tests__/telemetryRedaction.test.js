@@ -37,10 +37,11 @@ test("hashString uses SHA-256 prefix", () => {
 test("telemetry events validate against the schema", () => {
   const event = buildPromptEvent({
     promptHash: "sha256_test",
-    promptText: "Hello",
+    promptText: "Hello from user@example.com",
     modelId: "model_test",
   });
   const payload = buildTelemetryEvent(event);
   const validation = validateTelemetryEvent(payload);
   expect(validation.valid).toBe(true);
+  expect(payload.redaction_applied).toBe(true);
 });

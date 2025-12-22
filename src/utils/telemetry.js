@@ -3,12 +3,19 @@ import * as FileSystem from "expo-file-system";
 import Ajv from "ajv";
 import SHA256 from "crypto-js/sha256";
 import logger from "./logger";
+import {
+  DEFAULT_RUNTIME_PROMPT_ID,
+  getPromptDefinition,
+} from "../core/prompt/PromptRegistry";
 import { TOOL_SCHEMA_VERSION } from "../core/prompt/promptTemplate";
 
 const TELEMETRY_TAG = "Telemetry";
 const MAX_VALUE_LENGTH = 2000;
 const DEFAULT_FILE_NAME = "events.jsonl";
-const TELEMETRY_SCHEMA_VERSION = "telemetry_v1";
+const TELEMETRY_SCHEMA_VERSION = "telemetry_v2";
+const DEFAULT_PROMPT_DEFINITION = getPromptDefinition(
+  DEFAULT_RUNTIME_PROMPT_ID,
+);
 
 const redactionPatterns = require("../../schemas/redaction_patterns.json");
 const sensitiveKeyPattern = new RegExp(redactionPatterns.sensitive_key, "i");
@@ -36,6 +43,12 @@ const stableSort = (value) => {
 };
 
 const stableStringify = (value) => JSON.stringify(stableSort(value));
+
+const detectRedaction = (original, redacted) =>
+  stableStringify(original) !== stableStringify(redacted);
+
+const didRedactValue = (value) =>
+  detectRedaction(value, redactTelemetryValue(value));
 
 const redactString = (value) => {
   if (!value) return value;
@@ -172,12 +185,38 @@ const flushTelemetryQueue = async () => {
 
 export const buildTelemetryEvent = (event) => {
   const timestamp = new Date().toISOString();
+  const promptId = event.prompt_id || DEFAULT_PROMPT_DEFINITION.id;
+  const promptVersion =
+    event.prompt_version || DEFAULT_PROMPT_DEFINITION.version;
+  const toolCalls = Array.isArray(event.tool_calls) ? event.tool_calls : [];
+  const retrievalHits = Array.isArray(event.retrieval_hits)
+    ? event.retrieval_hits
+    : [];
+  const latency =
+    typeof event.latency === "number"
+      ? event.latency
+      : typeof event.latency_ms === "number"
+        ? event.latency_ms
+        : 0;
+  const redactedEvent = redactTelemetryValue(event);
+  const redactionApplied =
+    typeof event.redaction_applied === "boolean"
+      ? event.redaction_applied
+      : detectRedaction(event, redactedEvent);
   return {
     schema_version: TELEMETRY_SCHEMA_VERSION,
     event_type: event.event_type,
     timestamp,
     tool_schema_version: TOOL_SCHEMA_VERSION,
-    ...redactTelemetryValue(event),
+    ...redactedEvent,
+    prompt_id: promptId,
+    prompt_version: promptVersion,
+    model_id: event.model_id || "unknown",
+    tool_calls: toolCalls,
+    retrieval_hits: retrievalHits,
+    outcome: event.outcome || "unknown",
+    latency,
+    redaction_applied: redactionApplied,
   };
 };
 
@@ -206,6 +245,8 @@ export const logTelemetryEvent = async (event) => {
 
 export const buildToolInvocationEvent = ({
   promptHash,
+  promptId,
+  promptVersion,
   toolName,
   args,
   success,
@@ -216,21 +257,48 @@ export const buildToolInvocationEvent = ({
 }) => ({
   event_type: "tool_invocation",
   prompt_hash: promptHash,
+  prompt_id: promptId,
+  prompt_version: promptVersion,
   tool_name: toolName,
   tool_args_hash: hashString(args),
   tool_args_preview: redactTelemetryValue(args),
   tool_result_size: resultSize,
   success,
   latency_ms: latencyMs,
+  latency: latencyMs,
   error: error ? String(error) : null,
   model_id: modelId,
+  tool_calls: [
+    {
+      name: toolName,
+      args: redactTelemetryValue(args),
+      success,
+      error: error ? String(error) : null,
+    },
+  ],
+  retrieval_hits: [],
+  outcome: success ? "success" : "error",
+  redaction_applied: didRedactValue(args),
 });
 
-export const buildPromptEvent = ({ promptHash, promptText, modelId }) => ({
+export const buildPromptEvent = ({
+  promptHash,
+  promptText,
+  modelId,
+  promptId,
+  promptVersion,
+}) => ({
   event_type: "prompt_received",
   prompt_hash: promptHash,
   prompt_preview: redactTelemetryValue(promptText),
+  prompt_id: promptId,
+  prompt_version: promptVersion,
   model_id: modelId,
+  tool_calls: [],
+  retrieval_hits: [],
+  outcome: "received",
+  latency: 0,
+  redaction_applied: didRedactValue(promptText),
 });
 
 export const buildFinalResponseEvent = ({
@@ -238,13 +306,22 @@ export const buildFinalResponseEvent = ({
   responseText,
   toolCallsCount,
   modelId,
+  promptId,
+  promptVersion,
 }) => ({
   event_type: "final_response",
   prompt_hash: promptHash,
   response_hash: hashString(responseText || ""),
   response_preview: redactTelemetryValue(responseText),
   tool_calls_count: toolCallsCount,
+  prompt_id: promptId,
+  prompt_version: promptVersion,
   model_id: modelId,
+  tool_calls: [],
+  retrieval_hits: [],
+  outcome: "completed",
+  latency: 0,
+  redaction_applied: didRedactValue(responseText),
 });
 
 export const buildRetrievalEvent = ({
@@ -255,6 +332,8 @@ export const buildRetrievalEvent = ({
   candidateIds,
   candidateScores,
   modelId,
+  promptId,
+  promptVersion,
 }) => ({
   event_type: "retrieval",
   query_hash: hashString(query),
@@ -262,9 +341,16 @@ export const buildRetrievalEvent = ({
   result_ids: resultIds,
   max_results: maxResults,
   latency_ms: latencyMs,
+  latency: latencyMs,
   retrieval_trace: {
     candidate_ids: candidateIds,
     candidate_scores: candidateScores,
   },
+  prompt_id: promptId,
+  prompt_version: promptVersion,
   model_id: modelId,
+  tool_calls: [],
+  retrieval_hits: resultIds,
+  outcome: "retrieved",
+  redaction_applied: didRedactValue(query),
 });

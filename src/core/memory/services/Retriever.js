@@ -2,6 +2,10 @@ import {
   buildRetrievalEvent,
   logTelemetryEvent,
 } from "../../../utils/telemetry";
+import {
+  DEFAULT_RUNTIME_PROMPT_ID,
+  getPromptDefinition,
+} from "../../prompt/PromptRegistry";
 
 export default class Retriever {
   constructor(vectorStore, llmService, attentionFn) {
@@ -20,6 +24,7 @@ export default class Retriever {
 
   async retrieve(query, maxResults = 5) {
     await this._ensureInit();
+    const promptDefinition = getPromptDefinition(DEFAULT_RUNTIME_PROMPT_ID);
     const startTime = Date.now();
     const qEmb = await this.llm.embed(query);
     const raw = await this.store.searchVectors(qEmb, maxResults * 3);
@@ -45,6 +50,8 @@ export default class Retriever {
           latencyMs: Date.now() - startTime,
           candidateIds,
           candidateScores,
+          promptId: promptDefinition.id,
+          promptVersion: promptDefinition.version,
           modelId:
             typeof this.llm.getModelId === "function"
               ? this.llm.getModelId()
@@ -69,6 +76,8 @@ export default class Retriever {
         latencyMs: Date.now() - startTime,
         candidateIds,
         candidateScores,
+        promptId: promptDefinition.id,
+        promptVersion: promptDefinition.version,
         modelId:
           typeof this.llm.getModelId === "function"
             ? this.llm.getModelId()
