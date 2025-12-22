@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://offllm.ai/schemas/tools/create_calendar_event.schema.json",
+  "title": "create_calendar_event",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "title": { "type": "string" },
+    "startDate": { "type": "string" },
+    "endDate": { "type": "string" },
+    "location": { "type": "string" },
+    "notes": { "type": "string" }
+  },
+  "required": ["title", "startDate"]
+}

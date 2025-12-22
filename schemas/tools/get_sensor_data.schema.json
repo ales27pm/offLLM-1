@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://offllm.ai/schemas/tools/get_sensor_data.schema.json",
+  "title": "get_sensor_data",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["accelerometer", "gyroscope", "magnetometer"]
+    },
+    "duration": { "type": "number", "minimum": 1 }
+  },
+  "required": ["type"]
+}

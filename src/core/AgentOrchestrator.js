@@ -86,8 +86,16 @@ export class AgentOrchestrator {
     });
 
     const promptHash = hashString(String(prompt ?? ""));
+    const modelId =
+      typeof this.llm.getModelId === "function"
+        ? this.llm.getModelId()
+        : "unknown";
     void logTelemetryEvent(
-      buildPromptEvent({ promptHash, promptText: String(prompt ?? "") }),
+      buildPromptEvent({
+        promptHash,
+        promptText: String(prompt ?? ""),
+        modelId,
+      }),
     );
 
     try {
@@ -141,7 +149,7 @@ export class AgentOrchestrator {
           () =>
             this.toolHandler.execute(toolCalls, {
               tracer,
-              telemetryContext: { promptHash },
+              telemetryContext: { promptHash, modelId },
             }),
           { successData: (results) => ({ count: results.length }) },
         );
@@ -166,6 +174,7 @@ export class AgentOrchestrator {
           promptHash,
           responseText: finalResponse,
           toolCallsCount: totalToolCalls,
+          modelId,
         }),
       );
 

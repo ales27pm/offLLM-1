@@ -18,7 +18,7 @@ def load_retrieval_events(path: Path) -> dict[str, list[dict]]:
             if not line.strip():
                 continue
             event = json.loads(line)
-            if event.get("event") != "retrieval":
+            if event.get("event_type") != "retrieval":
                 continue
             query_hash = event.get("query_hash")
             if not query_hash:

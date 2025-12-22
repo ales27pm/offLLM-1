@@ -1,6 +1,7 @@
 import ToolHandler from "../src/core/tools/ToolHandler";
 
 const handler = new ToolHandler({ getTool: () => null });
+const allowAllSchema = () => ({ valid: true, errors: [] });
 
 test("ToolHandler parses mixed-quote arguments", () => {
   const args = handler._parseArgs(
@@ -80,7 +81,9 @@ test("ToolHandler executes zero-argument tools", async () => {
   const registry = {
     getTool: (name) => (name === "ping" ? { execute } : null),
   };
-  const localHandler = new ToolHandler(registry);
+  const localHandler = new ToolHandler(registry, {
+    schemaValidator: allowAllSchema,
+  });
 
   const result = await localHandler.execute([{ name: "ping", args: {} }]);
 
@@ -90,7 +93,7 @@ test("ToolHandler executes zero-argument tools", async () => {
   ]);
 });
 
-test("ToolHandler reports missing required parameters without executing the tool", async () => {
+test("ToolHandler blocks invalid parameters without executing the tool", async () => {
   let executedCount = 0;
   const registry = {
     getTool: (name) =>
@@ -105,7 +108,12 @@ test("ToolHandler reports missing required parameters without executing the tool
           }
         : null,
   };
-  const handlerWithRequired = new ToolHandler(registry);
+  const handlerWithRequired = new ToolHandler(registry, {
+    schemaValidator: () => ({
+      valid: false,
+      errors: ["(root) must have required property 'foo'"],
+    }),
+  });
 
   const result = await handlerWithRequired.execute([
     { name: "needsFoo", args: {} },
@@ -116,7 +124,34 @@ test("ToolHandler reports missing required parameters without executing the tool
     {
       role: "tool",
       name: "needsFoo",
-      content: "Error: Missing required parameters: foo",
+      content:
+        "Error: Invalid parameters for 'needsFoo': (root) must have required property 'foo'",
+    },
+  ]);
+});
+
+test("ToolHandler enforces capability allowlists", async () => {
+  const execute = jest.fn().mockResolvedValue({ ok: true });
+  const registry = {
+    getTool: (name) => (name === "web_search" ? { execute } : null),
+    getToolCategories: () => ["online"],
+  };
+  const localHandler = new ToolHandler(registry, {
+    schemaValidator: allowAllSchema,
+  });
+
+  const result = await localHandler.execute(
+    [{ name: "web_search", args: { query: "test" } }],
+    { allowedCategories: ["general"] },
+  );
+
+  expect(execute).not.toHaveBeenCalled();
+  expect(result).toEqual([
+    {
+      role: "tool",
+      name: "web_search",
+      content:
+        "Error: Tool 'web_search' is not allowed for this capability scope",
     },
   ]);
 });

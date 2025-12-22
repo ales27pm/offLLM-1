@@ -30,5 +30,5 @@ test("buildToolInvocationEvent includes hashes", () => {
     resultSize: 5,
   });
   expect(event.tool_name).toBe("demo");
-  expect(event.tool_args_hash).toContain("fnv1a_");
+  expect(event.tool_args_hash).toContain("sha256_");
 });
