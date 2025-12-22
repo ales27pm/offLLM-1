@@ -6,8 +6,8 @@ if [[ -z "${OFFLLM_EVAL_MODEL_CMD:-}" ]]; then
   exit 1
 fi
 
-python eval/run_prompt_regression.py \
-  --prompts eval/golden_prompts.json \
+python scripts/eval/run_prompt_regression.py \
+  --prompts scripts/eval/golden_prompts.json \
   --prompts eval/redteam_tool_injection.json \
   --model-cmd "$OFFLLM_EVAL_MODEL_CMD" \
   --summary eval/prompt_regression_summary.json \

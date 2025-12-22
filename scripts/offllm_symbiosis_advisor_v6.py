@@ -49,8 +49,21 @@ DEFAULT_EXCLUDE_DIRS = {
     ".venv", "venv", "__pycache__",
     "Pods", "DerivedData",
     "runs",
+    "reports",
     "unsloth_compiled_cache",
 }
+
+DEFAULT_IGNORE_GLOBS = [
+    "reports/**",
+    "runs/**",
+    "node_modules/**",
+    ".git/**",
+    "dist/**",
+    "build/**",
+    "**/*.sarif",
+    "**/*prompt-regression*",
+    "**/*symbiosis*report*",
+]
 
 TEXT_EXT_ALLOW = {
     ".py", ".js", ".ts", ".tsx", ".jsx", ".m", ".mm", ".swift", ".java", ".kt",
@@ -377,6 +390,18 @@ def cfg_int(cfg: Dict[str, Any], key: str, default: int) -> int:
         return default
 
 
+def merge_ignore_globs(defaults: List[str], overrides: List[str]) -> List[str]:
+    out = []
+    seen = set()
+    for item in defaults + overrides:
+        item = str(item)
+        if item in seen:
+            continue
+        seen.add(item)
+        out.append(item)
+    return out
+
+
 def _run_git(repo_root: Path, args: List[str]) -> Optional[str]:
     try:
         r = subprocess.run(
@@ -608,8 +633,19 @@ def should_index_path(rel: str, exclude_dirs: set[str], ignore_globs: List[str])
     return True
 
 
-def iter_candidate_files(repo_root: Path, exclude_dirs: set[str], ignore_globs: List[str], include_generated: bool) -> List[Path]:
+def iter_candidate_files(
+    repo_root: Path,
+    exclude_dirs: set[str],
+    ignore_globs: List[str],
+    include_generated: bool,
+) -> Tuple[List[Path], Dict[str, int]]:
     out: List[Path] = []
+    stats = {
+        "files_seen": 0,
+        "files_included": 0,
+        "files_excluded": 0,
+        "dirs_pruned": 0,
+    }
     for root, dirs, files in os.walk(repo_root):
         pruned = []
         for d in list(dirs):
@@ -617,21 +653,29 @@ def iter_candidate_files(repo_root: Path, exclude_dirs: set[str], ignore_globs: 
                 pruned.append(d)
         for d in pruned:
             dirs.remove(d)
+        stats["dirs_pruned"] += len(pruned)
 
         for fn in files:
+            stats["files_seen"] += 1
             p = Path(root) / fn
             rel = safe_relpath(p, repo_root)
             if not rel:
+                stats["files_excluded"] += 1
                 continue
             if not should_index_path(rel, exclude_dirs if not include_generated else set(), ignore_globs):
+                stats["files_excluded"] += 1
                 continue
             ext = p.suffix.lower()
             if ext in TEXT_EXT_ALLOW or fn in ALWAYS_TEXT_NAMES:
                 out.append(p)
+                stats["files_included"] += 1
             else:
                 if p.suffix == "" and fn in ALWAYS_TEXT_NAMES:
                     out.append(p)
-    return out
+                    stats["files_included"] += 1
+                else:
+                    stats["files_excluded"] += 1
+    return out, stats
 
 
 def token_signature(snippet: str, max_tokens: int = 64) -> str:
@@ -865,7 +909,10 @@ def analyze_repo(args: argparse.Namespace) -> Dict[str, Any]:
 
     cfg = load_user_config(repo_root, Path(args.config).resolve() if args.config else None)
     exclude_dirs = set(cfg_list(cfg, "exclude_dirs", sorted(DEFAULT_EXCLUDE_DIRS)))
-    ignore_globs = cfg_list(cfg, "ignore_globs", [])
+    ignore_globs = merge_ignore_globs(
+        DEFAULT_IGNORE_GLOBS,
+        cfg_list(cfg, "ignore_globs", []),
+    )
     include_generated = bool(args.include_generated or cfg_bool(cfg, "include_generated", False))
     use_git = bool(args.git or cfg_bool(cfg, "use_git", True))
     include_git_churn = bool(args.git_churn or cfg_bool(cfg, "include_git_churn", False))
@@ -893,7 +940,12 @@ def analyze_repo(args: argparse.Namespace) -> Dict[str, Any]:
     }
 
     t0 = time.time()
-    paths = iter_candidate_files(repo_root, exclude_dirs, ignore_globs, include_generated=include_generated)
+    paths, index_stats = iter_candidate_files(
+        repo_root,
+        exclude_dirs,
+        ignore_globs,
+        include_generated=include_generated,
+    )
     repo_fp = repo_fingerprint(repo_root, paths, max_bytes=max_bytes, use_git=use_git)
     generated_at = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
@@ -953,6 +1005,12 @@ def analyze_repo(args: argparse.Namespace) -> Dict[str, Any]:
         "repo_root": repo_root.as_posix(),
         "repo_fingerprint": repo_fp,
         "config_path": cfg.get("_config_path"),
+        "indexing": {
+            "exclude_dirs": sorted(exclude_dirs),
+            "ignore_globs": ignore_globs,
+            "files_included": index_stats.get("files_included", len(paths)),
+            "files_excluded": index_stats.get("files_excluded", 0),
+        },
         "totals": totals,
         "where_to_search": where,
         "prompt_drift_clusters": [dataclasses.asdict(c) for c in clusters],
@@ -987,6 +1045,7 @@ def analyze_repo(args: argparse.Namespace) -> Dict[str, Any]:
 def build_arg_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="offLLM Symbiosis Advisor v6 (stdlib-only)")
     p.add_argument("--repo-root", default=".", help="Repository root")
+    p.add_argument("--repo", dest="repo_root", help="Repository root (alias)")
     p.add_argument("--out-dir", default="reports/symbiosis_v6", help="Output directory")
     p.add_argument("--include-generated", action="store_true", help="Include typically generated dirs (runs, cache, etc.)")
     p.add_argument("--max-file-size", type=int, default=2_000_000, help="Max bytes to read per file")

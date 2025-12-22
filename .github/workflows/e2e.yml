@@ -31,6 +31,9 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Eval + symbiosis guardrails
+        run: python scripts/ci/guard_eval_symbiosis.py
+
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
 
@@ -83,7 +86,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p runs/symbiosis
-          python scripts/offllm_symbiosis_advisor_v6.py --repo . --out-dir runs/symbiosis
+          python scripts/offllm_symbiosis_advisor.py --repo . --out-dir runs/symbiosis
 
       - name: Upload symbiosis artifacts
         if: always()
