@@ -43,6 +43,9 @@ jobs:
       - name: Format check
         run: npm run format:check
 
+      - name: Guard eval wiring
+        run: python scripts/ci/guard_eval_symbiosis.py
+
       - name: Prompt regression
         id: prompt_regression
         continue-on-error: true
@@ -50,8 +53,9 @@ jobs:
           set -euo pipefail
           mkdir -p reports
           python scripts/eval/run_prompt_regression.py \
-            --report-out reports/prompt-regression.json \
-            --sarif-out reports/prompt-regression.sarif
+           --report-out reports/prompt-regression.json \
+           --sarif-out reports/prompt-regression.sarif
+
 
       # Always keep the SARIF file (even on fork PRs where Code Scanning upload is blocked)
       - name: Upload prompt regression SARIF artifact

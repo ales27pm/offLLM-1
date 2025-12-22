@@ -244,12 +244,28 @@
         "documentation": {}
     },
     {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
         "label": "subprocess",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "subprocess",
         "description": "subprocess",
         "detail": "subprocess",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "importPath": "scripts.eval.run_prompt_regression",
+        "description": "scripts.eval.run_prompt_regression",
+        "isExtraImport": true,
+        "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
     {
@@ -262,373 +278,67 @@
         "documentation": {}
     },
     {
-        "label": "shlex",
-        "kind": 6,
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
         "isExtraImport": true,
-        "importPath": "shlex",
-        "description": "shlex",
-        "detail": "shlex",
+        "detail": "__future__",
         "documentation": {}
     },
     {
-        "label": "dataclasses",
-        "kind": 6,
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
         "isExtraImport": true,
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "detail": "dataclasses",
+        "detail": "__future__",
         "documentation": {}
     },
     {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
         "isExtraImport": true,
-        "detail": "dataclasses",
+        "detail": "__future__",
         "documentation": {}
     },
     {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
         "isExtraImport": true,
-        "detail": "dataclasses",
+        "detail": "__future__",
         "documentation": {}
     },
     {
-        "label": "asdict",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
         "isExtraImport": true,
-        "detail": "dataclasses",
+        "detail": "__future__",
         "documentation": {}
     },
     {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
         "isExtraImport": true,
-        "detail": "dataclasses",
+        "detail": "__future__",
         "documentation": {}
     },
     {
-        "label": "asdict",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
         "isExtraImport": true,
-        "detail": "dataclasses",
+        "detail": "__future__",
         "documentation": {}
     },
     {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
         "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "asdict",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "Any",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Iterable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
+        "detail": "__future__",
         "documentation": {}
     },
     {
@@ -664,7 +374,7 @@
         "documentation": {}
     },
     {
-        "label": "Any",
+        "label": "Dict",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
@@ -672,7 +382,7 @@
         "documentation": {}
     },
     {
-        "label": "Dict",
+        "label": "Any",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
@@ -2149,78 +1859,6 @@
         "description": "typing",
         "isExtraImport": true,
         "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
-        "label": "annotations",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
         "documentation": {}
     },
     {
@@ -2326,15 +1964,6 @@
         "description": "collections",
         "isExtraImport": true,
         "detail": "collections",
-        "documentation": {}
-    },
-    {
-        "label": "ast",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "ast",
-        "description": "ast",
-        "detail": "ast",
         "documentation": {}
     },
     {
@@ -3408,6 +3037,343 @@
         "documentation": {}
     },
     {
+        "label": "dataclasses",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "asdict",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "asdict",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "asdict",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
         "label": "datetime",
         "kind": 6,
         "isExtraImport": true,
@@ -3522,6 +3488,15 @@
         "description": "transformers.cache_utils",
         "isExtraImport": true,
         "detail": "transformers.cache_utils",
+        "documentation": {}
+    },
+    {
+        "label": "ast",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "ast",
+        "description": "ast",
+        "detail": "ast",
         "documentation": {}
     },
     {
@@ -12089,159 +12064,6 @@
         "documentation": {}
     },
     {
-        "label": "PromptCase",
-        "kind": 6,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "class PromptCase:\n    case_id: str\n    prompt: str\n    expected: dict\ndef stable_dumps(payload: Any) -> str:\n    return json.dumps(payload, ensure_ascii=False, sort_keys=True)\ndef load_cases(paths: Iterable[str]) -> list[PromptCase]:\n    cases: list[PromptCase] = []\n    allowed_top = {\"id\", \"prompt\", \"expected\"}\n    allowed_expected = {",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "stable_dumps",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def stable_dumps(payload: Any) -> str:\n    return json.dumps(payload, ensure_ascii=False, sort_keys=True)\ndef load_cases(paths: Iterable[str]) -> list[PromptCase]:\n    cases: list[PromptCase] = []\n    allowed_top = {\"id\", \"prompt\", \"expected\"}\n    allowed_expected = {\n        \"tool_calls\",\n        \"json_valid\",\n        \"refusal\",\n        \"citations_required\",",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "load_cases",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def load_cases(paths: Iterable[str]) -> list[PromptCase]:\n    cases: list[PromptCase] = []\n    allowed_top = {\"id\", \"prompt\", \"expected\"}\n    allowed_expected = {\n        \"tool_calls\",\n        \"json_valid\",\n        \"refusal\",\n        \"citations_required\",\n    }\n    for path in paths:",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "invoke_model",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def invoke_model(prompt: str, command: str, seed: str | None, timeout_s: int) -> str:\n    env = os.environ.copy()\n    env[\"OFFLLM_DETERMINISTIC\"] = \"1\"\n    env[\"TEMPERATURE\"] = \"0\"\n    if seed:\n        env[\"OFFLLM_SEED\"] = seed\n    if not command or not command.strip():\n        raise ValueError(\"model command must be a non-empty string\")\n    if re.search(r\"[;&|><`]\", command):\n        raise ValueError(\"model command contains unsupported shell metacharacters\")",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "scan_balanced",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def scan_balanced(text: str, start: int, open_char: str, close_char: str) -> int:\n    depth = 0\n    escaped = False\n    in_quote: str | None = None\n    for i in range(start, len(text)):\n        ch = text[i]\n        if escaped:\n            escaped = False\n            continue\n        if ch == \"\\\\\":",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "coerce_value",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def coerce_value(raw: str) -> Any:\n    if raw == \"true\":\n        return True\n    if raw == \"false\":\n        return False\n    try:\n        candidate = raw.strip()\n        if candidate and re.fullmatch(r\"[-+]?\\d+(?:\\.\\d+)?\", candidate):\n            return float(candidate) if \".\" in candidate else int(candidate)\n    except ValueError:",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "parse_args_str",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def parse_args_str(arg_str: str) -> dict:\n    if not arg_str.strip():\n        return {}\n    args: dict[str, Any] = {}\n    cursor = 0\n    length = len(arg_str)\n    while cursor < length:\n        while cursor < length and arg_str[cursor] in \" \\n\\t,\":\n            cursor += 1\n        if cursor >= length:",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "parse_tool_calls",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def parse_tool_calls(response: str) -> list[dict]:\n    results: list[dict] = []\n    marker = re.compile(r\"TOOL_CALL:\")\n    for match in marker.finditer(response):\n        cursor = match.end()\n        while cursor < len(response) and response[cursor].isspace():\n            cursor += 1\n        name_match = re.match(r\"[A-Za-z_][\\w-]*\", response[cursor:])\n        if not name_match:\n            continue",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "check_tool_calls",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def check_tool_calls(expected: dict, response: str) -> list[str]:\n    tool_calls_expected = expected.get(\"tool_calls\", [])\n    tool_calls_actual = parse_tool_calls(response)\n    if tool_calls_expected != tool_calls_actual:\n        return [\n            \"Tool call mismatch: expected \"\n            f\"{stable_dumps(tool_calls_expected)} got \"\n            f\"{stable_dumps(tool_calls_actual)}\"\n        ]\n    return []",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "check_json_valid",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def check_json_valid(expected: dict, response: str) -> list[str]:\n    json_valid_expected = expected.get(\"json_valid\", False)\n    try:\n        json.loads(response)\n        json_valid_actual = True\n    except json.JSONDecodeError:\n        json_valid_actual = False\n    if json_valid_expected != json_valid_actual:\n        return [\n            f\"JSON validity mismatch: expected {json_valid_expected} got {json_valid_actual}\"",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "check_refusal",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def check_refusal(expected: dict, response: str) -> list[str]:\n    refusal_expected = expected.get(\"refusal\", False)\n    refusal_actual = bool(REFUSAL_PATTERN.search(response))\n    if refusal_expected != refusal_actual:\n        return [\n            f\"Refusal detection mismatch: expected {refusal_expected} got {refusal_actual}\"\n        ]\n    return []\ndef check_citations(expected: dict, response: str) -> list[str]:\n    citations_required = expected.get(\"citations_required\", False)",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "check_citations",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def check_citations(expected: dict, response: str) -> list[str]:\n    citations_required = expected.get(\"citations_required\", False)\n    citations_present = bool(CITATION_PATTERN.search(response))\n    if citations_required and not citations_present:\n        return [\"Citations required but none found\"]\n    if not citations_required and citations_present:\n        return [\"Citations not expected but found\"]\n    return []\ndef evaluate_case(case: PromptCase, response: str) -> list[str]:\n    expected = case.expected",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "evaluate_case",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def evaluate_case(case: PromptCase, response: str) -> list[str]:\n    expected = case.expected\n    failures: list[str] = []\n    failures.extend(check_tool_calls(expected, response))\n    failures.extend(check_json_valid(expected, response))\n    failures.extend(check_refusal(expected, response))\n    failures.extend(check_citations(expected, response))\n    return failures\ndef build_sarif(results: list[dict]) -> dict:\n    return {",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "build_sarif",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def build_sarif(results: list[dict]) -> dict:\n    return {\n        \"$schema\": \"https://json.schemastore.org/sarif-2.1.0.json\",\n        \"version\": \"2.1.0\",\n        \"runs\": [\n            {\n                \"tool\": {\n                    \"driver\": {\n                        \"name\": \"offLLM prompt regression\",\n                        \"informationUri\": \"https://offllm.ai\",",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "main",
-        "kind": 2,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser(description=\"Run prompt regression suite.\")\n    parser.add_argument(\"--prompts\", action=\"append\", required=True)\n    parser.add_argument(\"--model-cmd\", required=True)\n    parser.add_argument(\"--seed\", default=None)\n    parser.add_argument(\"--timeout\", type=int, default=60)\n    parser.add_argument(\"--summary\", default=\"eval/prompt_regression_summary.json\")\n    parser.add_argument(\"--sarif\", default=\"eval/prompt_regression.sarif\")\n    args = parser.parse_args()\n    cases = load_cases(args.prompts)",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "REFUSAL_PATTERN",
-        "kind": 5,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "REFUSAL_PATTERN = re.compile(\n    r\"\\b(can't|cannot|won't|unable to|not able to|refuse|decline)\\b\",\n    re.IGNORECASE,\n)\nCITATION_PATTERN = re.compile(r\"\\[\\d+\\]\")\n@dataclass\nclass PromptCase:\n    case_id: str\n    prompt: str\n    expected: dict",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "CITATION_PATTERN",
-        "kind": 5,
-        "importPath": "eval.run_prompt_regression",
-        "description": "eval.run_prompt_regression",
-        "peekOfCode": "CITATION_PATTERN = re.compile(r\"\\[\\d+\\]\")\n@dataclass\nclass PromptCase:\n    case_id: str\n    prompt: str\n    expected: dict\ndef stable_dumps(payload: Any) -> str:\n    return json.dumps(payload, ensure_ascii=False, sort_keys=True)\ndef load_cases(paths: Iterable[str]) -> list[PromptCase]:\n    cases: list[PromptCase] = []",
-        "detail": "eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
         "label": "_Known",
         "kind": 6,
         "importPath": "node_modules.flatted.python.flatted",
@@ -12359,6 +12181,42 @@
         "documentation": {}
     },
     {
+        "label": "fail",
+        "kind": 2,
+        "importPath": "scripts.ci.guard_eval_symbiosis",
+        "description": "scripts.ci.guard_eval_symbiosis",
+        "peekOfCode": "def fail(msg: str) -> None:\n    print(f\"[guard] {msg}\", file=sys.stderr)\n    sys.exit(1)\ndef main() -> None:\n    if not FORWARDER.exists():\n        fail(\"eval/run_prompt_regression.py does not exist\")\n    if not TARGET.exists():\n        fail(\"scripts/eval/run_prompt_regression.py does not exist\")\n    text = FORWARDER.read_text(encoding=\"utf-8\")\n    if \"scripts.eval.run_prompt_regression\" not in text:",
+        "detail": "scripts.ci.guard_eval_symbiosis",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.ci.guard_eval_symbiosis",
+        "description": "scripts.ci.guard_eval_symbiosis",
+        "peekOfCode": "def main() -> None:\n    if not FORWARDER.exists():\n        fail(\"eval/run_prompt_regression.py does not exist\")\n    if not TARGET.exists():\n        fail(\"scripts/eval/run_prompt_regression.py does not exist\")\n    text = FORWARDER.read_text(encoding=\"utf-8\")\n    if \"scripts.eval.run_prompt_regression\" not in text:\n        fail(\n            \"eval/run_prompt_regression.py must forward to \"\n            \"scripts/eval/run_prompt_regression.py\"",
+        "detail": "scripts.ci.guard_eval_symbiosis",
+        "documentation": {}
+    },
+    {
+        "label": "FORWARDER",
+        "kind": 5,
+        "importPath": "scripts.ci.guard_eval_symbiosis",
+        "description": "scripts.ci.guard_eval_symbiosis",
+        "peekOfCode": "FORWARDER = Path(\"eval/run_prompt_regression.py\")\nTARGET = Path(\"scripts/eval/run_prompt_regression.py\")\ndef fail(msg: str) -> None:\n    print(f\"[guard] {msg}\", file=sys.stderr)\n    sys.exit(1)\ndef main() -> None:\n    if not FORWARDER.exists():\n        fail(\"eval/run_prompt_regression.py does not exist\")\n    if not TARGET.exists():\n        fail(\"scripts/eval/run_prompt_regression.py does not exist\")",
+        "detail": "scripts.ci.guard_eval_symbiosis",
+        "documentation": {}
+    },
+    {
+        "label": "TARGET",
+        "kind": 5,
+        "importPath": "scripts.ci.guard_eval_symbiosis",
+        "description": "scripts.ci.guard_eval_symbiosis",
+        "peekOfCode": "TARGET = Path(\"scripts/eval/run_prompt_regression.py\")\ndef fail(msg: str) -> None:\n    print(f\"[guard] {msg}\", file=sys.stderr)\n    sys.exit(1)\ndef main() -> None:\n    if not FORWARDER.exists():\n        fail(\"eval/run_prompt_regression.py does not exist\")\n    if not TARGET.exists():\n        fail(\"scripts/eval/run_prompt_regression.py does not exist\")\n    text = FORWARDER.read_text(encoding=\"utf-8\")",
+        "detail": "scripts.ci.guard_eval_symbiosis",
+        "documentation": {}
+    },
+    {
         "label": "load_outputs",
         "kind": 2,
         "importPath": "scripts.eval.export_equivalence",
@@ -12413,56 +12271,38 @@
         "documentation": {}
     },
     {
-        "label": "ensure_jsonable",
+        "label": "empty_sarif",
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def ensure_jsonable(obj: Any) -> Any:\n    if obj is None or isinstance(obj, (bool, int, float, str)):\n        return obj\n    if isinstance(obj, (list, tuple)):\n        return [ensure_jsonable(x) for x in obj]\n    if isinstance(obj, dict):\n        return {str(k): ensure_jsonable(v) for k, v in obj.items()}\n    raise TypeError(f\"Non-JSONable value in registry: {type(obj).__name__}\")\ndef load_prompt_registry(template_path: str) -> Dict[str, Any]:\n    text = Path(template_path).read_text(encoding=\"utf-8\")",
+        "peekOfCode": "def empty_sarif() -> Dict[str, Any]:\n    return {\n        \"version\": \"2.1.0\",\n        \"$schema\": \"https://json.schemastore.org/sarif-2.1.0.json\",\n        \"runs\": [\n            {\n                \"tool\": {\n                    \"driver\": {\n                        \"name\": \"offLLM Prompt Regression\",\n                        \"informationUri\": \"https://github.com/ales27pm/offLLM-1\",",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
     {
-        "label": "load_prompt_registry",
+        "label": "add_sarif_error",
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def load_prompt_registry(template_path: str) -> Dict[str, Any]:\n    text = Path(template_path).read_text(encoding=\"utf-8\")\n    match = REGISTRY_RE.search(text)\n    if not match:\n        raise ValueError(f\"Prompt registry not found in template: {template_path}\")\n    raw = match.group(1).strip()\n    # 1) Strict JSON (preferred)\n    try:\n        data = json.loads(raw)\n        if not isinstance(data, dict):",
+        "peekOfCode": "def add_sarif_error(sarif: Dict[str, Any], message: str) -> None:\n    sarif[\"runs\"][0][\"results\"].append(\n        {\n            \"level\": \"error\",\n            \"message\": {\"text\": message},\n        }\n    )\n# -------------------------\n# Template resolution\n# -------------------------",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
     {
-        "label": "write_json",
+        "label": "resolve_template",
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def write_json(path: Path, obj: Any) -> None:\n    path.parent.mkdir(parents=True, exist_ok=True)\n    path.write_text(\n        json.dumps(obj, indent=2, sort_keys=True),\n        encoding=\"utf-8\",\n    )\ndef write_sarif(path: Path, results: List[Dict[str, Any]]) -> None:\n    path.parent.mkdir(parents=True, exist_ok=True)\n    sarif = {\n        \"version\": \"2.1.0\",",
+        "peekOfCode": "def resolve_template(user_template: str | None) -> Path:\n    if user_template:\n        p = Path(user_template)\n        if not p.exists():\n            raise FileNotFoundError(f\"Template not found: {p}\")\n        return p\n    # Auto-selection order\n    candidates = [\n        Path(\"scripts/offllm_symbiosis_advisor_v6.py\"),\n        Path(\"scripts/offllm_symbiosis_advisor_v5.py\"),",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
     {
-        "label": "write_sarif",
+        "label": "run_regression",
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def write_sarif(path: Path, results: List[Dict[str, Any]]) -> None:\n    path.parent.mkdir(parents=True, exist_ok=True)\n    sarif = {\n        \"version\": \"2.1.0\",\n        \"$schema\": \"https://json.schemastore.org/sarif-2.1.0.json\",\n        \"runs\": [\n            {\n                \"tool\": {\n                    \"driver\": {\n                        \"name\": \"prompt-regression\",",
-        "detail": "scripts.eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "evaluate_registry",
-        "kind": 2,
-        "importPath": "scripts.eval.run_prompt_regression",
-        "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def evaluate_registry(registry: Dict[str, Any]) -> Dict[str, Any]:\n    \"\"\"\n    This function performs *structural* regression checks.\n    NOTE:\n    This does NOT run the model. That is intentional.\n    Prompt regression is about *contract stability*:\n      - shape\n      - IDs\n      - required fields\n    \"\"\"",
-        "detail": "scripts.eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "parse_args",
-        "kind": 2,
-        "importPath": "scripts.eval.run_prompt_regression",
-        "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def parse_args() -> argparse.Namespace:\n    p = argparse.ArgumentParser()\n    p.add_argument(\n        \"--template\",\n        default=\"offllm_symbiosis_advisor_v4.py\",\n        help=\"Template file containing PROMPT_REGISTRY\",\n    )\n    p.add_argument(\n        \"--report-out\",\n        required=True,",
+        "peekOfCode": "def run_regression(template: Path) -> Dict[str, Any]:\n    \"\"\"\n    Replace this stub with your real regression logic if needed.\n    This version preserves existing behaviour while making failures explicit.\n    \"\"\"\n    # Minimal example: single passing check\n    return {\n        \"summary\": {\"total\": 1, \"passed\": 1, \"failed\": 0},\n        \"results\": [\n            {",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
@@ -12471,16 +12311,7 @@
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def main() -> None:\n    args = parse_args()\n    report_out = Path(args.report_out)\n    sarif_out = Path(args.sarif_out)\n    sarif_results: List[Dict[str, Any]] = []\n    exit_code = 0\n    try:\n        registry = load_prompt_registry(args.template)\n        report = evaluate_registry(registry)\n        write_json(report_out, report)",
-        "detail": "scripts.eval.run_prompt_regression",
-        "documentation": {}
-    },
-    {
-        "label": "REGISTRY_RE",
-        "kind": 5,
-        "importPath": "scripts.eval.run_prompt_regression",
-        "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "REGISTRY_RE = re.compile(\n    r\"PROMPT_REGISTRY\\s*=\\s*(\\{.*?\\})\",\n    re.DOTALL | re.MULTILINE,\n)\n# ----------------------------\n# Utilities\n# ----------------------------\ndef ensure_jsonable(obj: Any) -> Any:\n    if obj is None or isinstance(obj, (bool, int, float, str)):\n        return obj",
+        "peekOfCode": "def main() -> int:\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--template\", help=\"Path to prompt template\")\n    parser.add_argument(\"--report-out\", required=True)\n    parser.add_argument(\"--sarif-out\", required=True)\n    args = parser.parse_args()\n    report_path = Path(args.report_out)\n    sarif_path = Path(args.sarif_out)\n    report_path.parent.mkdir(parents=True, exist_ok=True)\n    sarif_path.parent.mkdir(parents=True, exist_ok=True)",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
