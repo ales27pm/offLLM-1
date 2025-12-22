@@ -247,7 +247,7 @@ describe("PromptBuilder", () => {
     "golden_prompts.json",
   );
   const golden = JSON.parse(fs.readFileSync(goldenPath, "utf-8"));
-  const goldenCases = golden.map((entry) => [entry.id, entry]);
+  const goldenCases = golden.map((entry) => [entry.stable_id, entry]);
 
   it.each(goldenCases)("matches golden prompt %s", (_id, entry) => {
     const registry = {
