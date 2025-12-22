@@ -8784,6 +8784,14 @@
         "documentation": {}
     },
     {
+        "label": "os",
+        "importPath": "trl.trainer.online_dpo_trainer",
+        "description": "trl.trainer.online_dpo_trainer",
+        "isExtraImport": true,
+        "detail": "trl.trainer.online_dpo_trainer",
+        "documentation": {}
+    },
+    {
         "label": "re",
         "importPath": "trl.trainer.online_dpo_trainer",
         "description": "trl.trainer.online_dpo_trainer",

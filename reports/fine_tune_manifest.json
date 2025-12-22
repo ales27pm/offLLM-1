@@ -1,0 +1,304 @@
+{
+  "generated_at": "2025-12-22T08:29:34Z",
+  "recommended_evals": [
+    "chunk_stability",
+    "citation_groundedness",
+    "prompt_regression",
+    "refusal_correctness",
+    "retrieval_recall_at_k",
+    "telemetry_schema_validation",
+    "tool_json_validity",
+    "tool_selection_accuracy"
+  ],
+  "sources": [
+    {
+      "intent": "prompt_registry",
+      "path": "ci/download-mlx-model.sh",
+      "surface": "prompts",
+      "weight": 3
+    },
+    {
+      "intent": "prompt_registry",
+      "path": "eval/golden_prompts.json",
+      "surface": "prompts",
+      "weight": 3
+    },
+    {
+      "intent": "prompt_registry",
+      "path": "mlops/offllm_symbiosis_advisor_v4.py",
+      "surface": "prompts",
+      "weight": 3
+    },
+    {
+      "intent": "prompt_registry",
+      "path": "offllm_symbiosis_advisor_v4.py",
+      "surface": "prompts",
+      "weight": 3
+    },
+    {
+      "intent": "prompt_registry",
+      "path": "reports/symbiosis_v6/symbiosis_deep_report.json",
+      "surface": "prompts",
+      "weight": 3
+    },
+    {
+      "intent": "prompt_registry",
+      "path": "reports/symbiosis_v6/symbiosis_deep_report.md",
+      "surface": "prompts",
+      "weight": 3
+    },
+    {
+      "intent": "prompt_registry",
+      "path": "train_lora.py",
+      "surface": "prompts",
+      "weight": 3
+    },
+    {
+      "intent": "tool_schemas_and_handlers",
+      "path": "eval/golden_prompts.json",
+      "surface": "tools_orchestration",
+      "weight": 3
+    },
+    {
+      "intent": "tool_schemas_and_handlers",
+      "path": "mlops/offllm_symbiosis_advisor_v4.py",
+      "surface": "tools_orchestration",
+      "weight": 3
+    },
+    {
+      "intent": "tool_schemas_and_handlers",
+      "path": "mlops/telemetry_to_sft.py",
+      "surface": "tools_orchestration",
+      "weight": 3
+    },
+    {
+      "intent": "tool_schemas_and_handlers",
+      "path": "offllm_end_to_end_pipeline.py",
+      "surface": "tools_orchestration",
+      "weight": 3
+    },
+    {
+      "intent": "tool_schemas_and_handlers",
+      "path": "offllm_symbiosis_advisor_v3.py",
+      "surface": "tools_orchestration",
+      "weight": 3
+    },
+    {
+      "intent": "tool_schemas_and_handlers",
+      "path": "offllm_symbiosis_advisor_v4.py",
+      "surface": "tools_orchestration",
+      "weight": 3
+    },
+    {
+      "intent": "tool_schemas_and_handlers",
+      "path": "offllm_symbiosis_advisor_v6.py",
+      "surface": "tools_orchestration",
+      "weight": 3
+    },
+    {
+      "intent": "tool_schemas_and_handlers",
+      "path": "reports/symbiosis_v6/symbiosis_deep_report.json",
+      "surface": "tools_orchestration",
+      "weight": 3
+    },
+    {
+      "intent": "tool_schemas_and_handlers",
+      "path": "reports/symbiosis_v6/symbiosis_deep_report.md",
+      "surface": "tools_orchestration",
+      "weight": 3
+    },
+    {
+      "intent": "tool_schemas_and_handlers",
+      "path": "train_lora.py",
+      "surface": "tools_orchestration",
+      "weight": 3
+    },
+    {
+      "intent": "telemetry_events",
+      "path": "convert_to_coreml.py",
+      "surface": "telemetry",
+      "weight": 4
+    },
+    {
+      "intent": "telemetry_events",
+      "path": "eval/export_equivalence.py",
+      "surface": "telemetry",
+      "weight": 4
+    },
+    {
+      "intent": "telemetry_events",
+      "path": "eval/retrieval_eval.py",
+      "surface": "telemetry",
+      "weight": 4
+    },
+    {
+      "intent": "telemetry_events",
+      "path": "mlops/generate_retrieval_pairs.py",
+      "surface": "telemetry",
+      "weight": 4
+    },
+    {
+      "intent": "telemetry_events",
+      "path": "mlops/offllm_symbiosis_advisor_v4.py",
+      "surface": "telemetry",
+      "weight": 4
+    },
+    {
+      "intent": "telemetry_events",
+      "path": "mlops/telemetry_to_sft.py",
+      "surface": "telemetry",
+      "weight": 4
+    },
+    {
+      "intent": "telemetry_events",
+      "path": "offllm_end_to_end_pipeline.py",
+      "surface": "telemetry",
+      "weight": 4
+    },
+    {
+      "intent": "telemetry_events",
+      "path": "offllm_symbiosis_advisor_v3.py",
+      "surface": "telemetry",
+      "weight": 4
+    },
+    {
+      "intent": "telemetry_events",
+      "path": "offllm_symbiosis_advisor_v4.py",
+      "surface": "telemetry",
+      "weight": 4
+    },
+    {
+      "intent": "telemetry_events",
+      "path": "offllm_symbiosis_advisor_v6.py",
+      "surface": "telemetry",
+      "weight": 4
+    },
+    {
+      "intent": "telemetry_events",
+      "path": "reports/symbiosis_v6/symbiosis_deep_report.json",
+      "surface": "telemetry",
+      "weight": 4
+    },
+    {
+      "intent": "telemetry_events",
+      "path": "reports/symbiosis_v6/symbiosis_deep_report.md",
+      "surface": "telemetry",
+      "weight": 4
+    },
+    {
+      "intent": "retrieval_pairs",
+      "path": "eval/retrieval_eval.py",
+      "surface": "retrieval_rag",
+      "weight": 4
+    },
+    {
+      "intent": "retrieval_pairs",
+      "path": "mlops/generate_retrieval_pairs.py",
+      "surface": "retrieval_rag",
+      "weight": 4
+    },
+    {
+      "intent": "retrieval_pairs",
+      "path": "mlops/offllm_symbiosis_advisor_v4.py",
+      "surface": "retrieval_rag",
+      "weight": 4
+    },
+    {
+      "intent": "retrieval_pairs",
+      "path": "offllm_end_to_end_pipeline.py",
+      "surface": "retrieval_rag",
+      "weight": 4
+    },
+    {
+      "intent": "retrieval_pairs",
+      "path": "offllm_symbiosis_advisor_v3.py",
+      "surface": "retrieval_rag",
+      "weight": 4
+    },
+    {
+      "intent": "retrieval_pairs",
+      "path": "offllm_symbiosis_advisor_v4.py",
+      "surface": "retrieval_rag",
+      "weight": 4
+    },
+    {
+      "intent": "retrieval_pairs",
+      "path": "offllm_symbiosis_advisor_v6.py",
+      "surface": "retrieval_rag",
+      "weight": 4
+    },
+    {
+      "intent": "retrieval_pairs",
+      "path": "reports/symbiosis_v6/symbiosis_deep_report.json",
+      "surface": "retrieval_rag",
+      "weight": 4
+    },
+    {
+      "intent": "retrieval_pairs",
+      "path": "reports/symbiosis_v6/symbiosis_deep_report.md",
+      "surface": "retrieval_rag",
+      "weight": 4
+    },
+    {
+      "intent": "eval_cases",
+      "path": "convert_to_coreml.py",
+      "surface": "evaluation",
+      "weight": 5
+    },
+    {
+      "intent": "eval_cases",
+      "path": "eval/export_equivalence.py",
+      "surface": "evaluation",
+      "weight": 5
+    },
+    {
+      "intent": "eval_cases",
+      "path": "eval/run_prompt_regression.py",
+      "surface": "evaluation",
+      "weight": 5
+    },
+    {
+      "intent": "eval_cases",
+      "path": "mlops/offllm_symbiosis_advisor_v4.py",
+      "surface": "evaluation",
+      "weight": 5
+    },
+    {
+      "intent": "eval_cases",
+      "path": "offllm_symbiosis_advisor_v3.py",
+      "surface": "evaluation",
+      "weight": 5
+    },
+    {
+      "intent": "eval_cases",
+      "path": "offllm_symbiosis_advisor_v4.py",
+      "surface": "evaluation",
+      "weight": 5
+    },
+    {
+      "intent": "eval_cases",
+      "path": "offllm_symbiosis_advisor_v6.py",
+      "surface": "evaluation",
+      "weight": 5
+    },
+    {
+      "intent": "eval_cases",
+      "path": "reports/symbiosis_v6/symbiosis_deep_report.json",
+      "surface": "evaluation",
+      "weight": 5
+    },
+    {
+      "intent": "eval_cases",
+      "path": "reports/symbiosis_v6/symbiosis_deep_report.md",
+      "surface": "evaluation",
+      "weight": 5
+    },
+    {
+      "intent": "eval_cases",
+      "path": "reports/symbiosis_v6/symbiosis_deep_report.sarif.json",
+      "surface": "evaluation",
+      "weight": 5
+    }
+  ],
+  "version": "v1"
+}
