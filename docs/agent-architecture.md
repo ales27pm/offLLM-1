@@ -3,7 +3,7 @@
 ## Orchestrator and Control Flow
 
 - `AgentOrchestrator` wires together the language model service, memory, prompt builder, tool handler, and plugin system. The `run` method retrieves long- and short-term context, builds an initial prompt, calls the LLM, parses any `TOOL_CALL` directives, executes the referenced tools, and then issues a final LLM call that incorporates tool output before persisting the exchange to memory.【F:src/core/AgentOrchestrator.js†L1-L174】
-- `PromptBuilder` makes the available tool roster explicit by enumerating the registered tools (name, description, parameter schema) and stitching both retrieved context and user input into the prompt template that is handed to the model. Prompt formatting is now anchored to the versioned template in `promptTemplates.json` to keep runtime and training prompts aligned.【F:src/core/prompt/PromptBuilder.js†L1-L35】【F:src/core/prompt/promptTemplate.js†L1-L31】【F:src/core/prompt/promptTemplates.json†L1-L16】
+- `PromptBuilder` makes the available tool roster explicit by enumerating the registered tools (name, description, parameter schema) and stitching both retrieved context and user input into the prompt template that is handed to the model. Prompt formatting now flows through the versioned entries in `PromptRegistry.ts` so runtime and training prompts stay aligned under a single source of truth.【F:src/core/prompt/PromptBuilder.js†L1-L35】【F:src/core/prompt/promptTemplate.js†L1-L36】【F:src/core/prompt/PromptRegistry.ts†L1-L113】
 - `ToolHandler` implements the dynamic routing layer: it parses structured tool invocations emitted by the LLM, validates arguments against JSON Schemas before execution, enforces capability allowlists, and returns structured results that are appended to the conversational context.【F:src/core/tools/ToolHandler.js†L1-L216】【F:src/core/tools/toolSchemaValidator.js†L1-L33】【F:schemas/tools/web_search.schema.json†L1-L15】
 
 ## Memory and Context Management
@@ -33,7 +33,7 @@
 ## Telemetry, Training, and Evaluation
 
 - Telemetry events capture prompts, tool calls, and retrieval signals with redaction and SHA-256 hash metadata, and each event validates against the canonical telemetry JSON Schema before it is persisted for training or evaluation workflows.【F:src/utils/telemetry.js†L1-L236】【F:schemas/telemetry_event.schema.json†L1-L118】
-- The LoRA training pipeline now consumes the shared prompt template, ensuring training prompts match the runtime tool-call schema and instruction text.【F:scripts/train_lora.py†L1-L142】【F:src/core/prompt/promptTemplates.json†L1-L16】
+- The LoRA training pipeline now consumes the shared prompt registry, ensuring training prompts match the runtime tool-call schema and instruction text.【F:scripts/train_lora.py†L1-L147】【F:src/core/prompt/PromptRegistry.ts†L1-L113】
 - Evaluation scripts provide deterministic checks for prompt regression (prompt output, tool-call diffs, JSON/refusal/citation expectations, and SARIF export), retrieval recall, and export equivalence to keep runtime behavior aligned with tooling outputs and conversion pipelines.【F:scripts/eval/run_prompt_regression.py†L1-L361】【F:scripts/eval/retrieval_eval.py†L1-L54】【F:scripts/eval/export_equivalence.py†L1-L52】
 
 ## Workflow and Automation Patterns

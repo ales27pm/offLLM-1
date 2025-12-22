@@ -2,6 +2,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 from dataclasses import dataclass
 from typing import Any, Optional
 
@@ -17,7 +18,6 @@ REQUIRED_FIELDS = {
     "tools",
     "context",
     "user_prompt",
-    "expected_prompt",
     "expected_response",
     "expected_tool_calls",
     "expects_json",
@@ -76,6 +76,22 @@ def build_prompt(
         template["assistant_prefix"],
     ]
     return "\n".join([segment for segment in sections if segment != ""])
+
+
+def load_prompt_registry(registry_path: str) -> dict:
+    with open(registry_path, "r", encoding="utf-8") as handle:
+        text = handle.read()
+    match = re.search(r"PROMPT_REGISTRY_JSON\\s*=\\s*`(.*?)`", text, re.S)
+    if not match:
+        raise ValueError("Unable to locate PROMPT_REGISTRY_JSON in registry file")
+    return json.loads(match.group(1))
+
+
+def get_runtime_template(registry: dict) -> dict:
+    prompt = registry["prompts"].get("runtime_prompt_v1")
+    if not prompt:
+        raise ValueError("runtime_prompt_v1 missing from prompt registry")
+    return prompt["template"]
 
 
 def _scan_balanced(
@@ -283,12 +299,14 @@ def normalize_tool_calls(calls: list[ToolCall]) -> list[dict[str, Any]]:
 
 def validate_entry_schema(entry: dict) -> list[str]:
     errors = []
-    extra = set(entry.keys()) - REQUIRED_FIELDS
+    extra = set(entry.keys()) - REQUIRED_FIELDS - {"expected_prompt", "expected_prompt_hash"}
     missing = REQUIRED_FIELDS - set(entry.keys())
     if extra:
         errors.append(f"Unexpected fields: {sorted(extra)}")
     if missing:
         errors.append(f"Missing fields: {sorted(missing)}")
+    if "expected_prompt" not in entry and "expected_prompt_hash" not in entry:
+        errors.append("expected_prompt or expected_prompt_hash must be provided")
 
     if not isinstance(entry.get("stable_id"), str) or not entry.get("stable_id"):
         errors.append("stable_id must be a non-empty string")
@@ -298,8 +316,12 @@ def validate_entry_schema(entry: dict) -> list[str]:
         errors.append("context must be a list")
     if not isinstance(entry.get("user_prompt"), str):
         errors.append("user_prompt must be a string")
-    if not isinstance(entry.get("expected_prompt"), str):
+    if "expected_prompt" in entry and not isinstance(entry.get("expected_prompt"), str):
         errors.append("expected_prompt must be a string")
+    if "expected_prompt_hash" in entry and not isinstance(
+        entry.get("expected_prompt_hash"), str
+    ):
+        errors.append("expected_prompt_hash must be a string")
     if not isinstance(entry.get("expected_response"), str):
         errors.append("expected_response must be a string")
     if not isinstance(entry.get("expected_tool_calls"), list):
@@ -415,7 +437,7 @@ def main() -> None:
             "src",
             "core",
             "prompt",
-            "promptTemplates.json",
+            "PromptRegistry.ts",
         ),
     )
     parser.add_argument(
@@ -434,8 +456,8 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    with open(args.template, "r", encoding="utf-8") as handle:
-        template = json.load(handle)
+    registry = load_prompt_registry(args.template)
+    template = get_runtime_template(registry)
     with open(args.golden, "r", encoding="utf-8") as handle:
         golden = json.load(handle)
 
@@ -476,11 +498,21 @@ def main() -> None:
         )
         prompt_hash = hashlib.sha256(prompt.encode("utf-8")).hexdigest()
 
-        if prompt != entry["expected_prompt"]:
+        expected_prompt = entry.get("expected_prompt")
+        expected_prompt_hash = entry.get("expected_prompt_hash")
+        if expected_prompt is not None and prompt != expected_prompt:
             issues.append(
                 {
                     "code": "prompt_mismatch",
                     "message": "Prompt did not match expected output",
+                    "prompt_hash": prompt_hash,
+                }
+            )
+        elif expected_prompt_hash is not None and prompt_hash != expected_prompt_hash:
+            issues.append(
+                {
+                    "code": "prompt_mismatch",
+                    "message": "Prompt hash did not match expected output",
                     "prompt_hash": prompt_hash,
                 }
             )

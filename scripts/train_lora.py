@@ -1,6 +1,7 @@
 import argparse
 import json
 import os
+import re
 
 import torch
 from datasets import load_dataset
@@ -14,11 +15,15 @@ from transformers import (
 )
 
 
-def load_prompt_template(template_path: str) -> dict:
-    if not os.path.isfile(template_path):
-        raise FileNotFoundError(f"Prompt template not found: {template_path}")
-    with open(template_path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+def load_prompt_registry(registry_path: str) -> dict:
+    if not os.path.isfile(registry_path):
+        raise FileNotFoundError(f"Prompt registry not found: {registry_path}")
+    with open(registry_path, "r", encoding="utf-8") as handle:
+        text = handle.read()
+    match = re.search(r"PROMPT_REGISTRY_JSON\\s*=\\s*`(.*?)`", text, re.S)
+    if not match:
+        raise ValueError("Unable to locate PROMPT_REGISTRY_JSON in registry file")
+    return json.loads(match.group(1))
 
 
 def format_example(example: dict, training_template: dict) -> str:
@@ -61,14 +66,15 @@ def main() -> None:
             "src",
             "core",
             "prompt",
-            "promptTemplates.json",
+            "PromptRegistry.ts",
         )
     )
     template_path = args.prompt_template or default_template_path
-    template = load_prompt_template(template_path)
-    training_template = template.get("training")
-    if not training_template:
-        raise ValueError("Prompt template missing 'training' section")
+    registry = load_prompt_registry(template_path)
+    training_prompt = registry["prompts"].get("training_prompt_v1")
+    if not training_prompt:
+        raise ValueError("Prompt registry missing training_prompt_v1")
+    training_template = training_prompt.get("template")
 
     tokenizer = AutoTokenizer.from_pretrained(args.base_model, use_fast=True)
     if tokenizer.pad_token is None:

@@ -1,4 +1,16 @@
 import LLMService from "./llmService";
+import {
+  TREE_OF_THOUGHT_CANDIDATE_ID,
+  TREE_OF_THOUGHT_EVALUATION_ID,
+  TREE_OF_THOUGHT_FALLBACK_ID,
+  getPromptDefinition,
+} from "../core/prompt/PromptRegistry";
+
+const renderPromptTemplate = (template, values) =>
+  Object.entries(values).reduce(
+    (acc, [key, value]) => acc.replaceAll(`{${key}}`, String(value)),
+    template,
+  );
 
 export class TreeOfThoughtReasoner {
   constructor() {
@@ -77,9 +89,12 @@ export class TreeOfThoughtReasoner {
   }
 
   async generateCandidateThoughts(currentThought, maxCandidates) {
-    const prompt = `Given the current thought: "${currentThought}"
-
-Generate ${maxCandidates} diverse alternative approaches or next steps. Format as a numbered list:`;
+    const promptTemplate = getPromptDefinition(TREE_OF_THOUGHT_CANDIDATE_ID)
+      .template.prompt;
+    const prompt = renderPromptTemplate(promptTemplate, {
+      current_thought: currentThought,
+      max_candidates: maxCandidates,
+    });
 
     try {
       const response = await LLMService.generate(prompt, 200, 0.8);
@@ -100,29 +115,19 @@ Generate ${maxCandidates} diverse alternative approaches or next steps. Format a
 
   generateFallbackCandidates(thought, maxCandidates) {
     // Fallback candidates for when LLM generation fails
-    const baseCandidates = [
-      `Consider alternative perspectives on: ${thought}`,
-      `Break down the problem: ${thought} into smaller components`,
-      `What are the assumptions behind: ${thought}`,
-      `Consider the opposite of: ${thought}`,
-      `How would an expert approach: ${thought}`,
-    ];
+    const fallbackTemplates = getPromptDefinition(TREE_OF_THOUGHT_FALLBACK_ID)
+      .template.candidates;
+    const baseCandidates = fallbackTemplates.map((template) =>
+      renderPromptTemplate(template, { thought }),
+    );
 
     return baseCandidates.slice(0, maxCandidates);
   }
 
   async evaluateThought(thought, context) {
-    const prompt = `Evaluate the quality of this thought in the context of solving: "${context}"
-
-Thought to evaluate: "${thought}"
-
-Rate on a scale of 0.0 to 1.0 considering:
-- Relevance to the problem
-- Novelty and creativity
-- Practical feasibility
-- Logical coherence
-
-Provide only the numerical rating:`;
+    const promptTemplate = getPromptDefinition(TREE_OF_THOUGHT_EVALUATION_ID)
+      .template.prompt;
+    const prompt = renderPromptTemplate(promptTemplate, { context, thought });
 
     try {
       const response = await LLMService.generate(prompt, 10, 0.1);

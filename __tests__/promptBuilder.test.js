@@ -1,6 +1,11 @@
+import crypto from "crypto";
 import fs from "fs";
 import path from "path";
 import PromptBuilder from "../src/core/prompt/PromptBuilder";
+import {
+  DEFAULT_RUNTIME_PROMPT_ID,
+  getPromptDefinition,
+} from "../src/core/prompt/PromptRegistry";
 import ToolHandler from "../src/core/tools/ToolHandler";
 
 class InMemoryToolRegistry {
@@ -32,6 +37,10 @@ const createTool = ({ name, description, parameters, execute }) => ({
 });
 
 describe("PromptBuilder", () => {
+  const runtimeTemplate = getPromptDefinition(
+    DEFAULT_RUNTIME_PROMPT_ID,
+  ).template;
+
   it("lists available tools alphabetically and preserves context order", () => {
     const searchTool = createTool({
       name: "search",
@@ -61,10 +70,10 @@ describe("PromptBuilder", () => {
     ];
     const prompt = builder.build("Write a summary", context);
 
-    expect(prompt).toContain("You are an AI assistant with access to:");
-    expect(prompt).toContain("Context:");
-    expect(prompt).toContain("User: Write a summary");
-    expect(prompt.trim().endsWith("Assistant:")).toBe(true);
+    expect(prompt).toContain(runtimeTemplate.system_intro);
+    expect(prompt).toContain(runtimeTemplate.context_title);
+    expect(prompt).toContain(`${runtimeTemplate.user_prefix} Write a summary`);
+    expect(prompt.trim().endsWith(runtimeTemplate.assistant_prefix)).toBe(true);
 
     const searchIndex = prompt.indexOf(`Tool: ${searchTool.name}`);
     const codeIndex = prompt.indexOf(`Tool: ${codeTool.name}`);
@@ -95,10 +104,10 @@ describe("PromptBuilder", () => {
 
     const prompt = builder.build("Hello there");
 
-    expect(prompt).toContain("You are an AI assistant with access to:");
+    expect(prompt).toContain(runtimeTemplate.system_intro);
     expect(prompt).not.toContain("Tool:");
-    expect(prompt).toContain("Context:");
-    expect(prompt).toContain("User: Hello there");
+    expect(prompt).toContain(runtimeTemplate.context_title);
+    expect(prompt).toContain(`${runtimeTemplate.user_prefix} Hello there`);
   });
 
   it("reflects runtime tool registry updates without caching results", () => {
@@ -180,7 +189,9 @@ describe("PromptBuilder", () => {
     expect(prompt).toContain("How do I double 21?");
     expect(prompt).toContain("Let me calculate that.");
     expect(prompt).toContain('{"doubled":42}');
-    expect(prompt).toContain("User: Share the doubled result");
+    expect(prompt).toContain(
+      `${runtimeTemplate.user_prefix} Share the doubled result`,
+    );
   });
 
   it("omits tools missing required metadata", () => {
@@ -264,6 +275,10 @@ describe("PromptBuilder", () => {
     };
     const builder = new PromptBuilder(registry);
     const prompt = builder.build(entry.user_prompt, entry.context);
-    expect(prompt).toBe(entry.expected_prompt);
+    const promptHash = crypto
+      .createHash("sha256")
+      .update(prompt, "utf-8")
+      .digest("hex");
+    expect(promptHash).toBe(entry.expected_prompt_hash);
   });
 });
