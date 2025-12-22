@@ -63,6 +63,7 @@ DEFAULT_IGNORE_GLOBS = [
     "**/*.sarif",
     "**/*prompt-regression*.json",
     "**/*prompt-regression*",
+    "**/*symbiosis*",
     "**/*symbiosis*report*",
 ]
 
