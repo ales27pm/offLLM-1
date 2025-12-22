@@ -187,9 +187,14 @@ describe("golden prompts", () => {
 
       if (
         Object.prototype.hasOwnProperty.call(entry, "requires_citations") &&
-        Object.prototype.hasOwnProperty.call(entry.expected, "citations_required")
+        Object.prototype.hasOwnProperty.call(
+          entry.expected,
+          "citations_required",
+        )
       ) {
-        expect(entry.expected.citations_required).toBe(entry.requires_citations);
+        expect(entry.expected.citations_required).toBe(
+          entry.requires_citations,
+        );
       }
     });
   });

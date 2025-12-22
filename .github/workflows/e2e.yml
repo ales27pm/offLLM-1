@@ -59,7 +59,6 @@ jobs:
            --report-out reports/prompt-regression.json \
            --sarif-out reports/prompt-regression.sarif
 
-
       # Always keep the SARIF file (even on fork PRs where Code Scanning upload is blocked)
       - name: Upload prompt regression SARIF artifact
         if: always()
