@@ -33,8 +33,14 @@ def main() -> int:
     scripts_runner = REPO_ROOT / "scripts" / "eval" / "run_prompt_regression.py"
     if eval_runner.exists() and scripts_runner.exists():
         text = eval_runner.read_text(encoding="utf-8")
-        if "scripts.eval.run_prompt_regression" not in text:
-            messages.append("eval/run_prompt_regression.py must forward to scripts/eval/run_prompt_regression.py")
+        if "scripts.eval.run_prompt_regression" not in text and "runpy.run_path" not in text:
+            messages.append(
+                "eval/run_prompt_regression.py must forward to scripts/eval/run_prompt_regression.py"
+            )
+        if "runpy.run_path" in text and "scripts/eval/run_prompt_regression.py" not in text:
+            messages.append(
+                "eval/run_prompt_regression.py must run scripts/eval/run_prompt_regression.py"
+            )
         for marker in ("PromptCase", "invoke_model", "load_cases", "parse_tool_calls"):
             if marker in text:
                 messages.append("eval/run_prompt_regression.py contains real logic; must be a thin forwarder")
