@@ -6,10 +6,16 @@ on:
     branches:
       - "**"
 
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
 jobs:
   e2e-smoke:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -40,23 +46,49 @@ jobs:
       - name: Prompt regression
         id: prompt_regression
         continue-on-error: true
-        run: python scripts/eval/run_prompt_regression.py --report-out reports/prompt-regression.json --sarif-out reports/prompt-regression.sarif
+        run: |
+          set -euo pipefail
+          mkdir -p reports
+          python scripts/eval/run_prompt_regression.py \
+            --report-out reports/prompt-regression.json \
+            --sarif-out reports/prompt-regression.sarif
 
-      - name: Upload prompt regression SARIF
+      # Always keep the SARIF file (even on fork PRs where Code Scanning upload is blocked)
+      - name: Upload prompt regression SARIF artifact
         if: always()
-        uses: github/codeql-action/upload-sarif@v3
+        uses: actions/upload-artifact@v5
+        with:
+          name: prompt-regression-sarif
+          path: reports/prompt-regression.sarif
+          if-no-files-found: warn
+
+      # Upload to GitHub Code Scanning ONLY when permitted (non-fork PRs / manual runs on repo / pushes)
+      - name: Upload prompt regression SARIF to Code Scanning
+        if: >
+          always() &&
+          (
+            github.event_name != 'pull_request' ||
+            github.event.pull_request.head.repo.full_name == github.repository
+          )
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: reports/prompt-regression.sarif
+          wait-for-processing: true
 
       - name: Enforce prompt regression
         if: steps.prompt_regression.outcome == 'failure'
         run: exit 1
 
       - name: Symbiosis advisor
-        run: python scripts/offllm_symbiosis_advisor_v3.py --repo . --out-dir runs/symbiosis
+        run: |
+          set -euo pipefail
+          mkdir -p runs/symbiosis
+          python scripts/offllm_symbiosis_advisor_v3.py --repo . --out-dir runs/symbiosis
 
       - name: Upload symbiosis artifacts
+        if: always()
         uses: actions/upload-artifact@v5
         with:
           name: symbiosis-advisor
           path: runs/symbiosis
+          if-no-files-found: warn
