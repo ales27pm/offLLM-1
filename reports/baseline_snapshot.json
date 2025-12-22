@@ -1,0 +1,82 @@
+{
+  "commit_sha": "fb090a86c37ea4af86c25a2c921bb3838af5ac3e",
+  "prompt_file_paths": [
+    "src/core/prompt/promptTemplates.json",
+    "src/core/prompt/promptTemplate.js",
+    "src/services/treeOfThought.js",
+    "src/utils/buildPrompt.ts",
+    "eval/golden_prompts.json",
+    "eval/redteam_tool_injection.json",
+    "scripts/eval/golden_prompts.json"
+  ],
+  "telemetry_schema": {
+    "file": "schemas/telemetry_event.schema.json",
+    "event_types": [
+      "prompt_received",
+      "tool_invocation",
+      "retrieval",
+      "final_response"
+    ]
+  },
+  "telemetry_producers": [
+    {
+      "file": "src/utils/telemetry.js",
+      "functions": [
+        "buildTelemetryEvent",
+        "logTelemetryEvent",
+        "buildToolInvocationEvent",
+        "buildPromptEvent",
+        "buildFinalResponseEvent",
+        "buildRetrievalEvent"
+      ]
+    },
+    {
+      "file": "src/core/AgentOrchestrator.js",
+      "functions": [
+        "buildPromptEvent",
+        "buildFinalResponseEvent",
+        "logTelemetryEvent"
+      ]
+    },
+    {
+      "file": "src/core/tools/ToolHandler.js",
+      "functions": [
+        "buildToolInvocationEvent",
+        "logTelemetryEvent"
+      ]
+    },
+    {
+      "file": "src/core/memory/services/Retriever.js",
+      "functions": [
+        "buildRetrievalEvent",
+        "logTelemetryEvent"
+      ]
+    }
+  ],
+  "eval_entry_points": [
+    "eval/run_prompt_regression.py",
+    "eval/retrieval_eval.py",
+    "eval/export_equivalence.py",
+    "scripts/eval/run_prompt_regression.py",
+    "scripts/eval/retrieval_eval.py",
+    "scripts/eval/export_equivalence.py",
+    "ci/run_prompt_regression.sh"
+  ],
+  "ci_workflows": [
+    ".github/workflows/offllm_pipeline.yml",
+    ".github/workflows/csr.yml",
+    ".github/workflows/e2e.yml",
+    ".github/workflows/ios-signing-validate.yml",
+    ".github/workflows/fine_tune_and_convert.yml",
+    ".github/workflows/ios-deploy-testflight.yml",
+    ".github/workflows/CoreML.yml",
+    ".github/workflows/prompt_regression.yml",
+    ".github/workflows/ios-signed-monGARS.yml",
+    ".github/workflows/ios-build-signed-ipa.yml"
+  ],
+  "export_scripts": [
+    "scripts/convert_to_coreml.py",
+    "scripts/offllm_end_to_end_pipeline.py",
+    "scripts/ci/export_ipa.sh"
+  ]
+}
