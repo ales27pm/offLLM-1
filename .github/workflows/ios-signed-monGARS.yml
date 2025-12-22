@@ -58,7 +58,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Select latest Xcode 16 on macOS 15
         run: bash scripts/ci/select_xcode.sh 16
