@@ -407,6 +407,7 @@ def parse_args_str(arg_str: str) -> dict:
             cursor += 1
             value = ""
             escaped = False
+            closed = False
             while cursor < length:
                 ch = arg_str[cursor]
                 if escaped:
@@ -420,9 +421,12 @@ def parse_args_str(arg_str: str) -> dict:
                     continue
                 if ch == quote:
                     cursor += 1
+                    closed = True
                     break
                 value += ch
                 cursor += 1
+            if not closed:
+                raise ValueError("Malformed argument string")
             args[key] = coerce_value(value)
         elif char in ("{", "["):
             end_char = "}" if char == "{" else "]"
