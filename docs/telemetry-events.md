@@ -17,4 +17,4 @@ Telemetry is stored as JSON Lines under the app document directory so runtime tr
 ## JSONL output
 
 - Each line is a standalone JSON object with ISO timestamps, schema metadata, prompt identifiers, and a tool schema version so downstream scripts can stream-process telemetry safely.【F:src/utils/telemetry.js†L115-L170】
-- Conversion utilities in `scripts/mlops` turn telemetry into SFT-ready datasets and retrieval pair files for training workflows while validating schema compliance and redaction status.【F:scripts/mlops/telemetry_to_sft.py†L1-L128】【F:scripts/mlops/generate_retrieval_pairs.py†L1-L48】
+- Conversion utilities in `scripts/mlops` turn telemetry into SFT-ready datasets, tool-call traces, and retrieval triples for training workflows while validating schema compliance and redaction status.【F:scripts/mlops/telemetry_to_sft.py†L1-L128】【F:scripts/mlops/telemetry_to_tool_calls.py†L1-L136】【F:scripts/mlops/telemetry_to_retrieval_triples.py†L1-L93】
