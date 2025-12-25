@@ -50,7 +50,7 @@ def build_retrieval_triples(path: Path, strict_schema: bool) -> list[dict]:
                 candidate_ids = trace.get("candidate_ids") or []
                 candidate_scores = trace.get("candidate_scores") or []
                 candidate_ranked = sorted(
-                    zip(candidate_ids, candidate_scores),
+                    zip(candidate_ids, candidate_scores, strict=True),
                     key=lambda pair: pair[1],
                     reverse=True,
                 )
