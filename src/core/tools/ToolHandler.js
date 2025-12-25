@@ -158,7 +158,7 @@ export default class ToolHandler {
     const results = [];
     for (const call of calls) {
       const normalized = call.tool
-        ? call
+        ? { ...call, ok: true }
         : { ok: true, tool: call.name, args: call.args || {} };
       const res = await this.executeCall(normalized, options);
       if (res.ok) {
