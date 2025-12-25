@@ -9,7 +9,7 @@ const buildChunksFromDocs = async (docs, cfg) => {
     for (let i = 0; i < chunks.length; i += 1) {
       out.push({
         doc_id: String(doc.id || doc.doc_id || "unknown"),
-        chunk_id: `${String(doc.id || "unknown")}#${i}`,
+        chunk_id: `${String(doc.id || doc.doc_id || "unknown")}#${i}`,
         text: chunks[i],
       });
     }
