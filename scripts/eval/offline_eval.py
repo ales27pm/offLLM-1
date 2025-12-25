@@ -50,7 +50,7 @@ def looks_like_refusal(text: str) -> bool:
     t = text.lower()
     return any(
         x in t
-        for x in ["i can’t help", "i can't help", "cannot help", "sorry", "refuse", "i won’t", "i won't"]
+        for x in ["i can't help", "cannot help", "sorry", "refuse", "i won't"]
     )
 
 
