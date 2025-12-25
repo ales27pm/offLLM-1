@@ -14,12 +14,17 @@ def load_manifest(path: str) -> dict:
 
 
 def stream_source_records(source: dict) -> Iterable[Dict[str, str]]:
-    dataset = load_dataset(
-        source["dataset"],
-        source.get("subset"),
-        split=source.get("split", "train"),
-        streaming=True,
-    )
+    try:
+        dataset = load_dataset(
+            source["dataset"],
+            source.get("subset"),
+            split=source.get("split", "train"),
+            streaming=True,
+        )
+    except Exception as e:
+        print(f"Error loading dataset {source['dataset']}: {e}")
+        return
+    
     text_field = source.get("text_field", "text")
     for record in dataset:
         text = record.get(text_field)
