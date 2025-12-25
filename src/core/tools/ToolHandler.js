@@ -86,7 +86,7 @@ export default class ToolHandler {
       let obj;
       try {
         obj = JSON.parse(inner);
-      } catch (error) {
+      } catch {
         calls.push({ ok: false, error: "invalid_json", raw: inner });
         continue;
       }
