@@ -1,9 +1,4 @@
-import {
-  USER_PROMPT_BUILDER_ID,
-  getPromptDefinition,
-} from "../core/prompt/PromptRegistry";
-
-const promptTemplate = getPromptDefinition(USER_PROMPT_BUILDER_ID).template;
+import promptTemplate from "../../prompts/v1/user_prompt_builder.json";
 
 const renderPromptTemplate = (
   template: string,

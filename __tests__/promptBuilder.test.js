@@ -1,316 +1,63 @@
-import crypto from "crypto";
-import fs from "fs";
-import path from "path";
 import PromptBuilder from "../src/core/prompt/PromptBuilder";
-import {
-  DEFAULT_RUNTIME_PROMPT_ID,
-  getPromptDefinition,
-} from "../src/core/prompt/PromptRegistry";
-import ToolHandler from "../src/core/tools/ToolHandler";
 
 class InMemoryToolRegistry {
   constructor(tools = []) {
-    this.tools = new Map();
-    tools.forEach((tool) => {
-      this.register(tool);
-    });
+    this.tools = tools;
   }
 
-  register(tool) {
-    this.tools.set(tool.name, tool);
-  }
-
-  getAvailableTools() {
-    return Array.from(this.tools.values());
-  }
-
-  getTool(name) {
-    return this.tools.get(name);
+  toolsJson() {
+    return [...this.tools].sort((a, b) => a.name.localeCompare(b.name));
   }
 }
 
-const createTool = ({ name, description, parameters, execute }) => ({
-  name,
-  description,
-  parameters,
-  execute,
-});
-
-function readGoldenPromptsFile(goldenPath) {
-  const raw = fs.readFileSync(goldenPath, "utf-8");
-  const parsed = JSON.parse(raw);
-
-  // legacy: [ ...cases ]
-  if (Array.isArray(parsed)) return { cases: parsed };
-
-  // current: { cases: [ ...cases ], ...meta }
-  if (parsed && typeof parsed === "object" && Array.isArray(parsed.cases)) {
-    return parsed;
-  }
-
-  const shape = parsed === null ? "null" : typeof parsed;
-  throw new Error(
-    `golden_prompts.json must be either an array of cases OR an object with { cases: [...] }. Got: ${shape}`,
-  );
-}
-
-describe("PromptBuilder", () => {
-  const runtimeTemplate = getPromptDefinition(
-    DEFAULT_RUNTIME_PROMPT_ID,
-  ).template;
-
-  it("lists available tools alphabetically and preserves context order", () => {
-    const searchTool = createTool({
+test("PromptBuilder injects deterministic tool JSON", () => {
+  const registry = new InMemoryToolRegistry([
+    {
       name: "search",
       description: "web search",
-      parameters: {
-        query: { type: "string", required: true },
-      },
-      execute: async ({ query }) => ({ results: [`result for ${query}`] }),
-    });
-
-    const codeTool = createTool({
+      schema: { type: "object", properties: { query: { type: "string" } } },
+      capabilities: ["online"],
+    },
+    {
       name: "code",
       description: "run code",
-      parameters: {
-        language: { type: "string", required: true },
-        code: { type: "string", required: true },
-      },
-      execute: async ({ language, code }) => ({ language, code }),
-    });
+      schema: { type: "object", properties: { code: { type: "string" } } },
+      capabilities: ["general"],
+    },
+  ]);
 
-    const registry = new InMemoryToolRegistry([searchTool, codeTool]);
-    const builder = new PromptBuilder(registry);
-    const context = [
-      "string context entry",
-      { content: "previous conversation" },
-      { content: "system note" },
-    ];
-    const prompt = builder.build("Write a summary", context);
+  const builder = new PromptBuilder({ toolRegistry: registry });
+  builder.now = () => new Date("2024-01-01T00:00:00.000Z");
 
-    expect(prompt).toContain(runtimeTemplate.system_intro);
-    expect(prompt).toContain(runtimeTemplate.context_title);
-    expect(prompt).toContain(`${runtimeTemplate.user_prefix} Write a summary`);
-    expect(prompt.trim().endsWith(runtimeTemplate.assistant_prefix)).toBe(true);
+  const { systemPrompt } = builder.buildSystemPrompt();
 
-    const searchIndex = prompt.indexOf(`Tool: ${searchTool.name}`);
-    const codeIndex = prompt.indexOf(`Tool: ${codeTool.name}`);
-    expect(searchIndex).toBeGreaterThanOrEqual(0);
-    expect(codeIndex).toBeGreaterThanOrEqual(0);
-    expect(codeIndex).toBeLessThan(searchIndex);
-    expect(prompt).toContain(
-      `(Params: ${JSON.stringify(searchTool.parameters)})`,
-    );
-    expect(prompt).toContain(
-      `Tool: ${codeTool.name} - ${codeTool.description}`,
-    );
-    expect(prompt).toContain(
-      `(Params: ${JSON.stringify(codeTool.parameters)})`,
-    );
+  expect(systemPrompt).toContain("Today is 2024-01-01T00:00:00.000Z");
+  const codeIndex = systemPrompt.indexOf('"name": "code"');
+  const searchIndex = systemPrompt.indexOf('"name": "search"');
+  expect(codeIndex).toBeGreaterThanOrEqual(0);
+  expect(searchIndex).toBeGreaterThanOrEqual(0);
+  expect(codeIndex).toBeLessThan(searchIndex);
+});
 
-    const firstContextIndex = prompt.indexOf(context[0]);
-    const secondContextIndex = prompt.indexOf(context[1].content);
-    const thirdContextIndex = prompt.indexOf(context[2].content);
-    expect(firstContextIndex).toBeGreaterThanOrEqual(0);
-    expect(secondContextIndex).toBeGreaterThan(firstContextIndex);
-    expect(thirdContextIndex).toBeGreaterThan(secondContextIndex);
-  });
+test("PromptBuilder filters tools by capability allowlist", () => {
+  const registry = new InMemoryToolRegistry([
+    {
+      name: "search",
+      description: "web search",
+      schema: { type: "object", properties: { query: { type: "string" } } },
+      capabilities: ["online"],
+    },
+    {
+      name: "note",
+      description: "take notes",
+      schema: { type: "object", properties: { text: { type: "string" } } },
+      capabilities: ["general"],
+    },
+  ]);
 
-  it("handles empty tool and context lists", () => {
-    const registry = new InMemoryToolRegistry();
-    const builder = new PromptBuilder(registry);
+  const builder = new PromptBuilder({ toolRegistry: registry });
+  const { systemPrompt } = builder.buildSystemPrompt(["general"]);
 
-    const prompt = builder.build("Hello there");
-
-    expect(prompt).toContain(runtimeTemplate.system_intro);
-    expect(prompt).not.toContain("Tool:");
-    expect(prompt).toContain(runtimeTemplate.context_title);
-    expect(prompt).toContain(`${runtimeTemplate.user_prefix} Hello there`);
-  });
-
-  it("reflects runtime tool registry updates without caching results", () => {
-    const registry = new InMemoryToolRegistry();
-    const builder = new PromptBuilder(registry);
-
-    const planTool = createTool({
-      name: "planner",
-      description: "plan tasks",
-      parameters: {
-        topic: { type: "string", required: true },
-      },
-      execute: async ({ topic }) => ({ plan: `Plan for ${topic}` }),
-    });
-
-    registry.register(planTool);
-    const firstPrompt = builder.build("Organize the day");
-
-    expect(firstPrompt).toContain(
-      `Tool: ${planTool.name} - ${planTool.description}`,
-    );
-    expect(firstPrompt).not.toContain("summarize notes");
-
-    const summaryTool = createTool({
-      name: "summarizer",
-      description: "summarize notes",
-      parameters: {
-        notes: { type: "string", required: true },
-      },
-      execute: async ({ notes }) => ({ summary: notes.slice(0, 10) }),
-    });
-
-    registry.register(summaryTool);
-    const secondPrompt = builder.build("Organize the day");
-
-    expect(secondPrompt).toContain(
-      `Tool: ${summaryTool.name} - ${summaryTool.description}`,
-    );
-    expect(secondPrompt).toContain("summarize notes");
-    expect(firstPrompt).not.toContain(
-      `Tool: ${summaryTool.name} - ${summaryTool.description}`,
-    );
-  });
-
-  it("incorporates conversation history and executed tool output", async () => {
-    const registry = new InMemoryToolRegistry();
-    const builder = new PromptBuilder(registry);
-
-    const doublerTool = createTool({
-      name: "doubler",
-      description: "double numeric strings",
-      parameters: {
-        value: { type: "number", required: true },
-      },
-      execute: async ({ value }) => {
-        const numeric = Number(value);
-        return { doubled: numeric * 2 };
-      },
-    });
-
-    registry.register(doublerTool);
-
-    const toolHandler = new ToolHandler(registry, {
-      schemaValidator: () => ({ valid: true, errors: [] }),
-    });
-    const llmResponse = 'TOOL_CALL:doubler(value="21")';
-    const calls = toolHandler.parse(llmResponse);
-    const toolResults = await toolHandler.execute(calls);
-
-    const conversation = [
-      { role: "user", content: "How do I double 21?" },
-      { role: "assistant", content: "Let me calculate that." },
-    ];
-    const prompt = builder.build("Share the doubled result", [
-      ...conversation,
-      ...toolResults,
-    ]);
-
-    expect(prompt).toContain("How do I double 21?");
-    expect(prompt).toContain("Let me calculate that.");
-    expect(prompt).toContain('{"doubled":42}');
-    expect(prompt).toContain(
-      `${runtimeTemplate.user_prefix} Share the doubled result`,
-    );
-  });
-
-  it("omits tools missing required metadata", () => {
-    const validTool = createTool({
-      name: "executor",
-      description: "valid tool",
-      parameters: {},
-      execute: async () => ({ ok: true }),
-    });
-
-    const registry = new InMemoryToolRegistry([
-      { description: "missing name", execute: async () => ({}) },
-      { name: "", description: "empty name", execute: async () => ({}) },
-      { name: "anon", execute: async () => ({}) },
-      validTool,
-    ]);
-
-    const builder = new PromptBuilder(registry);
-    const prompt = builder.build("Check tool list");
-
-    expect(prompt).toContain(
-      `Tool: ${validTool.name} - ${validTool.description}`,
-    );
-    expect(prompt).not.toContain("missing name");
-    expect(prompt).not.toContain("empty name");
-    expect(prompt).not.toContain("anon");
-    expect(prompt).toContain("(Params: {})");
-  });
-
-  it("surfaces missing required tool parameters as execution errors", async () => {
-    const registry = new InMemoryToolRegistry();
-    const builder = new PromptBuilder(registry);
-
-    const validatorTool = createTool({
-      name: "validator",
-      description: "requires foo",
-      parameters: {
-        foo: { type: "string", required: true },
-      },
-      execute: async ({ foo }) => ({ foo }),
-    });
-
-    registry.register(validatorTool);
-    const toolHandler = new ToolHandler(registry, {
-      schemaValidator: () => ({
-        valid: false,
-        errors: ["(root) must have required property 'foo'"],
-      }),
-    });
-
-    const calls = toolHandler.parse("TOOL_CALL:validator()");
-    const toolResults = await toolHandler.execute(calls);
-
-    expect(toolResults).toHaveLength(1);
-    expect(toolResults[0].content).toContain(
-      "Invalid parameters for 'validator': (root) must have required property 'foo'",
-    );
-
-    const prompt = builder.build("Proceed", toolResults);
-    expect(prompt).toContain(
-      "Invalid parameters for 'validator': (root) must have required property 'foo'",
-    );
-    expect(prompt).toContain(
-      `Tool: ${validatorTool.name} - ${validatorTool.description}`,
-    );
-  });
-
-  // Golden prompt regression cases
-  const goldenPath = path.join(
-    __dirname,
-    "..",
-    "scripts",
-    "eval",
-    "golden_prompts.json",
-  );
-  const golden = readGoldenPromptsFile(goldenPath);
-
-  const goldenCases = (golden.cases || [])
-    .filter((entry) => entry && typeof entry === "object")
-    .map((entry) => [entry.stable_id, entry]);
-
-  it.each(goldenCases)("matches golden prompt %s", (_id, entry) => {
-    // For this test we only need getAvailableTools()
-    const registry = {
-      getAvailableTools: () => entry.tools || [],
-    };
-
-    const builder = new PromptBuilder(registry);
-    const prompt = builder.build(entry.user_prompt, entry.context);
-
-    // Hash is optional; when present, enforce determinism.
-    if (typeof entry.expected_prompt_hash === "string") {
-      const promptHash = crypto
-        .createHash("sha256")
-        .update(prompt, "utf-8")
-        .digest("hex");
-      expect(promptHash).toBe(entry.expected_prompt_hash);
-    } else {
-      // Still assert prompt is buildable
-      expect(typeof prompt).toBe("string");
-      expect(prompt.length).toBeGreaterThan(0);
-    }
-  });
+  expect(systemPrompt).toContain('"name": "note"');
+  expect(systemPrompt).not.toContain('"name": "search"');
 });

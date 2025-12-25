@@ -1,47 +1,20 @@
-import {
-  buildTelemetryEvent,
-  buildPromptEvent,
-  hashString,
-  redactTelemetryValue,
-  validateTelemetryEvent,
-} from "../src/utils/telemetry";
+import { deepRedact, redactString } from "../src/utils/telemetry";
 
-test("redactTelemetryValue removes PII and secrets deterministically", () => {
+test("redactString scrubs tokens and emails", () => {
+  const input = "email test@example.com token sk-1234567890abcdef";
+  const result = redactString(input);
+  expect(result).not.toContain("test@example.com");
+  expect(result).not.toContain("sk-1234567890abcdef");
+});
+
+test("deepRedact scrubs secret-ish fields", () => {
   const input = {
-    email: "user@example.com",
-    phone: "+1 (415) 555-1234",
-    apiKey: "example-redacted-value",
-    bearer: "Bearer example-redacted",
-    nested: {
-      token: "example-redacted-token",
-      text: "Contact me at admin@example.com",
-    },
+    token: "secret",
+    nested: { apiKey: "secret2" },
+    safe: "ok",
   };
-
-  const redacted = redactTelemetryValue(input);
-
-  expect(redacted.email).toBe("[REDACTED_EMAIL]");
-  expect(redacted.phone).toBe("[REDACTED_PHONE]");
-  expect(redacted.apiKey).toBe("[REDACTED]");
-  expect(redacted.bearer).toBe("Bearer [REDACTED]");
-  expect(redacted.nested.token).toBe("[REDACTED]");
-  expect(redacted.nested.text).toBe("Contact me at [REDACTED_EMAIL]");
-});
-
-test("hashString uses SHA-256 prefix", () => {
-  const digest = hashString("test-value");
-  expect(digest.startsWith("sha256_")).toBe(true);
-  expect(digest.length).toBeGreaterThan(10);
-});
-
-test("telemetry events validate against the schema", () => {
-  const event = buildPromptEvent({
-    promptHash: "sha256_test",
-    promptText: "Hello from user@example.com",
-    modelId: "model_test",
-  });
-  const payload = buildTelemetryEvent(event);
-  const validation = validateTelemetryEvent(payload);
-  expect(validation.valid).toBe(true);
-  expect(payload.redaction_applied).toBe(true);
+  const result = deepRedact(input);
+  expect(result.token).toBe("[REDACTED_SECRET_FIELD]");
+  expect(result.nested.apiKey).toBe("[REDACTED_SECRET_FIELD]");
+  expect(result.safe).toBe("ok");
 });

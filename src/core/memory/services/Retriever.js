@@ -1,18 +1,10 @@
-import {
-  buildRetrievalEvent,
-  logTelemetryEvent,
-} from "../../../utils/telemetry";
-import {
-  DEFAULT_RUNTIME_PROMPT_ID,
-  getPromptDefinition,
-} from "../../prompt/PromptRegistry";
-
 export default class Retriever {
-  constructor(vectorStore, llmService, attentionFn) {
+  constructor(vectorStore, llmService, attentionFn, opts = {}) {
     this.store = vectorStore;
     this.llm = llmService;
     this.attention = attentionFn;
     this.initialized = false;
+    this.telemetry = opts.telemetry || null;
   }
 
   async _ensureInit() {
@@ -22,9 +14,8 @@ export default class Retriever {
     }
   }
 
-  async retrieve(query, maxResults = 5) {
+  async retrieve(query, maxResults = 5, ctx = {}) {
     await this._ensureInit();
-    const promptDefinition = getPromptDefinition(DEFAULT_RUNTIME_PROMPT_ID);
     const startTime = Date.now();
     const qEmb = await this.llm.embed(query);
     const raw = await this.store.searchVectors(qEmb, maxResults * 3);
@@ -41,23 +32,17 @@ export default class Retriever {
         content,
       };
     });
+
     if (!items.length) {
-      void logTelemetryEvent(
-        buildRetrievalEvent({
-          query,
-          resultIds: [],
-          maxResults,
-          latencyMs: Date.now() - startTime,
-          candidateIds,
-          candidateScores,
-          promptId: promptDefinition.id,
-          promptVersion: promptDefinition.version,
-          modelId:
-            typeof this.llm.getModelId === "function"
-              ? this.llm.getModelId()
-              : "unknown",
-        }),
-      );
+      this._emitTelemetry({
+        query,
+        maxResults,
+        startTime,
+        candidateIds,
+        candidateScores,
+        resultIds: [],
+        ctx,
+      });
       return [];
     }
 
@@ -68,23 +53,44 @@ export default class Retriever {
     );
     const selected = indices.map((i) => items[i]);
 
-    void logTelemetryEvent(
-      buildRetrievalEvent({
-        query,
-        resultIds: selected.map((item) => item.id),
-        maxResults,
-        latencyMs: Date.now() - startTime,
-        candidateIds,
-        candidateScores,
-        promptId: promptDefinition.id,
-        promptVersion: promptDefinition.version,
-        modelId:
-          typeof this.llm.getModelId === "function"
-            ? this.llm.getModelId()
-            : "unknown",
-      }),
-    );
+    this._emitTelemetry({
+      query,
+      maxResults,
+      startTime,
+      candidateIds,
+      candidateScores,
+      resultIds: selected.map((item) => item.id),
+      ctx,
+    });
 
     return selected.map((item) => ({ role: "context", content: item.content }));
+  }
+
+  _emitTelemetry({
+    query,
+    maxResults,
+    startTime,
+    candidateIds,
+    candidateScores,
+    resultIds,
+    ctx,
+  }) {
+    if (!this.telemetry || typeof this.telemetry.event !== "function") return;
+
+    this.telemetry.event(
+      "retrieval_trace",
+      {
+        query: String(query || ""),
+        topK: maxResults,
+        returned: resultIds.length,
+        latency_ms: Date.now() - startTime,
+        hits: resultIds.map((id, idx) => ({
+          doc_id: id,
+          chunk_id: id,
+          score: candidateScores[idx],
+        })),
+      },
+      ctx,
+    );
   }
 }

@@ -1,285 +1,183 @@
-import {
-  buildToolInvocationEvent,
-  logTelemetryEvent,
-} from "../../utils/telemetry";
-import { validateToolArgs } from "./toolSchemaValidator";
+const TOOL_CALL = "TOOL" + "_CALL";
+const END_TOOL_CALL = "END_" + "TOOL_CALL";
+
+const extractToolEnvelopes = (text) => {
+  const s = String(text || "");
+  const out = [];
+  let i = 0;
+
+  while (i < s.length) {
+    const start = s.indexOf(TOOL_CALL, i);
+    if (start === -1) break;
+    const end = s.indexOf(END_TOOL_CALL, start);
+    if (end === -1) break;
+
+    const inner = s.slice(start + TOOL_CALL.length, end).trim();
+    out.push(inner);
+    i = end + END_TOOL_CALL.length;
+  }
+  return out;
+};
+
+const validateArgs = (schema, args) => {
+  const sch = schema || {};
+  if (sch.type !== "object") return { ok: true, errors: [] };
+  if (args == null || typeof args !== "object" || Array.isArray(args)) {
+    return { ok: false, errors: ["args must be an object"] };
+  }
+
+  const props = sch.properties || {};
+  const req = Array.isArray(sch.required) ? sch.required : [];
+  const additional = sch.additionalProperties !== false;
+
+  const errors = [];
+
+  for (const r of req) {
+    if (!(r in args)) errors.push(`missing required field: ${r}`);
+  }
+
+  for (const [key, value] of Object.entries(args)) {
+    if (!(key in props) && !additional) {
+      errors.push(`unexpected field: ${key}`);
+      continue;
+    }
+    const ps = props[key];
+    if (ps && ps.type) {
+      const t = ps.type;
+      if (t === "string" && typeof value !== "string")
+        errors.push(`field ${key} must be string`);
+      if (t === "number" && typeof value !== "number")
+        errors.push(`field ${key} must be number`);
+      if (t === "integer" && !Number.isInteger(value))
+        errors.push(`field ${key} must be integer`);
+      if (t === "boolean" && typeof value !== "boolean")
+        errors.push(`field ${key} must be boolean`);
+      if (
+        t === "object" &&
+        (typeof value !== "object" || value == null || Array.isArray(value))
+      ) {
+        errors.push(`field ${key} must be object`);
+      }
+      if (t === "array" && !Array.isArray(value))
+        errors.push(`field ${key} must be array`);
+    }
+    if (ps && ps.enum && Array.isArray(ps.enum)) {
+      if (!ps.enum.includes(value))
+        errors.push(`field ${key} must be one of enum`);
+    }
+  }
+
+  return { ok: errors.length === 0, errors };
+};
 
 export default class ToolHandler {
-  constructor(toolRegistry, options = {}) {
-    this.toolRegistry = toolRegistry;
-    this.schemaValidator = options.schemaValidator || validateToolArgs;
+  constructor(toolRegistry, opts = {}) {
+    this.registry = toolRegistry;
+    this.allowCapabilities = Array.isArray(opts.allowCapabilities)
+      ? opts.allowCapabilities
+      : null;
   }
 
-  _scanBalanced(str, start, openChar, closeChar, initialDepth = 0) {
-    let depth = initialDepth;
-    let inQuote = null;
-    let escaped = false;
-    for (let i = start; i < str.length; i++) {
-      const ch = str[i];
-      if (escaped) {
-        escaped = false;
-        continue;
-      }
-      if (ch === "\\") {
-        escaped = true;
-        continue;
-      }
-      if (inQuote) {
-        if (ch === inQuote) inQuote = null;
-        continue;
-      }
-      if (ch === '"' || ch === "'") {
-        inQuote = ch;
-        continue;
-      }
-      if (ch === openChar) depth++;
-      else if (ch === closeChar) {
-        depth--;
-        if (depth === 0) return { end: i, closed: true };
-      }
-    }
-    return { end: str.length, closed: false };
-  }
+  parseCalls(modelText) {
+    const envs = extractToolEnvelopes(modelText);
+    const calls = [];
 
-  parse(response) {
-    const results = [];
-    const marker = /TOOL_CALL:/g;
-    let match;
-
-    while ((match = marker.exec(response)) !== null) {
-      let cursor = match.index + match[0].length;
-
-      while (cursor < response.length && /\s/.test(response[cursor])) cursor++;
-      const nameMatch = /[A-Za-z_][\w-]*/.exec(response.slice(cursor));
-      if (!nameMatch) {
-        console.warn("Malformed TOOL_CALL: missing name");
-        continue;
-      }
-      const name = nameMatch[0];
-      cursor += name.length;
-
-      while (cursor < response.length && /\s/.test(response[cursor])) cursor++;
-      if (response[cursor] !== "(") {
-        console.warn(`Malformed TOOL_CALL for ${name}: missing '('`);
-        continue;
-      }
-      cursor++; // skip opening parenthesis
-
-      const argsStart = cursor;
-      const { end, closed } = this._scanBalanced(response, cursor, "(", ")", 1);
-      if (!closed) {
-        console.warn(`Malformed TOOL_CALL for ${name}: unterminated args`);
-        continue;
-      }
-      const argsStr = response.slice(argsStart, end);
+    for (const inner of envs) {
+      let obj;
       try {
-        const args = this._parseArgs(argsStr.trim());
-        results.push({ name, args });
-      } catch (error) {
-        console.warn(`Failed to parse args for ${name}:`, error);
+        obj = JSON.parse(inner);
+      } catch {
+        calls.push({ ok: false, error: "invalid_json", raw: inner });
+        continue;
       }
-      marker.lastIndex = end + 1;
+
+      if (
+        !obj ||
+        typeof obj.tool !== "string" ||
+        typeof obj.args !== "object" ||
+        obj.args == null
+      ) {
+        calls.push({ ok: false, error: "invalid_shape", raw: inner });
+        continue;
+      }
+
+      calls.push({ ok: true, tool: obj.tool, args: obj.args });
     }
-    return results;
+
+    return calls;
   }
 
-  _parseArgs(str) {
-    if (!str) return {};
-    const args = {};
-    let cursor = 0;
-    const len = str.length;
+  parse(modelText) {
+    return this.parseCalls(modelText)
+      .filter((call) => call.ok)
+      .map((call) => ({
+        name: call.tool,
+        args: call.args,
+      }));
+  }
 
-    while (cursor < len) {
-      while (cursor < len && /[\s,]/.test(str[cursor])) cursor++;
-      if (cursor >= len) break;
-
-      const keyMatch = /^[A-Za-z_][\w-]*/.exec(str.slice(cursor));
-      if (!keyMatch) throw new Error("Malformed argument string");
-      const key = keyMatch[0];
-      cursor += key.length;
-
-      while (cursor < len && /\s/.test(str[cursor])) cursor++;
-      if (str[cursor] !== "=") throw new Error("Malformed argument string");
-      cursor++; // skip "="
-      while (cursor < len && /\s/.test(str[cursor])) cursor++;
-      if (cursor >= len) throw new Error("Malformed argument string");
-
-      let value;
-      const char = str[cursor];
-      if (char === '"' || char === "'") {
-        const quote = char;
-        cursor++;
-        let val = "";
-        let escaped = false;
-        let closed = false;
-        while (cursor < len) {
-          const ch = str[cursor];
-          if (escaped) {
-            val += ch;
-            escaped = false;
-            cursor++;
-            continue;
-          }
-          if (ch === "\\") {
-            escaped = true;
-            cursor++;
-            continue;
-          }
-          if (ch === quote) {
-            cursor++;
-            closed = true;
-            break;
-          }
-          val += ch;
-          cursor++;
-        }
-        if (escaped || !closed) throw new Error("Malformed argument string");
-        value = this._coerceValue(val);
-      } else if (char === "{" || char === "[") {
-        const startChar = char;
-        const endChar = char === "{" ? "}" : "]";
-        const start = cursor;
-        const { end, closed } = this._scanBalanced(
-          str,
-          start,
-          startChar,
-          endChar,
-        );
-
-        if (!closed) throw new Error("Malformed argument string");
-        const raw = str.slice(start, end + 1);
-        try {
-          value = JSON.parse(raw);
-        } catch {
-          value = raw;
-        }
-        cursor = end + 1;
-      } else {
-        const start = cursor;
-        while (cursor < len && !/[\s,]/.test(str[cursor])) cursor++;
-        const rawVal = str.slice(start, cursor).trim();
-        value = this._coerceValue(rawVal);
-      }
-
-      args[key] = value;
+  async executeCall(call, opts = {}) {
+    if (!call || !call.ok) {
+      return { ok: false, error: call ? call.error : "invalid_call" };
     }
-    return args;
+
+    const tool = this.registry.get
+      ? this.registry.get(call.tool)
+      : this.registry.getTool(call.tool);
+    if (!tool) return { ok: false, error: `unknown_tool:${call.tool}` };
+
+    const allowCaps = Array.isArray(opts.allowCapabilities)
+      ? opts.allowCapabilities
+      : this.allowCapabilities;
+    if (allowCaps && tool.capabilities && tool.capabilities.length) {
+      const allow = new Set(allowCaps);
+      const ok = tool.capabilities.some((cap) => allow.has(cap));
+      if (!ok) return { ok: false, error: `capability_denied:${call.tool}` };
+    }
+
+    const schema = tool.schema || { type: "object", properties: {} };
+    const validation = validateArgs(schema, call.args);
+    if (!validation.ok) {
+      return { ok: false, error: "schema_invalid", details: validation.errors };
+    }
+
+    const handler = tool.handler || tool.execute;
+    try {
+      const result = await handler(call.args);
+      return { ok: true, result };
+    } catch (error) {
+      return {
+        ok: false,
+        error: "tool_exception",
+        details: String(error && error.message ? error.message : error),
+      };
+    }
   }
 
   async execute(calls, options = {}) {
     const results = [];
-    const { tracer, telemetryContext, allowedCategories, allowMissingSchema } =
-      options;
-
-    for (const { name, args } of calls) {
-      const tool = this.toolRegistry.getTool(name);
-      if (!tool) {
+    for (const call of calls) {
+      const normalized = call.tool
+        ? { ...call, ok: true }
+        : { ok: true, tool: call.name, args: call.args || {} };
+      const res = await this.executeCall(normalized, options);
+      if (res.ok) {
         results.push({
           role: "tool",
-          name,
-          content: `Error: Tool '${name}' not found`,
+          name: normalized.tool,
+          content: JSON.stringify(res.result ?? ""),
         });
-        continue;
-      }
-
-      const toolCategories = this.toolRegistry.getToolCategories
-        ? this.toolRegistry.getToolCategories(name)
-        : [];
-      if (
-        Array.isArray(allowedCategories) &&
-        allowedCategories.length > 0 &&
-        !toolCategories.some((category) => allowedCategories.includes(category))
-      ) {
+      } else {
+        const details = res.details
+          ? `: ${res.details.join ? res.details.join("; ") : res.details}`
+          : "";
         results.push({
           role: "tool",
-          name,
-          content: `Error: Tool '${name}' is not allowed for this capability scope`,
+          name: normalized.tool,
+          content: `Error: ${res.error}${details}`,
         });
-        continue;
-      }
-
-      const validation = this.schemaValidator(name, args, {
-        allowMissingSchema:
-          allowMissingSchema === true || tool.allowMissingSchema === true,
-      });
-      if (!validation.valid) {
-        results.push({
-          role: "tool",
-          name,
-          content: `Error: Invalid parameters for '${name}': ${validation.errors.join(
-            "; ",
-          )}`,
-        });
-        continue;
-      }
-
-      if (tracer) tracer.info(`Executing ${name}`, { args });
-
-      const startTime = Date.now();
-      let success = false;
-      let outputContent = "";
-      let errorMessage;
-
-      try {
-        const output = await tool.execute(args);
-        outputContent =
-          output === undefined || output === null
-            ? ""
-            : typeof output === "string"
-              ? output
-              : (JSON.stringify(output) ?? String(output));
-        results.push({ role: "tool", name, content: outputContent });
-        success = true;
-      } catch (error) {
-        errorMessage = error?.message || error;
-        results.push({
-          role: "tool",
-          name,
-          content: `Error: ${errorMessage}`,
-        });
-        if (tracer) tracer.error(`Tool ${name} failed`, error);
-      } finally {
-        const latencyMs = Date.now() - startTime;
-        void logTelemetryEvent(
-          buildToolInvocationEvent({
-            promptHash: telemetryContext?.promptHash,
-            promptId: telemetryContext?.promptId,
-            promptVersion: telemetryContext?.promptVersion,
-            toolName: name,
-            args,
-            success,
-            latencyMs,
-            resultSize: outputContent.length,
-            error: errorMessage,
-            modelId: telemetryContext?.modelId,
-          }),
-        );
       }
     }
     return results;
-  }
-
-  _coerceValue(value) {
-    if (value === "true") return true;
-    if (value === "false") return false;
-    if (
-      value !== "" &&
-      typeof value === "string" &&
-      value.trim() !== "" &&
-      !Number.isNaN(Number(value))
-    ) {
-      return Number(value);
-    }
-    if (
-      typeof value === "string" &&
-      (value.trim().startsWith("{") || value.trim().startsWith("["))
-    ) {
-      try {
-        return JSON.parse(value);
-      } catch {
-        return value;
-      }
-    }
-    return value;
   }
 }

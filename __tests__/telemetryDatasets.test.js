@@ -6,62 +6,50 @@ import { execFileSync } from "child_process";
 const writeTelemetry = (dir) => {
   const events = [
     {
-      schema_version: "telemetry_v2",
-      event_type: "prompt_received",
-      timestamp: "2025-01-01T00:00:00Z",
-      prompt_id: "runtime_prompt",
-      prompt_version: "v1",
-      model_id: "model-test",
-      tool_calls: [],
-      retrieval_hits: [],
-      outcome: "received",
-      latency: 0,
-      redaction_applied: false,
-      prompt_hash: "sha256_prompt",
-      prompt_preview: "Open https://example.com",
+      event_id: "evt_prompt",
+      ts_ms: 1,
+      type: "model_interaction",
+      app: { name: "offLLM", version: "1.0.0", platform: "test" },
+      model: { id: "model-test", runtime: "local", quant: "" },
+      prompt: {
+        prompt_id: "runtime_system",
+        prompt_version: "v1",
+        system_hash: "sha256_prompt",
+      },
+      payload: { phase: "request", user_chars: 24 },
     },
     {
-      schema_version: "telemetry_v2",
-      event_type: "tool_invocation",
-      timestamp: "2025-01-01T00:00:01Z",
-      prompt_id: "runtime_prompt",
-      prompt_version: "v1",
-      model_id: "model-test",
-      tool_calls: [
-        {
-          name: "open_url",
-          args: { url: "https://example.com" },
-          success: true,
-          error: null,
-        },
-      ],
-      retrieval_hits: [],
-      outcome: "success",
-      latency: 12,
-      redaction_applied: false,
-      prompt_hash: "sha256_prompt",
-      tool_name: "open_url",
-      tool_args_preview: { url: "https://example.com" },
-      success: true,
-      error: null,
+      event_id: "evt_tool",
+      ts_ms: 2,
+      type: "tool_call",
+      app: { name: "offLLM", version: "1.0.0", platform: "test" },
+      model: { id: "model-test", runtime: "local", quant: "" },
+      prompt: {
+        prompt_id: "runtime_system",
+        prompt_version: "v1",
+        system_hash: "sha256_prompt",
+      },
+      payload: { tool: "open_url", args: { url: "https://example.com" } },
     },
     {
-      schema_version: "telemetry_v2",
-      event_type: "retrieval",
-      timestamp: "2025-01-01T00:00:02Z",
-      prompt_id: "runtime_prompt",
-      prompt_version: "v1",
-      model_id: "model-test",
-      tool_calls: [],
-      retrieval_hits: ["doc-1", "doc-2"],
-      outcome: "retrieved",
-      latency: 7,
-      redaction_applied: false,
-      query_hash: "sha256_query",
-      query_preview: "example query",
-      retrieval_trace: {
-        candidate_ids: ["doc-1", "doc-3", "doc-2"],
-        candidate_scores: [0.9, 0.8, 0.7],
+      event_id: "evt_retrieval",
+      ts_ms: 3,
+      type: "retrieval_trace",
+      app: { name: "offLLM", version: "1.0.0", platform: "test" },
+      model: { id: "model-test", runtime: "local", quant: "" },
+      prompt: {
+        prompt_id: "runtime_system",
+        prompt_version: "v1",
+        system_hash: "sha256_prompt",
+      },
+      payload: {
+        query: "example query",
+        topK: 2,
+        returned: 2,
+        hits: [
+          { doc_id: "doc-1", chunk_id: "doc-1#0", score: 0.9 },
+          { doc_id: "doc-2", chunk_id: "doc-2#0", score: 0.3 },
+        ],
       },
     },
   ];
@@ -115,6 +103,6 @@ describe("telemetry dataset scripts", () => {
     const triple = JSON.parse(tripleLines[0]);
     expect(triple.query).toBe("example query");
     expect(triple.positive).toBe("doc-1");
-    expect(triple.hard_negative).toBe("doc-3");
+    expect(triple.hard_negative).toBe("doc-2");
   });
 });

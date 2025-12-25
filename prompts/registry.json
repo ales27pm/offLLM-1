@@ -1,97 +1,19 @@
 {
-  "registry_version": "1",
-  "prompts": {
-    "runtime_prompt_v1": {
-      "id": "runtime_prompt",
+  "schema_version": 1,
+  "prompts": [
+    {
+      "id": "runtime_system",
       "version": "v1",
-      "inputs_schema": {
-        "type": "object",
-        "properties": {
-          "tools_desc": { "type": "string" },
-          "context_lines": { "type": "string" },
-          "user_prompt": { "type": "string" }
-        },
-        "required": ["tools_desc", "context_lines", "user_prompt"]
-      },
-      "expected_tool_schema": {
-        "tool_schema_version": "tool_schema_v1"
-      },
-      "template_file": "prompts/v1/runtime_prompt.json"
+      "type": "system",
+      "file": "prompts/v1/runtime_prompt.json",
+      "description": "Runtime system prompt template (tools + policies)."
     },
-    "training_prompt_v1": {
-      "id": "training_prompt",
+    {
+      "id": "training_system",
       "version": "v1",
-      "inputs_schema": {
-        "type": "object",
-        "properties": {
-          "instruction": { "type": "string" },
-          "context": { "type": "string" },
-          "schema": { "type": "string" },
-          "tool": { "type": "string" },
-          "answer": { "type": "string" }
-        },
-        "required": ["instruction", "context", "schema", "tool", "answer"]
-      },
-      "expected_tool_schema": {
-        "tool_schema_version": "tool_schema_v1"
-      },
-      "template_file": "prompts/v1/training_prompt.json"
-    },
-    "tree_of_thought_candidate_v1": {
-      "id": "tree_of_thought_candidate",
-      "version": "v1",
-      "inputs_schema": {
-        "type": "object",
-        "properties": {
-          "current_thought": { "type": "string" },
-          "max_candidates": { "type": "number" }
-        },
-        "required": ["current_thought", "max_candidates"]
-      },
-      "expected_tool_schema": null,
-      "template_file": "prompts/v1/tree_of_thought_candidate.json"
-    },
-    "tree_of_thought_evaluation_v1": {
-      "id": "tree_of_thought_evaluation",
-      "version": "v1",
-      "inputs_schema": {
-        "type": "object",
-        "properties": {
-          "context": { "type": "string" },
-          "thought": { "type": "string" }
-        },
-        "required": ["context", "thought"]
-      },
-      "expected_tool_schema": null,
-      "template_file": "prompts/v1/tree_of_thought_evaluation.json"
-    },
-    "tree_of_thought_fallback_candidates_v1": {
-      "id": "tree_of_thought_fallback_candidates",
-      "version": "v1",
-      "inputs_schema": {
-        "type": "object",
-        "properties": {
-          "thought": { "type": "string" }
-        },
-        "required": ["thought"]
-      },
-      "expected_tool_schema": null,
-      "template_file": "prompts/v1/tree_of_thought_fallback_candidates.json"
-    },
-    "user_prompt_builder_v1": {
-      "id": "user_prompt_builder",
-      "version": "v1",
-      "inputs_schema": {
-        "type": "object",
-        "properties": {
-          "query": { "type": "string" },
-          "emotion": { "type": ["string", "null"] },
-          "context": { "type": ["string", "null"] }
-        },
-        "required": ["query"]
-      },
-      "expected_tool_schema": null,
-      "template_file": "prompts/v1/user_prompt_builder.json"
+      "type": "system",
+      "file": "prompts/v1/training_prompt.json",
+      "description": "Training system prompt template aligned with runtime."
     }
-  }
+  ]
 }

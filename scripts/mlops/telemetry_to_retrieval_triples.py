@@ -34,37 +34,59 @@ def build_retrieval_triples(path: Path, strict_schema: bool) -> list[dict]:
                         f"Telemetry schema validation failed: {'; '.join(errors)}"
                     )
                 continue
-            if redacted.get("event_type") != "retrieval":
+            event_type = redacted.get("event_type") or redacted.get("type")
+            if event_type not in {"retrieval", "retrieval_trace"}:
                 continue
-            query = redacted.get("query_preview")
-            if not query:
+
+            prompt = redacted.get("prompt") or {}
+            prompt_id = prompt.get("prompt_id") or redacted.get("prompt_id")
+            prompt_version = prompt.get("prompt_version") or redacted.get("prompt_version")
+            model_id = redacted.get("model_id") or (redacted.get("model") or {}).get("id")
+
+            if event_type == "retrieval":
+                query = redacted.get("query_preview")
+                retrieval_hits = redacted.get("retrieval_hits") or []
+                trace = redacted.get("retrieval_trace") or {}
+                candidate_ids = trace.get("candidate_ids") or []
+                candidate_scores = trace.get("candidate_scores") or []
+                candidate_ranked = sorted(
+                    zip(candidate_ids, candidate_scores, strict=True),
+                    key=lambda pair: pair[1],
+                    reverse=True,
+                )
+                negatives = [
+                    candidate_id
+                    for candidate_id, _score in candidate_ranked
+                    if candidate_id not in retrieval_hits
+                ]
+                if not query or not retrieval_hits or not negatives:
+                    continue
+                triples.append(
+                    {
+                        "query": query,
+                        "positive": retrieval_hits[0],
+                        "hard_negative": negatives[0],
+                        "prompt_id": prompt_id,
+                        "prompt_version": prompt_version,
+                        "model_id": model_id,
+                    }
+                )
                 continue
-            retrieval_hits = redacted.get("retrieval_hits") or []
-            if not retrieval_hits:
+
+            payload = redacted.get("payload") or {}
+            query = payload.get("query")
+            hits = payload.get("hits") or []
+            if not query or len(hits) < 2:
                 continue
-            trace = redacted.get("retrieval_trace") or {}
-            candidate_ids = trace.get("candidate_ids") or []
-            candidate_scores = trace.get("candidate_scores") or []
-            candidate_ranked = sorted(
-                zip(candidate_ids, candidate_scores),
-                key=lambda pair: pair[1],
-                reverse=True,
-            )
-            negatives = [
-                candidate_id
-                for candidate_id, _score in candidate_ranked
-                if candidate_id not in retrieval_hits
-            ]
-            if not negatives:
-                continue
+            positives = sorted(hits, key=lambda hit: hit.get("score", 0), reverse=True)
             triples.append(
                 {
                     "query": query,
-                    "positive": retrieval_hits[0],
-                    "hard_negative": negatives[0],
-                    "prompt_id": redacted.get("prompt_id"),
-                    "prompt_version": redacted.get("prompt_version"),
-                    "model_id": redacted.get("model_id"),
+                    "positive": positives[0].get("doc_id"),
+                    "hard_negative": positives[-1].get("doc_id"),
+                    "prompt_id": prompt_id,
+                    "prompt_version": prompt_version,
+                    "model_id": model_id,
                 }
             )
     if invalid_events:

@@ -3,23 +3,14 @@ import { toolRegistry } from "./tools/ToolRegistry";
 import { memoryManager } from "./memory/MemorySingleton";
 import PluginSystem from "./plugins/PluginSystem";
 import PromptBuilder from "./prompt/PromptBuilder";
-import {
-  DEFAULT_RUNTIME_PROMPT_ID,
-  getPromptDefinition,
-} from "./prompt/PromptRegistry";
 import ToolHandler from "./tools/ToolHandler";
 import { WorkflowTracer } from "./workflows/WorkflowTracer";
-import {
-  buildFinalResponseEvent,
-  buildPromptEvent,
-  hashString,
-  logTelemetryEvent,
-} from "../utils/telemetry";
+import { TelemetrySink } from "../utils/telemetry";
 
 const WORKFLOW_NAME = "AgentOrchestrator";
-const MAX_ITERATIONS = 5;
+const MAX_ITERATIONS = 4;
 const MAX_CONTEXT_CHARS = 12000;
-const TOOL_OUTPUT_LIMIT = 2000; // Increased for better context
+const TOOL_OUTPUT_LIMIT = 2000;
 
 const normalizeModelOutput = (result) => {
   if (typeof result === "string") return result;
@@ -30,14 +21,51 @@ const normalizeModelOutput = (result) => {
 const promptLength = (value) =>
   typeof value === "string" ? value.length : normalizeModelOutput(value).length;
 
+const asMsg = (role, content) => ({ role, content: String(content || "") });
+
 export class AgentOrchestrator {
-  constructor() {
-    this.llm = LLMService;
-    this.memory = memoryManager;
-    this.promptBuilder = new PromptBuilder(toolRegistry);
-    this.toolHandler = new ToolHandler(toolRegistry);
+  constructor(opts = {}) {
+    this.llm = opts.llmClient || LLMService;
+    this.memory = opts.memory || memoryManager;
+    this.toolRegistry = opts.toolRegistry || toolRegistry;
+
+    this.allowCapabilities = Array.isArray(opts.allowCapabilities)
+      ? opts.allowCapabilities
+      : null;
+
+    this.promptBuilder = new PromptBuilder({
+      toolRegistry: this.toolRegistry,
+      promptId: opts.promptId || "runtime_system",
+      promptVersion: opts.promptVersion || "v1",
+    });
+
+    this.toolHandler = new ToolHandler(this.toolRegistry, {
+      allowCapabilities: this.allowCapabilities,
+    });
+
+    this.telemetry =
+      opts.telemetry ||
+      new TelemetrySink({
+        appName: opts.appName || "offLLM",
+        appVersion: opts.appVersion || "0.0.0",
+        modelId: opts.modelId || this._getModelId(),
+        modelRuntime: opts.modelRuntime || "local",
+        modelQuant: opts.modelQuant || "",
+        outDir: opts.telemetryOutDir || null,
+      });
+
+    this.sessionId =
+      opts.sessionId ||
+      `sess_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+
     this.plugins = new PluginSystem();
     this.plugins.loadPlugins();
+  }
+
+  _getModelId() {
+    return typeof this.llm.getModelId === "function"
+      ? this.llm.getModelId()
+      : "unknown";
   }
 
   _pruneContext(context) {
@@ -46,25 +74,18 @@ export class AgentOrchestrator {
       0,
     );
 
-    // If within limits, return as is
     if (currentLength < MAX_CONTEXT_CHARS) return context;
 
     console.warn(`[Agent] Pruning context (${currentLength} chars)...`);
 
-    // Always keep System Prompt (usually first message)
     const systemPrompts = context.filter(
       (m) => m.role === "system" && !m.content.startsWith("Observation"),
     );
 
-    // Get the rest of the conversation
     const history = context.filter((m) => !systemPrompts.includes(m));
-
-    // Keep last 6 messages (approx 3 turns)
     const keepCount = 6;
     let trimmedHistory = history.slice(-keepCount);
 
-    // Safety: If the first message in trimmed history is an Observation (system),
-    // it likely means we cut off the Tool Call. Remove the orphan observation.
     if (
       trimmedHistory.length > 0 &&
       trimmedHistory[0].role === "system" &&
@@ -76,39 +97,39 @@ export class AgentOrchestrator {
     return [...systemPrompts, ...trimmedHistory];
   }
 
-  _compressObservation(toolName, output) {
+  _compressObservation(output) {
     const text = typeof output === "string" ? output : JSON.stringify(output);
     if (text.length <= TOOL_OUTPUT_LIMIT) return text;
     return `${text.slice(0, TOOL_OUTPUT_LIMIT)}... [Output Truncated]`;
   }
 
-  async run(prompt) {
+  async _chat(messages, options = {}) {
+    if (typeof this.llm.chat === "function") {
+      return this.llm.chat(messages, options);
+    }
+    const prompt = messages
+      .map((m) => `${m.role.toUpperCase()}: ${m.content}`)
+      .join("\n\n");
+    const response = await this.llm.generate(
+      prompt,
+      options.max_tokens || 800,
+      options.temperature || 0,
+    );
+    return normalizeModelOutput(response);
+  }
+
+  async run(prompt, opts = {}) {
     const tracer = new WorkflowTracer({ workflowName: WORKFLOW_NAME });
     tracer.info("Workflow started", {
       promptLength: promptLength(prompt),
       promptPreview: tracer.preview(typeof prompt === "string" ? prompt : ""),
     });
 
-    const promptHash = hashString(String(prompt ?? ""));
-    const promptDefinition = getPromptDefinition(DEFAULT_RUNTIME_PROMPT_ID);
-    const promptId = promptDefinition.id;
-    const promptVersion = promptDefinition.version;
-    const modelId =
-      typeof this.llm.getModelId === "function"
-        ? this.llm.getModelId()
-        : "unknown";
-    void logTelemetryEvent(
-      buildPromptEvent({
-        promptHash,
-        promptText: String(prompt ?? ""),
-        modelId,
-        promptId,
-        promptVersion,
-      }),
-    );
+    const turnId =
+      opts.turnId ||
+      `turn_${Date.now()}_${Math.random().toString(16).slice(2)}`;
 
     try {
-      // 1. Context Retrieval
       const [longMem, shortMem] = await Promise.all([
         this.memory.retrieve(prompt),
         this.memory.getConversationHistory(),
@@ -117,64 +138,133 @@ export class AgentOrchestrator {
       let contextWindow = [...longMem, ...shortMem];
       let currentIteration = 0;
       let finalResponse = null;
-      let totalToolCalls = 0;
 
-      // 2. ReAct Loop
+      const { systemPrompt, promptMeta } = this.promptBuilder.buildSystemPrompt(
+        this.allowCapabilities,
+      );
+      const systemHash = this.telemetry.systemHash(systemPrompt);
+
       while (currentIteration < MAX_ITERATIONS) {
-        currentIteration++;
+        currentIteration += 1;
 
         contextWindow = this._pruneContext(contextWindow);
 
-        const currentPrompt = await tracer.withStep(
-          `buildPrompt_${currentIteration}`,
-          () =>
-            Promise.resolve(this.promptBuilder.build(prompt, contextWindow)),
+        const convo = [
+          asMsg("system", systemPrompt),
+          ...contextWindow.map((entry) =>
+            asMsg(entry.role || "system", entry.content || entry),
+          ),
+          asMsg("user", prompt),
+        ];
+
+        this.telemetry.event(
+          "model_interaction",
+          {
+            phase: "request",
+            messages_count: convo.length,
+            user_chars: String(prompt || "").length,
+          },
+          {
+            prompt: { ...promptMeta, system_hash: systemHash },
+            conversation: { turn_id: turnId, session_id: this.sessionId },
+          },
         );
 
         const rawResponse = await tracer.withStep(
           `modelReasoning_${currentIteration}`,
-          () => this.llm.generate(currentPrompt),
+          () => this._chat(convo, { temperature: 0, max_tokens: 800 }),
         );
-        const textResponse = normalizeModelOutput(rawResponse);
+        const assistant = normalizeModelOutput(rawResponse);
 
-        const toolCalls = this.toolHandler.parse(textResponse);
+        this.telemetry.event(
+          "model_interaction",
+          {
+            phase: "response",
+            assistant_chars: String(assistant || "").length,
+          },
+          {
+            prompt: { ...promptMeta, system_hash: systemHash },
+            conversation: { turn_id: turnId, session_id: this.sessionId },
+          },
+        );
 
-        // No tools? This is the answer.
-        if (toolCalls.length === 0) {
-          finalResponse = textResponse;
+        const calls = this.toolHandler.parseCalls(assistant);
+        const goodCalls = calls.filter((call) => call.ok);
+
+        if (!goodCalls.length) {
+          finalResponse = assistant;
           tracer.info("Final answer reached", { iteration: currentIteration });
           break;
         }
 
-        totalToolCalls += toolCalls.length;
-
         tracer.info(
-          `Iteration ${currentIteration}: Executing ${toolCalls.length} tools`,
+          `Iteration ${currentIteration}: Executing ${goodCalls.length} tools`,
         );
 
-        // Execute Tools
-        const toolResults = await tracer.withStep(
-          `executeTools_${currentIteration}`,
-          () =>
-            this.toolHandler.execute(toolCalls, {
-              tracer,
-              telemetryContext: {
-                promptHash,
-                modelId,
-                promptId,
-                promptVersion,
-              },
-            }),
-          { successData: (results) => ({ count: results.length }) },
+        for (const call of goodCalls) {
+          this.telemetry.event(
+            "tool_call",
+            { tool: call.tool, args: call.args },
+            {
+              prompt: { ...promptMeta, system_hash: systemHash },
+              conversation: { turn_id: turnId, session_id: this.sessionId },
+            },
+          );
+
+          const res = await this.toolHandler.executeCall(call, {
+            allowCapabilities: this.allowCapabilities,
+          });
+
+          this.telemetry.event(
+            "tool_result",
+            {
+              tool: call.tool,
+              ok: res.ok,
+              error: res.ok ? null : res.error,
+              details: res.ok ? null : res.details,
+            },
+            {
+              prompt: { ...promptMeta, system_hash: systemHash },
+              conversation: { turn_id: turnId, session_id: this.sessionId },
+            },
+          );
+
+          const observation = res.ok
+            ? JSON.stringify(res.result)
+            : JSON.stringify({ error: res.error, details: res.details });
+
+          contextWindow = [
+            ...contextWindow,
+            asMsg(
+              "system",
+              `Observation: ${this._compressObservation(observation)}`,
+            ),
+          ];
+        }
+
+        const followup = await this._chat(
+          [
+            asMsg("system", systemPrompt),
+            ...contextWindow.map((entry) =>
+              asMsg(entry.role || "system", entry.content || entry),
+            ),
+          ],
+          { temperature: 0, max_tokens: 800 },
         );
+        finalResponse = normalizeModelOutput(followup);
 
-        // Feed results back. Note: We use 'system' role for observations in this prompt format.
-        const observations = toolResults.map((res) => ({
-          role: "system",
-          content: `Observation from tool '${res.name}': ${this._compressObservation(res.name, res.content)}`,
-        }));
-
-        contextWindow = [...contextWindow, ...observations];
+        this.telemetry.event(
+          "model_interaction",
+          {
+            phase: "post_tools_response",
+            assistant_chars: String(finalResponse || "").length,
+            iter: currentIteration,
+          },
+          {
+            prompt: { ...promptMeta, system_hash: systemHash },
+            conversation: { turn_id: turnId, session_id: this.sessionId },
+          },
+        );
       }
 
       if (!finalResponse) {
@@ -183,18 +273,6 @@ export class AgentOrchestrator {
         tracer.warn("Max iterations reached");
       }
 
-      void logTelemetryEvent(
-        buildFinalResponseEvent({
-          promptHash,
-          responseText: finalResponse,
-          toolCallsCount: totalToolCalls,
-          modelId,
-          promptId,
-          promptVersion,
-        }),
-      );
-
-      // 4. Persist Interaction
       await tracer.withStep(
         "persistMemory",
         () => this.memory.addInteraction(prompt, finalResponse, contextWindow),
