@@ -70,14 +70,14 @@ jobs:
             --no-fail
 
       - name: Upload JSON report artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: prompt-regression-json
           path: reports/prompt-regression.json
           if-no-files-found: warn
 
       - name: Upload SARIF artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: prompt-regression-sarif
           path: reports/prompt-regression.sarif
