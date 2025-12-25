@@ -81,7 +81,7 @@ jobs:
 
       - name: Setup Bun
         if: hashFiles('bun.lockb') != ''
-        uses: oven-sh/setup-bun@f4d14e03ff726c06358e5557344e1da148b56cf7
+        uses: oven-sh/setup-bun@735343b667d3e6f658f44d0eca948eb6282f2b76
 
       - name: Install JS deps
         run: |
