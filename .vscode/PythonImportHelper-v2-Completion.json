@@ -480,6 +480,14 @@
         "documentation": {}
     },
     {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
         "label": "Any",
         "importPath": "typing",
         "description": "typing",
@@ -608,22 +616,6 @@
         "documentation": {}
     },
     {
-        "label": "Iterable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Iterator",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
         "label": "List",
         "importPath": "typing",
         "description": "typing",
@@ -640,23 +632,7 @@
         "documentation": {}
     },
     {
-        "label": "Sequence",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
         "label": "Tuple",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "Union",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
@@ -2009,30 +1985,6 @@
         "documentation": {}
     },
     {
-        "label": "deque",
-        "importPath": "collections",
-        "description": "collections",
-        "isExtraImport": true,
-        "detail": "collections",
-        "documentation": {}
-    },
-    {
-        "label": "Counter",
-        "importPath": "collections",
-        "description": "collections",
-        "isExtraImport": true,
-        "detail": "collections",
-        "documentation": {}
-    },
-    {
-        "label": "defaultdict",
-        "importPath": "collections",
-        "description": "collections",
-        "isExtraImport": true,
-        "detail": "collections",
-        "documentation": {}
-    },
-    {
         "label": "Counter",
         "importPath": "collections",
         "description": "collections",
@@ -2092,22 +2044,6 @@
     },
     {
         "label": "dataclass",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "asdict",
-        "importPath": "dataclasses",
-        "description": "dataclasses",
-        "isExtraImport": true,
-        "detail": "dataclasses",
-        "documentation": {}
-    },
-    {
-        "label": "field",
         "importPath": "dataclasses",
         "description": "dataclasses",
         "isExtraImport": true,
@@ -2676,14 +2612,6 @@
         "documentation": {}
     },
     {
-        "label": "load_dataset",
-        "importPath": "datasets",
-        "description": "datasets",
-        "isExtraImport": true,
-        "detail": "datasets",
-        "documentation": {}
-    },
-    {
         "label": "random",
         "kind": 6,
         "isExtraImport": true,
@@ -2698,14 +2626,6 @@
         "isExtraImport": true,
         "importPath": "torch",
         "description": "torch",
-        "detail": "torch",
-        "documentation": {}
-    },
-    {
-        "label": "nn",
-        "importPath": "torch",
-        "description": "torch",
-        "isExtraImport": true,
         "detail": "torch",
         "documentation": {}
     },
@@ -3176,38 +3096,6 @@
         "documentation": {}
     },
     {
-        "label": "TrainingArguments",
-        "importPath": "transformers",
-        "description": "transformers",
-        "isExtraImport": true,
-        "detail": "transformers",
-        "documentation": {}
-    },
-    {
-        "label": "get_linear_schedule_with_warmup",
-        "importPath": "transformers",
-        "description": "transformers",
-        "isExtraImport": true,
-        "detail": "transformers",
-        "documentation": {}
-    },
-    {
-        "label": "AutoModelForCausalLM",
-        "importPath": "transformers",
-        "description": "transformers",
-        "isExtraImport": true,
-        "detail": "transformers",
-        "documentation": {}
-    },
-    {
-        "label": "AutoTokenizer",
-        "importPath": "transformers",
-        "description": "transformers",
-        "isExtraImport": true,
-        "detail": "transformers",
-        "documentation": {}
-    },
-    {
         "label": "DataCollatorForLanguageModeling",
         "importPath": "transformers",
         "description": "transformers",
@@ -3504,30 +3392,6 @@
         "documentation": {}
     },
     {
-        "label": "PeftModel",
-        "importPath": "peft",
-        "description": "peft",
-        "isExtraImport": true,
-        "detail": "peft",
-        "documentation": {}
-    },
-    {
-        "label": "LoraConfig",
-        "importPath": "peft",
-        "description": "peft",
-        "isExtraImport": true,
-        "detail": "peft",
-        "documentation": {}
-    },
-    {
-        "label": "get_peft_model",
-        "importPath": "peft",
-        "description": "peft",
-        "isExtraImport": true,
-        "detail": "peft",
-        "documentation": {}
-    },
-    {
         "label": "prepare_model_for_kbit_training",
         "importPath": "peft",
         "description": "peft",
@@ -3588,12 +3452,12 @@
         "documentation": {}
     },
     {
-        "label": "ast",
+        "label": "shutil",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "ast",
-        "description": "ast",
-        "detail": "ast",
+        "importPath": "shutil",
+        "description": "shutil",
+        "detail": "shutil",
         "documentation": {}
     },
     {
@@ -3606,30 +3470,12 @@
         "documentation": {}
     },
     {
-        "label": "inspect",
+        "label": "tempfile",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "inspect",
-        "description": "inspect",
-        "detail": "inspect",
-        "documentation": {}
-    },
-    {
-        "label": "platform",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "platform",
-        "description": "platform",
-        "detail": "platform",
-        "documentation": {}
-    },
-    {
-        "label": "shutil",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "shutil",
-        "description": "shutil",
-        "detail": "shutil",
+        "importPath": "tempfile",
+        "description": "tempfile",
+        "detail": "tempfile",
         "documentation": {}
     },
     {
@@ -3648,31 +3494,6 @@
         "importPath": "time",
         "description": "time",
         "detail": "time",
-        "documentation": {}
-    },
-    {
-        "label": "AdamW",
-        "importPath": "torch.optim",
-        "description": "torch.optim",
-        "isExtraImport": true,
-        "detail": "torch.optim",
-        "documentation": {}
-    },
-    {
-        "label": "SFTTrainer",
-        "importPath": "trl",
-        "description": "trl",
-        "isExtraImport": true,
-        "detail": "trl",
-        "documentation": {}
-    },
-    {
-        "label": "tempfile",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "tempfile",
-        "description": "tempfile",
-        "detail": "tempfile",
         "documentation": {}
     },
     {
@@ -4549,6 +4370,15 @@
         "description": "contextlib",
         "isExtraImport": true,
         "detail": "contextlib",
+        "documentation": {}
+    },
+    {
+        "label": "inspect",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "inspect",
+        "description": "inspect",
+        "detail": "inspect",
         "documentation": {}
     },
     {
@@ -12651,7 +12481,7 @@
         "kind": 6,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "class Finding:\n  stable_id: str\n  title: str\n  kind: str\n  message: str\n  expected_hash: Optional[str]\n  actual_hash: Optional[str]\ndef _workspace_root() -> Path:\n  # In GitHub Actions, GITHUB_WORKSPACE is the repo root.\n  ws = os.environ.get(\"GITHUB_WORKSPACE\")",
+        "peekOfCode": "class Finding:\n    prompts_path: str\n    stable_id: str\n    kind: str  # schema | mismatch | missing_baseline | note\n    message: str\n    expected_hash: Optional[str] = None\n    actual_hash: Optional[str] = None\n# ---------------------------\n# SARIF\n# ---------------------------",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
@@ -12660,7 +12490,7 @@
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def build_sarif(findings: List[Finding], repo_root: Path, rel_path: str) -> Dict[str, Any]:\n  tool = {\n    \"driver\": {\n      \"name\": \"offLLM prompt regression\",\n      \"informationUri\": \"https://github.com/ales27pm/offLLM-1\",\n      \"rules\": [\n        {\n          \"id\": \"PROMPT_REGRESSION\",\n          \"name\": \"Prompt regression mismatch\",\n          \"shortDescription\": {\"text\": \"Golden prompt hash mismatch\"},",
+        "peekOfCode": "def build_sarif(findings: List[Finding], rule_meta: Dict[str, Any]) -> Dict[str, Any]:\n    tool = {\n        \"driver\": {\n            \"name\": \"offLLM prompt regression\",\n            \"informationUri\": \"https://github.com/ales27pm/offLLM-1\",\n            \"rules\": [\n                {\n                    \"id\": \"PROMPT_REGRESSION\",\n                    \"name\": \"Prompt regression mismatch\",\n                    \"shortDescription\": {\"text\": \"Golden prompt hash mismatch\"},",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
@@ -12669,7 +12499,7 @@
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:\n  p = argparse.ArgumentParser(description=\"Run golden prompt regression checks and emit JSON + SARIF.\")\n  p.add_argument(\n    \"--golden\",\n    default=str(Path(\"scripts/eval/golden_prompts.json\")),\n    help=\"Path to golden_prompts.json\",\n  )\n  p.add_argument(\n    \"--report-out\",\n    required=True,",
+        "peekOfCode": "def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:\n    p = argparse.ArgumentParser(description=\"Run golden prompt regression checks and emit JSON + SARIF.\")\n    p.add_argument(\n        \"--prompts\",\n        action=\"append\",\n        default=[],\n        help=\"Path to a prompt JSON file (repeatable). Supports array or {cases:[...]} layouts.\",\n    )\n    p.add_argument(\"--report-out\", required=True, help=\"Path to write JSON report.\")\n    p.add_argument(\"--sarif-out\", required=True, help=\"Path to write SARIF report.\")",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
@@ -12678,7 +12508,7 @@
         "kind": 2,
         "importPath": "scripts.eval.run_prompt_regression",
         "description": "scripts.eval.run_prompt_regression",
-        "peekOfCode": "def main(argv: Optional[List[str]] = None) -> int:\n  args = parse_args(argv)\n  repo_root = _workspace_root()\n  golden_path = Path(args.golden)\n  report_out = Path(args.report_out)\n  sarif_out = Path(args.sarif_out)\n  findings: List[Finding] = []\n  report: Dict[str, Any] = {\n    \"tool\": \"offLLM prompt regression\",\n    \"ts\": _utc_now_iso(),",
+        "peekOfCode": "def main(argv: Optional[List[str]] = None) -> int:\n    args = parse_args(argv)\n    prompts_paths = [Path(p) for p in (args.prompts or [])]\n    if not prompts_paths:\n        prompts_paths = [Path(\"scripts/eval/golden_prompts.json\")]\n    report_out = Path(args.report_out)\n    sarif_out = Path(args.sarif_out)\n    findings: List[Finding] = []\n    rule_meta: Dict[Tuple[str, str], Tuple[int, int]] = {}\n    report: Dict[str, Any] = {",
         "detail": "scripts.eval.run_prompt_regression",
         "documentation": {}
     },
@@ -13511,227 +13341,38 @@
         "documentation": {}
     },
     {
-        "label": "PipelineConfig",
+        "label": "AcceleratorInfo",
         "kind": 6,
         "importPath": "scripts.offllm_end_to_end_pipeline",
         "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "class PipelineConfig:\n    \"\"\"Main configuration for the entire pipeline.\"\"\"\n    repo_root: Path\n    run_id: str\n    run_dir: Path\n    # Model configuration\n    base_model: str = \"cognitivecomputations/Dolphin3.0-Llama3.2-3B\"\n    base_model_revision: str | None = None\n    # Dataset configuration\n    datasets_dir: Path | None = None",
+        "peekOfCode": "class AcceleratorInfo:\n    available: bool\n    kind: str          # \"cuda\" | \"mps\" | \"rocm\" | \"cpu\"\n    detail: str\ndef detect_accelerator() -> AcceleratorInfo:\n    \"\"\"\n    Conservative detection:\n    - CUDA if torch.cuda.is_available()\n    - MPS if torch.backends.mps.is_available()\n    - ROCm is typically also reported as cuda in torch builds; keep \"cuda\" bucket.",
         "detail": "scripts.offllm_end_to_end_pipeline",
         "documentation": {}
     },
     {
-        "label": "ScanConfig",
-        "kind": 6,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "class ScanConfig:\n    \"\"\"Configuration for repository scanning.\"\"\"\n    repo_root: Path\n    run_id: str\n    out_base: Path = Path(\"runs/scad/focused\")\n    top_n_per_category: int = 8\n    max_targets: int = 45\n    diff_target: str = \"\"\n    emit_datasets: bool = True\n    blame: bool = False",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "TrainCfg",
-        "kind": 6,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "class TrainCfg:\n    \"\"\"Configuration for LLM2Vec training.\"\"\"\n    base_model: str\n    revision: str | None = None\n    adapter_dir: str | None = None\n    corpus_jsonl: str = \"\"\n    out: str = \"\"\n    max_steps: int = 1200\n    warmup_steps: int = 50\n    lr: float = 1e-4",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "PySymbol",
-        "kind": 6,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "class PySymbol:\n    kind: str  # function/class/async_function\n    name: str\n    qualname: str\n    start_line: int\n    end_line: int\n    doc: str\n    signals: Dict[str, int]\n    calls: List[str]\n@dataclass",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "CommandSpec",
-        "kind": 6,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "class CommandSpec:\n    path: str\n    parser_var: str\n    args: List[Dict[str, Any]]\n@dataclass\nclass EnvVarUse:\n    name: str\n    kind: str\n    line: int\n    context: str",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "EnvVarUse",
-        "kind": 6,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "class EnvVarUse:\n    name: str\n    kind: str\n    line: int\n    context: str\n@dataclass\nclass Callsite:\n    category: str\n    path: str\n    line: int",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "Callsite",
-        "kind": 6,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "class Callsite:\n    category: str\n    path: str\n    line: int\n    context: str\nclass RepositoryScanner:\n    \"\"\"SCAD: Static Code Analysis for Documentation and dataset generation.\"\"\"\n    IGNORE_DIRS = {\n        \".git\",\n        \".hg\",",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "RepositoryScanner",
-        "kind": 6,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "class RepositoryScanner:\n    \"\"\"SCAD: Static Code Analysis for Documentation and dataset generation.\"\"\"\n    IGNORE_DIRS = {\n        \".git\",\n        \".hg\",\n        \".svn\",\n        \"node_modules\",\n        \".venv\",\n        \"venv\",\n        \"__pycache__\",",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "DatasetBuilder",
-        "kind": 6,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "class DatasetBuilder:\n    \"\"\"Build training datasets from various sources.\"\"\"\n    @staticmethod\n    def build_french_datasets(out_dir: Path) -> Dict[str, Path]:\n        \"\"\"Build French language datasets.\"\"\"\n        datasets_dir = Path(\"datasets\")\n        output = {}\n        for name in [\"combined_instruct.jsonl\", \"combined_retrieval.jsonl\"]:\n            src = datasets_dir / name\n            if src.exists():",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "SFTTrainerWrapper",
-        "kind": 6,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "class SFTTrainerWrapper:\n    \"\"\"Wrapper for supervised fine-tuning with LoRA.\"\"\"\n    @staticmethod\n    def train(config: PipelineConfig, dataset_path: Path) -> Path:\n        \"\"\"Train a model with SFT using LoRA.\"\"\"\n        set_seed(42)\n        out_dir = config.run_dir / \"sft\"\n        out_dir.mkdir(parents=True, exist_ok=True)\n        # Load tokenizer and model\n        tokenizer = AutoTokenizer.from_pretrained(",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "UnslothTrainerWrapper",
-        "kind": 6,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "class UnslothTrainerWrapper:\n    \"\"\"Wrapper for supervised fine-tuning with Unsloth.\"\"\"\n    @staticmethod\n    def train(\n        config: PipelineConfig,\n        dataset_path: Path,\n        output_dir: Path,\n        max_steps: int,\n    ) -> Path:\n        if not _module_available(\"unsloth\"):",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "LLM2VecTrainer",
-        "kind": 6,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "class LLM2VecTrainer:\n    \"\"\"Train embedding-capable models using MNTP + SimCSE.\"\"\"\n    def __init__(self, config: TrainCfg):\n        self.config = config\n    def train(self) -> Dict[str, Any]:\n        \"\"\"Main training loop for LLM2Vec.\"\"\"\n        set_seed(self.config.seed)\n        out_dir = Path(self.config.out)\n        out_dir.mkdir(parents=True, exist_ok=True)\n        # Load model and tokenizer",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "MNTPDataCollator",
-        "kind": 6,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "class MNTPDataCollator:\n    \"\"\"Data collator for Masked Next Token Prediction.\"\"\"\n    def __init__(self, tokenizer, mask_prob: float = 0.15, max_length: int = 512):\n        self.tok = tokenizer\n        self.mask_prob = mask_prob\n        self.max_length = max_length\n        if self.tok.mask_token_id is None:\n            self.tok.add_special_tokens({\"mask_token\": \"<mask>\"})\n    def __call__(self, texts: List[str]) -> Dict[str, torch.Tensor]:\n        enc = self.tok(",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "PipelineOrchestrator",
-        "kind": 6,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "class PipelineOrchestrator:\n    \"\"\"Orchestrate the entire multi-stage pipeline.\"\"\"\n    def __init__(self, config: PipelineConfig):\n        self.config = resolve_pipeline_config(config)\n    def run(self, stages: List[str]) -> int:\n        \"\"\"Run specified stages of the pipeline.\"\"\"\n        if \"all\" in stages:\n            stages = [\n                \"full_scan\",\n                \"scan\",",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "TerminalUI",
-        "kind": 6,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "class TerminalUI:\n    \"\"\"Simple terminal UI for pipeline interaction.\"\"\"\n    @staticmethod\n    def interactive() -> int:\n        \"\"\"Run interactive terminal UI.\"\"\"\n        print(\"\\n\" + \"=\" * 50)\n        print(\"offLLM End-to-End Pipeline\")\n        print(\"=\" * 50)\n        choices = {\n            \"1\": \"Run EVERYTHING (full scan → datasets → training → export)\",",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "resolve_pipeline_config",
+        "label": "detect_accelerator",
         "kind": 2,
         "importPath": "scripts.offllm_end_to_end_pipeline",
         "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "def resolve_pipeline_config(config: PipelineConfig) -> PipelineConfig:\n    repo_root = config.repo_root.expanduser().resolve()\n    run_dir = config.run_dir.expanduser()\n    if not run_dir.is_absolute():\n        run_dir = repo_root / run_dir\n    datasets_dir = (config.datasets_dir or (run_dir / \"datasets\")).expanduser()\n    if not datasets_dir.is_absolute():\n        datasets_dir = repo_root / datasets_dir\n    telemetry_path = (config.telemetry_path or (datasets_dir / \"telemetry.jsonl\")).expanduser()\n    if not telemetry_path.is_absolute():",
+        "peekOfCode": "def detect_accelerator() -> AcceleratorInfo:\n    \"\"\"\n    Conservative detection:\n    - CUDA if torch.cuda.is_available()\n    - MPS if torch.backends.mps.is_available()\n    - ROCm is typically also reported as cuda in torch builds; keep \"cuda\" bucket.\n    \"\"\"\n    try:\n        import torch  # type: ignore\n    except Exception as e:",
         "detail": "scripts.offllm_end_to_end_pipeline",
         "documentation": {}
     },
     {
-        "label": "utc_now",
+        "label": "parse_args",
         "kind": 2,
         "importPath": "scripts.offllm_end_to_end_pipeline",
         "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "def utc_now() -> str:\n    return datetime.now(timezone.utc).isoformat()\ndef default_run_id() -> str:\n    return datetime.now().strftime(\"%Y%m%d_%H%M%S\")\ndef set_seed(seed: int) -> None:\n    random.seed(seed)\n    torch.manual_seed(seed)\n    if torch.cuda.is_available():\n        torch.cuda.manual_seed_all(seed)\ndef git_commit(repo_root: Path) -> str | None:",
+        "peekOfCode": "def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:\n    p = argparse.ArgumentParser(description=\"offLLM end-to-end pipeline runner\")\n    p.add_argument(\n        \"--stage\",\n        default=\"full_scan\",\n        choices=[\"full_scan\", \"internals\", \"harvest\", \"retrieval\", \"finetune\", \"export\"],\n        help=\"Which stage(s) to run\",\n    )\n    p.add_argument(\"--base-model\", required=True, help=\"HF model id for the base model\")\n    p.add_argument(\"--harvest-manifest\", required=True, help=\"Path to sources manifest JSON\")",
         "detail": "scripts.offllm_end_to_end_pipeline",
         "documentation": {}
     },
     {
-        "label": "default_run_id",
+        "label": "main",
         "kind": 2,
         "importPath": "scripts.offllm_end_to_end_pipeline",
         "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "def default_run_id() -> str:\n    return datetime.now().strftime(\"%Y%m%d_%H%M%S\")\ndef set_seed(seed: int) -> None:\n    random.seed(seed)\n    torch.manual_seed(seed)\n    if torch.cuda.is_available():\n        torch.cuda.manual_seed_all(seed)\ndef git_commit(repo_root: Path) -> str | None:\n    try:\n        out = subprocess.check_output([\"git\", \"rev-parse\", \"HEAD\"], cwd=str(repo_root))",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "set_seed",
-        "kind": 2,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "def set_seed(seed: int) -> None:\n    random.seed(seed)\n    torch.manual_seed(seed)\n    if torch.cuda.is_available():\n        torch.cuda.manual_seed_all(seed)\ndef git_commit(repo_root: Path) -> str | None:\n    try:\n        out = subprocess.check_output([\"git\", \"rev-parse\", \"HEAD\"], cwd=str(repo_root))\n        return out.decode(\"utf-8\").strip()\n    except Exception:",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "git_commit",
-        "kind": 2,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "def git_commit(repo_root: Path) -> str | None:\n    try:\n        out = subprocess.check_output([\"git\", \"rev-parse\", \"HEAD\"], cwd=str(repo_root))\n        return out.decode(\"utf-8\").strip()\n    except Exception:\n        return None\ndef sha256_file(path: Path, chunk: int = 1024 * 1024) -> str:\n    h = hashlib.sha256()\n    with path.open(\"rb\") as f:\n        while True:",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "sha256_file",
-        "kind": 2,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "def sha256_file(path: Path, chunk: int = 1024 * 1024) -> str:\n    h = hashlib.sha256()\n    with path.open(\"rb\") as f:\n        while True:\n            b = f.read(chunk)\n            if not b:\n                break\n            h.update(b)\n    return h.hexdigest()\ndef to_json_serializable(value: Any) -> Any:",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "to_json_serializable",
-        "kind": 2,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "def to_json_serializable(value: Any) -> Any:\n    if isinstance(value, Path):\n        return str(value)\n    if dataclasses.is_dataclass(value):\n        return to_json_serializable(dataclasses.asdict(value))\n    if isinstance(value, dict):\n        return {str(key): to_json_serializable(val) for key, val in value.items()}\n    if isinstance(value, (list, tuple, set)):\n        return [to_json_serializable(item) for item in value]\n    return value",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "run_command",
-        "kind": 2,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "def run_command(\n    command: List[str],\n    cwd: Optional[Path] = None,\n    env: Optional[Dict[str, str]] = None,\n) -> None:\n    printable = \" \".join(command)\n    print(f\"▶️  Running: {printable}\")\n    subprocess.run(\n        command,\n        check=True,",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "build_sft_trainer_kwargs",
-        "kind": 2,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "def build_sft_trainer_kwargs(\n    trainer_cls: type, tokenizer: Any, **kwargs: Any\n) -> Dict[str, Any]:\n    signature = inspect.signature(trainer_cls.__init__)\n    params = signature.parameters\n    trainer_kwargs = dict(kwargs)\n    max_seq_length = trainer_kwargs.pop(\"max_seq_length\", None)\n    if max_seq_length is not None:\n        if \"max_seq_length\" in params:\n            trainer_kwargs[\"max_seq_length\"] = max_seq_length",
-        "detail": "scripts.offllm_end_to_end_pipeline",
-        "documentation": {}
-    },
-    {
-        "label": "main_cli",
-        "kind": 2,
-        "importPath": "scripts.offllm_end_to_end_pipeline",
-        "description": "scripts.offllm_end_to_end_pipeline",
-        "peekOfCode": "def main_cli():\n    \"\"\"Command-line interface entry point.\"\"\"\n    parser = argparse.ArgumentParser(description=\"offLLM End-to-End Pipeline\")\n    parser.add_argument(\n        \"--stage\",\n        choices=[\n            \"full_scan\",\n            \"scan\",\n            \"internals\",\n            \"harvest\",",
+        "peekOfCode": "def main(argv: Optional[List[str]] = None) -> int:\n    args = parse_args(argv)\n    report: Dict[str, Any] = {\n        \"tool\": \"offLLM end-to-end pipeline\",\n        \"ts\": _utc_now_iso(),\n        \"stage\": args.stage,\n        \"plan\": _stage_plan(args.stage),\n        \"base_model\": args.base_model,\n        \"harvest_manifest\": args.harvest_manifest,\n        \"accelerator\": {},",
         "detail": "scripts.offllm_end_to_end_pipeline",
         "documentation": {}
     },
@@ -14631,7 +14272,16 @@
         "kind": 2,
         "importPath": "scripts.train_lora",
         "description": "scripts.train_lora",
-        "peekOfCode": "def load_prompt_registry(registry_path: str) -> dict:\n    if not os.path.isfile(registry_path):\n        raise FileNotFoundError(f\"Prompt registry not found: {registry_path}\")\n    with open(registry_path, \"r\", encoding=\"utf-8\") as handle:\n        text = handle.read()\n    match = re.search(r\"PROMPT_REGISTRY_JSON\\s*=\\s*`(.*?)`\", text, re.S)\n    if not match:\n        raise ValueError(\"Unable to locate PROMPT_REGISTRY_JSON in registry file\")\n    return json.loads(match.group(1))\ndef format_example(example: dict, training_template: dict) -> str:",
+        "peekOfCode": "def load_prompt_registry(registry_path: str) -> dict:\n    if not os.path.isfile(registry_path):\n        raise FileNotFoundError(f\"Prompt registry not found: {registry_path}\")\n    with open(registry_path, \"r\", encoding=\"utf-8\") as handle:\n        return json.load(handle)\ndef load_prompt_template(registry: dict, prompt_key: str, base_dir: str) -> dict:\n    entry = registry.get(\"prompts\", {}).get(prompt_key)\n    if not entry:\n        raise ValueError(f\"Prompt registry missing {prompt_key}\")\n    template_file = entry.get(\"template_file\")",
+        "detail": "scripts.train_lora",
+        "documentation": {}
+    },
+    {
+        "label": "load_prompt_template",
+        "kind": 2,
+        "importPath": "scripts.train_lora",
+        "description": "scripts.train_lora",
+        "peekOfCode": "def load_prompt_template(registry: dict, prompt_key: str, base_dir: str) -> dict:\n    entry = registry.get(\"prompts\", {}).get(prompt_key)\n    if not entry:\n        raise ValueError(f\"Prompt registry missing {prompt_key}\")\n    template_file = entry.get(\"template_file\")\n    if not template_file:\n        raise ValueError(f\"Prompt registry entry missing template_file: {prompt_key}\")\n    template_path = os.path.abspath(os.path.join(base_dir, template_file))\n    if not os.path.isfile(template_path):\n        raise FileNotFoundError(f\"Prompt template not found: {template_path}\")",
         "detail": "scripts.train_lora",
         "documentation": {}
     },
