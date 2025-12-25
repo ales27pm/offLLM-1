@@ -72,14 +72,13 @@ def validate_tool_args(tool_name: str, args: Any) -> list[str]:
 
 
 def _prompt_meta(event: dict) -> dict:
-    prompt = event.get("prompt") or {}
+    prompt = event.get("prompt") if event.get("prompt") is not None else {}
     return {
         "prompt_id": prompt.get("prompt_id") or event.get("prompt_id"),
         "prompt_version": prompt.get("prompt_version") or event.get("prompt_version"),
         "prompt_hash": prompt.get("system_hash") or event.get("prompt_hash"),
-        "model_id": event.get("model_id") or (event.get("model") or {}).get("id"),
+        "model_id": event.get("model_id") or (event.get("model") if event.get("model") is not None else {}).get("id"),
     }
-
 
 def _extract_tool_call(event: dict) -> tuple[str | None, dict | None, dict]:
     if event.get("event_type") == "tool_invocation":
